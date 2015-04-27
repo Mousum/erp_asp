@@ -16,8 +16,8 @@ namespace Mhasb.Wsit.Domain
     public interface IObjectStateInt : IObjectState
     {
         int Id { get; set; }
-        Nullable<System.DateTime> EntryDate { get; set; }
-        Nullable<long> EntryBy { get; set; }        
+        //Nullable<System.DateTime> EntryDate { get; set; }
+        //Nullable<long> EntryBy { get; set; }        
     }
     public interface IObjectStateLong : IObjectState
     {
