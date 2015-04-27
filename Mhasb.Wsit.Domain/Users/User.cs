@@ -32,6 +32,7 @@ namespace Mhasb.Domain.Users
         public string ConfirmPassword { get; set; }
 
         public EmployeeProfile EmployeeProfiles { get; set; }
+
         [ScaffoldColumn(false)]
         public string Status { get; set; }
         public long Id

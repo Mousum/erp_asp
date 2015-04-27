@@ -40,11 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\Country.cs" />
+    <Compile Include="Commons\Industry.cs" />
+    <Compile Include="Commons\Language.cs" />
+    <Compile Include="Commons\LegalEntity.cs" />
+    <Compile Include="Commons\TimeZone.cs" />
+    <Compile Include="Loggers\LogUserLogin.cs" />
+    <Compile Include="Notifications\Invitation.cs" />
     <Compile Include="ObjectState.cs" />
     <Compile Include="Organizations\Company.cs" />
     <Compile Include="Organizations\CompanyProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\ActionList.cs" />
+    <Compile Include="Users\EmployeeProfile.cs" />
+    <Compile Include="Users\Role.cs" />
+    <Compile Include="Users\RoleVsAction.cs" />
     <Compile Include="Users\User.cs" />
+    <Compile Include="Users\UserInRole.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
