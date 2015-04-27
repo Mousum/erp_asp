@@ -1,4 +1,5 @@
-﻿using Mhasb.DAL.Mapping.Users;
+﻿using Mhasb.DAL.Mapping.Commons;
+using Mhasb.DAL.Mapping.Users;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -58,12 +59,14 @@ namespace Mhasb.Wsit.DAL.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Commons Entities
-            modelBuilder.Configurations.Add(new UserMaping());            
+            modelBuilder.Configurations.Add(new LanguageMaping()); 
+
+
+            // User Management
+            modelBuilder.Configurations.Add(new UserMaping());
+            
             
         }
 
-        public System.Data.Entity.DbSet<Mhasb.Domain.Users.User> Users { get; set; }
-
-        //public System.Data.Entity.DbSet<Mhasb.Wsit.Web.Areas.UserManagement.Models.Login> Logins { get; set; }
     }
 }
