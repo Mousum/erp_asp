@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ObjectState.cs" />
+    <Compile Include="Organizations\Company.cs" />
+    <Compile Include="Organizations\CompanyProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\User.cs" />
   </ItemGroup>

@@ -56,6 +56,7 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\RepositoryQuery.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Mapping\Organizations\CompanyMapping.cs" />
     <Compile Include="Mapping\Users\UserMaping.cs" />
     <Compile Include="Operations\CrudOperation.cs" />
     <Compile Include="Operations\ICrudOperation.cs" />
