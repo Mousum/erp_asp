@@ -22,10 +22,19 @@ namespace Mhasb.Wsit.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custome").Include(
+                      "~/Scripts/cbpAnimatedHeader.js",
+                      "~/Scripts/cbpAnimatedHeader.min.js",
+                      "~/Scripts/classie.js",
+                      "~/Scripts/jquery.easing.min.js",
+                      "~/Scripts/master.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/master.css",
+                      "~/Content/font-awesome/css/font-awesome.min.css"
+                      ));
         }
     }
 }
