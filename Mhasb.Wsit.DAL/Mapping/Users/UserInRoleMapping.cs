@@ -16,12 +16,8 @@ namespace Mhasb.DAL.Mapping.Users
             this.Ignore(uir => uir.State);
             this.Property(uir => uir.IsActive).HasColumnName("isactive");
             this.Property(uir => uir.RoleId).HasColumnName("roleid");
-            this.Property(uir => uir.UserId).HasColumnName("userid");
             this.Property(uir => uir.EmployeeId).HasColumnName("employeeid");
 
-            this.HasRequired(uir => uir.Users).
-                WithMany(uir => uir.UserInRoles).
-                HasForeignKey(uir => uir.UserId);
 
 
             this.HasRequired(uir => uir.Roles).

@@ -14,13 +14,11 @@ namespace Mhasb.Domain.Users
 
         public long EmployeeId { get; set; }
         public int RoleId { get; set; }
-        public int UserId { get; set; }
         public bool IsActive { get; set; }
         public int Id { get; set; }
 
         public virtual Role Roles { get; set; }
 
-        public virtual User Users { get; set; }
 
         public virtual Company Companies { get; set; }
 
