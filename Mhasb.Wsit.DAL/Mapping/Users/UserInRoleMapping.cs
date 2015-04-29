@@ -36,6 +36,6 @@ namespace Mhasb.DAL.Mapping.Users
             this.ToTable("sec.userinrole");
 
 
-        }
+        }  
     }
 }
