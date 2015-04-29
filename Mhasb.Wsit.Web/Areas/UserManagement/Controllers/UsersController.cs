@@ -38,9 +38,18 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-            uService.AddUser(user);
+          
+        
+            if (uService.AddUser(user)!= false)
+            {
+                
+              
 
-            return View();
+                return View();
+               
+            }
+
+            return Content("Failed");
         }
 
         public ActionResult Login()
@@ -51,7 +60,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            if (uService.UserLogin(email, password) != false) {
+            if (uService.UserLogin(email, password) != false)
+            {
                 return Content("Sucessfull");
             }
 

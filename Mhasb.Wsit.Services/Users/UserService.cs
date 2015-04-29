@@ -12,15 +12,18 @@ namespace Mhasb.Services.Users
     public class UserService : IUserService
     {
         private readonly CrudOperation<User> userRep = new CrudOperation<User>();
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
             try
             {
+                user.CreatedTime = DateTime.Now;
                 user.State = ObjectState.Added;
                 userRep.AddOperation(user);
+                return true;
             }
             catch (Exception ex) {
                 var rr = ex.Message;
+                return false;
             }
             
         }
