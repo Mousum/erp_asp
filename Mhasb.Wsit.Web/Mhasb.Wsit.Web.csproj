@@ -291,6 +291,7 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
+    <None Include="Properties\PublishProfiles\mhasb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
