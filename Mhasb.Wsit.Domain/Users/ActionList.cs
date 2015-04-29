@@ -17,6 +17,7 @@ namespace Mhasb.Domain.Users
         public bool IsShowInMenu { get; set; }
         public int OrderNo { get; set; }
 
+        public virtual ICollection<RoleVsAction> RoleVsActions { get; set; }
         public int Id { get; set; }
         public ObjectState State { get; set; }
     }
