@@ -38,14 +38,10 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-          
-        
-            if (uService.AddUser(user)!= false)
-            {
-                return View();
-            }
 
-            return Content("Failed");
+            user.CreatedTime = DateTime.Now;
+            uService.AddUser(user);
+            return null;
         }
 
         public ActionResult Login()
