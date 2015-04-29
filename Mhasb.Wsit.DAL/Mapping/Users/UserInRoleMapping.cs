@@ -24,7 +24,7 @@ namespace Mhasb.DAL.Mapping.Users
                 WithMany(uir => uir.UserInRoles).
                 HasForeignKey(uir=>uir.RoleId);
 
-            this.HasRequired(uir => uir.Companies).
+            this.HasRequired(uir => uir.Employees).
                 WithMany(uir => uir.UserInRoles).
                 HasForeignKey(uir=>uir.EmployeeId);
 
