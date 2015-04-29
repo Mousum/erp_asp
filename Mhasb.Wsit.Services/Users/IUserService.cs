@@ -9,7 +9,7 @@ namespace Mhasb.Services.Users
 {
    public interface IUserService
     {
-        void AddUser(User user);
+        bool AddUser(User user);
         bool UserLogin(string email,string password);
     }
 }

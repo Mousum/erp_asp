@@ -50,6 +50,7 @@
     <Compile Include="ObjectState.cs" />
     <Compile Include="Organizations\Company.cs" />
     <Compile Include="Organizations\CompanyProfile.cs" />
+    <Compile Include="Organizations\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\ActionList.cs" />
     <Compile Include="Users\EmployeeProfile.cs" />

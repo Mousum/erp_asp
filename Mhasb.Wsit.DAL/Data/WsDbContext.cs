@@ -75,6 +75,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new RoleMapping());
             modelBuilder.Configurations.Add(new RoleVsActionMapping());
             modelBuilder.Configurations.Add(new ActionListMapping());
+            modelBuilder.Configurations.Add(new UserInRoleMapping());
 
             // Company
             modelBuilder.Configurations.Add(new CompanyMapping());

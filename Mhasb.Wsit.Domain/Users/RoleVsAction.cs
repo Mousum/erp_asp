@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Mhasb.Domain.Users
-{
+{  
    public class RoleVsAction:IObjectStateInt
     {
        public int RoleId { get; set; }
