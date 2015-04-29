@@ -1,4 +1,5 @@
 ﻿using Mhasb.DAL.Mapping.Commons;
+using Mhasb.DAL.Mapping.Notifications;
 using Mhasb.DAL.Mapping.Organizations;
 using Mhasb.DAL.Mapping.Users;
 using System;
@@ -64,11 +65,19 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new LanguageMaping());
             modelBuilder.Configurations.Add(new LegalEntityMaping());
             modelBuilder.Configurations.Add(new IndustryMaping());
-            modelBuilder.Configurations.Add(new AreaTimeMaping()); 
+            modelBuilder.Configurations.Add(new AreaTimeMaping());
 
+
+            modelBuilder.Configurations.Add(new InvitationMapping());
 
             // User Management
             modelBuilder.Configurations.Add(new UserMaping());
+            modelBuilder.Configurations.Add(new RoleMapping());
+            modelBuilder.Configurations.Add(new RoleVsActionMapping());
+            modelBuilder.Configurations.Add(new ActionListMapping());
+            modelBuilder.Configurations.Add(new UserInRoleMapping());
+
+            // Company
             modelBuilder.Configurations.Add(new CompanyMapping());
             
             

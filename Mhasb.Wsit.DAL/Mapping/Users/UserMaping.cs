@@ -23,7 +23,7 @@ namespace Mhasb.DAL.Mapping.Users
             this.Property(u => u.Password).HasMaxLength(50).HasColumnName("password");
             this.Property(u => u.Status).HasMaxLength(50).HasColumnName("status");
 
-            this.ToTable("com.users");
+            this.ToTable("sec.users");
 
         }
     }

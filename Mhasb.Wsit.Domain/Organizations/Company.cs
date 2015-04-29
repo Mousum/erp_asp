@@ -67,6 +67,8 @@ namespace Mhasb.Domain.Organizations
         public string DocumentLocation { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public virtual ICollection<UserInRole> UserInRoles { get; set; }
         public virtual Country Countries { get; set; }
         public virtual Language Languages { get; set; }
         public virtual Industry Industries { get; set; }
