@@ -47,5 +47,16 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            if (uService.UserLogin(email, password) != false) {
+                return Content("Sucessfull");
+            }
+
+            return Redirect("Home/Index");
+        }
+
     }
 }
