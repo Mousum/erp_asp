@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Mhasb.DAL.Mapping.Commons
 {
-   public class LanguageMaping : EntityTypeConfiguration<Language>
+    public class AreaTimeMaping : EntityTypeConfiguration<AreaTime>
     {
-       public LanguageMaping()
+        public AreaTimeMaping()
        {
            // key 
            this.HasKey(l => l.Id);
            this.Ignore(l => l.State);
 
-           this.Property(l => l.LanguageName).HasMaxLength(100).HasColumnName("language_name");
-           this.ToTable("com.languages");
+           this.Property(l => l.ZoneName).HasMaxLength(100).HasColumnName("zone_name");
+           this.ToTable("com.areazone");
        }
     }
 }

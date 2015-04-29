@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Mhasb.Domain.Users;
+using Mhasb.Domain.Commons;
 
 namespace Mhasb.Domain.Organizations
 {
@@ -13,7 +15,7 @@ namespace Mhasb.Domain.Organizations
     {
         public int Id { get; set; }
 
-        public long UserId { get; set; }
+        //public long UserId { get; set; }
 
         [Required(ErrorMessage = "Trading Name is required")]
         [StringLength(100)]
@@ -54,16 +56,23 @@ namespace Mhasb.Domain.Organizations
         [StringLength(50)]
         public string Website { get; set; }
 
-        public int LegalEntityId { get; set; }
+        public int? LegalEntityId { get; set; }
 
-        public int TimezoneId { get; set; }
+        public int? TimezoneId { get; set; }
 
         public string LogoLocation { get; set; }
 
         public string SealLocation { get; set; }
 
         public string DocumentLocation { get; set; }
-        
+
+        public virtual ICollection<User> Users { get; set; }
+        public virtual Country Countries { get; set; }
+        public virtual Language Languages { get; set; }
+        public virtual Industry Industries { get; set; }
+
+        public virtual AreaTime AreaTimes { get; set; }
+        public virtual LegalEntity LegalEntities { get; set; }
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         //[DataType(DataType.Password)]

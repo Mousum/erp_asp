@@ -21,6 +21,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Create(User user)
         {
+            user.ConfirmPassword = user.Password;
+            user.CreatedTime = DateTime.Now;
             uService.AddUser(user);
 
             return View();

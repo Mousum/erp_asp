@@ -1,4 +1,5 @@
 ﻿using Mhasb.DAL.Mapping.Commons;
+using Mhasb.DAL.Mapping.Organizations;
 using Mhasb.DAL.Mapping.Users;
 using System;
 using System.Collections.Generic;
@@ -59,11 +60,16 @@ namespace Mhasb.Wsit.DAL.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Commons Entities
-            modelBuilder.Configurations.Add(new LanguageMaping()); 
+            modelBuilder.Configurations.Add(new CountryMaping());
+            modelBuilder.Configurations.Add(new LanguageMaping());
+            modelBuilder.Configurations.Add(new LegalEntityMaping());
+            modelBuilder.Configurations.Add(new IndustryMaping());
+            modelBuilder.Configurations.Add(new AreaTimeMaping()); 
 
 
             // User Management
             modelBuilder.Configurations.Add(new UserMaping());
+            modelBuilder.Configurations.Add(new CompanyMapping());
             
             
         }

@@ -56,7 +56,11 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\RepositoryQuery.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Mapping\Commons\AreaTimeMaping.cs" />
+    <Compile Include="Mapping\Commons\CountryMaping.cs" />
+    <Compile Include="Mapping\Commons\IndustryMaping.cs" />
     <Compile Include="Mapping\Commons\LanguageMaping.cs" />
+    <Compile Include="Mapping\Commons\LegalEntityMaping.cs" />
     <Compile Include="Mapping\Organizations\CompanyMapping.cs" />
     <Compile Include="Mapping\Users\UserMaping.cs" />
     <Compile Include="Operations\CrudOperation.cs" />

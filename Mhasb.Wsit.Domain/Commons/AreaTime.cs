@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Domain.Commons
 {
-    public class TimeZone : IObjectStateInt
+    public class AreaTime : IObjectStateInt
     {
         public string ZoneName { get; set; }
         public int Id

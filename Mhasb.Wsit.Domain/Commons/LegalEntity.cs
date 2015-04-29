@@ -9,7 +9,7 @@ namespace Mhasb.Domain.Commons
 {
     public class LegalEntity : IObjectStateInt
     {
-        public string LegalName { get; set; }
+        public string LegalEntityName { get; set; }
         public int Id { get; set; }
         public ObjectState State { get; set; }
         

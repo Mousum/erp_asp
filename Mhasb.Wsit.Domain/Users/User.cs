@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Mhasb.Domain.Organizations;
 
 
 namespace Mhasb.Domain.Users
 {
     public class User : IObjectStateLong
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [StringLength(50)]
@@ -30,8 +32,9 @@ namespace Mhasb.Domain.Users
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
-        public EmployeeProfile EmployeeProfiles { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
+        //public EmployeeProfile EmployeeProfiles { get; set; }
 
         [ScaffoldColumn(false)]
         public string Status { get; set; }

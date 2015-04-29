@@ -1,4 +1,5 @@
-﻿using Mhasb.Wsit.Domain;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace Mhasb.Domain.Commons
 {
     public class Language : IObjectStateInt
     {
-        public string Name { get; set; }
+        public string LanguageName { get; set; }
+
+        public virtual ICollection<Company> Companies { get; set; }
         public int Id
         {
             get;

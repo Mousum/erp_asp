@@ -15,7 +15,7 @@ namespace Mhasb.Domain.Users
        public int Location { get; set; }
        public string Phone { get; set; }
        public string Website { get; set; }
-       public virtual User Users { get; set; }
+       //public virtual User Users { get; set; }
        public long Id
        {
            get;

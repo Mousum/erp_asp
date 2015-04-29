@@ -14,8 +14,15 @@ namespace Mhasb.Services.Users
         private readonly CrudOperation<User> userRep = new CrudOperation<User>();
         public void AddUser(User user)
         {
-            user.State = ObjectState.Added;
-            userRep.AddOperation(user);
+            try
+            {
+                user.State = ObjectState.Added;
+                userRep.AddOperation(user);
+            }
+            catch (Exception ex) {
+                var rr = ex.Message;
+            }
+            
         }
     }
 }

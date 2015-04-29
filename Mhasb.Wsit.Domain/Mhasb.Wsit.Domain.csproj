@@ -44,7 +44,7 @@
     <Compile Include="Commons\Industry.cs" />
     <Compile Include="Commons\Language.cs" />
     <Compile Include="Commons\LegalEntity.cs" />
-    <Compile Include="Commons\TimeZone.cs" />
+    <Compile Include="Commons\AreaTime.cs" />
     <Compile Include="Loggers\LogUserLogin.cs" />
     <Compile Include="Notifications\Invitation.cs" />
     <Compile Include="ObjectState.cs" />
