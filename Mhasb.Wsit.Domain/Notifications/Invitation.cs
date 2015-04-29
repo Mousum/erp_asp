@@ -10,14 +10,14 @@ namespace Mhasb.Domain.Notifications
    public class Invitation:IObjectStateLong
     {
         public string Email { get; set; }
-        public long CompanyId { get; set; }
+        public int   CompanyId { get; set; }
 
         public EmpTypeEnum EmployeeType { get; set; }
         public string Token { get; set; }
         public StatusEnum Status { get; set; }
 
         public DateTime SendDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         public long Id { get; set; }
 
@@ -26,8 +26,8 @@ namespace Mhasb.Domain.Notifications
     }
    public enum EmpTypeEnum
    {
-       test1 = 1,
-       test2 = 2,
+       EmployeeType = 1,
+       Owner = 2,
        test3 = 3,
        test4 = 4
    }
