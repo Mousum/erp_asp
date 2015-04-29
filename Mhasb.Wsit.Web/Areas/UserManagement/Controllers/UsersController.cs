@@ -42,11 +42,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         
             if (uService.AddUser(user)!= false)
             {
-                
-              
-
                 return View();
-               
             }
 
             return Content("Failed");
@@ -67,6 +63,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             return Redirect("Home/Index");
         }
+
+
 
     }
 }
