@@ -38,6 +38,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
+          
+        
             if (uService.AddUser(user)!= false)
             {
                 return View();
@@ -77,14 +79,14 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 return View();
             else
                 return Redirect("Home/Index");
-        }
+            }
 
         public ActionResult MyMashab()
         {
             if (Session["uEmail"] != null)
                 return View();
             else
-                return Redirect("Home/Index");
+            return Redirect("Home/Index");
         }
 
 
