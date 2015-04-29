@@ -1,13 +1,14 @@
-
 body { overflow-x: hidden }
 p {
     font-size: 16px;
     font-family: "Rambla", sans-serif !important;
 }
+
 p.small { font-size: 16px }
 a,
 span,
 div { font-family: "Rambla", sans-serif !important }
+
 a,
 a:hover,
 a:focus,
@@ -16,6 +17,7 @@ a.active {
     outline: 0;
     color: #40B5E2;
 }
+
 h1,
 h2,
 h3,
@@ -27,7 +29,6 @@ h6 {
     font-weight: 400;
 }
 
-
 header {
     text-align: center;
     color: #fff;
@@ -35,10 +36,12 @@ header {
     background: url(../img/slider-bg.jpg) center center;
     background-size: cover;
 }
+
 header .container {
     padding-top: 100px;
     padding-bottom: 50px;
 }
+
 header .intro-text .name {
     display: block;
     text-transform: uppercase;
@@ -154,8 +157,11 @@ footer .footer-below {
     line-height: 28px;
 }
 .scroll-top .btn:focus { outline: 0 }
+
 /*bootstrap overwrite*/
+
 .navbar-default .navbar-brand { color: #40b5e2 }
+.navbar-brand:focus{color:#40b5e2 !important;} 
 .navbar-default .navbar-brand:hover { color: #40b5e2 }
 .navbar-default .navbar-nav > li > a {
     color: #474747 !important;
@@ -174,8 +180,16 @@ footer .footer-below {
     padding: 10px 27px;
     transition: background .5s;
 }
+.btn-block:focus {
+    background: #40B5E2 !important;
+}
+.navbar-toggle {
+    border: none !important;
+    background: #cbcbcb !important;
+}
 .btn-block:hover { background: #22ADE3 }
 .form-signin label { color: #474747 !important }
+
 /*sign up*/
 .form-signin {
     max-width: 330px;
@@ -185,6 +199,8 @@ footer .footer-below {
 .form-signin .form-signin-heading,
 .form-signin .checkbox { margin-bottom: 10px }
 .form-signin .checkbox { font-weight: normal }
+
+.sign-up-form .form-control,
 .form-signin .form-control {
     position: relative;
     font-size: 16px;
@@ -225,4 +241,55 @@ footer .footer-below {
 }
 .checkbox label,
 .form-signin input[type="text"] { font-family: "Rambla", sans-serif !important }
- 
+
+
+.get-started {
+    margin-top: 15px;
+    border-radius: 25px;
+    padding: 10px 38px;
+    color: #FFF;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2) none repeat scroll 0% 0%;
+    float: left;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+
+}
+
+.get-started:hover {
+    color: rgb(255, 255, 255);
+}
+
+
+/*sign up page style*/
+
+.sign-up {
+    background: url(../img/sign-up-bg.png) center center;
+    background-size: cover;
+    padding: 60px 0px;
+}
+.centered-form{
+	
+}
+
+.panel-body {
+    min-height:350px;
+    padding: 30px 20px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.7);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.fl {
+    float: left;
+}
+
+.terms label {
+    font-size: 14px;
+    font-weight: normal !important;
+    padding: 10px 0px;
+}

@@ -24,5 +24,30 @@ namespace Mhasb.Services.Users
             }
             
         }
+
+
+        public bool UserLogin(string email, string password)
+        {
+            //var userObj = userRep.GetOperation()
+            //                      .Filter(u => u.Email == email)
+            //                      .GetIQueryable();
+
+            var userObj = userRep.GetOperation()
+                                  .Filter(u => u.Email == email)
+                                  .Get().SingleOrDefault();
+
+
+            if (userObj != null)
+            {
+                if (userObj.Password == password)
+                    return true;
+                else
+                    return false;
+            }
+            else {
+                return false;
+            }
+
+        }
     }
 }

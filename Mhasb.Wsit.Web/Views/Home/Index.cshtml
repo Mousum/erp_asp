@@ -1,15 +1,19 @@
 ﻿<div class="col-lg-5 intro-text">
-
+    @model Mhasb.Wsit.Web.Areas.UserManagement.Models.Login
     <div class="account-wall">
         <h1 class="text-center login-title">Sign in to continue</h1>
-        <form class="form-signin">
+        @using (Html.BeginForm("Login", "Users",new{Area ="UserManagement"} ,FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
             <div style="margin-bottom: 10px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="Email">
+                  @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", placeholder = "Email", id = "login-username", Type = "Email", validate = "RequiredField" })
+                @Html.ValidationMessageFor(model => model.Email)
             </div>
             <div style="margin-bottom: 0px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input id="login-password" type="text" class="form-control" name="password" value="" placeholder="Password">
+                 @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control", placeholder = "Password", id = "login-password", Type = "Password", validate = "RequiredField" })
+                @Html.ValidationMessageFor(model => model.Password)
             </div>
             <div class="checkbox" style="float:left">
                 <label>
@@ -17,7 +21,27 @@
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+        }
+
+        @*<form class="form-signin">
+                <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="Email">
+                </div>
+                <div style="margin-bottom: 0px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="login-password" type="text" class="form-control" name="password" value="" placeholder="Password">
+                </div>
+                <div class="checkbox" style="float:left">
+                    <label>
+                        <input type="checkbox"> Save my password
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>*@
         <p>Don't have an account ? <a class="create-account" href="#">Create an account</a> </p>
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
