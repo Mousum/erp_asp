@@ -66,6 +66,7 @@
     <Compile Include="Mapping\Users\ActionListMapping.cs" />
     <Compile Include="Mapping\Users\RoleMapping.cs" />
     <Compile Include="Mapping\Users\RoleVsActionMapping.cs" />
+    <Compile Include="Mapping\Users\UserInRoleMapping.cs" />
     <Compile Include="Mapping\Users\UserMaping.cs" />
     <Compile Include="Operations\CrudOperation.cs" />
     <Compile Include="Operations\ICrudOperation.cs" />
