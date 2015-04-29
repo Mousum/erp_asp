@@ -72,11 +72,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult Dashboard()
         {
-            //Session.Add("uEmail", "sdf");
-            if (Session["uEmail"] != null)
-                return View();
-            else
-                return Redirect("Home/Index");
+            
+            //if (Session["uEmail"] != null)
+            //    return View();
+            //else
+                //return Redirect("Home/Index");
+            return View();
         }
 
         public ActionResult MyMashab()
