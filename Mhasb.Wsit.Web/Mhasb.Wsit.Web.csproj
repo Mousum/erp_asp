@@ -290,6 +290,8 @@
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
+    <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
