@@ -10,9 +10,10 @@ namespace Mhasb.DAL.Mapping.Organizations
 {
     public class EmployeeMapping : EntityTypeConfiguration<Employee>
     {
-        public EmployeeMapping() {
-            this.HasKey(emp=>emp.Id);
-            this.Ignore(emp=>emp.State);
+        public EmployeeMapping()
+        {
+            this.HasKey(emp => emp.Id);
+            this.Ignore(emp => emp.State);
             this.Property(emp => emp.UserId).HasColumnName("userid");
             this.Property(emp => emp.CompanyId).HasColumnName("companyid");
             this.Property(emp => emp.DesignationId).HasColumnName("designationid");

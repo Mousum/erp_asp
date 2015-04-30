@@ -79,6 +79,7 @@ namespace Mhasb.Wsit.DAL.Data
 
             // Company
             modelBuilder.Configurations.Add(new CompanyMapping());
+            modelBuilder.Configurations.Add(new EmployeeMapping());
             
             
         }
