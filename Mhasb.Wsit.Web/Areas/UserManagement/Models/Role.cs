@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Models
 {
-    public class RolesModel
+    public class Role
     {
 
         [Key]
