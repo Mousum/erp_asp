@@ -12,24 +12,29 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     {
         private IRoleService rService = new RoleService();
 
-        public ActionResult Create() {
+        public ActionResult Index() {
+            var model = rService.GetAllRoles();
+            return View("RoleIndex",model);
+        }
+
+        public ActionResult CreateRole() {
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Role role) 
+        public ActionResult CreateRole(Role role) 
         {
             rService.AddRole(role);
             return View();
         }
 
-        public ActionResult Edit()
+        public ActionResult EditRole()
         {
             return View();
         }
 
         [HttpPost]
 
-        public ActionResult Edit(Role  role)
+        public ActionResult EditRole(Role  role)
         {
             rService.EditRole(role);
             return View();
