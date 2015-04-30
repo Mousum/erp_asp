@@ -19,8 +19,7 @@ namespace Mhasb.Domain.Users
 
         public virtual Role Roles { get; set; }
 
-
-        public virtual Company Companies { get; set; }
+        public virtual Employee Employees { get; set; }
 
         public ObjectState State { get; set; }
     }

@@ -160,8 +160,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
+    <Compile Include="Areas\UserManagement\Models\Role.cs" />
     <Compile Include="Areas\UserManagement\UserManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -293,6 +295,7 @@
     <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
+    <None Include="Properties\PublishProfiles\mhasb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
