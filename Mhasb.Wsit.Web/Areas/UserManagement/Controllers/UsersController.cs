@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Users;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.AuthSecurity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            if (uService.UserLogin(email, password) != false)
+            if (CustomPrincipal.Login(email, password,false) != false)
             {
                 return Redirect("User/Dashboard");
             }
@@ -66,7 +67,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult Logout()
         {
-            Session.Clear();
+            //Session.Clear();
+            CustomPrincipal.Logout();
             return Redirect("Home/Index");
         }
 
@@ -82,6 +84,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult MyMashab()
         {
+
             if (Session["uEmail"] != null)
                 return View();
             else

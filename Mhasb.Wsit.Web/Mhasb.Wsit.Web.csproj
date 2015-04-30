@@ -163,7 +163,12 @@
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
     <Compile Include="Areas\UserManagement\UserManagementAreaRegistration.cs" />
+    <Compile Include="AuthSecurity\CustomIdentity.cs" />
+    <Compile Include="AuthSecurity\CustomPrincipal.cs" />
+    <Compile Include="AuthSecurity\ICustomIdentity.cs" />
+    <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -293,7 +298,9 @@
     <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
-    <None Include="Properties\PublishProfiles\mhasb.pubxml" />
+    <None Include="Properties\PublishProfiles\mhasb.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,6 +342,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

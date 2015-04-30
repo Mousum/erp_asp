@@ -36,7 +36,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.Property(c => c.SealLocation).HasMaxLength(100).HasColumnName("seal_location");
             this.Property(c => c.LogoLocation).HasMaxLength(100).HasColumnName("logo_location");
             this.Property(c => c.DocumentLocation).HasMaxLength(100).HasColumnName("document_location");
-            this.ToTable("com.companies");
+            this.ToTable("org.companies");
 
             //Relationship
             this.HasOptional(t => t.AreaTimes)
@@ -56,12 +56,8 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasRequired(c => c.Industries)
                 .WithMany(co => co.Companies)
                 .HasForeignKey(c => c.IndustryId);
-
-            this.HasMany(u => u.Users)
-                .WithMany(c => c.Companies)
-                .Map(c => c.ToTable("user_company")
-                    .MapLeftKey("userid")
-                    .MapRightKey("compnayid"));
+            this.HasRequired(u => u.Users)
+                .WithOptional();
 
         }
     }
