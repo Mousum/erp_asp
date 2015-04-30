@@ -56,12 +56,20 @@
     <Compile Include="Commons\IndustryService.cs" />
     <Compile Include="Commons\LanguageService.cs" />
     <Compile Include="Commons\LegalEntityService.cs" />
+    <Compile Include="Notifications\IInvitationService.cs" />
+    <Compile Include="Notifications\InvitationService.cs" />
     <Compile Include="Organizations\CompanyService.cs" />
     <Compile Include="Organizations\ICompanyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\ActionListService.cs" />
+    <Compile Include="Users\IActionListService.cs" />
     <Compile Include="Users\IRoleService.cs" />
+    <Compile Include="Users\IRoleVsActionService.cs" />
+    <Compile Include="Users\IUserInRoleService.cs" />
     <Compile Include="Users\IUserService.cs" />
     <Compile Include="Users\RoleService.cs" />
+    <Compile Include="Users\RoleVsActionService.cs" />
+    <Compile Include="Users\UserInRoleService.cs" />
     <Compile Include="Users\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
