@@ -23,5 +23,5 @@ namespace Mhasb.Domain.Organizations
         public long Id { get; set; }
 
         public ObjectState State { get; set; }
-}
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Users;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.AuthSecurity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-            if (uService.AddUser(user)!= false)
+
+
+            if (uService.AddUser(user) != false)
             {
                 return View();
             }
@@ -54,38 +57,41 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            if (uService.UserLogin(email, password) != false)
+            if (CustomPrincipal.Login(email, password,false) != false)
             {
-                return Redirect("User/Dashboard");
+                return Redirect("Dashboard");
             }
             else
-                Session.Add("uEmail",email);
-
-            return Redirect("Home/Index");
+                Session.Add("uEmail", email);
+            return Redirect(Url.Content("~/"));
         }
 
         public ActionResult Logout()
         {
-            Session.Clear();
+            //Session.Clear();
+            CustomPrincipal.Logout();
             return Redirect("Home/Index");
+
         }
 
         public ActionResult Dashboard()
         {
-            
+
             //if (Session["uEmail"] != null)
             //    return View();
             //else
-                //return Redirect("Home/Index");
+            //return Redirect("Home/Index");
             return View();
         }
 
         public ActionResult MyMashab()
         {
+
             if (Session["uEmail"] != null)
                 return View();
             else
-                return Redirect("Home/Index");
+                return Redirect(Url.Content("~/"));
+               // return RedirectToAction("Index", "Home", new { area = "Controllers" });
         }
 
 

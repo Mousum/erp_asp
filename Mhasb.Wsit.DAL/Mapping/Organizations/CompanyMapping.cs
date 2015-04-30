@@ -17,7 +17,6 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasKey(c => c.Id);
             // ignor
             this.Ignore(c => c.State);
-
             this.Property(c => c.TradingName).HasMaxLength(100).HasColumnName("trading_name");
             this.Property(c => c.LegalName).HasMaxLength(100).HasColumnName("legal_name");
             this.Property(c => c.DisplayName).HasMaxLength(100).HasColumnName("display_name");
@@ -36,7 +35,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.Property(c => c.SealLocation).HasMaxLength(100).HasColumnName("seal_location");
             this.Property(c => c.LogoLocation).HasMaxLength(100).HasColumnName("logo_location");
             this.Property(c => c.DocumentLocation).HasMaxLength(100).HasColumnName("document_location");
-            this.ToTable("com.companies");
+            this.ToTable("org.companies");
 
             //Relationship
             this.HasOptional(t => t.AreaTimes)
@@ -57,11 +56,9 @@ namespace Mhasb.DAL.Mapping.Organizations
                 .WithMany(co => co.Companies)
                 .HasForeignKey(c => c.IndustryId);
 
-            this.HasMany(u => u.Users)
-                .WithMany(c => c.Companies)
-                .Map(c => c.ToTable("user_company")
-                    .MapLeftKey("userid")
-                    .MapRightKey("compnayid"));
+            this.HasRequired(u => u.Users)
+                .WithOptional()
+                .Map(u => u.MapKey("userid"));
 
         }
     }
