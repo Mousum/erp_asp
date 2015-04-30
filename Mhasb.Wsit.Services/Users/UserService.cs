@@ -16,7 +16,7 @@ namespace Mhasb.Services.Users
         {
             try
             {
-                
+                user.CreatedTime = DateTime.Now;
                 user.State = ObjectState.Added;
                 userRep.AddOperation(user);
                 return true;
