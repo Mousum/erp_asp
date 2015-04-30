@@ -17,7 +17,6 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasKey(c => c.Id);
             // ignor
             this.Ignore(c => c.State);
-
             this.Property(c => c.TradingName).HasMaxLength(100).HasColumnName("trading_name");
             this.Property(c => c.LegalName).HasMaxLength(100).HasColumnName("legal_name");
             this.Property(c => c.DisplayName).HasMaxLength(100).HasColumnName("display_name");
@@ -56,8 +55,10 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasRequired(c => c.Industries)
                 .WithMany(co => co.Companies)
                 .HasForeignKey(c => c.IndustryId);
+
             this.HasRequired(u => u.Users)
-                .WithOptional();
+                .WithOptional()
+                .Map(u => u.MapKey("userid"));
 
         }
     }

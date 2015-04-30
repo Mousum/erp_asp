@@ -10,7 +10,7 @@ namespace Mhasb.Domain.Users
    public class EmployeeProfile:IObjectStateLong
     {
        public long UserId { get; set; }
-       public string ImageLocation { get; set; } 
+       public string ImageLocation { get; set; }
        public string Bio { get; set; }
        public int Location { get; set; }
        public string Phone { get; set; }

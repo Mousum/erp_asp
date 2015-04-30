@@ -80,8 +80,8 @@ namespace Mhasb.Domain.Organizations
         //[DataType(DataType.Password)]
         //public string Password { get; set; }
 
-   
+
         public ObjectState State { get; set; }
-       
+
     }
 }

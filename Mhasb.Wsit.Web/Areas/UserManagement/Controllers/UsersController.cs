@@ -39,7 +39,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-            if (uService.AddUser(user)!= false)
+
+
+            if (uService.AddUser(user) != false)
             {
                 return View();
             }
@@ -57,12 +59,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             if (CustomPrincipal.Login(email, password,false) != false)
             {
-                return Redirect("User/Dashboard");
+                return Redirect("Dashboard");
             }
             else
-                Session.Add("uEmail",email);
-
-            return Redirect("Home/Index");
+                Session.Add("uEmail", email);
+            return Redirect(Url.Content("~/"));
         }
 
         public ActionResult Logout()
@@ -70,15 +71,16 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             //Session.Clear();
             CustomPrincipal.Logout();
             return Redirect("Home/Index");
+
         }
 
         public ActionResult Dashboard()
         {
-            
+
             //if (Session["uEmail"] != null)
             //    return View();
             //else
-                //return Redirect("Home/Index");
+            //return Redirect("Home/Index");
             return View();
         }
 
@@ -88,7 +90,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             if (Session["uEmail"] != null)
                 return View();
             else
-                return Redirect("Home/Index");
+                return Redirect(Url.Content("~/"));
+               // return RedirectToAction("Index", "Home", new { area = "Controllers" });
         }
 
 
