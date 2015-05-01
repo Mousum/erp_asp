@@ -77,7 +77,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult Dashboard()
         {
-            var tt = HttpContext.User.Identity.Name;
+             var tt = HttpContext.User.Identity.Name;
             //if (Session["uEmail"] != null)
             //    return View();
             //else

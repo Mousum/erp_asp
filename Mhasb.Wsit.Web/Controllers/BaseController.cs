@@ -1,4 +1,5 @@
-﻿using Mhasb.Wsit.Web.AuthSecurity;
+﻿using Mhasb.Domain.Users;
+using Mhasb.Wsit.Web.AuthSecurity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,15 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
-            // To get area,controller and action name from http request
-            var routeData = filterContext.RequestContext.RouteData;
-            var module = (string)routeData.DataTokens["area"];
-            var controller = routeData.GetRequiredString("controller");
-            var action = routeData.GetRequiredString("action");
+            //// To get area,controller and action name from http request
+            //var routeData = filterContext.RequestContext.RouteData;
+            //var module = (string)routeData.DataTokens["area"];
+            //var controller = routeData.GetRequiredString("controller");
+            //var action = routeData.GetRequiredString("action");
+            //// to save Action List 
+            //var actionList = new ActionList { 
+            //                ModuleName = module ,ControllerName=controller,ActionName=action,IsShowInMenu=false,};
+
 
 
         }
