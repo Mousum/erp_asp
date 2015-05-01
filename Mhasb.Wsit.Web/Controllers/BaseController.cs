@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Mhasb.Wsit.Web.AuthSecurity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -27,6 +29,21 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
             base.OnAuthorization(filterContext);
+            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (cookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                var newTicket = FormsAuthentication.RenewTicketIfOld(ticket);
+                if (newTicket.Expiration != ticket.Expiration)
+                {
+                    string encryptedTicket = FormsAuthentication.Encrypt(newTicket);
+
+                    cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    cookie.Path = FormsAuthentication.FormsCookiePath;
+                    Response.Cookies.Add(cookie);
+                }
+                CustomPrincipal.Login(ticket.UserData);
+            }
         }
        
 	}
