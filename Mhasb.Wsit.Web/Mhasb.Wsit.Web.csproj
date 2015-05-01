@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Employee\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
@@ -361,7 +363,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
-    <Folder Include="Areas\OrganizationManagement\Views\Employee\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
