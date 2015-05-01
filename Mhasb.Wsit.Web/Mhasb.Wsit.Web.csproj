@@ -160,6 +160,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
@@ -302,6 +303,9 @@
     <Content Include="Areas\UserManagement\Views\Roles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\CreateRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\EditRole.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
