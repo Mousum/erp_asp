@@ -3,6 +3,7 @@ using Mhasb.Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,27 +13,44 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     {
         private IRoleService rService = new RoleService();
 
-        public ActionResult Create() {
+        public ActionResult Index() {
+            var model = rService.GetAllRoles();
+            return View(model);
+            //return View();
+        }
+
+        public ActionResult CreateRole() {
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Role role) 
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRole(Role role) 
         {
             rService.AddRole(role);
-            return View();
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Edit()
+        public ActionResult EditRole(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = rService.GetSingleRole(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         [HttpPost]
 
-        public ActionResult Edit(Role  role)
+        public ActionResult EditRole(Role  role)
         {
             rService.EditRole(role);
-            return View();
+            //return View();
+            return RedirectToAction("Index");
         }
 
 

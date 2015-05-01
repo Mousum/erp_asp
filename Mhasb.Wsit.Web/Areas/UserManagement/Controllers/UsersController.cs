@@ -1,6 +1,7 @@
 ﻿using Mhasb.Domain.Users;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.AuthSecurity;
+using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
         //
@@ -50,7 +51,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             return Content("Registration Failed");
         }
-
+        
         public ActionResult Login()
         {
             return View();
@@ -72,18 +73,15 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             //Session.Clear();
             CustomPrincipal.Logout();
-            return Redirect("Home/Index");
+            return Redirect("~/");
 
         }
 
         public ActionResult Dashboard()
         {
 
-            if (Session["uEmail"] != null)
+            if (HttpContext.User.Identity.IsAuthenticated)
                 return View();
-
-            //if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-            //    return View();
             else
                 return Redirect("~/");
         }
