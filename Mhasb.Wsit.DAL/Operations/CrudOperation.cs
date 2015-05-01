@@ -55,7 +55,7 @@ namespace Mhasb.Wsit.DAL.Operations
             var singleObject = unitOfWork.Repository<T>().FindById(id);
             return singleObject;
         }
-
+       
         #endregion
         
     }

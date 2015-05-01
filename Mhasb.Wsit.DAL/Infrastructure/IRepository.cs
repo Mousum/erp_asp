@@ -16,5 +16,6 @@ namespace Mhasb.Wsit.DAL.Infrastructure
         void Delete(TEntity entity);
         void Insert(TEntity entity);
         RepositoryQuery<TEntity> Query();
+
     }
 }

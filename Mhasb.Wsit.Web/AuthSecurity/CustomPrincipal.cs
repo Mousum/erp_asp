@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace Mhasb.Wsit.Web.AuthSecurity
 {
-    public class CustomPrincipal : IPrincipal
+    public class CustomPrincipal : ICustomPrincipal
     {
         private CustomPrincipal(ICustomIdentity identity)
         {
