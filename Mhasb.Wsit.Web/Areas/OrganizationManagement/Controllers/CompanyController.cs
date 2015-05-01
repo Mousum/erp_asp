@@ -3,6 +3,7 @@ using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class CompanyController : Controller
+    public class CompanyController : BaseController
     {
         private readonly ICompanyService iCompany= new CompanyService();
         private readonly IIndustryService iIndustry = new IndustryService();
@@ -27,6 +28,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         // GET: /OrganizationManagement/Company/
         public ActionResult Index()
         {
+            
             ViewBag.msg = "sfsd";
             return View("RegistrationResult");
         }
@@ -35,12 +37,18 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult Registration()
         {
-            ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
-            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
-            ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
-            ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
-            ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
+                ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+                ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
+                ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+                ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
+                return View();
+            }
+            else
+                return Redirect("~/");
+            
         }
         [HttpPost]
         public ActionResult Registraion(Company company)
@@ -84,8 +92,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     msg = "Failed";
                 }
-                
-                
                 
             }
             else
