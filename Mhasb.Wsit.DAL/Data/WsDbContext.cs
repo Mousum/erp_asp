@@ -67,7 +67,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new IndustryMaping());
             modelBuilder.Configurations.Add(new AreaTimeMaping());
 
-
+            // Notification
             modelBuilder.Configurations.Add(new InvitationMapping());
 
             // User Management
