@@ -85,6 +85,5 @@ namespace Mhasb.Wsit.DAL.Data
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Users.Role> Roles { get; set; }
-
     }
 }

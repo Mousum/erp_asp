@@ -13,8 +13,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private IRoleService rService = new RoleService();
 
         public ActionResult Index() {
-            var model = rService.GetAllRoles();
-            return View("RoleIndex",model);
+            //var model = rService.GetAllRoles();
+            //return View(model);
+            return View();
         }
 
         public ActionResult CreateRole() {
@@ -23,6 +24,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult CreateRole(Role role) 
         {
+
             rService.AddRole(role);
             return View();
         }
