@@ -1,10 +1,9 @@
 ﻿@model Mhasb.Domain.Users.Role
-
 @{
-    ViewBag.Title = "CreateRole";
+    ViewBag.Title = "EditRole";
 }
 
-<div class="container my-dashboard">
+<<div class="container my-dashboard">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="welcome">
@@ -17,11 +16,11 @@
                 @Html.ValidationSummary(true)
 
                 <div class="form-group ">
-                    @Html.TextBoxFor(model => model.RoleName, htmlAttributes: new { @class = "form-control", placeholder = "Role Name", id = "role_name", validate = "RequiredField",style="border:1px solid #b6b6b6;" })
+                    @Html.TextBoxFor(model => model.RoleName, htmlAttributes: new { @class = "form-control", placeholder = "Role Name", id = "role_name", validate = "RequiredField", style = "border:1px solid #b6b6b6;" })
                     @Html.ValidationMessageFor(model => model.RoleName)
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.Remarks, htmlAttributes: new { @class = "form-control", placeholder = "Reamarks", id = "remarks", validate = "RequiredField",style="border:1px solid #b6b6b6;" })
+                    @Html.TextBoxFor(model => model.Remarks, htmlAttributes: new { @class = "form-control", placeholder = "Reamarks", id = "remarks", validate = "RequiredField", style = "border:1px solid #b6b6b6;" })
                     @Html.ValidationMessageFor(model => model.Remarks)
                 </div>
                 <div class="row">

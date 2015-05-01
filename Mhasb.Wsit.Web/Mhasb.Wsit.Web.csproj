@@ -301,6 +301,7 @@
     <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\CreateRole.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Roles\EditRole.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
