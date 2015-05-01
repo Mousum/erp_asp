@@ -160,7 +160,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\OrganizationManagements\EmployeesController.cs" />
+    <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
+    <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\UtilityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -307,6 +309,11 @@
     <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\web.config" />
+    <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Invitations\Create.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Invitations\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
@@ -351,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
