@@ -11,5 +11,7 @@ namespace Mhasb.Services.Users
     {
         bool AddUser(User user);
         bool UserLogin(string email,string password);
+        bool CheckUserExistence(string email);
+        User GetSingleUserByEmail(string email);
     }
 }

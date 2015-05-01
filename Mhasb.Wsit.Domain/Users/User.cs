@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Mhasb.Domain.Organizations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 
 namespace Mhasb.Domain.Users

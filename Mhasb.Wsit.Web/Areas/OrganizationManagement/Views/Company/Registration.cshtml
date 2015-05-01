@@ -1,0 +1,366 @@
+﻿@model Mhasb.Domain.Organizations.Company
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="welcome">
+                <h4><a href="#">Add a Company</a></h4>
+                <p>
+                    Adding your company in our domain will make easier to run your business successfully.
+                </p>
+            </div>
+            @*<form class="organization-details-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="#" placeholder="Trading Name">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="#" placeholder="Legal Name">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="#" placeholder="Display Name">
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="inline-label">Organization Industry</label>
+                            <select id="" style="width:auto;" class="form-control">
+                                <option class="">Trading</option>
+                                <option class="">Industrial</option>
+                                <option class="">Contracting</option>
+                                <option class="">Transportation</option>
+                                <option class="">Limosine</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="inline-label">Organization Country</label>
+                            <select id="" style="width:auto;" class="form-control">
+                                <option class="">Bangladesh</option>
+                                <option class="">Bangladesh</option>
+                                <option class="">Bangladesh</option>
+                                <option class="">Bangladesh</option>
+                                <option class="">Bangladesh</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="inline-label">Organization Language</label>
+                            <select id="" style="width:auto;" class="form-control">
+                                <option class="">Bangla</option>
+                                <option class="">English</option>
+                                <option class="">Arabic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="#" placeholder="Organization Website">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="inline-label">Organization Legal Entity</label>
+                            <select id="" style="width:auto;" class="form-control">
+                                <option class="">Individual</option>
+                                <option class="">Limited Liability</option>
+                                <option class="">Private Shareholding</option>
+                                <option class="">Public Shareholding</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="inline-label">Timezone</label>
+                            <select id="" style="width: 60%;" class="form-control">
+                                <option class="">+4</option>
+                                <option class="">+5</option>
+                                <option class="">+6</option>
+                                <option class="">+7</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="#" placeholder="Organization Tel.">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="#" placeholder="Organization Fax">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="#" placeholder="Organization P. O. Box">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="#" placeholder="Organization Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="Postal Address/Location"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="">Upload Logo</label>
+                        <div class="form-group">
+                            <input type="file" id="">
+                            <input type="file" id="">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="logo-review">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="">Upload Seal</label>
+                        <div class="form-group">
+                            <input type="file" id="">
+                            <input type="file" id="">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="seal-review">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-8">
+                            <label for="">Upload Organization Profile</label>
+                            <div class="form-group">
+                                <input type="file" id="">
+                                <input type="file" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="">Or Set Profile</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="Organization-profile-review">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-6">
+                            <label for="">Upload Signature</label>
+                            <div class="form-group">
+                                <input type="file" id="">
+                                <input type="file" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option class="">Select Stuff Member</option>
+                                <option class="">1</option>
+                                <option class="">2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="Signature-review">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-default" type="submit">Save</button>
+                        <button class="btn btn-default" type="submit">Update</button>
+                        <a class="btn btn-default" href="#" role="button">Settings your financial</a>
+                    </div>
+                </div>
+            </form>*@
+
+
+
+            @using (Html.BeginForm("Registraion", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="organization-details-form">
+                    <h4>Company</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.TradingName, "Trading Name ")*@
+                       
+                            @Html.TextBoxFor(model => model.TradingName, new { @class = "form-control", @placeholder = "Trading Name*" })
+                            @Html.ValidationMessageFor(model => model.TradingName)
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.LegalName, "Legal Name", new { @class = "control-label col-md-2" })*@
+                       
+                            @Html.TextBoxFor(model => model.LegalName, new { @class = "form-control" , @placeholder="Legal Name"})
+                            @Html.ValidationMessageFor(model => model.LegalName)
+                       
+                    </div>
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.DisplayName, new { @class = "control-label col-md-2" })*@
+                       
+                            @Html.TextBoxFor(model => model.DisplayName, new { @class = "form-control", @placeholder = "Display Name" })
+                            @Html.ValidationMessageFor(model => model.DisplayName)
+                     
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IndustryId, "Industry", new { @class = "inline-label" })
+
+
+                            @Html.DropDownList("IndustryId", ViewBag.IndustryList as SelectList, new { @class = "form-control", style = "width:auto;" })
+                            @*@Html.DropDownListFor(x => x.accountId, new SelectList(ViewBag.IndustryList, "Id", "AccountName"))*@
+                            @Html.ValidationMessageFor(model => model.IndustryId)
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CountryId, "Country", new { @class = "inline-label" })
+
+                            @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, new { @class = "form-control", style = "width:auto;" })
+                            @Html.ValidationMessageFor(model => model.CountryId)
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LanguageId, "Language", new { @class = "inline-label" })
+
+                            @Html.DropDownList("LanguageId", ViewBag.LanguageList as SelectList, new { @class = "form-control", style = "width: auto;" })
+                            @Html.ValidationMessageFor(model => model.LanguageId)
+
+                        </div>
+
+                    </div>
+                 
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.Tel, new { @class = "control-label col-md-2" })*@
+
+                            @Html.TextBoxFor(model => model.Tel, new { @class = "form-control", @placeholder = "Telephone" })
+                            @Html.ValidationMessageFor(model => model.Tel)
+
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.Fax, new { @class = "control-label col-md-2" })*@
+
+                            @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                            @Html.ValidationMessageFor(model => model.Fax)
+
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.P_O_Box, new { @class = "control-label col-md-2" })*@
+
+                            @Html.TextBoxFor(model => model.P_O_Box, new { @class = "form-control", @placeholder = "P. O. Box No*" })
+                            @Html.ValidationMessageFor(model => model.P_O_Box)
+
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email)
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Location" })
+                            @Html.ValidationMessageFor(model => model.Location)
+
+                        </div>
+
+
+                    </div>
+                   
+
+                    <div class="form-group">
+                            @Html.TextBoxFor(model => model.Website, new { @class = "form-control", @placeholder = "Website" })
+                            @Html.ValidationMessageFor(model => model.Website)
+                       
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LegalEntityId, "Legal Entity", new { @class = "inline-label" })
+                    
+                            @Html.DropDownList("LegalEntityId", ViewBag.LegalEntityList as SelectList, new { @class = "form-control", style = "width: 60%;" })
+                            @Html.ValidationMessageFor(model => model.LegalEntityId)
+                       
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TimezoneId, "Timezone", new { @class = "inline-label" })
+                       
+                            @Html.DropDownList("TimezoneId", ViewBag.TimeZoneList as SelectList, new { @class = "form-control", style = "width: 60%;" })
+                            @Html.ValidationMessageFor(model => model.TimezoneId)
+                       
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LogoLocation, "Logo", htmlAttributes: new { @class = "control-label col-md-2" })
+                       
+                            <input name="logoImage" type="file" />
+                            @Html.ValidationMessageFor(model => model.LogoLocation)
+                     
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SealLocation, "Seal", htmlAttributes: new { @class = "control-label col-md-2" })
+                        
+                            <input name="sealImage" type="file" />
+                            @Html.ValidationMessageFor(model => model.SealLocation)
+                        
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DocumentLocation, "Add Document", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <input name="documentLocation" type="file" />
+                        @Html.ValidationMessageFor(model => model.DocumentLocation)
+
+                    </div>
+
+                  
+
+                    <div class="form-group">
+                    
+                            <input type="submit" value="Create Company" class="btn btn-default" />
+                        
+                    </div>
+                </div>
+            }
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*@{
+        ViewBag.Title = "Registration";
+    }
+
+    <h2>Registration</h2>*@
+
