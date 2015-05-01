@@ -5,6 +5,8 @@ using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -40,14 +42,14 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-
-
+            if (uService.CheckUserExistence(user.Email))
+                return Content("Already Exist");
             if (uService.AddUser(user) != false)
             {
-                return View();
+                return View("RegistrationSuccess");
             }
 
-            return Content("Failed");
+            return Content("Registration Failed");
         }
         
         public ActionResult Login()
@@ -58,31 +60,30 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            if (CustomPrincipal.Login(email, password,false) != false)
+            if (CustomPrincipal.Login(email, password,false))
             {
+                Session.Add("uEmail",email);
                 return Redirect("Dashboard");
             }
             else
-                Session.Add("uEmail", email);
-            return Redirect(Url.Content("~/"));
+                return Redirect("~/Home/Index");
         }
 
         public ActionResult Logout()
         {
             //Session.Clear();
             CustomPrincipal.Logout();
-            return Redirect("Home/Index");
+            return Redirect("~/");
 
         }
 
         public ActionResult Dashboard()
         {
-            var tt = HttpContext.User.Identity.Name;
-            //if (Session["uEmail"] != null)
-            //    return View();
-            //else
-            //return Redirect("Home/Index");
-            return View();
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return View();
+            else
+                return Redirect("~/");
         }
 
         public ActionResult MyMashab()
@@ -95,6 +96,34 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                // return RedirectToAction("Index", "Home", new { area = "Controllers" });
         }
 
+        public bool sendMail(string to,string mailSubject, string mailBody)
+        {
+            var fromAddress = new MailAddress("sumon20@gmail.com", "From Name");
+            var toAddress = new MailAddress(to, "To Name");
+             string fromPassword = "638848";
+             string subject = mailSubject;
+             string body = mailBody;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
+
+            return true;
+        }
 
 
     }

@@ -18,5 +18,6 @@ namespace Mhasb.Services.Organizations
         Company GetSingleCompany(int id);
 
         List<Company> GetAllCompanies();
+        int GetMaxId();
     }
 }
