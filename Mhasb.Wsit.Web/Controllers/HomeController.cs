@@ -14,7 +14,8 @@ namespace Mhasb.Wsit.Web.Controllers
         private IRoleVsActionService arService = new RoleVsActionService();
         public ActionResult Index()
         {
-            
+            var tt = arService.GetActionByRoleID(1);
+
             var model = new Login();
             return View(model);
         }
