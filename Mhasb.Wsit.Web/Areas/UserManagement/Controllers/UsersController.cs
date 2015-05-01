@@ -1,6 +1,7 @@
 ﻿using Mhasb.Domain.Users;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.AuthSecurity;
+using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
         //
@@ -48,7 +49,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             return Content("Failed");
         }
-
+        
         public ActionResult Login()
         {
             return View();
@@ -76,7 +77,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult Dashboard()
         {
-
+            var tt = HttpContext.User.Identity.Name;
             //if (Session["uEmail"] != null)
             //    return View();
             //else
