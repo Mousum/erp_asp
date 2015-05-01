@@ -4,14 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Areas.UserManagement.Models;
+using Mhasb.Services.Users;
 
 
 namespace Mhasb.Wsit.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IRoleVsActionService arService = new RoleVsActionService();
         public ActionResult Index()
         {
+            var tt = arService.GetActionByRoleID(1);
+
             var model = new Login();
             return View(model);
         }

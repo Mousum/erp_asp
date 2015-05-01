@@ -17,6 +17,7 @@ namespace Mhasb.Services.Users
             try
             {
                 user.CreatedTime = DateTime.Now;
+                
                 user.State = ObjectState.Added;
                 userRep.AddOperation(user);
                 return true;
@@ -52,5 +53,27 @@ namespace Mhasb.Services.Users
             }
 
         }
+
+        public bool CheckUserExistence(string email) {
+            var userObj = userRep.GetOperation()
+                                  .Filter(u => u.Email == email)
+                                  .Get().SingleOrDefault();
+            if (userObj != null)
+                return true;
+            else 
+                return false;
+            
+        }
+
+        public User GetSingleUserByEmail(string  email) {
+
+            var userObj = userRep.GetOperation()
+                                  .Filter(u => u.Email == email)
+                                  .Get().SingleOrDefault();
+
+            return userObj;
+        
+        }
+
     }
 }

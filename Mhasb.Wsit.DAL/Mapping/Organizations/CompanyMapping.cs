@@ -57,7 +57,7 @@ namespace Mhasb.DAL.Mapping.Organizations
                 .HasForeignKey(c => c.IndustryId);
 
             this.HasRequired(u => u.Users)
-                .WithOptional()
+                .WithMany()
                 .Map(u => u.MapKey("userid"));
 
         }

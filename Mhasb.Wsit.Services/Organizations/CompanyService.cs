@@ -113,6 +113,20 @@ namespace Mhasb.Services.Organizations
 
         }
 
+        public int GetMaxId()
+        {
+            try {
+                var mId = companyRep.GetOperation().Get().Max(c => c.Id);
+                return mId;
+            }
+            catch (Exception ex)
+            {
+                var tt = ex.Message;
+                return 0;
+            }
+            
+        }
+
 
     }
 }

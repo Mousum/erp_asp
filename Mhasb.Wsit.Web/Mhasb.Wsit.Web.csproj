@@ -160,6 +160,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
+    <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
@@ -168,6 +173,7 @@
     <Compile Include="AuthSecurity\CustomIdentity.cs" />
     <Compile Include="AuthSecurity\CustomPrincipal.cs" />
     <Compile Include="AuthSecurity\ICustomIdentity.cs" />
+    <Compile Include="AuthSecurity\ICustomPrincipal.cs" />
     <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -299,8 +305,23 @@
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
     <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\RegistrationSuccess.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\web.config" />
+    <Content Include="Areas\OrganizationManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\RegistrationResult.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\CreateRole.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Roles\EditRole.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Invitations\Create.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Invitations\Index.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\web.config" />
+    <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
@@ -345,6 +366,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\NotificationManagement\Models\" />
+    <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
