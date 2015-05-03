@@ -614,7 +614,7 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
     <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\MyMhasb.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\RegistrationSuccess.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\web.config" />
     <Content Include="Areas\OrganizationManagement\Views\_ViewStart.cshtml" />
