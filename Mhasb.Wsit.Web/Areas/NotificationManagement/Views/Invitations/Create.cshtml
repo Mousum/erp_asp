@@ -1,0 +1,36 @@
+﻿@model Mhasb.Domain.Notifications.Invitation
+@{
+    ViewBag.Title = "Create Invitation";
+   
+}
+
+
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="welcome">
+                <h4><a href="#">Create Action</a></h4>
+                @using (Html.BeginForm(new { @class = "organization-details-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group ">
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", placeholder = "Email", id = "email", validate = "RequiredField", style = "border:1px solid #b6b6b6;" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="form-group">
+                       @Html.DropDownList("EmployeeType", ViewBag.employeeType as SelectList, new { @class = "form-control", style = "width: 60%;" })
+                        @Html.ValidationMessageFor(model => model.EmployeeType)
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-success" type="submit" style="margin-bottom:10px;">Save</button>
+                        </div>
+                    </div>
+                }
+            </div>
+          </div>
+        </div>
+    </div>
+
