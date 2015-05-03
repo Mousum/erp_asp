@@ -32,27 +32,61 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         [HttpPost]
         public ActionResult Create(Invitation invitation) 
         {
-            string to = invitation.Email;
-            string subject = "Invitation From MHASB Erp";
-            string body = "Hello Doly, gottcha?";
-            if (sendMail(to, subject, body))
-            {
-                Random random = new Random();
+           Random random = new Random();
+            //string to = invitation.Email;
+            string rand = random.Next().ToString();
+            //string subject = "Invitation From MHASB Erp";
+            //string body = "Hello Doly, ";
+            //if (sendMail(to, subject, body))
+            //{
+               
                 invitation.CompanyId = 1;//Static Company id , combo will be added later 
                 invitation.SendDate = DateTime.Now;
                 invitation.UpdateDate = DateTime.Now;
-                invitation.Token = random.Next().ToString();
+                invitation.Token = rand;
                 invitation.Status = StatusEnum.test1;
                 inService.CreateInvitation(invitation);
                 
-            }
+            //}
             return RedirectToAction("Index");
         }
 
+        public ActionResult InvitationConfirm(int id,string token)
+        {
+            var Invitation = inService.GetSingleInvitation(id);
+            if (Invitation != null)
+            {
+                if (Invitation.Token == token)
+                {
+                    if (Invitation.Status != StatusEnum.test2)
+                    {
+                        Invitation.Status = StatusEnum.test2;
+                        inService.AcceptInvitation(Invitation);
+                        return RedirectToAction("Index");
+                    }
+                    else {
+                        return Content("You are trying to use a token that is already used !");
+                    }
+                    
+                   // return RedirectToAction("Index");
+                }
+                else 
+                {
+                    return Content("token mismatch");
+                }
+            }
+            else {
+                return Content("Invitation Not Found!");
+            }
+ 
+
+        }
+
+
         public bool sendMail(string to, string mailSubject, string mailBody)
         {
-            var fromAddress = new MailAddress("sumon20@gmail.com", "From Name");
-            var toAddress = new MailAddress(to, "To Name");
+            var fromAddress = new MailAddress("sumon20@gmail.com", "HHASB ERP");
+            var toAddress = new MailAddress(to, "Employee");
             string fromPassword = "638848";
             string subject = mailSubject;
             string body = mailBody;

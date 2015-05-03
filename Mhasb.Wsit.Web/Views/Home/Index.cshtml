@@ -1,49 +1,138 @@
-﻿<div class="col-lg-5 intro-text">
-    @model Mhasb.Wsit.Web.Areas.UserManagement.Models.Login
-    <div class="account-wall">
-        <h1 class="text-center login-title">Sign in to continue</h1>
-        @using (Html.BeginForm("Login", "Users",new{Area ="UserManagement"} ,FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div style="margin-bottom: 10px" class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", placeholder = "Email", id = "login-username", Type = "Email", validate = "RequiredField" })
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-            <div style="margin-bottom: 0px" class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                 @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control", placeholder = "Password", id = "login-password", Type = "Password", validate = "RequiredField" })
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-            <div class="checkbox" style="float:left">
-                <label>
-                    <input type="checkbox"> Save my password
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        }
+﻿@model Mhasb.Wsit.Web.Areas.UserManagement.Models.Login
 
-        @*<form class="form-signin">
-                <div style="margin-bottom: 10px" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="Email">
+@using (Html.BeginForm("Login","Users",new{Area ="UserManagement"},FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div id="base" class="" >
+
+        <!-- Unnamed (Shape) -->
+        <div id="u0" class="ax_shape">
+            <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u0.png" />
+            <!-- Unnamed () -->
+            
+            <div id="u1" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u2" class="ax_shape">
+            <img id="u2_img" class="img " src="~/AxureStyles/images/login_page/u2.png" />
+            <!-- Unnamed () -->
+            <div id="u3" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u4" class="ax_shape">
+            <img id="u4_img" class="img " src="~/AxureStyles/images/login_page/u4.png" />
+            <!-- Unnamed () -->
+            <div id="u5" class="text">
+                <p><span>Footer</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u6" class="ax_shape">
+            <img id="u6_img" class="img " src="~/AxureStyles/images/login_page/u6.png" />
+            <!-- Unnamed () -->
+            <div id="u7" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u8" class="ax_shape">
+            <img id="u8_img" class="img " src="~/AxureStyles/images/login_page/u8.png" />
+            <!-- Unnamed () -->
+            <div id="u9" class="text">
+                <p style="font-size:36px;"><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-size:36px;">Have a Great Day</span></p><p style="font-size:13px;"><span style="font-family:'Arial Regular', 'Arial';font-weight:400;font-size:13px;">&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Flow Shape) -->
+        <div id="u10" class="ax_flow_shape">
+            <img id="u10_img" class="img " src="~/AxureStyles/images/login_page/u10.png" />
+            <!-- Unnamed () -->
+            <div id="u11" class="text">
+                <p><span>MHASB ERP</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u12" class="ax_shape">
+            <img id="u12_img" class="img " src="~/AxureStyles/images/login_page/u12.png" />
+            <!-- Unnamed () -->
+            <div id="u13" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Text Field) -->
+        <div id="u14" class="ax_text_field">
+            @Html.TextBoxFor(model => model.Email, new { id = "u14_input" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <!-- Unnamed (Text Field) -->
+        <div id="u15" class="ax_text_field">
+            @Html.TextBoxFor(model => model.Password, new { @type = "password", id = "u15_input" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u16" class="ax_shape">
+            <img id="u16_img" class="img " src="~/AxureStyles/images/login_page/u16.png" />
+            <!-- Unnamed () -->
+            <div id="u17" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (HTML Button) -->
+        <div id="u18" class="ax_html_button">
+            <input id="u18_input" type="submit" value="LOGIN" />
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u19" class="ax_paragraph">
+            <img id="u19_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u20" class="text">
+                <p><span>Forget Your Password ?</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u21" class="ax_h1">
+            <img id="u21_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u22" class="text">
+                <p><span>Welcome To MHASB ERP</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u23" class="ax_h2">
+            <img id="u23_img" class="img " src="~/AxureStyles/images/login_page/u23.png" />
+            <!-- Unnamed () -->
+            <div id="u24" class="text">
+                <p><span>Do You have Login?&nbsp; try it free</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Checkbox) -->
+        <div id="u25" class="ax_checkbox">
+            <label for="u25_input">
+                <!-- Unnamed () -->
+                <div id="u26" class="text">
+                    <p><span>Save My Password </span></p>
                 </div>
-                <div style="margin-bottom: 0px" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="login-password" type="text" class="form-control" name="password" value="" placeholder="Password">
-                </div>
-                <div class="checkbox" style="float:left">
-                    <label>
-                        <input type="checkbox"> Save my password
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>*@
-        <p>Don't have an account ? @Html.ActionLink("Create an account", "Registration", "Users", new { area = "UserManagement" }, new { @class = "create-account" }) </p>
-        
-       
+            </label>
+            <input id="u25_input" type="checkbox" value="checkbox" />
+        </div>
     </div>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
 }
