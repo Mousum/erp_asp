@@ -99,6 +99,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(i => i.Industries)
                                         .Include(t => t.AreaTimes)
                                         .Include(l => l.LegalEntities)
+                                        .Include(u=>u.Users)
                                         .Get().ToList();
 
                 //companyRep.GetSingleObject(companyId);

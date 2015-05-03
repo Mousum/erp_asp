@@ -1,0 +1,392 @@
+﻿@model  IEnumerable<Mhasb.Domain.Organizations.Company>
+@{
+    Layout = "";
+}
+@*@{
+    ViewBag.Title = "MyMashab";
+}
+
+<h2>My Mhasbab</h2>
+
+<table>
+
+    @foreach (Mhasb.Domain.Organizations.Company company in Model)
+    {
+        <tr>
+            <td>@company.Id.ToString()</td>
+            <td>@company.TradingName</td>
+        </tr>
+    }
+</table>*@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Mhasb</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link href="~/AxureStyles/resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/data/styles.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/files/my_mhasb/styles.css" type="text/css" rel="stylesheet" />
+
+    @Scripts.Render("~/AxureStyles/resources/scripts/jquery-1.7.1.min.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/jquery-ui-1.8.10.custom.min.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/axQuery.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/globals.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axutils.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/annotation.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/axQuery.std.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/doc.js")
+    @Scripts.Render("~/AxureStyles/data/document.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/messagecenter.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/events.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/action.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/expr.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/geometry.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/flyout.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/ie.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/model.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/repeater.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/sto.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/utils.temp.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/variables.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/drag.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/move.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/visibility.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/style.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/adaptive.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/tree.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/init.temp.js")
+    @Scripts.Render("~/AxureStyles/files/login_page/data.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/legacy.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/viewer.js")
+    <script type="text/javascript">
+        $axure.utils.getTransparentGifPath = function () { return '~/AxureStyles/resources/images/transparent.gif'; };
+        $axure.utils.getOtherPath = function () { return '~/AxureStyles/resources/Other.html'; };
+        $axure.utils.getReloadPath = function () { return '~/AxureStyles/resources/reload.html'; };
+    </script>
+</head>
+<body style="margin:0px auto;">
+
+
+
+
+    <div id="base" class="">
+
+        <!-- Unnamed (Shape) -->
+        <div id="u0" class="ax_shape">
+            <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u2.png" />
+            <!-- Unnamed () -->
+            <div id="u1" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u2" class="ax_shape">
+            <img id="u2_img" class="img " src="~/AxureStyles/images/dashboard/u2.png" />
+            <!-- Unnamed () -->
+            <div id="u3" class="text">
+                <p style="font-size:36px;"><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-size:36px;">Have a Great Day</span></p><p style="font-size:13px;"><span style="font-family:'Arial Regular', 'Arial';font-weight:400;font-size:13px;">&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Flow Shape) -->
+        <div id="u4" class="ax_flow_shape">
+            <img id="u4_img" class="img " src="~/AxureStyles/images/dashboard/u4.png" />
+            <!-- Unnamed () -->
+            <div id="u5" class="text">
+                <p><span>MHASB ERP</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Menu) -->
+        <div id="u6" class="ax_menu">
+            <img id="u6_menu" class="img " src="~/AxureStyles/images/dashboard/u6_menu.png" alt="u6_menu" />
+
+            <!-- Unnamed (Table) -->
+            <div id="u7" class="ax_table">
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u8" class="ax_table_cell">
+                    <img id="u8_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u9" class="text">
+                        <p><span>Dashboard</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u10" class="ax_table_cell">
+                    <img id="u10_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u11" class="text">
+                        <p><span>Subscriptions &amp; Billing</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u12" class="ax_table_cell">
+                    <img id="u12_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u13" class="text">
+                        <p><span>Settings</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u14" class="ax_table_cell">
+                    <img id="u14_img" class="img " src="~/AxureStyles/images/dashboard/u14.png" />
+                    <!-- Unnamed () -->
+                    <div id="u15" class="text">
+                        <p><span>Reports</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unnamed (Menu) -->
+        <div id="u16" class="ax_menu">
+            <img id="u16_menu" class="img " src="~/AxureStyles/images/dashboard/u506_menu.png" alt="u16_menu" />
+
+            <!-- Unnamed (Table) -->
+            <div id="u17" class="ax_table">
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u18" class="ax_table_cell">
+                    <img id="u18_img" class="img " src="~/AxureStyles/images/dashboard/u508.png" />
+                    <!-- Unnamed () -->
+                    <div id="u19" class="text">
+                        <p><span>MARCO ATEF</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu) -->
+            <div id="u20" class="ax_menu sub_menu">
+                <img id="u20_menu" class="img " src="~/AxureStyles/images/dashboard/u510_menu.png" alt="u20_menu" />
+
+                <!-- Unnamed (Table) -->
+                <div id="u21" class="ax_table">
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u22" class="ax_table_cell">
+                        <img id="u22_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u23" class="text">
+                            <p><span>Profile </span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u24" class="ax_table_cell">
+                        <img id="u24_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u25" class="text">
+                            <p><span>Account </span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u26" class="ax_table_cell">
+                        <img id="u26_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u27" class="text">
+                            <p><span>Tasks</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u28" class="ax_table_cell">
+                        <img id="u28_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u29" class="text">
+                            <p><span>Help</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u30" class="ax_table_cell">
+                        <img id="u30_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u31" class="text">
+                            <p><span>Files Received</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u32" class="ax_table_cell">
+                        <img id="u32_img" class="img " src="~/AxureStyles/images/dashboard/u522.png" />
+                        <!-- Unnamed () -->
+                        <div id="u33" class="text">
+                            <p><span>Logout</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u34" class="ax_h1">
+            <img id="u34_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u35" class="text">
+                <p><span>Hi @ViewBag.userName , you last logged into @ViewBag.lastLoginCompany at @ViewBag.lastLoginTime O'Clock</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u36" class="ax_h2">
+            <img id="u36_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u37" class="text">
+                <p><span style="text-decoration:underline;">My MHASB</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u38" class="ax_h1">
+            <img id="u38_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u39" class="text">
+                <p><span>Organisations</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Table) -->
+        <div id="u40" class="ax_table">
+
+            @*<!-- Unnamed (Table Cell) -->
+            <div id="u41" class="ax_table_cell">
+                <img id="u41_img" class="img " src="~/AxureStyles/images/my_mhasb/u41.png" />
+                <!-- Unnamed () -->
+                <div id="u42" class="text">
+                    <p><span>Name</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u43" class="ax_table_cell">
+                <img id="u43_img" class="img " src="~/AxureStyles/images/my_mhasb/u41.png" />
+                <!-- Unnamed () -->
+                <div id="u44" class="text">
+                    <p><span>Last Viewed</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u45" class="ax_table_cell">
+                <img id="u45_img" class="img " src="~/AxureStyles/images/my_mhasb/u41.png" />
+                <!-- Unnamed () -->
+                <div id="u46" class="text">
+                    <p><span>Access</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u47" class="ax_table_cell">
+                <img id="u47_img" class="img " src="~/AxureStyles/images/my_mhasb/u47.png" />
+                <!-- Unnamed () -->
+                <div id="u48" class="text">
+                    <p><span>Subscription</span></p>
+                </div>
+            </div>*@
+            <table border="1" style="width:80%;float:left;border:1px solid #d8d8d8;border-spacing:0px;">
+                <thead style="background:#0094ff;padding:15px 10px;color:#fff;">
+                    <tr style="padding:15px 10px;font-size:15px;">
+                        <th style="padding:15px 10px;font-size:15px;">Name</th>
+                        <th style="padding:15px 10px;font-size:15px;">Last Viewed</th>
+                        <th style="padding:15px 10px;font-size:15px;">Access</th>
+                        <th style="padding:15px 10px;font-size:15px;">Subscription</th>
+                    </tr>
+                </thead>
+                <tbody>
+@foreach (Mhasb.Domain.Organizations.Company company in Model)
+{
+                    <tr style="font-size:14px;">
+                        <td>@company.TradingName</td>
+                        <td>21 Feb 3:54 p.m. By <br /> Khalid AL Kubaisi</td>
+                        <td>Adviser <br /> Manage users</td>
+                        <td>@company.Users.FirstName @company.Users.LastName <br />In Trial</td>
+                    </tr>
+}
+                </tbody>
+            </table>
+
+@*@foreach (Mhasb.Domain.Organizations.Company company in Model)
+{*@
+      <!-- Unnamed (Table Cell) -->
+            @*<div id="u49" class="ax_table_cell">
+                <img id="u49_img" class="img " src="~/AxureStyles/images/my_mhasb/u49.png" />
+                <!-- Unnamed () -->
+                <div id="u50" class="text">
+                    <p><span>@company.TradingName</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u51" class="ax_table_cell">
+                <img id="u51_img" class="img " src="~/AxureStyles/images/my_mhasb/u49.png" />
+                <!-- Unnamed () -->
+                <div id="u52" class="text">
+                    <p><span>21 Feb 3:54 p.m.</span></p><p><span>By Khalid AL Kubaisi </span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u53" class="ax_table_cell">
+                <img id="u53_img" class="img " src="~/AxureStyles/images/my_mhasb/u49.png" />
+                <!-- Unnamed () -->
+                <div id="u54" class="text">
+                    <p><span>Adviser</span></p><p><span>Manage users </span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Table Cell) -->
+            <div id="u55" class="ax_table_cell">
+                <img id="u55_img" class="img " src="~/AxureStyles/images/my_mhasb/u55.png" />
+                <!-- Unnamed () -->
+                <div id="u56" class="text">
+                    <p><span>@company.Users.FirstName</span></p><p><span>In Trial </span></p>
+                </div>
+            </div>*@
+    
+    
+    
+
+            
+@*}*@
+
+          
+
+        <!-- Unnamed (Flow Shape) -->
+        <div id="u73" class="ax_flow_shape" style="position:relative;top:-124px;float:left;right:0px;" >
+            <img id="u73_img" class="img " src="~/AxureStyles/images/my_mhasb/u73.png" />
+            <!-- Unnamed () -->
+            <div id="u74" class="text">
+                <p><span>Run Another Business? </span></p><p><span>&nbsp;</span></p><p><span>You Could Save 25% Off All Subscription Fees. </span></p><p><span>&nbsp;</span></p><p><span>&nbsp;</span></p><p><span>&nbsp;</span></p>
+            </div>
+            <div id="u75" class="ax_html_button" style="position:relative;left:23px;top:118px;">
+                <a href="/OrganizationManagement/Company/Registration"><button id="u75_input">Add An Organisation</button></a>
+            </div>
+        </div>
+
+        <!-- Unnamed (HTML Button) -->
+        
+    </div>
+
+
+
+
+
+</body>
+</html>

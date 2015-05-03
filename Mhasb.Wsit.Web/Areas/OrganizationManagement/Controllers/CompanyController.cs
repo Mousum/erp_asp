@@ -26,10 +26,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         //
         // GET: /OrganizationManagement/Company/
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            
-            ViewBag.msg = "sfsd";
+ 
+
+            var myList= iCompany.GetAllCompanies();
+
+            int j = 1;
             return View("RegistrationResult");
         }
 

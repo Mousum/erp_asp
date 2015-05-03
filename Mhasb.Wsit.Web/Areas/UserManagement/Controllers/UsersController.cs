@@ -1,4 +1,6 @@
-﻿using Mhasb.Domain.Users;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
+using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.AuthSecurity;
 using Mhasb.Wsit.Web.Controllers;
@@ -13,6 +15,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
+        private readonly ICompanyService iCompany = new CompanyService();
         //
         // GET: /UserManagement/Users/
         public ActionResult Create()
@@ -77,7 +80,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-
+    [AllowAnonymous]
         public ActionResult Dashboard()
         {
              var tt = HttpContext.User.Identity.Name;
@@ -88,14 +91,18 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View();
         }
 
-        public ActionResult MyMashab()
+        //[AllowAnonymous]
+        public ActionResult MyMhasb()
         {
 
-            if (Session["uEmail"] != null)
-                return View();
-            else
-                return Redirect(Url.Content("~/"));
-               // return RedirectToAction("Index", "Home", new { area = "Controllers" });
+            List<Company> myCompanyList = iCompany.GetAllCompanies();
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+            ViewBag.userName = user.FirstName + " " + user.LastName ;
+            ViewBag.lastLoginCompany = "UniCorn";
+            ViewBag.lastLoginTime = "27/01/2015 10.02.12";
+            return View("MyMhasb",myCompanyList);
+
         }
 
 
