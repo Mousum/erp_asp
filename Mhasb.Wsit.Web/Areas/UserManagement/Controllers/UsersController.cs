@@ -77,7 +77,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-
+    [AllowAnonymous]
         public ActionResult Dashboard()
         {
              var tt = HttpContext.User.Identity.Name;
