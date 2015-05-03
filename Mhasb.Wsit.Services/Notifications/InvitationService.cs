@@ -31,8 +31,8 @@ namespace Mhasb.Services.Notifications
         {
             try
             {
-                invite.State = ObjectState.Added;
-                inviteRep.AddOperation(invite);
+                invite.State = ObjectState.Modified;
+                inviteRep.UpdateOperation(invite);
                 return true;
             }
             catch (Exception ex)
