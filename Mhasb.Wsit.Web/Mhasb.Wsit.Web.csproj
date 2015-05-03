@@ -163,11 +163,10 @@
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
-    <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
-    <Compile Include="Areas\OrganizationManagement\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\UserInRolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
     <Compile Include="Areas\UserManagement\Models\Role.cs" />
@@ -177,7 +176,6 @@
     <Compile Include="AuthSecurity\ICustomIdentity.cs" />
     <Compile Include="AuthSecurity\ICustomPrincipal.cs" />
     <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,7 +188,6 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utilities\UtilityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AxureStyles\data\document.js" />
@@ -639,14 +636,13 @@
     <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
-    <Content Include="Areas\OrganizationManagement\Views\Employee\Index.cshtml" />
-    <Content Include="AxureStyles\resources\chrome\axure-chrome-extension.crx" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\Create.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\Index.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\web.config" />
     <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Shared\_Layout -Backup.cshtml" />
+    <Content Include="AxureStyles\resources\chrome\axure-chrome-extension.crx" />
+    <Content Include="Areas\UserManagement\Views\UserInRoles\Create.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
@@ -678,21 +674,20 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout -backup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
+    <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />
+    <Folder Include="AxureStyles\images\cost_centers_settings\" />
+    <Folder Include="AxureStyles\images\credit_voucher\" />
+    <Folder Include="AxureStyles\images\general_ledger\" />
+    <Folder Include="AxureStyles\images\registration___subscribe\" />
+    <Folder Include="AxureStyles\images\settings_external_auditor\" />
+    <Folder Include="AxureStyles\images\settings_your_financial\" />
+    <Folder Include="AxureStyles\images\settings_your_tax\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
@@ -731,7 +726,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2376</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
