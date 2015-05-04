@@ -12,6 +12,7 @@ namespace Mhasb.Services.Users
     public class UserInRoleService :IUserInRoleService
     {
         private readonly CrudOperation<UserInRole> userInRoleRep = new CrudOperation<UserInRole>();
+        private readonly CrudOperation<Role> roleRep = new CrudOperation<Role>();
 
         public bool AddUserInRole(UserInRole userInRole) 
         {
@@ -93,5 +94,46 @@ namespace Mhasb.Services.Users
             }
         }
 
+
+        public List<UserInRole> GetRoleListByUser(long Id)
+        {
+            try
+            {
+                var roleList = roleRep.GetOperation()
+                    .Get().ToList();
+                var urList = userInRoleRep.GetOperation()
+                                               .Include(u=>u.Employees.Users)
+                                               .Include(u=>u.Roles)
+                                               .Filter(u=>u.Employees.Users.Id==Id)
+                                               .Get()
+                                               .ToList();
+
+                var alData = from rl in roleList
+                             join ur in urList
+                                on rl.Id equals ur.RoleId into ar_al
+                             from r_a in ar_al.DefaultIfEmpty(new UserInRole())
+                             //.Where(a => a.ActionId == al.Id)
+                             //.DefaultIfEmpty()
+
+
+                             select new UserInRole
+                             {
+                                 Id = r_a.Id,
+                                 RoleId =rl.Id,
+                                 Roles = new Role { Id = rl.Id, RoleName = rl.RoleName},
+                                 //ActionId=ra.ActionId,
+                                 //Name = al.ActionName,
+                                 IsActive = r_a.IsActive
+                             };
+
+                return alData.ToList();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
+       
     }
 }

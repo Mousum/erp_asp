@@ -1,7 +1,120 @@
-﻿
+﻿@model Mhasb.Domain.Users.UserInRole
+
 @{
     ViewBag.Title = "Create";
+
+    var rr = ViewBag.roleList;
 }
 
-<h2>Create</h2>
+<div id="base" class="">
+
+    <!-- Unnamed (Shape) -->
+    <div id="u0" class="ax_shape">
+        <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u2.png" />
+        <!-- Unnamed () -->
+        <div id="u1" class="text">
+            <p><span>&nbsp;</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (Shape) -->
+    <div id="u2" class="ax_shape">
+        <img id="u2_img" class="img " src="~/AxureStyles/images/dashboard/u2.png" />
+        <!-- Unnamed () -->
+        <div id="u3" class="text">
+            <p style="font-size:36px;"><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-size:36px;">Have a Great Day</span></p><p style="font-size:13px;"><span style="font-family:'Arial Regular', 'Arial';font-weight:400;font-size:13px;">&nbsp;</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (Flow Shape) -->
+    <div id="u4" class="ax_flow_shape">
+        <img id="u4_img" class="img " src="~/AxureStyles/images/dashboard/u4.png" />
+        <!-- Unnamed () -->
+        <div id="u5" class="text">
+            <p><span>MHASB ERP</span></p>
+        </div>
+    </div>
+
+    <!-- Unnamed (Menu) -->
+    <div id="u6" class="ax_menu">
+        <img id="u6_menu" class="img " src="~/AxureStyles/images/dashboard/u6_menu.png" alt="u6_menu" />
+
+        <!-- Unnamed (Table) -->
+        <div id="u7" class="ax_table">
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u8" class="ax_table_cell">
+                <img id="u8_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                <!-- Unnamed () -->
+                <div id="u9" class="text">
+                    <p><span>Dashboard</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u10" class="ax_table_cell">
+                <img id="u10_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                <!-- Unnamed () -->
+                <div id="u11" class="text">
+                    <p><span>Subscriptions &amp; Billing</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u12" class="ax_table_cell">
+                <img id="u12_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                <!-- Unnamed () -->
+                <div id="u13" class="text">
+                    <p><span>Settings</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu Item) -->
+            <div id="u14" class="ax_table_cell">
+                <img id="u14_img" class="img " src="~/AxureStyles/images/dashboard/u14.png" />
+                <!-- Unnamed () -->
+                <div id="u15" class="text">
+                    <p><span>Reports</span></p>
+                </div>
+            </div>
+        </div>
+        <h2>Create User In Role</h2>
+      
+@using (Html.BeginForm(new { @class = ""}))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+  
+    @Html.LabelFor(model=>model.EmployeeId)
+    @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @id = "employee" })
+    <div class="roles"></div>
+
+
+}
+
+
+
+<script>
+    $("#employee").change(function () {
+
+        var baseUrl = '@Url.Content("~/")';
+        var data = { name: $(this).val() }
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "UserManagement/UserInRoles/GetUserInRole",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $(".roles").html(data);
+            }
+        });
+
+    });
+
+</script>
+   
+
+   
+</div>
 
