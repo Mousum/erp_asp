@@ -64,7 +64,7 @@ namespace Mhasb.Domain.Organizations
 
         public string SealLocation { get; set; }
 
-        public string DocumentLocation { get; set; }
+        //public string DocumentLocation { get; set; }
 
         public virtual User Users { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
@@ -74,6 +74,8 @@ namespace Mhasb.Domain.Organizations
 
         public virtual AreaTime AreaTimes { get; set; }
         public virtual LegalEntity LegalEntities { get; set; }
+
+        public virtual ICollection<CompanyDocument> Documents { get; set; }
 
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
