@@ -571,6 +571,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\master.css" />
+    <Content Include="EntityFramework.SqlMigrations.ReadMe.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -643,6 +644,7 @@
     <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
     <Content Include="AxureStyles\resources\chrome\axure-chrome-extension.crx" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>

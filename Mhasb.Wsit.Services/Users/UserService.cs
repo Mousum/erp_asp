@@ -75,5 +75,24 @@ namespace Mhasb.Services.Users
         
         }
 
+        public List<User> GetAllUsers() 
+        {
+            try
+            {
+            
+                var UserObj = userRep.GetOperation()
+                                    .Get() .ToList();
+
+                
+                return UserObj;
+
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
     }
 }
