@@ -1,0 +1,167 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.no-margin{
+    margin: 0px;
+}
+.no-padding{
+    padding: 0px;
+}
+.font-padding{
+    padding: 0px;
+    font-size: 12px;
+}
+.user-small{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #D8D8D8;
+    display: inline-block;
+    overflow: hidden;
+}
+.user-small img{
+    width: 30px;
+    height: 30px;
+}
+.user-icon-pad{
+    padding: 10px !important;
+}
+.user-icon-pad .caret{
+    margin-top: -20px;
+}
+.bg-color1{
+    background: #009DD9;
+}
+
+/*Navbar styling*/
+
+.cstm-navbar{
+    border-radius: 0px;
+    border-top: 0px;
+}
+.cstm-navbar li a{
+    color: #fff !important;
+}
+.cstm-navbar .dropdown-menu li a{
+    color: #009DD9 !important;
+}
+
+.cstm-navbar .navbar-nav > .open > a, .cstm-navbar .navbar-nav > .open > a:hover, .cstm-navbar .navbar-nav > .open > a:focus{
+    background-color: #167EA7 !important;
+}
+.cstm-navbar .navbar-brand{
+    color: #fff;
+}
+.cstm-menu li a:hover{
+    background-color: #fff !important;
+    color: #000 !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+/*Navbar styling*/
+.welcome-container{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.profile-image-div{
+    background: #f2f2f2;
+    height: 150px;
+}
+.choose-setting{
+    padding: 15px;
+    background: #f2f2f2;
+}
+.choose-setting label{
+    margin-right: 15px;
+}
+.choose-setting .checkbox{
+    margin-right: 10px;
+}
+.cstm-form-team{
+    padding: 15px;
+    background: #f2f2f2;
+}
+/*Header styles*/
+
+.welcome-header{
+    border-bottom: 2px solid #e7e7e7;
+    font-style: italic;
+    font-weight: bold;
+}
+.welcome-container p{
+    font-style: italic;
+    font-weight: bold;
+}
+.choose-setting.form-inline label.italic{
+    font-style: italic !important;
+}
+
+/*Header styles*/
+
+
+.bgcolor1{
+    background-color: #CCC;
+}
+.bgcolor2{
+    background-color: #A88F8F;
+}
+.form-control.mrgi{
+    margin-left: 15px;
+    width: 24%;
+    display: inline-block;
+}
+.form-control.mrg{
+    margin-left: 16px;
+    display: inline-block;
+    width: 45.8%;
+}
+.form-control.mrgs{
+    margin-top: 10px;
+}
+.finalbtn{
+    width: 35%;
+    background-color: #009DD9;
+    color: #fff;
+}
+.finalbtn:hover{
+    background-color: #47A447;
+    color: #fff;
+}
+.checkbox-element{
+    display: inline-block;
+    margin: 0px !important;
+}
+.body-permission{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.permisn{
+    min-height: 200px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    top: 50%;
+}
+.dropdown-table{
+      width: 50%;
+      text-align: center;
+      margin-left: 80px;
+      margin-top: 70px;
+      min-height: 35px;
+}
+.permisn1{
+    min-height: 51px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+/*Footer styles*/
+
+.ppolicy{
+
+}
+
+/*Footer styles*/

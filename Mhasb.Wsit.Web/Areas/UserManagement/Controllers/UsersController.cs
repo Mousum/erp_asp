@@ -1,4 +1,6 @@
-﻿using Mhasb.Domain.Users;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
+using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.AuthSecurity;
 using Mhasb.Wsit.Web.Controllers;
@@ -13,6 +15,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
+
         private ISettingsService setService = new SettingsService();
         //
         // GET: /UserManagement/Users/
@@ -31,6 +34,10 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View();
         }
 
+        private readonly ICompanyService iCompany = new CompanyService();
+        
+
+
         [AllowAnonymous]
         public ActionResult Registration()
         {
@@ -41,14 +48,21 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-
-
-            if (uService.AddUser(user))
+            var tnc= Request.Params.Get("tnc");
+            if (tnc != null && tnc == "on")
             {
-                return View("RegistrationSuccess");
-            }
+                if (uService.AddUser(user))
+                {
+                    //return View("RegistrationSuccess");
 
-            return Content("Failed");
+                    CustomPrincipal.Login(user.Email, user.Password, false);
+                    return Redirect("MyMhasb");
+                }
+                return Content("Failed");
+            }
+            
+
+            return Content("You Must Agree with our terms and Condition");
         }
         
         public ActionResult Login()
@@ -62,7 +76,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             if (CustomPrincipal.Login(email, password,false) != false)
             {
-                return Redirect("Dashboard");
+
+                return Redirect("MyMhasb");
             }
             else
                 Session.Add("uEmail", email);
@@ -74,7 +89,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             //Session.Clear();
             CustomPrincipal.Logout();
-            return Redirect("~/");
+            return RedirectToAction("Index", "Home", new {area="" });
 
         }
 
@@ -89,14 +104,18 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View();
         }
 
-        public ActionResult MyMashab()
+        //[AllowAnonymous]
+        public ActionResult MyMhasb()
         {
 
-            if (Session["uEmail"] != null)
-                return View();
-            else
-                return Redirect(Url.Content("~/"));
-               // return RedirectToAction("Index", "Home", new { area = "Controllers" });
+            List<Company> myCompanyList = iCompany.GetAllCompanies();
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+            ViewBag.userName = user.FirstName + " " + user.LastName ;
+            ViewBag.lastLoginCompany = "UniCorn";
+            ViewBag.lastLoginTime = DateTime.Now;
+            return View("MyMhasb",myCompanyList);
+
         }
         [AllowAnonymous]
         public ActionResult AccountSettings() {

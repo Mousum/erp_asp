@@ -16,7 +16,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
     public class CompanyController : BaseController
     {
-        private readonly ICompanyService iCompany= new CompanyService();
+        private readonly ICompanyService iCompany = new CompanyService();
+        private readonly ICompanyDocument iCompanyDocument = new CompanyDocumentService();
         private readonly IIndustryService iIndustry = new IndustryService();
         private readonly ICountryService iCountry = new CountryService();
         private readonly ILanguageService iLang = new LanguageService();
@@ -26,13 +27,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         //
         // GET: /OrganizationManagement/Company/
-        public ActionResult Index()
-        {
-            
-            ViewBag.msg = "sfsd";
-            return View("RegistrationResult");
-        }
+        //public ActionResult Index()
+        //{
+ 
 
+        //    var myList= iCompany.GetAllCompanies();
+
+        //    int j = 1;
+        //    return View("RegistrationResult");
+        //}
 
 
         public ActionResult Registration()
@@ -44,40 +47,37 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
                 ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
                 ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-                return View();
+                return View("Registration");
             }
             else
                 return Redirect("~/");
             
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Registraion(Company company)
         {
             
             HttpPostedFileBase logo = Request.Files["logoImage"];
             HttpPostedFileBase seal = Request.Files["sealImage"];
-            int companyTableId = iCompany.GetMaxId() + 1;
-            string sealName = "Seal_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + ".png";
-            //string sealName = "Seal_" + company.TradingName.Replace(" ", "_") +"_" +asd.ToString() + ".png";
-            string sealLocation=Server.MapPath("~/Uploads/");
-            
-            //string logoName = "Logo_" + company.TradingName.Replace(" ", "_") + "_" +iCompany.GetMaxId().ToString() + ".png";
-            string logoName = "Logo_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + ".png";
-            string logoLocation=Server.MapPath("~/Uploads/");
-            String msg;
-            //if (imageUpload(logo, logoName, Server.MapPath("~/Uploads/")))
-            //    msg = "Logo Success";
-            //else
-            //    msg = "Logo Failed";
-            
-            //if (imageUpload(seal, sealName, Server.MapPath("~/Uploads/")))
-            //    msg += " Seal Success";
-            //else
-            //    msg += " Seal Failed";
+            //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
-            if((imageUpload(logo, logoName, logoLocation) && imageUpload(seal, sealName, sealLocation)))
+
+            int companyTableId = iCompany.GetMaxId() + 1;
+            string sealName = "Seal_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString()+"_" + Path.GetRandomFileName() + ".png";
+            string sealLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+           
+            string logoName = "Logo_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
+            string logoLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+            String msg;
+            string documentName;
+            string documentLocation;
+
+            if ((fileUpload(logo, logoName, logoLocation) && fileUpload(seal, sealName, sealLocation)))
             {
-                company.Email = "zahedwsit@dfg.com";
+                
+
+                company.Email = HttpContext.User.Identity.Name;
                 company.LogoLocation= logoLocation+"/"+logoName;
                 company.SealLocation= sealLocation+"/"+sealName;
 
@@ -87,11 +87,32 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     iCompany.AddCompany(company);
                     msg = "Success";
+
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        if ("documentLocation[]" == Request.Files.GetKey(i))
+                        {
+                            documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                            documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            {
+                                CompanyDocument cd = new CompanyDocument();
+                                cd.CompanyId = company.Id;
+                                cd.DocumentLocation = documentLocation + "/" + documentName;
+                                iCompanyDocument.AddCompanyDocument(cd);
+                            }
+                        }
+
+                    }
+
+
                 }
                 catch (Exception)
                 {
                     msg = "Failed";
                 }
+
+
                 
             }
             else
@@ -99,7 +120,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             ViewBag.msg = msg;
 
-            return View("RegistrationResult"); ;
+            return RedirectToAction("MyMhasb", "Users", new { Area="UserManagement"});
         }
 
         public bool imageUpload(HttpPostedFileBase file)
@@ -116,15 +137,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                     if (file.FileName.Contains(fileExtensions[i]))
                     {
-
                         isValid = true;
+                        break;
                     }
                 }
 
                 if (isValid)
                 {
                     string fileName = Path.GetRandomFileName();
-                    System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName);
                     return true;
                 }
                 else
@@ -138,15 +159,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             }
         }
 
-        public bool imageUpload(HttpPostedFileBase file, string fileName, string filePath)
+        public bool fileUpload(HttpPostedFileBase file, string fileName, string filePath)
         {
             try
             {
-                string uploadPath = filePath;
-                file.SaveAs(uploadPath + file.FileName);
 
-                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg" };
+                string uploadPath = filePath;
                 bool isValid = false;
+                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg", ".pdf", ".doc", ".txt", ".docx" };
                 for (int i = 0; i < fileExtensions.Length; i++)
                 {
 
@@ -154,13 +174,22 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     {
 
                         isValid = true;
+                        break;
                     }
                 }
 
                 if (isValid)
                 {
-                    System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+                    file.SaveAs(uploadPath + fileName);
+
+
                     return true;
+                    //System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    //return true;
                 }
                 else
                 {

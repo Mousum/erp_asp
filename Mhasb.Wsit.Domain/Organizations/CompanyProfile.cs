@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Mhasb.Domain.Commons;
 
 namespace Mhasb.Domain.Organizations
 {
@@ -13,7 +14,6 @@ namespace Mhasb.Domain.Organizations
     {
         public int Id { get; set; }
 
-        public int CompanyId { get; set; }
 
         public long UserId { get; set; }
 
@@ -29,7 +29,7 @@ namespace Mhasb.Domain.Organizations
         public string Objectives { get; set; }
 
         [StringLength(1000)]
-        public string Mision { get; set; }
+        public string Mission { get; set; }
 
         [StringLength(1000)]
         public string Experties { get; set; }
@@ -61,6 +61,9 @@ namespace Mhasb.Domain.Organizations
         public string Email { get; set; }
 
         public ObjectState State { get; set; }
+
+        public virtual Company Companies { get; set; }
+        public virtual ICollection<ContactDetail> ContactDetails { get; set; }
 
     }
 }

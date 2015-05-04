@@ -14,5 +14,6 @@ namespace Mhasb.Services.Users
         bool DeleteUserInRole(int userInRoleId);
         UserInRole GetSingleUserInRole(int userInRoleId);
         List<UserInRole> GetAllUserInRole();
+        List<UserInRole> GetRoleListByUser(long Id);
     }
 }

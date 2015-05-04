@@ -1,7 +1,81 @@
-﻿
+﻿@model Mhasb.Domain.Users.UserInRole
+
 @{
     ViewBag.Title = "Create";
+    Layout = Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+    var rr = ViewBag.roleList;
+}
+<h2>Control User In Role</h2>
+@using (Html.BeginForm(new { @class = "" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<div class="row clearfix">
+    <div class="col-md-12 column body-permission">
+        <div class="row clearfix">
+            <div class="col-md-4 column permisn">
+                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
+               
+
+
+            </div>
+            <div class="col-md-6 column permisn">
+                <div class="form-group">
+                    <div class="col-sm-12 roles">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 column permisn1">
+
+            </div>
+            <div class="col-md-6 column permisn1">
+                <div class="form-group">
+
+                </div>
+            </div>
+            <div class="col-md-4 column permisn1">
+
+            </div>
+            <div class="col-md-6 column permisn1">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn  btn-info" style="float: right; margin-top: 5px; width: 30%;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+       @*<input type="submit" value="Save" class="btn btn-default fa-long-arrow-left" >*@
 }
 
-<h2>Create</h2>
+
+
+<script>
+    $("#employee").change(function () {
+
+        var baseUrl = '@Url.Content("~/")';
+       
+
+        var Id = $(this).val();
+        var data = { Id: Id }
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "UserManagement/UserInRoles/GetUserInRole",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $(".roles").html(data);
+            }
+        });
+
+    });
+
+</script>
+   
+
+   
+</div>
 

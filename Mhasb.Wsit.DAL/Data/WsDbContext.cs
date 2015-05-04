@@ -80,11 +80,28 @@ namespace Mhasb.Wsit.DAL.Data
             // Company
             modelBuilder.Configurations.Add(new CompanyMapping());
             modelBuilder.Configurations.Add(new EmployeeMapping());
+            modelBuilder.Configurations.Add(new CompanyProfileMapping());
+            modelBuilder.Configurations.Add(new EmployeeProfileMapping());
+            modelBuilder.Configurations.Add(new ContactDetailMapping());
+            
             
             
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Users.User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.AreaTime> AreaTimes { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Country> Countries { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Industry> Industries { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Language> Languages { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.LegalEntity> LegalEntities { get; set; }
+
 
 
     }
