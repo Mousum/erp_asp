@@ -14,8 +14,15 @@ namespace Mhasb.DAL.Mapping.Organizations
         {
             // Key
             this.HasKey(cd => cd.Id);
-
-
+            this.Property(cd => cd.CompanyId).HasColumnName("companyid");
+            this.Property(cd => cd.DocumentLocation).HasMaxLength(100).HasColumnName("document_location");
+            this.ToTable("org.companydocuments");
+            
+            
+            //Relations
+            this.HasRequired(c=>c.companies)
+                        .WithMany()
+                        .HasForeignKey(cd => cd.CompanyId);
 
          }
     }
