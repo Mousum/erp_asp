@@ -48,7 +48,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
                 ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
                 ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-                return View();
+                return View("CompanyRegistration");
             }
             else
                 return Redirect("~/");
