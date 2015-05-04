@@ -28,17 +28,21 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-
-
-            if (uService.AddUser(user))
+            var tnc= Request.Params.Get("tnc");
+            if (tnc != null && tnc == "on")
             {
-                //return View("RegistrationSuccess");
+                if (uService.AddUser(user))
+                {
+                    //return View("RegistrationSuccess");
 
-                CustomPrincipal.Login(user.Email,user.Password,false);
-                return Redirect("MyMhasb");
+                    CustomPrincipal.Login(user.Email, user.Password, false);
+                    return Redirect("MyMhasb");
+                }
+                return Content("Failed");
             }
+            
 
-            return Content("Failed");
+            return Content("You Must Agree with our terms and Condition");
         }
         
         public ActionResult Login()

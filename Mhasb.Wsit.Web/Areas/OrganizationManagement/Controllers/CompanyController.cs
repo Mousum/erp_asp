@@ -16,7 +16,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
     public class CompanyController : BaseController
     {
-        private readonly ICompanyService iCompany= new CompanyService();
+        private readonly ICompanyService iCompany = new CompanyService();
+        private readonly ICompanyDocument iCompanyDocument = new CompanyDocumentService();
         private readonly IIndustryService iIndustry = new IndustryService();
         private readonly ICountryService iCountry = new CountryService();
         private readonly ILanguageService iLang = new LanguageService();
@@ -26,19 +27,17 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         //
         // GET: /OrganizationManagement/Company/
-        [AllowAnonymous]
-        public ActionResult Index()
-        {
+        //public ActionResult Index()
+        //{
  
 
-            var myList= iCompany.GetAllCompanies();
+        //    var myList= iCompany.GetAllCompanies();
 
-            int j = 1;
-            return View("RegistrationResult");
-        }
+        //    int j = 1;
+        //    return View("RegistrationResult");
+        //}
 
 
-        [AllowAnonymous]
         public ActionResult Registration()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -63,15 +62,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             HttpPostedFileBase seal = Request.Files["sealImage"];
             //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
-            for (int i = 0; i < Request.Files.Count; i++)
-            {
-                if ("documentLocation[]" == Request.Files.GetKey(i))
-                {
-                    //
-                }
-
-            }
-
 
             int companyTableId = iCompany.GetMaxId() + 1;
             string sealName = "Seal_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString()+"_" + Path.GetRandomFileName() + ".png";
@@ -80,6 +70,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             string logoName = "Logo_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
             string logoLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
             String msg;
+            string documentName;
+            string documentLocation;
 
             if ((fileUpload(logo, logoName, logoLocation) && fileUpload(seal, sealName, sealLocation)))
             {
@@ -100,7 +92,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     {
                         if ("documentLocation[]" == Request.Files.GetKey(i))
                         {
-                            //
+                            documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                            documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            {
+                                CompanyDocument cd = new CompanyDocument();
+                                cd.CompanyId = company.Id;
+                                cd.DocumentLocation = documentLocation + "/" + documentName;
+                                iCompanyDocument.AddCompanyDocument(cd);
+                            }
                         }
 
                     }
