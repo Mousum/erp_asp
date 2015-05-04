@@ -643,6 +643,8 @@
     <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
     <Content Include="AxureStyles\resources\chrome\axure-chrome-extension.crx" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Shared\_Layout -Backup.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\AccountSettings.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>

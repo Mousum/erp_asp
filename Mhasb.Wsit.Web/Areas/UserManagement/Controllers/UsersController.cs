@@ -13,6 +13,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
+        private ISettingsService setService = new SettingsService();
         //
         // GET: /UserManagement/Users/
         public ActionResult Create()
@@ -77,7 +78,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-    [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Dashboard()
         {
              var tt = HttpContext.User.Identity.Name;
@@ -96,6 +97,66 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             else
                 return Redirect(Url.Content("~/"));
                // return RedirectToAction("Index", "Home", new { area = "Controllers" });
+        }
+        [AllowAnonymous]
+        public ActionResult AccountSettings() {
+            var email = HttpContext.User.Identity.Name;
+            
+            var users = uService.GetSingleUserByEmail(email);
+            return View(users);
+        
+        }
+        [HttpPost]
+        public ActionResult UpdateEmail(string Email)
+        {
+
+            if (String.IsNullOrEmpty(Email))
+            {
+
+               return Json(new { msg = "False"});
+            }
+            else {
+                var email = HttpContext.User.Identity.Name;
+                var users = uService.GetSingleUserByEmail(email);
+                users.Email = Email;
+                users.ConfirmPassword = users.Password;
+                var msg=uService.UpdateUser(users);
+                if (msg)
+                {
+                    CustomPrincipal.Login(Email,users.Password,false);
+                    return Json(new { success = "True", msg = Email });
+                }
+                else {
+
+                    return Json(new { success = "False" });
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateSettings(Settings setting) {
+            if (setting == null)
+            {
+                return Json(new { success = "False" });
+
+            }
+            else {
+                var email = HttpContext.User.Identity.Name;
+                var users = uService.GetSingleUserByEmail(email);
+                var setFlg = setService.GetAllByUserId(users.Id);
+
+                if (setFlg)
+                {
+                    setting.userId = users.Id;
+                    setService.UpdateSettings(setting);
+                    return Json(new { success = "True" });
+                }
+                else {
+                    setting.userId = users.Id;
+                    setService.AddSettings(setting);
+                    return Json(new { success = "True" });
+                }
+
+            }
         }
 
 

@@ -84,6 +84,8 @@ namespace Mhasb.Wsit.DAL.Data
             
         }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.Users.User> Users { get; set; }
+
 
     }
 }

@@ -10,6 +10,7 @@ namespace Mhasb.Services.Users
    public interface IUserService
     {
         bool AddUser(User user);
+        bool UpdateUser(User user);
         bool UserLogin(string email,string password);
         bool CheckUserExistence(string email);
         User GetSingleUserByEmail(string email);
