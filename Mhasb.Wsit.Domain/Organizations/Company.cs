@@ -74,6 +74,7 @@ namespace Mhasb.Domain.Organizations
 
         public virtual AreaTime AreaTimes { get; set; }
         public virtual LegalEntity LegalEntities { get; set; }
+        public virtual CompanyProfile CompanyProfiles { get; set; }
 
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]

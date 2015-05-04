@@ -80,6 +80,10 @@ namespace Mhasb.Wsit.DAL.Data
             // Company
             modelBuilder.Configurations.Add(new CompanyMapping());
             modelBuilder.Configurations.Add(new EmployeeMapping());
+            modelBuilder.Configurations.Add(new CompanyProfileMapping());
+            modelBuilder.Configurations.Add(new EmployeeProfileMapping());
+            modelBuilder.Configurations.Add(new ContactDetailMapping());
+            
             
             
         }
