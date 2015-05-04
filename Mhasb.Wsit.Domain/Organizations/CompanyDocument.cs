@@ -11,8 +11,10 @@ namespace Mhasb.Domain.Organizations
     {
         public long Id { get; set; }
 
-        public int companyId { get; set; }
-        public string documentLocation { get; set; }
+        public int CompanyId { get; set; }
+        public string DocumentLocation { get; set; }
+
+        public virtual Company companies {get; set;} 
 
         public ObjectState State
         {

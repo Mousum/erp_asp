@@ -73,6 +73,8 @@ namespace Mhasb.Services.Organizations
                                         .Include(i => i.Industries)
                                         .Include(t => t.AreaTimes)
                                         .Include(l => l.LegalEntities)
+                                        .Include(u => u.Users)
+                                        .Include(cd=>cd.Documents)
                                         .Filter(c => c.Id == companyId)
                                         .Get().SingleOrDefault();
 
@@ -100,6 +102,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(t => t.AreaTimes)
                                         .Include(l => l.LegalEntities)
                                         .Include(u=>u.Users)
+                                        .Include(cd => cd.Documents)
                                         .Get().ToList();
 
                 //companyRep.GetSingleObject(companyId);

@@ -2,95 +2,53 @@
 
 @{
     ViewBag.Title = "Create";
-
+    Layout = Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
     var rr = ViewBag.roleList;
 }
-
-<div id="base" class="">
-
-    <!-- Unnamed (Shape) -->
-    <div id="u0" class="ax_shape">
-        <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u2.png" />
-        <!-- Unnamed () -->
-        <div id="u1" class="text">
-            <p><span>&nbsp;</span></p>
-        </div>
-    </div>
-
-    <!-- Unnamed (Shape) -->
-    <div id="u2" class="ax_shape">
-        <img id="u2_img" class="img " src="~/AxureStyles/images/dashboard/u2.png" />
-        <!-- Unnamed () -->
-        <div id="u3" class="text">
-            <p style="font-size:36px;"><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-size:36px;">Have a Great Day</span></p><p style="font-size:13px;"><span style="font-family:'Arial Regular', 'Arial';font-weight:400;font-size:13px;">&nbsp;</span></p>
-        </div>
-    </div>
-
-    <!-- Unnamed (Flow Shape) -->
-    <div id="u4" class="ax_flow_shape">
-        <img id="u4_img" class="img " src="~/AxureStyles/images/dashboard/u4.png" />
-        <!-- Unnamed () -->
-        <div id="u5" class="text">
-            <p><span>MHASB ERP</span></p>
-        </div>
-    </div>
-
-    <!-- Unnamed (Menu) -->
-    <div id="u6" class="ax_menu">
-        <img id="u6_menu" class="img " src="~/AxureStyles/images/dashboard/u6_menu.png" alt="u6_menu" />
-
-        <!-- Unnamed (Table) -->
-        <div id="u7" class="ax_table">
-
-            <!-- Unnamed (Menu Item) -->
-            <div id="u8" class="ax_table_cell">
-                <img id="u8_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
-                <!-- Unnamed () -->
-                <div id="u9" class="text">
-                    <p><span>Dashboard</span></p>
-                </div>
-            </div>
-
-            <!-- Unnamed (Menu Item) -->
-            <div id="u10" class="ax_table_cell">
-                <img id="u10_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
-                <!-- Unnamed () -->
-                <div id="u11" class="text">
-                    <p><span>Subscriptions &amp; Billing</span></p>
-                </div>
-            </div>
-
-            <!-- Unnamed (Menu Item) -->
-            <div id="u12" class="ax_table_cell">
-                <img id="u12_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
-                <!-- Unnamed () -->
-                <div id="u13" class="text">
-                    <p><span>Settings</span></p>
-                </div>
-            </div>
-
-            <!-- Unnamed (Menu Item) -->
-            <div id="u14" class="ax_table_cell">
-                <img id="u14_img" class="img " src="~/AxureStyles/images/dashboard/u14.png" />
-                <!-- Unnamed () -->
-                <div id="u15" class="text">
-                    <p><span>Reports</span></p>
-                </div>
-            </div>
-        </div>
-        <h2>Create User In Role</h2>
-      
-@using (Html.BeginForm(new { @class = ""}))
+<h2>Control User In Role</h2>
+@using (Html.BeginForm(new { @class = "" }))
 {
 
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-  
-    @Html.LabelFor(model=>model.EmployeeId)
-    @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @id = "employee" })
-    <div class="roles"></div>
+<div class="row clearfix">
+    <div class="col-md-12 column body-permission">
+        <div class="row clearfix">
+            <div class="col-md-4 column permisn">
+                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
+               
 
 
+            </div>
+            <div class="col-md-6 column permisn">
+                <div class="form-group">
+                    <div class="col-sm-12 roles">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 column permisn1">
+
+            </div>
+            <div class="col-md-6 column permisn1">
+                <div class="form-group">
+
+                </div>
+            </div>
+            <div class="col-md-4 column permisn1">
+
+            </div>
+            <div class="col-md-6 column permisn1">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn  btn-info" style="float: right; margin-top: 5px; width: 30%;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+       @*<input type="submit" value="Save" class="btn btn-default fa-long-arrow-left" >*@
 }
 
 
@@ -99,7 +57,10 @@
     $("#employee").change(function () {
 
         var baseUrl = '@Url.Content("~/")';
-        var data = { name: $(this).val() }
+       
+
+        var Id = $(this).val();
+        var data = { Id: Id }
         $.ajax({
             type: "POST",
             url: baseUrl + "UserManagement/UserInRoles/GetUserInRole",
