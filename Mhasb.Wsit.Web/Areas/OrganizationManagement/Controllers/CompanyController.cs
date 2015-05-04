@@ -38,7 +38,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public ActionResult Registration()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -48,13 +48,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
                 ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
                 ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-                return View("CompanyRegistration");
+                return View("Registration");
             }
             else
                 return Redirect("~/");
             
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Registraion(Company company)
         {
             
@@ -128,7 +129,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 if (isValid)
                 {
                     string fileName = Path.GetRandomFileName();
-                    System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName);
                     return true;
                 }
                 else
