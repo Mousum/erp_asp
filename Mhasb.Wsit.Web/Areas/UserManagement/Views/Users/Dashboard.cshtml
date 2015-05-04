@@ -2396,7 +2396,7 @@
         <img id="u524_img" class="img " src="~/AxureStyles/images/dashboard/u524.png" />
         <!-- Unnamed () -->
         <div id="u525" class="text">
-            <p><span>Today's Date Is March 28, 2015</span></p><p><span>Time Now Is 21:17</span></p><p><span>Fiscal Year From January 1st 2015 to December 31/2015</span></p>
+            <p><span id="date-string"></span></p><p><span id="time-string"></span></p><p><span>Fiscal Year From January 1st 2015 to December 31/2015</span></p>
         </div>
     </div>
 
@@ -2409,3 +2409,16 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        
+        var d = new Date();
+        v = d.toUTCString();
+        //document.write(v);
+        document.getElementById("date-string").innerHTML = "Today's Date Is  " + v.slice(0, -12);
+        document.getElementById("time-string").innerHTML = "Time Now Is  " + v.slice(16,-7);
+
+
+    });
+</script>

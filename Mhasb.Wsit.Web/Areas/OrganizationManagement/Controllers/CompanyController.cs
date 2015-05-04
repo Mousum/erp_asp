@@ -26,10 +26,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         //
         // GET: /OrganizationManagement/Company/
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            
-            ViewBag.msg = "sfsd";
+ 
+
+            var myList= iCompany.GetAllCompanies();
+
+            int j = 1;
             return View("RegistrationResult");
         }
 
@@ -44,7 +48,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
                 ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
                 ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-                return View();
+                return View("CompanyRegistration");
             }
             else
                 return Redirect("~/");
@@ -77,7 +81,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             if((imageUpload(logo, logoName, logoLocation) && imageUpload(seal, sealName, sealLocation)))
             {
-                company.Email = "zahedwsit@dfg.com";
+                company.Email = HttpContext.User.Identity.Name;
                 company.LogoLocation= logoLocation+"/"+logoName;
                 company.SealLocation= sealLocation+"/"+sealName;
 
@@ -99,7 +103,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             ViewBag.msg = msg;
 
-            return View("RegistrationResult"); ;
+            return RedirectToAction("MyMhasb", "Users", new { Area="UserManagement"});
         }
 
         public bool imageUpload(HttpPostedFileBase file)

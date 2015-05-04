@@ -1,11 +1,12 @@
-﻿using Mhasb.Wsit.Domain;
+﻿using Mhasb.Domain.Users;
+using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mhasb.Domain.Users
+namespace Mhasb.Domain.Organizations
 {
    public class EmployeeProfile:IObjectStateLong
     {
@@ -15,7 +16,8 @@ namespace Mhasb.Domain.Users
        public int Location { get; set; }
        public string Phone { get; set; }
        public string Website { get; set; }
-       //public virtual User Users { get; set; }
+       public bool IsAction { get; set; }
+       public virtual User Users { get; set; }
        public long Id
        {
            get;

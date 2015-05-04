@@ -181,13 +181,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\UtilityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AxureStyles\data\document.js" />
@@ -512,8 +511,6 @@
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Mhasb.DAL.dll" />
     <Content Include="bin\Mhasb.DAL.pdb" />
     <Content Include="bin\Mhasb.Domain.dll" />
@@ -523,47 +520,27 @@
     <Content Include="bin\Mhasb.Wsit.Web.dll" />
     <Content Include="bin\Mhasb.Wsit.Web.pdb" />
     <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
     <Content Include="bin\Microsoft.Owin.dll" />
     <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
     <Content Include="bin\Microsoft.Owin.Security.dll" />
     <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.xml" />
     <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.xml" />
     <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\Owin.dll" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -571,7 +548,6 @@
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\master.css" />
-    <Content Include="EntityFramework.SqlMigrations.ReadMe.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -624,7 +600,7 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
     <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Users\MyMashab.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\MyMhasb.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\RegistrationSuccess.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\web.config" />
     <Content Include="Areas\OrganizationManagement\Views\_ViewStart.cshtml" />
@@ -644,7 +620,7 @@
     <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
     <Content Include="AxureStyles\resources\chrome\axure-chrome-extension.crx" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Create.cshtml" />
-    <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\CompanyRegistration.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
@@ -690,7 +666,9 @@
     <Folder Include="AxureStyles\images\settings_external_auditor\" />
     <Folder Include="AxureStyles\images\settings_your_financial\" />
     <Folder Include="AxureStyles\images\settings_your_tax\" />
+    <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
