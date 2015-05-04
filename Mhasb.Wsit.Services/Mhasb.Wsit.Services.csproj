@@ -69,10 +69,12 @@
     <Compile Include="Users\IActionListService.cs" />
     <Compile Include="Users\IRoleService.cs" />
     <Compile Include="Users\IRoleVsActionService.cs" />
+    <Compile Include="Users\ISettingService.cs" />
     <Compile Include="Users\IUserInRoleService.cs" />
     <Compile Include="Users\IUserService.cs" />
     <Compile Include="Users\RoleService.cs" />
     <Compile Include="Users\RoleVsActionService.cs" />
+    <Compile Include="Users\SettingsService.cs" />
     <Compile Include="Users\UserInRoleService.cs" />
     <Compile Include="Users\UserService.cs" />
   </ItemGroup>

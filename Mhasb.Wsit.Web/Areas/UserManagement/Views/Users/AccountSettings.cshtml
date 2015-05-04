@@ -1,0 +1,449 @@
+﻿@model Mhasb.Domain.Users.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Settings</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="~/AxureStyles/resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/data/styles.css" type="text/css" rel="stylesheet" />
+    <link href="~/AxureStyles/files/account_settings/styles.css" type="text/css" rel="stylesheet" />
+    <style>
+        .edit-email {
+            cursor: pointer;
+        }
+    </style>
+    @Scripts.Render("~/AxureStyles/resources/scripts/jquery-1.7.1.min.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/jquery-ui-1.8.10.custom.min.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/axQuery.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/globals.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axutils.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/annotation.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/axQuery.std.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/doc.js")
+    @Scripts.Render("~/AxureStyles/data/document.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/messagecenter.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/events.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/action.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/expr.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/geometry.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/flyout.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/ie.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/model.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/repeater.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/sto.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/utils.temp.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/variables.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/drag.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/move.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/visibility.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/style.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/adaptive.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/tree.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/init.temp.js")
+    @Scripts.Render("~/AxureStyles/files/dashboard/data.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/legacy.js")
+    @Scripts.Render("~/AxureStyles/resources/scripts/axure/viewer.js")
+    <script type="text/javascript">
+        $axure.utils.getTransparentGifPath = function () { return '~/AxureStyles/resources/images/transparent.gif'; };
+        $axure.utils.getOtherPath = function () { return '~/AxureStyles/resources/Other.html'; };
+        $axure.utils.getReloadPath = function () { return '~/AxureStyles/resources/reload.html'; };
+    </script>
+
+</head>
+<body>
+    @using(Html.BeginForm())
+    { 
+    <div id="base" class="">
+
+        <!-- Unnamed (Shape) -->
+        <div id="u0" class="ax_shape">
+            <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u2.png" />
+            <!-- Unnamed () -->
+            <div id="u1" class="text">
+                <p><span>&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u2" class="ax_shape">
+            <img id="u2_img" class="img " src="~/AxureStyles/images/dashboard/u2.png" />
+            <!-- Unnamed () -->
+            <div id="u3" class="text">
+                <p style="font-size:36px;"><span style="font-family:'Arial Bold', 'Arial';font-weight:700;font-size:36px;">Have a Great Day</span></p><p style="font-size:13px;"><span style="font-family:'Arial Regular', 'Arial';font-weight:400;font-size:13px;">&nbsp;</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Flow Shape) -->
+        <div id="u4" class="ax_flow_shape">
+            <img id="u4_img" class="img " src="~/AxureStyles/images/dashboard/u4.png" />
+            <!-- Unnamed () -->
+            <div id="u5" class="text">
+                <p><span>MHASB ERP</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Menu) -->
+        <div id="u6" class="ax_menu">
+            <img id="u6_menu" class="img " src="~/AxureStyles/images/dashboard/u6_menu.png" alt="u6_menu" />
+
+            <!-- Unnamed (Table) -->
+            <div id="u7" class="ax_table">
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u8" class="ax_table_cell">
+                    <img id="u8_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u9" class="text">
+                        <p><span>Dashboard</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u10" class="ax_table_cell">
+                    <img id="u10_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u11" class="text">
+                        <p><span>Subscriptions &amp; Billing</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u12" class="ax_table_cell">
+                    <img id="u12_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
+                    <!-- Unnamed () -->
+                    <div id="u13" class="text">
+                        <p><span>Settings</span></p>
+                    </div>
+                </div>
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u14" class="ax_table_cell">
+                    <img id="u14_img" class="img " src="~/AxureStyles/images/dashboard/u14.png" />
+                    <!-- Unnamed () -->
+                    <div id="u15" class="text">
+                        <p><span>Reports</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu) -->
+            <div id="u16" class="ax_menu sub_menu">
+                <img id="u16_menu" class="img " src="~/AxureStyles/images/account_settings/u16_menu.png" alt="u16_menu" />
+
+                <!-- Unnamed (Table) -->
+                <div id="u17" class="ax_table">
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u18" class="ax_table_cell">
+                        <img id="u18_img" class="img " src="~/AxureStyles/images/account_settings/u18.png" />
+                        <!-- Unnamed () -->
+                        <div id="u19" class="text">
+                            <p><span>Profile Settings</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u20" class="ax_table_cell">
+                        <img id="u20_img" class="img " src="~/AxureStyles/images/account_settings/u20.png" />
+                        <!-- Unnamed () -->
+                        <div id="u21" class="text">
+                            <p><span>Account Settings</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unnamed (Menu) -->
+        <div id="u22" class="ax_menu">
+            <img id="u22_menu" class="img " src="~/AxureStyles/images/dashboard/u506_menu.png" alt="u22_menu" />
+
+            <!-- Unnamed (Table) -->
+            <div id="u23" class="ax_table">
+
+                <!-- Unnamed (Menu Item) -->
+                <div id="u24" class="ax_table_cell">
+                    <img id="u24_img" class="img " src="~/AxureStyles/images/dashboard/u508.png" />
+                    <!-- Unnamed () -->
+                    <div id="u25" class="text">
+                        <p><span>MARCO ATEF</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unnamed (Menu) -->
+            <div id="u26" class="ax_menu sub_menu">
+                <img id="u26_menu" class="img " src="~/AxureStyles/images/dashboard/u510_menu.png" alt="u26_menu" />
+
+                <!-- Unnamed (Table) -->
+                <div id="u27" class="ax_table">
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u28" class="ax_table_cell">
+                        <img id="u28_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u29" class="text">
+                            <p><span>Profile </span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u30" class="ax_table_cell">
+                        <img id="u30_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u31" class="text">
+                            <p><span>Account </span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u32" class="ax_table_cell">
+                        <img id="u32_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u33" class="text">
+                            <p><span>Tasks</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u34" class="ax_table_cell">
+                        <img id="u34_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u35" class="text">
+                            <p><span>Help</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u36" class="ax_table_cell">
+                        <img id="u36_img" class="img " src="~/AxureStyles/images/dashboard/u512.png" />
+                        <!-- Unnamed () -->
+                        <div id="u37" class="text">
+                            <p><span>Files Received</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Unnamed (Menu Item) -->
+                    <div id="u38" class="ax_table_cell">
+                        <img id="u38_img" class="img " src="~/AxureStyles/images/dashboard/u522.png" />
+                        <!-- Unnamed () -->
+                        <div id="u39" class="text">
+                            <p><span>Logout</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u40" class="ax_h2">
+            <img id="u40_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u41" class="text">
+                <p><span style="text-decoration:underline;">Account Settings</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Text Field) -->
+        <div id="u42" class="ax_text_field">
+            @Html.EditorFor(u => u.Email, new { disabled = "disabled" })
+            @*<input id="u42_input" readonly="readonly" type="text" value="" />*@
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u43" class="ax_h2">
+            <img id="u43_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u44" class="text">
+                <p><span>Email</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u45" class="ax_h2">
+            <img id="u45_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u46" class="text">
+                <p><span>Your current email address is </span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u47" class="ax_h2">
+            <img id="u47_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div id="u48" class="text">
+                <p><span id="edit-email">Edit</span></p>
+            </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <!-- <div id="u49" class="ax_h2">
+            <img id="u49_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <!--<div id="u50" class="text">
+                <p><span>Password</span></p>
+            </div>
+        </div>-->
+        <div class="ax_h2">
+            <img  class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+            <!-- Unnamed () -->
+            <div class="text">
+                <p><span>Your current email address is </span></p>
+            </div>
+        </div>
+        <div id="u68" class="ax_h2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+        </div>
+            
+
+
+            <!-- Unnamed (Shape) -->
+            <!--<div id="u51" class="ax_h2">
+                <img id="u51_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+                <!-- Unnamed () -->
+              <!--  <div id="u52" class="text">
+                    <p><span>Edit</span></p>
+                </div>
+            </div> -->
+
+            <!-- Unnamed (Shape) -->
+            <div id="u53" class="ax_h2">
+                <img id="u53_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+                <!-- Unnamed () -->
+                <div id="u54" class="text">
+                    <p><span style="text-decoration:underline;">Settings</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Shape) -->
+            <div id="u55" class="ax_h2">
+                <img id="u55_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+                <!-- Unnamed () -->
+                <div id="u56" class="text">
+                    <p><span>When I Log In</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Checkbox) -->
+            <div id="u57" class="ax_checkbox">
+                <label for="u57_input">
+                    <!-- Unnamed () -->
+                    <div id="u58" class="text">
+                        <p><span>Go to My MHASB</span></p>
+                    </div>
+                </label>
+                <input id="u57_input" type="checkbox" value="checkbox" />
+            </div>
+
+            <!-- Unnamed (Checkbox) -->
+            <div id="u59" class="ax_checkbox">
+                <label for="u59_input">
+                    <!-- Unnamed () -->
+                    <div id="u60" class="text">
+                        <p><span>Go to My Dashboard</span></p>
+                    </div>
+                </label>
+                <input id="u59_input" type="checkbox" value="checkbox" />
+            </div>
+
+            <!-- Unnamed (Checkbox) -->
+            <div id="u61" class="ax_checkbox">
+                <label for="u61_input">
+                    <!-- Unnamed () -->
+                    <div id="u62" class="text">
+                        <p><span>Go to the organisation I was last in</span></p>
+                    </div>
+                </label>
+                <input id="u61_input" type="checkbox" value="checkbox" />
+            </div>
+
+            <!-- Unnamed (Shape) -->
+            <div id="u63" class="ax_h2">
+                <img id="u63_img" class="img " src="~/AxureStyles/resources/images/transparent.gif" />
+                <!-- Unnamed () -->
+                <div id="u64" class="text">
+                    <p><span>Timezone</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (Droplist) -->
+            <div id="u65" class="ax_droplist">
+                <select id="u65_input"></select>
+            </div>
+
+            <!-- Unnamed (HTML Button) -->
+            <div id="u66" class="ax_html_button">
+                <input id="u66_input" type="submit" value="Save" />
+            </div>
+
+            <!-- Unnamed (HTML Button) -->
+            <div id="u67" class="ax_html_button">
+                <input id="u67_input" type="submit" value="Cancel" />
+            </div>
+        </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Email").attr("readonly", true);
+            $("#edit-email").click(function () {
+                var btnName = $("#edit-email").text();
+                if (btnName == "Edit") {
+                    $("#Email").attr("readonly", false);
+                    $("#edit-email").text("Save")
+                } else {
+                    var email = $("#Email").val();
+                    if(!isValidEmailAddress( email ) ) { 
+                        $("#u40").after("<p>Pelase Insert Valid Email</p>");
+                        $("#Email").attr("readonly", true);
+                        $("#edit-email").text("Edit");
+                    }else{
+                        $.ajax({
+                            url: '@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })',
+                            type: "post",
+                            data: { Email: email },
+                            success: function (data) {
+                                if (data.success == "True") {
+                                    $("#Email").val(data.msg);
+                                    $("#u40").after("<p>Email Successfully  Update</p>");
+                                    $("#Email").attr("readonly", true);
+                                    $("#edit-email").text("Edit");
+                                } else {
+                                    $("#u40").after("<p>Something Wrong!</p>");
+                                    $("#Email").attr("readonly", false);
+                                    $("#edit-email").text("Save");
+                                }
+
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    }
+                    
+
+                }
+
+            });
+        });
+
+        function isValidEmailAddress(emailAddress) {
+            var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            return emailReg.test(emailAddress);
+        };
+    </script>
+    }
+</body>
+</html>

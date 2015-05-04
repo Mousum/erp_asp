@@ -28,6 +28,23 @@ namespace Mhasb.Services.Users
             }
             
         }
+        public bool UpdateUser(User user)
+        {
+
+            try
+            {
+
+                user.State = ObjectState.Modified;
+                userRep.UpdateOperation(user);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
 
 
         public bool UserLogin(string email, string password)
