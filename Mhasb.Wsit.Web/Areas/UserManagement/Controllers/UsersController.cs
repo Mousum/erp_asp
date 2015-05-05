@@ -164,7 +164,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 var setFlg = setService.GetAllByUserId(users.Id);
 
                 if (setFlg)
-                {
+                { 
                     setting.userId = users.Id;
                     setService.UpdateSettings(setting);
                     return Json(new { success = "True" });
