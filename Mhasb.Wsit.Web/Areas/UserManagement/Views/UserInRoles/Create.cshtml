@@ -57,13 +57,12 @@
     $("#employee").change(function () {
 
         var baseUrl = '@Url.Content("~/")';
-       
-
         var Id = $(this).val();
+        alert(Id + " hh")
         var data = { Id: Id }
         $.ajax({
             type: "POST",
-            url: baseUrl + "UserManagement/UserInRoles/GetUserInRole",
+            url: '@Url.Action("GetUserInRole", "UserInRoles", new { area = "UserManagement" })',
             data: data,
             datatype: "html",
             success: function (data) {

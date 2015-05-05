@@ -39,7 +39,7 @@
                 <img id="u8_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
                 <!-- Unnamed () -->
                 <div id="u9" class="text">
-                    <p><span>Dashboard</span></p>
+                    <p><span>@Html.ActionLink(" My Mhasb DashBoard ", "MyMhasb", "Users", new { area = "UserManagement" },null)</span></p>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                 <img id="u10_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
                 <!-- Unnamed () -->
                 <div id="u11" class="text">
-                    <p><span>Settings</span></p>
+                    <p><span>@Html.ActionLink(" Role ", "Index", "Roles", new { area = "UserManagement" }, null)</span></p>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                 <img id="u12_img" class="img " src="~/AxureStyles/images/dashboard/u8.png" />
                 <!-- Unnamed () -->
                 <div id="u13" class="text">
-                    <p><span>Operations</span></p>
+                    <p><span>@Html.ActionLink(" User Role ", "Create", "UserInRoles", new { area = "UserManagement" },null)</span></p>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                 <img id="u14_img" class="img " src="~/AxureStyles/images/dashboard/u14.png" />
                 <!-- Unnamed () -->
                 <div id="u15" class="text">
-                    <p><span>Reports</span></p>
+                    <p><span>@Html.ActionLink(" Operation ", "Index", "ActionList", new { area = "UserManagement" },null)</span></p>
                 </div>
             </div>
         </div>
