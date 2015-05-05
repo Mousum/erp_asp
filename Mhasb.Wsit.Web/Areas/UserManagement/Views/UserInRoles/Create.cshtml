@@ -15,6 +15,7 @@
     <div class="col-md-12 column body-permission">
         <div class="row clearfix">
             <div class="col-md-4 column permisn">
+               <label style="margin-top: auto;margin-left: 0px;"> Select Employee:</label>
                 @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
                
 
