@@ -23,9 +23,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Create()
         {
             var ActionList = alService.GetAllActionList();
+
+            var mList = ActionList.Select(m => new { Id = m.ModuleName, ModuleName = m.ModuleName }).Distinct();
+            var cList = ActionList.Select(m => new { Id = m.ControllerName, ControllerName = m.ControllerName }).Distinct();
+
             ViewBag.roleList = new SelectList(rService.GetAllRoles(), "Id", "RoleName");
-            ViewBag.moduleList = new SelectList(ActionList, "ModuleName", "ModuleName");
-            ViewBag.ControllerList = new SelectList(ActionList, "ControllerName", "ControllerName");
+            ViewBag.moduleList = new SelectList(mList, "Id", "ModuleName");// ModuleName
+            ViewBag.ControllerList = new SelectList(cList, "Id", "ControllerName");//ControllerName
             return View();
         }
         [HttpPost]
