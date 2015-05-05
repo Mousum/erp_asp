@@ -17,7 +17,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
     public class CompanyController : BaseController
     {
         private readonly ICompanyService iCompany = new CompanyService();
+
         private readonly ICompanyDocument iCompanyDocument = new CompanyDocumentService();
+
+
         private readonly IIndustryService iIndustry = new IndustryService();
         private readonly ICountryService iCountry = new CountryService();
         private readonly ILanguageService iLang = new LanguageService();
@@ -66,6 +69,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             int companyTableId = iCompany.GetMaxId() + 1;
             string sealName = "Seal_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString()+"_" + Path.GetRandomFileName() + ".png";
             string sealLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+      
            
             string logoName = "Logo_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
             string logoLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
@@ -78,33 +82,36 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 
 
                 company.Email = HttpContext.User.Identity.Name;
-                company.LogoLocation= logoLocation+"/"+logoName;
-                company.SealLocation= sealLocation+"/"+sealName;
+                company.LogoLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + logoName;
+                company.SealLocation= "Uploads/" + company.TradingName.Replace(" ", "_")+"/"+sealName;
 
                 var tt = uService.GetSingleUserByEmail(company.Email);
                 company.Users = new User { Id = tt.Id, Email = tt.Email };
                 try
                 {
-                    iCompany.AddCompany(company);
-                    msg = "Success";
-
-                    for (int i = 0; i < Request.Files.Count; i++)
+                    if (iCompany.AddCompany(company))
                     {
-                        if ("documentLocation[]" == Request.Files.GetKey(i))
+                        msg = "Success";
+
+                        for (int i = 0; i < Request.Files.Count; i++)
                         {
-                            documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
-                            documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
-                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            if ("documentLocation[]" == Request.Files.GetKey(i))
                             {
-                                CompanyDocument cd = new CompanyDocument();
-                                cd.CompanyId = company.Id;
-                                cd.DocumentLocation = documentLocation + "/" + documentName;
-                                iCompanyDocument.AddCompanyDocument(cd);
+                                documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                                documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+                                if (fileUpload(Request.Files[i], documentName, documentLocation))
+                                {
+                                    CompanyDocument cd = new CompanyDocument();
+                                    cd.CompanyId = company.Id;
+                                    cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
+                                    iCompanyDocument.AddCompanyDocument(cd);
+                                }
                             }
+
                         }
-
                     }
-
+                    else
+                        msg = "Registration Failed";
 
                 }
                 catch (Exception)

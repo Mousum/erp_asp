@@ -15,8 +15,28 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
+
+        private ISettingsService setService = new SettingsService();
+        //
+        // GET: /UserManagement/Users/
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(User user)
+        {
+            user.ConfirmPassword = user.Password;
+            user.CreatedTime = DateTime.Now;
+            uService.AddUser(user);
+
+            return View();
+        }
+
         private readonly ICompanyService iCompany = new CompanyService();
         
+
 
         [AllowAnonymous]
         public ActionResult Registration()
@@ -73,7 +93,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-    [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Dashboard()
         {
              var tt = HttpContext.User.Identity.Name;
@@ -87,15 +107,77 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         //[AllowAnonymous]
         public ActionResult MyMhasb()
         {
-
-            List<Company> myCompanyList = iCompany.GetAllCompanies();
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            List<Company> myCompanyList = iCompany.GetAllCompanies()
+                                                   .Where(c => c.Users.Id == user.Id).ToList();
+            
+
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.userName = user.FirstName + " " + user.LastName ;
             ViewBag.lastLoginCompany = "UniCorn";
             ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb",myCompanyList);
 
+        }
+        
+        public ActionResult AccountSettings() {
+            var email = HttpContext.User.Identity.Name;
+            
+            var users = uService.GetSingleUserByEmail(email);
+            return View(users);
+        
+        }
+        [HttpPost]
+        public ActionResult UpdateEmail(string Email)
+        {
+
+            if (String.IsNullOrEmpty(Email))
+            {
+
+               return Json(new { msg = "False"});
+            }
+            else {
+                var email = HttpContext.User.Identity.Name;
+                var users = uService.GetSingleUserByEmail(email);
+                users.Email = Email;
+                users.ConfirmPassword = users.Password;
+                var msg=uService.UpdateUser(users);
+                if (msg)
+                {
+                    CustomPrincipal.Login(Email,users.Password,false);
+                    return Json(new { success = "True", msg = Email });
+                }
+                else {
+
+                    return Json(new { success = "False" });
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateSettings(Settings setting) {
+            if (setting == null)
+            {
+                return Json(new { success = "False" });
+
+            }
+            else {
+                var email = HttpContext.User.Identity.Name;
+                var users = uService.GetSingleUserByEmail(email);
+                var setFlg = setService.GetAllByUserId(users.Id);
+
+                if (setFlg)
+                { 
+                    setting.userId = users.Id;
+                    setService.UpdateSettings(setting);
+                    return Json(new { success = "True" });
+                }
+                else {
+                    setting.userId = users.Id;
+                    setService.AddSettings(setting);
+                    return Json(new { success = "True" });
+                }
+
+            }
         }
 
 
