@@ -47,20 +47,16 @@ namespace Mhasb.Services.Users
 
 
 
-        public bool GetAllByUserId(long userId)
+        public Settings GetAllByUserId(long userId)
         {
             var setObj = setRep.GetOperation()
+                                  .Include(st=>st.Users)
                                   .Filter(st => st.userId == userId)
                                   .Get().SingleOrDefault();
 
-            if (setObj != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                return setObj;
+            
+            
 
         }
 
