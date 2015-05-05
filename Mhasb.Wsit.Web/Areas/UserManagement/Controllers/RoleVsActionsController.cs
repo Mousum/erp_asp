@@ -86,10 +86,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             {
                 model = model.Where(m => m.ActionLists.ControllerName == controllerName).ToList();
             }
-            else if (moduleName == "" && controllerName == "")
-            {
-                model = model;
-            }
+            
             return PartialView("_GetActionList", model);
         }
 
