@@ -27,7 +27,28 @@ namespace Mhasb.Services.Users
             }
         }
 
-
+        public bool AddActionListFromBaseController(ActionList actionlist)
+        {
+            try
+            {
+              var alistObj= ActionRep.GetOperation()
+                                     .Filter(ac => ac.ActionName == actionlist.ActionName && ac.ControllerName == actionlist.ControllerName && ac.ModuleName == actionlist.ModuleName)
+                                     .Get().SingleOrDefault();
+              if (alistObj==null)
+              {
+                  actionlist.State = ObjectState.Added;
+                  ActionRep.AddOperation(actionlist);
+                  return true;
+              }
+              return true;
+                
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+        }
         public bool UpdateActionList(ActionList actionlist)
         {
             try
