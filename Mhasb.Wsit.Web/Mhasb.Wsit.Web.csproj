@@ -696,6 +696,7 @@
     <Content Include="mhasbStyle\less\utilities.less" />
     <Content Include="mhasbStyle\less\variables.less" />
     <Content Include="mhasbStyle\less\wells.less" />
+    <None Include="Properties\PublishProfiles\demomhasb.pubxml" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -709,7 +710,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploads\sdfsdf\Seal_sdfsdf_1_s5gvenco.m3b.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -745,6 +745,7 @@
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Uploads\Al-Qalam_Media_\" />
     <Folder Include="Uploads\New_Company\" />
+    <Folder Include="Uploads\sdfsdf\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
