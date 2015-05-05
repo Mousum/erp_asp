@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Users;
+using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.AuthSecurity;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,21 @@ namespace Mhasb.Wsit.Web.Controllers
         {
             base.OnActionExecuted(filterContext);
 
-            //// To get area,controller and action name from http request
-            //var routeData = filterContext.RequestContext.RouteData;
-            //var module = (string)routeData.DataTokens["area"];
-            //var controller = routeData.GetRequiredString("controller");
-            //var action = routeData.GetRequiredString("action");
-            //// to save Action List 
-            //var actionList = new ActionList { 
-            //                ModuleName = module ,ControllerName=controller,ActionName=action,IsShowInMenu=false,};
-
+             IActionListService actionService = new ActionListService();
+            // To get area,controller and action name from http request
+            var routeData = filterContext.RequestContext.RouteData;
+            var module = (string)routeData.DataTokens["area"];
+            var controller = routeData.GetRequiredString("controller");
+            var action = routeData.GetRequiredString("action");
+            // to save Action List 
+            var actionList = new ActionList
+            {
+                ModuleName = module,
+                ControllerName = controller,
+                ActionName = action,
+                IsShowInMenu = false,
+            };
+            actionService.AddActionListFromBaseController(actionList);
 
 
         }

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Mhasb.Domain.Users.RoleVsAction>
+@foreach (var item in Model)
+{
+    <tr>
+        <td><input type="checkbox" name="ActionId" checked="@item.IsActive" value="@item.ActionId" /></td>
+        <td>@item.ActionLists.ModuleName</td>
+        <td>@item.ActionLists.ControllerName</td>
+        <td>@item.ActionLists.ActionName </td>
+    </tr>
+}
+
+

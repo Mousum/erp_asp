@@ -15,7 +15,8 @@
     <div class="col-md-12 column body-permission">
         <div class="row clearfix">
             <div class="col-md-4 column permisn">
-                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
+               <label style="margin-top: auto;margin-left: 0px;"> Select Employee:</label>
+                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList,"---Select Employee---", htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
                
 
 
@@ -57,13 +58,11 @@
     $("#employee").change(function () {
 
         var baseUrl = '@Url.Content("~/")';
-       
-
         var Id = $(this).val();
         var data = { Id: Id }
         $.ajax({
             type: "POST",
-            url: baseUrl + "UserManagement/UserInRoles/GetUserInRole",
+            url: '@Url.Action("GetUserInRole", "UserInRoles", new { area = "UserManagement" })',
             data: data,
             datatype: "html",
             success: function (data) {
