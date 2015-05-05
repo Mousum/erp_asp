@@ -11,7 +11,7 @@ namespace Mhasb.Services.Users
     {
          bool AddSettings(Settings setting);
          bool UpdateSettings(Settings setting);
-         bool GetAllByUserId(long userId);
+         Settings GetAllByUserId(long userId);
 
 
     }

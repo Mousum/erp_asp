@@ -1,7 +1,9 @@
 ﻿using Mhasb.Domain.Organizations;
 using Mhasb.Domain.Users;
+using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Areas.UserManagement.Models;
 using Mhasb.Wsit.Web.AuthSecurity;
 using Mhasb.Wsit.Web.Controllers;
 using System;
@@ -17,6 +19,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private IUserService uService = new UserService();
 
         private ISettingsService setService = new SettingsService();
+        private readonly IAreaTimeService iTimeZone = new AreaTimeService();
+
         //
         // GET: /UserManagement/Users/
         public ActionResult Create()
@@ -35,7 +39,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         private readonly ICompanyService iCompany = new CompanyService();
-        
+
 
 
         [AllowAnonymous]
@@ -48,7 +52,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-            var tnc= Request.Params.Get("tnc");
+            var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
             {
                 if (uService.AddUser(user))
@@ -60,11 +64,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 }
                 return Content("Failed");
             }
-            
+
 
             return Content("You Must Agree with our terms and Condition");
         }
-        
+
         public ActionResult Login()
         {
             return View();
@@ -74,7 +78,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [AllowAnonymous]
         public ActionResult Login(string email, string password)
         {
-            if (CustomPrincipal.Login(email, password,false) != false)
+            if (CustomPrincipal.Login(email, password, false) != false)
             {
 
                 return Redirect("MyMhasb");
@@ -89,14 +93,14 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             //Session.Clear();
             CustomPrincipal.Logout();
-            return RedirectToAction("Index", "Home", new {area="" });
+            return RedirectToAction("Index", "Home", new { area = "" });
 
         }
 
         [AllowAnonymous]
         public ActionResult Dashboard()
         {
-             var tt = HttpContext.User.Identity.Name;
+            var tt = HttpContext.User.Identity.Name;
             //if (Session["uEmail"] != null)
             //    return View();
             //else
@@ -110,22 +114,27 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             List<Company> myCompanyList = iCompany.GetAllCompanies()
                                                    .Where(c => c.Users.Id == user.Id).ToList();
-            
+
 
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-            ViewBag.userName = user.FirstName + " " + user.LastName ;
+            ViewBag.userName = user.FirstName + " " + user.LastName;
             ViewBag.lastLoginCompany = "UniCorn";
             ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb",myCompanyList);
+            return View("MyMhasb", myCompanyList);
 
         }
-        
-        public ActionResult AccountSettings() {
+
+        public ActionResult AccountSettings()
+        {
+
+            var accsetting = new AccountSetting();
             var email = HttpContext.User.Identity.Name;
-            
             var users = uService.GetSingleUserByEmail(email);
-            return View(users);
-        
+            accsetting.Users = users;
+            accsetting.AccSettings = new Settings();
+            ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+            return View(accsetting);
+
         }
         [HttpPost]
         public ActionResult UpdateEmail(string Email)
@@ -134,50 +143,79 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             if (String.IsNullOrEmpty(Email))
             {
 
-               return Json(new { msg = "False"});
+                return Json(new { msg = "False" });
             }
-            else {
-                var email = HttpContext.User.Identity.Name;
-                var users = uService.GetSingleUserByEmail(email);
-                users.Email = Email;
-                users.ConfirmPassword = users.Password;
-                var msg=uService.UpdateUser(users);
-                if (msg)
+            else
+            {
+                var exitsEmal = uService.GetSingleUserByEmail(Email);
+                if (exitsEmal == null)
                 {
-                    CustomPrincipal.Login(Email,users.Password,false);
-                    return Json(new { success = "True", msg = Email });
-                }
-                else {
+                    var email = HttpContext.User.Identity.Name;
+                    var users = uService.GetSingleUserByEmail(email);
+                    users.Email = Email;
+                    users.ConfirmPassword = users.Password;
+                    var msg = uService.UpdateUser(users);
+                    if (msg)
+                    {
+                        CustomPrincipal.Login(Email, users.Password, false);
+                        return Json(new { success = "True", msg = Email });
+                    }
+                    else
+                    {
 
+                        return Json(new { success = "False" });
+                    }
+
+                }
+                else
+                {
                     return Json(new { success = "False" });
                 }
+
             }
         }
         [HttpPost]
-        public ActionResult UpdateSettings(Settings setting) {
-            if (setting == null)
-            {
-                return Json(new { success = "False" });
-
-            }
-            else {
+        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast,int TimezoneId)
+        //public ActionResult UpdateSettings(Settings setting)
+        {
+           
                 var email = HttpContext.User.Identity.Name;
                 var users = uService.GetSingleUserByEmail(email);
-                var setFlg = setService.GetAllByUserId(users.Id);
+                var setObj = setService.GetAllByUserId(users.Id);
 
-                if (setFlg)
-                { 
-                    setting.userId = users.Id;
-                    setService.UpdateSettings(setting);
+                if (setObj!=null)
+                {
+                    setObj.userId = users.Id;
+                    setObj.lgcompany = lgcompany;
+                    setObj.lgdash = lgdash;
+                    setObj.lglast = lglast;
+                    setObj.TimezoneId = TimezoneId;
+                    setService.UpdateSettings(setObj);
                     return Json(new { success = "True" });
                 }
-                else {
-                    setting.userId = users.Id;
-                    setService.AddSettings(setting);
+                else
+                {
+                    Settings newObj = new Settings();
+                    newObj.userId = users.Id;
+                    newObj.lgcompany = lgcompany;
+                    newObj.lgdash = lgdash;
+                    newObj.lglast = lglast;
+                    newObj.TimezoneId = TimezoneId;
+                    setService.AddSettings(newObj);
+                    
                     return Json(new { success = "True" });
                 }
 
-            }
+            
+        }
+
+        public JsonResult GetSettingsByUserId()
+        {
+
+            var email = HttpContext.User.Identity.Name;
+            var users = uService.GetSingleUserByEmail(email);
+            var setObj = setService.GetAllByUserId(users.Id);
+            return Json( setObj ,JsonRequestBehavior.AllowGet);
         }
 
 
