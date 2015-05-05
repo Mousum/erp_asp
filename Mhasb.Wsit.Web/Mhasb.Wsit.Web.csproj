@@ -649,6 +649,7 @@
     <Content Include="Areas\UserManagement\Views\UserInRoles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\RoleVsActions\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\CreateSucess.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

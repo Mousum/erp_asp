@@ -16,7 +16,7 @@
                 <label class="col-sm-4 control-label">Role Name</label>
                 <div class="col-sm-8">
                     <div class="dropdown">
-                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roleList, "--Select Role--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles" })
+                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roleList, "--Select Role--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles", required = "required" })
 
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <label class="col-sm-4 control-label">Module Name</label>
                 <div class="col-sm-8">
                     <div class="dropdown">
-                        @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "modules" })
+                        @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "modules", required = "required" })
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <label class="col-sm-4 control-label">Controller Name</label>
                 <div class="col-sm-8">
                     <div class="dropdown">
-                        @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Controller--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "controllers" })
+                        @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Controller--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "controllers", required="required" })
                     </div>
                 </div>
             </div>

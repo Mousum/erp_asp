@@ -61,7 +61,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
                 roleVsActionService.AddRoleVsAction(roleVsAction);
             }
-            return Content("Success");
+            ViewBag.Msg = "Operation SuccessFull";
+
+            return View("CreateSucess");
         }
 
         [HttpPost]

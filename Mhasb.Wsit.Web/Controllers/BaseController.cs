@@ -31,7 +31,7 @@ namespace Mhasb.Wsit.Web.Controllers
                 ActionName = action,
                 IsShowInMenu = false,
             };
-            actionService.AddActionList(actionList);
+            actionService.AddActionListFromBaseController(actionList);
 
 
         }
