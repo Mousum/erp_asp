@@ -169,8 +169,10 @@
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\RoleVsActionsController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UserInRolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
+    <Compile Include="Areas\UserManagement\Models\AccountSetting.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
     <Compile Include="Areas\UserManagement\Models\Role.cs" />
     <Compile Include="Areas\UserManagement\UserManagementAreaRegistration.cs" />
@@ -647,6 +649,9 @@
     <Content Include="Areas\UserManagement\Views\Users\MyMhasb.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\CreateSucess.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
