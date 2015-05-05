@@ -119,7 +119,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View("MyMhasb",myCompanyList);
 
         }
-        [AllowAnonymous]
+        
         public ActionResult AccountSettings() {
             var email = HttpContext.User.Identity.Name;
             

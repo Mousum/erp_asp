@@ -17,7 +17,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
     public class CompanyController : BaseController
     {
         private readonly ICompanyService iCompany = new CompanyService();
+
         private readonly ICompanyDocument iCompanyDocument = new CompanyDocumentService();
+
+
         private readonly IIndustryService iIndustry = new IndustryService();
         private readonly ICountryService iCountry = new CountryService();
         private readonly ILanguageService iLang = new LanguageService();
