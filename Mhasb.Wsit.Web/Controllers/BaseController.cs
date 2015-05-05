@@ -15,6 +15,7 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
+
             //// To get area,controller and action name from http request
             //var routeData = filterContext.RequestContext.RouteData;
             //var module = (string)routeData.DataTokens["area"];

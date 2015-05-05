@@ -107,9 +107,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         //[AllowAnonymous]
         public ActionResult MyMhasb()
         {
-
-            List<Company> myCompanyList = iCompany.GetAllCompanies();
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            List<Company> myCompanyList = iCompany.GetAllCompanies()
+                                                   .Where(c => c.Users.Id == user.Id).ToList();
+            
+
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.userName = user.FirstName + " " + user.LastName ;
             ViewBag.lastLoginCompany = "UniCorn";
@@ -117,7 +119,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View("MyMhasb",myCompanyList);
 
         }
-        [AllowAnonymous]
+        
         public ActionResult AccountSettings() {
             var email = HttpContext.User.Identity.Name;
             

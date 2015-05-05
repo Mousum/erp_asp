@@ -76,7 +76,6 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new RoleVsActionMapping());
             modelBuilder.Configurations.Add(new ActionListMapping());
             modelBuilder.Configurations.Add(new UserInRoleMapping());
-            modelBuilder.Configurations.Add(new SettingsMapping());
 
             // Company
             modelBuilder.Configurations.Add(new CompanyMapping());
@@ -84,11 +83,10 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new CompanyProfileMapping());
             modelBuilder.Configurations.Add(new EmployeeProfileMapping());
             modelBuilder.Configurations.Add(new ContactDetailMapping());
+            modelBuilder.Configurations.Add(new CompanyDocumentMapping());
             
             
             
         }
-
-
     }
 }
