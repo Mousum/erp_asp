@@ -11,7 +11,8 @@ namespace Mhasb.Domain.Organizations
 {
    public class EmployeeProfile:IObjectStateLong
     {
-       public string ImageLocation { get; set; } 
+       public string ImageLocation { get; set; }
+       public string JobTitle { get; set; }
        public string Bio { get; set; }
        public int Location { get; set; }
        public string Phone { get; set; }
