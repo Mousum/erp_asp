@@ -451,8 +451,9 @@
                         $.ajax({
                             url: '@Url.Action("UpdateSettings", "Users", new { area = "UserManagement" })',
                             type: "post",
-                            data: {lgcompany:chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId },
+                            data: { lgcompany: chackOne, lgdash: chackThree, lglast: chackTwo, TimezoneId: zoneId },
                             success: function (data) {
+                                alert("Successfully Added");
                             },
                             error: function () {
 
