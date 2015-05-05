@@ -167,6 +167,7 @@
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\RoleVsActionsController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UserInRolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\Login.cs" />
@@ -646,6 +647,9 @@
     <Content Include="Areas\UserManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Index.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\CreateSucess.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -705,6 +709,27 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_4lh2isgn.544.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_dxmc3oyv.xfo.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_ox1yhws4.msj.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_q2csd1we.ism.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_qjiree3b.erb.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Document_Al-Qalam_Media__2_y4i2o21e.sbp.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Logo_Al-Qalam_Media__2_222ptz31.ora.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Logo_Al-Qalam_Media__2_ftfdhl3y.ud4.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Logo_Al-Qalam_Media__2_i5tjbjkk.gyl.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Logo_Al-Qalam_Media__2_pgtfnvam.4zl.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Seal_Al-Qalam_Media__2_1b32wul4.uzs.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Seal_Al-Qalam_Media__2_5v34zlh4.wcx.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Seal_Al-Qalam_Media__2_ekyoasbs.qgc.png" />
+    <Content Include="Uploads\Al-Qalam_Media_\Seal_Al-Qalam_Media__2_vmq0sgnt.3ns.png" />
+    <Content Include="Uploads\Logo_Wsit_3.png.png" />
+    <Content Include="Uploads\New_Company\Document_New_Company_1_20lgpngs.lxr.png" />
+    <Content Include="Uploads\New_Company\Document_New_Company_1_hjkuokwh.q4v.png" />
+    <Content Include="Uploads\New_Company\Logo_New_Company_1_fc2zwxeu.v0b.png" />
+    <Content Include="Uploads\New_Company\Seal_New_Company_1_nqnpxzdv.fe0.png" />
+    <Content Include="Uploads\sdfsdf\Seal_sdfsdf_1_s5gvenco.m3b.png" />
+    <Content Include="Uploads\Seal_Wsit_3.png.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -735,9 +760,6 @@
     <Folder Include="AxureStyles\images\settings_your_financial\" />
     <Folder Include="AxureStyles\images\settings_your_tax\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Uploads\Al-Qalam_Media_\" />
-    <Folder Include="Uploads\New_Company\" />
-    <Folder Include="Uploads\sdfsdf\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

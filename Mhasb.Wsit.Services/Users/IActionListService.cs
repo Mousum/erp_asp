@@ -10,6 +10,7 @@ namespace Mhasb.Services.Users
   public interface IActionListService
     {
       bool AddActionList(ActionList actionlist);
+      bool AddActionListFromBaseController(ActionList actionlist);
       bool UpdateActionList(ActionList actionlist);
       bool DeleteActionList(int id);
 

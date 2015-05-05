@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Services.Users
 {
-   public class RoleVsActionService : IRoleVsActionService
+    public class RoleVsActionService : IRoleVsActionService
     {
         private readonly CrudOperation<RoleVsAction> rVcRep = new CrudOperation<RoleVsAction>();
         private readonly CrudOperation<ActionList> acRep = new CrudOperation<ActionList>();
@@ -18,9 +18,22 @@ namespace Mhasb.Services.Users
         {
             try
             {
-                rolevsaction.State = ObjectState.Added;
-                rVcRep.AddOperation(rolevsaction);
-                return true;
+                var roleaction = rVcRep.GetOperation()
+                    .Filter(r => r.RoleId == rolevsaction.RoleId && r.ActionId == rolevsaction.ActionId)
+                    .Get().FirstOrDefault();
+
+                if (roleaction == null)
+                {
+                    rolevsaction.State = ObjectState.Added;
+                    rVcRep.AddOperation(rolevsaction);
+                    return true;
+                }
+                else
+                {
+                    rolevsaction.Id = roleaction.Id;
+                    return UpdateRoleVsAction(rolevsaction);
+                }
+
 
             }
             catch (Exception ex)
@@ -34,8 +47,10 @@ namespace Mhasb.Services.Users
         {
             try
             {
-                rolevsaction.State = ObjectState.Added;
-                rVcRep.AddOperation(rolevsaction);
+                var dbObj = rVcRep.GetSingleObject(rolevsaction.Id);
+                dbObj.State = ObjectState.Modified;
+                dbObj.IsActive = rolevsaction.IsActive;
+                rVcRep.UpdateOperation(dbObj);
                 return true;
 
             }
@@ -127,7 +142,7 @@ namespace Mhasb.Services.Users
                              {
                                  ActionId = al.Id,
                                  RoleId = r_a.RoleId,
-                                 ActionLists= new ActionList{Id=al.Id,ActionName=al.ActionName,ControllerName=al.ControllerName,ModuleName=al.ModuleName},
+                                 ActionLists = new ActionList { Id = al.Id, ActionName = al.ActionName, ControllerName = al.ControllerName, ModuleName = al.ModuleName },
                                  //ActionId=ra.ActionId,
                                  //Name = al.ActionName,
                                  IsActive = r_a.IsActive
@@ -138,7 +153,7 @@ namespace Mhasb.Services.Users
                 //.Include(c => c.RoleId)
                 //.Filter(c => c.RoleId == roleId).Get().ToList();
 
-               // var tt = alData.ToList();
+                // var tt = alData.ToList();
                 return alData.ToList();
             }
             catch (Exception ex)
@@ -151,6 +166,6 @@ namespace Mhasb.Services.Users
         {
             List<T> newList = new List<T>();
             return newList;
-        }    
+        }
     }
 }

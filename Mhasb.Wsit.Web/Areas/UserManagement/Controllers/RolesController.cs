@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Users;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
-    public class RolesController :Controller
+    public class RolesController : BaseController
     {
         private IRoleService rService = new RoleService();
 
