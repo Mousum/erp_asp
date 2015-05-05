@@ -164,6 +164,8 @@
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Models\EmployeeProfileCustom.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
@@ -644,6 +646,7 @@
     <Content Include="Areas\UserManagement\Views\Users\AccountSettings.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\MyMhasb.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_mhasbLayout.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Create.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -744,7 +747,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
-    <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />
     <Folder Include="AxureStyles\images\cost_centers_settings\" />
     <Folder Include="AxureStyles\images\credit_voucher\" />

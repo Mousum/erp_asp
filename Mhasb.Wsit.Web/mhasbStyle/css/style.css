@@ -68,9 +68,17 @@ body{
     margin-bottom: 20px;
     border-bottom: 1px solid #f2f2f2;
 }
-.profile-image-div{
+.profile-image-div img{
     background: #f2f2f2;
-    height: 150px;
+    min-height: 150px;
+    margin: 10px;
+    width: 160px;
+}
+.first-field1{
+    font-size: 13px;
+}
+.img-div-txt{
+    margin: 10px;
 }
 .choose-setting{
     padding: 15px;
@@ -123,6 +131,25 @@ body{
 .form-control.mrgs{
     margin-top: 10px;
 }
+.form-control.mrg2{
+    margin-left: 5px;
+    display: inline-block;
+    width: 40.4%;
+}
+.mrg3{
+    margin-top: 12px;
+}
+.contact-title{
+    font-size: 24px;
+    font-weight: bold;
+}
+.contact-field{
+    font-size: 18px;
+}
+.contact-field:hover{
+    color: #262626;
+    text-decoration: none;
+}
 .finalbtn{
     width: 35%;
     background-color: #009DD9;
@@ -147,21 +174,28 @@ body{
     top: 50%;
 }
 .dropdown-table{
-      width: 50%;
-      text-align: center;
-      margin-left: 80px;
-      margin-top: 70px;
-      min-height: 35px;
+    width: 30%;
+    text-align: center;
+}
+.dropdown-menu > li > a:hover{
+    background-color: #167EA7;
+    color: #fff;
+}
+.dropdown-table1{
+    width: 100%;
+    text-align: center;
 }
 .permisn1{
-    min-height: 51px;
+    min-height: 33px;
     border: 1px solid #ccc;
     font-size: 15px;
 }
 /*Footer styles*/
 
-.ppolicy{
-
+.social-icons ul li{
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
 }
 
 /*Footer styles*/
