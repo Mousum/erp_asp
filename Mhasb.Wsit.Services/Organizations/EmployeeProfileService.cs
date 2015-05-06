@@ -17,6 +17,7 @@ namespace Mhasb.Services.Organizations
             try
             {
                 ep.State = ObjectState.Added;
+                
                 epRep.AddOperation(ep);
                 return true;
             }
