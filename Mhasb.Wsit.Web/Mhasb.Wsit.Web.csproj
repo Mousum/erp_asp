@@ -701,6 +701,7 @@
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\wsit.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
