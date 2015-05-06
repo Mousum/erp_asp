@@ -9,6 +9,10 @@ namespace Mhasb.Services.Commons
 {
     public interface IAreaTimeService
     {
+        bool AddAreaTime(AreaTime areaTime);
+        bool UpdateAreaTime(AreaTime areaTime);
+        bool DeleteAreaTime(int areaTimeId);
         List<AreaTime> GetAllAreaTimes();
+        AreaTime GetSingleAreaTime(int areaTimeId);
     }
 }
