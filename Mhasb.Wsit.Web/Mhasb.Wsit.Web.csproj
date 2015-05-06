@@ -170,6 +170,7 @@
     <Compile Include="Areas\Organizations\EmployeeController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\RoleVsActionsController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UserInRolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserManagement\Models\AccountSetting.cs" />
@@ -648,6 +649,9 @@
     <Content Include="Areas\UserManagement\Views\Users\RegistrationSuccess.cshtml" />
     <Content Include="Areas\UserManagement\Views\web.config" />
     <Content Include="Areas\UserManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\Create.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\CreateSucess.cshtml" />
+    <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
