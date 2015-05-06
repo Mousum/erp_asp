@@ -75,5 +75,21 @@ namespace Mhasb.Services.Commons
                 return false;
             }
         }
+        public Language GetSingleLanguage(int Id)
+        {
+            try
+            {
+                var LangObj = languageRep.GetOperation()
+                    .Filter(c => c.Id == Id)
+                    .Get().SingleOrDefault();
+                return LangObj;
+            }
+            catch (Exception Ex)
+            {
+                var msg = Ex.Message;
+                return null;
+
+            }
+        }
     }
 }

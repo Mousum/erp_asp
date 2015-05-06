@@ -75,5 +75,21 @@ namespace Mhasb.Services.Commons
                 return false;
             }
         }
+        public Industry GetSingleIndustry(int Id) 
+        {
+            try
+            {
+                var InsObj = industryRep.GetOperation()
+                    .Filter(c => c.Id == Id)
+                    .Get().SingleOrDefault();
+                return InsObj;
+            }
+            catch (Exception Ex)
+            {
+                var msg = Ex.Message;
+                return null;
+
+            }
+        }
     }
 }
