@@ -97,7 +97,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                         {
                             if ("documentLocation[]" == Request.Files.GetKey(i))
                             {
-                                documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                                documentName = "Document_" + company.TradingName.Replace(" ", "_") + "_" + companyTableId.ToString() + "_" + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
                                 documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
                                 if (fileUpload(Request.Files[i], documentName, documentLocation))
                                 {
@@ -173,7 +173,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                 string uploadPath = filePath;
                 bool isValid = false;
-                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg", ".pdf", ".doc", ".txt", ".docx" };
+                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg", ".pdf", ".doc", ".txt", ".docx" , ".xlsx" };
                 for (int i = 0; i < fileExtensions.Length; i++)
                 {
 

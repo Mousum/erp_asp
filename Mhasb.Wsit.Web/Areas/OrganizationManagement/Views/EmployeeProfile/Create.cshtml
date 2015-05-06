@@ -1,0 +1,295 @@
+﻿@model Mhasb.Wsit.Web.Areas.OrganizationManagement.Models.EmployeeProfileCustom
+
+@{
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+    ViewBag.Title = "Create Employee Profile";
+}
+
+<h2>Create Employee Profile</h2>
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix welcome-container">
+                <div class="col-md-8 column">
+                    <h2 class="text-center welcome-header">
+                        Join to the MHASB community .. FREE
+                    </h2>
+                    <p class="text-center">
+                        List your profile on MHASB community to become listed in our users directory and become part of our growing community and expanded your commercial relationships
+                    </p>
+                    <div class="row clearfix">
+                        <div class="col-md-12 column choose-setting form-inline">
+                            <label class="italic">List My Profile:</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Turn On
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Check me out
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-md-5 column">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div class="profile-image-div">
+                                <img id="profile_pic_target" src="" alt="Your Photo" width="120" />
+                            </div>
+                            <span class="img-div-txt">Profile Cover</span>
+                            <div class="form-group">
+                                <label for="profile-pic">Upload Photo</label>
+                                <input name="profile_pic" id="profile_pic" type="file" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="row clearfix cstm-form-ps">
+                        <div class="col-md-6 column">
+                            @using (Html.BeginForm("Create", "EmployeeProfile", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="row form-inline no-margin clearfix">
+                                    <label for="inputEmail3" class="col-sm-2 control-label first-field1">Name</label>
+                                    <input type="text" class="form-control mrg2" placeholder=@ViewBag.FirstName disabled>
+                                    <input type="text" class="form-control mrg2" placeholder=@ViewBag.LastName disabled>
+
+                                </div>
+                                <div class="form-group mrg3">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Job Title</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.employeeProfile.JobTitle, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.employeeProfile.JobTitle)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Brief Bio:</label>
+                                    <div class="col-sm-10">
+                                        @*<textarea class="form-control"></textarea>*@
+                                        @Html.TextAreaFor(model => model.employeeProfile.Bio, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.employeeProfile.Bio)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Location</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group contact-title">
+                                    <p>Contact Details</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Phone</label>
+                                    <div class="row form-inline no-margin clearfix">
+
+                                        @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "form-control mrgi", @placeholder = "Country Code" })
+
+                                        @Html.TextBoxFor(model => model.Phone.FieldValueTwo, new { @class = "form-control mrgi", @placeholder = "Area Code" })
+                                        @Html.TextBoxFor(model => model.Phone.FieldValueThree, new { @class = "form-control mrgi",@placeholder="Number"})
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Website</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Website.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Facebook</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Facebook.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Facebook.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Fax</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Fax.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Fax.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Linked In</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Twitter</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Twitter.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Twitter.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Skype</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Skype.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Skype.FieldValueOne)
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Google</label>
+                                    <div class="col-sm-10">
+                                        @*<input class="form-control" id="inputEmail3" type="text">*@
+                                        @Html.TextBoxFor(model => model.Google.FieldValueOne, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Google.FieldValueOne)
+                                    </div>
+                                </div>
+
+                                <a href="#" class="text-left contact-field">
+                                    Add Contact Field
+                                </a>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+<script>
+    function readImageURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#profile_pic_target').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#profile_pic").change(function () {
+        readImageURL(this);
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>EmployeeProfile</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageLocation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageLocation)
+                @Html.ValidationMessageFor(model => model.ImageLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bio, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bio)
+                @Html.ValidationMessageFor(model => model.Bio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location)
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Website, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Website)
+                @Html.ValidationMessageFor(model => model.Website)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAction, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsAction)
+                @Html.ValidationMessageFor(model => model.IsAction)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+
