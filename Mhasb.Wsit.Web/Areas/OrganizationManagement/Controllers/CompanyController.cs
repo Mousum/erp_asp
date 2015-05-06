@@ -81,7 +81,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             if((imageUpload(logo, logoName, logoLocation) && imageUpload(seal, sealName, sealLocation)))
             {
-                company.Email = "zahedwsit@dfg.com";
+                company.Email = HttpContext.User.Identity.Name;
                 company.LogoLocation= logoLocation+"/"+logoName;
                 company.SealLocation= sealLocation+"/"+sealName;
 
@@ -103,7 +103,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             ViewBag.msg = msg;
 
-            return View("RegistrationResult"); ;
+            return RedirectToAction("MyMhasb", "Users", new { Area="UserManagement"});
         }
 
         public bool imageUpload(HttpPostedFileBase file)

@@ -16,22 +16,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     {
         private IUserService uService = new UserService();
         private readonly ICompanyService iCompany = new CompanyService();
-        //
-        // GET: /UserManagement/Users/
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(User user)
-        {
-            user.ConfirmPassword = user.Password;
-            user.CreatedTime = DateTime.Now;
-            uService.AddUser(user);
-
-            return View();
-        }
+        
 
         [AllowAnonymous]
         public ActionResult Registration()
@@ -47,7 +32,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             if (uService.AddUser(user))
             {
-                return View("RegistrationSuccess");
+                //return View("RegistrationSuccess");
+
+                return Redirect("MyMhasb");
             }
 
             return Content("Failed");
@@ -64,7 +51,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             if (CustomPrincipal.Login(email, password,false) != false)
             {
-                return Redirect("Dashboard");
+
+                return Redirect("MyMhasb");
             }
             else
                 Session.Add("uEmail", email);
@@ -100,7 +88,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.userName = user.FirstName + " " + user.LastName ;
             ViewBag.lastLoginCompany = "UniCorn";
-            ViewBag.lastLoginTime = "27/01/2015 10.02.12";
+            ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb",myCompanyList);
 
         }
