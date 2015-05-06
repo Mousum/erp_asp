@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EntityFramework.SqlMigrations</id>
+    <version>0.6.0.2</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Legacy package, Code First Migrations is now included as part of the EntityFramework package.</description>
+    <summary>Legacy package, Code First Migrations is now included as part of the EntityFramework package.</summary>
+  </metadata>
+</package>
