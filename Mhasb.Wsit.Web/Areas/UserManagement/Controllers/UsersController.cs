@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
+
     public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
