@@ -67,7 +67,7 @@ namespace Mhasb.Services.Commons
                 return areaTimeObj;
 
             }
-            catch (Exception ex)
+            catch (Exception ex)   
             {
                 var rr = ex.Message;
 
