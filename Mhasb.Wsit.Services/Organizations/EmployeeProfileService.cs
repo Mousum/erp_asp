@@ -52,7 +52,6 @@ namespace Mhasb.Services.Organizations
                                    .Include(ep => ep.ContactDetails)
                                    .Filter(ep => ep.Users.Id == userId)
                                    .Get().FirstOrDefault();
-
             var empProfileObj = new EmployeeProfile {
                                 Id = empProfile.Id,
                                 ImageLocation = empProfile.ImageLocation,
