@@ -13,6 +13,7 @@ namespace Mhasb.Services.Commons
         bool UpdateAreaTime(AreaTime areaTime);
         bool DeleteAreaTime(int areaTimeId);
         List<AreaTime> GetAllAreaTimes();
+
         AreaTime GetSingleAreaTime(int areaTimeId);
     }
 }

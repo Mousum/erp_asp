@@ -70,6 +70,7 @@ namespace Mhasb.Services.Commons
             catch (Exception ex)
             {
                 var rr = ex.Message;
+
                 return null;
             }
 
