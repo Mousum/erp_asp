@@ -11,7 +11,7 @@ namespace Mhasb.Services.Users
 {
    public class SettingsService : ISettingsService
     {
-        public readonly CrudOperation<Settings> setRep = new CrudOperation<Settings>();
+        public readonly CrudOperation<Settings> setRep = new CrudOperation<Settings>();   
 
 
 
