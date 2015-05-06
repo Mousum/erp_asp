@@ -17,6 +17,7 @@ namespace Mhasb.DAL.Mapping.Users
             // ignor
             this.Ignore(u => u.State);
             this.Ignore(u => u.ConfirmPassword);
+            
             this.Property(u => u.FirstName).HasMaxLength(100).HasColumnName("first_name");
             this.Property(u => u.LastName).HasMaxLength(100).HasColumnName("last_name");
             this.Property(u => u.Email).HasMaxLength(50).HasColumnName("email");

@@ -1,11 +1,16 @@
 ﻿@model Mhasb.Wsit.Web.Areas.UserManagement.Models.Login
+@if (Session["msg"] != null) { 
+    @Session["msg"]
+    Session.Remove("msg");
+}
 
 @using (Html.BeginForm("Login","Users",new{Area ="UserManagement"},FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.ValidationMessageFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Password)
     <div id="base" class="" >
-
+       
         <!-- Unnamed (Shape) -->
         <div id="u0" class="ax_shape">
             <img id="u0_img" class="img " src="~/AxureStyles/images/login_page/u0.png" />
@@ -73,13 +78,13 @@
         <!-- Unnamed (Text Field) -->
         <div id="u14" class="ax_text_field">
             @Html.TextBoxFor(model => model.Email, new { id = "u14_input" })
-            @Html.ValidationMessageFor(model => model.Email)
+         
         </div>
 
         <!-- Unnamed (Text Field) -->
         <div id="u15" class="ax_text_field">
             @Html.TextBoxFor(model => model.Password, new { @type = "password", id = "u15_input" })
-            @Html.ValidationMessageFor(model => model.Password)
+           
         </div>
 
         <!-- Unnamed (Shape) -->
@@ -136,3 +141,4 @@
     </div>
    
 }
+@Scripts.Render("~/bundles/jqueryval")

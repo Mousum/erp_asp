@@ -10,5 +10,9 @@ namespace Mhasb.Services.Commons
     public interface ILanguageService
     {
         List<Language> GetAllLanguages();
+        bool CreateLanguage(Language language);
+        bool UpdateLanguage(Language language);
+        bool UpdateLanguage(int Id);
+        Language GetSingleLanguage(int Id);
     }
 }

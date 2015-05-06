@@ -10,5 +10,10 @@ namespace Mhasb.Services.Commons
     public interface IIndustryService
     {
         List<Industry> GetAllIndustries();
+        bool CreateIndustry(Industry industry);
+        bool UpdateIndustry(Industry industry);
+        bool DeleteIndustry(int Id);
+        Industry GetSingleIndustry(int Id);
+
     }
 }
