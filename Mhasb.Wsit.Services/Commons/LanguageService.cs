@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Commons;
 using Mhasb.Wsit.DAL.Operations;
+using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,51 @@ namespace Mhasb.Services.Commons
                 return null;
             }
 
+        }
+
+
+        public bool CreateLanguage(Language language)
+        {
+            try
+            {
+                language.State = ObjectState.Added;
+                languageRep.AddOperation(language);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+        public bool UpdateLanguage(Language language)
+        {
+            try
+            {
+                language.State = ObjectState.Modified;
+                languageRep.AddOperation(language);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+        public bool UpdateLanguage(int Id)
+        {
+            try
+            {
+                languageRep.DeleteOperation(Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Commons;
 using Mhasb.Wsit.DAL.Operations;
+using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,51 @@ namespace Mhasb.Services.Commons
                 return null;
             }
 
+        }
+
+
+        public bool CreateIndustry(Industry industry)
+        {
+            try
+            {
+                industry.State = ObjectState.Added;
+                industryRep.AddOperation(industry);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+        public bool UpdateIndustry(Industry industry)
+        {
+            try
+            {
+                industry.State = ObjectState.Modified;
+                industryRep.AddOperation(industry);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+
+        public bool DeleteIndustry(int Id)
+        {
+            try
+            {
+                industryRep.DeleteOperation(Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
         }
     }
 }

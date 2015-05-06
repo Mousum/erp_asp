@@ -10,5 +10,11 @@ namespace Mhasb.Services.Commons
     public interface ICountryService
     {
         List<Country> GetAllCountries();
+        bool CreateCountry(Country country);
+        bool UpdateCountry(Country country);
+        bool DeleteCountry(int Id);
+
+
+
     }
 }
