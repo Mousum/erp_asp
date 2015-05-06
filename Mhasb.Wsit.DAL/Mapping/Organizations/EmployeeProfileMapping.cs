@@ -18,6 +18,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             // 
             this.Property(ep => ep.Bio).HasMaxLength(1000).HasColumnName("bio");
             this.Property(ep => ep.ImageLocation).HasColumnName("image_location").HasMaxLength(100);
+            this.Property(ep => ep.JobTitle).HasColumnName("job_title").HasMaxLength(100);
             this.Property(ep => ep.Location).HasColumnName("location");
             this.ToTable("org.employee_profiles");
 
