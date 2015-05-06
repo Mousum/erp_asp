@@ -84,9 +84,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
                 return Redirect("MyMhasb");
             }
-            else
-                Session.Add("uEmail", email);
-            return Redirect(Url.Content("~/"));
+            else {
+               Session.Add("msg", "Invelid Email Or PassWord");
+                return Redirect(Url.Content("~/"));
+            }
+              
         }
 
         [AllowAnonymous]

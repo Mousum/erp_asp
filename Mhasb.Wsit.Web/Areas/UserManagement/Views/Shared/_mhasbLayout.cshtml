@@ -93,8 +93,9 @@
     <div class="container">
 
        @RenderBody()
+        @Scripts.Render("~/bundles/jqueryval")
     </div>
-    <div class="row clearfix no-margin">
+    <div class="row clearfix no-margin footer-fixed">
         <div class="col-md-3 colum bgcolor1">
             <h3 class="left">
                 Privacy Policy
@@ -106,8 +107,6 @@
             </h3>
         </div>
     </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+   
 </body>
 </html>

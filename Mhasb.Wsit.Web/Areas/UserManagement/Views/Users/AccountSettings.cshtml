@@ -498,32 +498,35 @@
                     $('#checkbox-1').prop('checked', false);
                 });
 
-                $("#Email").attr("readonly", true);
+                $("#Users_Email").attr("readonly", true);
                 $("#edit-email").click(function () {
                     var btnName = $("#edit-email").text();
                     if (btnName == "Edit") {
-                        $("#Email").attr("readonly", false);
+                        $("#Users_Email").attr("readonly", false);
                         $("#edit-email").text("Save")
                     } else {
-                        var email = $("#Email").val();
+                        var email = $("#Users_Email").val();
                         if (!isValidEmailAddress(email)) {
-                            $("#u40").after("<p>Pelase Insert Valid Email</p>");
-                            $("#Email").attr("readonly", true);
+                            //$("#u40").after("<p>Pelase Insert Valid Email</p>");
+                            alert("Pelase Insert Valid Email");
+                            $("#Users_Email").attr("readonly", true);
                             $("#edit-email").text("Edit");
                         } else {
+                            alert(email);
                             $.ajax({
                                 url: '@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })',
                                 type: "post",
                                 data: { Email: email },
                                 success: function (data) {
                                     if (data.success == "True") {
-                                        $("#Email").val(data.msg);
+                                        $("#Users_Email").val(data.msg);
                                         $("#u40").after("<p>Email Successfully  Update</p>");
-                                        $("#Email").attr("readonly", true);
+                                        $("#Users_Email").attr("readonly", true);
                                         $("#edit-email").text("Edit");
                                     } else {
-                                        $("#u40").after("<p>Something Wrong!</p>");
-                                        $("#Email").attr("readonly", false);
+                                        //$("#u40").after("<p>Something Wrong!</p>");
+                                        alert("Email Address Allready Use");
+                                        $("#Users_Email").attr("readonly", false);
                                         $("#edit-email").text("Save");
                                     }
 
