@@ -3,15 +3,16 @@ using Mhasb.Domain.Organizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Models
+namespace Mhasb.Wsit.CustomModel.Organizations
 {
     public class EmployeeProfileCustom
     {
-       
+
         public EmployeeProfile employeeProfile { get; set; }
-        public ContactDetail Phone { get; set; } 
+        public ContactDetail Phone { get; set; }
 
         public ContactDetail Website { get; set; }
         public ContactDetail Fax { get; set; }
@@ -28,8 +29,20 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Models
             Website = new ContactDetail { FieldName = "Website" };
             Facebook = new ContactDetail { FieldName = "Facebook", FieldUrl = "www.facebook.com" };
             Twitter = new ContactDetail { FieldName = "Twitter", FieldUrl = "www.twitter.com" };
-            Google = new ContactDetail { FieldName = "Google", FieldUrl = "www.google.com"};
-            LinkedIn = new ContactDetail { FieldName = "LinkedIn", FieldUrl="www.linkedin.com" };
+            Google = new ContactDetail { FieldName = "Google", FieldUrl = "www.google.com" };
+            LinkedIn = new ContactDetail { FieldName = "LinkedIn", FieldUrl = "www.linkedin.com" };
+            Skype = new ContactDetail { FieldName = "Skype", FieldUrl = "www.skype.com" };
+        }
+
+        public EmployeeProfileCustom(EmployeeProfile employeeProfile)
+        {
+            Phone = new ContactDetail { FieldName = "Phone" };
+            Fax = new ContactDetail { FieldName = "Fax" };
+            Website = new ContactDetail { FieldName = "Website" };
+            Facebook = new ContactDetail { FieldName = "Facebook", FieldUrl = "www.facebook.com" };
+            Twitter = new ContactDetail { FieldName = "Twitter", FieldUrl = "www.twitter.com" };
+            Google = new ContactDetail { FieldName = "Google", FieldUrl = "www.google.com" };
+            LinkedIn = new ContactDetail { FieldName = "LinkedIn", FieldUrl = "www.linkedin.com" };
             Skype = new ContactDetail { FieldName = "Skype", FieldUrl = "www.skype.com" };
         }
 

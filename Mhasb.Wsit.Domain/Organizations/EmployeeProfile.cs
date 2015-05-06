@@ -15,9 +15,7 @@ namespace Mhasb.Domain.Organizations
        public string JobTitle { get; set; }
        public string Bio { get; set; }
        public int Location { get; set; }
-       public string Phone { get; set; }
-       public string Website { get; set; }
-       public bool IsAction { get; set; }
+       public bool IsActive { get; set; }
        public virtual User Users { get; set; }
        public virtual ICollection<ContactDetail> ContactDetails { get; set; }
        public long Id
