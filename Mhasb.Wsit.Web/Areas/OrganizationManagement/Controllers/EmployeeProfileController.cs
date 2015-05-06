@@ -1,4 +1,6 @@
-﻿using Mhasb.Domain.Organizations;
+﻿using Mhasb.Domain.Commons;
+using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
@@ -50,18 +52,26 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
                 if (ImageUpload(profilePic, profilePicName, profilePicLocation))
                 {
-                    EmployeeProfile ep = employeeProfileCustom.employeeProfile;
+                    EmployeeProfile ep = new EmployeeProfile();
+                    ep = employeeProfileCustom.employeeProfile;
+                    ep.Users = new User { Id = user.Id, Email = user.Email };
                     ep.ImageLocation = "Uploads/EmployeeProfiles/"+profilePicName;
                     if (iEP.AddEmployeeProfile(ep))
                     {
-                        iCD.AddContactDetail(employeeProfileCustom.Phone);
-                        iCD.AddContactDetail(employeeProfileCustom.Fax);
-                        iCD.AddContactDetail(employeeProfileCustom.Website);
-                        iCD.AddContactDetail(employeeProfileCustom.Facebook);
-                        iCD.AddContactDetail(employeeProfileCustom.Twitter);
-                        iCD.AddContactDetail(employeeProfileCustom.Google);
-                        iCD.AddContactDetail(employeeProfileCustom.LinkedIn);
-                        iCD.AddContactDetail(employeeProfileCustom.Skype);
+                        try {
+                            iCD.AddContactDetail(employeeProfileCustom.Phone);
+                            iCD.AddContactDetail(employeeProfileCustom.Fax);
+                            iCD.AddContactDetail(employeeProfileCustom.Website);
+                            iCD.AddContactDetail(employeeProfileCustom.Facebook);
+                            iCD.AddContactDetail(employeeProfileCustom.Twitter);
+                            iCD.AddContactDetail(employeeProfileCustom.Google);
+                            iCD.AddContactDetail(employeeProfileCustom.LinkedIn);
+                            iCD.AddContactDetail(employeeProfileCustom.Skype);
+                        }
+                        catch (Exception e) {
+                            var tt = e;
+                        }
+                        
                     }
                 }
       

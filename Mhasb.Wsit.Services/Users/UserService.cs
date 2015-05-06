@@ -55,7 +55,7 @@ namespace Mhasb.Services.Users
 
             var userObj = userRep.GetOperation()
                                   .Filter(u => u.Email == email)
-                                  .Get().SingleOrDefault();
+                                  .Get().FirstOrDefault();
 
 
             if (userObj != null)
@@ -86,7 +86,7 @@ namespace Mhasb.Services.Users
 
             var userObj = userRep.GetOperation()
                                   .Filter(u => u.Email == email)
-                                  .Get().SingleOrDefault();
+                                  .Get().FirstOrDefault();
 
             return userObj;
         
