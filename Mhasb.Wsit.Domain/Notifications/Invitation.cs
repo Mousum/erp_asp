@@ -24,7 +24,9 @@ namespace Mhasb.Domain.Notifications
         
         [Required(ErrorMessage = "Employee Type  is required")]
         public EmpTypeEnum EmployeeType { get; set; }
-        
+
+        [Required(ErrorMessage = "Role Name  is required")]
+        public int RoleId { get; set; }
         public string Token { get; set; }
         public StatusEnum Status { get; set; }
 

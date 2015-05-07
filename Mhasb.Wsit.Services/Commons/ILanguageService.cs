@@ -12,7 +12,7 @@ namespace Mhasb.Services.Commons
         List<Language> GetAllLanguages();
         bool CreateLanguage(Language language);
         bool UpdateLanguage(Language language);
-        bool UpdateLanguage(int Id);
+        bool DeleteLanguage(int Id);
 
         Language GetSingleLanguage(int Id);
 

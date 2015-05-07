@@ -62,7 +62,7 @@ namespace Mhasb.Services.Commons
             }
         }
 
-        public bool UpdateLanguage(int Id)
+        public bool DeleteLanguage(int Id)
         {
             try
             {

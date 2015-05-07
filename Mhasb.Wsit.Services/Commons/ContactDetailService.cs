@@ -46,12 +46,12 @@ namespace Mhasb.Services.Commons
 
         }
 
-        public ContactDetail GetSingleContactDetailByEmployeeIdAndFieldName(long id,string fieldName){
+        public ContactDetail GetSingleContactDetailById(long id){
             try
             {
                 //company.State = ObjectState.Unchanged;
                 var conObj = contactRep.GetOperation()
-                                        .Filter(c => c.EmployeeProfileId == id && c.FieldName==fieldName)
+                                        .Filter(c => c.Id == id )
                                         .Get().SingleOrDefault();
 
                 //companyRep.GetSingleObject(companyId);

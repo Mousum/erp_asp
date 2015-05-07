@@ -21,6 +21,7 @@ namespace Mhasb.DAL.Mapping.Notifications
             this.Property(i => i.CompanyId).HasColumnName("companyid");
             this.Property(i => i.Email).HasMaxLength(100).HasColumnName("email");
             this.Property(i => i.EmployeeType).HasColumnName("employee_type");
+            this.Property(i => i.RoleId).HasColumnName("roleid");
             this.Property(i => i.Status).HasColumnName("status");
 
             this.ToTable("nts.invitations");
