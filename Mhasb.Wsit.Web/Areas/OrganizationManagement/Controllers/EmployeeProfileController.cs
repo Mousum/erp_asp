@@ -35,6 +35,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             ViewBag.FirstName = user.FirstName;
             ViewBag.LastName = user.LastName;
+            EmployeeProfileCustom epc = iEP.GetEmployeeProfile(user.Id);
+            if (epc != null)
+                return View("Edit",epc);
             return View();
         }
 
@@ -48,43 +51,82 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 HttpPostedFileBase profilePic = Request.Files["profile_pic"];
                 //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
-                string profilePicName = "Employee_" + "_"+user.Id.ToString() +"_" + Path.GetRandomFileName() + ".png";
+                string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
                 string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
                 if (ImageUpload(profilePic, profilePicName, profilePicLocation))
                 {
                     EmployeeProfile ep = new EmployeeProfile();
                     ep = employeeProfileCustom.employeeProfile;
                     ep.Users = new User { Id = user.Id, Email = user.Email };
-                    ep.ImageLocation = "Uploads/EmployeeProfiles/"+profilePicName;
+                    ep.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
                     if (iEP.AddEmployeeProfile(ep))
                     {
-                        try {
-                            iCD.AddContactDetail(employeeProfileCustom.Phone);
-                            iCD.AddContactDetail(employeeProfileCustom.Fax);
-                            iCD.AddContactDetail(employeeProfileCustom.Website);
-                            iCD.AddContactDetail(employeeProfileCustom.Facebook);
-                            iCD.AddContactDetail(employeeProfileCustom.Twitter);
-                            iCD.AddContactDetail(employeeProfileCustom.Google);
-                            iCD.AddContactDetail(employeeProfileCustom.LinkedIn);
-                            iCD.AddContactDetail(employeeProfileCustom.Skype);
+                        try
+                        {
+                            ContactDetail phone = employeeProfileCustom.Phone;
+                            phone.EmployeeProfileId = ep.Id;
+
+                            ContactDetail fax = employeeProfileCustom.Fax;
+                            fax.EmployeeProfileId = ep.Id;
+
+                            ContactDetail facebook = employeeProfileCustom.Facebook;
+                            facebook.EmployeeProfileId = ep.Id;
+
+                            ContactDetail google = employeeProfileCustom.Google;
+                            google.EmployeeProfileId = ep.Id;
+
+                            ContactDetail linkedin = employeeProfileCustom.LinkedIn;
+                            linkedin.EmployeeProfileId = ep.Id;
+
+                            ContactDetail skype = employeeProfileCustom.Skype;
+                            skype.EmployeeProfileId = ep.Id;
+
+                            ContactDetail twitter = employeeProfileCustom.Twitter;
+                            twitter.EmployeeProfileId = ep.Id;
+
+                            ContactDetail website = employeeProfileCustom.Website;
+                            website.EmployeeProfileId = ep.Id;
+
+                            iCD.AddContactDetail(phone);
+                            iCD.AddContactDetail(fax);
+                            iCD.AddContactDetail(website);
+                            iCD.AddContactDetail(facebook);
+                            iCD.AddContactDetail(twitter);
+                            iCD.AddContactDetail(google);
+                            iCD.AddContactDetail(linkedin);
+                            iCD.AddContactDetail(skype);
                         }
-                        catch (Exception e) {
+                        catch (Exception e)
+                        {
                             var tt = e;
                         }
-                        
+
                     }
                 }
-      
-                
+
             }
             catch (Exception ex)
             {
 
             }
-            
+
             //return Content("sdffs");
             return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Update(EmployeeProfileCustom employeeProfileCustom)
+        {
+            
+
+            return Content("sdffs");
+            //return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+        }
+
+
+
 
         public bool ImageUpload(HttpPostedFileBase file, string fileName, string filePath)
         {

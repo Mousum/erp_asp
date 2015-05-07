@@ -48,44 +48,53 @@ namespace Mhasb.Services.Organizations
 
         public EmployeeProfileCustom GetEmployeeProfile(long userId)
         {
-            var empProfile = epRep.GetOperation()
+            try {
+                var empProfile = epRep.GetOperation()
                                    .Include(ep => ep.ContactDetails)
                                    .Filter(ep => ep.Users.Id == userId)
                                    .Get().FirstOrDefault();
-            var empProfileObj = new EmployeeProfile {
-                                Id = empProfile.Id,
-                                ImageLocation = empProfile.ImageLocation,
-                                IsActive = empProfile.IsActive,
-                                JobTitle = empProfile.JobTitle,
-                                Location = empProfile.Location
-                            };
-            var empProfileCustom = new EmployeeProfileCustom();
+                var empProfileObj = new EmployeeProfile
+                {
+                    Id = empProfile.Id,
+                    ImageLocation = empProfile.ImageLocation,
+                    Bio=empProfile.Bio,
+                    IsActive = empProfile.IsActive,
+                    JobTitle = empProfile.JobTitle,
+                    Location = empProfile.Location
+                };
+                var empProfileCustom = new EmployeeProfileCustom();
                 empProfileCustom.employeeProfile = empProfileObj;
 
-                if (empProfile.ContactDetails.Count<1)
+                if (empProfile.ContactDetails.Count < 1)
                 {
-                    return new EmployeeProfileCustom(empProfileObj);
+                    return null;
                 }
-            foreach(var oo in empProfile.ContactDetails)
-            {
-                if (oo.FieldName == "Phone")
-                    empProfileCustom.Phone = GetContactObject(oo);
-                else if (oo.FieldName == "Fax")
-                    empProfileCustom.Fax = GetContactObject(oo);
-                else if (oo.FieldName == "Website")
-                    empProfileCustom.Website = GetContactObject(oo);
-                else if (oo.FieldName == "Facebook")
-                    empProfileCustom.Facebook = GetContactObject(oo);
-                else if (oo.FieldName == "Twitter")
-                    empProfileCustom.Twitter = GetContactObject(oo);
-                else if (oo.FieldName == "Google")
-                    empProfileCustom.Google = GetContactObject(oo);
-                else if (oo.FieldName == "LinkedIn")
-                    empProfileCustom.LinkedIn = GetContactObject(oo);
-                else if (oo.FieldName == "Skype")
-                    empProfileCustom.Skype = GetContactObject(oo);
+                foreach (var oo in empProfile.ContactDetails)
+                {
+                    if (oo.FieldName == "Phone")
+                        empProfileCustom.Phone = GetContactObject(oo);
+                    else if (oo.FieldName == "Fax")
+                        empProfileCustom.Fax = GetContactObject(oo);
+                    else if (oo.FieldName == "Website")
+                        empProfileCustom.Website = GetContactObject(oo);
+                    else if (oo.FieldName == "Facebook")
+                        empProfileCustom.Facebook = GetContactObject(oo);
+                    else if (oo.FieldName == "Twitter")
+                        empProfileCustom.Twitter = GetContactObject(oo);
+                    else if (oo.FieldName == "Google")
+                        empProfileCustom.Google = GetContactObject(oo);
+                    else if (oo.FieldName == "LinkedIn")
+                        empProfileCustom.LinkedIn = GetContactObject(oo);
+                    else if (oo.FieldName == "Skype")
+                        empProfileCustom.Skype = GetContactObject(oo);
+                }
+                return empProfileCustom;
             }
-            return empProfileCustom;
+            catch (Exception ex)
+            {
+                return null;
+            }
+            
         }
 
         private ContactDetail GetContactObject (ContactDetail oo)
