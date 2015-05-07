@@ -653,6 +653,7 @@
     <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

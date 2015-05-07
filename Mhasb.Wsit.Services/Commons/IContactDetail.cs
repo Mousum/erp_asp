@@ -10,5 +10,8 @@ namespace Mhasb.Services.Commons
     public interface IContactDetail
     {
         bool AddContactDetail(ContactDetail cd);
+        bool UpdateContactDetail(ContactDetail contactDetail);
+        ContactDetail GetSingleContactDetailByEmployeeIdAndFieldName(long id, string fieldName);
+
     }
 }
