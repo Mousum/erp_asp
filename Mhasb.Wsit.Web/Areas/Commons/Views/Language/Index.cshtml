@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Mhasb.Domain.Commons.Language>
+
+@{
+
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LanguageName)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanguageName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+                <a href="javascript:void(0)" class="delete-button" data-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    
+    </table>
+    <div id="dialog-confirm" style="display:none;" title="Confirm">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Are you sure you want to proceed?
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            $(".delete-button").click(function () {
+                var recordToDelete = $(this).attr("data-id"); // now we need the data-id to retrieve the identifier for the item to delete              
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    height: 200,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {
+                            alert("Russel");
+                            $(this).dialog("close");
+                            $.post("/Language/Delete", { id: recordToDelete }, DeleteSuccessfull);
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            });  //DeleteItem is the callback
+        });
+
+        function confirmDeleteVersion() {
+            
+        }
+
+    </script>
+</body>
+</html>

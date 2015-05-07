@@ -13,6 +13,8 @@ namespace Mhasb.Services.Commons
         bool CreateLanguage(Language language);
         bool UpdateLanguage(Language language);
         bool UpdateLanguage(int Id);
+
         Language GetSingleLanguage(int Id);
+
     }
 }
