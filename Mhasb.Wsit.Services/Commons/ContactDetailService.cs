@@ -18,6 +18,7 @@ namespace Mhasb.Services.Commons
             {
                 contactDetail.State = ObjectState.Added;
                 contactRep.AddOperation(contactDetail);
+                contactDetail.State = ObjectState.Unchanged;
                 return true;
             }
             catch (Exception ex)
@@ -27,5 +28,41 @@ namespace Mhasb.Services.Commons
             }
 
         }
+
+        public bool UpdateContactDetail(ContactDetail contactDetail)
+        {
+            try
+            {
+                contactDetail.State = ObjectState.Modified;
+                contactRep.UpdateOperation(contactDetail);
+                contactDetail.State = ObjectState.Unchanged;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
+
+        public ContactDetail GetSingleContactDetailById(long id){
+            try
+            {
+                //company.State = ObjectState.Unchanged;
+                var conObj = contactRep.GetOperation()
+                                        .Filter(c => c.Id == id )
+                                        .Get().SingleOrDefault();
+
+                //companyRep.GetSingleObject(companyId);
+                return conObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
     }
 }

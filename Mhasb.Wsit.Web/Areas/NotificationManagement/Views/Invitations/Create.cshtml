@@ -24,7 +24,11 @@
                         @Html.ValidationMessageFor(model => model.EmployeeType)
                     </div>
                     <div class="form-group">
-                        @Html.DropDownList("CompanyId", (SelectList)ViewBag.Companies , "--Select Company--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles", required = "required" })
+                        @Html.DropDownList("CompanyId", (SelectList)ViewBag.Companies, "--Select Company--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles", required = "required" })
+                        @Html.ValidationMessageFor(model => model.CompanyId)
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roles, "--Select Role--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles", required = "required" })
                         @Html.ValidationMessageFor(model => model.CompanyId)
                     </div>
                     <div class="row">

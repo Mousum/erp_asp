@@ -21,6 +21,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private readonly ICompanyService iCompany = new CompanyService();
         private IUserService uService = new UserService();
         private IEmployeeService eService = new EmployeeService();
+        private IRoleService rService = new RoleService();
         public ActionResult Index()
         {
             var model = inService.GetAllInvitation();
@@ -30,7 +31,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         public ActionResult Create()
         {
 
-
+            var roles = rService.GetAllRoles();
             var Companies = iCompany.GetAllCompanies();
             var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
                                     .Cast<EmpTypeEnum>()
@@ -38,7 +39,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                                     .ToList();
             ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
             ViewBag.Companies = new SelectList(Companies, "Id", "DisplayName");
-
+            ViewBag.roles = new SelectList(roles, "Id", "RoleName");
 
 
 

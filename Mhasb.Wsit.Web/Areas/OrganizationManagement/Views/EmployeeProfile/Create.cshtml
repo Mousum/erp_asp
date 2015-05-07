@@ -234,7 +234,10 @@
     });
 
     $("#add_contact_btn").click(function () {
-        $("#add_contact_fieldnames").show();
+        if ($("#add_contact_fieldnames").is(':visible'))
+            $("#add_contact_fieldnames").hide();
+        else
+            $("#add_contact_fieldnames").show();
     });
 
     $("#facebook_name").click(function () {
