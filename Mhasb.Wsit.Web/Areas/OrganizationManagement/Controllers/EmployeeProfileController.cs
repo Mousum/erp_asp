@@ -104,7 +104,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                 }
 
-
             }
             catch (Exception ex)
             {
