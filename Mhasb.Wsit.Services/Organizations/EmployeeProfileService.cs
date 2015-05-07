@@ -71,19 +71,19 @@ namespace Mhasb.Services.Organizations
                 if (oo.FieldName == "Phone")
                     empProfileCustom.Phone = GetContactObject(oo);
                 else if (oo.FieldName == "Fax")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Fax = GetContactObject(oo);
                 else if (oo.FieldName == "Website")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Website = GetContactObject(oo);
                 else if (oo.FieldName == "Facebook")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Facebook = GetContactObject(oo);
                 else if (oo.FieldName == "Twitter")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Twitter = GetContactObject(oo);
                 else if (oo.FieldName == "Google")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Google = GetContactObject(oo);
                 else if (oo.FieldName == "LinkedIn")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.LinkedIn = GetContactObject(oo);
                 else if (oo.FieldName == "Skype")
-                    empProfileCustom.Phone = GetContactObject(oo);
+                    empProfileCustom.Skype = GetContactObject(oo);
             }
             return empProfileCustom;
         }
