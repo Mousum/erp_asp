@@ -20,6 +20,8 @@ namespace Mhasb.Domain.Organizations
         public virtual User Users { get; set; }
         public virtual Company Companies { get; set; }
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
+        public virtual ICollection<TaskManager> TaskManagers { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
         public long Id { get; set; }
 
         public ObjectState State { get; set; }
