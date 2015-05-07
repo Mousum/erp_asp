@@ -56,13 +56,23 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
             {
-                if (uService.AddUser(user))
+                if(uService.GetSingleUserByEmail(user.Email)==null)
                 {
-                    //return View("RegistrationSuccess");
+                    if (uService.AddUser(user))
+                    {
+                        //return View("RegistrationSuccess");
 
-                    CustomPrincipal.Login(user.Email, user.Password, false);
-                    return Redirect("MyMhasb");
+                        CustomPrincipal.Login(user.Email, user.Password, false);
+                        return Redirect("MyMhasb");
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError("Msg", "Already Register");
+                    //return Content("Already Register");
+                    return View();
+                }
+                
                 return Content("Failed");
             }
 
@@ -72,6 +82,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult Login()
         {
+            if(HttpContext.User.Identity.IsAuthenticated)
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             return View();
         }
 
