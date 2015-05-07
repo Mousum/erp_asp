@@ -18,10 +18,10 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         public ActionResult Index()
         {
             var model = arService.GetAllAreaTimes();
-            if (model==null)
-            {
-                return HttpNotFound();
-            }
+            //if (model==null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(model);
         }
 
