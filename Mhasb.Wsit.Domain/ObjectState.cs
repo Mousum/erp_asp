@@ -13,6 +13,13 @@ namespace Mhasb.Wsit.Domain
         Modified,
         Deleted
     }
+    public enum EnumStatus
+    {
+        Ongoing = 1,
+        Finished = 2
+
+
+    }
     public interface IObjectStateInt : IObjectState
     {
         int Id { get; set; }
@@ -30,5 +37,7 @@ namespace Mhasb.Wsit.Domain
     {
         ObjectState State { get; set; }
     }
+
+
 }
 
