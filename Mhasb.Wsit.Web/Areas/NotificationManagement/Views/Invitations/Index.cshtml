@@ -51,12 +51,13 @@
                 </td>
                 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Accept", "InvitationConfirm", new { id = item.Id, token = item.Token })
+                     @Html.ActionLink("Accept", "InvitationConfirm", new { id = item.Id, token = item.Token })
+                  
+
                 </td>
             </tr>
         }
 
     </table>
+    <b class="alert-danger">"Accept" link will Be mailed to the given mail and will be removed from here. This is for test purpose </b>
 </div>
