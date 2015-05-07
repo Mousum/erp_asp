@@ -4,15 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Mhasb.Domain.Organizations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mhasb.Domain.Notifications
 {
-   public class Invitation:IObjectStateLong
+    public class Invitation : IObjectStateLong
     {
+        [Required(ErrorMessage = "Email is required")]
+        [StringLength(50)]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
-        public int   CompanyId { get; set; }
 
+        [Required(ErrorMessage = "Company  is required")]
+        public int CompanyId { get; set; }
+        
+        [Required(ErrorMessage = "Employee Type  is required")]
         public EmpTypeEnum EmployeeType { get; set; }
+        
         public string Token { get; set; }
         public StatusEnum Status { get; set; }
 
@@ -22,22 +34,21 @@ namespace Mhasb.Domain.Notifications
         public long Id { get; set; }
 
         public ObjectState State { get; set; }
-        
+
     }
-   public enum EmpTypeEnum
-   {
-       EmployeeType = 1,
-       Owner = 2,
-       test3 = 3,
-       test4 = 4
-   }
-   public enum StatusEnum
-   {
-       test1 = 1,
-       test2 = 2,
-       test3 = 3,
-       test4 = 4
-   }
+    public enum EmpTypeEnum
+    {
+        EmployeeType = 1,
+        Owner = 2,
+        test3 = 3,
+        test4 = 4
+    }
+    public enum StatusEnum
+    {
+        test1 = 1,
+        test2 = 2,
+        test3 = 3,
+        test4 = 4
+    }
 
 }
- 
