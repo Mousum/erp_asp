@@ -13,6 +13,7 @@ namespace Mhasb.Services.Commons
         bool CreateCountry(Country country);
         bool UpdateCountry(Country country);
         bool DeleteCountry(int Id);
+        Country GetSingleCountry(int Id);
 
 
 

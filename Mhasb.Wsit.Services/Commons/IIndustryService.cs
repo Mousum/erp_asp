@@ -15,5 +15,7 @@ namespace Mhasb.Services.Commons
 
         bool DeleteIndustry(int Id);
 
+        Industry GetSingleIndustry(int Id);
+
     }
 }

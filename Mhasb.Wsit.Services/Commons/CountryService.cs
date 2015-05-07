@@ -76,5 +76,19 @@ namespace Mhasb.Services.Commons
                 return false;
             }
         }
+
+
+        public Country GetSingleCountry(int Id)
+        {
+            try {
+                var countryObj = countryRep.GetOperation()
+                    .Filter(c => c.Id==Id)
+                    .Get().SingleOrDefault();
+                return countryObj;
+            }catch(Exception ex){
+                var msg = ex.Message;
+                return null;
+            }
+        }
     }
 }
