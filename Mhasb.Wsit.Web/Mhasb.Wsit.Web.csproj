@@ -653,6 +653,9 @@
     <Content Include="Areas\UserManagement\Views\RoleVsActions\_GetActionList.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Index.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Shared\_mhasbLayout.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\CompanyRegistration.cshtml" />
+    <Content Include="Areas\NotificationManagement\Views\Invitations\InvitationConfirm.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
