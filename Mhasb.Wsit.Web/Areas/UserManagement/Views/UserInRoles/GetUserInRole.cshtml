@@ -1,0 +1,5 @@
+﻿@model IEnumerable<Mhasb.Domain.Users.UserInRole>
+@foreach (var item in Model)
+{
+    <input type="checkbox" name="check" value="@item.RoleId"/> @item.Roles.RoleName
+}
