@@ -100,8 +100,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+              return RedirectToAction("Index");
             }
             catch
             {

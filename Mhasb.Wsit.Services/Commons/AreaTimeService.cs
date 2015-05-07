@@ -32,7 +32,7 @@ namespace Mhasb.Services.Commons
         {
             try
             {
-                areaTime.State = ObjectState.Added;
+                areaTime.State = ObjectState.Modified;
                 areaTimeRep.UpdateOperation(areaTime);
                 return true;
             }
