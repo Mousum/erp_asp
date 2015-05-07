@@ -34,6 +34,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             {
                 //return View("RegistrationSuccess");
 
+                CustomPrincipal.Login(user.Email,user.Password,false);
                 return Redirect("MyMhasb");
             }
 
@@ -64,7 +65,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             //Session.Clear();
             CustomPrincipal.Logout();
-            return Redirect("~/");
+            return RedirectToAction("Index", "Home", new {area="" });
 
         }
 
