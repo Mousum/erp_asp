@@ -4,7 +4,7 @@ using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
-using Mhasb.Wsit.Web.Areas.OrganizationManagement.Models;
+using Mhasb.Wsit.CustomModel.Organizations;
 using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;

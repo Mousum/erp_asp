@@ -170,7 +170,6 @@
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
-    <Compile Include="Areas\OrganizationManagement\Models\EmployeeProfileCustom.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
@@ -759,6 +758,7 @@
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
+    <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />
     <Folder Include="AxureStyles\images\cost_centers_settings\" />
     <Folder Include="AxureStyles\images\credit_voucher\" />
@@ -779,6 +779,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj">
+      <Project>{06bc9fb9-6608-4262-812e-c705d9f6c076}</Project>
+      <Name>Mhasb.Wsit.CustomModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mhasb.Wsit.DAL\Mhasb.Wsit.DAL.csproj">
       <Project>{aea63c3a-868b-4f14-ba25-d0369620c064}</Project>
       <Name>Mhasb.Wsit.DAL</Name>

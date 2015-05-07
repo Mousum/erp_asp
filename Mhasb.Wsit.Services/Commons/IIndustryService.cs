@@ -12,8 +12,8 @@ namespace Mhasb.Services.Commons
         List<Industry> GetAllIndustries();
         bool CreateIndustry(Industry industry);
         bool UpdateIndustry(Industry industry);
-
         bool DeleteIndustry(int Id);
+        Industry GetSingleIndustry(int Id);
 
         Industry GetSingleIndustry(int Id);
 

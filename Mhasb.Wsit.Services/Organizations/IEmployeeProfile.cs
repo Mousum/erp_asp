@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.CustomModel.Organizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Mhasb.Services.Organizations
     {
         bool AddEmployeeProfile( EmployeeProfile employee);
         bool UpdateEmployeeProfile(EmployeeProfile ep);
+        EmployeeProfileCustom GetEmployeeProfile(long userId);
     }
 }

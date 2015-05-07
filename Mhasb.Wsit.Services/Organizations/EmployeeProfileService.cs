@@ -1,4 +1,6 @@
-﻿using Mhasb.Domain.Organizations;
+﻿using Mhasb.Domain.Commons;
+using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.CustomModel.Organizations;
 using Mhasb.Wsit.DAL.Operations;
 using Mhasb.Wsit.Domain;
 using System;
@@ -17,7 +19,7 @@ namespace Mhasb.Services.Organizations
             try
             {
                 ep.State = ObjectState.Added;
-                
+
                 epRep.AddOperation(ep);
                 return true;
             }
@@ -44,6 +46,61 @@ namespace Mhasb.Services.Organizations
             }
         }
 
+        public EmployeeProfileCustom GetEmployeeProfile(long userId)
+        {
+            var empProfile = epRep.GetOperation()
+                                   .Include(ep => ep.ContactDetails)
+                                   .Filter(ep => ep.Users.Id == userId)
+                                   .Get().FirstOrDefault();
+            var empProfileObj = new EmployeeProfile {
+                                Id = empProfile.Id,
+                                ImageLocation = empProfile.ImageLocation,
+                                IsActive = empProfile.IsActive,
+                                JobTitle = empProfile.JobTitle,
+                                Location = empProfile.Location
+                            };
+            var empProfileCustom = new EmployeeProfileCustom();
+                empProfileCustom.employeeProfile = empProfileObj;
 
+                if (empProfile.ContactDetails.Count<1)
+                {
+                    return new EmployeeProfileCustom(empProfileObj);
+                }
+            foreach(var oo in empProfile.ContactDetails)
+            {
+                if (oo.FieldName == "Phone")
+                    empProfileCustom.Phone = GetContactObject(oo);
+                else if (oo.FieldName == "Fax")
+                    empProfileCustom.Fax = GetContactObject(oo);
+                else if (oo.FieldName == "Website")
+                    empProfileCustom.Website = GetContactObject(oo);
+                else if (oo.FieldName == "Facebook")
+                    empProfileCustom.Facebook = GetContactObject(oo);
+                else if (oo.FieldName == "Twitter")
+                    empProfileCustom.Twitter = GetContactObject(oo);
+                else if (oo.FieldName == "Google")
+                    empProfileCustom.Google = GetContactObject(oo);
+                else if (oo.FieldName == "LinkedIn")
+                    empProfileCustom.LinkedIn = GetContactObject(oo);
+                else if (oo.FieldName == "Skype")
+                    empProfileCustom.Skype = GetContactObject(oo);
+            }
+            return empProfileCustom;
+        }
+
+        private ContactDetail GetContactObject (ContactDetail oo)
+        {
+          return  new ContactDetail
+                {
+                    Id = oo.Id,
+                    EmployeeProfileId = oo.EmployeeProfileId,
+                    CompanyProfileId = oo.CompanyProfileId,
+                    FieldName = oo.FieldName,
+                    FieldUrl = oo.FieldUrl,
+                    FieldValueOne = oo.FieldValueOne,
+                    FieldValueTwo = oo.FieldValueTwo,
+                    FieldValueThree = oo.FieldValueThree
+                };
+        }
     }
 }
