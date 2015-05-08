@@ -63,7 +63,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             
         }
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Registraion(Company company)
         {
             
@@ -137,7 +136,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         }
 
 
-        [AllowAnonymous]
+      
         public ActionResult AddProfile()
         {
             CompanyProfileCustom cpc = iCP.GetCompanyProfile(3);
@@ -147,7 +146,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult AddProfile(CompanyProfileCustom companyProfileCustom)
         {
 
@@ -166,7 +164,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     cp = companyProfileCustom.companyProfile;
                     cp.UserId = user.Id;
 
-
+                    /// Static CompanyId Will dynamic next day 
                     var myCompany=iCompany.GetSingleCompany(3);
                     cp.Companies = new Company { Id=myCompany.Id};
 
