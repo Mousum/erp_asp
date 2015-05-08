@@ -119,9 +119,66 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         [HttpPost]
         public ActionResult Update(EmployeeProfileCustom employeeProfileCustom)
         {
-            
 
-            return Content("sdffs");
+            try
+            {
+                EmployeeProfile ep = new EmployeeProfile();
+                ep = employeeProfileCustom.employeeProfile;
+                HttpPostedFileBase profilePic = Request.Files["profile_pic"];
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if(profilePic.ContentLength>0)
+                {
+                    string prevImage = Request.MapPath("~/" + ep.ImageLocation);
+                    
+                    string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                    string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
+                    if (ImageUpload(profilePic, profilePicName, profilePicLocation)) 
+                    {
+                        ep.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
+                        if (System.IO.File.Exists(prevImage))
+                        {
+                            System.IO.File.Delete(prevImage);
+                        }
+                    }
+                    else
+                    {
+                        return Content("Photo Upload Unsuccessfull!!!...");
+                    }
+                    
+                    
+                }
+
+                if (iEP.UpdateEmployeeProfile(ep))
+                {
+                    try
+                    {
+                        iCD.UpdateContactDetail(employeeProfileCustom.Phone);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Fax);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Website);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Facebook);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Twitter);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Google);
+                        iCD.UpdateContactDetail(employeeProfileCustom.LinkedIn);
+                        iCD.UpdateContactDetail(employeeProfileCustom.Skype);
+                    }
+                    catch (Exception ex)
+                    {
+                        return Content("One or more Contact Field Updating Unsuccessfull!!!!");
+                    }
+                    
+                }
+                else
+                {
+                    return Content("Profile Updating cannot done successfully!!!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("Failed");
+            }
+
+           
+            return Content("Success");
             //return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
 

@@ -661,7 +661,6 @@
     <Content Include="Areas\NotificationManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\CompanyRegistration.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\InvitationConfirm.cshtml" />
-    <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\AreaTime\Create.cshtml" />
     <Content Include="Areas\Commons\Views\AreaTime\Details.cshtml" />
     <Content Include="Areas\Commons\Views\AreaTime\Edit.cshtml" />
@@ -758,6 +757,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Commons\Models\" />
+    <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />

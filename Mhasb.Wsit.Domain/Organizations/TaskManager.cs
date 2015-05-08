@@ -16,7 +16,7 @@ namespace Mhasb.Domain.Organizations
        public DateTime TaskDate { get; set; }
        public DateTime StartingDate { get; set; }
        public DateTime FinishingDate { get; set; }
-       public EnumStatus ProjectStatus { get; set; }
+       public EnumStatus Status { get; set; }
 
        public virtual Project Projects { get; set; }
        public virtual Employee Employees { get; set; }

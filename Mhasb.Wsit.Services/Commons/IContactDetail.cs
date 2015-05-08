@@ -11,7 +11,7 @@ namespace Mhasb.Services.Commons
     {
         bool AddContactDetail(ContactDetail cd);
         bool UpdateContactDetail(ContactDetail contactDetail);
-        ContactDetail GetSingleContactDetailByEmployeeIdAndFieldName(long id, string fieldName);
+        ContactDetail GetSingleContactDetailById(long id);
 
     }
 }

@@ -12,7 +12,27 @@
 {
     @*@Html.AntiForgeryToken()*@
 
-
+    @Html.HiddenFor(m => m.employeeProfile.Id, new { Value = Model.employeeProfile.Id })
+    @Html.HiddenFor(m => m.employeeProfile.ImageLocation, new { Value = Model.employeeProfile.ImageLocation })
+    
+    @Html.HiddenFor(m => m.Phone.Id, new { Value = Model.Phone.Id })
+    @Html.HiddenFor(m => m.Website.Id, new { Value = Model.Website.Id })
+    @Html.HiddenFor(m => m.Fax.Id, new { Value = Model.Fax.Id })
+    @Html.HiddenFor(m => m.Facebook.Id, new { Value = Model.Facebook.Id })
+    @Html.HiddenFor(m => m.Twitter.Id, new { Value = Model.Twitter.Id })
+    @Html.HiddenFor(m => m.Google.Id, new { Value = Model.Google.Id })
+    @Html.HiddenFor(m => m.LinkedIn.Id, new { Value = Model.LinkedIn.Id })
+    @Html.HiddenFor(m => m.Skype.Id, new { Value = Model.Skype.Id })
+    
+    @Html.HiddenFor(m => m.Phone.EmployeeProfileId, new { Value = Model.Phone.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Website.EmployeeProfileId, new { Value = Model.Website.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Fax.EmployeeProfileId, new { Value = Model.Fax.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Facebook.EmployeeProfileId, new { Value = Model.Facebook.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Twitter.EmployeeProfileId, new { Value = Model.Twitter.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Google.EmployeeProfileId, new { Value = Model.Google.EmployeeProfileId })
+    @Html.HiddenFor(m => m.LinkedIn.EmployeeProfileId, new { Value = Model.LinkedIn.EmployeeProfileId })
+    @Html.HiddenFor(m => m.Skype.EmployeeProfileId, new { Value = Model.Skype.EmployeeProfileId })
+    
 
 
     <div class="container">
