@@ -144,7 +144,7 @@
                                 <div class="form-group" id="facebook_field" hidden="hidden">
                                     <label for="inputEmail3" class="col-sm-2 control-label font-padding">Facebook</label>
                                     <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/facebook.png">www.facebook.com/</label>
-                                    <div class="col-sm-10 social-list-hidden-field">
+                                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
                                         @*<input class="form-control" id="inputEmail3" type="text">*@
                                         @Html.TextBoxFor(model => model.Facebook.FieldValueOne, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Facebook.FieldValueOne)
@@ -155,7 +155,7 @@
                                 <div class="form-group" id="fax_field" hidden="hidden">
                                     <label for="inputEmail3" class="col-sm-2 control-label font-padding">Fax</label>
                                     <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/fax.png"></label>
-                                    <div class="col-sm-10 social-list-hidden-field">
+                                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
                                         @*<input class="form-control" id="inputEmail3" type="text">*@
                                         @Html.TextBoxFor(model => model.Fax.FieldValueOne, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Fax.FieldValueOne)
@@ -166,7 +166,7 @@
                                 <div class="form-group" id="linkedin_field" hidden="hidden">
                                     <label for="inputEmail3" class="col-sm-2 control-label font-padding">Linked In</label>
                                     <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/linkedin.png">www.linkedin.com/</label>
-                                    <div class="col-sm-10 social-list-hidden-field">
+                                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
                                         @*<input class="form-control" id="inputEmail3" type="text">*@
                                         @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
@@ -177,7 +177,7 @@
                                 <div class="form-group" id="twitter_field" hidden="hidden">
                                     <label for="inputEmail3" class="col-sm-2 control-label font-padding">Twitter</label>
                                     <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/twitter.png">www.twitter.com/</label>
-                                    <div class="col-sm-10 social-list-hidden-field">
+                                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
                                         @*<input class="form-control" id="inputEmail3" type="text">*@
                                         @Html.TextBoxFor(model => model.Twitter.FieldValueOne, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Twitter.FieldValueOne)
@@ -188,7 +188,7 @@
                                 <div class="form-group" id="skype_field" hidden="hidden">
                                     <label for="inputEmail3" class="col-sm-2 control-label font-padding">Skype</label>
                                     <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/skype.png"></label>
-                                    <div class="col-sm-10 social-list-hidden-field">
+                                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
                                         @*<input class="form-control" id="inputEmail3" type="text">*@
                                         @Html.TextBoxFor(model => model.Skype.FieldValueOne, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Skype.FieldValueOne)
@@ -238,6 +238,25 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
 <script>
+
+    $(document).ready(function () {
+        console.log("ready!");
+        if ($("#Facebook_FieldValueOne").val() != '')
+            $("#facebook_field").show();
+        if ($("#Skype_FieldValueOne").val() != '')
+            $("#skype_field").show();
+        if ($("#Twitter_FieldValueOne").val() != '')
+            $("#twitter_field").show();
+        if ($("#Fax_FieldValueOne").val() != '')
+            $("#fax_field").show();
+        if ($("#Linkedin_FieldValueOne").val() != '')
+            $("#linkedin_field").show();
+        if ($("#Google_FieldValueOne").val() != '')
+            $("#google_field").show();
+
+    });
+
+
     function readImageURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
