@@ -84,28 +84,21 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
             }
         }
 
-        //
-        // GET: /Commons/AreaTime/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Commons/AreaTime/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public String DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                arService.DeleteAreaTime(id);
+                return "Success";
+                // return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return "Failed";
             }
+
+
         }
     }
 }

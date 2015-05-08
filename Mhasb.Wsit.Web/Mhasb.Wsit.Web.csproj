@@ -171,6 +171,8 @@
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
+    <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RoleVsActionsController.cs" />
@@ -566,6 +568,8 @@
     <Content Include="img\logo.png" />
     <Content Include="img\sign-up-bg.png" />
     <Content Include="img\slider-bg.jpg" />
+    <Content Include="mhasbStyle\css\bootstrap-datetimepicker.css" />
+    <Content Include="mhasbStyle\css\bootstrap-datetimepicker.min.css" />
     <Content Include="mhasbStyle\css\bootstrap-theme.css" />
     <Content Include="mhasbStyle\css\bootstrap-theme.min.css" />
     <Content Include="mhasbStyle\css\bootstrap.css" />
@@ -579,6 +583,8 @@
     <Content Include="mhasbStyle\img\favicon.png" />
     <Content Include="mhasbStyle\img\glyphicons-halflings-white.png" />
     <Content Include="mhasbStyle\img\glyphicons-halflings.png" />
+    <Content Include="mhasbStyle\js\bootstrap-datepicker.js" />
+    <Content Include="mhasbStyle\js\bootstrap-datetimepicker.min.js" />
     <Content Include="mhasbStyle\js\bootstrap.min.js" />
     <Content Include="mhasbStyle\js\html5shiv.js" />
     <Content Include="mhasbStyle\js\jquery.min.js" />
@@ -679,9 +685,15 @@
     <Content Include="Areas\Commons\Views\Language\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\Language\Index.cshtml" />
     <Content Include="Areas\Commons\Views\web.config" />
+
     <Content Include="Areas\OrganizationManagement\Views\Company\AddProfile.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\EditProfile.cshtml" />
+
+    <Content Include="Areas\TaskManagement\Views\web.config" />
+    <Content Include="Areas\TaskManagement\Views\Shared\_mhasbLayout.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\Index.cshtml" />
+
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -764,6 +776,7 @@
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
+    <Folder Include="Areas\TaskManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />
     <Folder Include="AxureStyles\images\cost_centers_settings\" />
     <Folder Include="AxureStyles\images\credit_voucher\" />

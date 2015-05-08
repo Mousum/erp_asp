@@ -70,6 +70,10 @@
     <Compile Include="Organizations\ICompanyService.cs" />
     <Compile Include="Organizations\IEmployeeProfile.cs" />
     <Compile Include="Organizations\IEmployeeService.cs" />
+    <Compile Include="Organizations\IProjectService.cs" />
+    <Compile Include="Organizations\ITaskManagerService.cs" />
+    <Compile Include="Organizations\ProjectService.cs" />
+    <Compile Include="Organizations\TaskManagerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\ActionListService.cs" />
     <Compile Include="Users\IActionListService.cs" />

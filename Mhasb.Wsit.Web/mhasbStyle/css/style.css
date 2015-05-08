@@ -398,6 +398,7 @@ font-size: 20px;
     width: 100%;
     background: #484C58;
 }
+
 .foot-list, .foot-list-address{
     margin-top: 20px;  
     margin-bottom: 20px;
@@ -460,4 +461,20 @@ font-size: 20px;
 .bokkor {
     color: #ccc;
 }
+
+
+.field-validation-error {
+    color: #b94a48;
+}
+
+.link {
+    color: #EFF3F5;
+    text-decoration: none;
+}
+
+    .link a:hover {
+        color: #EFF3F5;
+        text-decoration: none;
+    }
+
 /*Footer styles*/

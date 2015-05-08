@@ -13,9 +13,10 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
+    <p class="btn btn-success link">
+        @Html.ActionLink("Create New", "Create", new { area = "commons" }, new { @class = "link" })
     </p>
+    <div id="alert"></div>
     <table class="table">
         <tr>
             <th>
@@ -37,14 +38,64 @@
                         @Html.DisplayFor(modelItem => item.IndustryName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <div class="btn btn-success link">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" })
+                        </div>
+                        <div class="btn btn-info link">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link" })
+                        </div>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
+                            Delete
+                        </button>
+                        @*<a href="javascript:void(0)"  class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1" data-id="@item.Id">Delete</a>*@
+                        <div class="modal fade" id="pop-up-@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header cstm-pop-up-header">
+                                        <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title sign-up-title" id="myModalLabel">Delete Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                                            Are you sure you want to proceed?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="button" data-id="@item.Id" class="btn btn-primary confirmDelete">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                 </tr>
             }
         }
 
     </table>
+    <script>
+        $(".confirmDelete").click(function () {
+            var baseUrl = '@Url.Content("~/")';
+            var data = { id: $(this).attr("data-id") }
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "Commons/Industry/Delete",
+                data: data,
+                success: function (data) {
+                    if (data == "Success") {
+                        $('.close').trigger('click');
+                        $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
+                        setTimeout(function () {
+                            window.location.replace(baseUrl + "Commons/Industry");//will redirect to your blog page (an ex: blog.html)
+                        }, 2000);
+
+                    }
+                }
+            });
+        })
+    </script>
+
 </body>
 </html>
