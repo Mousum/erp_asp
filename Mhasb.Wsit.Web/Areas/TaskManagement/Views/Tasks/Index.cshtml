@@ -226,15 +226,14 @@
                     data: data,
                     success: function (data) {
                         if (data == "Success") {
-                            $("#prjName").val() = "";
-                            $("#mId").val() = "";
-                            $("#start").val() = "";
-                            $("#finish").val() = "";
                             $('.close').trigger('click');
                             $("#alert").html(" <b class='alert-success'>Project Successfully Added!Loading New Data...</b>");
                             setTimeout(function () {
-                                window.location.replace(baseUrl + "TaskManagement/Tasks/");//will redirect to your blog page (an ex: blog.html)
+                                window.location.replace(baseUrl + "TaskManagement/Tasks/");
                             }, 3000);
+                        }
+                        else {
+                            alert(data);
                         }
                     }
                 });
