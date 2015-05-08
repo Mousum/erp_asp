@@ -306,8 +306,18 @@ body {
     bottom: 0px;
     left: 0px;
 }
+
 .field-validation-error {
- color:#b94a48;  
+    color: #b94a48;
 }
 
+.link {
+    color: #EFF3F5;
+    text-decoration: none;
+}
+
+    .link a:hover {
+        color: #EFF3F5;
+        text-decoration: none;
+    }
 /*Footer styles*/

@@ -13,8 +13,8 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
+    <p class="btn btn-success link">
+        @Html.ActionLink("Create New", "Create", new { area = "commons" }, new { @class = "link" })
     </p>
     <div id="alert"></div>
     <table class="table">
@@ -38,8 +38,12 @@
                         @Html.DisplayFor(modelItem => item.IndustryName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        <div class="btn btn-success link">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" })
+                        </div>
+                        <div class="btn btn-info link">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link" })
+                        </div>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
                             Delete
                         </button>
@@ -72,25 +76,25 @@
 
     </table>
     <script>
-    $(".confirmDelete").click(function () {
-        var baseUrl = '@Url.Content("~/")';
-        var data = { id: $(this).attr("data-id") }
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "Commons/Industry/Delete",
-            data: data,
-            success: function (data) {
-                if (data == "Success") {
-                    $('.close').trigger('click');
-                    $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
-                    setTimeout(function () {
-                        window.location.replace(baseUrl + "Commons/Industry");//will redirect to your blog page (an ex: blog.html)
-                    }, 2000);
-                    
+        $(".confirmDelete").click(function () {
+            var baseUrl = '@Url.Content("~/")';
+            var data = { id: $(this).attr("data-id") }
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "Commons/Industry/Delete",
+                data: data,
+                success: function (data) {
+                    if (data == "Success") {
+                        $('.close').trigger('click');
+                        $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
+                        setTimeout(function () {
+                            window.location.replace(baseUrl + "Commons/Industry");//will redirect to your blog page (an ex: blog.html)
+                        }, 2000);
+
+                    }
                 }
-            }
-        });
-    })
+            });
+        })
     </script>
 
 </body>
