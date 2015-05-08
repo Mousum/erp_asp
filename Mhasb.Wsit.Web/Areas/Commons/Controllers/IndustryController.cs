@@ -75,28 +75,18 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
             }
         }
 
-        //
-        // GET: /Commons/Industry/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var model = iService.GetSingleIndustry(id);
-            return View(model);
-        }
-
-        //
-        // POST: /Commons/Industry/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public String DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                iService.DeleteIndustry(id);
+                return "Success";
+                // return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return "Failed";
             }
         }
     }

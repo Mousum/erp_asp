@@ -16,9 +16,7 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1">
-        Add New Project
-    </button>
+    <div id="alert"></div>
     <table class="table">
         <tr>
             <th>
@@ -78,14 +76,21 @@
         $(".confirmDelete").click(function () {
             var baseUrl = '@Url.Content("~/")';
             var data = { id: $(this).attr("data-id") }
-           
             $.ajax({
                 type: "POST",
                 url: baseUrl + "Commons/Language/Delete",
                 data: data,
-                datatype: "html",
                 success: function (data) {
-                 window.location(@Url.Content("~/Commons/Language/"))
+                    if (data == "Success")
+                    {
+
+                        $('.close').trigger('click');
+                        $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
+                        setTimeout(function () {
+                            window.location.replace(baseUrl + "Commons/Language/");//will redirect to your blog page (an ex: blog.html)
+                        }, 2000);
+
+                    }
                 }
             });
         })
