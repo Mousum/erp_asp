@@ -22,7 +22,7 @@ namespace Mhasb.Domain.Organizations
        public virtual Employee Employees { get; set; }
        public virtual ICollection<TaskManager> TaskManagers { get; set; }
       
-       public long Id { get; set; }
+       public long Id { get; set; }   
 
        public ObjectState State { get; set; }
     }
