@@ -31,20 +31,25 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
             /* This Part Will Be Omitted*/
             var emp = eService.GetEmpByUserId(ManagerId);
              /*End*/
-            
-            var newProj = new Project();
-            newProj.ProjectName = ProjectName;
-            newProj.ManagerId =emp.Id;
-            newProj.ProjectDate = DateTime.Now;
-            newProj.StartingDate = Convert.ToDateTime(StartingDate);
-            newProj.FinishingDate = Convert.ToDateTime(FinishingDate);
-            if (pService.CreateProject(newProj))
-            {
-                return "Success";
+            if (emp != null) {
+                var newProj = new Project();
+                newProj.ProjectName = ProjectName;
+                newProj.ManagerId = emp.Id;
+                newProj.ProjectDate = DateTime.Now;
+                newProj.StartingDate = Convert.ToDateTime(StartingDate);
+                newProj.FinishingDate = Convert.ToDateTime(FinishingDate);
+                if (pService.CreateProject(newProj))
+                {
+                    return "Success";
+                }
+                else {
+                    return "Failed";
+                }
             }
+            
             else
             {
-                return "Failed";
+                return "User IS not an employee";
             }
 
         }
