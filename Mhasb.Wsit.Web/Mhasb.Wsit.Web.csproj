@@ -160,6 +160,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Commons\CommonsAreaRegistration.cs" />
+    <Compile Include="Areas\Commons\Controllers\AreaTimeController.cs" />
+    <Compile Include="Areas\Commons\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Commons\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Commons\Controllers\LanguageController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -656,7 +661,24 @@
     <Content Include="Areas\NotificationManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\CompanyRegistration.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\InvitationConfirm.cshtml" />
-    <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Delete.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\web.config" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -735,6 +757,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Commons\Models\" />
+    <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />

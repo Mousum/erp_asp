@@ -68,6 +68,8 @@
     <Compile Include="Mapping\Commons\ContactDetailMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeProfileMapping.cs" />
+    <Compile Include="Mapping\Organizations\ProjectMapping.cs" />
+    <Compile Include="Mapping\Organizations\TaskManageMapping.cs" />
     <Compile Include="Mapping\Users\ActionListMapping.cs" />
     <Compile Include="Mapping\Users\RoleMapping.cs" />
     <Compile Include="Mapping\Users\RoleVsActionMapping.cs" />
