@@ -29,7 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly IContactDetail iCD = new ContactDetailService();
         private readonly IUserService uService = new UserService();
 
-        [AllowAnonymous]
+        
         public ActionResult Create()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -41,7 +41,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        
         [HttpPost]
         public ActionResult Create(EmployeeProfileCustom employeeProfileCustom)
         {

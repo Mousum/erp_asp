@@ -46,6 +46,9 @@ namespace Mhasb.Domain.Organizations
         [StringLength(1000)]
         public string Address { get; set; }
 
+        [StringLength(200)]
+        public string ImageLocation { get; set; }
+
         public int Location { get; set; }
 
         //[StringLength(50)]
