@@ -17,7 +17,7 @@ namespace Mhasb.Services.Organizations
 
         TaskManager GetTaskByEmpId(long empId);
 
-        TaskManager GetTaskByProjectId(long projectId);
+        List<TaskManager> GetTaskByProjectId(long projectId);
         List<TaskManager> GetAllTask();
     }
 }

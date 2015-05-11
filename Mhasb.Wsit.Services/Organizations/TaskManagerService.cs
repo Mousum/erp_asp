@@ -82,7 +82,7 @@ namespace Mhasb.Services.Organizations
             }
         }
 
-        public TaskManager GetTaskByProjectId(long projectId)
+        public List<TaskManager> GetTaskByProjectId(long projectId)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Mhasb.Services.Organizations
                     .Include(c => c.Employees)
                     .Include(c => c.Projects)
                     .Filter(c => c.ProjectId == projectId)
-                    .Get().SingleOrDefault();
+                    .Get().ToList();
                 return taskObj;
             }
             catch (Exception ex)

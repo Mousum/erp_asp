@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Mhasb.Domain.Organizations.TaskManager>
+
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-2">Add New Task</button>
+        @Html.ActionLink("See All Project", "Index", "Tasks", new { area = "TaskManagement" }, new { @style= "float:right;text-decoration:none"})
+        @if (!Model.Any())
+        {
+            <div class=" alert alert-info alert-dismissable"  style="float:inherit;"> There Are No Tasks Under The Project</div>
+
+        }
+        else
+        {
+            <table class="table table-bordered table-hover table-condensed data-table">
+                <thead>
+                    <tr class="table-header">
+                        <th>#</th>
+                        <th>Task To</th>
+                        <th>Task Title</th>
+                        <th>For Project </th>
+                        <th>Task Date</th>
+                        <th>Starting Date</th>
+                        <th>Finishing Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr class="danger">
+                        <td>@item.Id</td>
+                        <td>@item.TaskTo</td>@*@item.Employees.Users.FirstName @item.Employees.Users.LastName*@
+                        <td>@item.Tite</td>
+                        <td>@item.Projects.ProjectName</td>
+                        <td>@item.TaskDate</td>
+                        <td>@item.StartingDate</td>
+                        <td>@item.FinishingDate</td>
+                        <td>@item.Status</td>
+                    </tr>
+                   }
+                </tbody>
+            </table>
+        }
+        <input type="hidden" id="projeId" value="@ViewBag.ProjectId"/>
+    </div>
+</div>

@@ -92,14 +92,14 @@ namespace Mhasb.Services.Organizations
         }
 
 
-        public Employee GetEmpByCompanyId(int CompanyId)
+        public List<Employee> GetEmpByCompanyId(int CompanyId)
         {
             try {
                 var empObj = empRep.GetOperation()
                     .Include(c => c.Users)
                     .Include(c => c.Companies)
                     .Filter(c => c.Id == CompanyId)
-                    .Get().SingleOrDefault();
+                    .Get().ToList();
                 return empObj;
                    
             }catch(Exception ex){

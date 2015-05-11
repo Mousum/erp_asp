@@ -20,6 +20,7 @@ namespace Mhasb.DAL.Mapping.Organizations
 
             // proprty
             this.Property(p=>p.ManagerId).HasColumnName("managerid");
+            this.Property(p => p.CompanyId).HasColumnName("companyid");
             this.Property(p => p.ProjectName).HasMaxLength(100).IsRequired().HasColumnName("project_name");
             this.Property(p => p.ProjectDate).HasColumnName("project_date");
             this.Property(p => p.StartingDate).HasColumnName("starting_date");
