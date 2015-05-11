@@ -27,5 +27,43 @@ namespace Mhasb.Services.Organizations
             }
 
         }
+
+        public CompanyDocument GetCompanyDocumentById(int id) 
+        {
+            try
+            {
+                //company.State = ObjectState.Unchanged;
+                var conObj = companyRep.GetOperation()
+                                        .Filter(c => c.Id == id)
+                                        .Get().SingleOrDefault();
+
+                //companyRep.GetSingleObject(companyId);
+                return conObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public bool DeleteCompanyDocument(int id)
+        {
+            try
+            {
+                var cd = GetCompanyDocumentById(id);
+                cd.State = ObjectState.Deleted;
+                companyRep.DeleteOperation(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
+
+
     }
 }

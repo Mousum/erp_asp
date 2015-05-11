@@ -1,0 +1,216 @@
+﻿@model Mhasb.Domain.Organizations.Company
+
+@{
+    ViewBag.Title = "update";
+}
+
+<h2>update</h2>
+
+
+@using (Html.BeginForm("Update", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Users.Id, new { Value = Model.Users.Id })
+    @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
+    @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
+    
+    <div class="form-horizontal">
+        <h4>Company</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TradingName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TradingName)
+                @Html.ValidationMessageFor(model => model.TradingName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LegalName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LegalName)
+                @Html.ValidationMessageFor(model => model.LegalName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayName)
+                @Html.ValidationMessageFor(model => model.DisplayName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IndustryId, "IndustryId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("IndustryId", String.Empty)*@
+                @Html.DropDownList("IndustryId", ViewBag.IndustryList as SelectList, new { @class = "form-control", style = "width:auto;" })
+                @Html.ValidationMessageFor(model => model.IndustryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryId, "CountryId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, new { @class = "form-control", style = "width:auto;" })
+                @*@Html.DropDownList("CountryId", String.Empty)*@
+                @Html.ValidationMessageFor(model => model.CountryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LanguageId, "LanguageId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("LanguageId", ViewBag.LanguageList as SelectList, new { @class = "form-control", style = "width: auto;" })
+                @*@Html.DropDownList("LanguageId", String.Empty)*@
+                @Html.ValidationMessageFor(model => model.LanguageId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tel, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tel)
+                @Html.ValidationMessageFor(model => model.Tel)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fax, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fax)
+                @Html.ValidationMessageFor(model => model.Fax)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.P_O_Box, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.P_O_Box)
+                @Html.ValidationMessageFor(model => model.P_O_Box)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location)
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Website, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Website)
+                @Html.ValidationMessageFor(model => model.Website)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LegalEntityId, "LegalEntityId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("LegalEntityId", ViewBag.LegalEntityList as SelectList, new { @class = "form-control", style = "width: 60%;" })
+                @*@Html.DropDownList("LegalEntityId", String.Empty)*@
+                @Html.ValidationMessageFor(model => model.LegalEntityId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimezoneId, "TimezoneId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TimezoneId", ViewBag.TimeZoneList as SelectList, new { @class = "form-control", style = "width: 60%;" })
+                @*@Html.DropDownList("TimezoneId", String.Empty)*@
+                @Html.ValidationMessageFor(model => model.TimezoneId)
+            </div>
+        </div>
+
+        
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LogoLocation, "Logo", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <input name="logoImage" type="file" id="logoImage" />
+            @Html.ValidationMessageFor(model => model.LogoLocation)
+            <img id="logo_target" src="@Url.Content("~/" + Model.LogoLocation)" alt="Logo" width="120" />
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SealLocation, "Seal", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <input name="sealImage" id="sealImage" type="file" />
+            @Html.ValidationMessageFor(model => model.SealLocation)
+            <img id="seal_target" src="@Url.Content("~/" + Model.SealLocation)" alt="Seal" width="120" />
+
+        </div>
+
+        <div class="form-group" id="documentDiv">
+            @Html.LabelFor(model => model.Documents, "Add Document", htmlAttributes: new { @class = "control-label col-md-2" })
+            <input name="documentLocation[]" type="file" multiple />
+
+            @*@Html.ValidationMessageFor(model => model.DocumentLocation)*@
+            @{int i = 1;}
+            @foreach (var item in Model.Documents)
+{
+    <div id="Document_@item.Id">
+        <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">
+            Document @i
+            @{i++;}
+            @*@Html.DisplayFor(Model.Documents)*@
+        </a>
+        <button type="button" class="CompanyDocumentList" cdid="@item.Id">X</button>
+    </div>
+}
+             
+
+        </div>
+        <button id="addDoc" type="button">Add More</button>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+<script>
+    $(".CompanyDocumentList").click(function () {
+        //alert($(this).attr("CDId"));
+        //$("#Document_" + $(this).attr("CDId")).hide();
+        var doc=$("#Document_" + $(this).attr("CDId"));
+        $.ajax({
+            url: "/OrganizationManagement/Company/deleteCompanyDocument/" + $(this).attr("CDId"),
+            //data:"id="+$(this).attr("CDId"),
+            success: function (result) {
+                doc.hide();
+                alert(result);
+            }
+        });
+    });
+</script>

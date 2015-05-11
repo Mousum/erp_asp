@@ -11,6 +11,7 @@ namespace Mhasb.Services.Commons
     {
         bool AddContactDetail(ContactDetail cd);
         bool UpdateContactDetail(ContactDetail contactDetail);
+        bool DeleteContactDetails(long id);
         ContactDetail GetSingleContactDetailById(long id);
 
     }

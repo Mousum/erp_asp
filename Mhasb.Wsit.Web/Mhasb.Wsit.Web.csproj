@@ -710,8 +710,7 @@
     <Content Include="Areas\TaskManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\_taskList.cshtml" />
-    <Content Include="Areas\TaskManagement\Views\Tasks\_updateProject.cshtml" />
-    <Content Include="Areas\TaskManagement\Views\Tasks\_updateTask.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\update.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

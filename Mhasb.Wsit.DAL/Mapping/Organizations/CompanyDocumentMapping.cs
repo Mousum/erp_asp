@@ -21,7 +21,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             
             //Relations
             this.HasRequired(c=>c.companies)
-                        .WithMany()
+                        .WithMany(c=>c.Documents)
                         .HasForeignKey(cd => cd.CompanyId);
 
          }

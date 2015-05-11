@@ -64,5 +64,22 @@ namespace Mhasb.Services.Commons
             }
         }
 
+        public bool DeleteContactDetails(long id)
+        {
+            try
+            {
+                var contactDetail = GetSingleContactDetailById(id);
+                contactDetail.State = ObjectState.Deleted;
+                //contactRep.DeleteOperation(contactDetail);
+                contactDetail.State = ObjectState.Unchanged;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+        }
+
     }
 }

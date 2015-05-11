@@ -136,6 +136,152 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         }
 
 
+
+        public ActionResult update()
+        {
+            int id = 3;
+
+            
+            var company=iCompany.GetSingleCompany(id);
+
+
+
+
+            ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
+            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+            ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
+            ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+            ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
+
+            return View("update",company);
+        }
+
+        [HttpPost]
+        public ActionResult Update(Company company )
+        {
+            HttpPostedFileBase logo = Request.Files["logoImage"];
+            HttpPostedFileBase seal = Request.Files["sealImage"];
+            //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
+            if (logo.ContentLength > 0)
+            {
+                string logoName = company.LogoLocation.Split('/').Last();
+                string logoLocation = company.LogoLocation;
+                logoLocation = Path.GetDirectoryName(logoLocation);// logoLocation.TrimEnd('\\');
+                //logoLocation = logoLocation.Remove(logoLocation.LastIndexOf('\\') + 1);
+                logoLocation = Server.MapPath("~/" +logoLocation+"/");
+                string tempPath = Server.MapPath("~/Uploads/Temp");
+                
+                if (System.IO.File.Exists(logoLocation + logoName))
+                {
+                    if (!Directory.Exists(tempPath))
+                    {
+                        Directory.CreateDirectory(tempPath);
+                    }
+                    System.IO.File.Move(logoLocation + logoName, tempPath + logoName);
+                }
+                
+                if (fileUpload(logo, logoName, logoLocation)) 
+                {
+                    if (System.IO.File.Exists(tempPath+logoName))
+                    {
+                        System.IO.File.Delete(tempPath+logoName);
+                    }
+                }
+                else
+                {
+                    System.IO.File.Move( tempPath + logoName, logoLocation + logoName);
+                    return Content("Problem in logo Replacing");
+                }
+            }
+
+            if (seal.ContentLength > 0)
+            {
+                string sealName = company.SealLocation.Split('/').Last();
+                string sealLocation = company.SealLocation;
+                sealLocation = Path.GetDirectoryName(sealLocation); ;
+                sealLocation = Server.MapPath("~/" + sealLocation+"/");
+                string tempPath = Server.MapPath("~/Uploads/Temp");
+                if (!Directory.Exists(tempPath))
+                {
+                    Directory.CreateDirectory(tempPath);
+                }
+
+                if (System.IO.File.Exists(sealLocation + sealName))
+                {
+                    System.IO.File.Move(sealLocation + sealName, tempPath + sealName);
+                }
+                
+                if (fileUpload(seal, sealName, sealLocation))
+                {
+                    if (System.IO.File.Exists(tempPath + sealName))
+                    {
+                        System.IO.File.Delete(tempPath + sealName);
+                    }
+                }
+                else
+                {
+                    System.IO.File.Move(tempPath + sealName, sealLocation + sealName);
+                    return Content("Problem in Seal Replacing");
+                }
+            }
+
+            
+            String msg;
+            string documentName;
+            string documentLocation;
+
+            try
+            {
+                if (iCompany.UpdateCompany(company))
+                {
+                    msg = "Success";
+
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        if ("documentLocation[]" == Request.Files.GetKey(i))
+                        {
+                            documentName = "Document_" + company.TradingName.Replace(" ", "_") +  "_" + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                            documentLocation = Server.MapPath("~/Uploads/" + company.TradingName.Replace(" ", "_") + "/");
+                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            {
+                                CompanyDocument cd = new CompanyDocument();
+                                cd.CompanyId = company.Id;
+                                cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
+                                iCompanyDocument.AddCompanyDocument(cd);
+                            }
+                        }
+
+                    }
+                }
+                else
+                    msg = "Registration Failed";
+
+            }
+            catch (Exception)
+            {
+                msg = "Failed";
+            }
+
+            ViewBag.msg = msg;
+
+            return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+        }
+
+        public string deleteCompanyDocument(int id)
+        {
+            var companyDocument = iCompanyDocument.GetCompanyDocumentById(id);
+            if (iCompanyDocument.DeleteCompanyDocument(id))
+            {
+                
+                string prevFile= Request.MapPath("~/" + companyDocument.DocumentLocation);
+                if (System.IO.File.Exists(prevFile))
+                {
+                    System.IO.File.Delete(prevFile);
+                }
+                return "Successfull;y deleted!!!";
+            }
+            return "Failed";
+        }
       
         public ActionResult AddProfile()
         {
