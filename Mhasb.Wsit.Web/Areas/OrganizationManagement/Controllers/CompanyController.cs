@@ -1,8 +1,10 @@
-﻿using Mhasb.Domain.Organizations;
+﻿using Mhasb.Domain.Commons;
+using Mhasb.Domain.Organizations;
 using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.CustomModel.Organizations;
 using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly ILegalEntityService iLegalEntity = new LegalEntityService();
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
         private readonly IUserService uService = new UserService();
+
+
+        private readonly ICompanyProfile iCP = new CompanyProfileService();
+        private readonly IContactDetail iCD = new ContactDetailService();
 
         //
         // GET: /OrganizationManagement/Company/
@@ -57,7 +63,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             
         }
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Registraion(Company company)
         {
             
@@ -130,6 +135,166 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             return RedirectToAction("MyMhasb", "Users", new { Area="UserManagement"});
         }
 
+
+      
+        public ActionResult AddProfile()
+        {
+            CompanyProfileCustom cpc = iCP.GetCompanyProfile(2);
+            if (cpc != null)
+                return View("EditProfile", cpc);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddProfile(CompanyProfileCustom companyProfileCustom)
+        {
+
+
+            try
+            {
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                HttpPostedFileBase profilePic = Request.Files["profile_pic"];
+                //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
+
+                string profilePicName = "Company_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                string profilePicLocation = Server.MapPath("~/Uploads/CompanyProfiles/");
+                if (fileUpload(profilePic, profilePicName, profilePicLocation))
+                {
+                    CompanyProfile cp = new CompanyProfile();
+                    cp = companyProfileCustom.companyProfile;
+                    cp.UserId = user.Id;
+
+                    /// Static CompanyId Will dynamic next day 
+                    var myCompany=iCompany.GetSingleCompany(2);
+                    cp.Companies = new Company { Id=myCompany.Id};
+
+
+
+                    cp.ImageLocation = "Uploads/CompanyProfiles/" + profilePicName;
+                    if (iCP.AddCompanyProfile(cp))
+                    {
+                        try
+                        {
+                            ContactDetail phone = companyProfileCustom.Phone;
+                            phone.CompanyProfileId = cp.Id;
+
+                            ContactDetail fax = companyProfileCustom.Fax;
+                            fax.CompanyProfileId = cp.Id;
+
+                            ContactDetail facebook = companyProfileCustom.Facebook;
+                            facebook.CompanyProfileId = cp.Id;
+
+                            ContactDetail google = companyProfileCustom.Google;
+                            google.CompanyProfileId = cp.Id;
+
+                            ContactDetail linkedin = companyProfileCustom.LinkedIn;
+                            linkedin.CompanyProfileId = cp.Id;
+
+                            ContactDetail skype = companyProfileCustom.Skype;
+                            skype.CompanyProfileId = cp.Id;
+
+                            ContactDetail twitter = companyProfileCustom.Twitter;
+                            twitter.CompanyProfileId = cp.Id;
+
+                            ContactDetail website = companyProfileCustom.Website;
+                            website.CompanyProfileId = cp.Id;
+
+                            iCD.AddContactDetail(phone);
+                            iCD.AddContactDetail(fax);
+                            iCD.AddContactDetail(website);
+                            iCD.AddContactDetail(facebook);
+                            iCD.AddContactDetail(twitter);
+                            iCD.AddContactDetail(google);
+                            iCD.AddContactDetail(linkedin);
+                            iCD.AddContactDetail(skype);
+                        }
+                        catch (Exception e)
+                        {
+                            var tt = e;
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
+            return View();
+        }
+
+
+
+        public ActionResult UpdateProfile(CompanyProfileCustom companyProfileCustom) 
+        {
+            try
+            {
+                CompanyProfile cp = new CompanyProfile();
+                cp = companyProfileCustom.companyProfile;
+                HttpPostedFileBase profilePic = Request.Files["profile_pic"];
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (profilePic.ContentLength > 0)
+                {
+                    string prevImage = Request.MapPath("~/" + cp.ImageLocation);
+
+                    string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                    string profilePicLocation = Server.MapPath("~/Uploads/CompanyProfiles/");
+                    if (fileUpload(profilePic, profilePicName, profilePicLocation))
+                    {
+                        cp.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
+                        if (System.IO.File.Exists(prevImage))
+                        {
+                            System.IO.File.Delete(prevImage);
+                        }
+                    }
+                    else
+                    {
+                        return Content("Photo Upload Unsuccessfull!!!...");
+                    }
+
+
+                }
+
+                if (iCP.UpdateCompanyProfile(cp))
+                {
+                    try
+                    {
+                        iCD.UpdateContactDetail(companyProfileCustom.Phone);
+                        iCD.UpdateContactDetail(companyProfileCustom.Fax);
+                        iCD.UpdateContactDetail(companyProfileCustom.Website);
+                        iCD.UpdateContactDetail(companyProfileCustom.Facebook);
+                        iCD.UpdateContactDetail(companyProfileCustom.Twitter);
+                        iCD.UpdateContactDetail(companyProfileCustom.Google);
+                        iCD.UpdateContactDetail(companyProfileCustom.LinkedIn);
+                        iCD.UpdateContactDetail(companyProfileCustom.Skype);
+                    }
+                    catch (Exception ex)
+                    {
+                        return Content("One or more Contact Field Updating Unsuccessfull!!!!");
+                    }
+
+                }
+                else
+                {
+                    return Content("Profile Updating cannot done successfully!!!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("Failed");
+            }
+            return Content("Success");
+        }
+
+
+
+        
+        
         public bool imageUpload(HttpPostedFileBase file)
         {
             try
@@ -209,5 +374,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             }
         }
 
-	}
+	
+    
+    
+    }
 }

@@ -84,28 +84,21 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 return View();
             }
         }
-
-        //
-        // GET: /Commons/Language/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Commons/Language/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+         public String DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-              return RedirectToAction("Index");
+                lService.DeleteLanguage(id);
+                return "Success";
+               // return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return "Failed";
             }
+            
+           
         }
     }
 }

@@ -32,13 +32,15 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         {
 
             var roles = rService.GetAllRoles();
-            var Companies = iCompany.GetAllCompanies();
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            List<Company> myCompanyList = iCompany.GetAllCompanies()
+                                                   .Where(c => c.Users.Id == user.Id).ToList();
             var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
                                     .Cast<EmpTypeEnum>()
                                     .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
                                     .ToList();
             ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
-            ViewBag.Companies = new SelectList(Companies, "Id", "DisplayName");
+            ViewBag.Companies = new SelectList(myCompanyList, "Id", "DisplayName");
             ViewBag.roles = new SelectList(roles, "Id", "RoleName");
 
 

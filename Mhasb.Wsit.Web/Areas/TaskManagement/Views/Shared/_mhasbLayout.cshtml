@@ -15,8 +15,6 @@
 
     <link href="~/mhasbStyle/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/mhasbStyle/css/style.css" rel="stylesheet">
-   <link href="~/mhasbStyle/css/bootstrap-datetimepicker.css" rel="stylesheet">
-    <link href="~/mhasbStyle/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -32,10 +30,6 @@
     <script type="text/javascript" src="~/mhasbStyle/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/mhasbStyle/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/mhasbStyle/js/scripts.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/bootstrap-datetimepicker.min.js"></script>
-
-
 </head>
 
 <body>
@@ -52,29 +46,29 @@
                             <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dash Board</a>
                         </li>
                         @*<li>
-                            <a href="#">Human Resources</a>
-                        </li>
-                        <li>
-                            <a href="#">Banks</a>
-                        </li>
-                        <li>
-                            <a href="#">Treasury</a>
-                        </li>
-                        <li>
-                            <a href="#">Petty Cash</a>
-                        </li>
-                        <li>
-                            <a href="#">Fixed Assets</a>
-                        </li>
-                        <li>
-                            <a href="#">Purchasing</a>
-                        </li>
-                        <li>
-                            <a href="#">Warehouse</a>
-                        </li>
-                        <li>
-                            <a href="#">Sales</a>
-                        </li>*@
+                                <a href="#">Human Resources</a>
+                            </li>
+                            <li>
+                                <a href="#">Banks</a>
+                            </li>
+                            <li>
+                                <a href="#">Treasury</a>
+                            </li>
+                            <li>
+                                <a href="#">Petty Cash</a>
+                            </li>
+                            <li>
+                                <a href="#">Fixed Assets</a>
+                            </li>
+                            <li>
+                                <a href="#">Purchasing</a>
+                            </li>
+                            <li>
+                                <a href="#">Warehouse</a>
+                            </li>
+                            <li>
+                                <a href="#">Sales</a>
+                            </li>*@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle user-icon-pad" data-toggle="dropdown"><div class="user-small"></div><strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -96,11 +90,11 @@
             </nav>
         </div>
     </div>
-    <div class="container">
 
-       @RenderBody()
-        @Scripts.Render("~/bundles/jqueryval")
-    </div>
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jqueryval")
+
     <div class="row clearfix no-margin footer-fixed">
         <div class="col-md-3 colum bgcolor1">
             <h3 class="left">
@@ -113,6 +107,6 @@
             </h3>
         </div>
     </div>
-   
+
 </body>
 </html>

@@ -17,6 +17,7 @@ namespace Mhasb.DAL.Mapping.Organizations
 
             this.ToTable("org.company_profiles");
             // property
+            this.Property(cp => cp.ImageLocation).HasColumnName("imagelocation").HasMaxLength(200);
             this.Property(cp => cp.BusinessName).HasColumnName("business_name").HasMaxLength(100);
             this.Property(cp => cp.Vision).HasColumnName("vision").HasMaxLength(1000).IsOptional();
             

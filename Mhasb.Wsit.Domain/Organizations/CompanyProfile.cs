@@ -46,13 +46,16 @@ namespace Mhasb.Domain.Organizations
         [StringLength(1000)]
         public string Address { get; set; }
 
+        [StringLength(200)]
+        public string ImageLocation { get; set; }
+
         public int Location { get; set; }
 
-        [StringLength(50)]
-        public string Phone { get; set; }
+        //[StringLength(50)]
+        //public string Phone { get; set; }
 
-        [StringLength(50)]
-        public string Website { get; set; }
+        //[StringLength(50)]
+        //public string Website { get; set; }
 
         //[Required(ErrorMessage = "Email is required")]
         [StringLength(50)]
