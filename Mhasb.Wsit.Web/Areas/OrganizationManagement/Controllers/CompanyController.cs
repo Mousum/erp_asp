@@ -136,6 +136,26 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         }
 
 
+
+        public ActionResult update(int id)
+        {
+            id = 3;
+
+            var company=iCompany.GetSingleCompany(id);
+
+
+
+
+            ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
+            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+            ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
+            ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+            ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
+
+            return View("update",company);
+        }
+
+
       
         public ActionResult AddProfile()
         {
