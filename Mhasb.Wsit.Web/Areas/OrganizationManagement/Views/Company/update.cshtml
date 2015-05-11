@@ -7,9 +7,12 @@
 <h2>update</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Users.Id, new { Value = Model.Users.Id })
+    @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
+    @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
     
     <div class="form-horizontal">
         <h4>Company</h4>
@@ -162,12 +165,16 @@
             @*@Html.ValidationMessageFor(model => model.DocumentLocation)*@
             @{int i = 1;}
             @foreach (var item in Model.Documents)
-            {
-                <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">Document @i
-                    @{i++;}                    
-                    @*@Html.DisplayFor(Model.Documents)*@
-                </a> 
-            }
+{
+    <div id="Document_@item.Id">
+        <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">
+            Document @i
+            @{i++;}
+            @*@Html.DisplayFor(Model.Documents)*@
+        </a>
+        <button type="button" class="CompanyDocumentList" cdid="@item.Id">X</button>
+    </div>
+}
              
 
         </div>
@@ -191,3 +198,19 @@
 @*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }*@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+<script>
+    $(".CompanyDocumentList").click(function () {
+        //alert($(this).attr("CDId"));
+        //$("#Document_" + $(this).attr("CDId")).hide();
+        var doc=$("#Document_" + $(this).attr("CDId"));
+        $.ajax({
+            url: "/OrganizationManagement/Company/deleteCompanyDocument/" + $(this).attr("CDId"),
+            //data:"id="+$(this).attr("CDId"),
+            success: function (result) {
+                doc.hide();
+                alert(result);
+            }
+        });
+    });
+</script>

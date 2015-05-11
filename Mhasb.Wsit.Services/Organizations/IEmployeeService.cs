@@ -13,7 +13,7 @@ namespace Mhasb.Services.Organizations
            bool UpdateEmployee(Employee emp);
            bool DeleteEmployee(int empId);
            Employee GetEmpByUserId(int UserId);
-           Employee GetEmpByCompanyId(int CompanyId);
+           List<Employee> GetEmpByCompanyId(int CompanyId);
            Employee GetEmpByEmpId(int CompanyId);
 
            
