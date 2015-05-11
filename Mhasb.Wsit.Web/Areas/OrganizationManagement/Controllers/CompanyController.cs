@@ -139,7 +139,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
       
         public ActionResult AddProfile()
         {
-            CompanyProfileCustom cpc = iCP.GetCompanyProfile(3);
+            CompanyProfileCustom cpc = iCP.GetCompanyProfile(2);
             if (cpc != null)
                 return View("EditProfile", cpc);
             return View();
@@ -156,7 +156,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 HttpPostedFileBase profilePic = Request.Files["profile_pic"];
                 //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
-                string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                string profilePicName = "Company_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
                 string profilePicLocation = Server.MapPath("~/Uploads/CompanyProfiles/");
                 if (fileUpload(profilePic, profilePicName, profilePicLocation))
                 {
@@ -165,12 +165,12 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     cp.UserId = user.Id;
 
                     /// Static CompanyId Will dynamic next day 
-                    var myCompany=iCompany.GetSingleCompany(3);
+                    var myCompany=iCompany.GetSingleCompany(2);
                     cp.Companies = new Company { Id=myCompany.Id};
 
 
 
-                    cp.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
+                    cp.ImageLocation = "Uploads/CompanyProfiles/" + profilePicName;
                     if (iCP.AddCompanyProfile(cp))
                     {
                         try

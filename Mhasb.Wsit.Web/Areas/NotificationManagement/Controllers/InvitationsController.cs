@@ -123,22 +123,32 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
             {
-                if (uService.AddUser(user))
+                if (uService.GetSingleUserByEmail(user.Email) == null)
                 {
-                    var Invitation = inService.GetSingleInvitation(id);
-                    var emp = new Employee();
-                    emp.UserId = user.Id;
-                    emp.CompanyId = Invitation.CompanyId;
-                    if (eService.CreateEmployee(emp))
+                    if (uService.AddUser(user))
                     {
-                        CustomPrincipal.Login(user.Email, user.Password, false);
-                        return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-                    }
-                    else {
-                        return Content("Failed");
+                        var Invitation = inService.GetSingleInvitation(id);
+                        var emp = new Employee();
+                        emp.UserId = user.Id;
+                        emp.CompanyId = Invitation.CompanyId;
+                        if (eService.CreateEmployee(emp))
+                        {
+                            CustomPrincipal.Login(user.Email, user.Password, false);
+                            return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                        }
+                        else
+                        {
+                            return Content("Failed");
+                        }
                     }
                 }
-                return Content("Failed");
+                else
+                {
+                    ModelState.AddModelError("Msg", "Already Register");
+                    //return Content("Already Register");
+                    return View();
+
+                }
             }
 
 

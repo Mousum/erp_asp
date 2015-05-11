@@ -687,6 +687,26 @@
     <Content Include="Areas\Commons\Views\web.config" />
     <Content Include="Areas\OrganizationManagement\Views\Company\AddProfile.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
+
+    <Content Include="Areas\Commons\Views\AreaTime\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\AreaTime\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Delete.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\web.config" />
+
     <Content Include="Areas\OrganizationManagement\Views\Company\EditProfile.cshtml" />
     <Content Include="Areas\TaskManagement\Views\web.config" />
     <Content Include="Areas\TaskManagement\Views\Shared\_mhasbLayout.cshtml" />
