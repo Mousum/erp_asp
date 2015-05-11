@@ -25,6 +25,7 @@
                         <th>Starting Date</th>
                         <th>Finishing Date</th>
                         <th>Tasks Number</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +49,8 @@
                                 <td>@item.ProjectDate</td>
                                 <td>@item.StartingDate</td>
                                 <td>@item.FinishingDate</td>
-                                <td><a href="javascript:void(0)" class="task" data-id="@item.Id">@item.TaskNumber</a></td>
+                                <td><a href="javascript:void(0)" class="task" data-id="@item.Id">@item.TaskManagers.Count</a></td>
+                                <td><button class="btn update-btn" data-id="@item.Id">Update</button></td>
                             </tr>
                         }
                     }
@@ -224,7 +226,8 @@
             id = $(this).attr("data-id")
             $(".projectList").each(function () {
                 if($(this).attr("data-id")!=id){
-                    $(this).remove();
+                    // $(this).remove();
+                    $(this).fadeOut(500);
                 }
             })
 
@@ -238,12 +241,13 @@
                 data: data,
                 datatype: "html",
                 success: function (data) {
-                    $("#taskList").html(data);
+                    $("#taskList").html(data).fadeIn(500);
+                   
                 }
             });
         });
         $("#crTask").click(function () {
-            alert($("#projeId").val());
+           
             if ($("#empId").val() == "") {
                 $("#empId").focus();
                 $("#empId").css("border-color", "red");
@@ -282,6 +286,7 @@
                                     datatype: "html",
                                     success: function (data) {
                                         $("#taskList").html(data);
+                                        $("#alert").empty();
                                     }
                                 });
                             }, 3000);
@@ -294,6 +299,11 @@
             }
 
         });
+        $(".update-btn").click(function () {
+            var baseUrl = '@Url.Content("~/")';
+            var data = { id: $(this).attr("data-id") };
+        });
+       
     });
 
 
