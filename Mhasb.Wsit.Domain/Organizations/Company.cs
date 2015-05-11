@@ -41,7 +41,7 @@ namespace Mhasb.Domain.Organizations
 
         [StringLength(50)]
         public string Fax { get; set; }
-        public int P_O_Box { get; set; }
+        public int? P_O_Box { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [StringLength(50)]
