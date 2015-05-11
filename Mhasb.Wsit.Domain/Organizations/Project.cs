@@ -11,7 +11,7 @@ namespace Mhasb.Domain.Organizations
     {
        public string ProjectName { get; set; }
        public long ManagerId { get; set; }
-
+       public long CompanyId { get; set; }
        public DateTime ProjectDate { get; set; }
        public DateTime? StartingDate { get; set; }
        public DateTime? FinishingDate { get; set; }

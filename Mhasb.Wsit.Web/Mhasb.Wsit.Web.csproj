@@ -685,15 +685,13 @@
     <Content Include="Areas\Commons\Views\Language\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\Language\Index.cshtml" />
     <Content Include="Areas\Commons\Views\web.config" />
-
     <Content Include="Areas\OrganizationManagement\Views\Company\AddProfile.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\EditProfile.cshtml" />
-
     <Content Include="Areas\TaskManagement\Views\web.config" />
     <Content Include="Areas\TaskManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\Index.cshtml" />
-
+    <Content Include="Areas\TaskManagement\Views\Tasks\_taskList.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
