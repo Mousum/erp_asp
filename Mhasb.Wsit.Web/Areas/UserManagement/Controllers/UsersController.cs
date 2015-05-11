@@ -74,7 +74,6 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     return View();
                 }
                 
-                return Content("Failed");
             }
 
 

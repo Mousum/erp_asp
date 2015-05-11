@@ -10,5 +10,8 @@ namespace Mhasb.Services.Organizations
     public interface ICompanyDocument
     {
         bool AddCompanyDocument(CompanyDocument cd);
+        bool DeleteCompanyDocument(int id);
+        CompanyDocument GetCompanyDocumentById(int id);
+
     }
 }
