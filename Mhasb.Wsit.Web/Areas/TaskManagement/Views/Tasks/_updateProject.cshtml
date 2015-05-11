@@ -1,0 +1,53 @@
+﻿@model Mhasb.Domain.Organizations.Project
+
+<div class="row">
+    <div class="col-md-12">
+        <label>Project Name</label>
+      @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control",id="uPname" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 label-marg">
+        <label>Leader</label>
+        @Html.DropDownList("ManagerId", (SelectList)ViewBag.Employess, "--Select Leader--", htmlAttributes: new { @class = "form-control", id = "UpMId", required = "required" })
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <label>Starting Date</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker5'>
+                @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", id = "Upstart" })
+              
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 label-marg">
+        <label>Finish Date</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                @Html.TextBoxFor(m => m.FinishingDate, new { @class = "form-control", id = "Upfinish" })
+                
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Id, new { id="UprjId"})
+</div>
+<script>
+    $(document).ready(function () {
+        //   $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker5').datepicker({
+            format: 'dd/mm/yyyy'
+            });
+        $('#datetimepicker6').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+</script>

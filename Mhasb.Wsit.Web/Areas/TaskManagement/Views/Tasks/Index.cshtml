@@ -50,7 +50,7 @@
                                 <td>@item.StartingDate</td>
                                 <td>@item.FinishingDate</td>
                                 <td><a href="javascript:void(0)" class="task" data-id="@item.Id">@item.TaskManagers.Count</a></td>
-                                <td><button class="btn update-btn" data-id="@item.Id">Update</button></td>
+                                <td><button class="btn update-btn" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-3">Update</button></td>
                             </tr>
                         }
                     }
@@ -302,9 +302,80 @@
         $(".update-btn").click(function () {
             var baseUrl = '@Url.Content("~/")';
             var data = { id: $(this).attr("data-id") };
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "TaskManagement/Tasks/UpdateProject",
+                data: data,
+                datatype: "html",
+                success: function (data) {
+                    $("#projectDet").html(data);
+
+                }
+            });
         });
-       
+        $("#UpProj").click(function () {
+
+            if ($("#uPname").val() == "") {
+                $("#uPname").focus();
+                $("#uPname").css("border-color", "red");
+            }
+            else if ($("#UpMId").val() == "") {
+                $("#UpMId").focus();
+                $("#UpMId").css("border-color", "red");
+            }
+            else if ($("#Upstart").val() == "") {
+                $("#Upstart").focus();
+                $("#Upstart").css("border-color", "red");
+            }
+            else if ($("#Upfinish").val() == "") {
+                $("#Upfinish").focus();
+                $("#Upfinish").css("border-color", "red");
+            }
+            else {
+                var baseUrl = '@Url.Content("~/")';
+                var data = { id: $("#UprjId").val(), ProjectName: $("#uPname").val(), ManagerId: $("#UpMId").val(), StartingDate: $("#Upstart").val(), FinishingDate: $("#Upfinish").val() };
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "TaskManagement/Tasks/EditProject",
+                    data: data,
+                    success: function (data) {
+                        if (data == "Success") {
+                            $('.close').trigger('click');
+                            $("#alert").html(" <b class='alert-success'>Project Successfully Added!Loading New Data...</b>");
+                            setTimeout(function () {
+                                window.location.replace(baseUrl + "TaskManagement/Tasks/");
+                            }, 3000);
+                        }
+                        else {
+                            alert(data);
+                        }
+                    }
+                });
+            }
+
+
+        });
+      
     });
 
 
 </script>
+<!-- Pop Up Update Project-->
+<div class="modal fade" id="pop-up-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">Update Project</h4>
+            </div>
+            <div class="modal-body" id="projectDet">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="UpProj">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pop Up Update Project -->
