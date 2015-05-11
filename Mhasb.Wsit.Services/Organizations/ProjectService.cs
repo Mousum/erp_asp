@@ -77,6 +77,7 @@ namespace Mhasb.Services.Organizations
             try {
                 var proObj = proRep.GetOperation()
                     .Include(c => c.Employees)
+                    .Include(t=>t.TaskManagers)
                     .Get().ToList();
                 return proObj;
             }catch(Exception ex){
