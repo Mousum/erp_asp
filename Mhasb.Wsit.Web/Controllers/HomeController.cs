@@ -17,7 +17,8 @@ namespace Mhasb.Wsit.Web.Controllers
             if (HttpContext.User.Identity.IsAuthenticated)
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             var model = new Login();
-            return View(model);
+           // return View(model);
+            return View("index_new");
         }
 
         public ActionResult About()

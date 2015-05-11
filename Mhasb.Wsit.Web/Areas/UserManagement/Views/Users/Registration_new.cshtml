@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Areas/UserManagement/Views/Shared/_Signup-new.cshtml";
+}
+
+<div class="col-xs-10 col-sm-8 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-4">
+    <h1 class="text-center"><img src="~/img/logo.png" alt="logo"></h1>
+    <div class="panel account-wall">
+        <div class="panel-heading">
+            <h4 class="text-center">Please Sign Up</h4>
+        </div>
+        <div class="panel-body">
+            <form class="sign-up-form">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="fl terms">
+                    <label>
+                        <input type="checkbox"> I agree to the <a href="">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <input type="submit" value="Register" class="btn btn-info btn-block">
+            </form>
+        </div>
+    </div>
+</div>

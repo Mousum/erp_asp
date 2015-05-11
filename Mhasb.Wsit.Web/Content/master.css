@@ -41,20 +41,32 @@ header .container {
     padding-top: 100px;
     padding-bottom: 50px;
 }
-
+header .intro-text{
+    margin-bottom: 20px;
+}
 header .intro-text .name {
     display: block;
     text-transform: uppercase;
     font-family: 'Rambla', sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 700;
+    text-align: left;
+}
+.promo{
+    color: #FD6E6E;
+    font-size: 1.8em;
+}
+.smash{
+    font-size: 1.2em;
+    color: #F8F8F8;
+    font-weight: normal;
 }
 @media (min-width:768px) { 
     header .container {
         padding-top: 200px;
         padding-bottom: 100px;
     }
-    header .intro-text .name { font-size: 3.75em }
+    header .intro-text .name { font-size: 2.5em }
 }
 @media (min-width:768px) { 
     .navbar-fixed-top {
@@ -69,7 +81,7 @@ header .intro-text .name {
         -moz-transition: all .3s;
         transition: all .3s;
     }
-    .navbar-fixed-top.navbar-shrink { padding: 10px 0 }
+    .navbar-fixed-top.navbar-shrink { padding: 10px 0;background: rgba(0,0,0,0.8); }
     .navbar-fixed-top.navbar-shrink .navbar-brand { font-size: 1.5em }
 }
 .navbar {
@@ -107,7 +119,7 @@ section h2 {
 footer h3 { margin-bottom: 30px }
 footer .footer-above {
     padding-top: 50px;
-    background-color: #fff;
+    background-color: #fbfbfb;
     color: #474747;
 }
 footer .footer-col { margin-bottom: 50px }
@@ -158,20 +170,19 @@ footer .footer-below {
 
 /*main navbar*/
 
-.main-navbar,
-.navbar-inverse {
+.main-navbar{
     border: 0;
-    background: #fff;
+    background: rgba(0,0,0,0.4);
 }
-.main-navbar .navbar-brand { color: #40b5e2 }
+.main-navbar .navbar-brand { color: #fff;padding: 0px; }
 .main-navbar .navbar-brand:focus{color:#40b5e2 !important;} 
 .main-navbar .navbar-brand:hover { color: #40b5e2 }
 .main-navbar .navbar-nav > li > a {
-    color: #474747 !important;
+    color: #fff !important;
     text-transform: normal;
     transition: all .5s;
 }
-.main-navbar .navbar-nav > li > a:hover { color: #40b5e2 !important }
+.main-navbar .navbar-nav > li > a:hover { color: #FD6E6E !important }
 
 
 
@@ -181,26 +192,29 @@ footer .footer-below {
     color: #40B5E2;
 }
 .btn-block {
-    background: #40B5E2;
-    border: none;
+    background:transparent;
+    border: 1px solid #fff;
     padding: 10px 27px;
     transition: background .5s;
 }
 .btn-block:focus {
-    background: #40B5E2 !important;
+    background: #FD6E6E !important;
+    border-color: #FD6E6E;
+
 }
 .navbar-toggle {
     border: none !important;
     background: #cbcbcb !important;
 }
-.btn-block:hover { background: #22ADE3 }
-.form-signin label { color: #474747 !important }
+.btn-block:hover { background: #FD6E6E;border-color: #FD6E6E; }
+.form-signin label { color: #fff !important }
 
 /*sign up*/
 .form-signin {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
+    color: #fff;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox { margin-bottom: 10px }
@@ -216,6 +230,22 @@ footer .footer-below {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.sign-up-form .form-control{
+    background: rgba(0,0,0,0.7);
+    border-radius: 0px;
+    color: #fff;
+}
+.account-wall .panel-heading h4{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    color: #fff;
+}
+.sign-up-form label{
+    color: #fff !important;
+}
+.sign-up-form label a{
+    color: #FD6E6E;
+}
 .form-signin .form-control:focus { z-index: 2 }
 .form-signin input[type="text"] {
     margin-bottom: -1px;
@@ -229,16 +259,18 @@ footer .footer-below {
 }
 .account-wall {
     padding: 20px;
-    background-color: rgba(255,255,255, .8);
-    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 6px 15px #111;
+    border-top: 3px solid #FD6E6E;
 }
-.account-wall p { color: #474747 }
-.create-account { color: #40B5E2 }
+.account-wall p { color: #fff }
+.create-account { color: #FD6E6E }
 .login-title {
-    color: #40B5E2;
-    font-size: 22px;
+    color: #fff;
+    font-size: 2em;
     font-weight: 400;
     display: block;
+    margin-bottom: 30px;
 }
 .need-help { margin-top: 10px }
 .new-account {
@@ -246,8 +278,21 @@ footer .footer-below {
     margin-top: 10px;
 }
 .checkbox label,
-.form-signin input[type="text"] { font-family: "Rambla", sans-serif !important }
-
+.form-signin input[type="text"] { font-family: "Rambla", sans-serif !important; }
+.form-signin .form-control{
+    background: rgba(0,0,0,0.7);
+    border-radius: 0px;
+    color: #fff;
+}
+.form-signin .input-group-addon{
+    border: 0px;
+    border-radius: 0px;
+    background: #FD6E6E;
+    color: #fff !important;
+}
+.form-signin .input-group-addon i{
+    color: #fff;
+}
 
 .get-started {
     margin-top: 15px;
@@ -272,9 +317,10 @@ footer .footer-below {
 /*sign up page style*/
 
 .sign-up {
-    background: url(../img/sign-up-bg.png) center center;
+    background: url(../img/slider-bg.jpg) center center;
     background-size: cover;
     padding: 60px 0px;
+    min-height: 800px;
 }
 .centered-form{
 
@@ -286,8 +332,8 @@ footer .footer-below {
 }
 
 .centered-form .panel{
-    background: rgba(255, 255, 255, 0.7);
-    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+    /*    background: rgba(255, 255, 255, 0.7);
+        box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;*/
 }
 
 .fl {
@@ -315,7 +361,7 @@ footer .footer-below {
 .dashboard-nav,
 .navbar-inverse {
     border: 0;
-    background: #40b5e2;
+    background: #233140;
     position: relative;
 }
 .dashboard-nav .navbar-brand { color: #fff; padding: 11px 15px !important; }
@@ -323,12 +369,11 @@ footer .footer-below {
 .dashboard-nav .navbar-brand:hover { color: #fff }
 .dashboard-nav .navbar-nav > li > a {
     color: #fff;
-    background: #40b5e2;
+    background: #FD6E6E;
     text-transform: normal;
     transition: all .5s;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-right: 1px !important;
+    border-radius: 0px !important;
+    margin-right: 2px !important;
     padding: 10px 10px !important;
     margin-top: 20px;
 }
@@ -336,28 +381,27 @@ footer .footer-below {
     width: 85%;
 }
 .dashboard-nav .navbar-nav {
-    padding-left: 20px;
+    padding-left: 3px;
 }
 
 .dashboard-nav .navbar-nav > li > a:hover {
-    color: #40B5E2 !important;
+    color: #233140 !important;
     background: #fff !important;
 }
 
 .dashboard-nav .navbar-nav > li > a:focus {
-    color: #40B5E2 !important;
+    color: #233140 !important;
     background: #fff !important;
 }
 .dashboard-nav  .navbar-nav > .active > a { 
-    color: #40B5E2 !important;
+    color: #233140 !important;
     background: #fff !important;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 0px !important;
 }
 .dashboard-nav  .navbar-nav > .active > a :hover { color: #40B5E2 !important }
 
 .dashboard-nav {
-    padding: 35px 0px 0px 0px;;
+    padding: 10px 0px 0px 0px;
 
 }
 
@@ -472,7 +516,7 @@ footer .footer-below {
     .dashboard-nav .navbar-nav > li > a {
         border-top-left-radius: 0px !important;
         border-top-right-radius: 0px !important;
-          margin-top: 0px !important;
+        margin-top: 0px !important;
     }  
     .dashboard-nav .navbar-nav {
         padding-left: 0px !important;
@@ -521,3 +565,52 @@ footer .footer-below {
     width: 150px;
     border: 1px solid #eee;
 }
+
+
+/*-----------------*/
+.cstm-frm-row{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    display: block;
+}
+.cstm-frm-row label{
+    font-weight: normal;
+    margin-top: 8px;
+}
+.cstm-input{
+    background: #e7e7e7;
+    border: 1px solid #e7e7e7;
+    height: 35px;
+    width: 100%;
+    padding: 3px 7px;
+    margin-bottom: 7px;
+}
+.cstm-tarea{
+    background: #e7e7e7;
+    border: 1px solid #e7e7e7;
+    height: 120px;
+    width: 100%;
+    padding: 3px 7px;
+    margin-bottom: 7px;
+}
+.cstm-tarea:focus{
+    background: transparent;
+}
+.cstm-input:focus{
+    background: transparent;
+}
+.btn{
+    border-radius: 0px;
+}
+.btn-block-dis{
+    display: block;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.foot-icon{
+    color: #FD6E6E;
+    margin-right: 10px;
+    font-size: 30px !important;
+}
+/*-----------------*/

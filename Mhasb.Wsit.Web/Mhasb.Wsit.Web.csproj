@@ -560,6 +560,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\master.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -685,15 +686,14 @@
     <Content Include="Areas\Commons\Views\Language\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\Language\Index.cshtml" />
     <Content Include="Areas\Commons\Views\web.config" />
-
     <Content Include="Areas\OrganizationManagement\Views\Company\AddProfile.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Edit.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\EditProfile.cshtml" />
-
     <Content Include="Areas\TaskManagement\Views\web.config" />
     <Content Include="Areas\TaskManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\Index.cshtml" />
-
+    <Content Include="Areas\UserManagement\Views\Users\Registration_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Shared\_Signup-new.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -738,13 +738,21 @@
     <Content Include="mhasbStyle\less\utilities.less" />
     <Content Include="mhasbStyle\less\variables.less" />
     <Content Include="mhasbStyle\less\wells.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cbpAnimatedHeader.js" />
+    <Content Include="Scripts\cbpAnimatedHeader.min.js" />
+    <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -763,6 +771,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="web.config" />
+    <Content Include="Views\Shared\Land_new.cshtml" />
+    <Content Include="Views\Home\index_new.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

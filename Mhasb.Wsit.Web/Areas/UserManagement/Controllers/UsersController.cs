@@ -46,7 +46,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [AllowAnonymous]
         public ActionResult Registration()
         {
-            return View();
+            //return View();
+            return View("Registration_new");
         }
 
         [AllowAnonymous]
