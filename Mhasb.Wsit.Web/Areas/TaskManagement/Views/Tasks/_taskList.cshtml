@@ -22,6 +22,7 @@
                         <th>Starting Date</th>
                         <th>Finishing Date</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                         <td>@item.StartingDate</td>
                         <td>@item.FinishingDate</td>
                         <td>@item.Status</td>
+                        <td><button class="update-task" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-4"> Update</button></td>
                     </tr>
                    }
                 </tbody>
@@ -44,3 +46,96 @@
         <input type="hidden" id="projeId" value="@ViewBag.ProjectId"/>
     </div>
 </div>
+<script>
+    $(".update-task").click(function () {
+        var baseUrl = '@Url.Content("~/")';
+        var data = { id: $(this).attr("data-id") };
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "TaskManagement/Tasks/UpdateTask",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $("#TaskDet").html(data);
+
+            }
+        });
+    });
+    $("#UpTask").click(function () {
+
+        if ($("#utempId").val() == "") {
+            $("#utempId").focus();
+            $("#utempId").css("border-color", "red");
+        }
+        else if ($("#utTitle").val() == "") {
+            $("#utTitle").focus();
+            $("#utTitle").css("border-color", "red");
+        }
+        else if ($("#utstart").val() == "") {
+            $("#utstart").focus();
+            $("#utstart").css("border-color", "red");
+        }
+        else if ($("#utfinish").val() == "") {
+            $("#utfinish").focus();
+            $("#utfinish").css("border-color", "red");
+        }
+        else if ($("#utstatus").val() == "") {
+            $("#utstatus").focus();
+            $("#utstatus").css("border-color", "red");
+        }
+        else {
+
+            var baseUrl = '@Url.Content("~/")';
+            var data = { id: $("#utId").val(), TaskTo: $("#utempId").val(), TaskTitle: $("#utTitle").val(), StartingDate: $("#utstart").val(), FinishingDate: $("#utfinish").val(), Status: $("#utstatus").val() };
+
+
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "TaskManagement/Tasks/EditTask",
+                data: data,
+                success: function (data) {
+                    if (data == "Success") {
+                        $('.close').trigger('click');
+                        $("#alert").html(" <b class='alert-success'>Task Successfully Edited!Loading New Data...</b>");
+                        setTimeout(function () {
+                            var data = { id: $("#projeId").val() }
+                            $.ajax({
+                                type: "POST",
+                                url: baseUrl + "TaskManagement/Tasks/TaskList",
+                                data: data,
+                                datatype: "html",
+                                success: function (data) {
+                                    $("#taskList").html(data);
+                                    $("#alert").empty();
+                                }
+                            });
+                        }, 3000);
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+
+    });
+</script>
+<!-- Pop Up Update Task-->
+<div class="modal fade" id="pop-up-4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">Update Task</h4>
+            </div>
+            <div class="modal-body" id="TaskDet">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="UpTask">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pop Up Update Task-->

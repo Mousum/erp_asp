@@ -1,0 +1,64 @@
+﻿@model Mhasb.Domain.Organizations.TaskManager
+
+<div class="row">
+    <div class="col-md-6">
+        <label>Task To</label>
+        @Html.DropDownList("TaskTo", (SelectList)ViewBag.Employess, "--Select Employee--", htmlAttributes: new { @class = "form-control", id = "utempId", required = "required" })
+    </div>
+    <div class="col-md-6">
+        <label>Task Title</label>
+        @Html.TextBoxFor(m => m.Tite, new { @class = "form-control",id="utTitle" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <label>Status</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker3'>
+                 @Html.DropDownList("Status", (SelectList)ViewBag.status, "--Select Status--", htmlAttributes: new { @class = "form-control", id = "utstatus", required = "required" })
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <label>Starting Date</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+              
+                @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", id = "utstart" })
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 label-marg">
+        <label>Finish Date</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker8'>
+               @Html.TextBoxFor(m => m.FinishingDate, new { @class = "form-control", id = "utfinish" })
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Id, new { @id="utId"})
+</div>
+<script>
+    $(document).ready(function () {
+        //   $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker7').datepicker({
+            format: 'dd/mm/yyyy'
+            });
+        $('#datetimepicker8').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+
+</script>
+

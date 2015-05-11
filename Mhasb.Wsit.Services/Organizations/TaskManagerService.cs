@@ -29,10 +29,18 @@ namespace Mhasb.Services.Organizations
         public bool UpdateTask(Domain.Organizations.TaskManager task)
         {
             try {
-                task.State = ObjectState.Modified;
-                taskRep.UpdateOperation(task);
+                var dbObj = taskRep.GetSingleObject(task.Id);
+                dbObj.StartingDate = task.StartingDate;
+                dbObj.FinishingDate = task.FinishingDate;
+                dbObj.Tite = task.Tite;
+                dbObj.TaskTo = task.TaskTo;
+                dbObj.Status = task.Status;
+                dbObj.State = ObjectState.Modified;
+                taskRep.UpdateOperation(dbObj);
                 return true;
-            }catch(Exception ex){
+            }
+            catch(Exception ex)
+            {
                 var msg = ex.Message;
                 return false;
             }

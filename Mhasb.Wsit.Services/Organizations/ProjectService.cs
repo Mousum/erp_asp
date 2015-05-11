@@ -31,8 +31,14 @@ namespace Mhasb.Services.Organizations
         {
             try
             {
-                project.State = ObjectState.Modified;
-                proRep.UpdateOperation(project);
+                var dbObj = proRep.GetSingleObject(project.Id);
+
+                dbObj.StartingDate = project.StartingDate;
+                dbObj.FinishingDate = project.FinishingDate;
+                dbObj.ManagerId = project.ManagerId;
+                dbObj.ProjectName = project.ProjectName;
+                dbObj.State = ObjectState.Modified;
+                proRep.UpdateOperation(dbObj);
                 return true;
             }
             catch (Exception ex)
