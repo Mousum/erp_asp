@@ -17,46 +17,52 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         private readonly ITaskManagerService itService = new TaskManagerService();
         private readonly IProjectService pService = new ProjectService();
         private readonly IEmployeeService eService = new EmployeeService();
+        private ISettingsService setService = new SettingsService();
         private IUserService uService = new UserService();
+
+
         // GET: TaskManagement/Tasks
         public ActionResult Index()
         {
-            // var  user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var Employess = uService.GetAllUsers();//there will be employees from employee service under compnies of the user Loged in
-            ViewBag.Employess = new SelectList(Employess, "Id", "FirstName");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            try
+            {
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                ViewBag.Employess = new SelectList(Emp, "Id", "Name");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+
+            }
+
             var model = pService.GetAllProject();
             return View(model);
         }
         [HttpPost]
         public string CreateProject(string ProjectName, int ManagerId, string StartingDate, string FinishingDate)
         {
-
-            /* This Part Will Be Omitted*/
-            var emp = eService.GetEmpByUserId(ManagerId);
-            /*End*/
-            if (emp != null)//for now
-            {//for now
-                var newProj = new Project();
-                newProj.ProjectName = ProjectName;
-                newProj.ManagerId = emp.Id;//direct "ManagerId"
-                newProj.CompanyId = 1;
-                newProj.ProjectDate = DateTime.Now;
-                newProj.StartingDate = Convert.ToDateTime(StartingDate);
-                newProj.FinishingDate = Convert.ToDateTime(FinishingDate);
-                if (pService.CreateProject(newProj))
-                {
-                    return "Success";
-                }
-                else
-                {
-                    return "Failed";
-                }
-            }//fornow
-
-            else//fornow
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            var newProj = new Project();
+            newProj.ProjectName = ProjectName;
+            newProj.ManagerId = ManagerId;
+            newProj.CompanyId = AccSet.Companies.Id;
+            newProj.ProjectDate = DateTime.Now;
+            newProj.StartingDate = Convert.ToDateTime(StartingDate);
+            newProj.FinishingDate = Convert.ToDateTime(FinishingDate);
+            if (pService.CreateProject(newProj))
             {
-                return "User IS not an employee";
+                return "Success";
             }
+            else
+            {
+                return "Failed";
+            }
+
+
+
 
         }
         [HttpPost]
@@ -69,114 +75,121 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         [HttpPost]
         public string CreateTask(int TaskTo, long ProjectId, string TaskTitle, string StartingDate, string FinishingDate)
         {
-            /* This Part Will Be Omitted*/
-            var emp = eService.GetEmpByUserId(TaskTo);
-            /*End*/
-            if (emp != null)//for now
-            {//for now
-                TaskManager newTask = new TaskManager();
-                newTask.TaskTo = emp.Id;//Direct "TaskTo"
-                newTask.ProjectId = ProjectId;
-                newTask.Tite = TaskTitle;
-                newTask.TaskDate = DateTime.Now;
-                newTask.StartingDate = Convert.ToDateTime(StartingDate);
-                newTask.FinishingDate = Convert.ToDateTime(FinishingDate);
-                newTask.Status = Domain.EnumStatus.Ongoing;
 
-                if (itService.CreateTask(newTask))
-                {
-                    return "Success";
-                }
-                else
-                {
-                    return "Failed";
-                }
+            TaskManager newTask = new TaskManager();
+            newTask.TaskTo = TaskTo;
+            newTask.ProjectId = ProjectId;
+            newTask.Tite = TaskTitle;
+            newTask.TaskDate = DateTime.Now;
+            newTask.StartingDate = Convert.ToDateTime(StartingDate);
+            newTask.FinishingDate = Convert.ToDateTime(FinishingDate);
+            newTask.Status = Domain.EnumStatus.Ongoing;
+
+            if (itService.CreateTask(newTask))
+            {
+                return "Success";
             }
             else
             {
-                return "User IS not an employee";
+                return "Failed";
             }
         }
+
+
         [HttpPost]
         public PartialViewResult UpdateProject(int id)
         {
-            var Employess = uService.GetAllUsers();//there will be employees from employee service under compnies of the user Loged in
-            ViewBag.Employess = new SelectList(Employess, "Id", "FirstName");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            try
+            {
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                ViewBag.Employess = new SelectList(Emp, "Id", "Name");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+
+            }
             var model = pService.GetSingleProject(id);
-            return PartialView("_updateProject",model);
+            return PartialView("_updateProject", model);
         }
         [HttpPost]
-        public string EditProject(int id, string ProjectName, int ManagerId, string StartingDate, string FinishingDate) {
-              /* This Part Will Be Omitted*/
-            var emp = eService.GetEmpByUserId(ManagerId);
-            /*End*/
-            if (emp != null)//for now
-            {//for now 
-            
-                var proj = new Project();
-                proj.Id = id;
-                proj.ProjectName = ProjectName;
-                proj.ManagerId = emp.Id;
+        public string EditProject(int id, string ProjectName, int ManagerId, string StartingDate, string FinishingDate)
+        {
+            string[] dateString = StartingDate.Split('/');
+            DateTime start_date = Convert.ToDateTime(dateString[1] + "/" + dateString[0] + "/" + dateString[2]);
+            string[] dateString1 = FinishingDate.Split('/');
+            DateTime end_date = Convert.ToDateTime(dateString1[1] + "/" + dateString1[0] + "/" + dateString1[2]);
+            var proj = new Project();
+            proj.Id = id;
+            proj.ProjectName = ProjectName;
+            proj.ManagerId = ManagerId;
 
-                proj.StartingDate =Convert.ToDateTime(StartingDate) ;
-                proj.FinishingDate = Convert.ToDateTime(StartingDate);
+            proj.StartingDate = start_date;
+            proj.FinishingDate = end_date;
 
-                if (pService.UpdateProject(proj))
-                {
-                    return "Success";
-                }
-                else
-                {
-                    return "Failed";
-                }
+            if (pService.UpdateProject(proj))
+            {
+                return "Success";
             }
-            else {
-                return "Selected User Is not an Employee !!";
+            else
+            {
+                return "Failed";
             }
         }
+
+
         [HttpPost]
         public PartialViewResult UpdateTask(int id)
         {
-            var Employess = uService.GetAllUsers();//there will be employees from employee service under compnies of the user Loged in
-            ViewBag.Employess = new SelectList(Employess, "Id", "FirstName");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            try
+            {
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                ViewBag.Employess = new SelectList(Emp, "Id", "Name");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+
+            }
             var listSt = Enum.GetValues(typeof(EnumStatus))
                                     .Cast<EnumStatus>()
                                     .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
                                     .ToList();
 
-            ViewBag.status = new SelectList(listSt,"Id","Name");
+            ViewBag.status = new SelectList(listSt, "Id", "Name");
             var model = itService.GetSingleTask(id);
             return PartialView("_updateTask", model);
         }
         [HttpPost]
         public string EditTask(int id, int TaskTo, string TaskTitle, string StartingDate, string FinishingDate)
         {
-            /* This Part Will Be Omitted*/
-            var emp = eService.GetEmpByUserId(TaskTo);
-            /*End*/
-            if (emp != null)//for now
-            {//for now 
-                var task = new TaskManager();
-                task.Id = id;
-                task.TaskTo = emp.Id;
-                task.Tite = TaskTitle;
-                task.StartingDate = Convert.ToDateTime(StartingDate);
-                task.FinishingDate = Convert.ToDateTime(FinishingDate);
-                if (itService.UpdateTask(task))
-                {
-                    return "Success";
-                }
-                else
-                {
-                    return "Failed";
-                }
-            }
-            else 
+
+            string[] dateString = StartingDate.Split('/');
+            DateTime start_date = Convert.ToDateTime(dateString[1] + "/" + dateString[0] + "/" + dateString[2]);
+            string[] dateString1 = FinishingDate.Split('/');
+            DateTime end_date = Convert.ToDateTime(dateString1[1] + "/" + dateString1[0] + "/" + dateString1[2]);
+            var task = new TaskManager();
+            task.Id = id;
+            task.TaskTo = TaskTo;
+            task.Tite = TaskTitle;
+            task.StartingDate = start_date;
+            task.FinishingDate = end_date;
+            if (itService.UpdateTask(task))
             {
-                return "Selected User Is not an Employee";
+                return "Success";
             }
- 
+            else
+            {
+                return "Failed";
+            }
         }
+
+
+
 
     }
 }

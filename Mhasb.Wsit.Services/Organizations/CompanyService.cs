@@ -130,7 +130,33 @@ namespace Mhasb.Services.Organizations
             }
             
         }
+        public List<Company> GetAllCompaniesByUserId(long UserId)
+        {
+            try
+            {
+                //company.State = ObjectState.Unchanged;
+                var comObj = companyRep.GetOperation()
+                                        .Include(c => c.Countries)
+                                        .Include(l => l.Languages)
+                                        .Include(i => i.Industries)
+                                        .Include(t => t.AreaTimes)
+                                        .Include(l => l.LegalEntities)
+                                        .Include(u => u.Users)
+                                        .Include(cd => cd.Documents)
+                                        .Filter(u=>u.Users.Id == UserId)
+                                        .Get().ToList();
 
+                //companyRep.GetSingleObject(companyId);
+                return comObj;
+
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+
+        }
 
     }
 }
