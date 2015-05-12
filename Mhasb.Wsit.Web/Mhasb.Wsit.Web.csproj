@@ -704,6 +704,8 @@
     <Content Include="Areas\UserManagement\Views\Users\MyMhasb_new.cshtml" />
     <Content Include="Areas\Commons\Views\Country\List.cshtml" />
     <Content Include="Areas\Commons\Views\Country\Index1.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\Index1.cshtml" />
+    <Content Include="Areas\Commons\Views\Language\List.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

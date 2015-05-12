@@ -1,39 +1,21 @@
-﻿@model IEnumerable<Mhasb.Domain.Commons.Country>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Mhasb.Domain.Commons.Language>
 
-@{
-    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
 
-}
 
-<!DOCTYPE html>
+<div id="content">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p class="btn btn-success link">
-        @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "link" })
-    </p>
-    <div id="alert"></div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CountryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShortName)
+                Language Name
+                @*@Html.DisplayNameFor(model => model.LanguageName)*@
             </th>
             <th></th>
         </tr>
-
         @if (!Model.Any())
         {
-            <tr><td class="alert-success" colspan="4">There are no Country</td></tr>
+            <tr><td class="alert-success" colspan="4">There are no Language</td></tr>
         }
         else
         {
@@ -41,19 +23,16 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CountryName)
+                        @Html.DisplayFor(modelItem => item.LanguageName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CountryCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShortName)
-                    </td>
-                    <td>
-                        <div class="btn btn-success link">   @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" }) </div>
-                        <div class="btn btn-info link">
+                        <p class="btn btn-success link">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" })
+                        </p>
+                        <p class="btn btn-info link">
                             @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link" })
-                        </div>
+                        </p>
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }) |*@
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
                             Delete
                         </button>
@@ -78,31 +57,32 @@
                                 </div>
                             </div>
                         </div>
+
                     </td>
                 </tr>
+
             }
         }
     </table>
-    <script>
-        $(".confirmDelete").click(function () {
-            var baseUrl = '@Url.Content("~/")';
-            var data = { id: $(this).attr("data-id") }
-            $.ajax({
-                type: "POST",
-                url: baseUrl + "Commons/Country/Delete",
-                data: data,
-                success: function (data) {
-                    if (data == "Success") {
-                        $('.close').trigger('click');
-                        $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
-                        setTimeout(function () {
-                            window.location.replace(baseUrl + "Commons/Country");//will redirect to your blog page (an ex: blog.html)
-                        }, 2000);
 
-                    }
-                }
-            });
-        })
-    </script>
-</body>
-</html>
+    <div id="contentPager" class="contentPager">
+        @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).on("click", ".contentPager a", function () {
+        var currentFilter = $("#SearchString").val();
+        var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#content').html(result);
+            }
+        });
+        return false;
+    });
+
+</script>
+

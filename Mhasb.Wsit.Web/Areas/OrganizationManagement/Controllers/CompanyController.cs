@@ -147,7 +147,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult update()
         {
-            int id = 3;
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int id = AccSet.Companies.Id;
 
             
             var company=iCompany.GetSingleCompany(id);
@@ -294,7 +296,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
       
         public ActionResult AddProfile()
         {
-            CompanyProfileCustom cpc = iCP.GetCompanyProfile(2);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            CompanyProfileCustom cpc = iCP.GetCompanyProfile(AccSet.Companies.Id);
             if (cpc != null)
                 return View("EditProfile", cpc);
             return View();
@@ -319,8 +323,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     cp = companyProfileCustom.companyProfile;
                     cp.UserId = user.Id;
 
-                    /// Static CompanyId Will dynamic next day 
-                    var myCompany=iCompany.GetSingleCompany(2);
+
+                    var AccSet = sService.GetAllByUserId(user.Id);
+
+                    var myCompany=iCompany.GetSingleCompany(AccSet.Companies.Id);
                     cp.Companies = new Company { Id=myCompany.Id};
 
 

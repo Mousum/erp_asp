@@ -1,108 +1,75 @@
-﻿@model IEnumerable<Mhasb.Domain.Commons.Country>
-
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
+    ViewBag.Title = "Country";
     Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+}
+<h2>Students1</h2>
+<p>
+    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="button" id="SearchStringBtn" value="Search" />
+</p>
+<div id="CountryListShow">
 
+</div>
+@*@Html.Action("List")*@
+
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $.get('@Url.Action("List", "Country", new { Area = "Commons" })' + '?page=', function (data) {
+                $('#CountryListShow').html(data);
+            }
+            );
+            //$(document).on("click", "#contentPager a[href]", function () {
+            //    $.ajax({
+            //        url: $(this).attr("href"),
+            //        type: 'GET',
+            //        cache: false,
+            //        success: function (result) {
+            //            $('#content').html(result);
+            //        }
+            //    });
+            //    return false;
+            //});
+        });
+
+        $(document).on("click", "#SearchStringBtn", function () {
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "Commons/Country/List?page=''" + "&SearchString=" + SearchString;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+    </script>
 }
 
-<!DOCTYPE html>
+@*<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            alert("Russel");
+            $.get('@Url.Action("List", "Student", new { Area = "" })' + '?page=', function (data) {
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p class="btn btn-success link">
-        @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "link" })
-    </p>
-    <div id="alert"></div>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShortName)
-            </th>
-            <th></th>
-        </tr>
-
-        @if (!Model.Any())
-        {
-            <tr><td class="alert-success" colspan="4">There are no Country</td></tr>
-        }
-        else
-        {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CountryName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CountryCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShortName)
-                    </td>
-                    <td>
-                     <div class="btn btn-success link">   @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" }) </div>
-                        <div class="btn btn-info link">
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link" })
-                        </div>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
-                                Delete
-                            </button>
-                            @*<a href="javascript:void(0)"  class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1" data-id="@item.Id">Delete</a>*@
-                            <div class="modal fade" id="pop-up-@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header cstm-pop-up-header">
-                                            <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title sign-up-title" id="myModalLabel">Delete Confirmation</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>
-                                                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-                                                Are you sure you want to proceed?
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                            <button type="button" data-id="@item.Id" class="btn btn-primary confirmDelete">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-</td>
-                </tr>
+                $('#StudentListShow').html(data);
             }
-        }
-    </table>
-    <script>
-    $(".confirmDelete").click(function () {
-        var baseUrl = '@Url.Content("~/")';
-        var data = { id: $(this).attr("data-id") }
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "Commons/Country/Delete",
-            data: data,
-            success: function (data) {
-                if (data == "Success") {
-                    $('.close').trigger('click');
-                    $("#alert").html(" <b class='alert-success'>Successfully Deleted!Loading New Data...</b>");
-                    setTimeout(function () {
-                        window.location.replace(baseUrl + "Commons/Country");//will redirect to your blog page (an ex: blog.html)
-                    }, 2000);
-                   
-                }
-            }
+            );
+            //$(document).on("click", "#contentPager a[href]", function () {
+            //    $.ajax({
+            //        url: $(this).attr("href"),
+            //        type: 'GET',
+            //        cache: false,
+            //        success: function (result) {
+            //            $('#content').html(result);
+            //        }
+            //    });
+            //    return false;
+            //});
         });
-    })
-    </script>
-</body>
-</html>
+    </script>*@
