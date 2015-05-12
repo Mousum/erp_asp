@@ -14,6 +14,8 @@ namespace Mhasb.Domain.Organizations
         public int CompanyId { get; set; }
         public string DocumentLocation { get; set; }
 
+        public string DocumentOriginalName { get; set; }
+
         public virtual Company companies {get; set;} 
 
         public ObjectState State
