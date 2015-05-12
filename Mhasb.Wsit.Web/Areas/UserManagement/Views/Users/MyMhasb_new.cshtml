@@ -1,0 +1,87 @@
+﻿@model  IEnumerable<Mhasb.Domain.Organizations.Company>
+
+@{
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+
+}
+
+<!--start welcome dashboard section-->
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="welcome">
+                <h4><a href="#"> My MHASB</a></h4>
+                <p>Hi Khalid, you last logged into UniTrans Co. today at 2:05 a.m.</p>
+            </div>
+            <div class="table-responsive">
+                <h3>Organisations</h3>
+                <table class="table organization-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Last Viewed</th>
+                            <th>Access</th>
+                            <th>Subscription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chauffeur Limousine </td>
+                            <td>21 Feb 3:54 p.m. <br /> By Khalid AL Kubaisi</td>
+                            <td>Adviser <br /> Manage users</td>
+                            <td>Mohamed Awney <br /> In Trial</td>
+                        </tr>
+                        <tr>
+                            <td>MSADR Technology </td>
+                            <td>21 Feb 3:54 p.m. <br /> By Khalid AL Kubaisi</td>
+                            <td>Adviser <br /> Manage users</td>
+                            <td>Mohamed Awney <br /> In Trial</td>
+                        </tr>
+                        <tr>
+                            <td>UniTrans</td>
+                            <td>21 Feb 3:54 p.m. <br /> By Khalid AL Kubaisi</td>
+                            <td>Adviser <br /> Manage users</td>
+                            <td>Mohamed Awney <br /> In Trial</td>
+                        </tr>
+                        <tr>
+                            <td>UniTrans</td>
+                            <td>21 Feb 3:54 p.m. <br /> By Khalid AL Kubaisi</td>
+                            <td>Adviser <br /> Manage users</td>
+                            <td>Mohamed Awney <br /> In Trial</td>
+                        </tr>
+                        <tr>
+                            <td>UniTrans</td>
+                            <td>21 Feb 3:54 p.m. <br /> By Khalid AL Kubaisi</td>
+                            <td>Adviser <br /> Manage users</td>
+                            <td>Mohamed Awney <br /> In Trial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 add-organization shadow">
+            <h3 class="title"> Run Another Business ?</h3>
+            <p> You Could Save <br /> <span class="free">25%</span> Off <br /> All Subscription Fees </p>
+            <button type="button" class="btn btn-add-Organization ">Add Organization</button>
+        </div>
+    </div>
+</div>
+<!--End welcome dashboard section-->
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    Copyright &copy;  2015
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Scroll to Top ) -->
+<div class="scroll-top page-scroll visible-xs visible-sm">
+    <a class="btn btn-primary" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>

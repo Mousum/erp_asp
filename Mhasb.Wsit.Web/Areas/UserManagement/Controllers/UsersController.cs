@@ -47,7 +47,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Registration()
         {
             //return View();
-            return View("Registration_new");
+            return View();
         }
 
         [AllowAnonymous]
@@ -135,7 +135,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             ViewBag.userName = user.FirstName + " " + user.LastName;
             ViewBag.lastLoginCompany = "UniCorn";
             ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb", myCompanyList);
+            return View("MyMhasb_new", myCompanyList);
 
         }
 

@@ -694,6 +694,7 @@
     <Content Include="Areas\TaskManagement\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\Registration_new.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_Signup-new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\MyMhasb_new.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

@@ -1,118 +1,64 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>MHASB ERP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
-    <!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
-    <!--script src="js/less-1.3.3.min.js"></script-->
-    <!--append â€˜#!watchâ€™ to the browser URL, then refresh the page. -->
-
-    <link href="~/mhasbStyle/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/mhasbStyle/css/style.css" rel="stylesheet">
-   <link href="~/mhasbStyle/css/bootstrap-datetimepicker.css" rel="stylesheet">
-    <link href="~/mhasbStyle/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <title>MHASB ERP</title>
+    @Styles.Render("~/Content/css")
+    <link href='http://fonts.googleapis.com/css?family=Rambla:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/mhasbStyle/img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/mhasbStyle/img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/mhasbStyle/img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="~/mhasbStyle/img/apple-touch-icon-57-precomposed.png">
-    <!--<link rel="shortcut icon" href="img/favicon.png">-->
-
-    <script type="text/javascript" src="~/mhasbStyle/js/jquery.min.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/scripts.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="~/mhasbStyle/js/bootstrap-datetimepicker.min.js"></script>
-
-
 </head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row clearfix no-margin">
-            <nav class="navbar navbar-default cstm-navbar bg-color1" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">MHASB ERP</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right cstm-menu">
-                        <li>
-                            <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dash Board</a>
-                        </li>
-                        @*<li>
-                            <a href="#">Human Resources</a>
-                        </li>
-                        <li>
-                            <a href="#">Banks</a>
-                        </li>
-                        <li>
-                            <a href="#">Treasury</a>
-                        </li>
-                        <li>
-                            <a href="#">Petty Cash</a>
-                        </li>
-                        <li>
-                            <a href="#">Fixed Assets</a>
-                        </li>
-                        <li>
-                            <a href="#">Purchasing</a>
-                        </li>
-                        <li>
-                            <a href="#">Warehouse</a>
-                        </li>
-                        <li>
-                            <a href="#">Sales</a>
-                        </li>*@
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle user-icon-pad" data-toggle="dropdown"><div class="user-small"></div><strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-            </nav>
+<body id="page-top" class="index">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default dashboard-nav navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top"><img src="~/img/logo.png" alt="logo"></a>
+            </div>
+            <!-- nav links -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="hidden">
+                        <a href="#page"></a>
+                    </li>
+                    <li class="active">
+                        <a href="#Dashboard">Dashboard</a>
+                    </li>
+                    <li class="">
+                        <a href="#Settings">Settings</a>
+                    </li>
+                    <li class="">
+                        <a href="#Operations">Operations</a>
+                    </li>
+                    <li class="">
+                        <a href="#Reports">Reports</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-    </div>
-    <div class="container">
+        <!-- /.container-fluid -->
+    </nav>
+    @RenderBody();
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- Custom Theme JavaScript -->
+    @Scripts.Render("~/bundles/custome")
 
-       @RenderBody()
-        @Scripts.Render("~/bundles/jqueryval")
-    </div>
-    <div class="row clearfix no-margin footer-fixed">
-        <div class="col-md-3 colum bgcolor1">
-            <h3 class="left">
-                Privacy Policy
-            </h3>
-        </div>
-        <div class="col-md-9 column bgcolor2">
-            <h3 class="text-center">
-                Footer Element
-            </h3>
-        </div>
-    </div>
-   
+    @RenderSection("scripts", required: false)
 </body>
 </html>
