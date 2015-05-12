@@ -3,16 +3,19 @@
     ViewBag.Title = "Language";
     Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
 }
-
-@*<p>
+<div class="container">
+<p style="display:none;">
     Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
     <input type="button" id="SearchStringBtn" value="Search" />
-</p>*@
-<div class="container" id="LanguageListShow">
+</p>
+<p class="btn btn-success link">
+    @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "link" })
+</p>
+<div  id="LanguageListShow">
 
 </div>
 @*@Html.Action("List")*@
-
+</div>
 
 @section scripts
 {
