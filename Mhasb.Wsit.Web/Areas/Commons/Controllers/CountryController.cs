@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
@@ -15,8 +17,32 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         // GET: /Commons/Country/
         public ActionResult Index()
         {
-            var model=coService.GetAllCountries();
-            return View(model);
+            //var model=coService.GetAllCountries();
+            //return View(model);
+            return View("Index1");
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Country> Country = coService.GetAllCountries();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Country = Country.Where(s => s.CountryName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return PartialView(Country.ToPagedList(pageNumber, pageSize));
+
         }
 
         //
