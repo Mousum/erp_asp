@@ -8,6 +8,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.DAL.Mapping.OrgSettings;
+using Mhasb.Domain.OrgSettings;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -89,23 +91,15 @@ namespace Mhasb.Wsit.DAL.Data
             // Project Task
             modelBuilder.Configurations.Add(new TaskManageMapping());
             modelBuilder.Configurations.Add(new ProjectMapping());
-            
-            
+
+            // Org Settings
+            modelBuilder.Configurations.Add(new CurrencyMapping());
+            modelBuilder.Configurations.Add(new FinalcialPeriodMapping());
+            modelBuilder.Configurations.Add(new FinalcialSettingMapping());
+            modelBuilder.Configurations.Add(new ExternalAuditorMapping());
+            modelBuilder.Configurations.Add(new InternalAuditorMapping());
+            modelBuilder.Configurations.Add(new TaxSettingMapping());
+
         }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Language> Languages { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Industry> Industries { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.AreaTime> AreaTimes { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Country> Countries { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.CompanyProfile> CompanyProfiles { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.LegalEntity> LegalEntities { get; set; }
-
     }
 }
