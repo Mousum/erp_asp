@@ -68,8 +68,15 @@
     <Compile Include="Mapping\Commons\ContactDetailMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeProfileMapping.cs" />
+    <Compile Include="Mapping\Organizations\FounderMapping.cs" />
     <Compile Include="Mapping\Organizations\ProjectMapping.cs" />
     <Compile Include="Mapping\Organizations\TaskManageMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\CurrencyMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\ExternalAuditorMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\FinalcialPeriodMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\FinalcialSettingMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\InternalAuditorMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\TaxSettingMapping.cs" />
     <Compile Include="Mapping\Users\ActionListMapping.cs" />
     <Compile Include="Mapping\Users\RoleMapping.cs" />
     <Compile Include="Mapping\Users\RoleVsActionMapping.cs" />

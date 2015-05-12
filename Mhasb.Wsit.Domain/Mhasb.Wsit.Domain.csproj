@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
+    <Compile Include="Organizations\Founder.cs" />
+    <Compile Include="OrgSettings\Currency.cs" />
+    <Compile Include="OrgSettings\FinalcialPeriod.cs" />
     <Compile Include="Commons\Industry.cs" />
     <Compile Include="Commons\Language.cs" />
     <Compile Include="Commons\LegalEntity.cs" />
@@ -55,6 +58,10 @@
     <Compile Include="Organizations\Employee.cs" />
     <Compile Include="Organizations\Project.cs" />
     <Compile Include="Organizations\TaskManager.cs" />
+    <Compile Include="OrgSettings\FinalcialSetting.cs" />
+    <Compile Include="OrgSettings\ExternalAuditor.cs" />
+    <Compile Include="OrgSettings\InternalAuditor.cs" />
+    <Compile Include="OrgSettings\TaxSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\ActionList.cs" />
     <Compile Include="Organizations\EmployeeProfile.cs" />
