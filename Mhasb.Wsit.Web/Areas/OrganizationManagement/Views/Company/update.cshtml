@@ -203,9 +203,10 @@
     $(".CompanyDocumentList").click(function () {
         //alert($(this).attr("CDId"));
         //$("#Document_" + $(this).attr("CDId")).hide();
+        var rr = '@Url.Action("deleteCompanyDocument", "Company", new { area = "OrganizationManagement" })';
         var doc=$("#Document_" + $(this).attr("CDId"));
         $.ajax({
-            url: "/OrganizationManagement/Company/deleteCompanyDocument/" + $(this).attr("CDId"),
+            url: rr +'/'+ $(this).attr("CDId"),
             //data:"id="+$(this).attr("CDId"),
             success: function (result) {
                 doc.hide();

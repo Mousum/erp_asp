@@ -139,7 +139,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult update()
         {
-            int id = 3;
+            int id = 1;
 
             
             var company=iCompany.GetSingleCompany(id);

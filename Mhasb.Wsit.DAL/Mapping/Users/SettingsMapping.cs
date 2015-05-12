@@ -23,9 +23,14 @@ namespace Mhasb.DAL.Mapping.Users
             this.HasRequired(c => c.Users)
                 .WithMany()
                 .HasForeignKey(c => c.userId);
+
             this.HasOptional(c => c.AreaTimes)
             .WithMany()
             .HasForeignKey(c => c.TimezoneId);
+
+            this.HasOptional(c => c.Companies)
+                .WithOptionalDependent()
+                .Map(c=>c.MapKey("companyid"));
         }
     }
 }
