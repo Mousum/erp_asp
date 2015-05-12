@@ -108,6 +108,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                                 {
                                     CompanyDocument cd = new CompanyDocument();
                                     cd.CompanyId = company.Id;
+                                    cd.DocumentOriginalName = Request.Files[i].FileName;
                                     cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                     iCompanyDocument.AddCompanyDocument(cd);
                                 }
@@ -139,7 +140,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult update()
         {
-            int id = 1;
+            int id = 3;
 
             
             var company=iCompany.GetSingleCompany(id);
@@ -246,6 +247,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                             {
                                 CompanyDocument cd = new CompanyDocument();
                                 cd.CompanyId = company.Id;
+                                cd.DocumentOriginalName = Request.Files[i].FileName;
                                 cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                 iCompanyDocument.AddCompanyDocument(cd);
                             }
