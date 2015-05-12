@@ -98,7 +98,7 @@ namespace Mhasb.Services.Organizations
                 var empObj = empRep.GetOperation()
                     .Include(c => c.Users)
                     .Include(c => c.Companies)
-                    .Filter(c => c.Id == CompanyId)
+                    .Filter(c => c.CompanyId== CompanyId)
                     .Get().ToList();
                 return empObj;
                    

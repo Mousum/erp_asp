@@ -1,0 +1,47 @@
+﻿@model  IEnumerable<Mhasb.Domain.Organizations.Company>
+
+@{
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+
+}
+
+<!--start welcome dashboard section-->
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="welcome">
+                <h4><a href="#"> My MHASB</a></h4>
+                <p>Hi @ViewBag.userName , you last logged into @ViewBag.lastLoginCompany at @ViewBag.lastLoginTime O'Clock</p>
+            </div>
+            <div class="table-responsive">
+                <h3>Organisations</h3>
+                <table class="table organization-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Last Viewed</th>
+                            <th>Access</th>
+                            <th>Subscription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Mhasb.Domain.Organizations.Company company in Model)
+                        {
+                            <tr>
+                                <td>@company.TradingName</td>
+                                <td>21 Feb 3:54 p.m. By <br /> Khalid AL Kubaisi</td>
+                                <td>Adviser <br /> Manage users</td>
+                                <td>@company.Users.FirstName @company.Users.LastName <br />In Trial</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 add-organization shadow">
+            <h3 class="title"> Run Another Business ?</h3>
+            <p> You Could Save <br /> <span class="free">25%</span> Off <br /> All Subscription Fees </p>
+            <a href="@Url.Action("Registration", "Company", new { area = "OrganizationManagement" })"><button type="button" class="btn btn-add-Organization ">Add Organization</button></a>
+        </div>
+    </div>
+</div>

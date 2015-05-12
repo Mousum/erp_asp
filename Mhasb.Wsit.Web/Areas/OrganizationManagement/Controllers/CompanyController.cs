@@ -29,6 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly ILegalEntityService iLegalEntity = new LegalEntityService();
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
         private readonly IUserService uService = new UserService();
+        private readonly ISettingsService sService = new SettingsService();
 
 
         private readonly ICompanyProfile iCP = new CompanyProfileService();
@@ -96,6 +97,12 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     if (iCompany.AddCompany(company))
                     {
+                        var accountSetting = sService.GetAllByUserId(tt.Id);
+                        if (accountSetting.Companies == null) {
+                            accountSetting.Companies = new Company { Id=company.Id};
+                            accountSetting.lgcompany = true;
+                            sService.UpdateSettings(accountSetting);
+                        }
                         msg = "Success";
 
                         for (int i = 0; i < Request.Files.Count; i++)
@@ -108,6 +115,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                                 {
                                     CompanyDocument cd = new CompanyDocument();
                                     cd.CompanyId = company.Id;
+                                    cd.DocumentOriginalName = Request.Files[i].FileName;
                                     cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                     iCompanyDocument.AddCompanyDocument(cd);
                                 }
@@ -139,7 +147,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult update()
         {
-            int id = 1;
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int id = AccSet.Companies.Id;
 
             
             var company=iCompany.GetSingleCompany(id);
@@ -246,6 +256,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                             {
                                 CompanyDocument cd = new CompanyDocument();
                                 cd.CompanyId = company.Id;
+                                cd.DocumentOriginalName = Request.Files[i].FileName;
                                 cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                 iCompanyDocument.AddCompanyDocument(cd);
                             }
@@ -285,7 +296,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
       
         public ActionResult AddProfile()
         {
-            CompanyProfileCustom cpc = iCP.GetCompanyProfile(2);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            CompanyProfileCustom cpc = iCP.GetCompanyProfile(AccSet.Companies.Id);
             if (cpc != null)
                 return View("EditProfile", cpc);
             return View();
@@ -310,8 +323,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     cp = companyProfileCustom.companyProfile;
                     cp.UserId = user.Id;
 
-                    /// Static CompanyId Will dynamic next day 
-                    var myCompany=iCompany.GetSingleCompany(2);
+
+                    var AccSet = sService.GetAllByUserId(user.Id);
+
+                    var myCompany=iCompany.GetSingleCompany(AccSet.Companies.Id);
                     cp.Companies = new Company { Id=myCompany.Id};
 
 

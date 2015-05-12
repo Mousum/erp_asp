@@ -1,5 +1,7 @@
-﻿@{
+﻿@model Mhasb.Domain.Users.User
+@{
     Layout = "~/Areas/UserManagement/Views/Shared/_Signup-new.cshtml";
+    ViewBag.Title = "Registration - MHASB ERP";
 }
 
 <div class="col-xs-10 col-sm-8 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-4">
@@ -9,42 +11,74 @@
             <h4 class="text-center">Please Sign Up</h4>
         </div>
         <div class="panel-body">
-            <form class="sign-up-form">
+            @using (Html.BeginForm("Registration", "Users", new { Area = "UserManagement" }, FormMethod.Post, new { @class="sign-up-form"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+
+
                 <div class="row">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="col-xs-12 col-sm-12 alert-danger">
+                            <div class="form-group text-center">
+                                @Html.ValidationMessage("Msg")
+                            </div>
+                        </div>
+                    }
+
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                            @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control input-sm", placeholder = "First Name", id = "first_name", validate = "RequiredField" })
+                          <div class="error-msg" style="color:#FD6E6E;">  @Html.ValidationMessageFor(model => model.FirstName) </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                        </div>
+                            @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { @class = "form-control input-sm", placeholder = "Last Name", id = "last_name", validate = "RequiredField" })
+                            <div class="error-msg" style="color:#FD6E6E;">@Html.ValidationMessageFor(model => model.LastName)</div>
+                            </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                    @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control input-sm", placeholder = "Email Address", id = "email", type = "email", validate = "RequiredField" })
+                    <div class="error-msg" style="color:#FD6E6E;">@Html.ValidationMessageFor(model => model.Email)</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                            @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control input-sm", placeholder = "Password", id = "password", type = "password", validate = "RequiredField" })
+                            <div class="error-msg" style="color:#FD6E6E;">@Html.ValidationMessageFor(model => model.Password)</div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                            @Html.TextBoxFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "form-control input-sm", placeholder = "Confirm Password", id = "password_confirmation", type = "password", validate = "RequiredField" })
+                            <div class="error-msg" style="color:#FD6E6E;">@Html.ValidationMessageFor(model => model.ConfirmPassword)</div>
                         </div>
                     </div>
                 </div>
                 <div class="fl terms">
                     <label>
-                        <input type="checkbox"> I agree to the <a href="">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                         <input name="tnc" type="checkbox" id="Agree" required="required"> I agree to the <a href="">Terms of Use</a> and <a href="#">Privacy Policy</a><br />
+                        <span id="alert" style="font-family: 'Rambla', sans-serif !important;color:#FD6E6E;"></span>
                     </label>
                 </div>
 
-                <input type="submit" value="Register" class="btn btn-info btn-block">
-            </form>
+                <input type="submit" value="Register" id="Register" class="btn btn-info btn-block">
+
+            }
         </div>
     </div>
 </div>
+<script src="/Scripts/jquery-1.10.2.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    $("#Register").click(function () {
+        if (!$("#Agree").is(':checked'))
+        {
+            $("#alert").html("Please Agree With  Terms & Conditions");
+        }
+    })
+</script>

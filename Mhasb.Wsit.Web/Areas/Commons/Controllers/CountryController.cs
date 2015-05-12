@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
@@ -19,6 +21,28 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
             return View(model);
         }
 
+        public PartialViewResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Country> Language = coService.GetAllCountries();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Language = Language.Where(s => s.CountryName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return PartialView("List", Language.ToPagedList(pageNumber, pageSize));
+
+        }
         //
         // GET: /Commons/Country/Details/5
         public ActionResult Details(int id)

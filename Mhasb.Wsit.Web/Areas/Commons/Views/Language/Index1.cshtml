@@ -1,0 +1,45 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Language";
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+}
+
+@*<p>
+    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="button" id="SearchStringBtn" value="Search" />
+</p>*@
+<div class="container" id="LanguageListShow">
+
+</div>
+@*@Html.Action("List")*@
+
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+
+        $.get('@Url.Action("List", "Language", new { Area = "Commons" })' + '?page=', function (data) {
+                $('#LanguageListShow').html(data);
+            }
+            );
+            
+    });
+        $(document).on("click", "#SearchStringBtn", function () {
+            alert("ljklk");
+            var baseUrl = '@Url.Content("~/")';
+        var SearchString = $("#SearchString").val();
+        var url = baseUrl + "Language/List?page=''" + "&SearchString=" + SearchString;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#content').html(result);
+            }
+        });
+        return false;
+    });
+    </script>
+}
+
