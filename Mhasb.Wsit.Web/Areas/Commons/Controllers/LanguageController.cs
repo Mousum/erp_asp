@@ -6,6 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
+
+
 
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
@@ -18,7 +22,31 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         public ActionResult Index()
         {
             var model = lService.GetAllLanguages();
-            return View(model);
+            //return View(model);
+            return View("Index1");
+        }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Language> Language = lService.GetAllLanguages();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Language = Language.Where(s => s.LanguageName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return PartialView(Language.ToPagedList(pageNumber, pageSize));
+
         }
 
         //
