@@ -48,7 +48,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Registration()
         {
             //return View();
-            return View();
+            return View("Registration_new");
         }
 
         [AllowAnonymous]
@@ -71,7 +71,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 else
                 {
                     ModelState.AddModelError("Msg", "Already Register");
-                    //return Content("Already Register");
+                   // return Content("Already Register");
                     return View();
                 }
                 
