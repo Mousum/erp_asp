@@ -14,9 +14,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class UserInRolesController : BaseController
     {
         private IUserInRoleService userInRoleService = new UserInRoleService();
+        private IUserService uService = new UserService();
+        private ISettingsService setService = new SettingsService();
+        private IEmployeeService eService = new EmployeeService(); 
 
         public ActionResult Index() 
         {
+            
             var model = userInRoleService.GetAllUserInRole();
             return View(model);
         }
@@ -24,8 +28,19 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Create() 
         {
             IUserService uService = new UserService();
-         
-            ViewBag.UserList = new SelectList(uService.GetAllUsers(),"Id","FirstName");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            try
+            {
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Users.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                ViewBag.UserList = new SelectList(Emp, "Id", "Name");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+
+            }
+           // ViewBag.UserList = new SelectList(uService.GetAllUsers(),"Id","FirstName");
             return View();
         }
         [HttpPost]

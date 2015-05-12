@@ -21,6 +21,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         private ISettingsService setService = new SettingsService();
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
+        private readonly ICompanyService cService = new CompanyService();
 
         //
         // GET: /UserManagement/Users/
@@ -148,6 +149,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             accsetting.Users = users;
             accsetting.AccSettings = new Settings();
             ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+            ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserId(users.Id),"Id","DisplayName");
             return View(accsetting);
 
         }

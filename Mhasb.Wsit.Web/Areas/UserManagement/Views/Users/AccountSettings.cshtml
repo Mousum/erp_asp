@@ -388,6 +388,13 @@
                 @Html.DropDownList("zoneId", ViewBag.TimeZoneList as SelectList, "-- Select your TimeZone --", new { @class = "u33_input" })
             </div>
 
+            
+
+            <!-- Unnamed (Droplist) -->
+
+            @Html.DropDownList("CompanyId", ViewBag.CompanyList as SelectList, "-- Select your Default Company --", new { style = "" })
+               
+            
             <!-- Unnamed (HTML Button) -->
             <div id="u66" class="ax_html_button">
                 <input id="u66_input" type="button" value="Save" />
@@ -549,5 +556,6 @@
             };
         </script>
     }
+    
 </body>
 </html>

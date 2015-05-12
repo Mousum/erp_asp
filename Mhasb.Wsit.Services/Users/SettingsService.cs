@@ -33,9 +33,12 @@ namespace Mhasb.Services.Users
 
         public bool UpdateSettings(Settings setting)
         {
-            try { 
-             setting.State=ObjectState.Modified;
-             setRep.UpdateOperation(setting);
+            try {
+                var dbObj = setRep.GetSingleObject(setting.Id);
+                dbObj.lgcompany = setting.lgcompany;
+                dbObj.Companies = setting.Companies;
+                dbObj.State = ObjectState.Modified;
+                setRep.UpdateOperation(dbObj);
               return true;
 
             }catch(Exception ex){
@@ -51,6 +54,7 @@ namespace Mhasb.Services.Users
         {
             var setObj = setRep.GetOperation()
                                   .Include(st=>st.Users)
+                                  .Include(st=>st.Companies)
                                   .Filter(st => st.userId == userId)
                                   .Get().SingleOrDefault();
 

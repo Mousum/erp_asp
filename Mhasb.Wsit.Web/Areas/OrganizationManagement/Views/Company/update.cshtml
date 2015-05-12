@@ -168,7 +168,7 @@
 {
     <div id="Document_@item.Id">
         <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">
-            Document @i
+            @i . @item.DocumentOriginalName
             @{i++;}
             @*@Html.DisplayFor(Model.Documents)*@
         </a>
@@ -203,9 +203,10 @@
     $(".CompanyDocumentList").click(function () {
         //alert($(this).attr("CDId"));
         //$("#Document_" + $(this).attr("CDId")).hide();
+        var rr = '@Url.Action("deleteCompanyDocument", "Company", new { area = "OrganizationManagement" })';
         var doc=$("#Document_" + $(this).attr("CDId"));
         $.ajax({
-            url: "/OrganizationManagement/Company/deleteCompanyDocument/" + $(this).attr("CDId"),
+            url: rr +'/'+ $(this).attr("CDId"),
             //data:"id="+$(this).attr("CDId"),
             success: function (result) {
                 doc.hide();
@@ -213,4 +214,42 @@
             }
         });
     });
+
+
+
+    function readLogoURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#logo_target').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#logoImage").change(function () {
+        readLogoURL(this);
+    });
+
+    function readSealURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#seal_target').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#sealImage").change(function () {
+        readSealURL(this);
+    });
+
+    $("#addDoc").click(function () {
+        $("#documentDiv").append("<input name='documentLocation[]' type='file' multiple />");
+        $("documentDiv").focus();
+    });
+
 </script>

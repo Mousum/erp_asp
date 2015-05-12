@@ -16,6 +16,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasKey(cd => cd.Id);
             this.Property(cd => cd.CompanyId).HasColumnName("companyid");
             this.Property(cd => cd.DocumentLocation).HasMaxLength(100).HasColumnName("document_location");
+            this.Property(cd => cd.DocumentOriginalName).HasMaxLength(100).HasColumnName("document_original_name");
             this.ToTable("org.companydocuments");
             
             

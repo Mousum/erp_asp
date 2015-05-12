@@ -29,6 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly ILegalEntityService iLegalEntity = new LegalEntityService();
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
         private readonly IUserService uService = new UserService();
+        private readonly ISettingsService sService = new SettingsService();
 
 
         private readonly ICompanyProfile iCP = new CompanyProfileService();
@@ -96,6 +97,12 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     if (iCompany.AddCompany(company))
                     {
+                        var accountSetting = sService.GetAllByUserId(tt.Id);
+                        if (accountSetting.Companies == null) {
+                            accountSetting.Companies = new Company { Id=company.Id};
+                            accountSetting.lgcompany = true;
+                            sService.UpdateSettings(accountSetting);
+                        }
                         msg = "Success";
 
                         for (int i = 0; i < Request.Files.Count; i++)
@@ -108,6 +115,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                                 {
                                     CompanyDocument cd = new CompanyDocument();
                                     cd.CompanyId = company.Id;
+                                    cd.DocumentOriginalName = Request.Files[i].FileName;
                                     cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                     iCompanyDocument.AddCompanyDocument(cd);
                                 }
@@ -246,6 +254,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                             {
                                 CompanyDocument cd = new CompanyDocument();
                                 cd.CompanyId = company.Id;
+                                cd.DocumentOriginalName = Request.Files[i].FileName;
                                 cd.DocumentLocation = "Uploads/" + company.TradingName.Replace(" ", "_") + "/" + documentName;
                                 iCompanyDocument.AddCompanyDocument(cd);
                             }
