@@ -17,6 +17,15 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CompanyId)
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="col-xs-12 col-sm-12 alert-danger">
+                <div class="form-group text-center">
+                    @Html.ValidationMessage("msg")
+                </div>
+            </div>
+        }
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.TaxBasis, new { @class = "control-label col-md-2" })

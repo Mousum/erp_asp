@@ -39,7 +39,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
                 taxSetting.CompanyId = Int32.Parse( AccSet.Companies.Id.ToString());
 
                 if (_taxSettingService.AddTaxSetting(taxSetting))
-                    return Content("Data insert Successfully");
+                    return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
                 else
                     return Content("Data insert Failed");
             }
@@ -67,9 +67,13 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             try
             {
                 if(_taxSettingService.UpdateTaxSetting(taxSetting))
-                    return Content("Data Update Successfully");
+                    return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
                 else
-                    return Content("Data Update Failed");
+                {
+                    ModelState.AddModelError("msg", "Data Update Failed");
+                    return View();
+                }
+                    
             }
             catch (Exception ex)
             {
