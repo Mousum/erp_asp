@@ -22,6 +22,7 @@ namespace Mhasb.Domain.OrgSettings
        public double SharePrice { get; set; }
        public double TotalShares { get; set; }
        public int SharesCurrencyId { get; set; }
+       public bool IsActive { get; set; }
        public DateTime StartingDate { get; set; }
        public DateTime? EndingDate { get; set; }
        public DateTime? PeriodLockDate { get; set; }
@@ -33,7 +34,7 @@ namespace Mhasb.Domain.OrgSettings
        public virtual Company Companies { get; set; }
        public virtual Currency Currencies { get; set; }
        public virtual Currency SharesCurrencies { get; set; }
-       public virtual FinalcialPeriod FiaFinalcialPeriods { get; set; }
+       public virtual FinalcialPeriod FinalcialPeriods { get; set; }
 
 
     }

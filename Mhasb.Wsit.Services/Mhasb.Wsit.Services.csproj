@@ -75,7 +75,9 @@
     <Compile Include="Organizations\ProjectService.cs" />
     <Compile Include="Organizations\TaskManagerService.cs" />
     <Compile Include="OrgSettings\CurrencyService.cs" />
+    <Compile Include="OrgSettings\FinalcialSettingService.cs" />
     <Compile Include="OrgSettings\ICurrency.cs" />
+    <Compile Include="OrgSettings\IFinalcialSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\ActionListService.cs" />
     <Compile Include="Users\IActionListService.cs" />

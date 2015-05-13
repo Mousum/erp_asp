@@ -32,6 +32,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            this.Property(f => f.EndingDate).HasColumnName("ending_date");
            this.Property(f => f.PeriodLockDate).HasColumnName("period_lock_date");
            this.Property(f => f.YearLockDate).HasColumnName("year_lock_date");
+           this.Property(f => f.IsActive).HasColumnName("is_active");
 
            this.ToTable("set.finalcial_setting");
 
@@ -49,7 +50,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
                .HasForeignKey(f => f.SharesCurrencyId)
                .WillCascadeOnDelete(false);
 
-           this.HasRequired(f=>f.FiaFinalcialPeriods)
+           this.HasRequired(f=>f.FinalcialPeriods)
                .WithMany(f=>f.FinalcialSettings)
                .HasForeignKey(f=>f.PeriodId);
        }
