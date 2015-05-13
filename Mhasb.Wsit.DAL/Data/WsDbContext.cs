@@ -94,13 +94,11 @@ namespace Mhasb.Wsit.DAL.Data
 
             // Org Settings
             modelBuilder.Configurations.Add(new CurrencyMapping());
-            modelBuilder.Configurations.Add(new FinalcialPeriodMapping());
             modelBuilder.Configurations.Add(new FinalcialSettingMapping());
             modelBuilder.Configurations.Add(new AuditorMapping());
             modelBuilder.Configurations.Add(new TaxSettingMapping());
 
         }
 
-        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.Currency> Currencies { get; set; }
     }
 }

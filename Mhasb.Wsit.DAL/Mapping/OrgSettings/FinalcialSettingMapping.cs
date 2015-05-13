@@ -21,7 +21,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            // property
            this.Property(f => f.FoundedYear).HasColumnName("founded_year");
 
-           this.Property(f => f.PeriodId).HasColumnName("periodid");
+           this.Property(f => f.FinalcialPeriod).HasColumnName("periodid");
            this.Property(f => f.CurrencyId).HasColumnName("currencyid");
            this.Property(f => f.SharesCurrencyId).HasColumnName("shares_currencyid");
            this.Property(f => f.Capital).HasColumnName("capital");
@@ -49,10 +49,6 @@ namespace Mhasb.DAL.Mapping.OrgSettings
                .WithMany(f => f.SharesFinalcialSettings)
                .HasForeignKey(f => f.SharesCurrencyId)
                .WillCascadeOnDelete(false);
-
-           this.HasRequired(f=>f.FinalcialPeriods)
-               .WithMany(f=>f.FinalcialSettings)
-               .HasForeignKey(f=>f.PeriodId);
-       }
+           }
     }
 }
