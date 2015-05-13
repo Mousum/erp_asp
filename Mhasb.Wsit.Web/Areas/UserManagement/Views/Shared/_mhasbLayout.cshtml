@@ -39,10 +39,12 @@
                         <a href="#page"></a>
                     </li>
                     <li class="active">
-                        <a href="#Dashboard">Dashboard</a>
+                        @*<a href="#Dashboard">Dashboard</a>*@
+                        @Html.ActionLink("Dashboard", "Dashboard", "Users", new { area = "UserManagement" })
                     </li>
                     <li class="">
-                        <a href="#Settings">Settings</a>
+                        @*<a href="#Settings">Settings</a>*@
+                        @Html.ActionLink("Settings", "AccountSettings", "Users", new { area = "UserManagement" })
                     </li>
                     <li class="">
                         <a href="#Operations">Operations</a>

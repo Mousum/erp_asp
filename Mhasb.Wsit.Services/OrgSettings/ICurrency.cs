@@ -11,5 +11,8 @@ namespace Mhasb.Services.OrgSettings
     {
         bool AddCurrency(Currency cur);
         List<Currency> GetAllCurrency();
+        bool UpdateCurrency(Currency cur);
+        bool DeleteCurrency(int id);
+        Currency GetCurrencyById(int id);
     }
 }

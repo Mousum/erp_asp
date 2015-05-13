@@ -22,6 +22,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IUserService uService = new UserService();
         private IEmployeeService eService = new EmployeeService();
         private IRoleService rService = new RoleService();
+        private readonly ISettingsService sService = new SettingsService();
         public ActionResult Index()
         {
             var model = inService.GetAllInvitation();
@@ -57,24 +58,23 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             invitation.Token = rand;
             invitation.Status = StatusEnum.test1;
             if (inService.CreateInvitation(invitation))
-            
             {
-                
-                string host = HttpContext.Request.Url.Host+":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token ;
+
+                string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
                 string msg = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Hello There"
-                                            +", </p><p>To verify your account, please click the following link:</p>"
-                                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host 
-                                            +"</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
-                                            +"this email. The verify link is private.</p></body></html>";
+                                            + ", </p><p>To verify your account, please click the following link:</p>"
+                                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host
+                                            + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
+                                            + "this email. The verify link is private.</p></body></html>";
                 msg = HttpUtility.HtmlEncode(msg);
-                
-                
-                
+
+
+
                 string to = invitation.Email;
                 string subject = "Invitation From MHASB Erp";
                 string body = msg;
                 sendMail(to, subject, body);
-              
+
             }
             return RedirectToAction("Index");
         }
@@ -89,7 +89,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 {
                     if (Invitation.Status != StatusEnum.test2)
                     {
-                        
+
                         Invitation.Status = StatusEnum.test2;
                         inService.AcceptInvitation(Invitation);
                         ViewBag.Company = Invitation.CompanyId;
@@ -133,9 +133,18 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         emp.CompanyId = Invitation.CompanyId;
                         if (eService.CreateEmployee(emp))
                         {
+                            var accountSetting = new Settings();
+                            accountSetting.userId = user.Id;
+                            accountSetting.lgdash = false;
+                            accountSetting.lglast = false;
+                            accountSetting.lgcompany = true;
+                            accountSetting.Companies = new Company { Id = Invitation.CompanyId };
 
-                            CustomPrincipal.Login(user.Email, user.Password, false);
-                            return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                            if (sService.AddSettings(accountSetting))
+                            {
+                                CustomPrincipal.Login(user.Email, user.Password, false);
+                                return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                            }
                         }
                         else
                         {
@@ -155,7 +164,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
             return Content("You Must Agree with our terms and Condition");
         }
-        
+
 
         public bool sendMail(string to, string mailSubject, string mailBody)
         {
@@ -178,7 +187,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             {
                 Subject = subject,
                 Body = body,
-                IsBodyHtml=true
+                IsBodyHtml = true
             })
             {
                 smtp.Send(message);
