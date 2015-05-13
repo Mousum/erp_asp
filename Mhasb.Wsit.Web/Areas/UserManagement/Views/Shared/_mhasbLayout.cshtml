@@ -41,19 +41,31 @@
                     <li class="hidden">
                         <a href="#page"></a>
                     </li>
-                    <li class="active">
+                    <li class="">
                         <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dashboard</a>
 
                     </li>
                     <li class="">
-                        <a href='@Url.Action("AccountSettings", "Users", new { area = "UserManagement" }) '>Dashboard</a>
+                        <a href='@Url.Action("AccountSettings", "Users", new { area = "UserManagement" }) '>Account Settings</a>
 
                     </li>
                     <li class="">
-                        <a href="#Operations">Operations</a>
+                       
+                        <a href='@Url.Action("Index", "Tasks", new { area = "TaskManagement" }) '>Task Managements</a>
+
                     </li>
                     <li class="">
-                        <a href="#Reports">Reports</a>
+                         <a href='@Url.Action("Create", "RoleVsActions", new { area = "UserManagement" })'>Role Vs Actions</a>
+                    </li>
+                    <li class="">
+                         <a href='@Url.Action("Index", "Roles", new { area = "UserManagement" })'>User Role</a>
+                    </li>
+                    <li class="">
+                        <a href='@Url.Action("Index", "ActionList", new { area = "UserManagement" })'>Action List</a>
+                    </li>
+                    <li class="">
+                        
+                        <a href='@Url.Action("MyMhasb", "Users", new { area = "UserManagement" })'>MYMHASB</a>
                     </li>
                     <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
                 </ul>
