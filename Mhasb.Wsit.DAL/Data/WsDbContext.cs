@@ -101,5 +101,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new TaxSettingMapping());
 
         }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.Currency> Currencies { get; set; }
     }
 }
