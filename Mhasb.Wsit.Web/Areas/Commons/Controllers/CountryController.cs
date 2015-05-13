@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
 
+
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
     public class CountryController : Controller
@@ -17,11 +18,12 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         // GET: /Commons/Country/
         public ActionResult Index()
         {
-            var model=coService.GetAllCountries();
-            return View(model);
+            //var model=coService.GetAllCountries();
+            //return View(model);
+            return View("Index1");
         }
 
-        public PartialViewResult List(string currentFilter, string searchString, int? page)
+        public ActionResult List(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
             {
@@ -32,17 +34,18 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
-            List<Country> Language = coService.GetAllCountries();
+            List<Country> Country = coService.GetAllCountries();
             if (!String.IsNullOrEmpty(searchString))
             {
-                Language = Language.Where(s => s.CountryName.Contains(searchString)).ToList();
+                Country = Country.Where(s => s.CountryName.Contains(searchString)).ToList();
             }
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return PartialView("List", Language.ToPagedList(pageNumber, pageSize));
+            return PartialView(Country.ToPagedList(pageNumber, pageSize));
 
         }
+
         //
         // GET: /Commons/Country/Details/5
         public ActionResult Details(int id)

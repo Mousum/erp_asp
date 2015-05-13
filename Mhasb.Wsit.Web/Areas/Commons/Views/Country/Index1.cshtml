@@ -1,0 +1,75 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Country";
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+}
+<h2>Students1</h2>
+<p>
+    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="button" id="SearchStringBtn" value="Search" />
+</p>
+<div id="CountryListShow">
+
+</div>
+@*@Html.Action("List")*@
+
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $.get('@Url.Action("List", "Country", new { Area = "Commons" })' + '?page=', function (data) {
+                $('#CountryListShow').html(data);
+            }
+            );
+            //$(document).on("click", "#contentPager a[href]", function () {
+            //    $.ajax({
+            //        url: $(this).attr("href"),
+            //        type: 'GET',
+            //        cache: false,
+            //        success: function (result) {
+            //            $('#content').html(result);
+            //        }
+            //    });
+            //    return false;
+            //});
+        });
+
+        $(document).on("click", "#SearchStringBtn", function () {
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "Commons/Country/List?page=''" + "&SearchString=" + SearchString;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+    </script>
+}
+
+@*<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            alert("Russel");
+            $.get('@Url.Action("List", "Student", new { Area = "" })' + '?page=', function (data) {
+
+                $('#StudentListShow').html(data);
+            }
+            );
+            //$(document).on("click", "#contentPager a[href]", function () {
+            //    $.ajax({
+            //        url: $(this).attr("href"),
+            //        type: 'GET',
+            //        cache: false,
+            //        success: function (result) {
+            //            $('#content').html(result);
+            //        }
+            //    });
+            //    return false;
+            //});
+        });
+    </script>*@
