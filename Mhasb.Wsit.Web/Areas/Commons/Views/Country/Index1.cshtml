@@ -4,10 +4,15 @@
     Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
 }
 <h2>Students1</h2>
+<p class="btn btn-success link">
+    @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "link" })
+</p>
 <p>
     Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
     <input type="button" id="SearchStringBtn" value="Search" />
 </p>
+
+
 <div id="CountryListShow">
 
 </div>
@@ -43,6 +48,7 @@
                 url: url,
                 type: 'GET',
                 cache: false,
+                
                 success: function (result) {
                     $('#content').html(result);
                 }

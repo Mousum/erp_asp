@@ -39,7 +39,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 Industry = Industry.Where(s => s.IndustryName.Contains(searchString)).ToList();
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return PartialView(Industry.ToPagedList(pageNumber, pageSize));
 
