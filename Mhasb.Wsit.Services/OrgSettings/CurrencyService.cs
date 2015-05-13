@@ -28,12 +28,60 @@ namespace Mhasb.Services.OrgSettings
 
         }
 
+        public bool UpdateCurrency(Currency cur)
+        {
+            try
+            {
+                cur.State = ObjectState.Modified;
+                curRep.UpdateOperation(cur);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
+
+        public bool DeleteCurrency(int id)
+        {
+            try
+            {
+                curRep.DeleteOperation(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
+
         public List<Currency> GetAllCurrency()
         {
             try
             {
                 var curObj = curRep.GetOperation()
                                         .Get().ToList();
+
+                return curObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public Currency GetCurrencyById(int id)
+        {
+            try
+            {
+                var curObj = curRep.GetOperation()
+                                    .Filter(c=>c.Id==id)
+                                    .Get().SingleOrDefault();
 
                 return curObj;
             }
