@@ -100,5 +100,11 @@ namespace Mhasb.Wsit.DAL.Data
 
         }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.FinalcialSetting> FinalcialSettings { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.Currency> Currencies { get; set; }
+
     }
 }

@@ -1,0 +1,121 @@
+﻿@model Mhasb.Domain.OrgSettings.FinalcialSetting
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Companies.TradingName)*@
+            Comapany Name
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Currencies.Name)*@
+            Currency
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SharesCurrencies.Name)*@
+            Share Currency
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FoundedYear)*@
+            Founded Year
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FinalcialPeriod)*@
+            Finalcial Period
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capital)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PaidUpCapital)*@
+            Paid Up Capital
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SharePrice)*@
+            Share Price
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TotalShares)*@
+            Total Shares
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>*@
+        <th>
+            @*@Html.DisplayNameFor(model => model.StartingDate)*@
+            Starting Date
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.EndingDate)*@
+            Ending Date
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PeriodLockDate)*@
+            Period Lock Date
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.YearLockDate)*@
+            Year Lock Date
+        </th>
+        <th></th>
+    </tr>
+
+@*@foreach (var item in Model) {*@
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Companies.TradingName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Currencies.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.SharesCurrencies.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FoundedYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FinalcialPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Capital)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PaidUpCapital)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.SharePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.TotalShares)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => Model.IsActive)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => Model.StartingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.EndingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PeriodLockDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.YearLockDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) 
+        </td>
+    </tr>
+@*}*@
+
+</table>
