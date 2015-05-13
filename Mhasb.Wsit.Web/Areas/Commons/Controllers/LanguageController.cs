@@ -43,7 +43,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 Language = Language.Where(s => s.LanguageName.Contains(searchString)).ToList();
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return PartialView(Language.ToPagedList(pageNumber, pageSize));
 
