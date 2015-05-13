@@ -96,8 +96,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new CurrencyMapping());
             modelBuilder.Configurations.Add(new FinalcialPeriodMapping());
             modelBuilder.Configurations.Add(new FinalcialSettingMapping());
-            modelBuilder.Configurations.Add(new ExternalAuditorMapping());
-            modelBuilder.Configurations.Add(new InternalAuditorMapping());
+            modelBuilder.Configurations.Add(new AuditorMapping());
             modelBuilder.Configurations.Add(new TaxSettingMapping());
 
         }

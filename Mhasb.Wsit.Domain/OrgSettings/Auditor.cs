@@ -8,8 +8,10 @@ using Mhasb.Wsit.Domain;
 
 namespace Mhasb.Domain.OrgSettings
 {
-    public class InternalAuditor : IObjectStateInt
+    public class Auditor : IObjectStateInt
     {
+        public int CompanyId { get; set; }
+        public EnumAuditorType AuditorType { get; set; }
         public string AuditorName { get; set; }
         public string AuditorTel { get; set; }
         public string AuditorEmail { get; set; }
@@ -19,5 +21,13 @@ namespace Mhasb.Domain.OrgSettings
         public ObjectState State { get; set; }
 
         public virtual Employee Employees { get; set; }
+        public virtual Company Companies { get; set; }
+    }
+
+
+    public enum EnumAuditorType
+    {
+        Internal=1,
+        External=2
     }
 }
