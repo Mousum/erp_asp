@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+
 
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
@@ -16,9 +18,33 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         // GET: /Commons/Industry/
         public ActionResult Index()
         {
-            var model = iService.GetAllIndustries();
-            return View(model);
+            //var model = iService.GetAllIndustries();
+            return View("Index1");
         }
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Industry> Industry = iService.GetAllIndustries();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Industry = Industry.Where(s => s.IndustryName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return PartialView(Industry.ToPagedList(pageNumber, pageSize));
+
+        }
+
 
         //
         // GET: /Commons/Industry/Details/5
