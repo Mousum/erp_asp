@@ -729,6 +729,7 @@
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Create.cshtml" />
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Index.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\List.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
