@@ -73,7 +73,6 @@
     <Compile Include="Mapping\Organizations\TaskManageMapping.cs" />
     <Compile Include="Mapping\OrgSettings\CurrencyMapping.cs" />
     <Compile Include="Mapping\OrgSettings\AuditorMapping.cs" />
-    <Compile Include="Mapping\OrgSettings\FinalcialPeriodMapping.cs" />
     <Compile Include="Mapping\OrgSettings\FinalcialSettingMapping.cs" />
     <Compile Include="Mapping\OrgSettings\TaxSettingMapping.cs" />
     <Compile Include="Mapping\Users\ActionListMapping.cs" />

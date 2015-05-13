@@ -15,7 +15,7 @@ namespace Mhasb.Domain.OrgSettings
        public int FoundedYear { get; set; }
 
        public int CompanyId { get; set; }
-       public int PeriodId { get; set; }
+       public EnumFinalcialPeriod FinalcialPeriod { get; set; }
        public int CurrencyId { get; set; }
        public double Capital { get; set; }
        public double PaidUpCapital { get; set; }
@@ -34,8 +34,16 @@ namespace Mhasb.Domain.OrgSettings
        public virtual Company Companies { get; set; }
        public virtual Currency Currencies { get; set; }
        public virtual Currency SharesCurrencies { get; set; }
-       public virtual FinalcialPeriod FinalcialPeriods { get; set; }
-
 
     }
+
+   public enum EnumFinalcialPeriod
+    {
+        Weekly=1,
+        MonMonthly=2,
+        Quarterly=3,
+        Biannual=4,
+        Yearly=5
+    }
+
 }

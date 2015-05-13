@@ -34,7 +34,7 @@ namespace Mhasb.Services.OrgSettings
                 var dbObj = _finalCrudOperation
                     .GetSingleObject(finalcialSetting.Id);
                 dbObj.FoundedYear = finalcialSetting.FoundedYear;
-                dbObj.PeriodId = finalcialSetting.PeriodId;
+                dbObj.FinalcialPeriod = finalcialSetting.FinalcialPeriod;
                 dbObj.CurrencyId = finalcialSetting.CurrencyId;
                 dbObj.SharesCurrencyId = finalcialSetting.SharesCurrencyId;
                 dbObj.StartingDate = finalcialSetting.StartingDate;
@@ -63,7 +63,6 @@ namespace Mhasb.Services.OrgSettings
                 var fSetttingObj = _finalCrudOperation.GetOperation()
                     .Include(fs => fs.Companies)
                     .Include(fs => fs.Currencies)
-                    .Include(fs => fs.FinalcialPeriods)
                     .Filter(fs => fs.Id == finalcialSettingId)
                     .Get()
                     .SingleOrDefault();
