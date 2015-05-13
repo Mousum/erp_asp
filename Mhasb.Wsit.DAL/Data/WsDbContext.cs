@@ -100,5 +100,9 @@ namespace Mhasb.Wsit.DAL.Data
 
         }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.TaxSetting> TaxSettings { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
+
     }
 }

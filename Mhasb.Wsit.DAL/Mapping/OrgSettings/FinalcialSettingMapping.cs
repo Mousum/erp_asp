@@ -22,6 +22,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            this.Property(f => f.FoundedYear).HasColumnName("founded_year");
 
            this.Property(f => f.FinalcialPeriod).HasColumnName("periodid");
+           this.Property(f => f.CompanyId).HasColumnName("companyid");
            this.Property(f => f.CurrencyId).HasColumnName("currencyid");
            this.Property(f => f.SharesCurrencyId).HasColumnName("shares_currencyid");
            this.Property(f => f.Capital).HasColumnName("capital");

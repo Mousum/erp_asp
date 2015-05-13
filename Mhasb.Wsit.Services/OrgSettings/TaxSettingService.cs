@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mhasb.Domain.OrgSettings;
 using Mhasb.Wsit.DAL.Operations;
@@ -65,6 +66,11 @@ namespace Mhasb.Services.OrgSettings
                var errMsg = ex.Message;
                return null;
            }
-       }   
+       }
+
+       public List<TaxSetting> GeTaxSettingList()
+       {
+           return null;
+       }
     }
 }
