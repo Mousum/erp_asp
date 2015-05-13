@@ -133,6 +133,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         emp.CompanyId = Invitation.CompanyId;
                         if (eService.CreateEmployee(emp))
                         {
+
                             CustomPrincipal.Login(user.Email, user.Password, false);
                             return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
                         }
