@@ -26,6 +26,31 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(Currency cr)
+        {
+            cService.AddCurrency(cr);
+            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View(cService.GetCurrencyById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Currency cr)
+        {
+            cService.UpdateCurrency(cr);
+            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+        }
+
+        public ActionResult Delete(int id)
+        {
+            cService.DeleteCurrency(id);
+            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+        }
+
 	
 	}
 }

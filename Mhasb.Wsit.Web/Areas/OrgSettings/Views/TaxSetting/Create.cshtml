@@ -1,0 +1,63 @@
+﻿@model Mhasb.Domain.OrgSettings.TaxSetting
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    
+    @Html.AntiForgeryToken()
+
+    <div class="organization-details-form">
+        <h4>TaxSetting</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                        @Html.TextBoxFor(model => model.TaxBasis, new { placeholder = "Tax Basis", @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.TaxBasis)
+                </div>
+
+                <div class="form-group">
+                        @Html.TextBoxFor(model => model.DisplayName, new { placeholder = "Tax ID Display Name", @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.DisplayName)
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                        @Html.TextBoxFor(model => model.TaxId, new { placeholder = "Tax ID Number", @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.TaxId)
+                </div>
+                <div class="form-group">
+                        @Html.Label("Tax Period", new { @class = "inline-label" })
+                        @Html.DropDownList("FinalcialPeriod", ViewBag.PeriodList as SelectList, "--Select Period First--", new { @class = "cstm-input",@style="width: 82%" })
+                        @Html.ValidationMessageFor(model => model.FinalcialPeriod)
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
