@@ -3,11 +3,11 @@
 <div class="row">
     <div class="col-md-6">
         <label>Task To</label>
-        @Html.DropDownList("TaskTo", (SelectList)ViewBag.Employess, "--Select Employee--", htmlAttributes: new { @class = "form-control", id = "utempId", required = "required" })
+        @Html.DropDownList("TaskTo", (SelectList)ViewBag.Employess, "--Select Employee--", htmlAttributes: new { @class = "cstm-input", id = "utempId", required = "required" })
     </div>
     <div class="col-md-6">
         <label>Task Title</label>
-        @Html.TextBoxFor(m => m.Tite, new { @class = "form-control",id="utTitle" })
+        @Html.TextBoxFor(m => m.Tite, new { @class = "cstm-input", id = "utTitle" })
     </div>
 </div>
 <div class="row">
@@ -15,7 +15,7 @@
         <label>Status</label>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker3'>
-                 @Html.DropDownList("Status", (SelectList)ViewBag.status, "--Select Status--", htmlAttributes: new { @class = "form-control", id = "utstatus", required = "required" })
+                 @Html.DropDownList("Status", (SelectList)ViewBag.status, "--Select Status--", htmlAttributes: new { @class = "cstm-input", id = "utstatus", required = "required" })
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -28,11 +28,11 @@
         <label>Starting Date</label>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker7'>
-              
-                @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", id = "utstart" })
+                <input class="cstm-input" data-val="true" data-val-date="The field StartingDate must be a date." data-val-required="The StartingDate field is required." id="utstart" name="StartingDate" type="text" value="@Model.StartingDate.ToString("dd/MM/yyyy")">
+                @*@Html.TextBoxFor(m => m.StartingDate, new { @class = "cstm-input", id = "utstart" })*@
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+                    <i class="fa fa-calendar"></i>
+                    </span>
             </div>
         </div>
     </div>
@@ -40,9 +40,10 @@
         <label>Finish Date</label>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker8'>
-               @Html.TextBoxFor(m => m.FinishingDate, new { @class = "form-control", id = "utfinish" })
+                <input class="cstm-input" data-val="true" data-val-date="The field FinishingDate must be a date." data-val-required="The FinishingDate field is required." id="utfinish" name="FinishingDate" type="text" value="@Model.FinishingDate.ToString("dd/MM/yyyy")">
+              @* @Html.TextBoxFor(m => m.FinishingDate, new { @class = "cstm-input", id = "utfinish" })*@
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <i class="fa fa-calendar"></i>
                 </span>
             </div>
         </div>

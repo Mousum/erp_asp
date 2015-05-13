@@ -8,6 +8,8 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 
 namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
@@ -28,7 +30,7 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
             var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
@@ -37,9 +39,40 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
 
             }
 
-            var model = pService.GetAllProject();
-            return View(model);
+            //var model = pService.GetAllProject();
+            return View("Index1");
         }
+        //method for paging and search option
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Project> projects = pService.GetAllProject();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                projects = projects.Where(s => s.ProjectName.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return PartialView(projects.ToPagedList(pageNumber, pageSize));
+
+        }
+
+
+
+
+
+
+
+
         [HttpPost]
         public string CreateProject(string ProjectName, int ManagerId, string StartingDate, string FinishingDate)
         {
@@ -103,12 +136,13 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
             var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
             {
                 var msg = ex.Message;
+              
 
             }
             var model = pService.GetSingleProject(id);
@@ -147,7 +181,7 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
             var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
@@ -165,19 +199,29 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
             return PartialView("_updateTask", model);
         }
         [HttpPost]
-        public string EditTask(int id, int TaskTo, string TaskTitle, string StartingDate, string FinishingDate)
+        public string EditTask(int id, int TaskTo, string TaskTitle, string StartingDate, string FinishingDate,int Status)
         {
-
-            string[] dateString = StartingDate.Split('/');
+            EnumStatus enumDisplayStatus = (EnumStatus)Status;
+            string StatusValue = enumDisplayStatus.ToString();
+            
+            
+            string[] date1 = StartingDate.Split(' ');
+            string[] date2 = FinishingDate.Split(' ');
+            string[] dateString = date1[0].Split('/');
             DateTime start_date = Convert.ToDateTime(dateString[1] + "/" + dateString[0] + "/" + dateString[2]);
-            string[] dateString1 = FinishingDate.Split('/');
+            
+            string[] dateString1 = date2[0].Split('/');
             DateTime end_date = Convert.ToDateTime(dateString1[1] + "/" + dateString1[0] + "/" + dateString1[2]);
+           
+            
             var task = new TaskManager();
             task.Id = id;
             task.TaskTo = TaskTo;
             task.Tite = TaskTitle;
             task.StartingDate = start_date;
             task.FinishingDate = end_date;
+            task.Status = (EnumStatus)Enum.Parse(typeof(EnumStatus), StatusValue, true);
+           // task.Status = EnumStatus.stringValue;
             if (itService.UpdateTask(task))
             {
                 return "Success";

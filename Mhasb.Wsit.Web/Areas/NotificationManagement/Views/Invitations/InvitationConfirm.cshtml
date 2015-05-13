@@ -11,7 +11,7 @@
             <h4 class="text-center">Please Sign Up</h4>
         </div>
         <div class="panel-body">
-            @using (Html.BeginForm("Registration", "Users", new { Area = "UserManagement" }, FormMethod.Post, new { @class = "sign-up-form" }))
+            @using (Html.BeginForm("InvitationConfirm", "Invitations", new { Area = "NotificationManagement" }, FormMethod.Post, new { @class = "sign-up-form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
