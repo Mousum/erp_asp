@@ -177,6 +177,8 @@
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
+    <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
     <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
@@ -706,6 +708,10 @@
     <Content Include="Areas\Commons\Views\Country\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Language\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Language\List.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\web.config" />
+    <Content Include="Areas\OrgSettings\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -798,6 +804,7 @@
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
+    <Folder Include="Areas\OrgSettings\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />
     <Folder Include="AxureStyles\images\chart_of_accounts_settings\" />
     <Folder Include="AxureStyles\images\cost_centers_settings\" />
@@ -835,6 +842,9 @@
       <Project>{cb47ae35-93bb-4696-9338-b700bfc0a5e6}</Project>
       <Name>Mhasb.Wsit.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
