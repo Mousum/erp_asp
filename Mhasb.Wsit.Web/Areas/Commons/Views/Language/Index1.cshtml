@@ -4,45 +4,46 @@
     Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
 }
 <div class="container">
-<p style="display:none;">
-    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-    <input type="button" id="SearchStringBtn" value="Search" />
-</p>
-<p class="btn btn-success link">
-    @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "link" })
-</p>
-<div  id="LanguageListShow">
 
-</div>
-@*@Html.Action("List")*@
+    <p class="btn btn-success link">
+        @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "link" })
+    </p>
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { id = "SearchString" })
+        <input type="button" id="SearchStringBtn" value="Search" />
+    </p>
+    <div id="LanguageListShow">
+
+    </div>
+    @*@Html.Action("List")*@
 </div>
 
 @section scripts
 {
     <script language="javascript" type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        $.get('@Url.Action("List", "Language", new { Area = "Commons" })' + '?page=', function (data) {
+            $.get('@Url.Action("List", "Language", new { Area = "Commons" })' + '?page=', function (data) {
                 $('#LanguageListShow').html(data);
             }
-            );
-            
-    });
-        $(document).on("click", "#SearchStringBtn", function () {
-            alert("ljklk");
-            var baseUrl = '@Url.Content("~/")';
-        var SearchString = $("#SearchString").val();
-        var url = baseUrl + "Language/List?page=''" + "&SearchString=" + SearchString;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#content').html(result);
-            }
+                );
+
         });
-        return false;
-    });
+        $(document).on("click", "#SearchStringBtn", function () {
+            
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "Commons/Language/List?page=''" + "&SearchString=" + SearchString;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
     </script>
 }
 

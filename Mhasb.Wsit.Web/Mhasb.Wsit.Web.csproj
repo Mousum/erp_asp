@@ -652,7 +652,7 @@
     <Content Include="Areas\UserManagement\Views\Roles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\CreateRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\EditRole.cshtml" />
-    <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Index_old.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\ActionList\Edit.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\Create.cshtml" />
@@ -706,6 +706,13 @@
     <Content Include="Areas\Commons\Views\Country\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Language\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Language\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_taskList.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateProject.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateTask.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Shared\_Layout_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\Deshboard_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\List.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
