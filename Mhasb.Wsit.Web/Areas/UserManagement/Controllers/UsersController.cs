@@ -126,7 +126,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         //[AllowAnonymous]
         public ActionResult MyMhasb()
-        {
+        {        
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             List<Company> myCompanyList = iCompany.GetAllCompanies()
                                                    .Where(c => c.Users.Id == user.Id).ToList();

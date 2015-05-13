@@ -563,6 +563,8 @@
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
@@ -603,6 +605,8 @@
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.dll" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.pdb" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\UserManagement\Views\web.config" />
@@ -714,6 +718,15 @@
     <Content Include="Areas\OrgSettings\Views\Currency\Index.cshtml" />
     <Content Include="Areas\Commons\Views\Industry\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Industry\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_taskList.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateProject.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateTask.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Shared\_Layout_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\Deshboard_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\Index_old.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -773,10 +786,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\master.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -784,7 +799,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

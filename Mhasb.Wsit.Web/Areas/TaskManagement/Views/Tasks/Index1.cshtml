@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Mhasb.Domain.Organizations.Project>
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
@@ -14,54 +15,18 @@
                 Add New Project
             </button>
             <div id="alert"></div>
-            <table class="table table-bordered table-hover table-condensed data-table">
-                <thead>
-                    <tr class="table-header">
-                        <th>#</th>
-                        <th>Project Name</th>
-                        <th>Project Leader</th>
-                        <th>Members Number</th>
-                        <th>Project Date</th>
-                        <th>Starting Date</th>
-                        <th>Finishing Date</th>
-                        <th>Tasks Number</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (!Model.Any())
-                    {
-                        <tr >
-                            <td colspan="8">
-                                <b class="alert-info" style="float:inherit;"> There Are No Project Created</b>
-                            </td>
-                        </tr>
-                    }
-                    else
-                    {
-                        foreach (var item in Model)
-                        {
-                            <tr class="projectList" data-id="@item.Id">
-                                <td>2</td>
-                                <td>@item.ProjectName</td>
-                                <td>@item.ManagerId</td>
-                                <td>@item.NumberOfMember</td>
-                                <td>@item.ProjectDate</td>
-                                <td>@item.StartingDate</td>
-                                <td>@item.FinishingDate</td>
-                                <td><a href="javascript:void(0)" class="task" data-id="@item.Id">@item.TaskManagers.Count</a></td>
-                                <td><button class="btn update-btn" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-3">Update</button></td>
-                            </tr>
-                        }
-                    }
-                  
-                </tbody>
-            </table>
+            <p>
+                Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="button" id="SearchStringBtn" value="Search" />
+            </p>
+            <div id="ActionListListShow">
+
+            </div>
         </div>
     </div>
 </div>
 <div class="container" id="taskList">
-  
+
 </div>
 <!-- Pop Up Add New Project -->
 
@@ -81,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-12 label-marg">
                         <label>Leader</label>
-                        @if (ViewBag.Employess!=null)
+                        @if (ViewBag.Employess != null)
                         {
                             @Html.DropDownList("ManagerId", (SelectList)ViewBag.Employess, "--Select Leader--", htmlAttributes: new { @class = "cstm-input", id = "mId", required = "required" })
                         }
@@ -91,7 +56,7 @@
                                 <option value="">No Employee Found</option>
                             </select>
                         }
-                      
+
                     </div>
 
                 </div>
@@ -241,10 +206,10 @@
 
 
         });
-        $(".task").click(function () {
+        @*$(".task").click(function () {
             id = $(this).attr("data-id")
             $(".projectList").each(function () {
-                if($(this).attr("data-id")!=id){
+                if ($(this).attr("data-id") != id) {
                     // $(this).remove();
                     $(this).fadeOut(500);
                 }
@@ -261,17 +226,17 @@
                 datatype: "html",
                 success: function (data) {
                     $("#taskList").html(data).fadeIn(500);
-                   
+
                 }
             });
-        });
+        });*@
         $("#crTask").click(function () {
-           
+
             if ($("#empId").val() == "") {
                 $("#empId").focus();
                 $("#empId").css("border-color", "red");
             }
-            else if ($("#tTitle").val()=="") {
+            else if ($("#tTitle").val() == "") {
                 $("#tTitle").focus();
                 $("#tTitle").css("border-color", "red");
             }
@@ -318,9 +283,10 @@
             }
 
         });
-        $(".update-btn").click(function () {
+        @*$(".update-btn").click(function () {
             var baseUrl = '@Url.Content("~/")';
             var data = { id: $(this).attr("data-id") };
+            alert($(this).attr("data-id"));
             $.ajax({
                 type: "POST",
                 url: baseUrl + "TaskManagement/Tasks/UpdateProject",
@@ -331,7 +297,7 @@
 
                 }
             });
-        });
+        });*@
         $("#UpProj").click(function () {
 
             if ($("#uPname").val() == "") {
@@ -374,7 +340,7 @@
 
 
         });
-      
+
     });
 
 
@@ -388,7 +354,7 @@
                 <h4 class="modal-title sign-up-title" id="myModalLabel">Update Project</h4>
             </div>
             <div class="modal-body" id="projectDet">
-               
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -398,3 +364,33 @@
     </div>
 </div>
 <!-- Pop Up Update Project -->
+
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $.get('@Url.Action("List", "Tasks", new { Area = "TaskManagement" })' + '?page=', function (data) {
+                $('#ActionListListShow').html(data);
+            }
+            );
+
+        });
+
+        $(document).on("click", "#SearchStringBtn", function () {
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "TaskManagement/Tasks/List?page=''" + "&SearchString=" + SearchString;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+    </script>
+}
+

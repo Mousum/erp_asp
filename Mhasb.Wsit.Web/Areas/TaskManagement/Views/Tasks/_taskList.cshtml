@@ -6,7 +6,7 @@
         @Html.ActionLink("See All Project", "Index", "Tasks", new { area = "TaskManagement" }, new { @style= "float:right;text-decoration:none"})
         @if (!Model.Any())
         {
-            <div class=" alert alert-info alert-dismissable"  style="float:inherit;"> There Are No Tasks Under The Project</div>
+            <div class=" alert alert-info alert-dismissable"  style="float: none;"> There Are No Tasks Under The Project</div>
 
         }
         else
@@ -28,7 +28,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr class="danger">
+                    <tr>
                         <td>@item.Id</td>
                         <td>@item.TaskTo</td>@*@item.Employees.Users.FirstName @item.Employees.Users.LastName*@
                         <td>@item.Tite</td>

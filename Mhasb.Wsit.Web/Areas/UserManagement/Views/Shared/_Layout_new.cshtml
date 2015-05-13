@@ -46,17 +46,21 @@
                         <a href="#page"></a>
                     </li>
                     <li class="active">
-                        @Html.ActionLink("Dashboard", "Dashboard", "Users", new { area = "UserManagement" })
+                        <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dashboard</a> 
+                        
                     </li>
                     <li class="">
-                        @Html.ActionLink("Settings", "AccountSettings", "Users", new { area = "UserManagement" })
+                        <a href='@Url.Action("AccountSettings", "Users", new { area = "UserManagement" }) '>Dashboard</a> 
+                       
                     </li>
+                        
                     <li class="">
                         <a href="#Operations">Operations</a>
                     </li>
                     <li class="">
                         <a href="#Reports">Reports</a>
                     </li>
+                    <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
                 </ul>
 
             </div>

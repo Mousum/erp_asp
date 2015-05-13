@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<Mhasb.Domain.Organizations.Project>
+@using PagedList.Mvc;
+<div id="content">
+    <table class="table table-bordered table-hover table-condensed data-table">
+        <thead>
+            <tr class="table-header">
+                <th>#</th>
+                <th>Project Name</th>
+                <th>Project Leader</th>
+                <th>Members Number</th>
+                <th>Project Date</th>
+                <th>Starting Date</th>
+                <th>Finishing Date</th>
+                <th>Tasks Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="8">
+                        <b class="alert-info" style="float:inherit;"> There Are No Project Created</b>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr class="projectList" data-id="@item.Id">
+                        <td>2</td>
+                        <td>@item.ProjectName</td>
+                        <td>@item.ManagerId</td>
+                        <td>@item.NumberOfMember</td>
+                        <td>@item.ProjectDate</td>
+                        <td>@item.StartingDate</td>
+                        <td>@item.FinishingDate</td>
+                        <td><a href="javascript:void(0)" class="task" data-id="@item.Id">@item.TaskManagers.Count</a></td>
+                        <td><button class="btn update-btn" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-3">Update</button></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+
+
+    <div id="contentPager" class="contentPager">
+        @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).on("click", ".contentPager a", function () {
+        var currentFilter = $("#SearchString").val();
+
+        var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#content').html(result);
+            }
+        });
+        return false;
+    });
+
+    $(document).ready(function () {
+
+    });
+
+    $(".update-btn").click(function () {
+        alert("Hello");
+        var baseUrl = '@Url.Content("~/")';
+        var data = { id: $(this).attr("data-id") };
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "TaskManagement/Tasks/UpdateProject",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $("#projectDet").html(data);
+
+            }
+        });
+    });
+    $(".task").click(function () {
+        id = $(this).attr("data-id")
+        $(".projectList").each(function () {
+            if ($(this).attr("data-id") != id) {
+                // $(this).remove();
+                $(this).fadeOut(500);
+            }
+        })
+
+        $("#contentPager").css("display", "none");
+        var baseUrl = '@Url.Content("~/")';
+        var data = { id: id }
+
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "TaskManagement/Tasks/TaskList",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $("#taskList").html(data).fadeIn(500);
+
+            }
+        });
+    });
+
+</script>
