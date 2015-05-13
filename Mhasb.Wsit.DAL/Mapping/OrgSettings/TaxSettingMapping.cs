@@ -36,7 +36,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
 
            // relationship
            this.HasRequired(t => t.Companies)
-               .WithMany()
+               .WithMany(t=>t.TaxSettings)
                .HasForeignKey(t => t.CompanyId);
        }
     }

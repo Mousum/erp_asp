@@ -82,9 +82,20 @@
             url: url,
             type: 'GET',
             cache: false,
+            //beforeSend: function () {
+            //    //$(placeholder).addClass('loading');
+            //   // $('#loader-wrapper').show();
+            //    $('#loader-wrapper').css('display','block');
+            //},
             success: function (result) {
                 $('#content').html(result);
-            }
+
+            },
+            //complete: function () {
+            //    //$(placeholder).removeClass('loading');
+            //    //$('#loader-wrapper').hide();
+            //    $('#loader-wrapper').css('display', 'none');
+            //}
         });
         return false;
     });

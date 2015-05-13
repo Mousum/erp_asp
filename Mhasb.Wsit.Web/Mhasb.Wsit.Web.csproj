@@ -179,6 +179,7 @@
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\FinalcialSettingController.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\TaxSettingController.cs" />
     <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
     <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
@@ -570,6 +571,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\loader.css" />
     <Content Include="Content\master.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -713,8 +715,17 @@
     <Content Include="Areas\OrgSettings\Views\_ViewStart.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Currency\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Index1.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_taskList.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateProject.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\_updateTask.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Currency\Create.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Currency\Edit.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\TaxSetting\Create.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\TaxSetting\Index.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\TaxSetting\Details.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\TaxSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Create.cshtml" />
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\FinalcialSetting\Index.cshtml" />
@@ -773,6 +784,7 @@
     <Content Include="Scripts\cbpAnimatedHeader.js" />
     <Content Include="Scripts\cbpAnimatedHeader.min.js" />
     <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\customeJs.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

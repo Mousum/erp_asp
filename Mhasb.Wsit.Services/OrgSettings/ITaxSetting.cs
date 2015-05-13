@@ -12,5 +12,6 @@ namespace Mhasb.Services.OrgSettings
        bool AddTaxSetting(TaxSetting taxSetting);
        bool UpdateTaxSetting(TaxSetting taxSetting);
        TaxSetting GeTaxSetting(int taxSettingId);
+       List<TaxSetting> GeTaxSettingList();
    }
 }

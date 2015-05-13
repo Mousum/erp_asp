@@ -29,12 +29,14 @@ namespace Mhasb.Wsit.Web
                       "~/Scripts/jquery.easing.min.js",
                       "~/Scripts/master.js",
                       "~/Scripts/bootstrap-datepicker.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js"
+                      "~/Scripts/bootstrap-datetimepicker.min.js",
+                      "~/Scripts/customeJs.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/master.css",
+                       "~/Content/loader.css",
                       "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/bootstrap-datetimepicker.min.css"
