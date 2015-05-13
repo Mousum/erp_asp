@@ -712,6 +712,8 @@
     <Content Include="Areas\OrgSettings\Views\_ViewStart.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Currency\Index.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\Index1.cshtml" />
+    <Content Include="Areas\Commons\Views\Industry\List.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
