@@ -31,7 +31,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
             }
             else
             {
-                searchString = currentFilter;
+                searchString = currentFilter;  
             }
             ViewBag.CurrentFilter = searchString;
             List<Country> Country = coService.GetAllCountries();
