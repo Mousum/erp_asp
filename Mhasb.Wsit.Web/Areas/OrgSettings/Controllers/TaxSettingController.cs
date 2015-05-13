@@ -3,12 +3,15 @@ using System.Linq;
 using System.Web.Mvc;
 using Mhasb.Domain.OrgSettings;
 using Mhasb.Services.OrgSettings;
+using Mhasb.Services.Users;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
     public class TaxSettingController : Controller
     {
         private readonly ITaxSetting _taxSettingService=new TaxSettingService();
+        private readonly IUserService uService = new UserService();
+        private readonly ISettingsService sService = new SettingsService();
 
         public ActionResult Index()
         {
@@ -31,10 +34,14 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             try
             {
-                taxSetting.CompanyId = 1;
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                var AccSet = sService.GetAllByUserId(user.Id);
+                taxSetting.CompanyId = Int32.Parse( AccSet.Companies.Id.ToString());
 
-                _taxSettingService.AddTaxSetting(taxSetting);
-                return Content("Data insert Successfully");
+                if (_taxSettingService.AddTaxSetting(taxSetting))
+                    return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
+                else
+                    return Content("Data insert Failed");
             }
             catch (Exception ex)
             {
@@ -43,17 +50,45 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 
         }
 
-        public ActionResult Details()
+        public ActionResult Edit(int id)
+        {
+            var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
+                                    .Cast<EnumFinalcialPeriod>()
+                                    .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                    .ToList();
+            ViewBag.PeriodList = new SelectList(periodList, "Name", "Name");
+            return View(_taxSettingService.GeTaxSetting(id));
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(TaxSetting taxSetting)
+        {
+            try
+            {
+                if(_taxSettingService.UpdateTaxSetting(taxSetting))
+                    return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
+                else
+                {
+                    ModelState.AddModelError("msg", "Data Update Failed");
+                    return View();
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+
+        }
+
+        public ActionResult Details(int id)
         {
 
-            var taxObj = _taxSettingService.GeTaxSetting(1);
+            var taxObj = _taxSettingService.GeTaxSetting(id);
 
             return View(taxObj);
         }
 
-        public ActionResult Edit()
-        {
-            return null;
-        }
 	}
 }
