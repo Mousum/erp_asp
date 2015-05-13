@@ -15,11 +15,10 @@ namespace Mhasb.Domain.OrgSettings
        public string TaxId { get; set; }
        public string DisplayName { get; set; }
        public int CompanyId { get; set; }
-       public int PeriodId { get; set; }
+       public EnumFinalcialPeriod FinalcialPeriod { get; set; }
        public int Id { get; set; }
        public ObjectState State { get; set; }
 
-       public virtual FinalcialPeriod FinalcialPeriods { get; set; }
        public virtual Company Companies { get; set; }
 
     }

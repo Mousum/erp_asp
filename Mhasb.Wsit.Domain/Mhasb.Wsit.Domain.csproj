@@ -44,7 +44,6 @@
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Organizations\Founder.cs" />
     <Compile Include="OrgSettings\Currency.cs" />
-    <Compile Include="OrgSettings\FinalcialPeriod.cs" />
     <Compile Include="Commons\Industry.cs" />
     <Compile Include="Commons\Language.cs" />
     <Compile Include="Commons\LegalEntity.cs" />

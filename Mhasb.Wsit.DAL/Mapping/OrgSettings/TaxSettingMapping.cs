@@ -18,7 +18,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
 
            this.Property(t => t.CompanyId)
                .HasColumnName("companyid");
-           this.Property(t => t.PeriodId)
+           this.Property(t => t.FinalcialPeriod)
                .HasColumnName("periodid");
 
            this.Property(t => t.TaxBasis)
@@ -38,9 +38,6 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            this.HasRequired(t => t.Companies)
                .WithMany()
                .HasForeignKey(t => t.CompanyId);
-           this.HasRequired(t => t.FinalcialPeriods)
-               .WithMany()
-               .HasForeignKey(t => t.PeriodId);
        }
     }
 }
