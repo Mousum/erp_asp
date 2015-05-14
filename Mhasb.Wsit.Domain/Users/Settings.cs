@@ -13,7 +13,7 @@ namespace Mhasb.Domain.Users
     {
         public long Id { get; set; }
 
-       public int CompanyId { get; set; }
+       public int? CompanyId { get; set; }
        public long userId { get; set; }
 
         public bool lgcompany { get; set; }

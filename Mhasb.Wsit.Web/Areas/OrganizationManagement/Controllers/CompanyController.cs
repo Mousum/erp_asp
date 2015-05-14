@@ -98,10 +98,22 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     if (iCompany.AddCompany(company))
                     {
                         var accountSetting = sService.GetAllByUserId(tt.Id);
-                        if (accountSetting.Companies == null) {
-                            accountSetting.Companies = new Company { Id=company.Id};
+                        if (accountSetting != null && accountSetting.Companies == null)
+                        {
+                            accountSetting.Companies = new Company { Id = company.Id };
                             accountSetting.lgcompany = true;
                             sService.UpdateSettings(accountSetting);
+                        }
+                        else 
+                        {
+                            var AccSet = new Settings();
+                            AccSet.userId = tt.Id;
+                            AccSet.lgdash = false;
+                            AccSet.lglast = false;
+                            AccSet.Companies = new Company { Id = company.Id };
+                            AccSet.lgcompany = true;
+                            sService.AddSettings(AccSet);
+
                         }
                         msg = "Success";
 

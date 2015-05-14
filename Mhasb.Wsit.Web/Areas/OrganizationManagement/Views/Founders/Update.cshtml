@@ -1,9 +1,11 @@
 ﻿@model Mhasb.Domain.Organizations.Founder
 <div class="container">
-    @using (Html.BeginForm("Settings", "Founders", new { area = "OrganizationManagement" }, FormMethod.Post, new { @class = "organization-details-form" }))
+    @using (Html.BeginForm("Update", "Founders", new { area = "OrganizationManagement" }, FormMethod.Post, new { @class = "organization-details-form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.Id);
+        @Html.HiddenFor(m => m.CompanyId);
         <div class="row cstm-frm-row">
             <div class="col-md-6">
                 @Html.TextBoxFor(m => m.FounderName, new { @class = "cstm-input", placeholder = "Founder Name" })
@@ -43,10 +45,10 @@
         </div>
         <div class="row cstm-frm-row">
             <div class="col-md-6">
-                @Html.TextBoxFor(m => m.Email, new { @class = "cstm-input", placeholder = "Founder Email",type="email" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "cstm-input", placeholder = "Founder Email", type = "email" })
                 @Html.ValidationMessageFor(m => m.Email)
             </div>
-            
+
         </div>
         <div class="row cstm-frm-row">
             <div class="col-md-6">

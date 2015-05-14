@@ -32,7 +32,8 @@ namespace Mhasb.DAL.Mapping.Users
 
             this.HasOptional(c => c.Companies)
                 .WithMany()
-                .HasForeignKey(c=>c.CompanyId);
+                .HasForeignKey(c => c.CompanyId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
