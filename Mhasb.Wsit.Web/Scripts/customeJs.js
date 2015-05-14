@@ -45,6 +45,7 @@ $(document).ready(function () {
             chackThree = "true";
         }
         var zoneId = $("#zoneId").val();
+        var ComanyId = $('#ComanyId').val();
 
         if (chackOne == "true" || chackTwo == "true" || chackThree == "true") {
 
@@ -52,14 +53,14 @@ $(document).ready(function () {
                 $('.msg-danger').text("Please Select timeZone");
                 $('.msg-danger').show('slow');
                 return false;
-            }
+            } 
 
             //var setting = { "Settings": { "lgcompany": chackOne, "lgdash": chackTwo, "lglast": chackThree, "TimezoneId": zoneId } };
             var url = $('.UpdateSettings').attr("data-url");
             $.ajax({
                 url: url,
                 type: "post",
-                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId },
+                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId, ComanyId: ComanyId },
                 success: function (data) {
                     $('.msg-danger').text("Successfully Added");
                     $('.msg-danger').show('slow');

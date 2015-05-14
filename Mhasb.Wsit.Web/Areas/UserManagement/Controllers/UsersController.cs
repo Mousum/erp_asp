@@ -192,7 +192,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
         }
         [HttpPost]
-        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast,int TimezoneId)
+        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId)
         //public ActionResult UpdateSettings(Settings setting)
         {
            
