@@ -76,8 +76,10 @@
     <Compile Include="Organizations\ITaskManagerService.cs" />
     <Compile Include="Organizations\ProjectService.cs" />
     <Compile Include="Organizations\TaskManagerService.cs" />
+    <Compile Include="OrgSettings\AuditorService.cs" />
     <Compile Include="OrgSettings\CurrencyService.cs" />
     <Compile Include="OrgSettings\FinalcialSettingService.cs" />
+    <Compile Include="OrgSettings\IAuditor.cs" />
     <Compile Include="OrgSettings\ICurrency.cs" />
     <Compile Include="OrgSettings\IFinalcialSetting.cs" />
     <Compile Include="OrgSettings\ITaxSetting.cs" />

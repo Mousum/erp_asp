@@ -29,8 +29,13 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         [HttpPost]
         public ActionResult Create(Currency cr)
         {
-            cService.AddCurrency(cr);
-            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            if(cService.AddCurrency(cr))
+                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            else
+            {
+                ModelState.AddModelError("msg","Currency did not inserted successfully");
+                return View();
+            }
         }
 
         public ActionResult Edit(int id)
@@ -41,14 +46,25 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         [HttpPost]
         public ActionResult Edit(Currency cr)
         {
-            cService.UpdateCurrency(cr);
-            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            if (cService.UpdateCurrency(cr))
+                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            else
+            {
+                ModelState.AddModelError("msg", "Currency did not updated successfully");
+                return View();
+            }
         }
 
         public ActionResult Delete(int id)
         {
-            cService.DeleteCurrency(id);
-            return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            
+            if (cService.DeleteCurrency(id))
+                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            else
+            {
+                ModelState.AddModelError("msg", "Currency did not updated successfully");
+                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            }
         }
 
 	
