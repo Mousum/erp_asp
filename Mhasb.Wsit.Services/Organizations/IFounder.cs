@@ -12,6 +12,6 @@ namespace Mhasb.Services.Organizations
         bool AddFounder(Founder founder);
         bool UpdateFounder(Founder founder);
         List<Founder> GetFounders(int companyId);
-
+        Founder GetSingleFounder(int FounderId);
     }
 }

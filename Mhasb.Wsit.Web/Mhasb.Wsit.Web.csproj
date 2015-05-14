@@ -729,6 +729,11 @@
     <Content Include="Areas\OrganizationManagement\Views\Founders\Settings.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\Deshboard_new.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_Layout_new.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\List.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Update.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
