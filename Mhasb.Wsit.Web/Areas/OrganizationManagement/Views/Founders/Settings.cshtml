@@ -1,0 +1,48 @@
+﻿@model Mhasb.Domain.Organizations.Founder
+<div class="container">
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.FounderName, new { @class = "cstm-input", placeholder = "Founder Name" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.FounderResidence, new { @class = "cstm-input", placeholder = "Residence of Founder" })
+        </div>
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6 ">
+            @Html.TextBoxFor(m => m.Tel, new { @class = "cstm-input", placeholder = "Founder Tel" })
+        </div>
+        <div class="col-md-6 ">
+            @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, "--Founder Country--", new { @class = "cstm-input" })
+        </div>
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Fax, new { @class = "cstm-input", placeholder = "Founder Fax" })
+        </div>
+        <div class="col-md-6 ">
+            @Html.DropDownList("LanguageId", ViewBag.LanguageList as SelectList, "--Founder Language--", new { @class = "cstm-input" })
+        </div>
+        
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.PoBoax, new { @class = "cstm-input", placeholder = "Founder P. O. Box" })
+        </div>
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Email, new { @class = "cstm-input", placeholder = "Founder Email" })
+        </div>
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.SharesOwned, new { @class = "cstm-input", placeholder = "Number of Shares Owned" })
+        </div>
+    </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.TotalSharesValue, new { @class = "cstm-input", placeholder = "Total Shares Value" })
+        </div>
+    </div>
+</div>
