@@ -87,7 +87,8 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new EmployeeProfileMapping());
             modelBuilder.Configurations.Add(new ContactDetailMapping());
             modelBuilder.Configurations.Add(new CompanyDocumentMapping());
-            
+
+            modelBuilder.Configurations.Add(new DesignationMapping());
             // Project Task
             modelBuilder.Configurations.Add(new TaskManageMapping());
             modelBuilder.Configurations.Add(new ProjectMapping());
