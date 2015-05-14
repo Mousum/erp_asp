@@ -45,6 +45,7 @@ $(document).ready(function () {
             chackThree = "true";
         }
         var zoneId = $("#zoneId").val();
+        var ComanyId = $('#ComanyId').val();
 
         if (chackOne == "true" || chackTwo == "true" || chackThree == "true") {
 
@@ -59,7 +60,7 @@ $(document).ready(function () {
             $.ajax({
                 url: url,
                 type: "post",
-                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId },
+                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId, ComanyId: ComanyId },
                 success: function (data) {
                     $('.msg-danger').text("Successfully Added");
                     $('.msg-danger').show('slow');
