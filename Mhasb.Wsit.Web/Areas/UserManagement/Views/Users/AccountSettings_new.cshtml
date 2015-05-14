@@ -1,0 +1,115 @@
+﻿@model Mhasb.Wsit.Web.Areas.UserManagement.Models.AccountSetting
+
+@{
+    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+
+}
+<li style="display:none" class='UpdateSettings' data-url='@Url.Action("UpdateSettings", "Users", new { area = "UserManagement" })'></li>
+<li style="display:none" class='GetSettingsByUserId' data-url='@Url.Action("GetSettingsByUserId", "Users", new { area = "UserManagement" })'></li>
+<li style="display:none" class='UpdateEmail' data-url='@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })'></li>
+
+<div class="container my-dashboard">
+    <div class="row clearfix no-margin">
+        <h3 class="all-head">Account Settings</h3>
+        <div class="row cstm-frm-row">
+            <div class="col-md-12">
+                <p style="color: #e74c3c; display: none;" class="email-danger"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix p-setting-container">
+        <div class="col-md-10">
+            <div class="row cstm-frm-row">
+                <div class="col-md-2">
+                    <label class="txt-bold-r">Email:</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Your current email address is</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBoxFor(u => u.Users.Email,  new { @class = "cstm-input"})
+                    <a href="javascript:void(0)" class=""><i class="fa fa-pencil"></i></a>
+                </div>
+            </div>
+            <div class="row cstm-frm-row">
+                <div class="col-md-2">
+                    <label class="txt-bold-r">Password:</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Your current password is</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", type="password" })
+                    <a href="javascript:void(0)"><i class="fa fa-pencil"></i></a>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-10 text-right cstm-btn-acc-st">
+                        <button type="button" class="btn btn-success account1stSub">Save</button>
+                        <button type="button" class="btn btn-danger account1stCan">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row clearfix no-margin">
+                <h3>Settings</h3>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12">
+                        <p style="color: #e74c3c; display: none;" class="msg-danger"></p>
+                       </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-2">
+                            <label class="txt-bold-r">When I Log In</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>
+                                <input type="radio" id="radio-1" name="logCheck" value="radio-1"> Go to My MHSAB
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label>
+                                <input type="radio" id="radio-2" name="logCheck" value="radio-2"> Go to My Dashboard
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>
+                                <input type="radio" id="radio-3" name="logCheck" value="radio-3"> Go to The Organisation I was Last In
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-2">
+                            <label class="txt-bold-r-1">Timezone</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="cstm-select">
+                                @Html.DropDownList("zoneId", ViewBag.TimeZoneList as SelectList, "-- Select your TimeZone --", new { @class = "zoneClass" })
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <div class="row cstm-frm-row">
+                <div class="col-md-2">
+                    <label class="txt-bold-r-1">Company</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="cstm-select">
+                            @Html.DropDownList("ComanyId", ViewBag.CompanyList as SelectList, "-- Select your Company --", new { @class = "companyClass" })
+                     
+                    </label>
+                </div>
+
+            </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-10 text-right cstm-btn-acc-st">
+                            <button type="button" class="btn btn-success account2nSub">Save</button>
+                            <button type="button" class="btn btn-danger account2nCan">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
