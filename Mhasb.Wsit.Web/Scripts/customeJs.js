@@ -53,7 +53,7 @@ $(document).ready(function () {
                 $('.msg-danger').text("Please Select timeZone");
                 $('.msg-danger').show('slow');
                 return false;
-            }
+            } 
 
             //var setting = { "Settings": { "lgcompany": chackOne, "lgdash": chackTwo, "lglast": chackThree, "TimezoneId": zoneId } };
             var url = $('.UpdateSettings').attr("data-url");
