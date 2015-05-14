@@ -64,6 +64,7 @@ namespace Mhasb.Services.Organizations
                 var empObj = empRep.GetOperation()
                     .Include(c => c.Users)
                     .Include(c => c.Companies)
+                    .Include(d=>d.Designations)
                     .Filter(c => c.UserId==UserId)
                     .Get().SingleOrDefault();
                 return empObj;
@@ -73,14 +74,15 @@ namespace Mhasb.Services.Organizations
             }
         }
 
-        public Employee GetEmpByEmpId(int CompanyId)
+        public Employee GetEmpByEmpId(int empId)
         {
             try
             {
                 var empObj = empRep.GetOperation()
                     .Include(c => c.Users)
                     .Include(c => c.Companies)
-                    .Filter(c => c.CompanyId == CompanyId)
+                    .Include(d => d.Designations)
+                    .Filter(c => c.Id == empId)
                     .Get().SingleOrDefault();
                 return empObj;
             }
@@ -98,6 +100,7 @@ namespace Mhasb.Services.Organizations
                 var empObj = empRep.GetOperation()
                     .Include(c => c.Users)
                     .Include(c => c.Companies)
+                    .Include(d => d.Designations)
                     .Filter(c => c.CompanyId== CompanyId)
                     .Get().ToList();
                 return empObj;

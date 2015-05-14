@@ -1,4 +1,5 @@
-﻿using Mhasb.Domain.Users;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Models
     {
         public User Users { get; set; }
         public Settings AccSettings { get; set; }
+        public Company Company { get; set; }
     }
 }

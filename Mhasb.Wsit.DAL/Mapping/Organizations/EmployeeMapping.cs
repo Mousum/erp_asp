@@ -31,6 +31,9 @@ namespace Mhasb.DAL.Mapping.Organizations
                 WithMany(emp => emp.Employees).
                 HasForeignKey(emp => emp.CompanyId);
 
+            this.HasRequired(emp => emp.Designations).
+                WithMany().
+                HasForeignKey(emp => emp.DesignationId);
 
 
 

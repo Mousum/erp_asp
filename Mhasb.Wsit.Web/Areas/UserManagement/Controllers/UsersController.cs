@@ -192,7 +192,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
         }
         [HttpPost]
-        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast,int TimezoneId)
+        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId, int ComanyId)
         //public ActionResult UpdateSettings(Settings setting)
         {
            
@@ -207,6 +207,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     setObj.lgdash = lgdash;
                     setObj.lglast = lglast;
                     setObj.TimezoneId = TimezoneId;
+                    setObj.CompanyId = ComanyId;
                     setService.UpdateSettings(setObj);
                     return Json(new { success = "True" });
                 }
@@ -218,6 +219,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     newObj.lgdash = lgdash;
                     newObj.lglast = lglast;
                     newObj.TimezoneId = TimezoneId;
+                    newObj.CompanyId = ComanyId;
                     setService.AddSettings(newObj);
                     
                     return Json(new { success = "True" });

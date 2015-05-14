@@ -14,13 +14,14 @@ namespace Mhasb.DAL.Mapping.Users
         {
             this.HasKey(c => c.Id);
             this.Property(c => c.userId).HasColumnName("user_Id");
+            this.Property(c => c.CompanyId).HasColumnName("companyid"); 
             this.Property(c => c.lgcompany).HasColumnName("lg_company");
             this.Property(c => c.lgdash).HasColumnName("lg_dash");
             this.Property(c => c.lglast).HasColumnName("lg_last");
             this.Property(c => c.TimezoneId).HasColumnName("Time_zoneId");
 
             this.ToTable("sec.settings");
-            this.HasRequired(c => c.Users)
+            this.HasRequired(c => c.Users)  
                 .WithMany()
                 .HasForeignKey(c => c.userId);
 
@@ -28,9 +29,10 @@ namespace Mhasb.DAL.Mapping.Users
             .WithMany()
             .HasForeignKey(c => c.TimezoneId);
 
+
             this.HasOptional(c => c.Companies)
-                .WithOptionalDependent()
-                .Map(c=>c.MapKey("companyid"));
+                .WithMany()
+                .HasForeignKey(c=>c.CompanyId);
         }
     }
 }

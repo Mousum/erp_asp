@@ -12,12 +12,15 @@ namespace Mhasb.Domain.Users
    public class Settings:IObjectStateLong
     {
         public long Id { get; set; }
-        public long userId { get; set; }
+
+       public int CompanyId { get; set; }
+       public long userId { get; set; }
 
         public bool lgcompany { get; set; }
         public bool lgdash { get; set; }
         public bool lglast { get; set; }
         public int? TimezoneId { get; set; }
+        
 
 
         public virtual Company Companies { get; set; }

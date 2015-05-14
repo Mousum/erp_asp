@@ -66,12 +66,14 @@
     <Compile Include="Organizations\DesignationService.cs" />
     <Compile Include="Organizations\EmployeeProfileService.cs" />
     <Compile Include="Organizations\EmployeeService.cs" />
+    <Compile Include="Organizations\FounderService.cs" />
     <Compile Include="Organizations\ICompanyDocument.cs" />
     <Compile Include="Organizations\ICompanyProfile.cs" />
     <Compile Include="Organizations\ICompanyService.cs" />
     <Compile Include="Organizations\IDesignation.cs" />
     <Compile Include="Organizations\IEmployeeProfile.cs" />
     <Compile Include="Organizations\IEmployeeService.cs" />
+    <Compile Include="Organizations\IFounder.cs" />
     <Compile Include="Organizations\IProjectService.cs" />
     <Compile Include="Organizations\ITaskManagerService.cs" />
     <Compile Include="Organizations\ProjectService.cs" />
