@@ -28,9 +28,20 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
-            var model = fService.GetFounders(AccSet.Companies.Id);
-            return View(model);
+            if (AccSet != null) 
+            { 
+                 var model = fService.GetFounders(AccSet.Companies.Id);
+                 return View(model); 
+            }
+            else
+            {
+                return RedirectToAction("MyMhasb","Users",new{area="Usermanagement"});
+            }
+           
         }
+          
+            
+       
 
         public ActionResult Settings() 
         {
@@ -50,11 +61,13 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             if (fService.AddFounder(founder))
             {
-                return Content("success");
+                TempData.Add("Msg", "Founder Added Successfully!");
+                return RedirectToAction("Index");
             }
             else 
             {
-                return Content("Failed");
+                TempData.Add("Msg", "Founder Add Failed!");
+                return RedirectToAction("Index");
             }
           
 
@@ -72,11 +85,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         {
            if (fService.UpdateFounder(founder))
             {
-                return Content("success");
+              
+                TempData.Add("Msg", "Founder Updated Successfully!");
+                return RedirectToAction("Index");
             }
             else
             {
-                return Content("Failed");
+               
+                TempData.Add("errMsg", "Founder Update Failed!");
+               return RedirectToAction("Index");
             }
         }
     }

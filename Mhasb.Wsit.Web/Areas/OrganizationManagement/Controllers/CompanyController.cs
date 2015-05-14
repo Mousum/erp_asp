@@ -110,7 +110,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                             AccSet.userId = tt.Id;
                             AccSet.lgdash = false;
                             AccSet.lglast = false;
-                            AccSet.Companies = new Company { Id = company.Id };
+                            AccSet.CompanyId = company.Id;
                             AccSet.lgcompany = true;
                             sService.AddSettings(AccSet);
 
