@@ -18,6 +18,7 @@ namespace Mhasb.Domain.Users
         public bool lgdash { get; set; }
         public bool lglast { get; set; }
         public int? TimezoneId { get; set; }
+        
 
 
         public virtual Company Companies { get; set; }

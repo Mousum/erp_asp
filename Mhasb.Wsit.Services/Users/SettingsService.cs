@@ -36,6 +36,8 @@ namespace Mhasb.Services.Users
             try {
                 var dbObj = setRep.GetSingleObject(setting.Id);
                 dbObj.lgcompany = setting.lgcompany;
+                dbObj.lgdash = setting.lgdash;
+                dbObj.lglast = setting.lglast;
                 dbObj.Companies = setting.Companies;
                 dbObj.State = ObjectState.Modified;
                 setRep.UpdateOperation(dbObj);

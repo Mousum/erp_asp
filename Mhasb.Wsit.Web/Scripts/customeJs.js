@@ -7,15 +7,19 @@ $(document).ready(function () {
         type: "GET",
         data: {},
         success: function (data) {
-            if (data.lgdash == true) {
+            //console.log(typeof data.lgcompany);
+            if (data.lgdash === true) {
                 $('#radio-2').prop('checked', true);
-            } else if (data.lgcompany == true) {
+            } else if (data.lgcompany === true) {
                 $('#radio-1').prop('checked', true);
             } else {
                 $('#radio-3').prop('checked', true);
             }
             if (data.TimezoneId) {
                 $('#zoneId option[value=' + data.TimezoneId + ']').attr('selected', 'selected');
+            }
+            if (data.TimezoneId) {
+                $('#ComanyId option[value=' + data.Companies.Id + ']').attr('selected', 'selected');
             }
 
         },
@@ -38,7 +42,6 @@ $(document).ready(function () {
         var chackThree = "false";
         if (radio == "radio-1") {
             chackOne = "true";
-            console.log(chackOne + "chackOne");
         } else if (radio == "radio-2") {
             chackTwo = "true";
         } else if (radio == "radio-3") {
@@ -54,7 +57,9 @@ $(document).ready(function () {
                 $('.msg-danger').show('slow');
                 return false;
             } 
-
+            console.log(chackOne);
+            console.log(chackTwo);
+            console.log(chackThree);
             //var setting = { "Settings": { "lgcompany": chackOne, "lgdash": chackTwo, "lglast": chackThree, "TimezoneId": zoneId } };
             var url = $('.UpdateSettings').attr("data-url");
             $.ajax({
