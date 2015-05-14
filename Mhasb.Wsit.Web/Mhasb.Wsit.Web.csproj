@@ -174,9 +174,11 @@
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\DesignationController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\AuditorController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
     <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
@@ -723,6 +725,10 @@
     <Content Include="Areas\TaskManagement\Views\Tasks\_updateProject.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\_updateTask.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\AccountSettings_new.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Designation\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Designation\Create.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Designation\Edit.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Auditor\Auditor.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

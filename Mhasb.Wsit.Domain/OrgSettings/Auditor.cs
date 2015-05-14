@@ -15,7 +15,7 @@ namespace Mhasb.Domain.OrgSettings
         public string AuditorName { get; set; }
         public string AuditorTel { get; set; }
         public string AuditorEmail { get; set; }
-        public string Position { get; set; }
+        public int Position { get; set; }
         public long ManagerId { get; set; }
         public int Id { get; set; }
         public ObjectState State { get; set; }

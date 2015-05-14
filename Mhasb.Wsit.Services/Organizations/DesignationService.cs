@@ -47,7 +47,35 @@ namespace Mhasb.Services.Organizations
 
         public List<Domain.Organizations.Designation> GetDesignations()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var desObj = _crudOperation.GetOperation()
+                                        .Get().ToList();
+
+                return desObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public Domain.Organizations.Designation GetSingleDesignationById(int id)
+        {
+            try
+            {
+                var desObj = _crudOperation.GetOperation()
+                                        .Filter(d=>d.Id==id)
+                                        .Get().SingleOrDefault();
+
+                return desObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
         }
     }
 }

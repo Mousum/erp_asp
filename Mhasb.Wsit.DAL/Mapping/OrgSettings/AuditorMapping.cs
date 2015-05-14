@@ -19,7 +19,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            this.Property(a => a.AuditorName).HasColumnName("auditor_name").HasMaxLength(100);
            this.Property(a => a.AuditorTel).HasColumnName("tel").HasMaxLength(100);
            this.Property(a => a.AuditorEmail).HasColumnName("email").HasMaxLength(100);
-           this.Property(a => a.Position).HasColumnName("position").HasMaxLength(100);
+           this.Property(a => a.Position).HasColumnName("position");
 
            this.Property(a => a.CompanyId).HasColumnName("companyid");
            this.Property(a => a.ManagerId).HasColumnName("managerid");
