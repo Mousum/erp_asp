@@ -7,7 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>MHASB ERP</title>
-    @Styles.Render("~/Content/css")
+  @Styles.Render("~/Content/css")
+    <script src="~/Scripts/jquery-1.10.2.min.js">
+
+    </script>
     <link href='http://fonts.googleapis.com/css?family=Rambla:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,20 +41,33 @@
                     <li class="hidden">
                         <a href="#page"></a>
                     </li>
-                    <li class="active">
-                        @*<a href="#Dashboard">Dashboard</a>*@
-                        @Html.ActionLink("Dashboard", "Dashboard", "Users", new { area = "UserManagement" })
+                    <li class="">
+                        <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dashboard</a>
+
                     </li>
                     <li class="">
-                        @*<a href="#Settings">Settings</a>*@
-                        @Html.ActionLink("Settings", "AccountSettings", "Users", new { area = "UserManagement" })
+                        <a href='@Url.Action("AccountSettings", "Users", new { area = "UserManagement" }) '>Account Settings</a>
+
                     </li>
                     <li class="">
-                        <a href="#Operations">Operations</a>
+                       
+                        <a href='@Url.Action("Index", "Tasks", new { area = "TaskManagement" }) '>Task Managements</a>
+
                     </li>
                     <li class="">
-                        <a href="#Reports">Reports</a>
+                         <a href='@Url.Action("Create", "RoleVsActions", new { area = "UserManagement" })'>Role Vs Actions</a>
                     </li>
+                    <li class="">
+                         <a href='@Url.Action("Index", "Roles", new { area = "UserManagement" })'>User Role</a>
+                    </li>
+                    <li class="">
+                        <a href='@Url.Action("Index", "ActionList", new { area = "UserManagement" })'>Action List</a>
+                    </li>
+                    <li class="">
+                        
+                        <a href='@Url.Action("MyMhasb", "Users", new { area = "UserManagement" })'>MYMHASB</a>
+                    </li>
+                    <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

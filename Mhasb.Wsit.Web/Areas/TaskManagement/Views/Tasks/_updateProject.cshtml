@@ -3,13 +3,24 @@
 <div class="row">
     <div class="col-md-12">
         <label>Project Name</label>
-      @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control",id="uPname" })
+      @Html.TextBoxFor(m => m.ProjectName, new { @class = "cstm-input", id = "uPname" })
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 label-marg">
         <label>Leader</label>
-        @Html.DropDownList("ManagerId", (SelectList)ViewBag.Employess, "--Select Leader--", htmlAttributes: new { @class = "form-control", id = "UpMId", required = "required" })
+      
+    
+        @if (ViewBag.Employess != null)
+        {
+            @Html.DropDownList("ManagerId", (SelectList)ViewBag.Employess, "--Select Leader--", htmlAttributes: new { @class = "cstm-input", id = "UpMId", required = "required" })
+        }
+        else
+        {
+            <select class="cstm-input" id="UpMId">
+                <option value="">No Employee Found</option>
+            </select>
+        }
     </div>
 
 </div>
@@ -18,10 +29,10 @@
         <label>Starting Date</label>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker5'>
-                @Html.TextBoxFor(m => m.StartingDate, new { @class = "form-control", id = "Upstart" })
-              
+                @Html.TextBoxFor(m => m.StartingDate, "{0:dd/MM/yyyy}", new { @class = "cstm-input", id = "Upstart" })
+   
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <i class="fa fa-calendar"></i>
                 </span>
             </div>
         </div>
@@ -30,10 +41,10 @@
         <label>Finish Date</label>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker6'>
-                @Html.TextBoxFor(m => m.FinishingDate, new { @class = "form-control", id = "Upfinish" })
-                
+               @Html.TextBoxFor(m => m.FinishingDate, "{0:dd/MM/yyyy}", new { @class = "cstm-input", id = "Upfinish" })
+   
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <i class="fa fa-calendar"></i>
                 </span>
             </div>
         </div>

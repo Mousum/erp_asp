@@ -31,9 +31,9 @@ namespace Mhasb.Services.Users
         {
             try
             {
-              var alistObj= ActionRep.GetOperation()
-                                     .Filter(ac => ac.ActionName == actionlist.ActionName && ac.ControllerName == actionlist.ControllerName && ac.ModuleName == actionlist.ModuleName)
-                                     .Get().SingleOrDefault();
+                var alistObj = ActionRep.GetOperation()
+                                       .Filter(ac => ac.ActionName == actionlist.ActionName && ac.ControllerName == actionlist.ControllerName && ac.ModuleName == actionlist.ModuleName)
+                                       .Get().SingleOrDefault();
               if (alistObj==null)
               {
                   actionlist.State = ObjectState.Added;

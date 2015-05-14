@@ -17,7 +17,7 @@ namespace Mhasb.Wsit.Web.Controllers
         {
             base.OnActionExecuted(filterContext);
 
-             IActionListService actionService = new ActionListService();
+            IActionListService actionService = new ActionListService();
             // To get area,controller and action name from http request
             var routeData = filterContext.RequestContext.RouteData;
             var module = (string)routeData.DataTokens["area"];

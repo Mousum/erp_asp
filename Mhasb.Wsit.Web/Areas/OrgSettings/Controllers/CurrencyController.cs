@@ -12,7 +12,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
     {
         //
         // GET: /OrgSettings/Currency/
-        private ICurrency cService = new CurrencyService();
+        private readonly ICurrency cService = new CurrencyService();
         //
         // GET: /OrgSettings/Currency/
         [AllowAnonymous]
