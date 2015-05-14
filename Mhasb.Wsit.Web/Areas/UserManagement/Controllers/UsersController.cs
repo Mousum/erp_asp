@@ -150,16 +150,15 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             accsetting.AccSettings = new Settings();
             ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
             ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserId(users.Id),"Id","DisplayName");
-            return View(accsetting);
+            return View("AccountSettings_new", accsetting);
 
         }
         [HttpPost]
-        public ActionResult UpdateEmail(string Email)
+        public ActionResult UpdateEmail(string Email, string Password)
         {
 
-            if (String.IsNullOrEmpty(Email))
+            if (String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password))
             {
-
                 return Json(new { msg = "False" });
             }
             else
@@ -170,12 +169,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     var email = HttpContext.User.Identity.Name;
                     var users = uService.GetSingleUserByEmail(email);
                     users.Email = Email;
+                    users.Password = Password;
                     users.ConfirmPassword = users.Password;
                     var msg = uService.UpdateUser(users);
                     if (msg)
                     {
                         CustomPrincipal.Login(Email, users.Password, false);
-                        return Json(new { success = "True", msg = Email });
+                        return Json(new { success = "True", msg = Email, msgpass = Password });
                     }
                     else
                     {

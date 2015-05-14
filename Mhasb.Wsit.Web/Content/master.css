@@ -253,9 +253,14 @@ footer .footer-below {
     border-bottom-right-radius: 0;
 }
 .form-signin input[type="password"] {
-    margin-bottom: 10px;
+    margin-bottom: -1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .account-wall {
     padding: 20px;
@@ -279,6 +284,8 @@ footer .footer-below {
 }
 .checkbox label,
 .form-signin input[type="text"] { font-family: "Rambla", sans-serif !important; }
+.form-signin input[type="password"] { font-family: "Rambla", sans-serif !important; }
+.form-signin input[type="email"] { font-family: "Rambla", sans-serif !important; }
 .form-signin .form-control{
     background: rgba(0,0,0,0.7);
     border-radius: 0px;
@@ -689,7 +696,7 @@ label.cstm-select:before {
     font-weight: bold;
 }
 .base-block{
-    background: #fff;
+    background: transparent;
     min-height:20px;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -705,6 +712,14 @@ label.cstm-select:before {
 }
 .pad-right-null{
     padding-right: 0px;
+}
+.p-setting-container{
+    margin: 20px 0px 30px 0px;
+    min-height: 100px;
+    box-shadow: 2px 2px 2px #ECECEC;
+    border-radius: 10px;
+    background: #FBFBFB none repeat scroll 0% 0%;
+    padding: 10px 10px 20px;
 }
 .custom-upload {
     background-color: #008000;
@@ -780,4 +795,252 @@ label.cstm-select:before {
     margin-right: 10px;
     font-size: 30px !important;
 }
+
+/*icon colors*/
+.facebook-color{
+    color: #3B5998;
+}
+.twitter-color{
+    color:#5EA9DD;
+}
+.pinterest-color{
+    color: #5EA9DD;
+}
+.skype-color{
+    color: #00ADEF;
+}
+.google-color{
+    color: #DD4B39;
+}
+.social-add i{
+    /*    margin-right: 5px;*/
+}
+.social-label{
+    width: 25px;
+    text-align: center;
+    border: 1px solid #d8d8d8;
+    margin-right: 5px;
+    background: #fff;
+}
+.promo-text{
+    text-align: center;
+}
+.promo-p{
+    font-size: 18px;
+    line-height: 30px;
+}
+.promo-highlight{
+    color: #FD6E6E;
+}
+/*icon colors*/
 /*-----------------*/
+
+/*Toggle*/
+/*! ========================================================================
+ * Bootstrap Toggle: bootstrap-toggle.css v2.2.0
+ * http://www.bootstraptoggle.com
+ * ========================================================================
+ * Copyright 2014 Min Hur, The New York Times Company
+ * Licensed under MIT
+ * ======================================================================== */
+
+.thumbnail .caption{
+    overflow: hidden;
+}
+.checkbox label .toggle,
+.checkbox-inline .toggle {
+    margin-left: -20px;
+    margin-right: 5px;
+}
+
+.toggle {
+    position: relative;
+    overflow: hidden;
+}
+.toggle input[type="checkbox"] {
+    display: none;
+}
+.toggle-group {
+    position: absolute;
+    width: 200%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transition: left 0.35s;
+    -webkit-transition: left 0.35s;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.toggle.off .toggle-group {
+    left: -100%;
+}
+.toggle-on {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 50%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+.toggle-off {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+.toggle-handle {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 100%;
+    width: 0px;
+    border-width: 0 1px;
+}
+
+.toggle.btn { min-width: 59px; min-height: 34px; }
+.toggle-on.btn { padding-right: 24px; }
+.toggle-off.btn { padding-left: 24px; }
+
+.toggle.btn-lg { min-width: 79px; min-height: 45px; }
+.toggle-on.btn-lg { padding-right: 31px; }
+.toggle-off.btn-lg { padding-left: 31px; }
+.toggle-handle.btn-lg { width: 40px; }
+
+.toggle.btn-sm { min-width: 50px; min-height: 30px;}
+.toggle-on.btn-sm { padding-right: 20px; }
+.toggle-off.btn-sm { padding-left: 20px; }
+
+.toggle.btn-xs { min-width: 35px; min-height: 22px;}
+.toggle-on.btn-xs { padding-right: 12px; }
+.toggle-off.btn-xs { padding-left: 12px; }
+
+.toggle-group .btn-default{
+    background: #fff;
+    color: #000;
+}
+
+
+/*Toggle*/
+
+/*Clients*/
+.client-bg{
+    background: url(../img/header-bg.jpg)no-repeat;
+    background-size: cover;
+    height: 300px;
+}
+.uni-container{
+    background: rgba(255,255,255,0.9);
+    margin-top: -70px;
+    min-height: 200px;
+}
+.client{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.client img{
+    /*    height: 300px;*/
+}
+/*Clients*/
+/*Account Settings*/
+.edit-fa{
+    font-size: 1.5em;
+}
+.edit-fa a{
+    position: absolute;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    right: 0px;
+    top: 0px;
+    padding: 0px 8px;
+    border-width: 1px 1px 5px;
+    border-style: solid;
+    border-color: #D8D8D8;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #304A37;
+}
+.edit-fa a:hover{
+    background: #d8d8d8;
+    color: #4C984A;
+}
+.txt-bold-r{
+    font-weight: bold !important;
+}
+.txt-bold-r-1{
+    font-weight: bold !important;
+    margin-top: 13px !important;
+}
+.cstm-btn-acc-st{
+    margin-top: 20px;
+}
+.cstm-btn-acc-st button{
+    width: 15%;
+}
+/*Account Settings*/
+/*Contact*/
+.map{
+    width: 100%;
+    margin-top: 20px;
+}
+.contact-form-cstm1{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.contact-form-cstm1 button{
+    width: 22% !important;
+    height: 33% !important;
+    box-shadow: 0px 3px 0px #CCC !important;
+    border-radius: 4px;
+}
+.cstm-btn-contact1{
+    font-weight: bold !important;
+    font-size: 20px !important;
+}
+.foot-list, .foot-list-address{
+    margin-top: 20px;  
+    margin-bottom: 20px;
+}
+.foot-list h4, .foot-list-address h4{
+    color: #92B2D5;
+    font-weight: bold !important;
+    margin-bottom: 10px;
+}
+.foot-list p, .foot-list-address p{
+    color: #ccc;
+}
+.email-address{
+    margin-bottom: 0px;
+}
+.address p{
+    margin: 0px;
+}
+/*Contact*/
+.p-setting-container-1{
+    margin: 20px 0px 30px 0px;
+    min-height: 100px;
+    box-shadow: 2px 2px 2px #ECECEC;
+    border-radius: 10px;
+    background: #FBFBFB none repeat scroll 0% 0%;
+    padding: 10px 10px 20px;
+}
+.p-setting-container-2{
+    margin-top: 20px;
+}
+.p-setting-container-2 p{
+    text-align: justify;
+}
+.p-setting-container-1 p{
+    text-align: justify;
+}
