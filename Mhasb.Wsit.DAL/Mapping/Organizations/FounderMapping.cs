@@ -18,7 +18,7 @@ namespace Mhasb.DAL.Mapping.Organizations
 
            this.Property(f => f.CountryId).HasColumnName("countryid");
            this.Property(f => f.LanguageId).HasColumnName("languageid");
-           this.Property(f => f.CountryId).HasColumnName("companyid");
+           this.Property(f => f.CompanyId).HasColumnName("companyid");
            this.Property(f => f.FounderName).IsRequired().HasColumnName("name").HasMaxLength(100);
            this.Property(f => f.FounderResidence).HasColumnName("residence").HasMaxLength(200);
            this.Property(f => f.Tel).HasColumnName("tel").HasMaxLength(100);
@@ -32,13 +32,15 @@ namespace Mhasb.DAL.Mapping.Organizations
            // relationship
            this.HasRequired(f => f.Countries)
                .WithMany()
-               .HasForeignKey(f => f.CountryId);
+               .HasForeignKey(f => f.CountryId)
+               .WillCascadeOnDelete(false);
            this.HasRequired(f => f.Companies)
                .WithMany()
                .HasForeignKey(f => f.CompanyId);
            this.HasRequired(f => f.Languages)
                .WithMany()
-               .HasForeignKey(f => f.LanguageId);
+               .HasForeignKey(f => f.LanguageId)
+               .WillCascadeOnDelete(false);
        }
    }
  }

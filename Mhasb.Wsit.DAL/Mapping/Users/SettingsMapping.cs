@@ -28,6 +28,7 @@ namespace Mhasb.DAL.Mapping.Users
             .WithMany()
             .HasForeignKey(c => c.TimezoneId);
 
+
             this.HasOptional(c => c.Companies)
                 .WithOptionalDependent()
                 .Map(c=>c.MapKey("companyid"));
