@@ -12,6 +12,7 @@ namespace Mhasb.Services.Organizations
        bool AddDesignation(Designation designation);
        bool UpdateDesignation(Designation designation);
        List<Designation> GetDesignations();
+       Designation GetSingleDesignationById(int id);
 
    }
 }

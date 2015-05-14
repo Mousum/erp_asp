@@ -14,9 +14,8 @@ namespace Mhasb.Services.Organizations
            bool DeleteEmployee(int empId);
            Employee GetEmpByUserId(int UserId);
            List<Employee> GetEmpByCompanyId(int CompanyId);
-           Employee GetEmpByEmpId(int CompanyId);
+        Employee GetEmpByEmpId(int empId);
 
-           
-        
+
     }
 }

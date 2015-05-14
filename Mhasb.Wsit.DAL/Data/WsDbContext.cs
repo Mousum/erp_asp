@@ -105,5 +105,11 @@ namespace Mhasb.Wsit.DAL.Data
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Designation> Designations { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.Auditor> Auditors { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Employee> Employees { get; set; }
+
     }
 }
