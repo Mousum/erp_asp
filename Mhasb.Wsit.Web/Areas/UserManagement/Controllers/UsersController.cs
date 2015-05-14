@@ -207,7 +207,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     setObj.lgdash = lgdash;
                     setObj.lglast = lglast;
                     setObj.TimezoneId = TimezoneId;
-                    setObj.Companies = new Company { Id=ComanyId};
+                    setObj.CompanyId = ComanyId;
                     setService.UpdateSettings(setObj);
                     return Json(new { success = "True" });
                 }
@@ -219,7 +219,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                     newObj.lgdash = lgdash;
                     newObj.lglast = lglast;
                     newObj.TimezoneId = TimezoneId;
-                    setObj.Companies = new Company { Id = ComanyId };
+                    newObj.CompanyId = ComanyId;
                     setService.AddSettings(newObj);
                     
                     return Json(new { success = "True" });
