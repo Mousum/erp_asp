@@ -1,17 +1,91 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/Land_new.cshtml";
+
+
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<header class="client-bg"></header>
+<div class="container uni-container">
+    <h2 class="all-head">Contact</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1846434.857399892!2d51.19665775!3d25.32710535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x1cfa88cf812b4032!2sQatar!5e0!3m2!1sen!2sbd!4v1431514893187" width="100%" height="300px" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+        <div class="col-sm-5 client">
+            <div class="row clearfix no-margin ">
+                <h3 class="all-head">About Us</h3>
+            </div>
+            <div class="thumbnail p-setting-container">
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12 no-padding no-margin">
+                        <div class="col-md-3 no-padding no-margin">
+                            <p><i class="fa fa-home"></i> <strong>Address:</strong>
+                        </div>
+                        <div class="col-md-8 no-padding address">
+                            <p>22nd Main Street,</p>
+                            <p>100 Suite,</p>
+                            <p>Qatar.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding no-margin address">
+                        <div class="col-md-3 no-padding no-margin">
+                            <p><i class="fa fa-phone"></i> <strong>&nbsp;Phone:</strong>
+                        </div>
+                        <div class="col-md-8 no-padding">
+                            <p>+880 220 011 008</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding no-margin">
+                        <div class="col-md-3 no-padding no-margin">
+                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong>
+                        </div>
+                        <div class="col-md-8 no-padding email-address">
+                            <p>mhsab@abc.com</p>
+                        </div>
+                    </div>
+                </div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            </div>
+        </div>
+        <div class="col-sm-7 client">
+            <div class="row clearfix no-margin">
+                <h3 class="all-head">Contact Us</h3>
+            </div>
+            <div class="thumbnail p-setting-container">
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6">
+                            <input class="cstm-input" type="text" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="cstm-input" type="text" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12">
+                        <input class="cstm-input" type="text" placeholder="Email">
+                    </div>
+                </div>
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12">
+                        <input class="cstm-input" type="text" placeholder="Subject">
+                    </div>
+                </div>
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12">
+                        <textarea class="cstm-tarea" placeholder="Enter your message here..."></textarea>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row contact-form-cstm1">
+                    <div class="col-md-12 contact-form-cstm1 text-right">
+                        <button type="button" class="btn btn-success cstm-btn-contact1">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
