@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
+    <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
     <Compile Include="OrgSettings\Currency.cs" />
     <Compile Include="Commons\Industry.cs" />

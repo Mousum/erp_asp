@@ -66,6 +66,7 @@
     <Compile Include="Mapping\Organizations\CompanyMapping.cs" />
     <Compile Include="Mapping\Organizations\CompanyProfileMapping.cs" />
     <Compile Include="Mapping\Commons\ContactDetailMapping.cs" />
+    <Compile Include="Mapping\Organizations\DesignationMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeMapping.cs" />
     <Compile Include="Mapping\Organizations\EmployeeProfileMapping.cs" />
     <Compile Include="Mapping\Organizations\FounderMapping.cs" />
