@@ -11,6 +11,7 @@ namespace Mhasb.Domain.OrgSettings
     public class Auditor : IObjectStateInt
     {
         public int CompanyId { get; set; }
+        public long EmployeeId { get; set; }
         public EnumAuditorType AuditorType { get; set; }
         public string AuditorName { get; set; }
         public string AuditorTel { get; set; }
@@ -21,6 +22,7 @@ namespace Mhasb.Domain.OrgSettings
         public ObjectState State { get; set; }
 
         public virtual Employee Employees { get; set; }
+        public virtual Employee Managers { get; set; }
         public virtual Company Companies { get; set; }
     }
 
