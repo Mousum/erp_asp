@@ -2,6 +2,7 @@
 using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,11 @@ namespace Mhasb.Domain.OrgSettings
 {
     public class ChartOfAccount : IObjectStateInt
     {
+        [Key]
        public int Id { get; set; }
        public int CompanyId { get; set; }
        public string AType { get; set; }
-
+      
        public long ACode { get; set; }
        public string AName { get; set; }
        public string Description { get; set; }
