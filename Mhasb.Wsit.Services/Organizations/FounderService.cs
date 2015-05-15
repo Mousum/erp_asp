@@ -58,5 +58,15 @@ namespace Mhasb.Services.Organizations
                 .Get().ToList();
             return objList;
         }
+        public Founder GetSingleFounder(int FounderId) 
+        {
+            var obj = _crudOperation.GetOperation()
+                .Include(d => d.Companies)
+                .Include(f => f.Countries)
+                .Filter(f => f.Id == FounderId)
+                .Get().SingleOrDefault();
+            return obj;
+
+        }
     }
 }

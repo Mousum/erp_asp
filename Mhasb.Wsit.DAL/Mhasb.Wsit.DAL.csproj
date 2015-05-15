@@ -72,6 +72,7 @@
     <Compile Include="Mapping\Organizations\FounderMapping.cs" />
     <Compile Include="Mapping\Organizations\ProjectMapping.cs" />
     <Compile Include="Mapping\Organizations\TaskManageMapping.cs" />
+    <Compile Include="Mapping\OrgSettings\ChartOfAccountMapping.cs" />
     <Compile Include="Mapping\OrgSettings\CurrencyMapping.cs" />
     <Compile Include="Mapping\OrgSettings\AuditorMapping.cs" />
     <Compile Include="Mapping\OrgSettings\FinalcialSettingMapping.cs" />

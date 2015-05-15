@@ -23,6 +23,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IEmployeeService eService = new EmployeeService();
         private IRoleService rService = new RoleService();
         private readonly ISettingsService sService = new SettingsService();
+        private IDesignation degRep = new DesignationService();
         public ActionResult Index()
         {
             var model = inService.GetAllInvitation();
@@ -131,6 +132,11 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         var emp = new Employee();
                         emp.UserId = user.Id;
                         emp.CompanyId = Invitation.CompanyId;
+                        
+                        // get designation 
+                        var degObj = degRep.GetDesignations().FirstOrDefault();
+                        emp.DesignationId = degObj.Id;
+
                         if (eService.CreateEmployee(emp))
                         {
                             var accountSetting = new Settings();

@@ -260,7 +260,8 @@
                 data: data,
                 datatype: "html",
                 success: function (data) {
-                    $("#taskList").html(data).fadeIn(500);
+                    $("#taskList").html(data);
+                    $("#taskList").show("Slow");
                    
                 }
             });
@@ -305,6 +306,7 @@
                                     datatype: "html",
                                     success: function (data) {
                                         $("#taskList").html(data);
+                                        $("#taskList").show("slow");
                                         $("#alert").empty();
                                     }
                                 });
