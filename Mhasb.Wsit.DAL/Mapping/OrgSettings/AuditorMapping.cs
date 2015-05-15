@@ -15,7 +15,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            // primary key
            this.HasKey(a => a.Id);
            this.Ignore(a => a.State);
-           //this.Ignore(a => a.AuditorTel); 
+           //this.Ignore(a => a.AuditorTel);
            //this.Ignore(a => a.AuditorEmail);
            this.Ignore(a => a.AuditorName);
            this.Ignore(a => a.Position);

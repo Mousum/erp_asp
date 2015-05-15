@@ -1044,3 +1044,14 @@ label.cstm-select:before {
 .p-setting-container-1 p{
     text-align: justify;
 }
+ .btn-tag-search{
+          height: 38px;
+          line-height: 12px;
+    }
+ .custom-combobox{
+     width:95% !important;
+ }
+ .custom-combobox-input{
+     background:#fff !important;
+     width:100%;
+ }

@@ -18,7 +18,7 @@ namespace Mhasb.Wsit.Web.Controllers
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             var model = new Login();
            // return View(model);
-            return View("index_new",model);
+            return View("Index",model);
         }
 
         public ActionResult About()

@@ -393,6 +393,10 @@ font-size: 20px;
 .pop-cross{
     color: #f00;
 }
+  .btn-tag-search{
+          height: 38px;
+          line-height: 12px;
+    }
 /*Footer styles*/
 .footer-fixed {
     width: 100%;
@@ -476,5 +480,5 @@ font-size: 20px;
         color: #EFF3F5;
         text-decoration: none;
     }
-
+  
 /*Footer styles*/

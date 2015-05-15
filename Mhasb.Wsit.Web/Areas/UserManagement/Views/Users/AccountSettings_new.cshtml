@@ -1,9 +1,8 @@
 ﻿@model Mhasb.Wsit.Web.Areas.UserManagement.Models.AccountSetting
-
 @{
-    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
-
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+
 <li style="display:none" class='UpdateSettings' data-url='@Url.Action("UpdateSettings", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='GetSettingsByUserId' data-url='@Url.Action("GetSettingsByUserId", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdateEmail' data-url='@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })'></li>
