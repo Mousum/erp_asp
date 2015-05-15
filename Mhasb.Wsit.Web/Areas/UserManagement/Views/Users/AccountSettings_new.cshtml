@@ -7,6 +7,7 @@
 <li style="display:none" class='UpdateSettings' data-url='@Url.Action("UpdateSettings", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='GetSettingsByUserId' data-url='@Url.Action("GetSettingsByUserId", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdateEmail' data-url='@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })'></li>
+<li style="display:none" class='UpdatePassword' data-url='@Url.Action("UpdateUserPassword", "Users", new { area = "UserManagement" })'></li>
 
 <div class="container my-dashboard">
     <div class="row clearfix no-margin">
@@ -27,8 +28,8 @@
                     <label>Your current email address is</label>
                 </div>
                 <div class="col-md-5 edit-fa">
-                    @Html.TextBoxFor(u => u.Users.Email,  new { @class = "cstm-input"})
-                    <a href="javascript:void(0)" class=""><i class="fa fa-pencil"></i></a>
+                    @Html.TextBoxFor(u => u.Users.Email, new { @class = "cstm-input", id = "dbMail" })
+                    <a href="javascript:void(0)" class="" id="editmail"><i class="fa fa-pencil"></i></a>
                 </div>
             </div>
             <div class="row cstm-frm-row">
@@ -39,14 +40,75 @@
                     <label>Your current password is</label>
                 </div>
                 <div class="col-md-5 edit-fa">
-                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", type="password" })
-                    <a href="javascript:void(0)"><i class="fa fa-pencil"></i></a>
+                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", type = "password", id = "dbpass" })
+                    <a href="javascript:void(0)" id="editpass"><i class="fa fa-pencil"></i></a>
                 </div>
-                <div class="row cstm-frm-row">
-                    <div class="col-md-10 text-right cstm-btn-acc-st">
-                        <button type="button" class="btn btn-success account1stSub">Save</button>
-                        <button type="button" class="btn btn-danger account1stCan">Cancel</button>
-                    </div>
+
+                @*<div class="row cstm-frm-row">
+                        <div class="col-md-10 text-right cstm-btn-acc-st">
+                            <button type="button" class="btn btn-success account1stSub">Save</button>
+                            <button type="button" class="btn btn-danger account1stCan">Cancel</button>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="col-md-10" id="editmaildiv" style="display:none">
+            <hr />
+            <div class="row cstm-frm-row">
+                <div class="col-md-5">
+                    <label class="txt-bold-r">Current Password</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBox("PassWord", "", new { @class = "cstm-input", type = "password", id = "PassWord" })
+                </div>
+            </div>
+            <div class="row cstm-frm-row">
+                <div class="col-md-5">
+                    <label class="txt-bold-r">New Email</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBox("mail", "", new { @class = "cstm-input", type = "email", id = "newmail" })
+                </div>
+            </div>
+            <hr />
+            <div class="row cstm-frm-row">
+                <div class="col-md-10 text-right cstm-btn-acc-st">
+                    <button type="button" id="emailSave" class="btn btn-success">Save</button>
+                    <button type="button" id="EmailCancel" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10" id="editpassdiv" style="display:none">
+            <hr />
+            <div class="row cstm-frm-row">
+                <div class="col-md-5">
+                    <label class="txt-bold-r">Current Password</label>
+                </div>
+                <div class="col-md-5">
+                    @Html.TextBox("oldpass", "", new { @class = "cstm-input", type = "password", id = "oldPass" })
+                </div>
+            </div>
+            <div class="row cstm-frm-row">
+                <div class="col-md-5">
+                    <label class="txt-bold-r">New  Password</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBox("nPassWord", "", new { @class = "cstm-input", type = "password", id = "nPassWord" })
+                </div>
+            </div>
+            <div class="row cstm-frm-row">
+                <div class="col-md-5">
+                    <label class="txt-bold-r">Confirm New Password</label>
+                </div>
+                <div class="col-md-5 edit-fa">
+                    @Html.TextBox("cnPassWord", "", new { @class = "cstm-input", type = "password", id = "cnPassWord" })
+                </div>
+            </div>
+            <hr />
+            <div class="row cstm-frm-row">
+                <div class="col-md-10 text-right cstm-btn-acc-st">
+                    <button type="button" id="passSave" class="btn btn-success">Save</button>
+                    <button type="button" id="PassCancel" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
         </div>
@@ -56,60 +118,111 @@
                 <div class="row cstm-frm-row">
                     <div class="col-md-12">
                         <p style="color: #e74c3c; display: none;" class="msg-danger"></p>
-                       </div>
                     </div>
-                    <div class="row cstm-frm-row">
-                        <div class="col-md-2">
-                            <label class="txt-bold-r">When I Log In</label>
-                        </div>
-                        <div class="col-md-3">
-                            <label>
-                                <input type="radio" id="radio-1" name="logCheck" value="radio-1"> Go to My MHSAB
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <label>
-                                <input type="radio" id="radio-2" name="logCheck" value="radio-2"> Go to My Dashboard
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label>
-                                <input type="radio" id="radio-3" name="logCheck" value="radio-3"> Go to The Organisation I was Last In
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row cstm-frm-row">
-                        <div class="col-md-2">
-                            <label class="txt-bold-r-1">Timezone</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="cstm-select">
-                                @Html.DropDownList("zoneId", ViewBag.TimeZoneList as SelectList, "-- Select your TimeZone --", new { @class = "zoneClass" })
-                            </label>
-
-                        </div>
-
-                    </div>
-                    <div class="row cstm-frm-row">
-                <div class="col-md-2">
-                    <label class="txt-bold-r-1">Company</label>
                 </div>
-                <div class="col-md-6">
-                    <label class="cstm-select">
+                <div class="row cstm-frm-row">
+                    <div class="col-md-2">
+                        <label class="txt-bold-r">When I Log In</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label>
+                            <input type="radio" id="radio-1" name="logCheck" value="radio-1"> Go to My MHSAB
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label>
+                            <input type="radio" id="radio-2" name="logCheck" value="radio-2"> Go to My Dashboard
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>
+                            <input type="radio" id="radio-3" name="logCheck" value="radio-3"> Go to The Organisation I was Last In
+                        </label>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-2">
+                        <label class="txt-bold-r-1">Timezone</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="cstm-select">
+                            @Html.DropDownList("zoneId", ViewBag.TimeZoneList as SelectList, "-- Select your TimeZone --", new { @class = "zoneClass" })
+                        </label>
+
+                    </div>
+
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-2">
+                        <label class="txt-bold-r-1">Company</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="cstm-select">
                             @Html.DropDownList("ComanyId", ViewBag.CompanyList as SelectList, "-- Select your Company --", new { @class = "companyClass" })
-                     
-                    </label>
+
+                        </label>
+                    </div>
+
                 </div>
-                         
-            </div>
-                    <div class="row cstm-frm-row">
-                        <div class="col-md-10 text-right cstm-btn-acc-st">
-                            <button type="button" class="btn btn-success account2nSub">Save</button>
-                            <button type="button" class="btn btn-danger account2nCan">Cancel</button>
-                        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-10 text-right cstm-btn-acc-st">
+                        <button type="button" class="btn btn-success account2nSub">Save</button>
+                        <button type="button" class="btn btn-danger account2nCan">Cancel</button>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    //$("#editmail").click(function () {
+    //    $("#editmaildiv").toggle("slow");
+    //});
+    //$("#EmailCancel").click(function () {
+    //    $("#editmaildiv").hide("slow");
+    //})
+    //$("#emailSave").click(function () {
 
+    //    var Email = $("#newmail").val();
+    //    alert(Email);
+    //    if ($("#dbpass").val() != $("#PassWord").val()) {
+    //        $(".email-danger").text("Wrong Current Password").show('slow');
+    //    }
+    //    else if (Email == $("#dbMail").val()) {
+    //        $(".email-danger").text("Entered Same Email , Please Enter A New Email").show('slow');
+    //    }
+    //    else if (isValidEmailAddress(Email)) {
+    //        alert(Email);
+    //        $('.email-danger').text("Invalid Email Address");
+    //        $('.email-danger').show('slow');
+
+    //    }
+    //    else {
+    //        var url = $('.UpdateEmail').attr("data-url");
+    //        $.ajax({
+    //            url: url,
+    //            type: "post",
+    //            data: { Email: Email },
+    //            success: function (data) {
+    //                if (data.success == "True") {
+    //                    $("#dbMail").val(data.msg);
+    //                    $("#dbpass").val(data.msgpass);
+    //                    $('.email-danger').text("Email Successfully Updated");
+    //                    $('.email-danger').show('slow');
+    //                    $("#newmail").val("");
+    //                    $("#PassWord").val("")
+    //                    $("#editmaildiv").hide("slow");
+
+    //                } else {
+    //                    $('.email-danger').text("Email Address Already Used");
+    //                    $('.email-danger').show('slow');
+    //                }
+
+    //            },
+    //            error: function () {
+
+    //            }
+    //        });
+    //    }
+    //})
+</script>
