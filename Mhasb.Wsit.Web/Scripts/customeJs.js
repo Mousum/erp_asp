@@ -56,7 +56,7 @@ $(document).ready(function () {
                 $('.msg-danger').text("Please Select timeZone");
                 $('.msg-danger').show('slow');
                 return false;
-            } 
+            }
             console.log(chackOne);
             console.log(chackTwo);
             console.log(chackThree);
@@ -86,52 +86,52 @@ $(document).ready(function () {
     $("#Users_Password").click(function () {
         $('.email-danger').hide('slow');
     })
-    $('.account1stSub').click(function () {
-        
-        var url = $('.UpdateEmail').attr("data-url");
-        var Email = $("#Users_Email").val();
-        var Password = $("#Users_Password").val();
-        
-        if (isValidEmailAddress(Email)) {
-            $('.email-danger').text("Ivalid Email Address");
-            $('.email-danger').show('slow');
-            
-        } else {
-            if (Password.length < 5) {
-                $('.email-danger').text("Password More Than 5 Character");
-                $('.email-danger').show('slow');
-                return false;
-            }
-            $.ajax({
-                url: url,
-                type: "post",
-                data: { Email: Email, Password: Password },
-                success: function (data) {
-                    if (data.success == "True") {
-                        $("#Users_Email").val(data.msg);
-                        $("#Users_Password").val(data.msgpass);
-                        $('.email-danger').text("Email & Password Successfully Updated");
-                        $('.email-danger').show('slow');
-                       
-                    } else {
-                        $('.email-danger').text("Email Address Already Used");
-                        $('.email-danger').show('slow');
-                    }
+    //$('.account1stSub').click(function () {
 
-                },
-                error: function () {
+    //    var url = $('.UpdateEmail').attr("data-url");
+    //    var Email = $("#Users_Email").val();
+    //    var Password = $("#Users_Password").val();
 
-                }
-            });
-        }
-        
-    });
+    //    if (isValidEmailAddress(Email)) {
+    //        $('.email-danger').text("Ivalid Email Address");
+    //        $('.email-danger').show('slow');
+
+    //    } else {
+    //        if (Password.length < 5) {
+    //            $('.email-danger').text("Password More Than 5 Character");
+    //            $('.email-danger').show('slow');
+    //            return false;
+    //        }
+    //        $.ajax({
+    //            url: url,
+    //            type: "post",
+    //            data: { Email: Email, Password: Password },
+    //            success: function (data) {
+    //                if (data.success == "True") {
+    //                    $("#Users_Email").val(data.msg);
+    //                    $("#Users_Password").val(data.msgpass);
+    //                    $('.email-danger').text("Email & Password Successfully Updated");
+    //                    $('.email-danger').show('slow');
+
+    //                } else {
+    //                    $('.email-danger').text("Email Address Already Used");
+    //                    $('.email-danger').show('slow');
+    //                }
+
+    //            },
+    //            error: function () {
+
+    //            }
+    //        });
+    //    }
+
+    //});
 
 });
-function isValidEmailAddress(emailAddress) {
-    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailReg.test(emailAddress);
-}
+//function isValidEmailAddress(emailAddress) {
+//    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+//    return emailReg.test(emailAddress);
+//}
 
 function hideMsg() {
     $('.msg-danger').hide('slow');
@@ -140,7 +140,117 @@ function showMsg() {
     $('.msg-danger').show('slow');
 }
 
+//Update Password 
+$("#editpass").click(function () {
+    $("#editpassdiv").toggle("slow");
+});
+$("#PassCancel").click(function () {
+    $("#editpassdiv").hide("slow");
+});
+$("#passSave").click(function () {
 
+    if ($("#dbpass").val() != $("#oldPass").val()) {
+        $(".email-danger").text("Your Entered Wrong Current Password").show('slow');
+
+    }
+    else if ($("#dbpass").val() == $("#nPassWord").val()) {
+        $(".email-danger").text("Your Current Password and New Password Are Same,Please Try New One").show('slow');
+
+    }
+    else if ($("#nPassWord").val().length < 5) {
+        $(".email-danger").text("Password Must Be Longer Then 5 Charecter").show('slow');
+
+    }
+    else if ($("#nPassWord").val() != $("#cnPassWord").val()) {
+        $(".email-danger").text("'New Password' and 'Confirm New Password' Are Must Be The Same").show('slow');
+    }
+    else {
+        var url = $('.UpdatePassword').attr("data-url");
+        var Password = $("#nPassWord").val();
+        $.ajax({
+            url: url,
+            type: "post",
+            data: { password: Password },
+            success: function (data) {
+                if (data.success == "True") {
+                    $("#dbMail").val(data.msg);
+                    $("#dbpass").val(data.msgpass);
+                    $('.email-danger').text("Password Successfully Updated");
+                    $('.email-danger').show('slow');
+                    $("#nPassWord").val("");
+                    $("#cnPassWord").val("");
+                    $("#oldPass").val("");
+                    $("#editpassdiv").hide("slow");
+
+                } else {
+                    $('.email-danger').text("Password Cannot Updated this time");
+                    $('.email-danger').show('slow');
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+});
+
+
+//Update Email 
+$("#editmail").click(function () {
+    $("#editmaildiv").toggle("slow");
+});
+$("#EmailCancel").click(function () {
+    $("#editmaildiv").hide("slow");
+})
+$("#emailSave").click(function () {
+    var Email = $("#newmail").val();
+
+    if ($("#dbpass").val() != $("#PassWord").val()) {
+        $(".email-danger").text("Wrong Current Password").show('slow');
+    }
+    else if (Email == $("#dbMail").val()) {
+        $(".email-danger").text("Entered Same Email , Please Enter A New Email").show('slow');
+    }
+    else if (isValidEmailAddress(Email)) {
+        $('.email-danger').text("Invalid Email Address");
+        $('.email-danger').show('slow');
+
+    }
+    else {
+        var url = $('.UpdateEmail').attr("data-url");
+        $.ajax({
+            url: url,
+            type: "post",
+            data: { Email: Email },
+            success: function (data) {
+                if (data.success == "True") {
+                    $("#dbMail").val(data.msg);
+                    $("#dbpass").val(data.msgpass);
+                    $('.email-danger').text("Email Successfully Updated");
+                    $('.email-danger').show('slow');
+                    $("#newmail").val("");
+                    $("#PassWord").val("")
+                    $("#editmaildiv").hide("slow");
+
+                } else {
+                    $('.email-danger').text("Email Address Already Used");
+                    $('.email-danger').show('slow');
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+})
+
+function isValidEmailAddress(emailAddress) {
+    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test(emailAddress);
+}
 
 
 // for all ajax load
