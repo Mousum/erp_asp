@@ -180,7 +180,10 @@
     <Compile Include="Areas\OrganizationManagement\Controllers\FoundersController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\AuditorController.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\ChartOfAccountsController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\FinalcialSettingController.cs" />
+    <Compile Include="Areas\OrgSettings\Controllers\TaxSettingController.cs" />
     <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
     <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
@@ -733,6 +736,8 @@
     <Content Include="Areas\OrganizationManagement\Views\Founders\Index.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Founders\Settings.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Founders\Update.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\ChartOfAccounts\Create.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Create.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
