@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Domain.Commons;
 using Mhasb.Wsit.Domain;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mhasb.Domain.Organizations
 {
@@ -18,7 +20,9 @@ namespace Mhasb.Domain.Organizations
        public string Email { get; set; }
        public int SharesOwned { get; set; }
        public double TotalSharesValue { get; set; }
+       [Required(ErrorMessage = "Founders Nationality Is Resquired")]
        public int CountryId { get; set; }
+       [Required(ErrorMessage = "Founders Language Is Resquired")]
        public int LanguageId { get; set; }
        public int CompanyId { get; set; }
        public int Id { get; set; }
