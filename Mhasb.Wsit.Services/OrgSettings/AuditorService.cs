@@ -30,5 +30,28 @@ namespace Mhasb.Services.OrgSettings
             }
 
         }
+
+        public List<Auditor> GetAllAuditorsByCompanyAndType(int companyId, EnumAuditorType type)
+        {
+            try
+            {
+                var curObj = auditorRep.GetOperation()
+                                        .Include(a=>a.Employees)
+                                        .Include(b=>b.Employees.Designations)
+                                        .Include(d=>d.Employees.Users)
+                                        .Include(e=>e.Managers.Users)
+                                        .Include(m=>m.Managers.Designations)
+                                        .Filter(c=>c.CompanyId==companyId && c.AuditorType==type)
+                                        .Get().ToList();
+
+                return curObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
     }
 }

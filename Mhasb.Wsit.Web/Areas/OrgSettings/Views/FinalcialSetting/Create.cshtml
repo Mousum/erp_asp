@@ -4,157 +4,278 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Index</h2>
 
 
-@using (Html.BeginForm("Create", "FinalcialSetting", FormMethod.Post, new {  @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>FinalcialSetting</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        @using (Html.BeginForm("Create", "FinalcialSetting", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FoundedYear, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.FoundedYear)*@
-                @*Enumerable.Range(1930, 81).ToList()*@
-                @Html.DropDownList("FoundedYear", ViewBag.yearList as SelectList, "-- Select Period First--")
-                @Html.ValidationMessageFor(model => model.FoundedYear)
+            <div class="col-md-6">
+                <h4>FinalcialSetting </h4>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.FoundedYear) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("FoundedYear", ViewBag.yearList as SelectList, "-- Select Year First--")
+                            @Html.ValidationMessageFor(model => model.FoundedYear)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.FinalcialPeriod) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("FinalcialPeriod", ViewBag.PeriodList as SelectList, "-- Select Period First--")
+                            @Html.ValidationMessageFor(model => model.FinalcialPeriod)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.StartingDate) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.StartingDate, new { @class = "cstm-input", id = "StartingDate" })
+                        @Html.ValidationMessageFor(model => model.StartingDate)
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.EndingDate) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.EndingDate, new { @class = "cstm-input", id = "EndingDate" })
+                        @Html.ValidationMessageFor(model => model.EndingDate)
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.PeriodLockDate) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.PeriodLockDate, new { @class = "cstm-input", id = "PeriodLockDate" })
+                        @Html.ValidationMessageFor(model => model.PeriodLockDate)
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.YearLockDate) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.YearLockDate, new { @class = "cstm-input", id = "YearLockDate" })
+                        @Html.ValidationMessageFor(model => model.YearLockDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
             </div>
-        </div>
+            <div class="col-md-6">
+                <br />
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.CurrencyId) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("CurrencyId", ViewBag.CurrencyList as SelectList, "-- Select Period First--")
+                            @Html.ValidationMessageFor(model => model.CurrencyId)
+                        </label>
+                    </div>
+                </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CompanyId, "CompanyId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CompanyId", String.Empty)
-                @Html.ValidationMessageFor(model => model.CompanyId)
-            </div>
-        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FinalcialPeriod, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.FinalcialPeriod)*@
-                @Html.DropDownList("FinalcialPeriod", ViewBag.PeriodList as SelectList)
-                @Html.ValidationMessageFor(model => model.FinalcialPeriod)
-            </div>
-        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.Capital) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Capital, new { @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.Capital)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrencyId, "CurrencyId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CurrencyId", ViewBag.CurrencyList as SelectList, new { @class = "form-control", style = "width:auto;" })
-                @Html.ValidationMessageFor(model => model.CurrencyId)
-            </div>
-        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.PaidUpCapital) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.PaidUpCapital, new { @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.PaidUpCapital)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Capital, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Capital)
-                @Html.ValidationMessageFor(model => model.Capital)
-            </div>
-        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.SharePrice) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.SharePrice, new { @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.SharePrice)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PaidUpCapital, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PaidUpCapital)
-                @Html.ValidationMessageFor(model => model.PaidUpCapital)
-            </div>
-        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.TotalShares) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.TotalShares, new { @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.TotalShares)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SharePrice, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SharePrice)
-                @Html.ValidationMessageFor(model => model.SharePrice)
-            </div>
-        </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.SharesCurrencyId) :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("SharesCurrencyId", ViewBag.CurrencyList as SelectList, "-- Select Period First--")
+                            @Html.ValidationMessageFor(model => model.SharesCurrencyId)
+                        </label>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalShares, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalShares)
-                @Html.ValidationMessageFor(model => model.TotalShares)
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SharesCurrencyId, "SharesCurrencyId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SharesCurrencyId", ViewBag.CurrencyList as SelectList)
-                @Html.ValidationMessageFor(model => model.SharesCurrencyId)
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsActive)
-                @Html.ValidationMessageFor(model => model.IsActive)
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartingDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.StartingDate, new { id = "StartingDate" })
-                @Html.ValidationMessageFor(model => model.StartingDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndingDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.EndingDate, new { id = "EndingDate" })
-                @Html.ValidationMessageFor(model => model.EndingDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PeriodLockDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.PeriodLockDate, new { id = "PeriodLockDate" })
-                @Html.ValidationMessageFor(model => model.PeriodLockDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.YearLockDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.YearLockDate, new { id = "YearLockDate" })
-                @Html.ValidationMessageFor(model => model.YearLockDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+            
+        }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.FoundedYear, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("FoundedYear", ViewBag.yearList as SelectList, "-- Select Period First--")
+            @Html.ValidationMessageFor(model => model.FoundedYear)
+        </div>
+    </div>*@
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.FinalcialPeriod, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("FinalcialPeriod", ViewBag.PeriodList as SelectList)
+            @Html.ValidationMessageFor(model => model.FinalcialPeriod)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.CurrencyId, "CurrencyId", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CurrencyId", ViewBag.CurrencyList as SelectList, new { @class = "form-control", style = "width:auto;" })
+            @Html.ValidationMessageFor(model => model.CurrencyId)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.Capital, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Capital)
+            @Html.ValidationMessageFor(model => model.Capital)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.PaidUpCapital, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PaidUpCapital)
+            @Html.ValidationMessageFor(model => model.PaidUpCapital)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.SharePrice, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SharePrice)
+            @Html.ValidationMessageFor(model => model.SharePrice)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.TotalShares, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TotalShares)
+            @Html.ValidationMessageFor(model => model.TotalShares)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.SharesCurrencyId, "SharesCurrencyId", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SharesCurrencyId", ViewBag.CurrencyList as SelectList)
+            @Html.ValidationMessageFor(model => model.SharesCurrencyId)
+        </div>
+    </div>*@
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.StartingDate, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.StartingDate, new { id = "StartingDate" })
+            @Html.ValidationMessageFor(model => model.StartingDate)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.EndingDate, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.EndingDate, new { id = "EndingDate" })
+            @Html.ValidationMessageFor(model => model.EndingDate)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.PeriodLockDate, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.PeriodLockDate, new { id = "PeriodLockDate" })
+            @Html.ValidationMessageFor(model => model.PeriodLockDate)
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.YearLockDate, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.YearLockDate, new { id = "YearLockDate" })
+            @Html.ValidationMessageFor(model => model.YearLockDate)
+        </div>
+    </div>*@
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#StartingDate').datetimepicker();
-        $('#EndingDate').datetimepicker();
-        $('#PeriodLockDate').datetimepicker();
-        $('#YearLockDate').datetimepicker();
-    });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#StartingDate').datetimepicker();
+            $('#EndingDate').datetimepicker();
+            $('#PeriodLockDate').datetimepicker();
+            $('#YearLockDate').datetimepicker();
+        });
 
-</script>
-
+    </script>
 }
 
 

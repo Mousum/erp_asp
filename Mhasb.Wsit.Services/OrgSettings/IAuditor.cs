@@ -10,5 +10,7 @@ namespace Mhasb.Services.OrgSettings
     public interface IAuditor
     {
         bool AddAuditor(Auditor auditor);
+
+        List<Auditor> GetAllAuditorsByCompanyAndType(int companyId, EnumAuditorType type);
     }
 }
