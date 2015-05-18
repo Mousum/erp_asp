@@ -104,5 +104,7 @@ namespace Mhasb.Wsit.DAL.Data
 
 
         }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Accounts.VoucherType> VoucherTypes { get; set; }
     }
 }
