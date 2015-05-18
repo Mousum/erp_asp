@@ -751,6 +751,7 @@
     <Content Include="Areas\Accounts\Views\web.config" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Costcentre.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

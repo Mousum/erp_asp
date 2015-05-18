@@ -61,9 +61,32 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult CostCentresSettings() {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
-            var Atypes = cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
-
+            var centers= cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
+            ViewBag.centers = new SelectList(centers, "Id", "AName");
             return View("Costcentre");
         }
+        public ActionResult Edit(int id) 
+        {
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.LookupId, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+            var model = cSer.GetSingleChartOfAccount(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(ChartOfAccount ca)
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            ca.CompanyId = AccSet.Companies.Id;
+            if (cSer.UpdateChartOfAccount(ca))
+            {
+                return Content("Success");
+            }
+            else
+            {
+                return Content("Failed");
+            }
+        }
+
     }
 }

@@ -9,11 +9,7 @@
                 </div>
                 <div class="col-md-8">
                     <label class="cstm-select">
-                        <select>
-                            <option selected> USA </option>
-                            <option>UK</option>
-                            <option>Bangladesh</option>
-                        </select>
+                        @Html.DropDownList("atype", (SelectList)ViewBag.centers, "--Select Account Type--", htmlAttributes: new { @class = "cstm-input", id = "Aid", required = "required" })
                     </label>
                 </div>
             </div>
