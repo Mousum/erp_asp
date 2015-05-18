@@ -62,6 +62,7 @@
     <Compile Include="Mapping\Commons\IndustryMaping.cs" />
     <Compile Include="Mapping\Commons\LanguageMaping.cs" />
     <Compile Include="Mapping\Commons\LegalEntityMaping.cs" />
+    <Compile Include="Mapping\Commons\LookupMapping.cs" />
     <Compile Include="Mapping\Notifications\InvitationMapping.cs" />
     <Compile Include="Mapping\Organizations\CompanyDocumentMapping.cs" />
     <Compile Include="Mapping\Organizations\CompanyMapping.cs" />
