@@ -1,10 +1,10 @@
-﻿@model Mhasb.Domain.OrgSettings.ChartOfAccount
+﻿@model Mhasb.Domain.Accounts.ChartOfAccount
 
 <div class="container my-dashboard">
     <div class="row clearfix">
         <h4 class="all-head">Chart Of Accounts</h4>
         <div class="col-md-6">
-            
+
             <div class="row cstm-frm-row">
                 <div class="col-md-4">
                     <label>Account Type:</label>
@@ -75,10 +75,10 @@
         </div>
         <div class="col-md-6">
             <div class="row cstm-frm-row">
-                
+
                 <div class="col-md-12">
                     <label>
-                        <input type="checkbox"> Show on Dashboard Watchlist 
+                        <input type="checkbox"> Show on Dashboard Watchlist
                     </label>
                 </div>
             </div>
@@ -86,7 +86,7 @@
 
                 <div class="col-md-12">
                     <label>
-                        <input type="checkbox"> Show in Expense Claims 
+                        <input type="checkbox"> Show in Expense Claims
                     </label>
                 </div>
             </div>
@@ -102,12 +102,17 @@
 
                 <div class="col-md-12">
                     <label>
-                        <input type="checkbox"> This Account Is a Cost Center 
+                        <input type="checkbox"> This Account Is a Cost Center
                     </label>
                 </div>
             </div>
             <div class="row cstm-frm-row">
-                <button class="btn btn-default" type="submit">Button</button>
+                <div class="col-md-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
