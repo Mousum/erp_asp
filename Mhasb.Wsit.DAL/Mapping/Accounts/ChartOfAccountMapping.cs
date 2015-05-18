@@ -12,7 +12,7 @@ namespace Mhasb.DAL.Mapping.Accounts
             this.Property(c => c.CompanyId).HasColumnName("companyid");
             this.Property(c => c.ACode).HasColumnName("acode").HasMaxLength(10).IsRequired();
             this.Property(c => c.AName).HasColumnName("aname");
-            this.Property(c => c.Description).HasMaxLength(2000).HasColumnName("Description");
+            this.Property(c => c.Description).HasMaxLength(1000).HasColumnName("description");
             this.Property(c => c.Tax).HasColumnName("tax");
             this.Property(c => c.ShowInDashboard).HasColumnName("showsnsashboard");
             this.Property(c => c.ShowInExpenseClaims).HasColumnName("showinexpenseclaims");
