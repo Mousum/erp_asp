@@ -1,12 +1,7 @@
-﻿using Mhasb.Domain.OrgSettings;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
+using Mhasb.Domain.Accounts;
 
-namespace Mhasb.DAL.Mapping.OrgSettings
+namespace Mhasb.DAL.Mapping.Accounts
 {
     public class ChartOfAccountMapping : EntityTypeConfiguration<ChartOfAccount>
     {
@@ -15,7 +10,7 @@ namespace Mhasb.DAL.Mapping.OrgSettings
             this.Ignore(c => c.State);
             this.Property(c => c.CompanyId).HasColumnName("companyid");
             this.Property(c => c.AType).HasColumnName("atype");
-            this.Property(c => c.ACode).HasColumnName("acode");
+            this.Property(c => c.ACode).HasColumnName("acode").HasMaxLength(12).IsRequired();
             this.Property(c => c.AName).HasColumnName("aname");
             this.Property(c => c.Description).HasMaxLength(2000).HasColumnName("Description");
             this.Property(c => c.Tax).HasColumnName("tax");
