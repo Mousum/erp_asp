@@ -58,5 +58,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
            return Acode;
 
         }
+        public ActionResult CostCentresSettings() {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            var Atypes = cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
+
+            return View("Costcentre");
+        }
     }
 }

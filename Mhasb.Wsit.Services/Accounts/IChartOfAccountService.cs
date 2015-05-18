@@ -15,5 +15,6 @@ namespace Mhasb.Services.Accounts
         List<ChartOfAccount> GetAllChartOfAccount();
         ChartOfAccount GetSingleChartOfAccount(int caId);
         List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId);
+        List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId);
     }
 }
