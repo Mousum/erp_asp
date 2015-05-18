@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Accounts\AccountsAreaRegistration.cs" />
+    <Compile Include="Areas\Accounts\Controllers\VoucherTypeController.cs" />
     <Compile Include="Areas\Commons\CommonsAreaRegistration.cs" />
     <Compile Include="Areas\Commons\Controllers\AreaTimeController.cs" />
     <Compile Include="Areas\Commons\Controllers\CountryController.cs" />
@@ -837,9 +838,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Accounts\Controllers\" />
     <Folder Include="Areas\Accounts\Models\" />
     <Folder Include="Areas\Accounts\Views\Shared\" />
+    <Folder Include="Areas\Accounts\Views\VoucherType\" />
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
