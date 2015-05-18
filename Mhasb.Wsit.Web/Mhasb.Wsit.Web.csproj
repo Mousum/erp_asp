@@ -745,6 +745,9 @@
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Details.cshtml" />
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Index.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\ChartOfAccounts\Create.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Create.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
