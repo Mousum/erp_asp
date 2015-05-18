@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mhasb.Services.OrgSettings
+namespace Mhasb.Services.Accounts
 {
-    class ChartOfAccountService : IChartOfAccountService
+   public class ChartOfAccountService : IChartOfAccountService
     {
         private readonly CrudOperation<ChartOfAccount> _finalCrudOperation = new CrudOperation<ChartOfAccount>();
 
