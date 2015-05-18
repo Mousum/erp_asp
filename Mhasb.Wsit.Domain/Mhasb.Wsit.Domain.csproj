@@ -43,6 +43,7 @@
     <Compile Include="Accounts\VoucherType.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
+    <Compile Include="Commons\Lookup.cs" />
     <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
     <Compile Include="Accounts\ChartOfAccount.cs" />

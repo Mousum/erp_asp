@@ -8,6 +8,7 @@ namespace Mhasb.DAL.Mapping.Accounts
         public ChartOfAccountMapping(){
             this.HasKey(c=>c.Id);
             this.Ignore(c => c.State);
+            this.Property(c => c.LookupId).HasColumnName("lookupid");
             this.Property(c => c.CompanyId).HasColumnName("companyid");
             this.Property(c => c.AType).HasColumnName("atype");
             this.Property(c => c.ACode).HasColumnName("acode").HasMaxLength(12).IsRequired();
@@ -18,11 +19,14 @@ namespace Mhasb.DAL.Mapping.Accounts
             this.Property(c => c.ShowInExpenseClaims).HasColumnName("showinexpenseclaims");
             this.Property(c => c.IsCostCenter).HasColumnName("iscostcenter");
 
-            this.ToTable("set.chartofaccount");
+            this.ToTable("acc.chartofaccount");
 
             this.HasRequired(c => c.Companies)
                 .WithMany()
                 .HasForeignKey(c => c.CompanyId);
+            this.HasRequired(c => c.Lookups)
+                .WithMany()
+                .HasForeignKey(c => c.LookupId);
        }
     }
 }
