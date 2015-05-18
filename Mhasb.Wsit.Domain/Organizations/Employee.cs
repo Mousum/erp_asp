@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mhasb.Domain.Organizations
+namespace Mhasb.Domain.Organizations      
 {
     public class Employee : IObjectStateLong
     {
