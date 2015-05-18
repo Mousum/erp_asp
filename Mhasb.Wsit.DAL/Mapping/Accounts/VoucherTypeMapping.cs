@@ -17,6 +17,8 @@ namespace Mhasb.DAL.Mapping.Accounts
             this.Property(c => c.Code).HasColumnName("code").HasMaxLength(10);
             this.Property(c => c.Description).HasColumnName("description").HasMaxLength(1000);
 
+            this.Ignore(c=>c.State);
+
             this.ToTable("acc.vouchertype");
 
        }

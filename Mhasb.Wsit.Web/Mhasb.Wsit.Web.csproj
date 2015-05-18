@@ -748,6 +748,11 @@
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Index.cshtml" />
     <Content Include="Areas\Accounts\Views\web.config" />
+    <Content Include="Areas\Accounts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Accounts\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Accounts\Views\VoucherType\Create.cshtml" />
+    <Content Include="Areas\Accounts\Views\VoucherType\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\VoucherType\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -839,8 +844,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Accounts\Models\" />
-    <Folder Include="Areas\Accounts\Views\Shared\" />
-    <Folder Include="Areas\Accounts\Views\VoucherType\" />
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />

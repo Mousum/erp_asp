@@ -11,5 +11,8 @@ namespace Mhasb.Services.Accounts
     {
         bool AddVoucherType(VoucherType voucherType);
         bool UpdateVoucherType(VoucherType voucherType);
+        List<VoucherType> GetAllVoucherType();
+        VoucherType GetVoucherTypeById(int id);
+        bool DeleteVoucherTypeById(int id);
     }
 }
