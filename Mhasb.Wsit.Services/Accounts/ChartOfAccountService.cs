@@ -71,6 +71,23 @@ namespace Mhasb.Services.Accounts
                 return null;
             }
         }
+        public List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c=>c.Companies)
+                                        .Filter(c=>c.CompanyId == CompanyId || c.CompanyId == null)
+                                        .Get().ToList();
+
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
         public ChartOfAccount GetSingleChartOfAccount(int caId) 
         {
             try

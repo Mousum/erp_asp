@@ -14,5 +14,6 @@ namespace Mhasb.Services.Accounts
         bool DeleteChartOfAccount(int CaId);
         List<ChartOfAccount> GetAllChartOfAccount();
         ChartOfAccount GetSingleChartOfAccount(int caId);
+        List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId);
     }
 }
