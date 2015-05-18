@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mhasb.Domain.Accounts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Mhasb.Services.Accounts
 {
     public interface IVoucherType
     {
+        bool AddVoucherType(VoucherType voucherType);
     }
 }

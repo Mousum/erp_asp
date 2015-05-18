@@ -99,6 +99,7 @@ namespace Mhasb.Wsit.DAL.Data
 
             // Accounting Module
             modelBuilder.Configurations.Add(new ChartOfAccountMapping());
+            modelBuilder.Configurations.Add(new VoucherTypeMapping());
 
 
         }
