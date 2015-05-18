@@ -20,7 +20,7 @@ namespace Mhasb.DAL.Mapping.Commons
            this.Property(l => l.Quantity).HasColumnName("quantity");
            this.Property(l => l.Value).HasMaxLength(200).HasColumnName("value");
            this.Property(l => l.Description).HasMaxLength(1000).HasColumnName("description");
-           this.Property(l => l.Order).HasColumnName("description");
+           this.Property(l => l.Order).HasColumnName("order");
 
            this.ToTable("com.Lookup");
 

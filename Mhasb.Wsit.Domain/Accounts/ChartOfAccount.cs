@@ -16,7 +16,6 @@ namespace Mhasb.Domain.Accounts
        public int Id { get; set; }
        public int CompanyId { get; set; }
        public int LookupId { get; set; }
-       public string AType { get; set; }
       
        public string ACode { get; set; }
        public string AName { get; set; }
