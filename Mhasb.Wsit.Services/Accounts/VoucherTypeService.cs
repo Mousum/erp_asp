@@ -29,6 +29,22 @@ namespace Mhasb.Services.Accounts
             }
 
         }
+        public bool UpdateVoucherType(VoucherType voucherType)
+        {
+            try
+            {
+                voucherType.State = ObjectState.Added;
+                voucherRep.UpdateOperation(voucherType);
+                voucherType.State = ObjectState.Unchanged;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+
+        }
 
     }
 }

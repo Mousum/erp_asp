@@ -10,5 +10,6 @@ namespace Mhasb.Services.Accounts
     public interface IVoucherType
     {
         bool AddVoucherType(VoucherType voucherType);
+        bool UpdateVoucherType(VoucherType voucherType);
     }
 }
