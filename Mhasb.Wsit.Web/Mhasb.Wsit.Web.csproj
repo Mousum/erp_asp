@@ -166,6 +166,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Accounts\AccountsAreaRegistration.cs" />
+    <Compile Include="Areas\Accounts\Controllers\VoucherTypeController.cs" />
     <Compile Include="Areas\Commons\CommonsAreaRegistration.cs" />
     <Compile Include="Areas\Commons\Controllers\AreaTimeController.cs" />
     <Compile Include="Areas\Commons\Controllers\CountryController.cs" />
@@ -745,6 +747,7 @@
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Details.cshtml" />
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Edit.cshtml" />
     <Content Include="Areas\OrgSettings\Views\TaxSetting\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\web.config" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -835,6 +838,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Accounts\Models\" />
+    <Folder Include="Areas\Accounts\Views\Shared\" />
+    <Folder Include="Areas\Accounts\Views\VoucherType\" />
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />

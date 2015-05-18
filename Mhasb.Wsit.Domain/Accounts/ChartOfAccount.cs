@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mhasb.Domain.OrgSettings
+namespace Mhasb.Domain.Accounts
 {
     public class ChartOfAccount : IObjectStateInt
     {
@@ -16,7 +16,7 @@ namespace Mhasb.Domain.OrgSettings
        public int CompanyId { get; set; }
        public string AType { get; set; }
       
-       public long ACode { get; set; }
+       public string ACode { get; set; }
        public string AName { get; set; }
        public string Description { get; set; }
        public decimal Tax { get; set; }

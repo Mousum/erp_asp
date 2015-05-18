@@ -1,15 +1,12 @@
-﻿using Mhasb.DAL.Mapping.Commons;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using Mhasb.DAL.Mapping.Accounts;
+using Mhasb.DAL.Mapping.Commons;
 using Mhasb.DAL.Mapping.Notifications;
 using Mhasb.DAL.Mapping.Organizations;
-using Mhasb.DAL.Mapping.Users;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Mhasb.DAL.Mapping.OrgSettings;
-using Mhasb.Domain.OrgSettings;
+using Mhasb.DAL.Mapping.Users;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -41,7 +38,7 @@ namespace Mhasb.Wsit.DAL.Data
                 this.ApplyStateChanges();
                 return base.SaveChanges();
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (DbEntityValidationException dbEx)
             {
                 Exception raise = dbEx;
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
@@ -100,17 +97,10 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new TaxSettingMapping());
             //modelBuilder.Configurations.Add(new FinalcialSettingMapping());
 
+            // Accounting Module
+            modelBuilder.Configurations.Add(new ChartOfAccountMapping());
+
+
         }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.TaxSetting> TaxSettings { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Designation> Designations { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.OrgSettings.Auditor> Auditors { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Employee> Employees { get; set; }
-
     }
 }

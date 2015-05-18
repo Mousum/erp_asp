@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\VoucherType.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
-    <Compile Include="OrgSettings\ChartOfAccount.cs" />
+    <Compile Include="Accounts\ChartOfAccount.cs" />
     <Compile Include="OrgSettings\Currency.cs" />
     <Compile Include="Commons\Industry.cs" />
     <Compile Include="Commons\Language.cs" />

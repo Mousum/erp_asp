@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\IVoucherType.cs" />
+    <Compile Include="Accounts\VoucherTypeService.cs" />
     <Compile Include="Commons\AreaTimeService.cs" />
     <Compile Include="Commons\ContactDetailService.cs" />
     <Compile Include="Commons\CountryService.cs" />
