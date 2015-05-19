@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\Voucher.cs" />
+    <Compile Include="Accounts\VoucherDetail.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Organizations\Designation.cs" />
@@ -59,7 +61,7 @@
     <Compile Include="Organizations\Employee.cs" />
     <Compile Include="Organizations\Project.cs" />
     <Compile Include="Organizations\TaskManager.cs" />
-    <Compile Include="OrgSettings\FinalcialSetting.cs" />
+    <Compile Include="OrgSettings\FinancialSetting.cs" />
     <Compile Include="OrgSettings\Auditor.cs" />
     <Compile Include="OrgSettings\TaxSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

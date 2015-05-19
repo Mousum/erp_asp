@@ -9,9 +9,9 @@ namespace Mhasb.Services.OrgSettings
 {
     public interface IFinalcialSetting
     {
-        bool AddFinalcialSetting(FinalcialSetting finalcialSetting);
-        bool UpdateFinalcialSetting(FinalcialSetting finalcialSetting);
-        FinalcialSetting GetFinalcialSetting(int finalcialSettingId);
+        bool AddFinalcialSetting(FinancialSetting finalcialSetting);
+        bool UpdateFinalcialSetting(FinancialSetting finalcialSetting);
+        FinancialSetting GetFinalcialSetting(int finalcialSettingId);
 
 
     }

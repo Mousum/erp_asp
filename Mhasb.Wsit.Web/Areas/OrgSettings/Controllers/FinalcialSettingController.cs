@@ -46,7 +46,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FinalcialSetting fs)
+        public ActionResult Create(FinancialSetting fs)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -81,7 +81,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(FinalcialSetting fs)
+        public ActionResult Edit(FinancialSetting fs)
         {
             fs.IsActive = true;
             fService.UpdateFinalcialSetting(fs);
