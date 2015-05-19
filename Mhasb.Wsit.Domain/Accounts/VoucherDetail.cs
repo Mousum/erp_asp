@@ -15,9 +15,9 @@ namespace Mhasb.Domain.Accounts
        public decimal Debit { get; set; }
        public decimal Credit { get; set; }
 
-       //public decimal ConvDr { get; set; }
-       //public decimal ConvCr { get; set; }
-       
+       public decimal TaxDr { get; set; }
+       public decimal TaxCr { get; set; }
+       public string Description { get; set; }
        //chat of Account
        public virtual ChartOfAccount ChartOfAccounts { get; set; }
        //Voucher

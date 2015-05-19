@@ -20,6 +20,9 @@ namespace Mhasb.DAL.Mapping.Accounts
             this.Property(vd => vd.CoaId).HasColumnName("coaid");
             this.Property(vd => vd.Debit).HasColumnName("debit");
             this.Property(vd => vd.Credit).HasColumnName("credit");
+            this.Property(vd => vd.TaxDr).HasColumnName("taxdr");
+            this.Property(vd => vd.TaxCr).HasColumnName("taxcr");
+            this.Property(c => c.Description).HasColumnName("description").HasMaxLength(500);
             this.ToTable("acc.voucher_details");
 
             // relationship
