@@ -27,7 +27,6 @@ namespace Mhasb.Services.Accounts
                 var rr = ex.Message;
                 return false;
             }
-            throw new NotImplementedException();
         }
 
         public bool UpdateVoucher(Voucher voucherObj)

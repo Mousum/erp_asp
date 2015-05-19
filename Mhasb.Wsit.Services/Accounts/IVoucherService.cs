@@ -18,7 +18,7 @@ namespace Mhasb.Services.Accounts
        List<Voucher> GetAllVoucherByBranchId(int BranchId);
        List<Voucher> GetAllVoucherByCurrencyId(int CurrencyId);
 
-       List<Voucher> GetAllVoucherByVoucherDate(DateTime VoucherDate);
+       //List<Voucher> GetAllVoucherByVoucherDate(DateTime VoucherDate);
 
 
     }
