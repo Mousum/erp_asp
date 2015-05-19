@@ -87,6 +87,31 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 return Content("Failed");
             }
         }
+        [HttpPost]
+        public ActionResult GetCostCentreDetails(int id) 
+        {
+            var coa = cSer.GetSingleChartOfAccount(id);
+            return Json(new { Acode = coa.ACode,des = coa.Description});
+        }
+        [HttpPost]
+        public ActionResult SetCostCentreDetails(int id,string ACode,string description)
+        {
+            var coa = cSer.GetSingleChartOfAccount(id);
+            coa.Description = description;
+            coa.ACode = ACode;
+            coa.IsCostCenter = true;
+
+            if (cSer.UpdateChartOfAccount(coa))
+            {
+                return Json(new {ACode= coa.ACode,AName = coa.AName ,msg = "success" });
+
+            }
+            else 
+            {
+                return Json(new { ACode = coa.ACode, AName = coa.AName, msg = "failed" });
+            }
+
+        }
 
     }
 }
