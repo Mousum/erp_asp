@@ -4,6 +4,11 @@
 
     <div class="row clearfix">
         <h4 class="all-head">Chart Of Accounts</h4>
+        @if (TempData["SucMasg"] != null)
+        {
+            <div class="alert alert-success">@TempData["SucMasg"]</div>
+        }
+       
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()

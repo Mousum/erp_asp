@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Wsit.CustomModel.Accounts;
 
 namespace Mhasb.Services.Accounts
 {
@@ -17,5 +18,6 @@ namespace Mhasb.Services.Accounts
         List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId);
         List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId);
         string GeneratedCode(string pCode, int level);
+        List<TreeViewNode> TreeViewList(string pcode, int level);
     }
 }

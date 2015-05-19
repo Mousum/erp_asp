@@ -44,18 +44,19 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                return Content("Success");
+                TempData.Add("SucMasg","Chart Of Account Added Sucessfully!");
+                return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
             }
             else {
                 return Content("Failed");
             }
         }
         [HttpPost]
-        public string GetCode(int id) 
+        public ActionResult GetCode(int id) 
         {
            var chartHead = cSer.GetSingleChartOfAccount(id);
-           string Acode = id.ToString() + string.Format("{0:00}", cSer.GetAllChartOfAccount().Count()+1); //Prints 01
-           return Acode;
+          var  Acode = cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
+          return Json(new { code = Acode, lavel = chartHead.Level + 1 });
 
         }
         public ActionResult CostCentresSettings() {
@@ -80,7 +81,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ca.CompanyId = AccSet.Companies.Id;
             if (cSer.UpdateChartOfAccount(ca))
             {
-                return Content("Success");
+                TempData.Add("SucMasg", "Chart Of Account Updated Sucessfully!");
+                return RedirectToAction("Edit", "ChartOfAccounts", new { id = ca.Id });
             }
             else
             {
