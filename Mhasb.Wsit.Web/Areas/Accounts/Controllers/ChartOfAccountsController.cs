@@ -29,7 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
             var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.LookupId, Value =u.Value+"("+u.Quantity+"%)"});
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.Id, Value =u.Value+"("+u.Quantity+"%)"});
             ViewBag.Lookups = new SelectList(lookups,"Id","Value");
 
             ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
@@ -44,7 +44,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                return Content("Success");
+                TempData.Add("SucMasg","Chart Of Account Added Sucessfully!");
+                return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
             }
             else {
                 return Content("Failed");
@@ -67,7 +68,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
         public ActionResult Edit(int id) 
         {
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.LookupId, Value = u.Value + "(" + u.Quantity + "%)" });
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
             var model = cSer.GetSingleChartOfAccount(id);
             return View(model);
@@ -80,7 +81,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ca.CompanyId = AccSet.Companies.Id;
             if (cSer.UpdateChartOfAccount(ca))
             {
-                return Content("Success");
+                TempData.Add("SucMasg", "Chart Of Account Updated Sucessfully!");
+                return RedirectToAction("Edit", "ChartOfAccounts", new { id = ca.Id });
             }
             else
             {

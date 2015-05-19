@@ -123,6 +123,41 @@ namespace Mhasb.Services.Accounts
             }
         }
 
-
+       public string GeneratedCode(string pCode,int level)
+       {
+           var maxVal = _finalCrudOperation.GetOperation()
+               .Filter(c => c.Level == level)
+               .Get()
+               .Where(c => c.ACode.Contains(pCode))
+               .Max(r=>r.ACode);
+           var maxValue = 1;
+           var returnCode = "";
+           if (maxVal != null)
+           {
+               var tt = maxVal.Substring(1, 2);
+               maxValue = Convert.ToInt32(tt)+1;
+               if (level != 4)
+               {
+                   returnCode = pCode + maxValue.ToString().PadLeft(2, '0');
+               }
+               else
+               {
+                   returnCode = pCode + maxValue.ToString().PadLeft(5, '0');
+               }
+                
+           }
+           else
+           {
+               if (level != 4)
+               {
+                   returnCode = pCode + maxValue.ToString().PadLeft(2, '0');
+               }
+               else
+               {
+                   returnCode = pCode + maxValue.ToString().PadLeft(5, '0');
+               }
+           }
+           return returnCode;
+       }
     }
 }

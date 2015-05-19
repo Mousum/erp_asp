@@ -12,9 +12,10 @@ namespace Mhasb.DAL.Mapping.Commons
     {
         public LookupMapping(){
 
-           this.HasKey(l => l.LookupId);
-
+           this.HasKey(l => l.Id);
            this.Ignore(l => l.State);
+
+           this.Property(l => l.Id).HasColumnName("lookupid");
            this.Property(l => l.LookupType).HasMaxLength(20).HasColumnName("lookuptype");
            this.Property(l => l.Key).HasMaxLength(20).HasColumnName("key");
            this.Property(l => l.Quantity).HasColumnName("quantity");
@@ -22,7 +23,7 @@ namespace Mhasb.DAL.Mapping.Commons
            this.Property(l => l.Description).HasMaxLength(1000).HasColumnName("description");
            this.Property(l => l.Order).HasColumnName("order");
 
-           this.ToTable("com.Lookup");
+           this.ToTable("com.lookup");
 
 
         }
