@@ -30,7 +30,9 @@ namespace Mhasb.Wsit.Web
                       "~/Scripts/master.js",
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/bootstrap-datetimepicker.min.js",
-                      "~/Scripts/customeJs.js"
+                      "~/Scripts/customeJs.js",
+                      "~/Scripts/treeview/jquery-treeview-1.4.0.min.js",
+                       "~/Scripts/treeview/jquery-treeview-async-0.1.0.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -39,7 +41,8 @@ namespace Mhasb.Wsit.Web
                        "~/Content/loader.css",
                       "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/bootstrap-datepicker.css",
-                      "~/Content/bootstrap-datetimepicker.min.css"
+                      "~/Content/bootstrap-datetimepicker.min.css",
+                       "~/Scripts/treeview/jquery-treeview.css"
                       ));
         }
     }

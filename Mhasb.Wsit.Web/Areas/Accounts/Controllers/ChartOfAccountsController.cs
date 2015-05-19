@@ -115,5 +115,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         }
 
+        public ActionResult CoaTree()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CoaTreeList(string root)
+        {
+            var nodes = cSer.TreeViewList("1", 1);
+            return Json(nodes);
+        }
+
     }
 }
