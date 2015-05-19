@@ -162,5 +162,21 @@ namespace Mhasb.Services.Accounts
         //        return null;
         //    }
         //}
+
+        public long GetMaxCountByBranchId(long id)
+        {
+            try
+            {
+                var mId = _finalCrudOperation.GetOperation()
+                                        .Filter(c => c.BranchId == id)
+                                        .Get().Max(c => c.Id);
+                return mId;
+            }
+            catch (Exception ex)
+            {
+                var tt = ex.Message;
+                return -1;
+            }
+        }
     }
 }
