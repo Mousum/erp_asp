@@ -1,0 +1,43 @@
+﻿<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <h4>Cost Centres Settings  :</h4>
+
+            <div class="row cstm-frm-row">
+                <div class="col-md-4">
+                    <label>Cost Centre Name:</label>
+                </div>
+                <div class="col-md-8">
+                    <label class="cstm-select">
+                        @Html.DropDownList("atype", (SelectList)ViewBag.centers, "--Select Account Type--", htmlAttributes: new { @class = "cstm-input", id = "Aid", required = "required" })
+                    </label>
+                </div>
+            </div>
+            <div class="row cstm-frm-row">
+                <div class="col-md-4">
+                    <label>Cost Centre Code:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="cstm-input" type="text" readonly="readonly">
+                </div>
+            </div>
+
+            <div class="row cstm-frm-row">
+                <div class="col-md-4">
+                    <label>Cost Center Description:</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="cstm-tarea"></textarea>
+                </div>
+            </div>
+            <div class="row cstm-frm-row text-right">
+                <!-- Indicates a successful or positive action -->
+                <button type="button" class="btn btn-success">Add Cost Centre</button>
+                <!-- Contextual button for informational alert messages -->
+                <button type="button" class="btn btn-info">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+</div>

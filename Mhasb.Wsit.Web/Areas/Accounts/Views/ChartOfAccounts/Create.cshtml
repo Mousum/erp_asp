@@ -1,0 +1,125 @@
+﻿@model Mhasb.Domain.Accounts.ChartOfAccount
+
+<div class="container my-dashboard">
+    <li style="display:none;" id="getCode" data-url="'@Url.Action("GetCode", "ChartOfAccounts", new { area = "Accounts" })'"></li>
+    <div class="row clearfix">
+        <h4 class="all-head">Chart Of Accounts</h4>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="col-md-6">
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>Account Type:</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownList("atype", (SelectList)ViewBag.ATypes, "--Select Account Type--", htmlAttributes: new { @class = "cstm-input", id = "Aid", required = "required" })
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>Account Name</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.AName, new { @class = "cstm-input" })
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>Account Code</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.ACode, new { @class = "cstm-input", id="code" })
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>Account Description</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "cstm-tarea", placeholder = "Type a text here" })
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>Account Tax</label>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.DropDownList("TaxId", (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { @class = "cstm-input", id = "Aid", required = "required" })
+                    </div>
+                </div>
+                @*<div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            <label>Account Nature</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="cstm-input">
+                                <option value="">--Select Account Nature--</option>
+                                <option value="">Debit</option>
+                                <option value="">Credit </option>
+
+                            </select>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="col-md-6">
+                <div class="row cstm-frm-row">
+
+                    <div class="col-md-12">
+                        <label>
+                            @Html.CheckBoxFor(m => m.ShowInDashboard)
+                            Show on Dashboard Watchlist
+                        </label>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+
+                    <div class="col-md-12">
+                        <label>
+                            @Html.CheckBoxFor(m => m.ShowInExpenseClaims) Show in Expense Claims
+                        </label>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+
+                    <div class="col-md-12">
+                        <label>
+                            @Html.CheckBoxFor(m => m.IsCostCenter)This Account Is a Cost Center
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $("#Aid").change(function () {
+        var baseUrl = '@Url.Content("~/")';
+        var url = $("#getCode").attr("data-url");
+        var id = $(this).val();
+        var data = {id:id}
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "Accounts/ChartOfAccounts/GetCode",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                $("#code").val(data);
+                $("#code").attr('readonly', 'readonly');
+
+            }
+        });
+    })
+</script>

@@ -8,21 +8,23 @@ namespace Mhasb.DAL.Mapping.Accounts
         public ChartOfAccountMapping(){
             this.HasKey(c=>c.Id);
             this.Ignore(c => c.State);
-            this.Property(c => c.CompanyId).HasColumnName("companyid");
-            this.Property(c => c.AType).HasColumnName("atype");
-            this.Property(c => c.ACode).HasColumnName("acode").HasMaxLength(12).IsRequired();
+            this.Property(c => c.TaxId).HasColumnName("taxid").IsOptional();
+            this.Property(c => c.CompanyId).HasColumnName("companyid").IsOptional();
+            this.Property(c => c.ACode).HasColumnName("acode").HasMaxLength(10).IsRequired();
             this.Property(c => c.AName).HasColumnName("aname");
-            this.Property(c => c.Description).HasMaxLength(2000).HasColumnName("Description");
-            this.Property(c => c.Tax).HasColumnName("tax");
+            this.Property(c => c.Description).HasMaxLength(1000).HasColumnName("description");
             this.Property(c => c.ShowInDashboard).HasColumnName("showsnsashboard");
             this.Property(c => c.ShowInExpenseClaims).HasColumnName("showinexpenseclaims");
             this.Property(c => c.IsCostCenter).HasColumnName("iscostcenter");
 
-            this.ToTable("set.chartofaccount");
+            this.ToTable("acc.chartofaccount");
 
-            this.HasRequired(c => c.Companies)
+            this.HasOptional(c => c.Companies)
                 .WithMany()
                 .HasForeignKey(c => c.CompanyId);
+            this.HasOptional(c => c.Lookups)
+                .WithMany()
+                .HasForeignKey(c => c.TaxId);
        }
     }
 }

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\IVoucherType.cs" />
+    <Compile Include="Accounts\VoucherTypeService.cs" />
     <Compile Include="Commons\AreaTimeService.cs" />
     <Compile Include="Commons\ContactDetailService.cs" />
     <Compile Include="Commons\CountryService.cs" />
@@ -55,9 +57,11 @@
     <Compile Include="Commons\IIndustryService.cs" />
     <Compile Include="Commons\ILanguageService.cs" />
     <Compile Include="Commons\ILegalEntityService.cs" />
+    <Compile Include="Commons\ILookupService.cs" />
     <Compile Include="Commons\IndustryService.cs" />
     <Compile Include="Commons\LanguageService.cs" />
     <Compile Include="Commons\LegalEntityService.cs" />
+    <Compile Include="Commons\LookupService.cs" />
     <Compile Include="Notifications\IInvitationService.cs" />
     <Compile Include="Notifications\InvitationService.cs" />
     <Compile Include="Organizations\CompanyDocumentService.cs" />
@@ -79,11 +83,11 @@
     <Compile Include="Organizations\ProjectService.cs" />
     <Compile Include="Organizations\TaskManagerService.cs" />
     <Compile Include="OrgSettings\AuditorService.cs" />
-    <Compile Include="OrgSettings\ChartOfAccountService.cs" />
+    <Compile Include="Accounts\ChartOfAccountService.cs" />
     <Compile Include="OrgSettings\CurrencyService.cs" />
     <Compile Include="OrgSettings\FinalcialSettingService.cs" />
     <Compile Include="OrgSettings\IAuditor.cs" />
-    <Compile Include="OrgSettings\IChartOfAccountService.cs" />
+    <Compile Include="Accounts\IChartOfAccountService.cs" />
     <Compile Include="OrgSettings\ICurrency.cs" />
     <Compile Include="OrgSettings\IFinalcialSetting.cs" />
     <Compile Include="OrgSettings\ITaxSetting.cs" />

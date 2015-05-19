@@ -65,6 +65,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new LegalEntityMaping());
             modelBuilder.Configurations.Add(new IndustryMaping());
             modelBuilder.Configurations.Add(new AreaTimeMaping());
+            modelBuilder.Configurations.Add(new LookupMapping());
 
             // Notification
             modelBuilder.Configurations.Add(new InvitationMapping());
@@ -99,8 +100,10 @@ namespace Mhasb.Wsit.DAL.Data
 
             // Accounting Module
             modelBuilder.Configurations.Add(new ChartOfAccountMapping());
+            modelBuilder.Configurations.Add(new VoucherTypeMapping());
 
 
         }
+
     }
 }
