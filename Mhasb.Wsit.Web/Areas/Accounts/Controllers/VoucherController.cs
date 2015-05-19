@@ -11,7 +11,6 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
     public class VoucherController : Controller
     {
         private readonly ICurrency cService = new CurrencyService();
-        private readonly ICurrency cService = new CurrencyService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
