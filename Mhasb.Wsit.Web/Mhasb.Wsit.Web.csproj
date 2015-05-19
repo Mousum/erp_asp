@@ -168,6 +168,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Accounts\AccountsAreaRegistration.cs" />
     <Compile Include="Areas\Accounts\Controllers\ChartOfAccountsController.cs" />
+    <Compile Include="Areas\Accounts\Controllers\VoucherController.cs" />
     <Compile Include="Areas\Accounts\Controllers\VoucherTypeController.cs" />
     <Compile Include="Areas\Commons\CommonsAreaRegistration.cs" />
     <Compile Include="Areas\Commons\Controllers\AreaTimeController.cs" />
@@ -752,6 +753,7 @@
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Costcentre.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Edit.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\Create.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
