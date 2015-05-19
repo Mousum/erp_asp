@@ -1,6 +1,10 @@
 ﻿@model Mhasb.Domain.Accounts.ChartOfAccount
 
 <div class="container my-dashboard">
+    @if (TempData["SucMasg"]!=null)
+    {
+        <div class="alert alert-success">@TempData["SucMasg"]</div>
+    }
     <li style="display:none;" id="getCode" data-url="'@Url.Action("GetCode", "ChartOfAccounts", new { area = "Accounts" })'"></li>
     <div class="row clearfix">
         <h4 class="all-head">Chart Of Accounts</h4>

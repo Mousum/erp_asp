@@ -54,6 +54,19 @@
                         </label>
                     </div>
                 </div>
+
+                <div class="row cstm-frm-row">
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.voucher.RefferenceNo)
+                        @Html.HiddenFor(model => model.voucher.RefferenceNo, new { Value = ViewBag.RefferenceNo })
+
+                    </div>
+                    <div class="col-md-8">
+                        <p>@ViewBag.RefferenceNo</p>
+                    </div>
+                </div>
+
             </div>
             <br /><hr />
             <div class="col-md-12">
@@ -85,7 +98,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @for (int i = 0; i < 3; i++)
+                           @for (int i = 0; i < 1; i++)
                            {
                                 <tr>
                                     <td>@Html.TextAreaFor(m => m.voucherDetails[i].Description, new { @class = "cstm-input" })</td>
@@ -127,7 +140,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#voucherdate').datetimepicker();
+            $('#voucherdate').datepicker({
+                format: 'dd/mm/yyyy'
+            });
         });
 
     </script>
