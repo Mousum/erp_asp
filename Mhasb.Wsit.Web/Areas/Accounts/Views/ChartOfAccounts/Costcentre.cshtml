@@ -2,7 +2,7 @@
     <div class="row clearfix">
         <div class="col-md-6">
             <h4>Cost Centres Settings  :</h4>
-
+            <div class="alert alert-success successMsg" style="display:none;"></div>
             <div class="row cstm-frm-row">
                 <div class="col-md-4">
                     <label>Cost Centre Name:</label>
@@ -18,7 +18,7 @@
                     <label>Cost Centre Code:</label>
                 </div>
                 <div class="col-md-8">
-                    <input class="cstm-input" type="text" readonly="readonly">
+                    <input class="cstm-input" type="text" id="code">
                 </div>
             </div>
 
@@ -27,12 +27,12 @@
                     <label>Cost Center Description:</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="cstm-tarea"></textarea>
+                    <textarea class="cstm-tarea" id="des"></textarea>
                 </div>
             </div>
             <div class="row cstm-frm-row text-right">
                 <!-- Indicates a successful or positive action -->
-                <button type="button" class="btn btn-success">Add Cost Centre</button>
+                <button type="button"  class="btn btn-success saveCostCentre">Add Cost Centre</button>
                 <!-- Contextual button for informational alert messages -->
                 <button type="button" class="btn btn-info">Cancel</button>
             </div>
@@ -41,3 +41,57 @@
     </div>
     <hr>
 </div>
+
+<script>
+    $("#Aid").change(function () {
+        var id = $(this).val();
+        if (id === "") {
+            $("#code").val("");
+            $("#des").val("");
+        }
+        else
+        {
+            var baseUrl = '@Url.Content("~/")';
+            var data = { id: id }
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "Accounts/ChartOfAccounts/GetCostCentreDetails",
+                data: data,
+                datatype: "Json",
+                success: function (data) {
+                    $("#code").val(data.Acode);
+                    $("#code").attr('readonly', 'readonly');
+                    $("#des").val(data.des);
+
+                }
+            });
+        }
+     
+    })
+    $(".saveCostCentre").click(function () {
+       var id = $("#Aid").val();
+       var code = $("#code").val();
+       var des = $("#des").val();
+       if (id !== "" && code !== "" && des !== "")
+       {
+           var baseUrl = '@Url.Content("~/")';
+           var data = { id: id, ACode: code, description: des };
+           $.ajax({
+               type: "POST",
+               url: baseUrl + "Accounts/ChartOfAccounts/SetCostCentreDetails",
+               data: data,
+               datatype: "Json",
+               success: function (data) {
+                   $("#Aid").val("");
+                   $("#code").val("");
+                   $("#des").val("");
+                   if (data.msg === "success")
+                   {
+                       $(".successMsg").text(data.AName + "(" + data.ACode + ") Cost Centre Saved Successfully");
+                       $(".successMsg").show("slow");
+                   }
+               }
+           });
+       }
+    })
+</script>
