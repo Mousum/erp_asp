@@ -19,6 +19,7 @@ namespace Mhasb.Domain.Accounts
        //public decimal ConvCr { get; set; }
        
        //chat of Account
+       public virtual ChartOfAccount ChartOfAccounts { get; set; }
        //Voucher
        public virtual Voucher Vouchers { get; set; }
 

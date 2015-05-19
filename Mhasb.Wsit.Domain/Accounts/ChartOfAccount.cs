@@ -24,13 +24,15 @@ namespace Mhasb.Domain.Accounts
        public bool ShowInDashboard { get; set; }
        public bool ShowInExpenseClaims { get; set; }
        public bool IsCostCenter { get; set; }
-       public ObjectState State { get; set; }
+        public int Level { get; set; }
+        public ObjectState State { get; set; }
        public virtual Company Companies { get; set; }
        public virtual Lookup Lookups { get; set; }
+        public virtual ICollection<VoucherDetail> VoucherDetails { get; set; }
 
-       
 
-        
+
+
 
     }
 }

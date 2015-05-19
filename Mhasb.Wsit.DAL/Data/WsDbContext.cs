@@ -102,6 +102,9 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new ChartOfAccountMapping());
             modelBuilder.Configurations.Add(new VoucherTypeMapping());
 
+            modelBuilder.Configurations.Add(new VoucherMapping());
+            modelBuilder.Configurations.Add(new VoucherDetailMapping());
+
 
         }
 

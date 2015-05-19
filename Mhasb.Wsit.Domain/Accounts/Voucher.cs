@@ -34,7 +34,7 @@ namespace Mhasb.Domain.Accounts
         // financial Setting
         public virtual FinancialSetting FinancialSettings { get; set; }
         //voucher type
-        //public virtual VoucherType VoucherTypes { get; set; }
+        public virtual VoucherType VoucherTypes { get; set; }
         // branch 
         public virtual ICollection<VoucherDetail> VoucherDetails { get; set; }
         // currency

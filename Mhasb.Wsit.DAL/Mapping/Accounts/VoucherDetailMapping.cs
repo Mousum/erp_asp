@@ -26,6 +26,11 @@ namespace Mhasb.DAL.Mapping.Accounts
             this.HasRequired(vd => vd.Vouchers)
                 .WithMany(vd => vd.VoucherDetails)
                 .HasForeignKey(vd => vd.VoucherId);
+            this.HasRequired(vd => vd.ChartOfAccounts)
+                .WithMany(vd => vd.VoucherDetails)
+                .HasForeignKey(vd => vd.CoaId);
+
+
         }
 
     }
