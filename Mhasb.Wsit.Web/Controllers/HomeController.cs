@@ -15,6 +15,7 @@ namespace Mhasb.Wsit.Web.Controllers
         private IRoleVsActionService arService = new RoleVsActionService();
         public ActionResult Index()
         {
+
             if (HttpContext.User.Identity.IsAuthenticated)
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             var model = new Login();

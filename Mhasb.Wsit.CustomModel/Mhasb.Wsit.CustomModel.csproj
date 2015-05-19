@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\TreeViewNode.cs" />
     <Compile Include="Accounts\VoucherCustom.cs" />
     <Compile Include="Organizations\CompanyProfileCustom.cs" />
     <Compile Include="Organizations\EmployeeProfileCustom.cs" />

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Wsit.CustomModel.Accounts;
 
 namespace Mhasb.Services.Accounts
 {
@@ -160,6 +161,24 @@ namespace Mhasb.Services.Accounts
            return returnCode;
        }
 
-       
+       public List<TreeViewNode> TreeViewList(string pcode, int level)
+       {
+           var tvList = _finalCrudOperation
+               .GetOperation()
+               .Filter(ca => ca.Level == level)
+               .Get()
+               .Select(c => new TreeViewNode
+               {
+                   id=c.ACode,
+                   text = c.AName,
+                   classes = c.Level == 4?"file":"folder",
+                   hasChildren = c.Level!=4 
+               }).ToList();
+
+
+           return tvList;
+
+           // return new List<TreeViewNode>();
+       }
     }
 }
