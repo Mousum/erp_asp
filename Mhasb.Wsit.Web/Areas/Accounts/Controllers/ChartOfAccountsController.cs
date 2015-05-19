@@ -29,7 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
             var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.LookupId, Value =u.Value+"("+u.Quantity+"%)"});
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.Id, Value =u.Value+"("+u.Quantity+"%)"});
             ViewBag.Lookups = new SelectList(lookups,"Id","Value");
 
             ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
@@ -68,7 +68,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
         public ActionResult Edit(int id) 
         {
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.LookupId, Value = u.Value + "(" + u.Quantity + "%)" });
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
             var model = cSer.GetSingleChartOfAccount(id);
             return View(model);
