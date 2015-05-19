@@ -23,5 +23,7 @@ namespace Mhasb.Domain.Accounts
         public string Description { get; set; }
 
         public ObjectState State { get; set; }
+
+        public virtual ICollection<Voucher> Vouchers { get; set; }
     }
 }
