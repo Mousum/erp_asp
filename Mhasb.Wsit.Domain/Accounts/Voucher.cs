@@ -21,9 +21,9 @@ namespace Mhasb.Domain.Accounts
         public string RefferenceNo { get; set; }
         public string Description { get; set; }
         public string ChequeNo { get; set; }
-        public DateTime ChequeDate { get; set; }
+        public DateTime? ChequeDate { get; set; }
         public string BillNo { get; set; }
-        public DateTime BillDate { get; set; }
+        public DateTime? BillDate { get; set; }
         public string ChallenNo { get; set; }
         public string OrderNo { get; set; }
 

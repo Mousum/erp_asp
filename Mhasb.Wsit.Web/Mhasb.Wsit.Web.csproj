@@ -754,6 +754,12 @@
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Costcentre.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Edit.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\Create.cshtml" />
+    <Content Include="Areas\Accounts\Views\VoucherType\Create.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Accounts\Views\VoucherType\Edit.cshtml" />
+    <Content Include="Areas\Accounts\Views\VoucherType\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\_ViewStart.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -848,7 +854,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Accounts\Models\" />
     <Folder Include="Areas\Accounts\Views\Shared\" />
-    <Folder Include="Areas\Accounts\Views\VoucherType\" />
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
