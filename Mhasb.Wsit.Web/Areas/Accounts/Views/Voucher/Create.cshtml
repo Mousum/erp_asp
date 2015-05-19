@@ -15,7 +15,7 @@
             <hr />
             @Html.ValidationSummary(true)
 
-
+            @Html.HiddenFor(model => model.voucher.FinancialSettingId, new { Value = ViewBag.FinancialSettingId })
             
 
             <div class="col-md-6">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-8">
                         <label class="cstm-select">
-                            @Html.DropDownList("voucher.CurrencyId", ViewBag.CurrencyList as SelectList, "-- Select Currency First--")
+                            @Html.DropDownList("voucher.CurrencyId", ViewBag.CurrencyList as SelectList)
                             @Html.ValidationMessageFor(model => model.voucher.CurrencyId)
                         </label>
                     </div>
@@ -98,13 +98,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @for (int i = 0; i < 1; i++)
+                           @for (int i = 0; i < 3; i++)
                            {
                                 <tr>
                                     <td>@Html.TextAreaFor(m => m.voucherDetails[i].Description, new { @class = "cstm-input" })</td>
                                     <td>@Html.TextBoxFor(m => m.voucherDetails[i].ChartOfAccounts, new { @class = "cstm-input" })</td>
                                     <td></td>
-                                    <td>@Html.TextBoxFor(m => m.voucherDetails[i].CoaId, new { @class = "cstm-input" })</td>
+                                    <td>
+
+                                        <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control">
+                                            <option value="">Select one...</option>
+                                            @foreach (var coa in ViewBag.coaList)
+                                            {
+                                                <option value="@coa.Id">@coa.AName</option>
+                                            }
+                                        </select>
+
+                                    </td>
                                     <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input" })</td>
                                     <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input" })</td>
                                     <td>Action</td>
@@ -138,12 +148,185 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#voucherdate').datepicker({
-                format: 'dd/mm/yyyy'
-            });
+    
+
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 5px 10px;
+    }
+</style>
+
+
+<script>
+
+    $(document).ready(function () {
+        var data=@Html.Raw(Json.Encode(ViewBag.dataset));
+        data=data.Data;
+        $('#voucherdate').datepicker({
+            format: 'mm/dd/yyyy'
         });
 
-    </script>
+    });
+
+    (function( $ ) {
+        $.widget( "custom.combobox", {
+            _create: function() {
+                this.wrapper = $( "<span>" )
+                  .addClass( "custom-combobox" )
+                  .insertAfter( this.element );
+ 
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+ 
+            _createAutocomplete: function() {
+                var selected = this.element.children( ":selected" ),
+                  value = selected.val() ? selected.text() : "";
+ 
+                this.input = $( "<input>" )
+                  .appendTo( this.wrapper )
+                  .val( value )
+                  .attr( "title", "" )
+                  .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy( this, "_source" )
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+ 
+                this._on( this.input, {
+                    autocompleteselect: function( event, ui ) {
+                        ui.item.option.selected = true;
+                        this._trigger( "select", event, {
+                            item: ui.item.option
+                        });
+                    },
+ 
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+ 
+            _createShowAllButton: function() {
+                var input = this.input,
+                  wasOpen = false;
+ 
+                $( "<a>" )
+                  .attr( "tabIndex", -1 )
+                  .attr( "title", "Show All Items" )
+                  .tooltip()
+                  .appendTo( this.wrapper )
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass( "ui-corner-all" )
+                  .addClass( "custom-combobox-toggle ui-corner-right" )
+                  .mousedown(function() {
+                      wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                  })
+                  .click(function() {
+                      input.focus();
+ 
+                      // Close if already visible
+                      if ( wasOpen ) {
+                          return;
+                      }
+ 
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete( "search", "" );
+                  });
+            },
+ 
+            _source: function( request, response ) {
+                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+                response( this.element.children( "option" ).map(function() {
+                    var text = $( this ).text();
+                    if ( this.value && ( !request.term || matcher.test(text) ) )
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }) );
+            },
+ 
+            _removeIfInvalid: function( event, ui ) {
+ 
+                // Selected an item, nothing to do
+                if ( ui.item ) {
+                    return;
+                }
+ 
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children( "option" ).each(function() {
+                    if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+ 
+                // Found a match, nothing to do
+                if ( valid ) {
+                    return;
+                }
+ 
+                // Remove invalid value
+                this.input
+                  .val( "" )
+                  .attr( "title", value + " didn't match any item" )
+                  .tooltip( "open" );
+                this.element.val( "" );
+                this._delay(function() {
+                    this.input.tooltip( "close" ).attr( "title", "" );
+                }, 2500 );
+                this.input.autocomplete( "instance" ).term = "";
+            },
+ 
+            _destroy: function() {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })( jQuery );
+ 
+    $(function() {
+        $( "#combobox_0" ).combobox();
+        $( "#toggle_0" ).click(function() {
+            $( "#combobox_0" ).toggle();
+        });
+    });
+</script>
+
+
+
 }

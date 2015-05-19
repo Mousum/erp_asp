@@ -163,7 +163,7 @@ namespace Mhasb.Services.Accounts
         //    }
         //}
 
-        public long GetMaxCountByBranchId(long id)
+        public long GetMaxCountByBranchId(int id)
         {
             try
             {

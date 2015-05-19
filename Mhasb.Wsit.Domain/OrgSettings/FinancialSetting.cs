@@ -25,7 +25,7 @@ namespace Mhasb.Domain.OrgSettings
        public int SharesCurrencyId { get; set; }
        public bool IsActive { get; set; }
        public DateTime StartingDate { get; set; }
-       public DateTime? EndingDate { get; set; }
+       public DateTime EndingDate { get; set; }
        public DateTime? PeriodLockDate { get; set; }
        public DateTime? YearLockDate { get; set; }
 
