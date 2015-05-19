@@ -10,19 +10,13 @@ using Mhasb.DAL.Mapping.Users;
 
 namespace Mhasb.Wsit.DAL.Data
 {
-    class WsDbContext: DbContext, IDbContext
+  class WsDbContext: DbContext, IDbContext
     {
-       
-        static WsDbContext()
-        {
-            //Database.SetInitializer<WsDbContext>(null);
-
-        }
-
         public WsDbContext()
             : base("Name=DbConString")
         {
             Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer(new DropCreateWSDb());
         }
 
 
@@ -46,7 +40,7 @@ namespace Mhasb.Wsit.DAL.Data
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
                         string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
+                            validationErrors.Entry.Entity,
                            validationError.ErrorMessage);
                         // raise a new exception nesting
                         // the current instance as InnerException

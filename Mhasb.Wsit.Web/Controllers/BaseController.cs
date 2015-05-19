@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Mhasb.Services.Accounts;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -18,6 +19,8 @@ namespace Mhasb.Wsit.Web.Controllers
             base.OnActionExecuted(filterContext);
 
             IActionListService actionService = new ActionListService();
+            
+
             // To get area,controller and action name from http request
             var routeData = filterContext.RequestContext.RouteData;
             var module = (string)routeData.DataTokens["area"];

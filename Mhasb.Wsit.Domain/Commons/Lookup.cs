@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Domain.Commons
 {
-    public class Lookup
+    public class Lookup:IObjectStateInt
     {
-        public int LookupId { get; set; }
+        public int Id { get; set; }
         public string LookupType { get; set; }
         public string Key { get; set; }
         public decimal Quantity { get; set; }
