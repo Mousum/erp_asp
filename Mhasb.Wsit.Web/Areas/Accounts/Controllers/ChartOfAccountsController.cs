@@ -52,11 +52,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
         }
         [HttpPost]
-        public string GetCode(int id) 
+        public ActionResult GetCode(int id) 
         {
            var chartHead = cSer.GetSingleChartOfAccount(id);
-           string Acode = id.ToString() + string.Format("{0:00}", cSer.GetAllChartOfAccount().Count()+1); //Prints 01
-           return Acode;
+          var  Acode = cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
+          return Json(new { code = Acode, lavel = chartHead.Level + 1 });
 
         }
         public ActionResult CostCentresSettings() {
