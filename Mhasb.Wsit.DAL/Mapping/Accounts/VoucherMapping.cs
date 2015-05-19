@@ -39,6 +39,20 @@ namespace Mhasb.DAL.Mapping.Accounts
           this.ToTable("acc.vouchers");
           // Relationship
 
+          this.HasRequired(v => v.VoucherTypes)
+              .WithMany(v => v.Vouchers)
+              .HasForeignKey(v => v.VoucherTypeId);
+
+          this.HasRequired(v => v.FinancialSettings)
+              .WithMany(v => v.Vouchers)
+              .HasForeignKey(v => v.FinancialSettingId)
+              .WillCascadeOnDelete(false);
+          this.HasRequired(v => v.Currencies)
+              .WithMany()
+              .HasForeignKey(v => v.CurrencyId);
+
+
+
       }
     }
 }
