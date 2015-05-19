@@ -16,7 +16,6 @@ namespace Mhasb.Wsit.DAL.Data
             : base("Name=DbConString")
         {
             Configuration.LazyLoadingEnabled = false;
-            Database.SetInitializer(new DropCreateWSDb());
         }
 
 
