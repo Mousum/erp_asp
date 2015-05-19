@@ -78,7 +78,7 @@ namespace Mhasb.Domain.Organizations
         public virtual CompanyProfile CompanyProfiles { get; set; }
 
         public virtual ICollection<CompanyDocument> Documents { get; set; }
-        public virtual ICollection<FinalcialSetting> FinalcialSettings { get; set; }
+        public virtual ICollection<FinancialSetting> FinalcialSettings { get; set; }
         public virtual ICollection<TaxSetting> TaxSettings { get; set; }
 
         //[Required(ErrorMessage = "Password is required")]

@@ -8,8 +8,8 @@ namespace Mhasb.Services.OrgSettings
 {
    public class FinalcialSettingService:IFinalcialSetting
     {
-       private readonly CrudOperation<FinalcialSetting> _finalCrudOperation = new CrudOperation<FinalcialSetting>();
-        public bool AddFinalcialSetting(FinalcialSetting finalcialSetting)
+       private readonly CrudOperation<FinancialSetting> _finalCrudOperation = new CrudOperation<FinancialSetting>();
+        public bool AddFinalcialSetting(FinancialSetting finalcialSetting)
         {
 
             try
@@ -27,7 +27,7 @@ namespace Mhasb.Services.OrgSettings
             }
         }
 
-        public bool UpdateFinalcialSetting(FinalcialSetting finalcialSetting)
+        public bool UpdateFinalcialSetting(FinancialSetting finalcialSetting)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Mhasb.Services.OrgSettings
             }
         }
 
-        public FinalcialSetting GetFinalcialSetting(int finalcialSettingId)
+        public FinancialSetting GetFinalcialSetting(int finalcialSettingId)
         {
             try
             {

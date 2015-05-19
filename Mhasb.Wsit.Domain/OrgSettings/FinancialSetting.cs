@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Commons;
 using Mhasb.Domain.Organizations;
 
 namespace Mhasb.Domain.OrgSettings
 {
-   public  class FinalcialSetting:IObjectStateInt
+   public  class FinancialSetting:IObjectStateInt
     {
 
        public int FoundedYear { get; set; }
@@ -34,7 +35,7 @@ namespace Mhasb.Domain.OrgSettings
        public virtual Company Companies { get; set; }
        public virtual Currency Currencies { get; set; }
        public virtual Currency SharesCurrencies { get; set; }
-
+       public ICollection<Voucher> Vouchers { get; set; }
     }
 
    public enum EnumFinalcialPeriod

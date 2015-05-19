@@ -1,12 +1,10 @@
-﻿using Mhasb.Domain.OrgSettings;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using Mhasb.Domain.OrgSettings;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
@@ -46,7 +44,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FinalcialSetting fs)
+        public ActionResult Create(FinancialSetting fs)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -81,7 +79,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(FinalcialSetting fs)
+        public ActionResult Edit(FinancialSetting fs)
         {
             fs.IsActive = true;
             fService.UpdateFinalcialSetting(fs);

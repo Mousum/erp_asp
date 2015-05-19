@@ -8,7 +8,7 @@ using Mhasb.Domain.OrgSettings;
 
 namespace Mhasb.DAL.Mapping.OrgSettings
 {
-   public  class FinalcialSettingMapping:EntityTypeConfiguration<FinalcialSetting>
+   public  class FinalcialSettingMapping:EntityTypeConfiguration<FinancialSetting>
    {
        public FinalcialSettingMapping()
        {

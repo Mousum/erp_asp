@@ -15,7 +15,7 @@ namespace Mhasb.Domain.OrgSettings
        public int Id { get; set; }
         public ObjectState State { get; set; }
 
-       public virtual ICollection<FinalcialSetting> FinalcialSettings { get; set; }
-       public virtual ICollection<FinalcialSetting> SharesFinalcialSettings { get; set; }
+       public virtual ICollection<FinancialSetting> FinalcialSettings { get; set; }
+       public virtual ICollection<FinancialSetting> SharesFinalcialSettings { get; set; }
     }
 }

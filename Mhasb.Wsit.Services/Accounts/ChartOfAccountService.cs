@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mhasb.Services.OrgSettings
+namespace Mhasb.Services.Accounts
 {
-    class ChartOfAccountService : IChartOfAccountService
+   public class ChartOfAccountService : IChartOfAccountService
     {
         private readonly CrudOperation<ChartOfAccount> _finalCrudOperation = new CrudOperation<ChartOfAccount>();
 
@@ -61,6 +61,41 @@ namespace Mhasb.Services.OrgSettings
             try
             {
                 var cAObj = _finalCrudOperation.GetOperation()
+                                        .Get().ToList();
+
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+        public List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c=>c.Companies)
+                                        .Filter(c=>c.CompanyId == CompanyId || c.CompanyId == null)
+                                        .Get().ToList();
+
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+        public List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c => c.Companies)
+                                        .Filter(c => c.CompanyId == CompanyId && c.IsCostCenter == false)
+                                     //   .Filter(c => c.IsCostCenter == false)
                                         .Get().ToList();
 
                 return cAObj;
