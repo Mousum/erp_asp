@@ -826,7 +826,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\_LandLayout.cshtml" />
     <Content Include="Views\Home\Clients.cshtml" />
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
