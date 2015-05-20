@@ -116,6 +116,10 @@ namespace Mhasb.Services.Accounts
             try
             {
                 var voObj = _finalCrudOperation.GetOperation()
+                                        .Include(c=>c.VoucherDetails)
+                                        .Include(c=>c.VoucherTypes)
+                                        .Include(c=>c.FinancialSettings)
+                                        .Include(c=>c.Currencies)
                                         .Filter(c => c.BranchId == BranchId)
                                         .Get().ToList();
 

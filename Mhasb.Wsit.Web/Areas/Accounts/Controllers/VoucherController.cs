@@ -76,5 +76,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             return Content("sdfsd");
         }
 
+        public ActionResult ManualJournals() 
+        {
+            var model = vService.GetAllVoucherByBranchId(3);
+            return View(model);
+        }
+
 	}
 }

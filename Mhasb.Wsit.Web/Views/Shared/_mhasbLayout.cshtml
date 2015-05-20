@@ -88,7 +88,28 @@
                             <li class="">
                                 <a href='@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })'>Chart of Accounts</a>
                             </li>
-                        </ul>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Voucher", new { area = "Accounts" })'>Voucher</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("ExternalAuditor", "Auditor", new { area = "OrgSettings" })'>External Auditor</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("InternalAuditor", "Auditor", new { area = "OrgSettings" })'>Internal Auditor</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Currency", new { area = "OrgSettings" })'>Currency</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })'>Finalcial</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })'>Tax</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("CostCentresSettings", "ChartOfAccounts", new { area = "Accounts" })'>Cost Centre</a>
+                            </li>
+                        </ul> 
                     </li>
                     <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
                 </ul>
