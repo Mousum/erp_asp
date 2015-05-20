@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Mhasb.Domain.Accounts.Voucher>
+
+<div class="container my-dashboard">
+    <h4>Manual Journals</h4>
+    <div class="row cstm-frm-row">
+        <div class="col-md-8">
+            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;">
+                <button type="button" class="btn btn-default">All </button>
+                <button type="button" class="btn btn-default">Draft </button>
+                <button type="button" class="btn btn-default">Posted </button>
+                <button type="button" class="btn btn-default">Voided </button>
+                <button type="button" class="btn btn-default">Repeating </button>
+                <button type="button" class="btn btn-default">Archive </button>
+                <button type="button" class="btn btn-default">Cost Center (Select)</button>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;">
+                <button type="button" class="btn btn-info">Add New Journal</button>
+                <button type="button" class="btn btn-info">Add New Repeating Journal</button>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info">Add New Journal</button>
+        </div>
+        <div class="col-md-3 cstm-frm-row">
+            <label>Total Archived Journals</label>
+        </div>
+        <div class="col-md-2 cstm-frm-row">
+            <input type="text">
+        </div>
+        <div class="col-md-1 cstm-frm-row" style="float:left">
+            Items
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            @if (!Model.Any())
+            {
+                <div class="alert-success">There are no Vouchar</div>
+            }
+            else
+            {
+
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th width="40%">Narration </th>
+                            <th>Date</th>
+                            <th>Currency</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Status</th>
+                            <th>Revew</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                           
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>@item.Description</td>
+                                <td>@item.VoucherDate</td>
+                                <td>@item.Currencies.Name</td>
+                                <td>@item.VoucherDetails.Sum(a=>a.Debit)</td>
+                                <td>@item.VoucherDetails.Sum(a => a.Credit)</td>
+                                <td>@if (item.Posted == 0)
+                                    {
+                                         <p>Pending </p>
+                                    }
+                                    else
+                                    {<p>Posted</p>}
+                                </td>
+                                   
+                                <td></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+         </div>
+
+    </div>
+
+</div>
