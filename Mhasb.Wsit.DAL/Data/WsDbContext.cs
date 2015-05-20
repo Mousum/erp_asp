@@ -97,6 +97,7 @@ namespace Mhasb.Wsit.DAL.Data
 
             modelBuilder.Configurations.Add(new VoucherMapping());
             modelBuilder.Configurations.Add(new VoucherDetailMapping());
+            modelBuilder.Configurations.Add(new VoucherDocumentMapping());
 
 
         }
