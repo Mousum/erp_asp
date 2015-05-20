@@ -256,6 +256,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var setObj = setService.GetAllByUserId(users.Id);
             return Json(setObj, JsonRequestBehavior.AllowGet);
         }
+        [AllowAnonymous]
+        public ActionResult Ledgersettings() {
+           
+            return View();
+        }
 
 
 
