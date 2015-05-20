@@ -16,6 +16,7 @@ namespace Mhasb.Services.Accounts
        List<Voucher> GetAllVoucherByFinancialSettingId(int FinancialSettingId);
        List<Voucher> GetAllVoucherByVoucherTypeId(int VoucherTypeId);
        List<Voucher> GetAllVoucherByBranchId(int BranchId);
+       long CountByBranchIdAndPrefix(int BranchId,string PreFix);
        List<Voucher> GetAllVoucherByCurrencyId(int CurrencyId);
 
        long GetMaxCountByBranchId(int id);
