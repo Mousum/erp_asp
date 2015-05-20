@@ -24,15 +24,15 @@
         </div>
 
         <div class="col-md-6">
-            <button type="button" class="btn btn-info">Add New Journal</button>
+            <button type="button" class="btn btn-info">All Journals</button>
         </div>
         <div class="col-md-3 cstm-frm-row">
-            <label>Total Archived Journals</label>
+            <label style="margin-left: 119px;">Total Archived Journals</label>
         </div>
         <div class="col-md-2 cstm-frm-row">
-            <input type="text">
+            <input type="text" readonly value="@Model.Count()" style="text-align: center;margin-top: 5px;width: 30%;">
         </div>
-        <div class="col-md-1 cstm-frm-row" style="float:left">
+        <div class="col-md-1 cstm-frm-row">
             Items
         </div>
     </div>
