@@ -96,7 +96,7 @@ namespace Mhasb.Services.Accounts
             {
                 var cAObj = _finalCrudOperation.GetOperation()
                                         .Include(c => c.Companies)
-                                        .Filter(c => c.CompanyId == CompanyId && c.IsCostCenter == false)
+                                        .Filter(c => c.CompanyId == CompanyId && c.IsCostCenter == false &&c.Level==4)
                                      //   .Filter(c => c.IsCostCenter == false)
                                         .Get().ToList();
 

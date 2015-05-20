@@ -144,7 +144,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                             accountSetting.lgdash = false;
                             accountSetting.lglast = false;
                             accountSetting.lgcompany = true;
-                            accountSetting.Companies = new Company { Id = Invitation.CompanyId };
+                            accountSetting.CompanyId = Invitation.CompanyId;
 
                             if (sService.AddSettings(accountSetting))
                             {
