@@ -128,6 +128,7 @@ namespace Mhasb.Services.Accounts
             }
         }
 
+
         public List<Voucher> GetAllVoucherByCurrencyId(int CurrencyId)
         {
             try
@@ -169,7 +170,24 @@ namespace Mhasb.Services.Accounts
             {
                 var mId = _finalCrudOperation.GetOperation()
                                         .Filter(c => c.BranchId == id)
-                                        .Get().Max(c => c.Id);
+                                        .Get().Count();
+                return mId;
+            }
+            catch (Exception ex)
+            {
+                var tt = ex.Message;
+                return -1;
+            }
+        }
+
+
+        public long CountByBranchIdAndPrefix(int BranchId, string PreFix)
+        {
+            try
+            {
+                var mId = _finalCrudOperation.GetOperation()
+                                        .Filter(c => c.BranchId == BranchId && c.RefferenceNo.StartsWith(PreFix))
+                                        .Get().Count();
                 return mId;
             }
             catch (Exception ex)

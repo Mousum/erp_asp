@@ -1,6 +1,7 @@
 ﻿using Mhasb.Domain.Accounts;
 using Mhasb.Services.Accounts;
 using Mhasb.Services.OrgSettings;
+using Mhasb.Services.Users;
 using Mhasb.Wsit.CustomModel.Accounts;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly IVoucherDetailService vdService = new VoucherDetailService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly IChartOfAccountService coaService = new ChartOfAccountService();
+        private readonly ISettingsService sService = new SettingsService();
+        private readonly IUserService uService = new UserService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
@@ -27,12 +30,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult Create()
         {
-         
-            int branchId = 3;
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = AccSet.Companies.Id;
 
+            string str = "G";
 
             ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach=vService.GetMaxCountByBranchId(branchId) + 1;
+            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if(maxBrach<1)
                 return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
@@ -40,7 +45,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
 
 
-            var code = "GF-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            var code = "Gj-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             ViewBag.FinancialSettingId = fService.GetCurrentFinalcialSettingByComapny(branchId).Id;
             return View();
@@ -51,29 +56,40 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
+
             voucher.VoucherTypeId = 1;
 
-            voucher.BranchId = 3;
-            
-            vService.CreateVoucher(voucher);
-            List<VoucherDetail> vds = vc.voucherDetails;
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = AccSet.Companies.Id;
 
-            foreach(var vd in vds)
+            if (vService.CreateVoucher(voucher))
             {
-                VoucherDetail voucherDetail = vd;
-                vd.VoucherId = voucher.Id;
-                try
+                List<VoucherDetail> vds = vc.voucherDetails;
+
+                foreach (var voucherDetail in vds)
                 {
-                    vdService.CreateVoucherDetail(vd);
-                }
-                catch(Exception)
-                {
-                    return Content("Voucher Details problem");
+                    voucherDetail.VoucherId = voucher.Id;
+                    try
+                    {
+                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                            return Content("One or more Voucher details could not added Successfully");
+                    }
+                    catch (Exception)
+                    {
+                        return Content("Voucher Details problem");
+                    }
                 }
             }
 
+            else
+            {
+                return Content("Failed To Add Voucher!!!!");
+            }
+           
 
-            return Content("sdfsd");
+
+            return Content("Success");
         }
 
 	}
