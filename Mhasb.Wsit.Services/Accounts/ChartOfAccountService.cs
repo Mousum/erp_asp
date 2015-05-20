@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Mhasb.Wsit.CustomModel.Accounts;
 
@@ -165,20 +166,24 @@ namespace Mhasb.Services.Accounts
        {
            var tvList = _finalCrudOperation
                .GetOperation()
-               .Filter(ca => ca.Level == level)
                .Get()
+               .Where(
+                   c =>
+                       ("0" == pcode || c.Level == level+1) &&
+                       ("0" == pcode || c.ACode.StartsWith(pcode, StringComparison.OrdinalIgnoreCase)) &&
+                       ("0" != pcode || c.Level == 1)
+                       )
                .Select(c => new TreeViewNode
                {
-                   id=c.ACode,
+                   id = c.ACode,
                    text = c.AName,
-                   classes = c.Level == 4?"file":"folder",
-                   hasChildren = c.Level!=4 
+                   classes = c.Level == 4 ? "file" : "folder",
+                   hasChildren = c.Level != 4
                }).ToList();
 
 
            return tvList;
 
-           // return new List<TreeViewNode>();
        }
     }
 }

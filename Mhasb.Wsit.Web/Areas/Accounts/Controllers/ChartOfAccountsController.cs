@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Services.Commons;
+using Mhasb.Wsit.Web.Utilities;
 
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
@@ -122,7 +123,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult CoaTreeList(string root)
         {
-            var nodes = cSer.TreeViewList("1", 1);
+            var code = root.Split('_')[0];
+            //int level;
+            //try
+            //{
+            //    level = Convert.ToInt32(root.Split('_')[1]);
+            //}
+            //catch
+            //{
+            //    level = 0;
+            //}
+
+           code = root == "source" ? "0" : root;
+            var level = UtilityManager.GetLedgerLevel(code);
+            var nodes = cSer.TreeViewList(code, level);
             return Json(nodes);
         }
 

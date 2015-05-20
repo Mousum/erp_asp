@@ -761,6 +761,15 @@
     <Content Include="Areas\Accounts\Views\VoucherType\Index.cshtml" />
     <Content Include="Areas\Accounts\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\CoaTree.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\Deshboard_new.cshtml" />
+    <Content Include="Areas\UserManagement\Views\ActionList\List.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\update.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Create.cshtml" />
+    <Content Include="Areas\OrgSettings\Views\Currency\Edit.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
+    <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\ledgersettings.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\ManualJournals.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

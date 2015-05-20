@@ -88,6 +88,50 @@
                             <li class="">
                                 <a href='@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })'>Chart of Accounts</a>
                             </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Voucher", new { area = "Accounts" })'>Voucher</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("ExternalAuditor", "Auditor", new { area = "OrgSettings" })'>External Auditor</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("InternalAuditor", "Auditor", new { area = "OrgSettings" })'>Internal Auditor</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Currency", new { area = "OrgSettings" })'>Currency</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })'>Finalcial</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })'>Tax</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("CostCentresSettings", "ChartOfAccounts", new { area = "Accounts" })'>Cost Centre</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })'>Invite Employee</a>
+                            </li>
+                        </ul> 
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            Commons <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu cstm-submenu" role="menu">
+                            <li class="">
+                                <a href='@Url.Action("Create", "AreaTime", new { area = "Commons" })'>Time Zone</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Country", new { area = "Commons" })'>Country</a>
+                            </li>
+                           
+                            <li class="">
+                                <a href='@Url.Action("Create", "Industry", new { area = "Commons" })'>Industry</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Language", new { area = "Commons" })'>Language</a>
+                            </li>
                         </ul>
                     </li>
                     <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
@@ -108,6 +152,37 @@
     <!--End welcome dashboard section-->
     <!-- Footer -->
     <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3><i class="fa fa-map-marker foot-icon"></i> Location</h3>
+                        <p>3481 Dhaka Place<br>Dhaka Hills, CA 90210</p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3><i class="fa fa-wifi foot-icon"></i> Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3><i class="fa fa-share-alt foot-icon"></i>About MHASB ERP</h3>
+                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="footer-below">
             <div class="container">
                 <div class="row">
