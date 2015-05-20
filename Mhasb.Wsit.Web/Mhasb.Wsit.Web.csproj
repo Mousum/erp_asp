@@ -768,6 +768,7 @@
     <Content Include="Areas\OrgSettings\Views\Currency\Edit.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\ledgersettings.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
