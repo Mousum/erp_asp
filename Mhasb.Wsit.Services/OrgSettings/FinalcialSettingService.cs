@@ -77,5 +77,29 @@ namespace Mhasb.Services.OrgSettings
                 return null;
             }
         }
+
+        public FinancialSetting GetCurrentFinalcialSettingByComapny(int CompanyId)
+        {
+            try
+            {
+                var fSetttingObj = _finalCrudOperation.GetOperation()
+                    .Include(fs => fs.Companies)
+                    .Include(fs => fs.Currencies)
+                    .Filter(fs => fs.CompanyId == CompanyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate,DateTime.Now) >=0)
+                    .Get()
+                    .SingleOrDefault();
+
+
+                return fSetttingObj;
+            }
+            catch (Exception ex)
+            {
+                var errorMsg = ex.Message;
+
+                return null;
+            }
+        }
+
+
     }
 }

@@ -13,6 +13,8 @@ namespace Mhasb.Services.OrgSettings
         bool UpdateFinalcialSetting(FinancialSetting finalcialSetting);
         FinancialSetting GetFinalcialSetting(int finalcialSettingId);
 
+        FinancialSetting GetCurrentFinalcialSettingByComapny(int CompanyId);
+
 
     }
 }

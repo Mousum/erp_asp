@@ -15,6 +15,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly ICurrency cService = new CurrencyService();
         private readonly IVoucherService vService = new VoucherService();
         private readonly IVoucherDetailService vdService = new VoucherDetailService();
+        private readonly IFinalcialSetting fService = new FinalcialSettingService();
+        private readonly IChartOfAccountService coaService = new ChartOfAccountService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
@@ -25,12 +27,22 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult Create()
         {
-            long branchId = 3;
+         
+            int branchId = 3;
 
 
             ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            var code = "GF-"+branchId.ToString()+"-" + (vService.GetMaxCountByBranchId(branchId) + 1).ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            long maxBrach=vService.GetMaxCountByBranchId(branchId) + 1;
+
+            if(maxBrach<1)
+                return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+
+
+            var code = "GF-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
+            ViewBag.FinancialSettingId = fService.GetCurrentFinalcialSettingByComapny(branchId).Id;
             return View();
         }
 
@@ -39,13 +51,26 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
-            voucher.BillDate = DateTime.Now;
-
+            voucher.VoucherTypeId = 1;
 
             voucher.BranchId = 3;
             
             vService.CreateVoucher(voucher);
             List<VoucherDetail> vds = vc.voucherDetails;
+
+            foreach(var vd in vds)
+            {
+                VoucherDetail voucherDetail = vd;
+                vd.VoucherId = voucher.Id;
+                try
+                {
+                    vdService.CreateVoucherDetail(vd);
+                }
+                catch(Exception)
+                {
+                    return Content("Voucher Details problem");
+                }
+            }
 
 
             return Content("sdfsd");
