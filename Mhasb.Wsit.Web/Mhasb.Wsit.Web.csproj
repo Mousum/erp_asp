@@ -769,6 +769,7 @@
     <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\ManualJournals.cshtml" />
+    <Content Include="Areas\Commons\Views\_ViewStart.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

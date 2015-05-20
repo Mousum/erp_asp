@@ -111,6 +111,26 @@
                             </li>
                         </ul> 
                     </li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            Commons <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu cstm-submenu" role="menu">
+                            <li class="">
+                                <a href='@Url.Action("Create", "AreaTime", new { area = "Commons" })'>Time Zone</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Country", new { area = "Commons" })'>Country</a>
+                            </li>
+                           
+                            <li class="">
+                                <a href='@Url.Action("Create", "Industry", new { area = "Commons" })'>Industry</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Language", new { area = "Commons" })'>Language</a>
+                            </li>
+                        </ul>
+                    </li>
                     <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
                 </ul>
             </div>
