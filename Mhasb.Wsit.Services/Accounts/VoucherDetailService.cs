@@ -19,6 +19,7 @@ namespace Mhasb.Services.Accounts
             {
                 voucherdetail.State = ObjectState.Added;
                 _finalCrudOperation.AddOperation(voucherdetail);
+                voucherdetail.State = ObjectState.Unchanged;
                 return true;
             }
             catch (Exception ex)
