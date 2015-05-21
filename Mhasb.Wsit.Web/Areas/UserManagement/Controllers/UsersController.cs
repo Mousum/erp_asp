@@ -129,11 +129,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult MyMhasb()
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            List<Company> myCompanyList = iCompany.GetAllCompanies()
-                                                   .Where(c => c.Users.Id == user.Id).ToList();
 
+            //List<Company> myCompanyList = iCompany.GetAllCompanies()
+            //                                       .Where(c => c.Users.Id == user.Id).ToList();
 
+            List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+
             ViewBag.userName = user.FirstName + " " + user.LastName;
             ViewBag.lastLoginCompany = "UniCorn";
             ViewBag.lastLoginTime = DateTime.Now;
@@ -152,7 +154,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 accsetting.Users = users;
                 accsetting.AccSettings = new Settings();
                 ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
-                ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserId(users.Id), "Id", "DisplayName");
+
+
+                ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserEmployee(users.Id), "Id", "DisplayName");
             }
             catch (Exception ex)
             {
