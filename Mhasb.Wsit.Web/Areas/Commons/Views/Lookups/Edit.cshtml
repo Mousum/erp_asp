@@ -23,14 +23,22 @@
                     </div>
                     <div class="row cstm-frm-row">
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.Key)
+                            Name
                         </div>
                         <div class="col-md-8">
                             @Html.TextBoxFor(model => model.Key, new { @class = "cstm-input" })
                             @Html.ValidationMessageFor(model => model.Key)
                         </div>
                     </div>
-
+                     <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Value)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Value, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Value)
+                        </div>
+                    </div>
                     <div class="row cstm-frm-row">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Quantity)
@@ -40,17 +48,6 @@
                             @Html.ValidationMessageFor(model => model.Quantity)
                         </div>
                     </div>
-
-                    <div class="row cstm-frm-row">
-                        <div class="col-md-4">
-                            @Html.LabelFor(model => model.Value)
-                        </div>
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(model => model.Value, new { @class = "cstm-input" })
-                            @Html.ValidationMessageFor(model => model.Value)
-                        </div>
-                    </div>
-
                     <div class="row cstm-frm-row">
                         <div class="col-md-4">
                             @Html.LabelFor(model => model.Description)
