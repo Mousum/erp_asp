@@ -49,9 +49,6 @@ namespace Mhasb.Services.Users
             }
         }
 
-
-
-
         public Settings GetAllByUserId(long userId)
         {
             // change SingleOrDefault to FirstOrDefault
@@ -67,5 +64,6 @@ namespace Mhasb.Services.Users
 
         }
 
+    
     }
 }
