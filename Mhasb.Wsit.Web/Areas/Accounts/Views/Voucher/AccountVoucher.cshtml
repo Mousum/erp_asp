@@ -165,6 +165,7 @@
     <script>
 
         (function ($) {
+
             $.widget("custom.combobox", {
                 _create: function () {
                     this.wrapper = $("<span>")
@@ -301,24 +302,16 @@
                     $("#combobox_"+i).toggle();
                 });
             }
-            
-        });
-       
 
-        function myFunction() {
-            var i = 0;
-            var result = 0;
-            $('.debit').each(function () {
-                result += parseInt($(this).val());
-                if (!isNaN(result)) {
-                    $('#totaldebit').text(result);
-                }
-            });
-        }
+        });
+
+
+
 
         $(document).ready(function () {
 
             $('.addContent').click(function () {
+                var options = $('.select-option').html();
                 var numItems = $('.tr-content').length;
                 var Content = '<tr class="tr-content">'
                               + '<td><textarea class="cstm-input description" cols="20" id="voucherDetails_' + numItems + '__Description" name="voucherDetails[' + numItems + '].Description" rows="2">'
@@ -328,7 +321,7 @@
                                         + '<td>'
                                         + '<select id="combobox_' + numItems + '" name="voucherDetails[' + numItems + '].CoaId" class="form-control">'
                                         + '<option value="">Select one...</option>'
-                                        + '<option value="3">Asset</option>'
+                                        + options
                                         + '</select>'
                                         + '</td>'
                                         + '<td><input autocomplete="off" class="cstm-input debit" onkeypress="myFunction()" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="0" /></td>'
@@ -341,29 +334,6 @@
                 $("#toggle").click(function () {
                     $("#combobox_" + numItems).toggle();
                 });
-
-                $('.debit').keyup(function () {
-                    var i = 0;
-                    var result = 0;
-                    $('.debit').each(function () {
-                        result += parseInt($(this).val());
-                        if (!isNaN(result)) {
-                            $('#totaldebit').text(result);
-                        }
-                    });
-                });
-
-                $('.credit').keyup(function () {
-                    var i = 0;
-                    var result = 0;
-                    $('.credit').each(function () {
-                        result += parseInt($(this).val());
-                        if (!isNaN(result)) {
-                            $('#totalcredit').text(result);
-                        }
-                    });
-                });
-
             });
 
             $("#form-id").submit(function (event) {
@@ -378,7 +348,7 @@
             });
 
             $('.debit').keyup(function () {
-                var i = 0;
+                $(this).parents('tr.tr-content').find('.credit').val(0.00);
                 var result = 0;
                 $('.debit').each(function () {
                     result += parseInt($(this).val());
@@ -386,15 +356,30 @@
                         $('#totaldebit').text(result);
                     }
                 });
+                result = 0;
+                $('.credit').each(function () {
+                    result += parseInt($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totalcredit').text(result);
+                    }
+                });
             });
 
             $('.credit').keyup(function () {
-                var i = 0;
+                $(this).parents('tr.tr-content').find('.debit').val(0.00);
+
                 var result = 0;
                 $('.credit').each(function () {
                     result += parseInt($(this).val());
                     if (!isNaN(result)) {
                         $('#totalcredit').text(result);
+                    }
+                });
+                result = 0;
+                $('.debit').each(function () {
+                    result += parseInt($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totaldebit').text(result);
                     }
                 });
             });
@@ -425,5 +410,5 @@
 
         }
 
-    </script>
+</script>
 }
