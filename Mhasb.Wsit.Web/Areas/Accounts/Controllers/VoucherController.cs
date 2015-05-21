@@ -328,7 +328,17 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
         public ActionResult ManualJournals() 
         {
-            var model = vService.GetAllVoucherByBranchId(3);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            if (AccSet == null)
+            {
+                return Content("Please add company financial settings ");
+            }
+
+            int branchId = AccSet.Companies.Id;
+
+
+            var model = vService.GetAllVoucherByBranchId(branchId);
             return View(model);
         }
 
