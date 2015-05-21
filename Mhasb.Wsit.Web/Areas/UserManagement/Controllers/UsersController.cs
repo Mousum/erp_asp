@@ -136,8 +136,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
 
+           var accountsetting = setService.GetAllByUserId(user.Id);
             ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = "UniCorn";
+            ViewBag.lastLoginCompany = accountsetting!=null? accountsetting.Companies.DisplayName:"Company was not set.";
             ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb_new", myCompanyList);
 
