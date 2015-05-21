@@ -101,5 +101,7 @@ namespace Mhasb.Wsit.DAL.Data
 
         }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Lookup> Lookups { get; set; }
+
     }
 }
