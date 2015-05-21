@@ -79,9 +79,9 @@ namespace Mhasb.Services.Accounts
             {
                 var cAObj = _finalCrudOperation.GetOperation()
                                         .Include(c=>c.Companies)
-                                        .Filter(c=>c.CompanyId == CompanyId || c.CompanyId == null)
-                                        .Get().ToList();
-
+                                        .Filter(c=>c.CompanyId == CompanyId || c.CompanyId.HasValue ==false)
+                                        .Get()
+                                        .ToList();
                 return cAObj;
             }
             catch (Exception ex)

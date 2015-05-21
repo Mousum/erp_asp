@@ -32,9 +32,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 3;// AccSet.Companies.Id;
+            if (AccSet == null)
+            {
+                return Content("Please add company financial settings ");
+            }
 
-           // int branchId = 2;
+            int branchId = AccSet.Companies.Id;
 
             string str = "G";
 
@@ -46,8 +49,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
                
                 //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+            var tt = coaService.GetAllChartOfAccountByCompanyId(branchId);
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c=>c.Level==4);
 
 
             var code = "Gj-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
