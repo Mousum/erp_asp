@@ -83,7 +83,7 @@
                         </a>
                         <ul class="dropdown-menu cstm-submenu" role="menu">
                             <li class="">
-                                <a href='@Url.Action("Create", "RoleVsActions", new { area = "UserManagement" })'>General Settings</a>
+                                <a href='@Url.Action("GeneralLedgerSettings", "Voucher", new { area = "Accounts" })'>General Ledger Settings</a>
                             </li>
                             <li class="">
                                 <a href='@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })'>Chart of Accounts</a>
@@ -110,6 +110,9 @@
                             <li class="">
                                 <a href='@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })'>Invite Employee</a>
                             </li>
+                            <li class="">
+                                <a href='@Url.Action("Index", "Founders", new { area = "OrganizationManagement" })'>Founders</a>
+                            </li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">
@@ -128,6 +131,9 @@
                             </li>
                             <li class="">
                                 <a href='@Url.Action("CreditVoucher", "Voucher", new { area = "Accounts" })'>Credit Voucher</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("ManualJournals", "Voucher", new { area = "Accounts" })'>Journal View List</a>
                             </li>
                         </ul>
                     </li>

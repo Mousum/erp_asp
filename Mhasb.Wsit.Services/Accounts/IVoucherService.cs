@@ -20,6 +20,7 @@ namespace Mhasb.Services.Accounts
        List<Voucher> GetAllVoucherByCurrencyId(int CurrencyId);
 
        long GetMaxCountByBranchId(int id);
+       Voucher GetSingleVoucher(int VId);
 
      //  List<Voucher> GetAllVoucherByVoucherDate(DateTime VoucherDate);
 

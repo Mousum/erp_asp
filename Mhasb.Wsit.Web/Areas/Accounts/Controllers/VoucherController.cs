@@ -341,6 +341,17 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var model = vService.GetAllVoucherByBranchId(branchId);
             return View(model);
         }
+        [HttpPost]
+        public PartialViewResult GetManualJournalDetails(int id) 
+        {
+            var model = vService.GetSingleVoucher(id);
+            ViewBag.data = model;
+            return PartialView("_manualJournalDetails",model);
+        }
 
+        public ActionResult GeneralLedgerSettings() 
+        {
+            return View("ledgersettings");
+        }
 	}
 }

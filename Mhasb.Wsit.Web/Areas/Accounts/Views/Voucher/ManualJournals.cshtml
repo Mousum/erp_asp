@@ -4,7 +4,7 @@
     <h4>Manual Journals</h4>
     <div class="row cstm-frm-row">
         <div class="col-md-8">
-            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;">
+            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;display:none;" >
                 <button type="button" class="btn btn-default">All </button>
                 <button type="button" class="btn btn-default">Draft </button>
                 <button type="button" class="btn btn-default">Posted </button>
@@ -55,37 +55,73 @@
                             <th>Debit</th>
                             <th>Credit</th>
                             <th>Status</th>
-                            <th>Revew</th>
+                            <th>Review</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                           
+
                             <tr>
                                 <th scope="row">1</th>
                                 <td>@item.Description</td>
                                 <td>@item.VoucherDate</td>
                                 <td>@item.Currencies.Name</td>
-                                <td>@item.VoucherDetails.Sum(a=>a.Debit)</td>
+                                <td>@item.VoucherDetails.Sum(a => a.Debit)</td>
                                 <td>@item.VoucherDetails.Sum(a => a.Credit)</td>
-                                <td>@if (item.Posted == 0)
+                                <td>
+                                    @if (item.Posted == 0)
                                     {
-                                         <p>Pending </p>
+                                        <p>Drafted </p>
                                     }
                                     else
                                     {<p>Posted</p>}
                                 </td>
-                                   
-                                <td></td>
+
+                                <td>
+                                    <button class="btn btn-info data-view" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-view">Review</button>
+                                </td>
                             </tr>
                         }
 
                     </tbody>
                 </table>
             }
-         </div>
+        </div>
 
     </div>
 
 </div>
+
+<div class="modal fade" id="pop-up-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body" id="det" style="padding: 0px!important;">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" data-id="" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".data-view").click(function () {
+        var id = $(this).attr("data-id");
+        var data = { id: id };
+        var baseUrl = '@Url.Content("~/")';
+        $.ajax({
+            type: "POST",
+            url: baseUrl+ "Accounts/Voucher/GetManualJournalDetails",
+            data: data,
+            success: function (data) {
+                $("#det").html(data);
+            }
+        });
+    })
+</script>
