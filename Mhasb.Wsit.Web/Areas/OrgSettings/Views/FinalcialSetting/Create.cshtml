@@ -269,10 +269,19 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#StartingDate').datepicker();
-            $('#EndingDate').datepicker();
-            $('#PeriodLockDate').datepicker();
-            $('#YearLockDate').datepicker();
+           
+            $('#StartingDate').datepicker({
+                format: 'mm/dd/yyyy'
+            });
+            $('#EndingDate').datepicker({
+                format: 'mm/dd/yyyy'
+            });
+            $('#PeriodLockDate').datepicker({
+                format: 'mm/dd/yyyy'
+            });
+            $('#YearLockDate').datepicker({
+                format: 'mm/dd/yyyy'
+            });
         });
 
     </script>

@@ -18,14 +18,7 @@
                         <p class="text-center">
                             List your profile on MHASB community to become listed in our users directory and become part of our growing community and expanded your commercial relationships
                         </p>
-                        @*<div class="row cstm-frm-row">
-                                <div class="col-md-4">
-                                    <label>Input Field:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="cstm-input" type="text">
-                                </div>
-                            </div>*@
+
                         <div class="row cstm-frm-row">
                             <div class="col-md-4">
                                 <label class="italic">List My Profile:</label>
@@ -53,27 +46,15 @@
                     </div>
                 </div>
                 <div class="row cstm-frm-row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
+
+                    </div>
+                    <div class="col-md-4">
                         <div class="profile-image-div">
                             <img id="profile_pic_target" src="" alt="Your Photo" width="120" />
                         </div>
                     </div>
                 </div>
-
-                @*<div class="col-md-5">
-                        <div class="row clearfix">
-                            <div class="col-md-12">
-                                <div class="profile-image-div">
-                                    <img id="profile_pic_target" src="" alt="Your Photo" width="120" />
-                                </div>
-                                <span class="img-div-txt">Profile Cover</span>
-                                <div class="form-group">
-                                    <label for="profile-pic">Upload Photo</label>
-                                    <input name="profile_pic" id="profile_pic" type="file" class="cstm-input" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
                 <div class="row cstm-frm-row">
                     <div class="col-md-4">
                         Name
@@ -99,8 +80,8 @@
                         Brief Bio:
                     </div>
                     <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.employeeProfile.JobTitle, new { @class = "cstm-input" })
-                        @Html.ValidationMessageFor(model => model.employeeProfile.JobTitle)
+                        @Html.TextAreaFor(model => model.employeeProfile.Bio, new { @class = "cstm-input" })
+                        @Html.ValidationMessageFor(model => model.employeeProfile.Bio)
                     </div>
                 </div>
                 <div class="row cstm-frm-row">
@@ -169,16 +150,16 @@
                 </div>
             </div>
             @*<div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label font-padding">Phone</label>
-                <div class="row form-inline no-margin clearfix">
+                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Phone</label>
+                    <div class="row form-inline no-margin clearfix">
 
-                    @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
+                        @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
 
-                    @Html.TextBoxFor(model => model.Phone.FieldValueTwo, new { @class = "cstm-input", @placeholder = "Area Code" })
-                    @Html.TextBoxFor(model => model.Phone.FieldValueThree, new { @class = "cstm-input", @placeholder = "Number" })
+                        @Html.TextBoxFor(model => model.Phone.FieldValueTwo, new { @class = "cstm-input", @placeholder = "Area Code" })
+                        @Html.TextBoxFor(model => model.Phone.FieldValueThree, new { @class = "cstm-input", @placeholder = "Number" })
 
-                </div>
-            </div>*@
+                    </div>
+                </div>*@
             <div class="row cstm-frm-row">
                 <div class="col-md-4">
                     Website
@@ -192,10 +173,10 @@
                 <label for="inputEmail3" class="col-sm-2 control-label font-padding">Website</label>
                 <div class="col-sm-10">
                     @*<input class="form-control" id="inputEmail3" type="text">*@
-                    @*@Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input" })
-                    @Html.ValidationMessageFor(model => model.Website.FieldValueOne)*@
-                @*</div>
-            </div>*@
+            @*@Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input" })
+                @Html.ValidationMessageFor(model => model.Website.FieldValueOne)*@
+            @*</div>
+                </div>*@
 
             <div class="form-group" id="facebook_field" hidden="hidden">
                 <label for="inputEmail3" class="col-sm-2 control-label font-padding">Facebook</label>
@@ -284,10 +265,10 @@
             </div>
         </div>
     </div>
-                @*</div>
+    @*</div>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
 
 }

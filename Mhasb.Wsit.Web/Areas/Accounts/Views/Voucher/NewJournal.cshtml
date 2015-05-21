@@ -1,6 +1,6 @@
 ﻿@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Journal";
 }
 
 <div class="container my-dashboard " ng-controller="TodoCtrl">
@@ -111,7 +111,7 @@
                                 </tr>
                             }
                             <tr>
-                                <td colspan="4" class="addContent">Total</td>
+                                <td colspan="4">Total</td>
                                 <td><div id="totaldebit">0</div></td>
                                 <td><div id="totalcredit">0</div></td>
                                 <td></td>
@@ -121,14 +121,16 @@
                     </table>
                 </div>
             </div>
-
+            <div class="col-md-6 form-inline">
+                <a class="btn btn-primary addContent" data-role="button" href="javascript:void(0)">Add new line</a>
+            </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </div>
-    }
+</div>
+}
 
 </div>
 
