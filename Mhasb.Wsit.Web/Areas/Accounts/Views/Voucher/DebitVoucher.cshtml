@@ -1,11 +1,11 @@
 ﻿@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
 @{
-    ViewBag.Title = "Create Account Voucher";
+    ViewBag.Title = "Create Debit Voucher";
 }
 
 <div class="container my-dashboard " ng-controller="TodoCtrl">
 
-    @using (Html.BeginForm("AccountVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
+    @using (Html.BeginForm("DebitVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
 {
         @Html.AntiForgeryToken()
 
@@ -129,8 +129,8 @@
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </div>
-    }
+</div>
+}
 
 </div>
 
@@ -162,7 +162,7 @@
             padding: 5px 10px;
         }
     </style>
-    <script>
+    <script>   
 
         (function ($) {
 
@@ -381,7 +381,7 @@
                     if (!isNaN(result)) {
                         $('#totaldebit').text(result);
                     }
-                }); 
+                });
             });
 
             $(document).on('keypress', '#item-table tr .debit', function (e) {
