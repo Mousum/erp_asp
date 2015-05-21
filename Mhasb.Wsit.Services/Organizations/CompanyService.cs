@@ -173,7 +173,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(u => u.Users)
                                         .Include(cd => cd.Documents)
                                         .Filter(e=>e.Employees.All(r=>r.UserId==userId))
-                                        .Get();
+                                        .Get().ToList();
 
                 var comObj2 = companyRep.GetOperation()
                                         .Include(c => c.Countries)
@@ -184,7 +184,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(u => u.Users)
                                         .Include(cd => cd.Documents)
                                         .Filter(u => u.Users.Id == userId)
-                                        .Get();
+                                        .Get().ToList();
                 var comObj = comObj1.Union(comObj2).ToList();
 
                 //companyRep.GetSingleObject(companyId);
