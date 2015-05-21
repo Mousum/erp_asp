@@ -54,11 +54,12 @@ namespace Mhasb.Services.Users
 
         public Settings GetAllByUserId(long userId)
         {
+            // change SingleOrDefault to FirstOrDefault
             var setObj = setRep.GetOperation()
                                   .Include(st=>st.Users)
                                   .Include(st=>st.Companies)
                                   .Filter(st => st.userId == userId)
-                                  .Get().SingleOrDefault();
+                                  .Get().FirstOrDefault();
 
                 return setObj;
             
