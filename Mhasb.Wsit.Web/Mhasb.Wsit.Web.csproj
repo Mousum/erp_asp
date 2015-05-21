@@ -758,7 +758,7 @@
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Costcentre.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Edit.cshtml" />
-    <Content Include="Areas\Accounts\Views\Voucher\Create.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\NewJournal.cshtml" />
     <Content Include="Areas\Accounts\Views\VoucherType\Create.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -775,6 +775,9 @@
     <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\ledgersettings.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\ManualJournals.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\DebitVoucher.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\CreditVoucher.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\AccountVoucher.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

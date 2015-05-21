@@ -28,11 +28,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
 
 
-        public ActionResult Create()
+        public ActionResult NewJournal()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = AccSet.Companies.Id;
+            int branchId = 3;// AccSet.Companies.Id;
 
            // int branchId = 2;
 
@@ -41,8 +41,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
             long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
-            if (maxBrach < 1)
+            if (maxBrach < 1) {
                 maxBrach = 1;
+            }
+               
                 //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
@@ -57,16 +59,19 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(VoucherCustom vc)
+        public ActionResult NewJournal(VoucherCustom vc)
         {
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
             voucher.VoucherTypeId = 1;
+            // This EmpId is static must be changed by Emp table 
+            voucher.EmployeeId = 2;
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = AccSet.Companies.Id;
+            int branchId = 6;
+            
 
             if (vService.CreateVoucher(voucher))
             {
@@ -97,6 +102,226 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             return Content("Success");
         }
 
+
+
+        //DebitVoucher
+        public ActionResult DebitVoucher()
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 3;// AccSet.Companies.Id;
+
+            // int branchId = 2;
+
+            string str = "D";
+
+            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+
+            if (maxBrach < 1)
+                maxBrach = 1;
+            //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+
+
+            var code = "Dr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            ViewBag.RefferenceNo = code;
+            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+
+            ViewBag.FinancialSettingId = fsObj.Id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DebitVoucher(VoucherCustom vc)
+        {
+            VoucherCustom v = vc;
+            Voucher voucher = vc.voucher;
+
+            voucher.VoucherTypeId = 1;
+            // This EmpId is static must be changed by Emp table 
+            voucher.EmployeeId = 2;
+
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 6;
+
+
+            if (vService.CreateVoucher(voucher))
+            {
+                List<VoucherDetail> vds = vc.voucherDetails;
+
+                foreach (var voucherDetail in vds)
+                {
+                    voucherDetail.VoucherId = voucher.Id;
+                    try
+                    {
+                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                            return Content("One or more Voucher details could not added Successfully");
+                    }
+                    catch (Exception)
+                    {
+                        return Content("Voucher Details problem");
+                    }
+                }
+            }
+
+            else
+            {
+                return Content("Failed To Add Voucher!!!!");
+            }
+
+
+
+            return Content("Success");
+        }
+        //Credit Voucher
+        public ActionResult CreditVoucher()
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 3;// AccSet.Companies.Id;
+
+            // int branchId = 2;
+
+            string str = "C";
+
+            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+
+            if (maxBrach < 1)
+                maxBrach = 1;
+            //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+
+
+            var code = "Cr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            ViewBag.RefferenceNo = code;
+            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+
+            ViewBag.FinancialSettingId = fsObj.Id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreditVoucher(VoucherCustom vc)
+        {
+            VoucherCustom v = vc;
+            Voucher voucher = vc.voucher;
+
+            voucher.VoucherTypeId = 1;
+            // This EmpId is static must be changed by Emp table 
+            voucher.EmployeeId = 2;
+
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 6;
+
+
+            if (vService.CreateVoucher(voucher))
+            {
+                List<VoucherDetail> vds = vc.voucherDetails;
+
+                foreach (var voucherDetail in vds)
+                {
+                    voucherDetail.VoucherId = voucher.Id;
+                    try
+                    {
+                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                            return Content("One or more Voucher details could not added Successfully");
+                    }
+                    catch (Exception)
+                    {
+                        return Content("Voucher Details problem");
+                    }
+                }
+            }
+
+            else
+            {
+                return Content("Failed To Add Voucher!!!!");
+            }
+
+
+
+            return Content("Success");
+        }
+        // Account Voucher
+
+
+        public ActionResult AccountVoucher()
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 3;// AccSet.Companies.Id;
+
+            // int branchId = 2;
+
+            string str = "O";
+
+            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+
+            if (maxBrach < 1)
+                maxBrach = 1;
+            //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+
+
+            var code = "Op-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            ViewBag.RefferenceNo = code;
+            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+
+            ViewBag.FinancialSettingId = fsObj.Id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AccountVoucher(VoucherCustom vc)
+        {
+            VoucherCustom v = vc;
+            Voucher voucher = vc.voucher;
+
+            voucher.VoucherTypeId = 1;
+            // This EmpId is static must be changed by Emp table 
+            voucher.EmployeeId = 2;
+
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            int branchId = 6;
+
+
+            if (vService.CreateVoucher(voucher))
+            {
+                List<VoucherDetail> vds = vc.voucherDetails;
+
+                foreach (var voucherDetail in vds)
+                {
+                    voucherDetail.VoucherId = voucher.Id;
+                    try
+                    {
+                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                            return Content("One or more Voucher details could not added Successfully");
+                    }
+                    catch (Exception)
+                    {
+                        return Content("Voucher Details problem");
+                    }
+                }
+            }
+
+            else
+            {
+                return Content("Failed To Add Voucher!!!!");
+            }
+
+
+
+            return Content("Success");
+        }
         public ActionResult ManualJournals() 
         {
             var model = vService.GetAllVoucherByBranchId(3);
