@@ -129,8 +129,8 @@
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-</div>
-}
+        </div>
+    }
 
 </div>
 
@@ -334,7 +334,8 @@
                                         + '<td><input autocomplete="off" class="cstm-input debit" onkeypress="myFunction()" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="0" /></td>'
                                         + '<td><input autocomplete="off" class="cstm-input credit" data-val="true" data-val-number="The field Credit must be a number." data-val-required="The Credit field is required." id="voucherDetails_' + numItems + '__Credit" name="voucherDetails[' + numItems + '].Credit" type="text" value="0" /></td>'
                                         + '<td>Action</td>'
-                                        + '</tr>'                ;
+                                        + '</tr>'
+                ;
                 $('.tr-content').last().after(Content);
                 $("#combobox_" + numItems).combobox();
                 $("#toggle").click(function () {
