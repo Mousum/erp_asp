@@ -31,8 +31,8 @@
                     <tr class="projectList" data-id="@item.Id">
                         <td>2</td>
                         <td>@item.ProjectName</td>
-                        <td>@item.ManagerId</td>
-                        <td>@item.NumberOfMember</td>
+                        <td>@item.Employees.Users.FirstName  @item.Employees.Users.LastName </td>
+                        <td>@item.TaskManagers.Count</td>
                         <td>@item.ProjectDate</td>
                         <td>@item.StartingDate</td>
                         <td>@item.FinishingDate</td>
@@ -72,7 +72,7 @@
     });
 
     $(".update-btn").click(function () {
-        alert("Hello");
+       
         var baseUrl = '@Url.Content("~/")';
         var data = { id: $(this).attr("data-id") };
         $.ajax({
@@ -91,22 +91,22 @@
         $(".projectList").each(function () {
             if ($(this).attr("data-id") != id) {
                 // $(this).remove();
-                $(this).fadeOut(500);
+                $(this).hide("slow");
             }
         })
 
         $("#contentPager").css("display", "none");
         var baseUrl = '@Url.Content("~/")';
         var data = { id: id }
-
+        $("#taskList").hide("slow");
         $.ajax({
             type: "POST",
             url: baseUrl + "TaskManagement/Tasks/TaskList",
             data: data,
             datatype: "html",
             success: function (data) {
-                $("#taskList").html(data).fadeIn(500);
-
+                $("#taskList").html(data);
+                $("#taskList").show("slow");
             }
         });
     });

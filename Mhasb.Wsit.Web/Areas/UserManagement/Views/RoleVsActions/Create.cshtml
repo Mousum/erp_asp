@@ -1,64 +1,66 @@
 ﻿@model Mhasb.Domain.Users.RoleVsAction
 @{
     ViewBag.Title = "Create";
-   // Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
+    // Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
 }
 <div class="container">
-<div class="row clearfix">
-@using (Html.BeginForm(new { @class = "form-horizontal",role="form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-   
-        <div class="col-md-4 column">
+    <div class="row clearfix">
+        @using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Role Name</label>
-                <div class="col-sm-8">
-                    <div class="dropdown">
-                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roleList, "--Select Role--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "roles", required = "required" })
+            <div class="col-md-4 column">
 
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">Role Name</div>
+                    <div class="col-md-8">
+                        <div class="dropdown">
+                            @Html.DropDownList("RoleId", (SelectList)ViewBag.roleList, "--Select Role--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "roles", required = "required" })
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Module Name</label>
-                <div class="col-sm-8">
-                    <div class="dropdown">
-                        @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "modules", required = "required" })
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4"> Module Name</div>
+                    <div class="col-md-8">
+                        <div class="dropdown">
+                            @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "modules", required = "required" })
+                        </div>
+                        <div id="alert"></div>
                     </div>
-                    <div id="alert"></div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Submodule Name</label>
-                <div class="col-sm-8">
-                    <div class="dropdown">
-                        @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Submodule--", htmlAttributes: new { @class = "dropdown-toggle droper", id = "controllers", required = "required" })
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        Submodule Name
                     </div>
-                    <div id="alert1"></div>
+                    <div class="col-md-8">
+                        <div class="dropdown">
+                            @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Submodule--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "controllers", required = "required" })
+                        </div>
+                        <div id="alert1"></div>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        <div class="col-md-8 column">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Module Name</th>
-                        <th>Submodule</th>
-                        <th>Action Name</th>
-                    </tr>
-                </thead>
-                <tbody id="Actions"></tbody>
-            </table>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Save" id="save" class="btn  btn-info" style="  float: right;margin-top: auto;margin-right: 25px;width: 30%;position: relative;">
-        </div>
-}
-</div>
+            </div>
+            <div class="col-md-8 column" id="hidden" >
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Module Name</th>
+                            <th>Submodule</th>
+                            <th>Action Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Actions"></tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" id="save" class="btn  btn-info" style="  float: right;margin-top: auto;margin-right: 25px;width: 30%;position: relative;">
+            </div>
+        }
+    </div>
 </div>
 <script>
     $(document).ready(function () {
@@ -84,7 +86,7 @@
             AjaxCall(data);
         });
         $("#save").click(function () {
-            if ($("#modules").val() =="") {
+            if ($("#modules").val() == "") {
                 $("#alert").html("Module Name Is reqiured!");
             }
             else if ($("#controllers").val() == "") {
@@ -92,9 +94,10 @@
             }
         })
     });
-   
+
     function AjaxCall(data) {
         var baseUrl = '@Url.Content("~/")';
+        $("#hidden").hide("slow");
         $.ajax({
             type: "POST",
             url: baseUrl + "UserManagement/RoleVsActions/GetActionList",
@@ -102,6 +105,7 @@
             datatype: "html",
             success: function (data) {
                 $("#Actions").html(data);
+                $("#hidden").show("slow");
             }
         });
     }

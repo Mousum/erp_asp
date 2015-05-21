@@ -9,6 +9,11 @@
 
 
 <div class="container my-dashboard ">
+    @if (TempData["succMsg"] != null)
+    {
+        <div class="alert alert-success">@TempData["succMsg"]</div>
+    }
+
 
     @using (Html.BeginForm("AddAuditor", "Auditor", FormMethod.Post, new { @class = "" }))
     {
