@@ -1,16 +1,16 @@
 ﻿@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
 @{
-    ViewBag.Title = "Create Account Voucher";
+    ViewBag.Title = "Create Credit Voucher";
 }
 
 <div class="container my-dashboard " ng-controller="TodoCtrl">
 
-    @using (Html.BeginForm("AccountVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
+    @using (Html.BeginForm("CreditVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
 {
         @Html.AntiForgeryToken()
 
         <div class="row clearfix no-margin">
-            <h4 class="all-head">@ViewBag.Title</h4>
+            <h4 class="all-head">@ViewBag.Title</h4>    
             <hr />
             @Html.ValidationSummary(true)
 
@@ -129,8 +129,8 @@
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </div>
-    }
+</div>
+}
 
 </div>
 
@@ -381,7 +381,7 @@
                     if (!isNaN(result)) {
                         $('#totaldebit').text(result);
                     }
-                }); 
+                });
             });
 
             $(document).on('keypress', '#item-table tr .debit', function (e) {
@@ -397,7 +397,7 @@
                     $("#errmsg").html("Digits Only").show().fadeOut("slow");
                     return false;
                 }
-            });
+            }); 
         });
 
         function checkValidation() {
@@ -406,7 +406,7 @@
             var valid = false;
             if (td == tc)
                 valid = true;
-            return valid;
+            return valid;              
 
         }
 
