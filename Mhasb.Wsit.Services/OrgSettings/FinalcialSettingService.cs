@@ -85,7 +85,8 @@ namespace Mhasb.Services.OrgSettings
                 var fSetttingObj = _finalCrudOperation.GetOperation()
                     .Include(fs => fs.Companies)
                     .Include(fs => fs.Currencies)
-                    .Filter(fs => fs.CompanyId == CompanyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate,DateTime.Now) >=0)
+                    //.Filter(fs => fs.CompanyId == CompanyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate,DateTime.Now) >=0)
+                    .Filter(fs => fs.CompanyId == CompanyId)
                     .Get()
                     .SingleOrDefault();
 

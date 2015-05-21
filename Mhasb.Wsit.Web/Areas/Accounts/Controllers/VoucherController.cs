@@ -34,20 +34,25 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var AccSet = sService.GetAllByUserId(user.Id);
             int branchId = AccSet.Companies.Id;
 
+           // int branchId = 2;
+
             string str = "G";
 
             ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
             long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
-            if(maxBrach<1)
-                return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+            if (maxBrach < 1)
+                maxBrach = 1;
+                //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
 
 
             var code = "Gj-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            ViewBag.FinancialSettingId = fService.GetCurrentFinalcialSettingByComapny(branchId).Id;
+            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+
+            ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
 

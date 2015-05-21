@@ -57,6 +57,7 @@
     <Compile Include="Infrastructure\RepositoryQuery.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Mapping\Accounts\VoucherDetailMapping.cs" />
+    <Compile Include="Mapping\Accounts\VoucherDocumentMapping.cs" />
     <Compile Include="Mapping\Accounts\VoucherMapping.cs" />
     <Compile Include="Mapping\Accounts\VoucherTypeMapping.cs" />
     <Compile Include="Mapping\Commons\AreaTimeMaping.cs" />
