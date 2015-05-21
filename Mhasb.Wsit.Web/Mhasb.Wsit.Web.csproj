@@ -182,6 +182,7 @@
     <Compile Include="Areas\OrganizationManagement\Controllers\DesignationController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\FoundersController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\AuditorController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
@@ -785,6 +786,9 @@
     <Content Include="Areas\Commons\Views\Lookups\Details.cshtml" />
     <Content Include="Areas\Commons\Views\Lookups\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\Lookups\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Settings.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Update.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
