@@ -784,6 +784,8 @@
     <Content Include="Areas\Commons\Views\Lookups\Details.cshtml" />
     <Content Include="Areas\Commons\Views\Lookups\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\Lookups\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\ledgersettings.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\_manualJournalDetails.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

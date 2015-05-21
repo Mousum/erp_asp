@@ -165,15 +165,16 @@ namespace Mhasb.Services.Organizations
             {
                 //company.State = ObjectState.Unchanged;
                 var comObj1 = companyRep.GetOperation()
-                                        .Include(c => c.Countries)
-                                        .Include(l => l.Languages)
-                                        .Include(i => i.Industries)
-                                        .Include(t => t.AreaTimes)
-                                        .Include(l => l.LegalEntities)
-                                        .Include(u => u.Users)
-                                        .Include(cd => cd.Documents)
-                                        .Filter(e=>e.Employees.All(r=>r.UserId==userId))
-                                        .Get().ToList();
+                    .Include(c => c.Countries)
+                    .Include(l => l.Languages)
+                    .Include(i => i.Industries)
+                    .Include(t => t.AreaTimes)
+                    .Include(l => l.LegalEntities)
+                    .Include(u => u.Users)
+                    .Include(cd => cd.Documents)
+                    .Filter(e=>e.Employees.All(r=>r.UserId==userId))
+                    .Get();
+                                        //.Where(e => e.Employees.All(r => r.UserId == userId));
 
                 var comObj2 = companyRep.GetOperation()
                                         .Include(c => c.Countries)
@@ -184,7 +185,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(u => u.Users)
                                         .Include(cd => cd.Documents)
                                         .Filter(u => u.Users.Id == userId)
-                                        .Get().ToList();
+                                        .Get();
                 var comObj = comObj1.Union(comObj2).ToList();
 
                 //companyRep.GetSingleObject(companyId);

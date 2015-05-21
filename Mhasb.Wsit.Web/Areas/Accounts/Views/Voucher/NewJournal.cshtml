@@ -6,7 +6,7 @@
 
 <div class="container my-dashboard " ng-controller="TodoCtrl">
 
-    @using (Html.BeginForm("Create", "Voucher", FormMethod.Post, new { id="form-id" }))
+    @using (Html.BeginForm("NewJournal", "Voucher", FormMethod.Post, new { id = "form-id" }))
 {
         @Html.AntiForgeryToken()
 

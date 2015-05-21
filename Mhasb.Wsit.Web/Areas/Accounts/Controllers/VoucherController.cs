@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mhasb.Services.Organizations;
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
@@ -20,6 +21,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly IChartOfAccountService coaService = new ChartOfAccountService();
         private readonly ISettingsService sService = new SettingsService();
         private readonly IUserService uService = new UserService();
+
+        private readonly IEmployeeService empService = new EmployeeService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
@@ -70,12 +73,22 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             voucher.VoucherTypeId = 1;
             // This EmpId is static must be changed by Emp table 
-            voucher.EmployeeId = 2;
+            
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 6;
+            var empObj = empService.GetEmployeeByUserId(user.Id);
+            if (empObj != null)
+            {
+                voucher.EmployeeId = empObj.Id;    
+            }
+            else
+            {
+                return Content("User must be a employee for this Transaction.");
+            }
             
+            var AccSet = sService.GetAllByUserId(user.Id);
+
+            var branchId = AccSet.CompanyId;
 
             if (vService.CreateVoucher(voucher))
             {
@@ -100,10 +113,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("Failed To Add Voucher!!!!");
             }
-           
 
 
-            return Content("Success");
+
+            return RedirectToAction("ManualJournals");
         }
 
 
@@ -113,9 +126,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 3;// AccSet.Companies.Id;
+            if (AccSet == null)
+            {
+                return Content("Please add company financial settings ");
+            }
 
-            // int branchId = 2;
+            int branchId = AccSet.Companies.Id;
 
             string str = "D";
 
@@ -126,7 +142,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+           // ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Dr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -143,13 +160,22 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
+            voucher.VoucherTypeId = 3;
             // This EmpId is static must be changed by Emp table 
-            voucher.EmployeeId = 2;
+          
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var empObj = empService.GetEmployeeByUserId(user.Id);
+            if (empObj != null)
+            {
+                voucher.EmployeeId = empObj.Id;
+            }
+            else
+            {
+                return Content("User must be a employee for this Transaction.");
+            }
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 6;
+            var branchId = AccSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
@@ -178,14 +204,19 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
 
-            return Content("Success");
+            return RedirectToAction("ManualJournals");
         }
         //Credit Voucher
         public ActionResult CreditVoucher()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 3;// AccSet.Companies.Id;
+            if (AccSet == null)
+            {
+                return Content("Please add company financial settings ");
+            }
+
+            int branchId = AccSet.Companies.Id;
 
             // int branchId = 2;
 
@@ -198,7 +229,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Cr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -215,13 +247,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
+            voucher.VoucherTypeId = 2;
             // This EmpId is static must be changed by Emp table 
-            voucher.EmployeeId = 2;
-
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var empObj = empService.GetEmployeeByUserId(user.Id);
+            if (empObj != null)
+            {
+                voucher.EmployeeId = empObj.Id;
+            }
+            else
+            {
+                return Content("User must be a employee for this Transaction.");
+            }
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 6;
+            var branchId = AccSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
@@ -250,7 +289,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
 
-            return Content("Success");
+            return RedirectToAction("ManualJournals");
         }
         // Account Voucher
 
@@ -259,9 +298,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 3;// AccSet.Companies.Id;
+            if (AccSet == null)
+            {
+                return Content("Please add company financial settings ");
+            }
 
-            // int branchId = 2;
+            int branchId = AccSet.Companies.Id;
 
             string str = "O";
 
@@ -272,7 +314,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Op-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -289,13 +332,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
+            voucher.VoucherTypeId = 4;
             // This EmpId is static must be changed by Emp table 
-            voucher.EmployeeId = 2;
-
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var empObj = empService.GetEmployeeByUserId(user.Id);
+            if (empObj != null)
+            {
+                voucher.EmployeeId = empObj.Id;
+            }
+            else
+            {
+                return Content("User must be a employee for this Transaction.");
+            }
             var AccSet = sService.GetAllByUserId(user.Id);
-            int branchId = 6;
+            var branchId = AccSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
@@ -324,7 +374,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
 
-            return Content("Success");
+            return RedirectToAction("ManualJournals");
         }
         public ActionResult ManualJournals() 
         {
