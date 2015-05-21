@@ -79,25 +79,6 @@
                     </li>
                     <li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            Voucher <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu cstm-submenu" role="menu">
-                            <li class="">
-                                <a href='@Url.Action("NewJournal", "Voucher", new { area = "Accounts" })'>New Journal</a>
-                            </li>
-                            <li class="">
-                                <a href='@Url.Action("AccountVoucher", "Voucher", new { area = "Accounts" })'>Account Voucher</a>
-                            </li>
-                            <li class="">
-                                <a href='@Url.Action("DebitVoucher", "Voucher", new { area = "Accounts" })'>Debit Voucher</a>
-                            </li>
-                            <li class="">
-                                <a href='@Url.Action("CreditVoucher", "Voucher", new { area = "Accounts" })'>Credit Voucher</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             Settings <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu cstm-submenu" role="menu">
@@ -106,6 +87,9 @@
                             </li>
                             <li class="">
                                 <a href='@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })'>Chart of Accounts</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Create", "Voucher", new { area = "Accounts" })'>Voucher</a>
                             </li>
                             <li class="">
                                 <a href='@Url.Action("ExternalAuditor", "Auditor", new { area = "OrgSettings" })'>External Auditor</a>
@@ -136,22 +120,28 @@
                         </a>
                         <ul class="dropdown-menu cstm-submenu" role="menu">
                             <li class="">
-                                <a href='@Url.Action("Create", "AreaTime", new { area = "Commons" })'>Time Zone</a>
+                                <a href='@Url.Action("Index", "AreaTime", new { area = "Commons" })'>Time Zone</a>
                             </li>
                             <li class="">
-                                <a href='@Url.Action("Create", "Country", new { area = "Commons" })'>Country</a>
+                                <a href='@Url.Action("Index", "Country", new { area = "Commons" })'>Country</a>
                             </li>
 
                             <li class="">
-                                <a href='@Url.Action("Create", "Industry", new { area = "Commons" })'>Industry</a>
+                                <a href='@Url.Action("Index", "Industry", new { area = "Commons" })'>Industry</a>
                             </li>
                             <li class="">
-                                <a href='@Url.Action("Create", "Language", new { area = "Commons" })'>Language</a>
+                                <a href='@Url.Action("Index", "Language", new { area = "Commons" })'>Language</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("Index", "Lookups", new { area = "Commons" })'>Lookups</a>
                             </li>
                         </ul>
                     </li>
-                    <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
+                  
+                       
+                    
                 </ul>
+                <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
             </div>
             <!-- /.navbar-collapse -->
         </div>

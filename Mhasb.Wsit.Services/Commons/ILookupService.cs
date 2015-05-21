@@ -10,5 +10,9 @@ namespace Mhasb.Services.Commons
     public interface ILookupService
     {
         List<Lookup> GetLookupByType(string LookupType);
+        bool AddLookup(Lookup lookup);
+        bool UpdateLookup(Lookup lookup);
+        Lookup GetSingleLookup(int lookupId);
+        List<Lookup> GetAllLookups();
     }
 }
