@@ -91,7 +91,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var AccSet = sService.GetAllByUserId(user.Id);
 
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
-
+            if (Request.Form["post"] != null)
+            {
+                voucher.Posted = 1; 
+            }
+            else if (Request.Form["draft"] != null)
+            {
+                voucher.Posted = 0; 
+            }
             if (vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;

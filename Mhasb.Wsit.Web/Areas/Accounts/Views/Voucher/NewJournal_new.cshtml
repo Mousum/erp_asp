@@ -111,11 +111,12 @@
                             </div>
 
                             <div class="col-md-6 text-right no-padding cstm-nrjbtn">
-                                <button class="btn btn-success" id="draft" type="submit">Save as draft</button>
-                                @*<button class="btn btn-success" id="post" type="submit">Post</button>*@
+                                <input class="btn btn-success" name="draft" value="Save as draft" type="submit" />
+                                <input class="btn btn-success" name="post" value="Post" type="submit" />
+                                <a href="@Url.Action("NewJournal", "Voucher")" class="btn btn-danger" data-role="button">Cancel</a>
                             </div>
                             @*<div class="col-md-6 text-right no-padding cstm-nrjbtn cstm-btn-de">
-                                <button class="btn btn-danger" type="reset">Cancel</button>
+                                <a class="btn btn-danger" data-role="button">Cancel</a>
                             </div>*@
                         </div>
                         <div class="hidden-note" style="display:none;">
@@ -161,15 +162,7 @@
 </div>
 
 <script>
-    $("#draft").click(function () {
-        $("#type").val("0");
-        
-    })
-    $("#post").click(function () {
-       
-        $("#type").val("1")
-        
-    })
+   
     $(".add-note").click(function () {
         $(".hidden-note").toggle("slow");
     })
