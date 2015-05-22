@@ -88,7 +88,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             
             var AccSet = sService.GetAllByUserId(user.Id);
 
-            var branchId = AccSet.CompanyId;
+            if (AccSet.CompanyId != null) voucher.CurrencyId = (int)AccSet.CompanyId;
 
             if (vService.CreateVoucher(voucher))
             {
@@ -175,7 +175,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 return Content("User must be a employee for this Transaction.");
             }
             var AccSet = sService.GetAllByUserId(user.Id);
-            var branchId = AccSet.CompanyId;
+            if (AccSet.CompanyId != null) voucher.CurrencyId = (int)AccSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
@@ -259,8 +259,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("User must be a employee for this Transaction.");
             }
-            var AccSet = sService.GetAllByUserId(user.Id);
-            var branchId = AccSet.CompanyId;
+            var accSet = sService.GetAllByUserId(user.Id);
+            if (accSet.CompanyId != null) voucher.CurrencyId = (int)accSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
@@ -344,8 +344,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("User must be a employee for this Transaction.");
             }
-            var AccSet = sService.GetAllByUserId(user.Id);
-            var branchId = AccSet.CompanyId;
+            var accSet = sService.GetAllByUserId(user.Id);
+            if (accSet.CompanyId != null) voucher.CurrencyId = (int)accSet.CompanyId;
 
 
             if (vService.CreateVoucher(voucher))
