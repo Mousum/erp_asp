@@ -792,6 +792,7 @@
     <Content Include="Areas\Commons\Views\_ViewStart.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\Accounts\Views\Voucher\NewJournal_new.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
