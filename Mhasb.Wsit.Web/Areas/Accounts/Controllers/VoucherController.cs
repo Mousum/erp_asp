@@ -64,7 +64,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
 
             ViewBag.FinancialSettingId = fsObj.Id;
-            return View("NewJournal_new");
+            return View();
         }
 
         [HttpPost]
@@ -169,9 +169,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 3;
+            voucher.VoucherTypeId = 1;
             // This EmpId is static must be changed by Emp table 
-          
+
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var empObj = empService.GetEmployeeByUserId(user.Id);
@@ -183,10 +183,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("User must be a employee for this Transaction.");
             }
+
             var AccSet = sService.GetAllByUserId(user.Id);
-            if (AccSet.CompanyId != null) voucher.CurrencyId = (int)AccSet.CompanyId;
 
-
+            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (Request.Form["post"] != null)
+            {
+                voucher.Posted = 1;
+            }
+            else if (Request.Form["draft"] != null)
+            {
+                voucher.Posted = 0;
+            }
             if (vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
@@ -256,8 +264,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 2;
+            voucher.VoucherTypeId = 1;
             // This EmpId is static must be changed by Emp table 
+
+
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
@@ -268,10 +278,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("User must be a employee for this Transaction.");
             }
-            var accSet = sService.GetAllByUserId(user.Id);
-            if (accSet.CompanyId != null) voucher.CurrencyId = (int)accSet.CompanyId;
 
+            var AccSet = sService.GetAllByUserId(user.Id);
 
+            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (Request.Form["post"] != null)
+            {
+                voucher.Posted = 1;
+            }
+            else if (Request.Form["draft"] != null)
+            {
+                voucher.Posted = 0;
+            }
             if (vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
@@ -341,8 +359,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 4;
+            voucher.VoucherTypeId = 1;
             // This EmpId is static must be changed by Emp table 
+
+
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
@@ -353,10 +373,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("User must be a employee for this Transaction.");
             }
-            var accSet = sService.GetAllByUserId(user.Id);
-            if (accSet.CompanyId != null) voucher.CurrencyId = (int)accSet.CompanyId;
 
+            var AccSet = sService.GetAllByUserId(user.Id);
 
+            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (Request.Form["post"] != null)
+            {
+                voucher.Posted = 1;
+            }
+            else if (Request.Form["draft"] != null)
+            {
+                voucher.Posted = 0;
+            }
             if (vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
@@ -380,7 +408,6 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 return Content("Failed To Add Voucher!!!!");
             }
-
 
 
             return RedirectToAction("ManualJournals");
