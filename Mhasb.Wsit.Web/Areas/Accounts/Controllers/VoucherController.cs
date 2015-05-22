@@ -35,6 +35,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
+            ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
                 return Content("Please add company financial settings ");
@@ -47,22 +48,23 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
             long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
-            if (maxBrach < 1) {
+            if (maxBrach < 1)
+            {
                 maxBrach = 1;
             }
-               
-                //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
+
+            //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
             var tt = coaService.GetAllChartOfAccountByCompanyId(branchId);
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c=>c.Level==4);
+            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
-            var code = "Gj-"+branchId.ToString()+"-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
+            var code = "Gj-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
 
             ViewBag.FinancialSettingId = fsObj.Id;
-            return View();
+            return View("NewJournal_new");
         }
 
         [HttpPost]
@@ -88,7 +90,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             
             var AccSet = sService.GetAllByUserId(user.Id);
 
-            if (AccSet.CompanyId != null) voucher.CurrencyId = (int)AccSet.CompanyId;
+            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
 
             if (vService.CreateVoucher(voucher))
             {
