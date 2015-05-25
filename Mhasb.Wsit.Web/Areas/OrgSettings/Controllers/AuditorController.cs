@@ -94,7 +94,16 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             ad.CompanyId = companyId;
             if (aService.AddAuditor(ad))
             {
-                return Content("Success");
+                if (type == 1)
+                {
+                    TempData.Add("succMsg", "Internal Auditor Added Successfully");
+                    return RedirectToAction("InternalAuditor", "Auditor", new { area = "OrgSettings" });
+                }
+                else 
+                {
+                    TempData.Add("succMsg", "External Auditor Added Successfully");
+                    return RedirectToAction("ExternalAuditor", "Auditor", new { area = "OrgSettings" });
+                }
             }
             else
             {

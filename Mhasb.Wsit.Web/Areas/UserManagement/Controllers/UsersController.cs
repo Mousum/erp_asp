@@ -129,13 +129,16 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult MyMhasb()
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            List<Company> myCompanyList = iCompany.GetAllCompanies()
-                                                   .Where(c => c.Users.Id == user.Id).ToList();
 
+            //List<Company> myCompanyList = iCompany.GetAllCompanies()
+            //                                       .Where(c => c.Users.Id == user.Id).ToList();
 
+            List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+
+           var accountsetting = setService.GetAllByUserId(user.Id);
             ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = "UniCorn";
+            ViewBag.lastLoginCompany = accountsetting!=null? accountsetting.Companies.DisplayName:"Company was not set.";
             ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb_new", myCompanyList);
 
@@ -147,10 +150,22 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var accsetting = new AccountSetting();
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
-            accsetting.Users = users;
-            accsetting.AccSettings = new Settings();
-            ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
-            ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserId(users.Id), "Id", "DisplayName");
+            try
+            {
+                accsetting.Users = users;
+                accsetting.AccSettings = new Settings();
+                ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+
+
+                ViewBag.CompanyList = new SelectList(cService.GetAllCompaniesByUserEmployee(users.Id), "Id", "DisplayName");
+            }
+            catch (Exception ex)
+            {
+                
+                var rr = ex.Message;
+            }
+          
+
             return View("AccountSettings_new", accsetting);
 
         }
@@ -250,10 +265,20 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public JsonResult GetSettingsByUserId()
         {
+            var setObj = new Settings();
+            try
+            {
+                var email = HttpContext.User.Identity.Name;
+                var users = uService.GetSingleUserByEmail(email);
+                setObj = setService.GetAllByUserId(users.Id);
+            }
+            catch (Exception ex)
+            {
+                
+                var rr =ex.Message;
+            }
+           
 
-            var email = HttpContext.User.Identity.Name;
-            var users = uService.GetSingleUserByEmail(email);
-            var setObj = setService.GetAllByUserId(users.Id);
             return Json(setObj, JsonRequestBehavior.AllowGet);
         }
         [AllowAnonymous]

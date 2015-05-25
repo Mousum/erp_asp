@@ -1,11 +1,12 @@
-﻿@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
+﻿
+@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Journal";
 }
 
 <div class="container my-dashboard " ng-controller="TodoCtrl">
 
-    @using (Html.BeginForm("Create", "Voucher", FormMethod.Post, new { id="form-id" }))
+    @using (Html.BeginForm("NewJournal", "Voucher", FormMethod.Post, new { id = "form-id" }))
 {
         @Html.AntiForgeryToken()
 
@@ -96,7 +97,7 @@
                                     <td></td>
                                     <td>
 
-                                        <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control">
+                                        <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control select-option">
                                             <option value="">Select one...</option>
                                             @foreach (var coa in ViewBag.coaList)
                                             {
@@ -111,7 +112,7 @@
                                 </tr>
                             }
                             <tr>
-                                <td colspan="4" class="addContent">Total</td>
+                                <td colspan="4">Total</td>
                                 <td><div id="totaldebit">0</div></td>
                                 <td><div id="totalcredit">0</div></td>
                                 <td></td>
@@ -121,14 +122,16 @@
                     </table>
                 </div>
             </div>
-
+            <div class="col-md-6 form-inline">
+                <a class="btn btn-primary addContent" data-role="button" href="javascript:void(0)">Add new line</a>
+            </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </div>
-    }
+</div>
+}
 
 </div>
 
@@ -159,10 +162,11 @@
             margin: 0;
             padding: 5px 10px;
         }
-    </style>
+    </style>   
     <script>
 
         (function ($) {
+            
             $.widget("custom.combobox", {
                 _create: function () {
                     this.wrapper = $("<span>")
@@ -303,20 +307,12 @@
         });
        
 
-        function myFunction() {
-            var i = 0;
-            var result = 0;
-            $('.debit').each(function () {
-                result += parseInt($(this).val());
-                if (!isNaN(result)) {
-                    $('#totaldebit').text(result);
-                }
-            });
-        }
+        
 
         $(document).ready(function () {
 
             $('.addContent').click(function () {
+                var options = $('.select-option').html();
                 var numItems = $('.tr-content').length;
                 var Content = '<tr class="tr-content">'
                               + '<td><textarea class="cstm-input description" cols="20" id="voucherDetails_' + numItems + '__Description" name="voucherDetails[' + numItems + '].Description" rows="2">'
@@ -326,7 +322,7 @@
                                         + '<td>'
                                         + '<select id="combobox_' + numItems + '" name="voucherDetails[' + numItems + '].CoaId" class="form-control">'
                                         + '<option value="">Select one...</option>'
-                                        + '<option value="3">Asset</option>'
+                                        + options
                                         + '</select>'
                                         + '</td>'
                                         + '<td><input autocomplete="off" class="cstm-input debit" onkeypress="myFunction()" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="0" /></td>'
@@ -338,28 +334,6 @@
                 $("#combobox_" + numItems).combobox();
                 $("#toggle").click(function () {
                     $("#combobox_" + numItems).toggle();
-                });
-
-                $('.debit').keyup(function () {
-                    var i = 0;
-                    var result = 0;
-                    $('.debit').each(function () {
-                        result += parseInt($(this).val());
-                        if (!isNaN(result)) {
-                            $('#totaldebit').text(result);
-                        }
-                    });
-                });
-
-                $('.credit').keyup(function () {
-                    var i = 0;
-                    var result = 0;
-                    $('.credit').each(function () {
-                        result += parseInt($(this).val());
-                        if (!isNaN(result)) {
-                            $('#totalcredit').text(result);
-                        }
-                    });
                 });
 
             });
@@ -376,7 +350,7 @@
             });
 
             $('.debit').keyup(function () {
-                var i = 0;
+                $(this).parents('tr.tr-content').find('.credit').val(0.00);
                 var result = 0;
                 $('.debit').each(function () {
                     result += parseInt($(this).val());
@@ -384,15 +358,30 @@
                         $('#totaldebit').text(result);
                     }
                 });
+                result = 0;
+                $('.credit').each(function () {
+                    result += parseInt($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totalcredit').text(result);
+                    }
+                });
             });
 
             $('.credit').keyup(function () {
-                var i = 0;
+                $(this).parents('tr.tr-content').find('.debit').val(0.00);
+                
                 var result = 0;
                 $('.credit').each(function () {
                     result += parseInt($(this).val());
                     if (!isNaN(result)) {
                         $('#totalcredit').text(result);
+                    }
+                });
+                result = 0;
+                $('.debit').each(function () {
+                    result += parseInt($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totaldebit').text(result);
                     }
                 });
             });

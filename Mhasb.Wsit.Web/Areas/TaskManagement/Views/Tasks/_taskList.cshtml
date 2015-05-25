@@ -30,7 +30,7 @@
                     {
                     <tr>
                         <td>@item.Id</td>
-                        <td>@item.TaskTo</td>@*@item.Employees.Users.FirstName @item.Employees.Users.LastName*@
+                        <td>@item.Employees.Users.FirstName @item.Employees.Users.LastName</td>
                         <td>@item.Tite</td>
                         <td>@item.Projects.ProjectName</td>
                         <td>@item.TaskDate</td>
@@ -87,7 +87,7 @@
 
             var baseUrl = '@Url.Content("~/")';
             var data = { id: $("#utId").val(), TaskTo: $("#utempId").val(), TaskTitle: $("#utTitle").val(), StartingDate: $("#utstart").val(), FinishingDate: $("#utfinish").val(), Status: $("#utstatus").val() };
-
+            $("#taskList").hide("slow");
 
             $.ajax({
                 type: "POST",
@@ -105,7 +105,7 @@
                                 data: data,
                                 datatype: "html",
                                 success: function (data) {
-                                    $("#taskList").html(data);
+                                    $("#taskList").html(data).show("slow");
                                     $("#alert").empty();
                                 }
                             });

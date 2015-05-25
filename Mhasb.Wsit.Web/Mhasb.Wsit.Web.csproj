@@ -175,12 +175,14 @@
     <Compile Include="Areas\Commons\Controllers\CountryController.cs" />
     <Compile Include="Areas\Commons\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Commons\Controllers\LanguageController.cs" />
+    <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\DesignationController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\EmployeeProfileController.cs" />
+    <Compile Include="Areas\OrganizationManagement\Controllers\FoundersController.cs" />
     <Compile Include="Areas\OrganizationManagement\OrganizationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\AuditorController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\CurrencyController.cs" />
@@ -571,11 +573,14 @@
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\loader.css" />
     <Content Include="Content\master.css" />
@@ -616,6 +621,8 @@
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.dll" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.pdb" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\UserManagement\Views\web.config" />
@@ -753,7 +760,7 @@
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Costcentre.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Edit.cshtml" />
-    <Content Include="Areas\Accounts\Views\Voucher\Create.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\NewJournal_old.cshtml" />
     <Content Include="Areas\Accounts\Views\VoucherType\Create.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -768,8 +775,24 @@
     <Content Include="Areas\OrgSettings\Views\Currency\Edit.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\Index1.cshtml" />
     <Content Include="Areas\TaskManagement\Views\Tasks\List.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Users\ledgersettings.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\ManualJournals.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\DebitVoucher.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\CreditVoucher.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\AccountVoucher.cshtml" />
+    <Content Include="Areas\Commons\Views\Lookups\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\Lookups\Delete.cshtml" />
+    <Content Include="Areas\Commons\Views\Lookups\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\Lookups\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\Lookups\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\ledgersettings.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\_manualJournalDetails.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Settings.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Founders\Update.cshtml" />
+    <Content Include="Areas\Commons\Views\_ViewStart.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Accounts\Views\Voucher\NewJournal.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -818,9 +841,15 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\wsit.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cbpAnimatedHeader.js" />
     <Content Include="Scripts\cbpAnimatedHeader.min.js" />
@@ -830,10 +859,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\master.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

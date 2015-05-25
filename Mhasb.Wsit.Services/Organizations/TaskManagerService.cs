@@ -96,6 +96,7 @@ namespace Mhasb.Services.Organizations
             {
                 var taskObj = taskRep.GetOperation()
                     .Include(c => c.Employees)
+                    .Include(c=>c.Employees.Users)
                     .Include(c => c.Projects)
                     .Filter(c => c.ProjectId == projectId)
                     .Get().ToList();

@@ -15,6 +15,8 @@ namespace Mhasb.Services.Organizations
            Employee GetEmpByUserId(int UserId);
            List<Employee> GetEmpByCompanyId(int CompanyId);
         Employee GetEmpByEmpId(int empId);
+        Employee GetEmployeeByUserId(long userId);
+
 
 
     }

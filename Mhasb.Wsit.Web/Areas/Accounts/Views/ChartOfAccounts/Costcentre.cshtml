@@ -3,6 +3,7 @@
         <div class="col-md-6">
             <h4>Cost Centres Settings  :</h4>
             <div class="alert alert-success successMsg" style="display:none;"></div>
+            <div class="alert alert-danger errorMsg" style="display:none;"></div>
             <div class="row cstm-frm-row">
                 <div class="col-md-4">
                     <label>Cost Centre Name:</label>
@@ -92,6 +93,12 @@
                    }
                }
            });
+       }
+       else if (des === "")
+       {
+           $(".errorMsg").text("Please Add Some Description For Your Cost Center");
+           $(".errorMsg").show("slow");
+           
        }
     })
 </script>

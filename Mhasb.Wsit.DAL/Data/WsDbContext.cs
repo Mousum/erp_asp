@@ -97,9 +97,12 @@ namespace Mhasb.Wsit.DAL.Data
 
             modelBuilder.Configurations.Add(new VoucherMapping());
             modelBuilder.Configurations.Add(new VoucherDetailMapping());
+            modelBuilder.Configurations.Add(new VoucherDocumentMapping());
 
 
         }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Lookup> Lookups { get; set; }
 
     }
 }

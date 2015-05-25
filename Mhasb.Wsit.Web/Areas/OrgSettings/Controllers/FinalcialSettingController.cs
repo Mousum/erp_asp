@@ -48,6 +48,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
+            
             fs.CompanyId = AccSet.Companies.Id;
             fs.IsActive = true;
             fService.AddFinalcialSetting(fs);

@@ -12,5 +12,9 @@ namespace Mhasb.Wsit.CustomModel.Accounts
         public Voucher voucher { get; set; }
 
         public List<VoucherDetail> voucherDetails { get; set; }
+
+        public List<VoucherDocument> voucherdocument { get; set; }
+
+
     }
 }

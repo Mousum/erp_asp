@@ -1,50 +1,56 @@
 ﻿@model Mhasb.Domain.OrgSettings.Currency
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
 
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <h2>Create</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Currency</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+                <div class="form-horizontal">
+                    <h4>Currency</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Symbol)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Symbol, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Symbol)
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Symbol, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Symbol)
-                @Html.ValidationMessageFor(model => model.Symbol)
-            </div>
-        </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div>
+                @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

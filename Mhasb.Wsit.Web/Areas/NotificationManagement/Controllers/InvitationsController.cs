@@ -135,6 +135,14 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         
                         // get designation 
                         var degObj = degRep.GetDesignations().FirstOrDefault();
+                        // if designation not exist then insert data into designation table
+                        if (degObj == null)
+                        {
+                            var designation = new Designation {DesignationName ="Employee Type"};
+                            degRep.AddDesignation(designation);
+
+                            degObj = degRep.GetDesignations().FirstOrDefault();
+                        }
                         emp.DesignationId = degObj.Id;
 
                         if (eService.CreateEmployee(emp))
@@ -144,7 +152,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                             accountSetting.lgdash = false;
                             accountSetting.lglast = false;
                             accountSetting.lgcompany = true;
-                            accountSetting.Companies = new Company { Id = Invitation.CompanyId };
+                            accountSetting.CompanyId = Invitation.CompanyId;
 
                             if (sService.AddSettings(accountSetting))
                             {

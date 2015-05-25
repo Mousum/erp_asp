@@ -130,6 +130,8 @@ namespace Mhasb.Services.Organizations
             }
             
         }
+
+        // Owner wise get all Company 
         public List<Company> GetAllCompaniesByUserId(long UserId)
         {
             try
@@ -157,6 +159,47 @@ namespace Mhasb.Services.Organizations
             }
 
         }
+        public List<Company> GetAllCompaniesByUserEmployee(long userId)
+        {
+            try
+            {
+                //company.State = ObjectState.Unchanged;
+                var comObj1 = companyRep.GetOperation()
+                    .Include(c => c.Countries)
+                    .Include(l => l.Languages)
+                    .Include(i => i.Industries)
+                    .Include(t => t.AreaTimes)
+                    .Include(l => l.LegalEntities)
+                    .Include(u => u.Users)
+                    .Include(cd => cd.Documents)
+                    .Filter(e=>e.Employees.All(r=>r.UserId==userId))
+                    .Get();
+                                        //.Where(e => e.Employees.All(r => r.UserId == userId));
+
+                var comObj2 = companyRep.GetOperation()
+                                        .Include(c => c.Countries)
+                                        .Include(l => l.Languages)
+                                        .Include(i => i.Industries)
+                                        .Include(t => t.AreaTimes)
+                                        .Include(l => l.LegalEntities)
+                                        .Include(u => u.Users)
+                                        .Include(cd => cd.Documents)
+                                        .Filter(u => u.Users.Id == userId)
+                                        .Get();
+                var comObj = comObj1.Union(comObj2).ToList();
+
+                //companyRep.GetSingleObject(companyId);
+                return comObj;
+
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+
+        }
+        
 
     }
 }

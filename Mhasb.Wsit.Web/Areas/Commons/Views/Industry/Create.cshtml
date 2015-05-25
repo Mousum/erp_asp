@@ -1,42 +1,40 @@
 ﻿@model Mhasb.Domain.Commons.Industry
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
+                <div class="form-horizontal">
+                    <h4>Industry</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
 
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.IndustryName)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.IndustryName, new { @class="cstm-input"})
+                            @Html.ValidationMessageFor(model => model.IndustryName)
+                        </div>
+                    </div>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>Industry</h4>
-            <hr />
-            @Html.ValidationSummary(true)
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.IndustryName, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.IndustryName)
-                    @Html.ValidationMessageFor(model => model.IndustryName)
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+
+            }
+            <div>
+                @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
-    }
-    @Scripts.Render("~/bundles/jqueryval")
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+
+

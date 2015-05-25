@@ -132,6 +132,7 @@ namespace Mhasb.Services.Accounts
             }
         }
 
+       
 
         public List<Voucher> GetAllVoucherByCurrencyId(int CurrencyId)
         {
@@ -198,6 +199,27 @@ namespace Mhasb.Services.Accounts
             {
                 var tt = ex.Message;
                 return -1;
+            }
+        }
+        public Voucher GetSingleVoucher(int VId)
+        {
+            try
+            {
+                var voObj = _finalCrudOperation.GetOperation()
+                                        .Include(c => c.VoucherDetails)
+                                        .Include(c => c.VoucherDetails.Select(d=>d.ChartOfAccounts))
+                                        .Include(c => c.VoucherTypes)
+                                        .Include(c => c.FinancialSettings)
+                                        .Include(c => c.Currencies)
+                                        .Filter(c => c.Id == VId)
+                                        .Get().SingleOrDefault();
+
+                return voObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
             }
         }
     }

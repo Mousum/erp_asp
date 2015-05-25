@@ -1,0 +1,83 @@
+﻿@model Mhasb.Domain.Commons.Lookup
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <h2>Create</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Lookup</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.LookupType)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.LookupType, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.LookupType)
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            Name
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Key, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Key)
+                        </div>
+                    </div>
+                     <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Value)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Value, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Value)
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Quantity)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Quantity, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Quantity)
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Description)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Description, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Order)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Order, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.Order)
+                        </div>
+                    </div>
+
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>

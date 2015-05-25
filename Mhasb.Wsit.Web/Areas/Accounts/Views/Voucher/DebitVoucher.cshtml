@@ -1,0 +1,494 @@
+﻿@model Mhasb.Wsit.CustomModel.Accounts.VoucherCustom
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            @using (Html.BeginForm("DebitVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="welcome">
+                    <h3 class="all-head">Debit Voucher</h3>
+                </div>
+                <hr>
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.voucher.FinancialSettingId, new { Value = ViewBag.FinancialSettingId })
+                <div class="row clearfix no-margin card">
+                    <div class="col-md-12">
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-2">
+                                        <label>Voucher No.</label>
+                                        @Html.HiddenFor(model => model.voucher.RefferenceNo, new { Value = ViewBag.RefferenceNo })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="cstm-input" type="text" value="@ViewBag.RefferenceNo" readonly>
+                                    </div>
+                                </div>
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-2">
+                                        <label>Description</label>
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextAreaFor(model => model.voucher.Description, new { @class = "cstm-input", reqiured = "reqiured" })
+                                        @Html.ValidationMessageFor(model => model.voucher.Description)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-5">
+                                        <label>Voucher Date:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.TextBoxFor(model => model.voucher.VoucherDate, new { @class = "cstm-input", id = "voucherdate" })
+                                        @Html.ValidationMessageFor(model => model.voucher.VoucherDate)
+                                    </div>
+                                </div>
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-5">
+                                        <label>Currency:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label class="cstm-select" style="margin-top: 0px;">
+                                            @Html.DropDownList("voucher.CurrencyId", ViewBag.CurrencyList as SelectList, new { reqiured = "reqiured" })
+                                            @Html.ValidationMessageFor(model => model.voucher.CurrencyId)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix no-margin">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger msg" style="display:none;"></div>
+                        <table class="table table-bordered table-responsive table-hover table-journal">
+                            <thead>
+                                <tr>
+                                    <th width="30%">Description</th>
+                                    <th>Ledger account</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbd-jour">
+                                @for (int i = 0; i < 2; i++)
+                                {
+                                    <tr class="tr-content">
+                                        <th scope="row">@Html.TextAreaFor(m => m.voucherDetails[i].Description, new { @class = "cstm-input description", required = "required" })</th>
+                                        <td>
+                                            <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control select-option" required="required">
+                                                <option value="">Select one...</option>
+                                                @foreach (var coa in ViewBag.coaList)
+                                                {
+                                                    <option value="@coa.Id">@coa.AName</option>
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input debit", autocomplete = "off", Value = '0', required = "required" })</td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input credit", autocomplete = "off", Value = '0', required = "required" })</td>
+                                        <td class="text-center"><a onclick="deleteRow(this)" href="javascript:void(0)"><i class="fa fa-remove cstm-remove"></i></a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">Total</td>
+                                    <td><div id="totaldebit">0</div></td>
+                                    <td><div id="totalcredit">0</div></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="row clearfix btn-drafty-cont">
+                            <div class="col-md-6 form-inline">
+                                <a href="javascript:void(0)" class="btn btn-primary add-line" data-role="button">Add new line</a>
+                                @*<a href="javascript:void(0)" class="btn btn-primary add-note" data-role="button">Add note</a>
+                                    <input type="file" class="cstm-upload-1">*@
+                            </div>
+
+                            <div class="col-md-6 text-right no-padding cstm-nrjbtn">
+                                <input class="btn btn-success" name="draft" value="Save as draft" type="submit" />
+                                <input class="btn btn-success" name="post" value="Post" type="submit" />
+                                <a href="@Url.Action("NewJournal", "Voucher")" class="btn btn-danger" data-role="button">Cancel</a>
+                            </div>
+                            @*<div class="col-md-6 text-right no-padding cstm-nrjbtn cstm-btn-de">
+                                    <a class="btn btn-danger" data-role="button">Cancel</a>
+                                </div>*@
+                        </div>
+                        <div class="hidden-note" style="display:none;">
+                            <div class="row cstm-frm-row">
+                                <div class="col-md-6 no-padding">
+                                    <textarea class="cstm-tarea" id="note-des"></textarea>
+                                </div>
+                            </div>
+                            <div class="row cstm-frm-row">
+                                <button class="btn btn-success note-save">Save</button>
+                                <button class="btn btn-danger note-cancel">Cancel</button>
+                            </div>
+                        </div>
+                        <input type="hidden" value="@ViewBag.User" id="usename" />
+                        @*<div class="col-md-9 no-padding">
+                                <table class="table table-bordered table-responsive table-hover table-journal">
+                                    <thead>
+                                        <tr>
+                                            <th>Change</th>
+                                            <th>Date</th>
+                                            <th>User</th>
+                                            <th width="30%">Details</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbd">
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>*@
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(".add-note").click(function () {
+        $(".hidden-note").toggle("slow");
+    })
+    $(".note-cancel").click(function () {
+        $(".hidden-note").hide("slow");
+    })
+    $(".note-save").click(function () {
+        var user = $("#usename").val();
+        var currentdate = new Date();
+        var htmlStr = "<tr><td>Note</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>" + $("#note-des").val() + "</td></tr>";
+        $("#tbd").append(htmlStr);
+        $("#note-des").val("");
+        $(".hidden-note").hide("slow");
+    })
+    $(".add-line").click(function () {
+        var options = $('.select-option').html();
+        var numItems = $('.tr-content').length;
+
+        var htmlStr = '<tr class="tr-content">'
+                       + '<th scope="row">'
+                          + '<textarea class="cstm-input description" cols="20" id="voucherDetails_' + numItems + '__Description" name="voucherDetails[' + numItems + '].Description" rows="2">'
+                          + '</textarea></th>'
+                        + '<td>'
+                            + '<select id="combobox_' + numItems + '" name="voucherDetails[' + numItems + '].CoaId" class="form-control select-option">'
+                                + options
+                            + '</select>'
+                      + '</td>'
+                      + '<td><input Value="0" autocomplete="off" class="cstm-input debit" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="" /></td>'
+                      + '<td><input Value="0" autocomplete="off" class="cstm-input credit" data-val="true" data-val-number="The field Credit must be a number." data-val-required="The Credit field is required." id="voucherDetails_' + numItems + '__Credit" name="voucherDetails[' + numItems + '].Credit" type="text" value="" /></td>'
+                      + '<td class="text-center"><a onclick="deleteRow(this)" href="javascript:void(0)"><i class="fa fa-remove cstm-remove"></i></a></td>'
+                    + '</tr>';
+        $("#tbd-jour").append(htmlStr);
+        $("#combobox_" + numItems).combobox();
+        $("#toggle").click(function () {
+            $("#combobox_" + numItems).toggle();
+        });
+        $('.debit').keyup(function () {
+            $(this).parents('tr.tr-content').find('.credit').val(0.00);
+            var result = 0;
+            $('.debit').each(function () {
+                result += parseFloat($(this).val());
+                if (!isNaN(result)) {
+                    $('#totaldebit').text(result);
+                }
+            });
+            result = 0;
+            $('.credit').each(function () {
+                result += parseFloat($(this).val());
+                if (!isNaN(result)) {
+                    $('#totalcredit').text(result);
+                }
+            });
+        });
+
+        $('.credit').keyup(function () {
+            $(this).parents('tr.tr-content').find('.debit').val(0.00);
+
+            var result = 0;
+            $('.credit').each(function () {
+                result += parseFloat($(this).val());
+                if (!isNaN(result)) {
+                    $('#totalcredit').text(result);
+                }
+            });
+            result = 0;
+            $('.debit').each(function () {
+                result += parseFloat($(this).val());
+                if (!isNaN(result)) {
+                    $('#totaldebit').text(result);
+                }
+            });
+        });
+    })
+    function deleteRow(e) {
+        e.closest("tr").remove();
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
+    </style>
+    <script>
+
+        (function ($) {
+
+            $.widget("custom.combobox", {
+                _create: function () {
+                    this.wrapper = $("<span>")
+                      .addClass("custom-combobox")
+                      .insertAfter(this.element);
+
+                    this.element.hide();
+                    this._createAutocomplete();
+                    this._createShowAllButton();
+                },
+
+                _createAutocomplete: function () {
+                    var selected = this.element.children(":selected"),
+                      value = selected.val() ? selected.text() : "";
+
+                    this.input = $("<input>")
+                      .appendTo(this.wrapper)
+                      .val(value)
+                      .attr("title", "")
+                      .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                      .autocomplete({
+                          delay: 0,
+                          minLength: 0,
+                          source: $.proxy(this, "_source")
+                      })
+                      .tooltip({
+                          tooltipClass: "ui-state-highlight"
+                      });
+
+                    this._on(this.input, {
+                        autocompleteselect: function (event, ui) {
+                            ui.item.option.selected = true;
+                            this._trigger("select", event, {
+                                item: ui.item.option
+                            });
+                        },
+
+                        autocompletechange: "_removeIfInvalid"
+                    });
+                },
+
+                _createShowAllButton: function () {
+                    var input = this.input,
+                      wasOpen = false;
+
+                    $("<a>")
+                      .attr("tabIndex", -1)
+                      .attr("title", "Show All Items")
+                      .tooltip()
+                      .appendTo(this.wrapper)
+                      .button({
+                          icons: {
+                              primary: "ui-icon-triangle-1-s"
+                          },
+                          text: false
+                      })
+                      .removeClass("ui-corner-all")
+                      .addClass("custom-combobox-toggle ui-corner-right")
+                      .mousedown(function () {
+                          wasOpen = input.autocomplete("widget").is(":visible");
+                      })
+                      .click(function () {
+                          input.focus();
+
+                          // Close if already visible
+                          if (wasOpen) {
+                              return;
+                          }
+
+                          // Pass empty string as value to search for, displaying all results
+                          input.autocomplete("search", "");
+                      });
+                },
+
+                _source: function (request, response) {
+                    var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                    response(this.element.children("option").map(function () {
+                        var text = $(this).text();
+                        if (this.value && (!request.term || matcher.test(text)))
+                            return {
+                                label: text,
+                                value: text,
+                                option: this
+                            };
+                    }));
+                },
+
+                _removeIfInvalid: function (event, ui) {
+
+                    // Selected an item, nothing to do
+                    if (ui.item) {
+                        return;
+                    }
+
+                    // Search for a match (case-insensitive)
+                    var value = this.input.val(),
+                      valueLowerCase = value.toLowerCase(),
+                      valid = false;
+                    this.element.children("option").each(function () {
+                        if ($(this).text().toLowerCase() === valueLowerCase) {
+                            this.selected = valid = true;
+                            return false;
+                        }
+                    });
+
+                    // Found a match, nothing to do
+                    if (valid) {
+                        return;
+                    }
+
+                    // Remove invalid value
+                    this.input
+                      .val("")
+                      .attr("title", value + " didn't match any item")
+                      .tooltip("open");
+                    this.element.val("");
+                    this._delay(function () {
+                        this.input.tooltip("close").attr("title", "");
+                    }, 2500);
+                    this.input.autocomplete("instance").term = "";
+                },
+
+                _destroy: function () {
+                    this.wrapper.remove();
+                    this.element.show();
+                }
+            });
+        })(jQuery);
+
+        $(function () {
+            for (var i = 0; i < 2; i++) {
+                $("#combobox_" + i).combobox();
+                $("#toggle").click(function () {
+                    $("#combobox_" + i).toggle();
+                });
+            }
+
+        });
+
+
+
+
+        $(document).ready(function () {
+
+            $("#form-id").submit(function (event) {
+                if (!checkValidation()) {
+                    $(".msg").text("Debit And Credit not Equal").show("slow");
+
+                    event.preventDefault();
+                }
+            });
+
+            $('#voucherdate').datepicker({
+                format: 'dd/mm/yyyy'
+            });
+
+            $('.debit').keyup(function () {
+                $(this).parents('tr.tr-content').find('.credit').val(0.00);
+                var result = 0;
+                $('.debit').each(function () {
+                    result += parseFloat($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totaldebit').text(result);
+                    }
+                });
+                result = 0;
+                $('.credit').each(function () {
+                    result += parseFloat($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totalcredit').text(result);
+                    }
+                });
+            });
+
+            $('.credit').keyup(function () {
+                $(this).parents('tr.tr-content').find('.debit').val(0.00);
+
+                var result = 0;
+                $('.credit').each(function () {
+                    result += parseFloat($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totalcredit').text(result);
+                    }
+                });
+                result = 0;
+                $('.debit').each(function () {
+                    result += parseFloat($(this).val());
+                    if (!isNaN(result)) {
+                        $('#totaldebit').text(result);
+                    }
+                });
+            });
+
+            $(document).on('keypress', '#item-table tr .debit', function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46) {
+                    //display error message
+                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+            $(document).on('keypress', '#item-table tr .credit', function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46) {
+                    //display error message
+                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+        });
+
+        function checkValidation() {
+            var td = $('#totaldebit').text();
+            var tc = $('#totalcredit').text();
+            var valid = false;
+            if (td == tc)
+                valid = true;
+            return valid;
+
+        }
+
+    </script>
+}
