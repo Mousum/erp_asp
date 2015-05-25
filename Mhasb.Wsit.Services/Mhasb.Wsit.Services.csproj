@@ -85,8 +85,10 @@
     <Compile Include="Organizations\IEmployeeService.cs" />
     <Compile Include="Organizations\IFounder.cs" />
     <Compile Include="Organizations\IProjectService.cs" />
+    <Compile Include="Organizations\IShareTransferService.cs" />
     <Compile Include="Organizations\ITaskManagerService.cs" />
     <Compile Include="Organizations\ProjectService.cs" />
+    <Compile Include="Organizations\ShareTransferService.cs" />
     <Compile Include="Organizations\TaskManagerService.cs" />
     <Compile Include="OrgSettings\AuditorService.cs" />
     <Compile Include="Accounts\ChartOfAccountService.cs" />

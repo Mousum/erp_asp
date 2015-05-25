@@ -34,7 +34,7 @@ namespace Mhasb.Services.Organizations
                 dbObj.Email = founder.Email;
                 dbObj.Fax = founder.Fax;
                 dbObj.SharesOwned = founder.SharesOwned;
-                dbObj.TotalSharesValue = founder.TotalSharesValue;
+                dbObj.ShareUnitValue = founder.ShareUnitValue;
                 dbObj.FounderResidence = founder.FounderResidence;
                 
                 dbObj.State = ObjectState.Modified;
@@ -54,6 +54,7 @@ namespace Mhasb.Services.Organizations
             var objList = _crudOperation.GetOperation()
                 .Include(d => d.Companies)
                 .Include(f => f.Countries)
+                .Include(l=>l.Languages)
                 .Filter(f => f.CompanyId == companyId)
                 .Get().ToList();
             return objList;

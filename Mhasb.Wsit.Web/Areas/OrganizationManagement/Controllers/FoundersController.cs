@@ -23,6 +23,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly ILanguageService iLang = new LanguageService();
         private ISettingsService setService = new SettingsService();
         private IUserService uService = new UserService();
+        private readonly IShareTransferService stService = new ShareTransferService();
         // GET: OrganizationManagement/Founders
         public ActionResult Index()
         {
@@ -96,5 +97,47 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                return RedirectToAction("Index");
             }
         }
+
+        public ActionResult ShareTransfer()
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = setService.GetAllByUserId(user.Id);
+            int comId = AccSet.Companies.Id;
+            var FounderList=fService.GetFounders(comId);
+            ViewBag.FounderList = FounderList;
+
+
+
+            var dbObj = FounderList.Select(e => new { fid = e.Id,shares=e.SharesOwned,tel=e.Tel,fax=e.Fax,pobox=e.PoBoax,email=e.Email,totalval=(e.ShareUnitValue*e.SharesOwned),residence=e.FounderResidence,nationality=e.Countries.CountryName,language=e.Languages.LanguageName }).ToList();
+
+            //ViewBag.Employees = eService.GetEmpByCompanyId(AccSet.Companies.Id);
+            ViewBag.dataSet = Json(dbObj);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ShareTransfer(ShareTransfer st)
+        {
+            var s = st;
+            st.TransferTime = DateTime.Now;
+            if (stService.AddShareTransferTransection(st))
+            {
+                var sender = fService.GetSingleFounder(st.FromFounderId);
+                sender.SharesOwned -= st.TransferAmount;
+                fService.UpdateFounder(sender);
+
+                var reciever = fService.GetSingleFounder(st.ToFounderId);
+                reciever.SharesOwned += st.TransferAmount;
+                fService.UpdateFounder(reciever);
+
+                return Content("Success");
+            }
+                
+            return Content("Failed");
+        }
+
+
+
     }
 }
