@@ -25,7 +25,7 @@
                         @foreach (Mhasb.Domain.Organizations.Company company in Model)
                         {
                             <tr>
-                                <td>@company.TradingName</td>
+                                <td>@Html.ActionLink(@company.TradingName, "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
                                 <td>21 Feb 3:54 p.m. By <br /> Khalid AL Kubaisi</td>
                                 <td>Adviser <br /> Manage users</td>
                                 <td>@company.Users.FirstName @company.Users.LastName <br />In Trial</td>

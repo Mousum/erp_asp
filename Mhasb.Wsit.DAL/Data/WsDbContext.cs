@@ -80,6 +80,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new CompanyDocumentMapping());
             modelBuilder.Configurations.Add(new FounderMapping());
             modelBuilder.Configurations.Add(new DesignationMapping());
+            modelBuilder.Configurations.Add(new ShareTransferMapping());
             // Project Task
             modelBuilder.Configurations.Add(new TaskManageMapping());
             modelBuilder.Configurations.Add(new ProjectMapping());
@@ -103,6 +104,10 @@ namespace Mhasb.Wsit.DAL.Data
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Lookup> Lookups { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.ShareTransfer> ShareTransfers { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Founder> Founders { get; set; }
 
     }
 }

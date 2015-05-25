@@ -26,7 +26,7 @@ namespace Mhasb.DAL.Mapping.Organizations
            this.Property(f => f.Email).HasColumnName("email").HasMaxLength(100);
            this.Property(f => f.PoBoax).HasColumnName("pobox").HasMaxLength(100);
            this.Property(f => f.SharesOwned).HasColumnName("shares_owned");
-           this.Property(f => f.TotalSharesValue).HasColumnName("total_shares_value");
+           this.Property(f => f.ShareUnitValue).HasColumnName("shares_unit_value");
            this.ToTable("org.founders");
 
            // relationship
