@@ -9,6 +9,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Services.Organizations;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
+using System.IO;
 using PagedList;
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
@@ -24,6 +27,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly IUserService uService = new UserService();
 
         private readonly IEmployeeService empService = new EmployeeService();
+
+        private readonly IVoucherDocument vDocSar = new VoucherDocumentService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
@@ -34,6 +39,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult NewJournal()
         {
+
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
@@ -77,8 +83,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             voucher.VoucherTypeId = 1;
             // This EmpId is static must be changed by Emp table 
 
+            //string data = Request.Form["note_data"];
+
+
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
@@ -117,6 +127,51 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         return Content("Voucher Details problem");
                     }
                 }
+                string data = Request.Form["note_data"];
+
+                if (Request.Form["note_data"] != "")
+                {
+                    JArray noteData = JArray.Parse(data);
+
+                    var VDoc = new VoucherDocument();
+                    for (int i = 0; i < noteData.Count(); i++)
+                    {
+
+                        VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
+                        VDoc.Description = noteData[i]["des"].ToString();
+                        VDoc.DocumentType = noteData[i]["type"].ToString();
+                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.VoucherId = voucher.Id;
+                        vDocSar.AddDocument(VDoc);
+                    }
+                }
+               
+                    string documentName;
+                    string documentLocation;
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        if ("documentLocation[]" == Request.Files.GetKey(i))
+                        {
+                            documentName = "Document_" + voucher.Id+"_"+i+ Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                            documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            {
+                                VoucherDocument VDoc = new VoucherDocument();
+                                VDoc.CreatedDate = DateTime.Now;
+                                VDoc.DocumentType = "File";
+                                VDoc.EmployeeId = voucher.EmployeeId;
+                                VDoc.VoucherId = voucher.Id;
+                                VDoc.FileLocation = documentLocation + "/" + documentName;
+                                vDocSar.AddDocument(VDoc);
+                            }
+                        }
+
+                    }
+                
+               
+
+
+
             }
 
             else
@@ -129,7 +184,48 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             return RedirectToAction("ManualJournals");
         }
 
+        public bool fileUpload(HttpPostedFileBase file, string fileName, string filePath)
+        {
+            try
+            {
 
+                string uploadPath = filePath;
+                bool isValid = false;
+                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg", ".pdf", ".doc", ".txt", ".docx", ".xlsx" };
+                for (int i = 0; i < fileExtensions.Length; i++)
+                {
+
+                    if (file.FileName.Contains(fileExtensions[i]))
+                    {
+
+                        isValid = true;
+                        break;
+                    }
+                }
+
+                if (isValid)
+                {
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+                    file.SaveAs(uploadPath + fileName);
+
+
+                    return true;
+                    //System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    //return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         //DebitVoucher
         public ActionResult DebitVoucher()
@@ -212,6 +308,46 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     {
                         return Content("Voucher Details problem");
                     }
+                }
+                string data = Request.Form["note_data"];
+
+                if (Request.Form["note_data"] != "")
+                {
+                    JArray noteData = JArray.Parse(data);
+
+                    var VDoc = new VoucherDocument();
+                    for (int i = 0; i < noteData.Count(); i++)
+                    {
+
+                        VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
+                        VDoc.Description = noteData[i]["des"].ToString();
+                        VDoc.DocumentType = noteData[i]["type"].ToString();
+                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.VoucherId = voucher.Id;
+                        vDocSar.AddDocument(VDoc);
+                    }
+                }
+
+                string documentName;
+                string documentLocation;
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    if ("documentLocation[]" == Request.Files.GetKey(i))
+                    {
+                        documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        if (fileUpload(Request.Files[i], documentName, documentLocation))
+                        {
+                            VoucherDocument VDoc = new VoucherDocument();
+                            VDoc.CreatedDate = DateTime.Now;
+                            VDoc.DocumentType = "File";
+                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.VoucherId = voucher.Id;
+                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            vDocSar.AddDocument(VDoc);
+                        }
+                    }
+
                 }
             }
 
@@ -306,6 +442,46 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     catch (Exception)
                     {
                         return Content("Voucher Details problem");
+                    }
+                    string data = Request.Form["note_data"];
+
+                    if (Request.Form["note_data"] != "")
+                    {
+                        JArray noteData = JArray.Parse(data);
+
+                        var VDoc = new VoucherDocument();
+                        for (int i = 0; i < noteData.Count(); i++)
+                        {
+
+                            VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
+                            VDoc.Description = noteData[i]["des"].ToString();
+                            VDoc.DocumentType = noteData[i]["type"].ToString();
+                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.VoucherId = voucher.Id;
+                            vDocSar.AddDocument(VDoc);
+                        }
+                    }
+
+                    string documentName;
+                    string documentLocation;
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        if ("documentLocation[]" == Request.Files.GetKey(i))
+                        {
+                            documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                            documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                            if (fileUpload(Request.Files[i], documentName, documentLocation))
+                            {
+                                VoucherDocument VDoc = new VoucherDocument();
+                                VDoc.CreatedDate = DateTime.Now;
+                                VDoc.DocumentType = "File";
+                                VDoc.EmployeeId = voucher.EmployeeId;
+                                VDoc.VoucherId = voucher.Id;
+                                VDoc.FileLocation = documentLocation + "/" + documentName;
+                                vDocSar.AddDocument(VDoc);
+                            }
+                        }
+
                     }
                 }
             }
@@ -403,6 +579,46 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         return Content("Voucher Details problem");
                     }
                 }
+                string data = Request.Form["note_data"];
+
+                if (Request.Form["note_data"] != "")
+                {
+                    JArray noteData = JArray.Parse(data);
+
+                    var VDoc = new VoucherDocument();
+                    for (int i = 0; i < noteData.Count(); i++)
+                    {
+
+                        VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
+                        VDoc.Description = noteData[i]["des"].ToString();
+                        VDoc.DocumentType = noteData[i]["type"].ToString();
+                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.VoucherId = voucher.Id;
+                        vDocSar.AddDocument(VDoc);
+                    }
+                }
+
+                string documentName;
+                string documentLocation;
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    if ("documentLocation[]" == Request.Files.GetKey(i))
+                    {
+                        documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        if (fileUpload(Request.Files[i], documentName, documentLocation))
+                        {
+                            VoucherDocument VDoc = new VoucherDocument();
+                            VDoc.CreatedDate = DateTime.Now;
+                            VDoc.DocumentType = "File";
+                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.VoucherId = voucher.Id;
+                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            vDocSar.AddDocument(VDoc);
+                        }
+                    }
+
+                }
             }
 
             else
@@ -415,7 +631,6 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         }
         public ActionResult ManualJournals(string sortOrder, string currentFilter, string searchString, int? page)
         {
-          
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             ViewBag.CurrentSort = sortOrder;
             if (searchString != null)
@@ -440,11 +655,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             List<Voucher> Voucher = vService.GetAllVoucherByBranchId(branchId);
             int pageSize = 6;
             int pageNumber = (page ?? 1);
-            short searchPosted=0;
+            short searchPosted = 0;
             if (searchString == "draft")
             {
                 searchPosted = 0;
-            }else{
+            }
+            else
+            {
                 searchPosted = 1;
             }
             if (!String.IsNullOrEmpty(searchString))
