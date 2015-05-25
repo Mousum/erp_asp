@@ -1,17 +1,19 @@
-﻿@model IEnumerable<Mhasb.Domain.Accounts.Voucher>
+﻿@*@model IEnumerable<Mhasb.Domain.Accounts.Voucher>*@
+@model PagedList.IPagedList<Mhasb.Domain.Accounts.Voucher>
+@using PagedList.Mvc;
 
 <div class="container my-dashboard">
     <h4>Manual Journals</h4>
     <div class="row cstm-frm-row">
         <div class="col-md-8">
-            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;display:none;" >
-                <button type="button" class="btn btn-default">All </button>
-                <button type="button" class="btn btn-default">Draft </button>
-                <button type="button" class="btn btn-default">Posted </button>
-                <button type="button" class="btn btn-default">Voided </button>
-                <button type="button" class="btn btn-default">Repeating </button>
-                <button type="button" class="btn btn-default">Archive </button>
-                <button type="button" class="btn btn-default">Cost Center (Select)</button>
+            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;">
+                <button type="button" class="btn btn-default" value="all">All </button>
+                <button type="button" class="btn btn-default" value="draft">Draft </button>
+                <button type="button" class="btn btn-default" value="posted">Posted </button>
+                <button type="button" class="btn btn-default" value="voided">Voided </button>
+                <button type="button" class="btn btn-default" value="repeating">Repeating </button>
+                <button type="button" class="btn btn-default" value="archive">Archive </button>
+                <button type="button" class="btn btn-default" value="costcenter">Cost Center (Select)</button>
 
             </div>
         </div>
@@ -23,7 +25,7 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="display:none;">
             <button type="button" class="btn btn-info">All Journals</button>
         </div>
         <div class="col-md-3 cstm-frm-row">
@@ -50,7 +52,7 @@
                         <tr>
                             <th>#</th>
                             <th width="40%">Narration </th>
-                            <th>Date</th>
+                            <th>@Html.ActionLink("Voucher Date", "ManualJournals", new { sortOrder = ViewBag.DateSortParm })</th>
                             <th>Currency</th>
                             <th>Debit</th>
                             <th>Credit</th>
@@ -88,7 +90,11 @@
                 </table>
             }
         </div>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+        @Html.PagedListPager(Model, page => Url.Action("ManualJournals",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
     </div>
 
 </div>
@@ -111,13 +117,30 @@
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        $('.btn-default').click(function () {
+            var baseUrl = '@Url.Content("~/")';
+            var searchString = $(this).val();
+            if (searchString == "draft") {
+                alert(searchString);
+                window.location = baseUrl + "Accounts/Voucher/ManualJournals?searchString=" + searchString;
+            } else if (searchString == "posted") {
+                window.location = baseUrl + "Accounts/Voucher/ManualJournals?searchString=" + searchString;
+            } else if (searchString == "voided") {
+                window.location = baseUrl + "Accounts/Voucher/ManualJournals?searchString=" + searchString;
+            }
+            else {
+                window.location = baseUrl + "Accounts/Voucher/ManualJournals";
+            }
+        });
+    });
     $(".data-view").click(function () {
         var id = $(this).attr("data-id");
         var data = { id: id };
         var baseUrl = '@Url.Content("~/")';
         $.ajax({
             type: "POST",
-            url: baseUrl+ "Accounts/Voucher/GetManualJournalDetails",
+            url: baseUrl + "Accounts/Voucher/GetManualJournalDetails",
             data: data,
             success: function (data) {
                 $("#det").html(data);
