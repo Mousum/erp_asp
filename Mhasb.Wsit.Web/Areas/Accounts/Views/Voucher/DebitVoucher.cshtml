@@ -2,7 +2,7 @@
 <div class="container my-dashboard">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
-            @using (Html.BeginForm("DebitVoucher", "Voucher", FormMethod.Post, new { id = "form-id" }))
+            @using (Html.BeginForm("DebitVoucher", "Voucher", FormMethod.Post, new { id = "form-id", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="welcome">
@@ -104,21 +104,28 @@
                             </tfoot>
                         </table>
                         <div class="row clearfix btn-drafty-cont">
-                            <div class="col-md-6 form-inline">
+                            <div class="col-md-6 form-inline" id="more">
                                 <a href="javascript:void(0)" class="btn btn-primary add-line" data-role="button">Add new line</a>
-                                @*<a href="javascript:void(0)" class="btn btn-primary add-note" data-role="button">Add note</a>
-                                    <input type="file" class="cstm-upload-1">*@
-                            </div>
+                                <a href="javascript:void(0)" class="btn btn-primary add-note" data-role="button">Add note</a>
+                                <input name="documentLocation[]" type="file" class="docFile" multiple id="doc_div" />
 
+
+                            </div>
                             <div class="col-md-6 text-right no-padding cstm-nrjbtn">
                                 <input class="btn btn-success" name="draft" value="Save as draft" type="submit" />
                                 <input class="btn btn-success" name="post" value="Post" type="submit" />
                                 <a href="@Url.Action("NewJournal", "Voucher")" class="btn btn-danger" data-role="button">Cancel</a>
                             </div>
-                            @*<div class="col-md-6 text-right no-padding cstm-nrjbtn cstm-btn-de">
-                                    <a class="btn btn-danger" data-role="button">Cancel</a>
-                                </div>*@
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary  cstm-ad-mr" data-role="button" href="javascript:void(0)" id="addDoc" data-role="button">Add More File</a>
+
+                                <div id="fileError" style="display:none;color:#E74C3C;"></div>
+                            </div>
+                        </div>
+
+
                         <div class="hidden-note" style="display:none;">
                             <div class="row cstm-frm-row">
                                 <div class="col-md-6 no-padding">
@@ -126,34 +133,29 @@
                                 </div>
                             </div>
                             <div class="row cstm-frm-row">
-                                <button class="btn btn-success note-save">Save</button>
-                                <button class="btn btn-danger note-cancel">Cancel</button>
+                                <a href="javascript:void(0)" class="btn btn-success note-save" data-role="button">Save</a>
+                                <a href="javascript:void(0)" class="btn btn-danger note-cancel" data-role="button">Cancel</a>
                             </div>
                         </div>
                         <input type="hidden" value="@ViewBag.User" id="usename" />
-                        @*<div class="col-md-9 no-padding">
-                                <table class="table table-bordered table-responsive table-hover table-journal">
-                                    <thead>
-                                        <tr>
-                                            <th>Change</th>
-                                            <th>Date</th>
-                                            <th>User</th>
-                                            <th width="30%">Details</th>
+                        <div class="col-md-9 no-padding">
+                            <table class="table table-bordered table-responsive table-hover table-journal">
+                                <thead>
+                                    <tr>
+                                        <th>Change</th>
+                                        <th>Date</th>
+                                        <th>User</th>
+                                        <th width="30%">Details</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbd">
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="tbd"></tbody>
+                            </table>
+                            @Html.Hidden("changes[]", "", new { id = "change" })
+                            @Html.Hidden("notedate[]", "", new { id = "date" })
+                            @Html.Hidden("Notedes[]", "", new { })
+                            <input type="hidden" name="note_data" id="notes" value="" />
+                        </div>
                     </div>
                 </div>
             }
@@ -162,7 +164,23 @@
 </div>
 
 <script>
+    $("#addDoc").click(function () {
+        if ($(".docFile").last().val() !== "") {
+            $("#more").append('<input name="documentLocation[]" type="file" class="docFile" multiple id="doc_div" />')
+            $(".docFile").change(function () {
+                var user = $("#usename").val();
+                var currentdate = new Date();
+                var htmlStr = "<tr><td>File</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>File Added</td></tr>";
+                $("#tbd").append(htmlStr);
+                $(".hidden-note").hide("slow");
+            })
+        }
+        else {
+            $("#fileError").text("Select File For Previous field First").show("slow");
+            setTimeout(function () { $("#fileError").hide("slow") }, 5000);
+        }
 
+    })
     $(".add-note").click(function () {
         $(".hidden-note").toggle("slow");
     })
@@ -172,9 +190,30 @@
     $(".note-save").click(function () {
         var user = $("#usename").val();
         var currentdate = new Date();
+        var cd = currentdate.toLocaleString();
+        var note = $("#note-des").val();
+        var curVal = $("#notes").val();
+        var ar = [];
+        if (curVal !== "") {
+            ar = JSON.parse(curVal);
+
+        }
+        var c = { "type": "note", "des": note, "date": cd };
+        ar.push(c);
+
+        $("#notes").val(JSON.stringify(ar));
+
+
         var htmlStr = "<tr><td>Note</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>" + $("#note-des").val() + "</td></tr>";
         $("#tbd").append(htmlStr);
         $("#note-des").val("");
+        $(".hidden-note").hide("slow");
+    })
+    $(".docFile").change(function () {
+        var user = $("#usename").val();
+        var currentdate = new Date();
+        var htmlStr = "<tr><td>File</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>File Added</td></tr>";
+        $("#tbd").append(htmlStr);
         $(".hidden-note").hide("slow");
     })
     $(".add-line").click(function () {
