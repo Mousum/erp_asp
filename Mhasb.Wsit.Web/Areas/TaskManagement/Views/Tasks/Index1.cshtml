@@ -271,6 +271,13 @@
                                     success: function (data) {
                                         $("#taskList").html(data);
                                         $("#alert").empty();
+                                    },
+                                    complete: function () {
+                                        var task = $('#taskList tbody tr').length;
+                                        if (task) {
+                                            $(".task").html(task);
+                                        }
+
                                     }
                                 });
                             }, 3000);
