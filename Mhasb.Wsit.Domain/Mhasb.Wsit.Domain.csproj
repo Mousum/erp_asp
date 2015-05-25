@@ -50,6 +50,7 @@
     <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
     <Compile Include="Accounts\ChartOfAccount.cs" />
+    <Compile Include="Organizations\ShareTransfer.cs" />
     <Compile Include="OrgSettings\Currency.cs" />
     <Compile Include="Commons\Industry.cs" />
     <Compile Include="Commons\Language.cs" />
