@@ -476,6 +476,7 @@
     <Content Include="Areas\OrganizationManagement\Views\Founders\ShareTransfer.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\RepeatingJournal.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\_mailBody.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
