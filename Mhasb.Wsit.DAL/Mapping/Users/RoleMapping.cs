@@ -15,11 +15,17 @@ namespace Mhasb.DAL.Mapping.Users
             //key
             this.HasKey(r => r.Id);
             this.Ignore(r => r.State);
-
+            this.Property(r => r.CompanyId).HasColumnName("ccompanyid");
             this.Property(r => r.RoleName).HasMaxLength(100).HasColumnName("role_name");
             this.Property(r => r.Remarks).HasMaxLength(100).HasColumnName("remarks");
 
             this.ToTable("sec.roles");
+
+            // relationship
+            this.HasRequired(r=>r.Companies)
+                .WithMany(r=>r.Roles)
+                .HasForeignKey(r=>r.CompanyId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
