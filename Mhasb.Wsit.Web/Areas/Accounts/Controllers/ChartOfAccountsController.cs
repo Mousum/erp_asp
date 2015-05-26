@@ -8,11 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using Mhasb.Services.Commons;
 using Mhasb.Wsit.Web.Utilities;
+using Mhasb.Wsit.Web.Controllers;
 
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
-    public class ChartOfAccountsController : Controller
+    public class ChartOfAccountsController : BaseController
     {
         private IChartOfAccountService cSer = new ChartOfAccountService();
         private IUserService uService = new UserService();
@@ -27,6 +28,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult Create() 
         {
+
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
             var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);

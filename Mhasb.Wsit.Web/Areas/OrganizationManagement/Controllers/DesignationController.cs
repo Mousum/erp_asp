@@ -1,5 +1,6 @@
 ﻿using Mhasb.Domain.Organizations;
 using Mhasb.Services.Organizations;
+using Mhasb.Wsit.Web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class DesignationController : Controller
+    public class DesignationController : BaseController
     {
         private readonly IDesignation iDesignation = new DesignationService();
         //

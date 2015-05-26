@@ -10,11 +10,12 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using Mhasb.Wsit.Web.Controllers;
 
 
 namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
 {
-    public class TasksController : Controller
+    public class TasksController : BaseController
     {
         private readonly ITaskManagerService itService = new TaskManagerService();
         private readonly IProjectService pService = new ProjectService();

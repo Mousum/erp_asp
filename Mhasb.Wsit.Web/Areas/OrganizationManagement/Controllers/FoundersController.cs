@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class FoundersController : Controller
+    public class FoundersController : BaseController
     {
         private readonly IFounder fService = new FounderService();
         private readonly ICountryService iCountry = new CountryService();

@@ -7,7 +7,14 @@
 
 <h2>update</h2>
 
-
+@if (TempData["SucMasg"] != null)
+{
+    <div class="alert alert-success">@TempData["SucMasg"]</div>
+}
+@if (TempData["errMsg"] != null)
+{
+    <div class="alert alert-danger">@TempData["errMsg"]</div>
+}
 @using (Html.BeginForm("Update", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mhasb.Wsit.Web.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
         //
         // GET: /OrganizationManagement/Employee/

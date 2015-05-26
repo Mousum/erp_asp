@@ -15,5 +15,6 @@ namespace Mhasb.Services.Users
         UserInRole GetSingleUserInRole(int userInRoleId);
         List<UserInRole> GetAllUserInRole();
         List<UserInRole> GetRoleListByUser(long Id);
+        List<UserInRole> GetRoleListByUserAndCompany(long userId, int companyId);
     }
 }

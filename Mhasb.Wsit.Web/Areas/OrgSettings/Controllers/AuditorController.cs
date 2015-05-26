@@ -2,6 +2,7 @@
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Controllers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class AuditorController : Controller
+    public class AuditorController : BaseController
     {
         private readonly IDesignation dService = new DesignationService();
         private readonly IEmployeeService eService = new EmployeeService();

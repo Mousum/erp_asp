@@ -64,7 +64,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             
         }
         [HttpPost]
-        public ActionResult Registraion(Company company)
+        public ActionResult Registration(Company company)
         {
             
             HttpPostedFileBase logo = Request.Files["logoImage"];
@@ -212,7 +212,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 else
                 {
                     System.IO.File.Move( tempPath + logoName, logoLocation + logoName);
-                    return Content("Problem in logo Replacing");
+                    TempData.Add("errMsg", "Problem in logo Replacing");
+                    return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
+                   // return Content("Problem in logo Replacing");
                 }
             }
 
@@ -243,7 +245,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 else
                 {
                     System.IO.File.Move(tempPath + sealName, sealLocation + sealName);
-                    return Content("Problem in Seal Replacing");
+                     TempData.Add("errMsg", "Problem in logo Replacing");
+                    return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
+                   // return Content("Problem in Seal Replacing");
                 }
             }
 
@@ -277,7 +281,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                 }
                 else
-                    msg = "Registration Failed";
+                    msg = "Update Failed";
 
             }
             catch (Exception)
@@ -285,8 +289,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 msg = "Failed";
             }
 
-            ViewBag.msg = msg;
-
+          //  ViewBag.msg = msg;
+            TempData.Add("SucMasg",msg);
             return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
 
@@ -427,7 +431,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                     else
                     {
-                        return Content("Photo Upload Unsuccessfull!!!...");
+                        TempData.Add("SucMasg", "Photo Upload Unsuccessfull!!!...");
+                        return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                       // return Content("Photo Upload Unsuccessfull!!!...");
                     }
 
 
@@ -448,18 +454,25 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                     catch (Exception ex)
                     {
-                        return Content("One or more Contact Field Updating Unsuccessfull!!!!");
+
+                        TempData.Add("errMsg", "One or more Contact Field Updating Unsuccessfull");
+                        return RedirectToAction("AddProfile", "Company", new { Area = "OrganizationManagement" });
+                       // return Content("One or more Contact Field Updating Unsuccessfull!!!!");
                     }
 
                 }
                 else
                 {
-                    return Content("Profile Updating cannot done successfully!!!!");
+                    TempData.Add("errMsg", "Profile Updating cannot done successfully");
+                    return RedirectToAction("AddProfile", "Company", new { Area = "OrganizationManagement" });
+                 //   return Content("Profile Updating cannot done successfully!!!!");
                 }
             }
             catch (Exception ex)
             {
-                return Content("Failed");
+                TempData.Add("errMsg", "Profile Updating cannot done successfully");
+                return RedirectToAction("AddProfile", "Company", new { Area = "OrganizationManagement" });
+               // return Content("Failed");
             }
             return Content("Success");
         }

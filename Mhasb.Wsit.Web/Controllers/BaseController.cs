@@ -42,18 +42,33 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-            //if (action == "MyMhasb" || action == "Logout" || action == "MyMhasb" || action == "MyMhasb" || action == "MyMhasb")
+            if (action == "Registration" && controller == "Company")
+                return;
 
 
             actionList = actionService.GetActionListByActionList(actionList);
 
+            IUserInRoleService userInRoleService = new UserInRoleService();
+            IUserService userService = new UserService();
+            ISettingsService setService = new SettingsService();
+            IRoleVsActionService rvaService = new RoleVsActionService();
 
+            var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var myCompany = setService.GetAllByUserId(user.Id).Companies.Id;
+            var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
+            foreach (var role in roleList)
+            {
+                var accessableActionList = rvaService.GetActionByRoleID(role.RoleId);
+                foreach (var accessableAction in accessableActionList)
+                {
+                    if (accessableAction.ActionId == actionList.Id)
+                        return;
+                }
 
-            
+            }
 
-
-
-
+            filterContext.Result = new RedirectResult("~/Home/AccessDenied");
+            return;
 
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
@@ -75,6 +90,6 @@ namespace Mhasb.Wsit.Web.Controllers
                 CustomPrincipal.Login(ticket.UserData);
             }
         }
-       
-	}
+
+    }
 }
