@@ -22,9 +22,16 @@ namespace Mhasb.DAL.Mapping.Notifications
             this.Property(i => i.Email).HasMaxLength(100).HasColumnName("email");
             this.Property(i => i.EmployeeType).HasColumnName("employee_type");
             this.Property(i => i.RoleId).HasColumnName("roleid");
+            this.Property(d => d.DesignationId).HasColumnName("designationid");
             this.Property(i => i.Status).HasColumnName("status");
 
             this.ToTable("nts.invitations");
+
+            // relationship
+            this.HasRequired(d=>d.Designations)
+                .WithMany()
+                .HasForeignKey(d=>d.DesignationId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

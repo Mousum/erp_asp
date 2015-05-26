@@ -18,6 +18,23 @@ namespace Mhasb.Wsit.Web.Controllers
         {
             base.OnActionExecuted(filterContext);
 
+        }
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+            var ctx = HttpContext.User.Identity.Name;
+
+            // check if session is supported
+
+
+            if (ctx == null || ctx == "")
+            {
+                // check if a new session id was generated
+                filterContext.Result = new RedirectResult("~/");
+                return;
+            }
+
+
             IActionListService actionService = new ActionListService();
             
 
@@ -37,21 +54,9 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-        }
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            base.OnActionExecuting(filterContext);
-            //var ctx = HttpContext.User.Identity.Name;
-
-            //// check if session is supported
 
 
-            //if (ctx == null || ctx =="")
-            //{
-            //    // check if a new session id was generated
-            //    filterContext.Result = new RedirectResult("~/");
-            //    return;
-            //}
+
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
