@@ -271,6 +271,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\client.jpg" />
+    <Content Include="img\dyn-logo.png" />
     <Content Include="img\favicon.ico" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\logo.png" />
@@ -587,6 +588,7 @@
     <Content Include="Views\Home\Clients.cshtml" />
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
