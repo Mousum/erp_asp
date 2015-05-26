@@ -2,6 +2,14 @@
 <div class="container my-dashboard">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
             @using (Html.BeginForm("CreditVoucher", "Voucher", FormMethod.Post, new { id = "form-id", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()

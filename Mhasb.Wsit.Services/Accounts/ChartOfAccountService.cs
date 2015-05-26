@@ -185,5 +185,10 @@ namespace Mhasb.Services.Accounts
            return tvList;
 
        }
+
+       public List<ChartOfAccount> GetBaseAccountTypes()
+       {
+           return null;
+       }
     }
 }
