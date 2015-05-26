@@ -5,10 +5,11 @@ using Mhasb.Domain.OrgSettings;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Controllers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class FinalcialSettingController : Controller
+    public class FinalcialSettingController : BaseController
     {
         private readonly ICompanyService iCompany = new CompanyService();
         private readonly ICurrency cService = new CurrencyService();

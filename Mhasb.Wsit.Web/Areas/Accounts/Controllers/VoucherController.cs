@@ -13,10 +13,11 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using PagedList;
+using Mhasb.Wsit.Web.Controllers;
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
-    public class VoucherController : Controller
+    public class VoucherController : BaseController
     {
         private readonly ICurrency cService = new CurrencyService();
         private readonly IVoucherService vService = new VoucherService();
