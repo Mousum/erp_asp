@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Mhasb.Services.Accounts;
+using Mhasb.Services.Organizations;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -52,9 +53,20 @@ namespace Mhasb.Wsit.Web.Controllers
             IUserService userService = new UserService();
             ISettingsService setService = new SettingsService();
             IRoleVsActionService rvaService = new RoleVsActionService();
+            ICompanyService cService = new CompanyService();
 
             var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            if (user == null)
+            {
+                filterContext.Result = new RedirectResult("~/");
+                return;
+            }
             var myCompany = setService.GetAllByUserId(user.Id).Companies.Id;
+            var ActivatedCompany = cService.GetSingleCompany(myCompany);
+
+            if (ActivatedCompany.Users.Id == user.Id)
+                return;
+
             var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
             foreach (var role in roleList)
             {
