@@ -27,6 +27,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult Create() 
         {
+
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
             var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);

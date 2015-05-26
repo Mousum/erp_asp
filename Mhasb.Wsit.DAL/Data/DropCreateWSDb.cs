@@ -8,6 +8,10 @@ namespace Mhasb.Wsit.DAL.Data
 {
     class DropCreateWSDb : CreateDatabaseIfNotExists<WsDbContext>
     {
+        public DropCreateWSDb()
+        {
+            
+        }
         protected override void Seed(WsDbContext context)
         {
             try
@@ -38,8 +42,9 @@ namespace Mhasb.Wsit.DAL.Data
                     context.Set<ChartOfAccount>().Add(coa);
                 }
 
-               // base.Seed(context);
-                context.ApplyStateChanges();
+
+
+                base.Seed(context);
                 context.SaveChanges();
             }
             catch (Exception ee)
