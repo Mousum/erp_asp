@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 {
     public class InvitationsController : Controller
@@ -60,26 +61,61 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             invitation.Status = StatusEnum.test1;
             if (inService.CreateInvitation(invitation))
             {
+                //Create the key email objects
+                MailMessage myemail = new MailMessage(); //Create message object
+                SmtpClient mysmtpserver = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("sumon20@gmail.com", "638848")
+            };; //Set mail server
 
-                string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
-                string msg = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Hello There"
-                                            + ", </p><p>To verify your account, please click the following link:</p>"
-                                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host
+                //Set mail recipients
+                myemail.To.Add(invitation.Email);
+             //   myemail.To.Add("user2@example.com");
+
+                //Set email properties
+                myemail.From = new MailAddress("sumon20@gmail.com", "HHASB ERP");
+               
+                myemail.Subject = "This is the Email Subject";
+                string host = Url.Content(HttpContext.Request.Url.Host + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+            //    string host = Url.Content("http://localhost:2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+                myemail.Body = "<p>Hello There"
+                    + ", </p><p>To verify your account, please click the following link:</p>"
+                                            + "<p><a href='"+host+"' target='_blank'> Click"
                                             + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
-                                            + "this email. The verify link is private.</p></body></html>";
-                msg = HttpUtility.HtmlEncode(msg);
+                                            + "<b>this email. The verify link is private.</b></p>";
+                myemail.IsBodyHtml = true; //Send this as plain-text
+
+               
+
+                //Send the email
+                mysmtpserver.Send(myemail);
+
+                //string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
+
+
+                //string msg = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Hello There"
+                //                            + ", </p><p>To verify your account, please click the following link:</p>"
+                //                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host
+                //                            + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
+                //                            + "this email. The verify link is private.</p></body></html>";
+                //msg = HttpUtility.HtmlEncode(msg);
 
 
 
-                string to = invitation.Email;
-                string subject = "Invitation From MHASB Erp";
-                string body = msg;
-                sendMail(to, subject, body);
+                //string to = invitation.Email;
+                //string subject = "Invitation From MHASB Erp";
+                //string body = msg;
+                //sendMail(to, subject, body);
 
             }
             return RedirectToAction("Index");
         }
-
+        
 
         public ActionResult InvitationConfirm(int id, string token)
         {
@@ -233,7 +269,8 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             {
                 Subject = subject,
                 Body = body,
-                IsBodyHtml = true
+                IsBodyHtml = true,
+               
             })
             {
                 smtp.Send(message);
