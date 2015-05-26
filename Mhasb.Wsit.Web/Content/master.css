@@ -2548,3 +2548,35 @@ label.cstm-select:before {
     float: left !important;
    
 }
+/*Author: Rafi , Date: 26.05.2015 , 404 error*/
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.error-actions {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.error-actions .btn { 
+    margin-right:10px; 
+}
+/*Author: Rafi , Date: 26.05.2015 , 404 error*/
+
+.dyn-menu{
+    display: block;
+}
+.cstm-logo{
+    float: left;
+}
+.cstm-logo img{
+    float: left;
+}
+.cstm-logo a{
+    min-width: 300px;
+}
+.cstm-logo a p{
+    font-size: 28px;
+    font-family: 'Oswald', sans-serif !important;
+    font-weight: bold;
+	margin-top: 12px;
+}
