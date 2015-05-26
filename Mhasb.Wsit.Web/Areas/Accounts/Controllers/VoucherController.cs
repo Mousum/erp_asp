@@ -45,7 +45,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
-              //  return Content("Please add company financial settings ");
+                //  return Content("Please add company financial settings ");
                 TempData.Add("errMsg", "Please add company financial settings ");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
@@ -95,8 +95,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             else
             {
                 TempData.Add("errMsg", "User must be a employee for this Transaction.");
-                return RedirectToAction("NewJournal", "Voucher", new { area ="Accounts"}); 
-             //   return Content("User must be a employee for this Transaction.");
+                return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
+                //   return Content("User must be a employee for this Transaction.");
             }
 
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -125,13 +125,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
                             //return Content("One or more Voucher details could not added Successfully");
                         }
-                            
+
                     }
                     catch (Exception)
                     {
                         TempData.Add("errMsg", "Voucher Details problem");
                         return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
-                      //  return Content("Voucher Details problem");
+                        //  return Content("Voucher Details problem");
                     }
                 }
                 string data = Request.Form["note_data"];
@@ -152,30 +152,30 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         vDocSar.AddDocument(VDoc);
                     }
                 }
-               
-                    string documentName;
-                    string documentLocation;
-                    for (int i = 0; i < Request.Files.Count; i++)
-                    {
-                        if ("documentLocation[]" == Request.Files.GetKey(i))
-                        {
-                            documentName = "Document_" + voucher.Id+"_"+i+ Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                            documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
-                            if (fileUpload(Request.Files[i], documentName, documentLocation))
-                            {
-                                VoucherDocument VDoc = new VoucherDocument();
-                                VDoc.CreatedDate = DateTime.Now;
-                                VDoc.DocumentType = "File";
-                                VDoc.EmployeeId = voucher.EmployeeId;
-                                VDoc.VoucherId = voucher.Id;
-                                VDoc.FileLocation = documentLocation + "/" + documentName;
-                                vDocSar.AddDocument(VDoc);
-                            }
-                        }
 
+                string documentName;
+                string documentLocation;
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    if ("documentLocation[]" == Request.Files.GetKey(i))
+                    {
+                        documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        if (fileUpload(Request.Files[i], documentName, documentLocation))
+                        {
+                            VoucherDocument VDoc = new VoucherDocument();
+                            VDoc.CreatedDate = DateTime.Now;
+                            VDoc.DocumentType = "File";
+                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.VoucherId = voucher.Id;
+                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            vDocSar.AddDocument(VDoc);
+                        }
                     }
-                
-               
+
+                }
+
+
 
 
 
@@ -185,7 +185,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 TempData.Add("errMsg", "Failed To Add Voucher.");
                 return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
-               // return Content("Failed To Add Voucher!!!!");
+                // return Content("Failed To Add Voucher!!!!");
             }
 
 
@@ -290,7 +290,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 TempData.Add("errMsg", "User must be a employee for this Transaction.");
                 return RedirectToAction("DebitVoucher", "Voucher", new { area = "Accounts" });
-             //   return Content("User must be a employee for this Transaction.");
+                //   return Content("User must be a employee for this Transaction.");
             }
 
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -313,16 +313,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail)) 
+                        if (!vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("DebitVoucher", "Voucher", new { area = "Accounts" });
                         }
-                            //return Content("One or more Voucher details could not added Successfully");
+                        //return Content("One or more Voucher details could not added Successfully");
                     }
                     catch (Exception)
                     {
-                       // return Content("Voucher Details problem");
+                        // return Content("Voucher Details problem");
                         TempData.Add("errMsg", "Voucher Details problem");
                         return RedirectToAction("DebitVoucher", "Voucher", new { area = "Accounts" });
                     }
@@ -433,7 +433,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             else
             {
-                return Content("User must be a employee for this Transaction.");
+                TempData.Add("errMsg", "User must be a employee for this Transaction.");
+                return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
+                //return Content("User must be a employee for this Transaction.");
             }
 
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -457,11 +459,17 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     try
                     {
                         if (!vdService.CreateVoucherDetail(voucherDetail))
-                            return Content("One or more Voucher details could not added Successfully");
+                        {
+                            TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
+                            return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
+                        }
+                        // return Content("One or more Voucher details could not added Successfully");
                     }
                     catch (Exception)
                     {
-                        return Content("Voucher Details problem");
+                        TempData.Add("errMsg", "Voucher Details problem");
+                        return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
+                        // return Content("Voucher Details problem");
                     }
                     string data = Request.Form["note_data"];
 
@@ -508,11 +516,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             else
             {
-                return Content("Failed To Add Voucher!!!!");
+                TempData.Add("errMsg", "Failed To Add Voucher");
+                return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
+                // return Content("Failed To Add Voucher!!!!");
             }
 
 
-
+            TempData.Add("SucMasg", "Voucher Added Successfully");
             return RedirectToAction("ManualJournals");
         }
         // Account Voucher
@@ -569,7 +579,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             else
             {
-                return Content("User must be a employee for this Transaction.");
+                TempData.Add("errMsg", "User must be a employee for this Transaction.");
+                return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
+                // return Content("User must be a employee for this Transaction.");
             }
 
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -593,11 +605,17 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     try
                     {
                         if (!vdService.CreateVoucherDetail(voucherDetail))
-                            return Content("One or more Voucher details could not added Successfully");
+                        {
+                            TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
+                            return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
+                        }
+                        //  return Content("One or more Voucher details could not added Successfully");
                     }
                     catch (Exception)
                     {
-                        return Content("Voucher Details problem");
+                        TempData.Add("errMsg", "Voucher Details problem");
+                        return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
+                        // return Content("Voucher Details problem");
                     }
                 }
                 string data = Request.Form["note_data"];
@@ -644,10 +662,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             else
             {
-                return Content("Failed To Add Voucher!!!!");
+                TempData.Add("errMsg", "Failed To Add Voucher");
+                return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
+                //  return Content("Failed To Add Voucher!!!!");
             }
 
-
+            TempData.Add("SucMasg", "Voucher Added Successfully");
             return RedirectToAction("ManualJournals");
         }
         //Repeating Journal
@@ -703,7 +723,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             else
             {
-                return Content("User must be a employee for this Transaction.");
+                TempData.Add("errMsg", "User must be a employee for this Transaction.");
+                return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
+                //return Content("User must be a employee for this Transaction.");
             }
 
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -717,7 +739,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 voucher.Posted = 0;
             }
-            voucher.BillNo = Request.Form["billnop1"] +" "+Request.Form["billnop2"]; //I have no Idea why??
+            voucher.BillNo = Request.Form["billnop1"] + " " + Request.Form["billnop2"]; //I have no Idea why??
             if (vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
@@ -728,11 +750,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     try
                     {
                         if (!vdService.CreateVoucherDetail(voucherDetail))
-                            return Content("One or more Voucher details could not added Successfully");
+                        {
+                            TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
+                            return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
+
+                        }
+                          //  return Content("One or more Voucher details could not added Successfully");
                     }
                     catch (Exception)
                     {
-                        return Content("Voucher Details problem");
+                        TempData.Add("errMsg", "Voucher Details problem");
+                        return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
+                        //return Content("Voucher Details problem");
                     }
                 }
                 string data = Request.Form["note_data"];
@@ -779,10 +808,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             else
             {
-                return Content("Failed To Add Voucher!!!!");
+                TempData.Add("errMsg", "Failed To Add Voucher");
+                return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
+                //return Content("Failed To Add Voucher!!!!");
             }
 
-
+            TempData.Add("SucMasg", "Voucher Added Successfully");
             return RedirectToAction("ManualJournals");
         }
         public ActionResult ManualJournals(string sortOrder, string currentFilter, string searchString, int? page)
