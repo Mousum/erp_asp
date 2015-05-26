@@ -12,11 +12,12 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using Mhasb.Wsit.Web.Controllers;
 
 
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 {
-    public class InvitationsController : Controller
+    public class InvitationsController : BaseController
     {
         private IInvitationService inService = new InvitationService();
         private readonly ICompanyService iCompany = new CompanyService();

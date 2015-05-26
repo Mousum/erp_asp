@@ -8,10 +8,11 @@ using System.Web.Mvc;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.CustomModel.Accounts;
+using Mhasb.Wsit.Web.Controllers;
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
-    public class VoucherTypeController : Controller
+    public class VoucherTypeController : BaseController
     {
         private readonly IVoucherType vtService = new VoucherTypeService();
 

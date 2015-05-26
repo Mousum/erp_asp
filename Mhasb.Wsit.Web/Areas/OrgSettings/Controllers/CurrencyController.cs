@@ -55,16 +55,26 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public String Delete(int id)
         {
-            
-            if (cService.DeleteCurrency(id))
-                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
-            else
+            try
             {
-                ModelState.AddModelError("msg", "Currency did not updated successfully");
-                return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+                cService.DeleteCurrency(id);
+                return "Success";
+                // return RedirectToAction("Index");
             }
+            catch
+            {
+                return "Failed";
+            }
+            
+            //if (cService.DeleteCurrency(id))
+            //    return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            //else
+            //{
+            //    ModelState.AddModelError("msg", "Currency did not updated successfully");
+            //    return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
+            //}
         }
 
 	

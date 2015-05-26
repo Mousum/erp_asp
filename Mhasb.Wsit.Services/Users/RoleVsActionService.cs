@@ -126,35 +126,40 @@ namespace Mhasb.Services.Users
             {
                 var roleactionList = rVcRep.GetOperation()
                     .Include(r => r.Roles)
-                    .Filter(r => r.RoleId == roleId)
+                    .Include(r=>r.ActionLists)
+                    .Filter(r => r.RoleId == roleId && r.IsActive==true)
                     .Get().ToList();
-                var actionList = acRep.GetOperation().Get().ToList();
-
-                var alData = from al in actionList
-                             join ra in roleactionList
-                                on al.Id equals ra.ActionId into ar_al
-                             from r_a in ar_al.DefaultIfEmpty(new RoleVsAction())
-                             //.Where(a => a.ActionId == al.Id)
-                             //.DefaultIfEmpty()
+                return roleactionList;
 
 
-                             select new RoleVsAction
-                             {
-                                 ActionId = al.Id,
-                                 RoleId = r_a.RoleId,
-                                 ActionLists = new ActionList { Id = al.Id, ActionName = al.ActionName, ControllerName = al.ControllerName, ModuleName = al.ModuleName },
-                                 //ActionId=ra.ActionId,
-                                 //Name = al.ActionName,
-                                 IsActive = r_a.IsActive
-                             };
 
-                //rVcRep.GetOperation()
-                //.Include(c => c.ActionId)
-                //.Include(c => c.RoleId)
-                //.Filter(c => c.RoleId == roleId).Get().ToList();
+                //var actionList = acRep.GetOperation().Get().ToList();
 
-                // var tt = alData.ToList();
-                return alData.ToList();
+                //var alData = from al in actionList
+                //             join ra in roleactionList
+                //                on al.Id equals ra.ActionId into ar_al
+                //             from r_a in ar_al.DefaultIfEmpty(new RoleVsAction())
+                //             //.Where(a => a.ActionId == al.Id)
+                //             //.DefaultIfEmpty()
+
+
+                //             select new RoleVsAction
+                //             {
+                //                 ActionId = al.Id,
+                //                 RoleId = r_a.RoleId,
+                //                 ActionLists = new ActionList { Id = al.Id, ActionName = al.ActionName, ControllerName = al.ControllerName, ModuleName = al.ModuleName },
+                //                 //ActionId=ra.ActionId,
+                //                 //Name = al.ActionName,
+                //                 IsActive = r_a.IsActive
+                //             };
+
+                ////rVcRep.GetOperation()
+                ////.Include(c => c.ActionId)
+                ////.Include(c => c.RoleId)
+                ////.Filter(c => c.RoleId == roleId).Get().ToList();
+
+                //// var tt = alData.ToList();
+                //return alData.ToList();
             }
             catch (Exception ex)
             {

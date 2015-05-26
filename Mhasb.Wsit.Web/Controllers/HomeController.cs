@@ -39,7 +39,7 @@ namespace Mhasb.Wsit.Web.Controllers
         }
         public ActionResult AccessDenied() {
             var tt = HttpContext.User.Identity.Name;
-            ViewData["message"] = "404 PAGE NOT FOUND";
+            ViewData["message"] = "Permission Denied!!!!! You do not have permission to access this page";
             ViewData["Session"]=tt;
             return View();
         }

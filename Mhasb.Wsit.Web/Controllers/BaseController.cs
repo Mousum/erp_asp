@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Mhasb.Services.Accounts;
+using Mhasb.Services.Organizations;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -42,18 +43,44 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-            //if (action == "MyMhasb" || action == "Logout" || action == "MyMhasb" || action == "MyMhasb" || action == "MyMhasb")
+            if (action == "Registration" && controller == "Company")
+                return;
 
 
             actionList = actionService.GetActionListByActionList(actionList);
 
+            IUserInRoleService userInRoleService = new UserInRoleService();
+            IUserService userService = new UserService();
+            ISettingsService setService = new SettingsService();
+            IRoleVsActionService rvaService = new RoleVsActionService();
+            ICompanyService cService = new CompanyService();
 
+            var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            if (user == null)
+            {
+                filterContext.Result = new RedirectResult("~/");
+                return;
+            }
+            var myCompany = setService.GetAllByUserId(user.Id).Companies.Id;
+            var ActivatedCompany = cService.GetSingleCompany(myCompany);
 
-            
+            if (ActivatedCompany.Users.Id == user.Id)
+                return;
 
+            var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
+            foreach (var role in roleList)
+            {
+                var accessableActionList = rvaService.GetActionByRoleID(role.RoleId);
+                foreach (var accessableAction in accessableActionList)
+                {
+                    if (accessableAction.ActionId == actionList.Id)
+                        return;
+                }
 
+            }
 
-
+            filterContext.Result = new RedirectResult("~/Home/AccessDenied");
+            return;
 
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
@@ -75,6 +102,6 @@ namespace Mhasb.Wsit.Web.Controllers
                 CustomPrincipal.Login(ticket.UserData);
             }
         }
-       
-	}
+
+    }
 }

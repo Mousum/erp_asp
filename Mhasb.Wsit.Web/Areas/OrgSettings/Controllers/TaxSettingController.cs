@@ -4,10 +4,11 @@ using System.Web.Mvc;
 using Mhasb.Domain.OrgSettings;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.Web.Controllers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class TaxSettingController : Controller
+    public class TaxSettingController : BaseController
     {
         private readonly ITaxSetting _taxSettingService=new TaxSettingService();
         private readonly IUserService uService = new UserService();
