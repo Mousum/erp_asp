@@ -95,7 +95,39 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         inService.AcceptInvitation(Invitation);
                         ViewBag.Company = Invitation.CompanyId;
                         ViewBag.email = Invitation.Email;
-                        return View("InvitationConfirm");
+                        var user = uService.GetSingleUserByEmail(Invitation.Email);
+                        if (user == null)
+                        {
+                            return View("InvitationConfirm");
+                        }
+                        else 
+                        {
+                            var emp = new Employee();
+                            emp.UserId = user.Id;
+                            emp.CompanyId = Invitation.CompanyId;
+
+                            // get designation 
+                            var degObj = degRep.GetDesignations().FirstOrDefault();
+                            // if designation not exist then insert data into designation table
+                            if (degObj == null)
+                            {
+                                var designation = new Designation { DesignationName = "Employee Type" };
+                                degRep.AddDesignation(designation);
+
+                                degObj = degRep.GetDesignations().FirstOrDefault();
+                            }
+                            emp.DesignationId = degObj.Id;
+                            if (eService.CreateEmployee(emp))
+                            {
+                                Session.Add("msg", "You have to login first");
+                                return Redirect(Url.Content("~/"));
+                            }
+                            else 
+                            {
+                                return Content("Employee Profile couldn't be completed");
+                            }
+                        }
+                        
                     }
                     else
                     {

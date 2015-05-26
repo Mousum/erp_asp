@@ -77,6 +77,22 @@
             var controllerName = $("#controllers").val();
             var data = { RoleId: roleId, moduleName: moduleName, controllerName: controllerName }
             AjaxCall(data);
+            var baseUrl = '@Url.Content("~/")';
+            $("#controllers").attr("disabled", true);
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "UserManagement/RoleVsActions/GetControllerList",
+                data: { moduleName: moduleName },
+                datatype: "Json",
+                success: function (data) {
+                    var htmlStr = '<option value ="">--Select Submodule--</option>';
+                    $.each(data.cl, function () {
+                        htmlStr += '<option value ="' + this.ControllerName + '">' + this.ControllerName + '</option>';
+                    });
+                    $("#controllers").attr("disabled",false);
+                    $("#controllers").html(htmlStr);
+                }
+            });
         });
         $("#controllers").change(function () {
             var moduleName = $("#modules").val();
