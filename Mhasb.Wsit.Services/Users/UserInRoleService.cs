@@ -152,6 +152,47 @@ namespace Mhasb.Services.Users
                 return null;
             }
         }
+
+        public List<UserInRole> GetRoleListByUserAndCompany(long userId, int companyId)
+        {
+            try
+            {
+                var roleList = roleRep.GetOperation()
+                    .Get().ToList();
+                var urList = userInRoleRep.GetOperation()
+                                               .Include(u => u.Employees.Users)
+                                               .Include(u => u.Roles)
+                                               .Filter(u => u.Employees.Users.Id == userId)
+                                               .Filter(c=>c.Roles.CompanyId==companyId)
+                                               .Get()
+                                               .ToList();
+
+                var alData = from rl in roleList
+                             join ur in urList
+                                on rl.Id equals ur.RoleId into ar_al
+                             from r_a in ar_al.DefaultIfEmpty(new UserInRole())
+                             //.Where(a => a.ActionId == al.Id)
+                             //.DefaultIfEmpty()
+
+
+                             select new UserInRole
+                             {
+                                 Id = r_a.Id,
+                                 RoleId = rl.Id,
+                                 Roles = new Role { Id = rl.Id, RoleName = rl.RoleName },
+                                 //ActionId=ra.ActionId,
+                                 //Name = al.ActionName,
+                                 IsActive = r_a.IsActive
+                             };
+
+                return alData.ToList();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
        
 
     }
