@@ -142,7 +142,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                     else
                     {
-                        return Content("Photo Upload Unsuccessfull!!!...");
+                        TempData.Add("errMsg", "Photo Upload Unsuccessfull");
+                        return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                      //  return Content("Photo Upload Unsuccessfull!!!...");
                     }
                     
                     
@@ -163,22 +165,29 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     }
                     catch (Exception ex)
                     {
-                        return Content("One or more Contact Field Updating Unsuccessfull!!!!");
+                        TempData.Add("errMsg", "One or more Contact Field Updating Unsuccessfull");
+                        return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                       // return Content("One or more Contact Field Updating Unsuccessfull!!!!");
                     }
                     
                 }
                 else
                 {
-                    return Content("Profile Updating cannot done successfully!!!!");
+                    TempData.Add("errMsg", "Profile Updating cannot done successfully");
+                    return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                  //  return Content("Profile Updating cannot done successfully!!!!");
                 }
             }
             catch (Exception ex)
             {
-                return Content("Failed");
+                TempData.Add("errMsg", "Failed");
+                return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                //return Content("Failed");
             }
 
-           
-            return Content("Success");
+            TempData.Add("SucMasg", "Success");
+            return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+            //return Content("Success");
             //return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
 
