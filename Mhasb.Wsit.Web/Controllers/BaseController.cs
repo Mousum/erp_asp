@@ -47,13 +47,14 @@ namespace Mhasb.Wsit.Web.Controllers
 
             actionList = actionService.GetActionListByActionList(actionList);
 
-
-
-            
-
-
-
-
+            IUserInRoleService userInRoleService = new UserInRoleService();
+            IUserService userService = new UserService();
+            var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var roleList = userInRoleService.GetRoleListByUser(user.Id);
+            foreach (var role in roleList)
+            {
+                //if()
+            }
 
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
