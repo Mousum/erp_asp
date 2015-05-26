@@ -37,6 +37,12 @@ namespace Mhasb.Wsit.Web.Controllers
         {
             return View();
         }
+        public ActionResult AccessDenied() {
+            var tt = HttpContext.User.Identity.Name;
+            ViewData["message"] = "404 PAGE NOT FOUND";
+            ViewData["Session"]=tt;
+            return View();
+        }
        
     }
 }

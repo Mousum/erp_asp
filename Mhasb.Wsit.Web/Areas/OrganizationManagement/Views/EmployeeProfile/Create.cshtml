@@ -5,7 +5,14 @@
     @Html.AntiForgeryToken()
 
 
-
+    @if (TempData["SucMasg"] != null)
+    {
+        <div class="alert alert-success">@TempData["SucMasg"]</div>
+    }
+    @if (TempData["errMsg"] != null)
+    {
+        <div class="alert alert-danger">@TempData["errMsg"]</div>
+    }
 
     <div class="container">
         <div class="row clearfix">

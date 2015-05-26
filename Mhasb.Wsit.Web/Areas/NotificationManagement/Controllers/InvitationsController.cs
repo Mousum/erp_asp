@@ -25,6 +25,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IRoleService rService = new RoleService();
         private readonly ISettingsService sService = new SettingsService();
         private IDesignation degRep = new DesignationService();
+
         public ActionResult Index()
         {
             var model = inService.GetAllInvitation();
@@ -33,7 +34,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
         public ActionResult Create()
         {
-
+            var designations = degRep.GetDesignations();
             var roles = rService.GetAllRoles();
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             List<Company> myCompanyList = iCompany.GetAllCompanies()
@@ -42,6 +43,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                                     .Cast<EmpTypeEnum>()
                                     .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
                                     .ToList();
+            ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
             ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
             ViewBag.Companies = new SelectList(myCompanyList, "Id", "DisplayName");
             ViewBag.roles = new SelectList(roles, "Id", "RoleName");
@@ -71,26 +73,26 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential("sumon20@gmail.com", "638848")
-            };; //Set mail server
+            }; ; //Set mail server
 
                 //Set mail recipients
                 myemail.To.Add(invitation.Email);
-             //   myemail.To.Add("user2@example.com");
+                //   myemail.To.Add("user2@example.com");
 
                 //Set email properties
                 myemail.From = new MailAddress("sumon20@gmail.com", "HHASB ERP");
-               
+
                 myemail.Subject = "This is the Email Subject";
                 string host = Url.Content(HttpContext.Request.Url.Host + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
-            //    string host = Url.Content("http://localhost:2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+                //    string host = Url.Content("http://localhost:2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
                 myemail.Body = "<p>Hello There"
                     + ", </p><p>To verify your account, please click the following link:</p>"
-                                            + "<p><a href='"+host+"' target='_blank'> Click"
+                                            + "<p><a href='" + host + "' target='_blank'> Click"
                                             + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
                                             + "<b>this email. The verify link is private.</b></p>";
                 myemail.IsBodyHtml = true; //Send this as plain-text
 
-               
+
 
                 //Send the email
                 mysmtpserver.Send(myemail);
@@ -115,7 +117,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
 
         public ActionResult InvitationConfirm(int id, string token)
         {
@@ -136,34 +138,34 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         {
                             return View("InvitationConfirm");
                         }
-                        else 
+                        else
                         {
                             var emp = new Employee();
                             emp.UserId = user.Id;
                             emp.CompanyId = Invitation.CompanyId;
 
                             // get designation 
-                            var degObj = degRep.GetDesignations().FirstOrDefault();
-                            // if designation not exist then insert data into designation table
-                            if (degObj == null)
-                            {
-                                var designation = new Designation { DesignationName = "Employee Type" };
-                                degRep.AddDesignation(designation);
+                            //var degObj = degRep.GetDesignations().FirstOrDefault();
+                            //// if designation not exist then insert data into designation table
+                            //if (degObj == null)
+                            //{
+                            //    var designation = new Designation { DesignationName = "Employee Type" };
+                            //    degRep.AddDesignation(designation);
 
-                                degObj = degRep.GetDesignations().FirstOrDefault();
-                            }
-                            emp.DesignationId = degObj.Id;
+                            //    degObj = degRep.GetDesignations().FirstOrDefault();
+                            //}
+                            emp.DesignationId = Invitation.DesignationId;
                             if (eService.CreateEmployee(emp))
                             {
                                 Session.Add("msg", "You have to login first");
                                 return Redirect(Url.Content("~/"));
                             }
-                            else 
+                            else
                             {
                                 return Content("Employee Profile couldn't be completed");
                             }
                         }
-                        
+
                     }
                     else
                     {
@@ -200,19 +202,19 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         var emp = new Employee();
                         emp.UserId = user.Id;
                         emp.CompanyId = Invitation.CompanyId;
-                        
+
                         // get designation 
-                        var degObj = degRep.GetDesignations().FirstOrDefault();
-                        // if designation not exist then insert data into designation table
-                        if (degObj == null)
-                        {
-                            var designation = new Designation {DesignationName ="Employee Type"};
-                            degRep.AddDesignation(designation);
+                        //var degObj = degRep.GetDesignations().FirstOrDefault();
+                        //// if designation not exist then insert data into designation table
+                        //if (degObj == null)
+                        //{
+                        //    var designation = new Designation {DesignationName ="Employee Type"};
+                        //    degRep.AddDesignation(designation);
 
-                            degObj = degRep.GetDesignations().FirstOrDefault();
-                        }
-                        emp.DesignationId = degObj.Id;
-
+                        //    degObj = degRep.GetDesignations().FirstOrDefault();
+                        //}
+                        //emp.DesignationId = degObj.Id;
+                        emp.DesignationId = Invitation.DesignationId;
                         if (eService.CreateEmployee(emp))
                         {
                             var accountSetting = new Settings();
@@ -270,7 +272,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true,
-               
+
             })
             {
                 smtp.Send(message);

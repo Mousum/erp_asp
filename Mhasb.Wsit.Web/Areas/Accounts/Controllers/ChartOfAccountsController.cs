@@ -50,7 +50,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
             }
             else {
-                return Content("Failed");
+                TempData.Add("errMsg", "Chart Of Account Addtion Failed");
+                return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
             }
         }
         [HttpPost]
@@ -88,7 +89,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             else
             {
-                return Content("Failed");
+                TempData.Add("errMsg", "Chart Of Account Updated Sucessfully!");
+                return RedirectToAction("Edit", "ChartOfAccounts", new { id = ca.Id });
             }
         }
         [HttpPost]

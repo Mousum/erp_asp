@@ -271,6 +271,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\client.jpg" />
+    <Content Include="img\dyn-logo.png" />
     <Content Include="img\favicon.ico" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\logo.png" />
@@ -476,6 +477,7 @@
     <Content Include="Areas\OrganizationManagement\Views\Founders\ShareTransfer.cshtml" />
     <Content Include="Areas\Accounts\Views\Voucher\RepeatingJournal.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\_mailBody.cshtml" />
+    <Content Include="Areas\Accounts\Views\Voucher\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -586,6 +588,7 @@
     <Content Include="Views\Home\Clients.cshtml" />
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
