@@ -67,7 +67,7 @@ namespace Mhasb.Wsit.Web.Controllers
 
             }
 
-            filterContext.Result = new RedirectResult("~/");
+            filterContext.Result = new RedirectResult("~/Home/AccessDenied");
             return;
 
         }
