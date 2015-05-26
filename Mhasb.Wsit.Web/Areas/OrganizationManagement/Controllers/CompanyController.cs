@@ -64,7 +64,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             
         }
         [HttpPost]
-        public ActionResult Registraion(Company company)
+        public ActionResult Registration(Company company)
         {
             
             HttpPostedFileBase logo = Request.Files["logoImage"];
