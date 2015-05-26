@@ -10,7 +10,7 @@
             {
                 <div class="alert alert-danger">@TempData["errMsg"]</div>
             }
-            @using (Html.BeginForm("NewJournal", "Voucher", FormMethod.Post, new { id = "form-id", enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("RepeatingJournal", "Voucher", FormMethod.Post, new { id = "form-id", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="welcome">
@@ -26,11 +26,19 @@
                             <div class="col-md-8">
                                 <div class="row cstm-frm-row">
                                     <div class="col-md-2">
-                                        <label>Voucher No.</label>
+                                        <label>Repeat this journal every </label>
                                         @Html.HiddenFor(model => model.voucher.RefferenceNo, new { Value = ViewBag.RefferenceNo })
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="cstm-input" type="text" value="@ViewBag.RefferenceNo" readonly>
+                                        <input class="cstm-input" type="text" name="billnop1" style="width:20%">
+                                        <select class="cstm-input" name = "billnop2" style="width:70%">
+                                            <option value="">--Select--</option>
+                                            <option value="hour">Hour</option>
+                                            <option value="day">Day</option>
+                                            <option value="week">Week</option>
+                                            <option value="month">Month</option>
+                                            <option value="year">Year</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row cstm-frm-row">
@@ -47,13 +55,22 @@
                             <div class="col-md-4">
                                 <div class="row cstm-frm-row">
                                     <div class="col-md-5">
-                                        <label>Voucher Date:</label>
+                                        <label>First Journal Date:</label>
                                     </div>
                                     <div class="col-md-7">
                                         @Html.TextBoxFor(model => model.voucher.VoucherDate, new { @class = "cstm-input", id = "voucherdate" })
                                         @Html.ValidationMessageFor(model => model.voucher.VoucherDate)
                                     </div>
                                 </div>
+                                <div class="row cstm-frm-row">
+                                <div class="col-md-5">
+                                    <label>End Date(Optional)</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.voucher.BillDate, new { @class = "cstm-input", id = "enddate" })
+                                    @Html.ValidationMessageFor(model => model.voucher.VoucherDate)
+                                </div>
+                            </div>
                                 <div class="row cstm-frm-row">
                                     <div class="col-md-5">
                                         <label>Currency:</label>
@@ -185,7 +202,7 @@
         }
         else {
             $("#fileError").text("Select File For Previous field First").show("slow");
-            setTimeout(function () { $("#fileError").hide("slow")}, 5000);
+            setTimeout(function () { $("#fileError").hide("slow") }, 5000);
         }
 
     })
@@ -471,6 +488,9 @@
             });
 
             $('#voucherdate').datepicker({
+                format: 'dd/mm/yyyy'
+            });
+            $('#enddate').datepicker({
                 format: 'dd/mm/yyyy'
             });
 

@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 {
     public class InvitationsController : Controller
@@ -24,6 +25,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IRoleService rService = new RoleService();
         private readonly ISettingsService sService = new SettingsService();
         private IDesignation degRep = new DesignationService();
+
         public ActionResult Index()
         {
             var model = inService.GetAllInvitation();
@@ -32,7 +34,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
         public ActionResult Create()
         {
-
+            var designations = degRep.GetDesignations();
             var roles = rService.GetAllRoles();
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             List<Company> myCompanyList = iCompany.GetAllCompanies()
@@ -41,6 +43,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                                     .Cast<EmpTypeEnum>()
                                     .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
                                     .ToList();
+            ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
             ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
             ViewBag.Companies = new SelectList(myCompanyList, "Id", "DisplayName");
             ViewBag.roles = new SelectList(roles, "Id", "RoleName");
@@ -60,21 +63,56 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             invitation.Status = StatusEnum.test1;
             if (inService.CreateInvitation(invitation))
             {
+                //Create the key email objects
+                MailMessage myemail = new MailMessage(); //Create message object
+                SmtpClient mysmtpserver = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("sumon20@gmail.com", "638848")
+            }; ; //Set mail server
 
-                string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
-                string msg = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Hello There"
-                                            + ", </p><p>To verify your account, please click the following link:</p>"
-                                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host
+                //Set mail recipients
+                myemail.To.Add(invitation.Email);
+                //   myemail.To.Add("user2@example.com");
+
+                //Set email properties
+                myemail.From = new MailAddress("sumon20@gmail.com", "HHASB ERP");
+
+                myemail.Subject = "This is the Email Subject";
+                string host = Url.Content(HttpContext.Request.Url.Host + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+                //    string host = Url.Content("http://localhost:2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+                myemail.Body = "<p>Hello There"
+                    + ", </p><p>To verify your account, please click the following link:</p>"
+                                            + "<p><a href='" + host + "' target='_blank'> Click"
                                             + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
-                                            + "this email. The verify link is private.</p></body></html>";
-                msg = HttpUtility.HtmlEncode(msg);
+                                            + "<b>this email. The verify link is private.</b></p>";
+                myemail.IsBodyHtml = true; //Send this as plain-text
 
 
 
-                string to = invitation.Email;
-                string subject = "Invitation From MHASB Erp";
-                string body = msg;
-                sendMail(to, subject, body);
+                //Send the email
+                mysmtpserver.Send(myemail);
+
+                //string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
+
+
+                //string msg = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Hello There"
+                //                            + ", </p><p>To verify your account, please click the following link:</p>"
+                //                            + "<p><a href=\"" + host + "\" target=\"_blank\">" + host
+                //                            + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
+                //                            + "this email. The verify link is private.</p></body></html>";
+                //msg = HttpUtility.HtmlEncode(msg);
+
+
+
+                //string to = invitation.Email;
+                //string subject = "Invitation From MHASB Erp";
+                //string body = msg;
+                //sendMail(to, subject, body);
 
             }
             return RedirectToAction("Index");
@@ -95,7 +133,39 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         inService.AcceptInvitation(Invitation);
                         ViewBag.Company = Invitation.CompanyId;
                         ViewBag.email = Invitation.Email;
-                        return View("InvitationConfirm");
+                        var user = uService.GetSingleUserByEmail(Invitation.Email);
+                        if (user == null)
+                        {
+                            return View("InvitationConfirm");
+                        }
+                        else
+                        {
+                            var emp = new Employee();
+                            emp.UserId = user.Id;
+                            emp.CompanyId = Invitation.CompanyId;
+
+                            // get designation 
+                            //var degObj = degRep.GetDesignations().FirstOrDefault();
+                            //// if designation not exist then insert data into designation table
+                            //if (degObj == null)
+                            //{
+                            //    var designation = new Designation { DesignationName = "Employee Type" };
+                            //    degRep.AddDesignation(designation);
+
+                            //    degObj = degRep.GetDesignations().FirstOrDefault();
+                            //}
+                            emp.DesignationId = Invitation.DesignationId;
+                            if (eService.CreateEmployee(emp))
+                            {
+                                Session.Add("msg", "You have to login first");
+                                return Redirect(Url.Content("~/"));
+                            }
+                            else
+                            {
+                                return Content("Employee Profile couldn't be completed");
+                            }
+                        }
+
                     }
                     else
                     {
@@ -132,19 +202,19 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         var emp = new Employee();
                         emp.UserId = user.Id;
                         emp.CompanyId = Invitation.CompanyId;
-                        
+
                         // get designation 
-                        var degObj = degRep.GetDesignations().FirstOrDefault();
-                        // if designation not exist then insert data into designation table
-                        if (degObj == null)
-                        {
-                            var designation = new Designation {DesignationName ="Employee Type"};
-                            degRep.AddDesignation(designation);
+                        //var degObj = degRep.GetDesignations().FirstOrDefault();
+                        //// if designation not exist then insert data into designation table
+                        //if (degObj == null)
+                        //{
+                        //    var designation = new Designation {DesignationName ="Employee Type"};
+                        //    degRep.AddDesignation(designation);
 
-                            degObj = degRep.GetDesignations().FirstOrDefault();
-                        }
-                        emp.DesignationId = degObj.Id;
-
+                        //    degObj = degRep.GetDesignations().FirstOrDefault();
+                        //}
+                        //emp.DesignationId = degObj.Id;
+                        emp.DesignationId = Invitation.DesignationId;
                         if (eService.CreateEmployee(emp))
                         {
                             var accountSetting = new Settings();
@@ -201,7 +271,8 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             {
                 Subject = subject,
                 Body = body,
-                IsBodyHtml = true
+                IsBodyHtml = true,
+
             })
             {
                 smtp.Send(message);

@@ -19,7 +19,7 @@ namespace Mhasb.Domain.Organizations
        public string PoBoax { get; set; }
        public string Email { get; set; }
        public int SharesOwned { get; set; }
-       public double TotalSharesValue { get; set; }
+       public double ShareUnitValue { get; set; }
        [Required(ErrorMessage = "Founders Nationality Is Resquired")]
        public int CountryId { get; set; }
        [Required(ErrorMessage = "Founders Language Is Resquired")]

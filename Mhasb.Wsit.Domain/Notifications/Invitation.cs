@@ -27,6 +27,8 @@ namespace Mhasb.Domain.Notifications
 
         [Required(ErrorMessage = "Role Name  is required")]
         public int RoleId { get; set; }
+
+        public int DesignationId { get; set; }
         public string Token { get; set; }
         public StatusEnum Status { get; set; }
 
@@ -37,13 +39,13 @@ namespace Mhasb.Domain.Notifications
 
         public ObjectState State { get; set; }
 
+
+        public virtual Designation Designations { get; set; }
     }
     public enum EmpTypeEnum
     {
         EmployeeType = 1,
-        Owner = 2,
-        test3 = 3,
-        test4 = 4
+        Owner = 2
     }
     public enum StatusEnum
     {

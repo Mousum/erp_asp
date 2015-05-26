@@ -34,14 +34,14 @@ namespace Mhasb.Services.Users
                 var alistObj = ActionRep.GetOperation()
                                        .Filter(ac => ac.ActionName == actionlist.ActionName && ac.ControllerName == actionlist.ControllerName && ac.ModuleName == actionlist.ModuleName)
                                        .Get().SingleOrDefault();
-              if (alistObj==null)
-              {
-                  actionlist.State = ObjectState.Added;
-                  ActionRep.AddOperation(actionlist);
-                  return true;
-              }
-              return true;
-                
+                if (alistObj == null)
+                {
+                    actionlist.State = ObjectState.Added;
+                    ActionRep.AddOperation(actionlist);
+                    return true;
+                }
+                return true;
+
             }
             catch (Exception ex)
             {
@@ -49,6 +49,28 @@ namespace Mhasb.Services.Users
                 return false;
             }
         }
+
+
+        public ActionList GetActionListByActionList(ActionList actionlist)
+        {
+            try
+            {
+                var alistObj = ActionRep.GetOperation()
+                                       .Filter(ac => ac.ActionName == actionlist.ActionName && ac.ControllerName == actionlist.ControllerName && ac.ModuleName == actionlist.ModuleName)
+                                       .Get().SingleOrDefault();
+
+                return alistObj;
+
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+
+
         public bool UpdateActionList(ActionList actionlist)
         {
             try

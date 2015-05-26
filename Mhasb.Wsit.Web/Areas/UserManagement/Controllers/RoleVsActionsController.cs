@@ -89,7 +89,14 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             
             return PartialView("_GetActionList", model);
         }
-
+        [HttpPost]
+        public ActionResult GetControllerList(string moduleName)
+        {
+            var actionList = alService.GetAllActionList();
+            var cList = actionList.Where(m => m.ModuleName== moduleName)
+                .Select(m => new { Id = m.ControllerName, ControllerName = m.ControllerName }).Distinct();
+            return Json(new {cl =cList });
+        }
 
 
 
