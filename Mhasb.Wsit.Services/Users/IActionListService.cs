@@ -16,6 +16,8 @@ namespace Mhasb.Services.Users
 
       ActionList GetSingleActionList(int id);
 
+      ActionList GetActionListByActionList(ActionList actionlist);
+
       List<ActionList> GetAllActionList();
     }
 }

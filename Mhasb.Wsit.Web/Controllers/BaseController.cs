@@ -22,21 +22,9 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            var ctx = HttpContext.User.Identity.Name;
-
-            // check if session is supported
-
-
-            if (ctx == null || ctx == "")
-            {
-                // check if a new session id was generated
-                filterContext.Result = new RedirectResult("~/");
-                return;
-            }
-
 
             IActionListService actionService = new ActionListService();
-            
+
 
             // To get area,controller and action name from http request
             var routeData = filterContext.RequestContext.RouteData;
@@ -52,6 +40,16 @@ namespace Mhasb.Wsit.Web.Controllers
                 IsShowInMenu = false,
             };
             actionService.AddActionListFromBaseController(actionList);
+
+
+            //if (action == "MyMhasb" || action == "Logout" || action == "MyMhasb" || action == "MyMhasb" || action == "MyMhasb")
+
+
+            actionList = actionService.GetActionListByActionList(actionList);
+
+
+
+            
 
 
 

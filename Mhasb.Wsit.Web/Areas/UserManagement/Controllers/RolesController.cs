@@ -13,6 +13,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
     public class RolesController : BaseController
     {
         private IRoleService rService = new RoleService();
+        private readonly IUserService uService = new UserService();
+        private readonly ISettingsService setService = new SettingsService();
 
         public ActionResult Index() {
             var model = rService.GetAllRoles();
@@ -27,8 +29,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRole(Role role) 
         {
-            rService.AddRole(role);
-            return RedirectToAction("Index");
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var accountsetting = setService.GetAllByUserId(user.Id);
+            role.CompanyId = accountsetting.Companies.Id;
+            if (rService.AddRole(role))
+                return RedirectToAction("Index");
+            else return Content("Failed to add Role");
         }
 
         public ActionResult EditRole(int id)

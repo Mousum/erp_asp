@@ -15,7 +15,7 @@ using System.Web.Mvc;
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
 
-    public class UsersController : BaseController
+    public class UsersController : Controller
     {
         private IUserService uService = new UserService();
 
@@ -30,15 +30,15 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(User user)
-        {
-            user.ConfirmPassword = user.Password;
-            user.CreatedTime = DateTime.Now;
-            uService.AddUser(user);
+        //[HttpPost]
+        //public ActionResult Create(User user)
+        //{
+        //    user.ConfirmPassword = user.Password;
+        //    user.CreatedTime = DateTime.Now;
+        //    uService.AddUser(user);
 
-            return View();
-        }
+        //    return View();
+        //}
 
         private readonly ICompanyService iCompany = new CompanyService();
 
@@ -125,7 +125,6 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View("Deshboard_new");
         }
 
-        //[AllowAnonymous]
         public ActionResult MyMhasb()
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -281,13 +280,6 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             return Json(setObj, JsonRequestBehavior.AllowGet);
         }
-        [AllowAnonymous]
-        public ActionResult Ledgersettings() {
-           
-            return View();
-        }
-
-
 
     }
 }
