@@ -154,7 +154,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
                         VDoc.Description = noteData[i]["des"].ToString();
                         VDoc.DocumentType = noteData[i]["type"].ToString();
-                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
                         vDocSar.AddDocument(VDoc);
                     }
@@ -173,7 +173,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VoucherDocument VDoc = new VoucherDocument();
                             VDoc.CreatedDate = DateTime.Now;
                             VDoc.DocumentType = "File";
-                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = documentLocation + "/" + documentName;
                             vDocSar.AddDocument(VDoc);
@@ -353,7 +353,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
                         VDoc.Description = noteData[i]["des"].ToString();
                         VDoc.DocumentType = noteData[i]["type"].ToString();
-                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
                         vDocSar.AddDocument(VDoc);
                     }
@@ -372,7 +372,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VoucherDocument VDoc = new VoucherDocument();
                             VDoc.CreatedDate = DateTime.Now;
                             VDoc.DocumentType = "File";
-                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = documentLocation + "/" + documentName;
                             vDocSar.AddDocument(VDoc);
@@ -501,7 +501,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
                             VDoc.Description = noteData[i]["des"].ToString();
                             VDoc.DocumentType = noteData[i]["type"].ToString();
-                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             vDocSar.AddDocument(VDoc);
                         }
@@ -520,7 +520,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                                 VoucherDocument VDoc = new VoucherDocument();
                                 VDoc.CreatedDate = DateTime.Now;
                                 VDoc.DocumentType = "File";
-                                VDoc.EmployeeId = voucher.EmployeeId;
+                                VDoc.EmployeeId = empObj.Id;
                                 VDoc.VoucherId = voucher.Id;
                                 VDoc.FileLocation = documentLocation + "/" + documentName;
                                 vDocSar.AddDocument(VDoc);
@@ -652,7 +652,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
                         VDoc.Description = noteData[i]["des"].ToString();
                         VDoc.DocumentType = noteData[i]["type"].ToString();
-                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
                         vDocSar.AddDocument(VDoc);
                     }
@@ -671,7 +671,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VoucherDocument VDoc = new VoucherDocument();
                             VDoc.CreatedDate = DateTime.Now;
                             VDoc.DocumentType = "File";
-                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = documentLocation + "/" + documentName;
                             vDocSar.AddDocument(VDoc);
@@ -802,7 +802,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
                         VDoc.Description = noteData[i]["des"].ToString();
                         VDoc.DocumentType = noteData[i]["type"].ToString();
-                        VDoc.EmployeeId = voucher.EmployeeId;
+                        VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
                         vDocSar.AddDocument(VDoc);
                     }
@@ -821,7 +821,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VoucherDocument VDoc = new VoucherDocument();
                             VDoc.CreatedDate = DateTime.Now;
                             VDoc.DocumentType = "File";
-                            VDoc.EmployeeId = voucher.EmployeeId;
+                            VDoc.EmployeeId =  empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = documentLocation + "/" + documentName;
                             vDocSar.AddDocument(VDoc);
