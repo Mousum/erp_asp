@@ -128,14 +128,17 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult MyMhasb()
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-
+            if (user==null)
+            {
+               return RedirectToAction("Index", "Home");
+            }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
-
             List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
+            var compamyArray = uService.GetcompanyByUserID(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-
-           var accountsetting = setService.GetAllByUserId(user.Id);
+            ViewBag.CompanyArr = user.Id;
+            var accountsetting = setService.GetAllByUserId(user.Id);
             ViewBag.userName = user.FirstName + " " + user.LastName;
             ViewBag.lastLoginCompany = accountsetting!=null? accountsetting.Companies.DisplayName:"Company was not set.";
             ViewBag.lastLoginTime = DateTime.Now;
