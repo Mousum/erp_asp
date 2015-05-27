@@ -26,6 +26,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly IChartOfAccountService coaService = new ChartOfAccountService();
         private readonly ISettingsService sService = new SettingsService();
         private readonly IUserService uService = new UserService();
+        private readonly IVoucherType _voucherType = new VoucherTypeService();
 
         private readonly IEmployeeService empService = new EmployeeService();
 
@@ -88,8 +89,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
+            // 
 
-            voucher.VoucherTypeId = 1;
+            var vtObj = _voucherType.GetVoucherTypeByCode("01");
+            if (vtObj != null)
+            {
+                voucher.VoucherTypeId = vtObj.Id; 
+            }
+            else
+            {
+                TempData.Add("errMsg", "Please Add voucher type as New Journal with 01 Code.");
+                return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
+            }
             // This EmpId is static must be changed by Emp table 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -286,11 +297,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult DebitVoucher(VoucherCustom vc)
         {
+            
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
-            // This EmpId is static must be changed by Emp table 
+            var vtObj = _voucherType.GetVoucherTypeByCode("02");
+            if (vtObj != null)
+            {
+                voucher.VoucherTypeId = vtObj.Id;
+            }
+            else
+            {
+                TempData.Add("errMsg", "Please Add voucher type as Debit Voucher with 02 Code.");
+                return RedirectToAction("DebitVoucher", "Voucher", new { area = "Accounts" });
+            }
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -438,9 +458,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
-            // This EmpId is static must be changed by Emp table 
-
+            var vtObj = _voucherType.GetVoucherTypeByCode("03");
+            if (vtObj != null)
+            {
+                voucher.VoucherTypeId = vtObj.Id;
+            }
+            else
+            {
+                TempData.Add("errMsg", "Please Add voucher type as Credit Voucher with 03 Code.");
+                return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
+            }
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var empObj = empService.GetEmployeeByUserId(user.Id);
@@ -585,11 +612,21 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult AccountVoucher(VoucherCustom vc)
         {
+            // openning voucher
+
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
-            // This EmpId is static must be changed by Emp table 
+            var vtObj = _voucherType.GetVoucherTypeByCode("04");
+            if (vtObj != null)
+            {
+                voucher.VoucherTypeId = vtObj.Id;
+            }
+            else
+            {
+                TempData.Add("errMsg", "Please Add voucher type as Openning Voucher with 04 Code.");
+                return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
+            }
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -736,8 +773,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            voucher.VoucherTypeId = 1;
-            // This EmpId is static must be changed by Emp table 
+            var vtObj = _voucherType.GetVoucherTypeByCode("05");
+            if (vtObj != null)
+            {
+                voucher.VoucherTypeId = vtObj.Id;
+            }
+            else
+            {
+                TempData.Add("errMsg", "Please Add voucher type as RepeatingJournal with 05 Code.");
+                return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
+            }
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
