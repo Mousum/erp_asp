@@ -7,22 +7,54 @@
 
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-12 column">
-            <h2 class="text-left task-title">
-                Tasks
-            </h2>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1">
-                Add New Project
-            </button>
-            <div id="alert"></div>
-            <p>
-                Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                <input type="button" id="SearchStringBtn" value="Search" />
-            </p>
-            <div id="ActionListListShow">
+        <div class="row">
+            <div class="col-md-10">
 
+                <div class="col-md-2">
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1">
+                        Add New Project
+                    </button>
+                </div>
+                <div class="col-md-6 pull-right no-padding">
+
+                    <p>
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "cstm-input", style = "width:88%" })
+                        <button class="btn btn-info cstm-tbl-srch-btn" id="SearchStringBtn"><i class="fa fa-fw fa-search"></i></button>
+                        @*  <input type="button" id="SearchStringBtn" class="btn btn-info" value="Search" /><i class="fa fa-fw fa-search"></i>*@
+                    </p>
+                </div>
+
+
+                @*@Html.Action("List")*@
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <div class="alert alert-success" style="display:none;"></div>
+                    <div id="ActionListListShow">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-12 column">
+                <h2 class="text-left task-title">
+                    Tasks
+                </h2>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1">
+                    Add New Project
+                </button>
+                <div id="alert"></div>
+                <p>
+                    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <input type="button" id="SearchStringBtn" value="Search" />
+                </p>
+                <div id="ActionListListShow">
+
+                </div>
+            </div>*@
     </div>
 </div>
 <div class="container" id="taskList">
@@ -192,7 +224,7 @@
                     success: function (data) {
                         if (data == "Success") {
                             $('.close').trigger('click');
-                            $("#alert").html(" <b class='alert-success'>Project Successfully Added!Loading New Data...</b>");
+                            $(".alert").html("Project Successfully Added !Loading New Data...").show("slow");
                             setTimeout(function () {
                                 window.location.replace(baseUrl + "TaskManagement/Tasks/");
                             }, 3000);
@@ -260,7 +292,7 @@
                     success: function (data) {
                         if (data == "Success") {
                             $('.close').trigger('click');
-                            $("#alert").html(" <b class='alert-success'>Task Successfully Added!Loading New Data...</b>");
+                            $(".alert").html("Task Successfully Added!Loading New Data...").show("slow");
                             setTimeout(function () {
                                 var data = { id: $("#projeId").val() }
                                 $.ajax({
@@ -270,7 +302,7 @@
                                     datatype: "html",
                                     success: function (data) {
                                         $("#taskList").html(data);
-                                        $("#alert").empty();
+                                        $(".alert").hide("slow");
                                     },
                                     complete: function () {
                                         var task = $('#taskList tbody tr').length;
@@ -333,7 +365,7 @@
                     success: function (data) {
                         if (data == "Success") {
                             $('.close').trigger('click');
-                            $("#alert").html(" <b class='alert-success'>Project Successfully Added!Loading New Data...</b>");
+                            $(".alert").html("Project Successfully Added!Loading New Data...").show("slow");
                             setTimeout(function () {
                                 window.location.replace(baseUrl + "TaskManagement/Tasks/");
                             }, 3000);
@@ -371,8 +403,6 @@
     </div>
 </div>
 <!-- Pop Up Update Project -->
-
-
 @section scripts
 {
     <script language="javascript" type="text/javascript">

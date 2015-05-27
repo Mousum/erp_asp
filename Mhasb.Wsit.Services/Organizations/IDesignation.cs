@@ -14,5 +14,7 @@ namespace Mhasb.Services.Organizations
        List<Designation> GetDesignations();
        Designation GetSingleDesignationById(int id);
 
+       Designation GetSingleDesignationByDesignationName(string designation);
+
    }
 }

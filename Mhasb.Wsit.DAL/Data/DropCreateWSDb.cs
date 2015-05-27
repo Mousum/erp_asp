@@ -6,7 +6,7 @@ using Mhasb.Domain.Commons;
 
 namespace Mhasb.Wsit.DAL.Data
 {
-    class DropCreateWSDb : CreateDatabaseIfNotExists<WsDbContext>
+   class DropCreateWSDb : CreateDatabaseIfNotExists<WsDbContext>
     {
         public DropCreateWSDb()
         {
@@ -29,22 +29,11 @@ namespace Mhasb.Wsit.DAL.Data
                     context.Set<Lookup>().Add(lookup);
                 }
                
-                // Insert Chat of Account First Level Entry
-                var coaList = new List<ChartOfAccount>();
-                coaList.Add(new ChartOfAccount { Id = 1, ACode = "1", AName = "Assets", Description = "", Level = 1, ShowInDashboard = true });
-                coaList.Add(new ChartOfAccount { Id = 2, ACode = "2", AName = "Liabilities", Description = "", Level = 1, ShowInDashboard = true });
-                coaList.Add(new ChartOfAccount { Id = 3, ACode = "3", AName = "Equity", Description = "", Level = 1, ShowInDashboard = true });
-                coaList.Add(new ChartOfAccount { Id = 4, ACode = "4", AName = "Expenses", Description = "", Level = 1, ShowInDashboard = true });
-                coaList.Add(new ChartOfAccount { Id = 5, ACode = "5", AName = "Revenue", Description = "", Level = 1, ShowInDashboard = true });
-
-                foreach (var coa in coaList)
-                {
-                    context.Set<ChartOfAccount>().Add(coa);
-                }
+               
 
 
 
-                base.Seed(context);
+                //base.Seed(context);
                 context.SaveChanges();
             }
             catch (Exception ee)

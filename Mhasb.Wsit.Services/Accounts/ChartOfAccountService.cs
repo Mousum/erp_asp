@@ -190,5 +190,34 @@ namespace Mhasb.Services.Accounts
        {
            return null;
        }
+
+       public bool AddBaseAccountTypes()
+       {
+           // Insert Chat of Account First Level Entry
+           var coaList = new List<ChartOfAccount>();
+           coaList.Add(new ChartOfAccount { Id = 1, ACode = "1", AName = "Assets", Description = "", Level = 1, ShowInDashboard = true });
+           coaList.Add(new ChartOfAccount { Id = 2, ACode = "2", AName = "Liabilities", Description = "", Level = 1, ShowInDashboard = true });
+           coaList.Add(new ChartOfAccount { Id = 3, ACode = "3", AName = "Equity", Description = "", Level = 1, ShowInDashboard = true });
+           coaList.Add(new ChartOfAccount { Id = 4, ACode = "4", AName = "Expenses", Description = "", Level = 1, ShowInDashboard = true });
+           coaList.Add(new ChartOfAccount { Id = 5, ACode = "5", AName = "Revenue", Description = "", Level = 1, ShowInDashboard = true });
+
+           try
+           {
+               foreach (var coa in coaList)
+               {
+                   coa.State = ObjectState.Added;
+                   _finalCrudOperation.AddOperation(coa);
+                   coa.State = ObjectState.Unchanged;
+               }
+               return true;
+           }
+           catch (Exception ex)
+           {
+               var rr = ex.Message;
+               return false;
+           }
+
+          
+       }
     }
 }

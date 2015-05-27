@@ -35,6 +35,9 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private readonly ICompanyProfile iCP = new CompanyProfileService();
         private readonly IContactDetail iCD = new ContactDetailService();
 
+        private readonly IDesignation iDesignation = new DesignationService();
+        private readonly IEmployeeService iEmployee = new EmployeeService();
+
         //
         // GET: /OrganizationManagement/Company/
         //public ActionResult Index()
@@ -97,6 +100,29 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     if (iCompany.AddCompany(company))
                     {
+                        var ownerDesignation = iDesignation.GetSingleDesignationByDesignationName("Owner");
+                        if (ownerDesignation == null)
+                        {
+                            Designation ds = new Designation();
+                            ds.DesignationName = "Owner";
+                            if (iDesignation.AddDesignation(ds))
+                                ownerDesignation = ds;
+                            else
+                            {
+                                //designation add failed
+                            }
+                        }
+
+                        Employee ownerEmp=new Employee();
+                        ownerEmp.UserId = tt.Id;
+                        ownerEmp.CompanyId = company.Id;
+                        ownerEmp.DesignationId = ownerDesignation.Id;
+                        ownerEmp.BranchId = company.Id;
+                        if (!iEmployee.CreateEmployee(ownerEmp))
+                        {
+                            //Employee add failed
+                        }
+
                         var accountSetting = sService.GetAllByUserId(tt.Id);
                         if (accountSetting != null)
                         {

@@ -19,5 +19,6 @@ namespace Mhasb.Services.Accounts
         List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId);
         string GeneratedCode(string pCode, int level);
         List<TreeViewNode> TreeViewList(string pcode, int level);
+        bool AddBaseAccountTypes();
     }
 }

@@ -1,6 +1,7 @@
 ﻿@model  IEnumerable<Mhasb.Domain.Organizations.Company>
 @{
     Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var tt = @ViewBag.CompanyArr;
 }
 <!--start welcome dashboard section-->
 <div class="container my-dashboard">
@@ -30,7 +31,12 @@
                                 <td>21 Feb 3:54 p.m. By <br /> Khalid AL Kubaisi</td>
                                 <td>Adviser <br /> Manage users</td>
                                 <td>@company.Users.FirstName @company.Users.LastName <br />In Trial</td>
+                                @if (@ViewBag.CompanyArr == @company.Users.Id)
+                                {
                                 <td>@Html.ActionLink("Update", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
+                                }else{
+                                <td>@Html.ActionLink("View", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
+                                }
                             </tr>
                         }
                     </tbody>

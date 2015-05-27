@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Domain.Organizations;
 using Mhasb.Domain.OrgSettings;
+using Mhasb.Domain.Users;
 using Mhasb.Wsit.Domain;
 
 namespace Mhasb.Domain.Accounts
@@ -41,7 +42,6 @@ namespace Mhasb.Domain.Accounts
         // currency
         public virtual Currency Currencies { get; set; }
         public virtual Employee Employees { get; set; }
-
         public virtual ICollection<VoucherDocument> VoucherDocuments { get; set; }
         public long Id { get; set; }
 

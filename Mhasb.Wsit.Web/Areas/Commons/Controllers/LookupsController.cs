@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Mhasb.Domain.Commons;
 using Mhasb.Wsit.DAL.Data;
 using Mhasb.Services.Commons;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
 {
@@ -123,5 +125,28 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
         //    }
         //    base.Dispose(disposing);
         //}
+
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Lookup> Lookup = luSer.GetAllLookups();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Lookup = Lookup.Where(s => s.LookupType.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return PartialView(Lookup.ToPagedList(pageNumber, pageSize));
+
+        }
     }
 }
