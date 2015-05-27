@@ -61,9 +61,14 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult("~/");
                 return;
             }
-            var myCompany = setService.GetAllByUserId(user.Id).Companies.Id;
+            var comSet = setService.GetAllByUserId(user.Id);
+            if (comSet == null)
+            {
+                filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Registration");
+                return;
+            }
+            var myCompany = comSet.Companies.Id;
             var activatedCompany = cService.GetSingleCompany(myCompany);
-
             if (activatedCompany.Users.Id == user.Id)
                 return;
 
