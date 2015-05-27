@@ -5,216 +5,241 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>update</h2>
+<div class="container my-dashboard">
+    <div class="row clearfix">
 
-@if (TempData["SucMasg"] != null)
-{
-    <div class="alert alert-success">@TempData["SucMasg"]</div>
-}
-@if (TempData["errMsg"] != null)
-{
-    <div class="alert alert-danger">@TempData["errMsg"]</div>
-}
-@using (Html.BeginForm("Update", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Users.Id, new { Value = Model.Users.Id })
-    @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
-    @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
-    
-    <div class="form-horizontal">
-        <h4>Company</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+        @if (TempData["SucMasg"] != null)
+        {
+            <div class="alert alert-success">@TempData["SucMasg"]</div>
+        }
+        @if (TempData["errMsg"] != null)
+        {
+            <div class="alert alert-danger">@TempData["errMsg"]</div>
+        }
+        @using (Html.BeginForm("Update", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Users.Id, new { Value = Model.Users.Id })
+            @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
+            @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TradingName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TradingName)
-                @Html.ValidationMessageFor(model => model.TradingName)
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="col-md-12">
+                <div class="row cstm-frm-row">
+                    <div class="col-md-6">
+
+                        @Html.TextBoxFor(model => model.TradingName, new { @class = "cstm-input", @placeholder = "Trading Name*" })
+                        @Html.ValidationMessageFor(model => model.TradingName)
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-6">
+
+                        @Html.TextBoxFor(model => model.LegalName, new { @class = "cstm-input", @placeholder = "Legal Name" })
+                        @Html.ValidationMessageFor(model => model.LegalName)
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-6">
+
+                        @Html.TextBoxFor(model => model.DisplayName, new { @class = "cstm-input", @placeholder = "Display Name" })
+                        @Html.ValidationMessageFor(model => model.DisplayName)
+
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LegalName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LegalName)
-                @Html.ValidationMessageFor(model => model.LegalName)
+
+            <div class="col-md-6">
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.IndustryId, "Industry") :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("IndustryId", ViewBag.IndustryList as SelectList, new { @class = "cstm-input" })
+                            @*@Html.DropDownListFor(x => x.accountId, new SelectList(ViewBag.IndustryList, "Id", "AccountName"))*@
+                            @Html.ValidationMessageFor(model => model.IndustryId)
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.CountryId, "Country") :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.CountryId)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-4">
+                        <label>@Html.LabelFor(model => model.LanguageId, "Language") :</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="cstm-select">
+                            @Html.DropDownList("LanguageId", ViewBag.LanguageList as SelectList)
+                            @Html.ValidationMessageFor(model => model.LanguageId)
+                        </label>
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DisplayName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DisplayName)
-                @Html.ValidationMessageFor(model => model.DisplayName)
+            <div class="col-md-6">
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-8">
+
+                        @Html.TextBoxFor(model => model.Tel, new { @class = "cstm-input", @placeholder = "Telephone" })
+                        @Html.ValidationMessageFor(model => model.Tel)
+
+                    </div>
+                </div>
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-8">
+                        @*@Html.LabelFor(model => model.Fax, new { @class = "control-label col-md-2" })*@
+
+                        @Html.TextBoxFor(model => model.Fax, new { @class = "cstm-input", @placeholder = "Fax" })
+                        @Html.ValidationMessageFor(model => model.Fax)
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-8">
+                        @*@Html.LabelFor(model => model.P_O_Box, new { @class = "control-label col-md-2" })*@
+
+                        @Html.TextBoxFor(model => model.P_O_Box, new { @class = "cstm-input", @placeholder = "P. O. Box No*" })
+                        @Html.ValidationMessageFor(model => model.P_O_Box)
+
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>*@
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-8">
+
+                        @Html.TextBoxFor(model => model.Location, new { @class = "cstm-input", @placeholder = "Location" })
+                        @Html.ValidationMessageFor(model => model.Location)
+
+                    </div>
+                </div>
+
+
             </div>
-        </div>
+            <div class="col-md-8">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IndustryId, "IndustryId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("IndustryId", String.Empty)*@
-                @Html.DropDownList("IndustryId", ViewBag.IndustryList as SelectList, new { @class = "form-control", style = "width:auto;" })
-                @Html.ValidationMessageFor(model => model.IndustryId)
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Website, new { @class = "cstm-input", @placeholder = "Website" })
+                        @Html.ValidationMessageFor(model => model.Website)
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-3">@Html.LabelFor(model => model.LegalEntityId, "Legal Entity")</div>
+
+                    <div class="col-md-6">
+                        <label class="cstm-select">
+                            @Html.DropDownList("LegalEntityId", ViewBag.LegalEntityList as SelectList)
+                            @Html.ValidationMessageFor(model => model.LegalEntityId)
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-3">@Html.LabelFor(model => model.TimezoneId, "Time Zone")</div>
+
+                    <div class="col-md-6">
+                        <label class="cstm-select">
+                            @Html.DropDownList("TimezoneId", ViewBag.TimeZoneList as SelectList)
+                            @Html.ValidationMessageFor(model => model.TimezoneId)
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-2 cstm-lbl">@Html.LabelFor(model => model.LogoLocation, "Logo")</div>
+                    <div class="col-md-4">
+                        <input name="logoImage" type="file" id="logoImage" />
+                        @Html.ValidationMessageFor(model => model.LogoLocation)
+                    </div>
+                    <div class="col-md-6">
+                        <img id="logo_target" src="http://placehold.it/160x120" alt="Logo" width="160" height="120" />
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-2 cstm-lbl">@Html.LabelFor(model => model.SealLocation, "Seal")</div>
+                    <div class="col-md-4 cstm-reg-label-1">
+                        <input name="logoImage" type="file" id="logoImage" />
+                        @Html.ValidationMessageFor(model => model.SealLocation)
+                    </div>
+                    <div class="col-md-6">
+                        <img id="logo_target" src="http://placehold.it/160x120" alt="Logo" width="160" height="120" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="documentDiv">
+                    <div class="col-md-4 min-hg-reg">
+                        @Html.LabelFor(model => model.Documents, "Add Document")
+                        <button id="addDoc" type="button">Add More</button>
+                    </div>
+                    <div class="col-md-7 pull-right cstm-show">
+                        <input name="documentLocation[]" type="file" multiple />
+                    </div>
+
+
+                    @*@Html.ValidationMessageFor(model => model.DocumentLocation)*@
+
+                </div>
+
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountryId, "CountryId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, new { @class = "form-control", style = "width:auto;" })
-                @*@Html.DropDownList("CountryId", String.Empty)*@
-                @Html.ValidationMessageFor(model => model.CountryId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LanguageId, "LanguageId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LanguageId", ViewBag.LanguageList as SelectList, new { @class = "form-control", style = "width: auto;" })
-                @*@Html.DropDownList("LanguageId", String.Empty)*@
-                @Html.ValidationMessageFor(model => model.LanguageId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tel, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tel)
-                @Html.ValidationMessageFor(model => model.Tel)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fax, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fax)
-                @Html.ValidationMessageFor(model => model.Fax)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.P_O_Box, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.P_O_Box)
-                @Html.ValidationMessageFor(model => model.P_O_Box)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location)
-                @Html.ValidationMessageFor(model => model.Location)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Website, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Website)
-                @Html.ValidationMessageFor(model => model.Website)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LegalEntityId, "LegalEntityId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LegalEntityId", ViewBag.LegalEntityList as SelectList, new { @class = "form-control", style = "width: 60%;" })
-                @*@Html.DropDownList("LegalEntityId", String.Empty)*@
-                @Html.ValidationMessageFor(model => model.LegalEntityId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimezoneId, "TimezoneId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TimezoneId", ViewBag.TimeZoneList as SelectList, new { @class = "form-control", style = "width: 60%;" })
-                @*@Html.DropDownList("TimezoneId", String.Empty)*@
-                @Html.ValidationMessageFor(model => model.TimezoneId)
-            </div>
-        </div>
-
-        
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LogoLocation, "Logo", htmlAttributes: new { @class = "control-label col-md-2" })
 
-            <input name="logoImage" type="file" id="logoImage" />
-            @Html.ValidationMessageFor(model => model.LogoLocation)
-            <img id="logo_target" src="@Url.Content("~/" + Model.LogoLocation)" alt="Logo" width="120" />
+        }
 
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SealLocation, "Seal", htmlAttributes: new { @class = "control-label col-md-2" })
-
-            <input name="sealImage" id="sealImage" type="file" />
-            @Html.ValidationMessageFor(model => model.SealLocation)
-            <img id="seal_target" src="@Url.Content("~/" + Model.SealLocation)" alt="Seal" width="120" />
-
-        </div>
-
-        <div class="form-group" id="documentDiv">
-            @Html.LabelFor(model => model.Documents, "Add Document", htmlAttributes: new { @class = "control-label col-md-2" })
-            <input name="documentLocation[]" type="file" multiple />
-
-            @*@Html.ValidationMessageFor(model => model.DocumentLocation)*@
-            @{int i = 1;}
-            @foreach (var item in Model.Documents)
-{
-    <div id="Document_@item.Id">
-        <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">
-            @i . @item.DocumentOriginalName
-            @{i++;}
-            @*@Html.DisplayFor(Model.Documents)*@
-        </a>
-        <button type="button" class="CompanyDocumentList" cdid="@item.Id">X</button>
     </div>
-}
-             
-
-        </div>
-        <button id="addDoc" type="button">Add More</button>
-
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
 <script>
     $(".CompanyDocumentList").click(function () {
         //alert($(this).attr("CDId"));
         //$("#Document_" + $(this).attr("CDId")).hide();
         var rr = '@Url.Action("deleteCompanyDocument", "Company", new { area = "OrganizationManagement" })';
-        var doc=$("#Document_" + $(this).attr("CDId"));
+        var doc = $("#Document_" + $(this).attr("CDId"));
         $.ajax({
-            url: rr +'/'+ $(this).attr("CDId"),
+            url: rr + '/' + $(this).attr("CDId"),
             //data:"id="+$(this).attr("CDId"),
             success: function (result) {
                 doc.hide();

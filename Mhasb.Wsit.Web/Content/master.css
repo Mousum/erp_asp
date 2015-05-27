@@ -2598,3 +2598,16 @@ label.cstm-select:before {
 margin-left: 30px;
 }
 /*Author: Rafi , Date: 27.05.2015 , language*/
+
+/*Author: Rafi , Date: 27.05.2015 , registration*/
+.min-hg-reg{
+    min-height: 112px;
+    min-width: 300px;
+}
+.cstm-lbl{
+    margin-top: -8px;
+}
+.cstm-show input{
+    margin-left: 0 !important;
+}
+/*Author: Rafi , Date: 27.05.2015 , registration*/
