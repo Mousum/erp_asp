@@ -1,4 +1,5 @@
-﻿using Mhasb.Domain.Users;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
 using Mhasb.Wsit.DAL.Operations;
 using Mhasb.Wsit.Domain;
 using System;
@@ -12,6 +13,7 @@ namespace Mhasb.Services.Users
     public class UserService : IUserService
     {
         private readonly CrudOperation<User> userRep = new CrudOperation<User>();
+        private readonly CrudOperation<Company> comRep = new CrudOperation<Company>();
         public bool AddUser(User user)
         {
             try
@@ -111,5 +113,46 @@ namespace Mhasb.Services.Users
             }
         }
 
+
+
+        public bool isSupperAdmin(long userId, int CompanyId)
+        {
+            try {
+                var comObj = comRep.GetOperation()
+                     .Filter(c => c.Id == CompanyId && c.Users.Id == userId)
+                    .Get().Count();
+                if (comObj == 1)
+                {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+                
+            }catch(Exception ex){
+                var msg = ex.Message;
+                return false;
+            }
+
+        }
+
+
+        public List<Company> GetcompanyByUserID(long userId)
+        {
+            try
+            {
+                var comObj = comRep.GetOperation()
+                     .Filter(c=>c.Users.Id == userId)
+                     .Get().ToList();
+                return comObj;
+
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+               
+                return null;
+            }
+        }
     }
 }

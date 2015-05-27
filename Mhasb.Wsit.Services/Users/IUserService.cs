@@ -1,4 +1,5 @@
-﻿using Mhasb.Domain.Users;
+﻿using Mhasb.Domain.Organizations;
+using Mhasb.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,8 @@ namespace Mhasb.Services.Users
         bool CheckUserExistence(string email);
         User GetSingleUserByEmail(string email);
         List<User> GetAllUsers();
+        bool isSupperAdmin(long userId, int CompanyId);
+        List<Company> GetcompanyByUserID(long userId);
+
     }
 }
