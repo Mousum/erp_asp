@@ -96,7 +96,7 @@
                 success: function (data) {
                     if (data == "Success") {
                         $('.close').trigger('click');
-                        $("#alert").html(" <b class='alert-success'>Task Successfully Edited!Loading New Data...</b>");
+                        $(".alert").html("Task Successfully Edited!Loading New Data...").show("slow");
                         setTimeout(function () {
                             var data = { id: $("#projeId").val() }
                             $.ajax({
@@ -106,7 +106,7 @@
                                 datatype: "html",
                                 success: function (data) {
                                     $("#taskList").html(data).show("slow");
-                                    $("#alert").empty();
+                                    $(".alert").hide("slow");
                                 }
                             });
                         }, 3000);

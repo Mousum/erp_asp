@@ -1,17 +1,46 @@
 ﻿@model PagedList.IPagedList<Mhasb.Domain.Commons.Country>
 @using PagedList.Mvc;
 <div id="content">
+    @*<table class="table table-bordered" style="text-align: center;">
+            <tbody>
+                <tr>
+                    <th style="text-align: center;">
+                        RoleName
+                    </th>
+                    <th style="text-align: center;">
+                        Remarks
+                    </th>
+                </tr>
 
-    <table class="table">
+                <tr>
+                    <td>
+                        Helo
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="">
+                            Delete
+                        </button>
+                        <a data-role="button" class="btn btn-info" data-toggle="modal" data-target="">
+                            Details
+                        </a>
+                        <a data-role="button" class="btn btn-success" data-toggle="modal" data-target="">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>*@
+    <table class="table table-bordered" style="text-align: center;">
         <tr>
-            <th>
+            <th style="text-align: center;">
                 Country Name
             </th>
-            <th>
-               CountryCode
+            <th style="text-align: center;">
+                CountryCode
             </th>
-            <th>
-               ShortName
+            <th style="text-align: center;">
+                ShortName
             </th>
             <th></th>
         </tr>
@@ -35,10 +64,10 @@
                         @Html.DisplayFor(modelItem => item.ShortName)
                     </td>
                     <td>
-                        <div class="btn btn-success link">   @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link" }) </div>
-                        <div class="btn btn-info link">
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link" })
-                        </div>
+                          @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) 
+                        
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                      
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
                             Delete
                         </button>
@@ -134,3 +163,24 @@
 
 </script>
 
+<script>
+    $(".confirmDelete").click(function () {
+        var baseUrl = '@Url.Content("~/")';
+        var data = { id: $(this).attr("data-id") }
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "Commons/Country/Delete",
+            data: data,
+            success: function (data) {
+                if (data == "Success") {
+                    $('.close').trigger('click');
+                    $(".alert").text("Successfully Deleted!Loading New Data...").show("slow");
+                    setTimeout(function () {
+                        window.location.replace(baseUrl + "Commons/Country");//will redirect to your blog page (an ex: blog.html)
+                    }, 2000);
+
+                }
+            }
+        });
+    })
+</script>
