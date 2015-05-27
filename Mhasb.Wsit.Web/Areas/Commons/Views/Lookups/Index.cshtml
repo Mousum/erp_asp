@@ -1,29 +1,29 @@
-﻿@model IEnumerable<Mhasb.Domain.Commons.Lookup>
+﻿@*@model IEnumerable<Mhasb.Domain.Commons.Lookup>*@
 <div class="container my-dashboard">
-    <div class="row clearfix">
+    @*<div class="row clearfix">
         <div class="col-md-12">
             <p>
-                @Html.ActionLink("Create New", "Create")
+                @Html.ActionLink("Create New", "Create", "Lookups", new { area = "Commons" }, new { @class="btn btn-success"})
             </p>
-            <table class="table">
+            <table class="table table-bordered" style="text-align: center;">
                 <tr>
-                    <th>
+                    <th style="text-align: center;">
                         @Html.DisplayNameFor(model => model.LookupType)
                     </th>
-                    <th>
-                      Name
+                    <th style="text-align: center;">
+                        Name
                     </th>
-                    <th>
+                    <th style="text-align: center;">
                         @Html.DisplayNameFor(model => model.Value)
                     </th>
-                    <th>
+                    <th style="text-align: center;">
                         @Html.DisplayNameFor(model => model.Quantity)
-                      
+
                     </th>
-                    <th>
+                    <th style="text-align: center;">
                         @Html.DisplayNameFor(model => model.Description)
                     </th>
-                    <th>
+                    <th style="text-align: center;">
                         @Html.DisplayNameFor(model => model.Order)
                     </th>
                     <th></th>
@@ -39,11 +39,11 @@
                             @Html.DisplayFor(modelItem => item.Key)
                         </td>
                         <td>
-                           @Html.DisplayFor(modelItem => item.Value)
+                            @Html.DisplayFor(modelItem => item.Value)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Quantity)
-                            
+
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
@@ -52,14 +52,71 @@
                             @Html.DisplayFor(modelItem => item.Order)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) @*|
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                        </td>
-                    </tr>
-                }
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class="btn btn-success"})
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+    @*</td>
+                        </tr>
+                    }
 
-            </table>
+                </table>
+            </div>
+        </div>*@
+    <div class="row">
+        <div class="col-md-10">
+
+            <div class="col-md-2">
+
+                @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "btn btn-success" })
+            </div>
+            <div class="col-md-6 pull-right no-padding">
+
+                <p>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "cstm-input", style = "width:88%" })
+                    <button class="btn btn-info cstm-tbl-srch-btn" id="SearchStringBtn"><i class="fa fa-fw fa-search"></i></button>
+                    @*  <input type="button" id="SearchStringBtn" class="btn btn-info" value="Search" /><i class="fa fa-fw fa-search"></i>*@
+                </p>
+            </div>
+
+
+            @*@Html.Action("List")*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-10">
+                <div class="alert alert-success" style="display:none;"></div>
+                <div id="LookupsList">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            $.get('@Url.Action("List", "Lookups", new { Area = "Commons" })' + '?page=', function (data) {
+                $('#LookupsList').html(data);
+            }
+                );
+
+        });
+        $(document).on("click", "#SearchStringBtn", function () {
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "Commons/Lookups/List?page=''" + "&SearchString=" + SearchString;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+    </script>
+}

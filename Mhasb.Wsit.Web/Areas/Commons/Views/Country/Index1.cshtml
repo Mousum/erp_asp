@@ -1,24 +1,54 @@
 ﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <div class="container my-dashboard">
-    <div class="row clearfix">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-10">
 
-            <p class="btn btn-success link">
-                @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "link" })
-            </p>
-            <p>
-                Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                <input type="button" id="SearchStringBtn" value="Search" />
-            </p>
+            <div class="col-md-2">
 
-
-            <div id="CountryListShow">
-
+                @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "btn btn-success" })
             </div>
+            <div class="col-md-6 pull-right no-padding">
+
+                <p>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "cstm-input", style = "width:88%" })
+                    <button class="btn btn-info cstm-tbl-srch-btn" id="SearchStringBtn"><i class="fa fa-fw fa-search"></i></button>
+                    @*  <input type="button" id="SearchStringBtn" class="btn btn-info" value="Search" /><i class="fa fa-fw fa-search"></i>*@
+                </p>
+            </div>
+
+
             @*@Html.Action("List")*@
         </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <div class="alert alert-success" style="display:none;"></div>
+                    <div id="CountryListShow">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="row clearfix">
+            <div class="col-md-6">
+
+                <p class="btn btn-success link">
+                    @Html.ActionLink("Create New", "Create", "Country", new { area = "Commons" }, new { @class = "link" })
+                </p>
+                <p>
+                    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <input type="button" id="SearchStringBtn" value="Search" />
+                </p>
+
+
+                <div id="CountryListShow">
+
+                </div>*@
+                @*@Html.Action("List")*@
+            @*</div>
+        </div>*@
     </div>
-</div>
 
 @section scripts
 {
