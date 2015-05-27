@@ -98,7 +98,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     if (iCompany.AddCompany(company))
                     {
                         var accountSetting = sService.GetAllByUserId(tt.Id);
-                        if (accountSetting != null && accountSetting.Companies == null)
+                        if (accountSetting != null)
                         {
                             accountSetting.Companies = new Company { Id = company.Id };
                             accountSetting.lgcompany = true;

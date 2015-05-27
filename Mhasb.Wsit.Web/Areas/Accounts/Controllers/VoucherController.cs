@@ -47,7 +47,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             if (AccSet == null)
             {
                 //  return Content("Please add company financial settings ");
-                TempData.Add("errMsg", "Please add company financial settings ");
+                TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
 
@@ -72,7 +72,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var code = "Gj-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
-
+            if (fsObj == null) 
+            {
+                TempData.Add("errMsg", "Please add company financial settings");
+                return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
+            }   
+            
+            
             ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
@@ -244,8 +250,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var AccSet = sService.GetAllByUserId(user.Id);
             if (AccSet == null)
             {
-                TempData.Add("errMsg", "Please add company financial settings ");
+                TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
+                
             }
 
             int branchId = AccSet.Companies.Id;
@@ -266,7 +273,12 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var code = "Dr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            if (fsObj == null) 
+            {
+                TempData.Add("errMsg", "Please add company financial settings");
+                return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
 
+            }
             ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
@@ -411,7 +423,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var code = "Cr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
-
+            if (fsObj == null)
+            {
+                TempData.Add("errMsg", "Please add company financial settings");
+                return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
+            }
             ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
@@ -557,7 +573,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var code = "Op-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
-
+            if (fsObj == null) 
+            {
+                TempData.Add("errMsg", "Please add company financial settings");
+                return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
+            }
             ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
@@ -702,7 +722,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var code = "RJ-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
             var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
-
+            if (fsObj == null)
+            {
+                TempData.Add("errMsg", "Please add company financial settings");
+                return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
+            }
             ViewBag.FinancialSettingId = fsObj.Id;
             return View();
         }
