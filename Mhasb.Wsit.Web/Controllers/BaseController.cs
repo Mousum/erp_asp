@@ -62,26 +62,18 @@ namespace Mhasb.Wsit.Web.Controllers
                 return;
             }
             var myCompany = setService.GetAllByUserId(user.Id).Companies.Id;
-            var ActivatedCompany = cService.GetSingleCompany(myCompany);
+            var activatedCompany = cService.GetSingleCompany(myCompany);
 
-            if (ActivatedCompany.Users.Id == user.Id)
+            if (activatedCompany.Users.Id == user.Id)
                 return;
 
             var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
-            foreach (var role in roleList)
+            if (roleList.SelectMany(role => rvaService.GetActionByRoleID(role.RoleId)).Any(accessableAction => accessableAction.ActionId == actionList.Id))
             {
-                var accessableActionList = rvaService.GetActionByRoleID(role.RoleId);
-                foreach (var accessableAction in accessableActionList)
-                {
-                    if (accessableAction.ActionId == actionList.Id)
-                        return;
-                }
-
+                return;
             }
 
             filterContext.Result = new RedirectResult("~/Home/AccessDenied");
-            return;
-
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
