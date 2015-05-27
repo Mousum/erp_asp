@@ -174,7 +174,7 @@ namespace Mhasb.Services.Organizations
                     .Include(l => l.LegalEntities)
                     .Include(u => u.Users)
                     .Include(cd => cd.Documents)
-                    .Filter(e=>e.Employees.All(r=>r.UserId==userId))
+                    .Filter(e=>e.Employees.Any(r=>r.UserId==userId))
                     .Get().ToList();
                     //.Where(e => e.Employees.All(r => r.UserId == userId)).ToList();
 
