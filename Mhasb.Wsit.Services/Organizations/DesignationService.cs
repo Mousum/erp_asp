@@ -66,7 +66,24 @@ namespace Mhasb.Services.Organizations
             try
             {
                 var desObj = _crudOperation.GetOperation()
-                                        .Filter(d=>d.Id==id)
+                                        .Filter(d => d.Id == id)
+                                        .Get().SingleOrDefault();
+
+                return desObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public Domain.Organizations.Designation GetSingleDesignationByDesignationName(string designation)
+        {
+            try
+            {
+                var desObj = _crudOperation.GetOperation()
+                                        .Filter(d => d.DesignationName == designation)
                                         .Get().SingleOrDefault();
 
                 return desObj;
