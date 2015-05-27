@@ -10,13 +10,12 @@ using Mhasb.DAL.Mapping.Users;
 
 namespace Mhasb.Wsit.DAL.Data
 {
-  class WsDbContext: DbContext, IDbContext
+ class WsDbContext: DbContext, IDbContext
     {
         public WsDbContext()
             : base("Name=DbConString")
         {
             Configuration.LazyLoadingEnabled = false;
-            //Database.SetInitializer(new DropCreateWSDb());
         }
 
 
@@ -103,12 +102,6 @@ namespace Mhasb.Wsit.DAL.Data
 
 
         }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Lookup> Lookups { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.ShareTransfer> ShareTransfers { get; set; }
-
-        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Founder> Founders { get; set; }
 
     }
 }

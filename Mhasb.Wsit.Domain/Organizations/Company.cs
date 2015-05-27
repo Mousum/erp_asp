@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Users;
 using Mhasb.Domain.Commons;
 using Mhasb.Domain.OrgSettings;
@@ -81,6 +82,7 @@ namespace Mhasb.Domain.Organizations
         public virtual ICollection<FinancialSetting> FinalcialSettings { get; set; }
         public virtual ICollection<TaxSetting> TaxSettings { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Voucher> Vouchers { get; set; }
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         //[DataType(DataType.Password)]

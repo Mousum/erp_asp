@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Mhasb.Domain.Organizations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Mhasb.Domain.Accounts;
 
 
 namespace Mhasb.Domain.Users
@@ -42,6 +42,7 @@ namespace Mhasb.Domain.Users
         public DateTime CreatedTime { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Voucher> Vouchers { get; set; }
 
         [ScaffoldColumn(false)]
         public string Status { get; set; }
