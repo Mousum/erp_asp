@@ -97,8 +97,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
-                voucher.UserId = empObj.UserId;
-                voucher.CompanyId = empObj.CompanyId;
+                voucher.EmployeeId = empObj.Id;
             }
             else
             {
@@ -298,8 +297,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
-                voucher.UserId = empObj.UserId;
-                voucher.CompanyId = empObj.CompanyId;
+                voucher.EmployeeId = empObj.Id;
             }
             else
             {
@@ -448,8 +446,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
-                voucher.UserId = empObj.UserId;
-                voucher.CompanyId = empObj.CompanyId;
+                voucher.EmployeeId = empObj.Id;
             }
             else
             {
@@ -599,8 +596,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
-                voucher.UserId  = empObj.UserId;
-                voucher.CompanyId = empObj.CompanyId;
+                voucher.EmployeeId = empObj.Id;
             }
             else
             {
@@ -748,8 +744,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var empObj = empService.GetEmployeeByUserId(user.Id);
             if (empObj != null)
             {
-                voucher.UserId = empObj.UserId;
-                voucher.CompanyId = empObj.CompanyId;
+                voucher.EmployeeId = empObj.Id;
             }
             else
             {

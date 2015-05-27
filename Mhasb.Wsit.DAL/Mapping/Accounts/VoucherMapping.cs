@@ -20,8 +20,7 @@ namespace Mhasb.DAL.Mapping.Accounts
           this.Property(v => v.VoucherTypeId).HasColumnName("voucher_typeid");
           this.Property(v => v.BranchId).HasColumnName("branchid");
           this.Property(v => v.CurrencyId).HasColumnName("currencyid");
-          this.Property(v => v.UserId).HasColumnName("userid");
-          this.Property(v => v.CompanyId).HasColumnName("companyid");
+          this.Property(v => v.EmployeeId).HasColumnName("employeeid");
 
 
           this.Property(v => v.VoucherDate).HasColumnName("voucher_date");
@@ -54,14 +53,9 @@ namespace Mhasb.DAL.Mapping.Accounts
               .WithMany()
               .HasForeignKey(v => v.CurrencyId);
 
-          this.HasRequired(e => e.Companies)
-              .WithMany(e => e.Vouchers)
-              .HasForeignKey(e => e.CompanyId)
-              .WillCascadeOnDelete(false);
-
-          this.HasRequired(e=>e.Users)
+          this.HasRequired(e=>e.Employees)
               .WithMany(e=>e.Vouchers)
-              .HasForeignKey(e=>e.UserId)
+              .HasForeignKey(e=>e.EmployeeId)
               .WillCascadeOnDelete(false);
 
 

@@ -15,10 +15,9 @@ namespace Mhasb.Domain.Accounts
 
         public int FinancialSettingId { get; set; }
         public int VoucherTypeId { get; set; }
-        public int CompanyId { get; set; }
         public int BranchId { get; set; }
         public int CurrencyId { get; set; }
-        public long UserId { get; set; }
+        public long EmployeeId { get; set; }
         public DateTime VoucherDate { get; set; }
         public string VoucherNo { get; set; }
         public string RefferenceNo { get; set; }
@@ -42,8 +41,7 @@ namespace Mhasb.Domain.Accounts
         public virtual ICollection<VoucherDetail> VoucherDetails { get; set; }
         // currency
         public virtual Currency Currencies { get; set; }
-        public virtual User Users { get; set; }
-        public virtual Company Companies { get; set; }
+        public virtual Employee Employees { get; set; }
         public virtual ICollection<VoucherDocument> VoucherDocuments { get; set; }
         public long Id { get; set; }
 
