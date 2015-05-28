@@ -265,6 +265,7 @@
         });
         $('.debit').keyup(function () {
             $(this).parents('tr.tr-content').find('.credit').val(0.00);
+            if (isNaN($(this).val())) $(this).val(0.00)
             var result = 0;
             $('.debit').each(function () {
                 result += parseFloat($(this).val());
@@ -283,7 +284,7 @@
 
         $('.credit').keyup(function () {
             $(this).parents('tr.tr-content').find('.debit').val(0.00);
-
+            if (isNaN($(this).val())) $(this).val(0.00)
             var result = 0;
             $('.credit').each(function () {
                 result += parseFloat($(this).val());
@@ -496,6 +497,7 @@
 
             $('.debit').keyup(function () {
                 $(this).parents('tr.tr-content').find('.credit').val(0.00);
+                if (isNaN($(this).val())) $(this).val(0.00);
                 var result = 0;
                 $('.debit').each(function () {
                     result += parseFloat($(this).val());
@@ -514,7 +516,7 @@
 
             $('.credit').keyup(function () {
                 $(this).parents('tr.tr-content').find('.debit').val(0.00);
-
+                if (isNaN($(this).val())) $(this).val(0.00);
                 var result = 0;
                 $('.credit').each(function () {
                     result += parseFloat($(this).val());

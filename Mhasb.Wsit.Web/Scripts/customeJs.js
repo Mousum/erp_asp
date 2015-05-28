@@ -1,32 +1,7 @@
 ﻿// for account setting Page
 
 $(document).ready(function () {
-    var urlset = $('.GetSettingsByUserId').attr("data-url");
-    $.ajax({
-        url: urlset,
-        type: "GET",
-        data: {},
-        success: function (data) {
-            //console.log(typeof data.lgcompany);
-            if (data.lgdash === true) {
-                $('#radio-2').prop('checked', true);
-            } else if (data.lgcompany === true) {
-                $('#radio-1').prop('checked', true);
-            } else {
-                $('#radio-3').prop('checked', true);
-            }
-            if (data.TimezoneId) {
-                $('#zoneId option[value=' + data.TimezoneId + ']').attr('selected', 'selected');
-            }
-            if (data.TimezoneId) {
-                $('#ComanyId option[value=' + data.Companies.Id + ']').attr('selected', 'selected');
-            }
-
-        },
-        error: function () {
-
-        }
-    });
+    
 
     $('#zoneId').click(function () {
         hideMsg();
@@ -132,6 +107,8 @@ $(document).ready(function () {
 //    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
 //    return emailReg.test(emailAddress);
 //}
+
+
 
 function hideMsg() {
     $('.msg-danger').hide('slow');

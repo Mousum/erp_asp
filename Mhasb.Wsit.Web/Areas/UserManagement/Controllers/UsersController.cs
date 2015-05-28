@@ -130,7 +130,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             if (user==null)
             {
-               return RedirectToAction("Index", "Home");
+                return RedirectToAction("Logout");
             }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();

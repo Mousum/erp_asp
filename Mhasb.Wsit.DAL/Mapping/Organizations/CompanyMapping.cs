@@ -34,6 +34,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.Property(c => c.TimezoneId).HasColumnName("time_zone_id");
             this.Property(c => c.SealLocation).HasMaxLength(100).HasColumnName("seal_location");
             this.Property(c => c.LogoLocation).HasMaxLength(100).HasColumnName("logo_location");
+            this.Property(c => c.CompleteFlag).HasColumnName("complete_flag");
             this.ToTable("org.companies");
 
             //Relationship
