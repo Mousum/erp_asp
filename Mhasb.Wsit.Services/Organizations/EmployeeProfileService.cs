@@ -97,6 +97,7 @@ namespace Mhasb.Services.Organizations
             
         }
 
+
         private ContactDetail GetContactObject (ContactDetail oo)
         {
           return  new ContactDetail
@@ -111,5 +112,7 @@ namespace Mhasb.Services.Organizations
                     FieldValueThree = oo.FieldValueThree
                 };
         }
+
+
     }
 }
