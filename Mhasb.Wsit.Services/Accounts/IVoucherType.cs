@@ -14,5 +14,6 @@ namespace Mhasb.Services.Accounts
         List<VoucherType> GetAllVoucherType();
         VoucherType GetVoucherTypeById(int id);
         bool DeleteVoucherTypeById(int id);
+        VoucherType GetVoucherTypeByCode(string code);
     }
 }
