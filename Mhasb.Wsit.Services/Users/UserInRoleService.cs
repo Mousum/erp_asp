@@ -26,14 +26,15 @@ namespace Mhasb.Services.Users
                 {
                     userInRole.State = ObjectState.Added;
                     userInRoleRep.AddOperation(userInRole);
+                    userInRole.State = ObjectState.Unchanged;
                     return true;
                 }
                 else {
                     userInRole.Id = ur.Id;
                     return UpdateUserInRole(userInRole);
                 }
-                
 
+                
             }
             catch (Exception ex)
             {
@@ -51,6 +52,7 @@ namespace Mhasb.Services.Users
                 dbObj.IsActive = userInRole.IsActive;
                 dbObj.State = ObjectState.Modified;
                 userInRoleRep.UpdateOperation(dbObj);
+                userInRole.State = ObjectState.Unchanged;
                 return true;
             }
             catch (Exception ex)
