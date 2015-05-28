@@ -128,71 +128,96 @@
                 </div>
                 <div class="row cstm-frm-row">
                     <div class="col-md-12">
-                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input" })
+                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input",placeholder="Website"})
                         @Html.ValidationMessageFor(model => model.Website.FieldValueOne)
                     </div>
                 </div>
                 <div class="row cstm-frm-row social-add">
-                    <div class="col-md-12 cstm-frm-row">
+                    <div class="col-md-12 cstm-frm-row" id="facebook_field" style="display:none;">
                         <div class="col-md-3 no-padding">
                             <label class="social-label"><i class="fa fa-facebook facebook-color"></i></label>
                             <label class="pull-right">www.facebook.com/</label>
                         </div>
-                        <div class="col-md-9 no-padding">
+                        <div class="col-md-9 no-padding cstm-cross">
                             @Html.TextBoxFor(model => model.Facebook.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
                             @Html.ValidationMessageFor(model => model.Facebook.FieldValueOne)
+                            <button id="facebook_remove" type="button">X</button>
                         </div>
                     </div>
-                    <div class="col-md-12 cstm-frm-row">
+
+                    <div class="col-md-12 cstm-frm-row" id="fax_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            Fax
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Fax.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Fax.FieldValueOne)
+                            <button id="fax_remove" type="button">X</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 cstm-frm-row" id="linkedin_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-linkedin"></i></label>
+                            <label class="pull-right">www.linkedin.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
+                            <button id="linkedin_remove" type="button">X</button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 cstm-frm-row" id="twitter_field" style="display:none;">
                         <div class="col-md-3 no-padding">
                             <label class="social-label"><i class="fa fa-twitter twitter-color"></i></label>
                             <label class="pull-right">www.twitter.com/</label>
                         </div>
-                        <div class="col-md-9 no-padding">
+                        <div class="col-md-9 no-padding cstm-cross">
                             @Html.TextBoxFor(model => model.Twitter.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
                             @Html.ValidationMessageFor(model => model.Twitter.FieldValueOne)
+                            <button id="twitter_remove" type="button">X</button>
                         </div>
                     </div>
-                    <div class="col-md-12 cstm-frm-row">
+                    <div class="col-md-12 cstm-frm-row" id="google_field" style="display:none;">
                         <div class="col-md-3 no-padding">
                             <label class="social-label"><i class="fa fa-google-plus google-color"></i></label>
                             <label class="pull-right">plus.google.com/</label>
                         </div>
-                        <div class="col-md-9 no-padding">
+                        <div class="col-md-9 no-padding cstm-cross">
                             @Html.TextBoxFor(model => model.Google.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
                             @Html.ValidationMessageFor(model => model.Google.FieldValueOne)
+                            <button id="google_remove" type="button">X</button>
+
                         </div>
                     </div>
-                    <div class="col-md-12 cstm-frm-row">
+                    <div class="col-md-12 cstm-frm-row" id="skype_field" style="display:none;">
                         <div class="col-md-3 no-padding">
                             <label class="social-label"><i class="fa fa-skype skype-color"></i></label>
                             <label class="pull-right">www.skype.com/</label>
                         </div>
-                        <div class="col-md-9 no-padding">
+                        <div class="col-md-9 no-padding cstm-cross">
                             @Html.TextBoxFor(model => model.Skype.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
                             @Html.ValidationMessageFor(model => model.Skype.FieldValueOne)
+                            <button id="skype_remove" type="button">X</button>
                         </div>
                     </div>
                 </div>
-                <div class="dropup" id="add_contact_btn">
-                    <div>
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                            Add contact field
-                            <span class="caret"></span>
-                        </button>
-                    </div>
 
-                    <div class="social-list" id="add_contact_fieldnames" hidden="hidden">
-                        <ul class="dropdown-menu">
-                            <li id="facebook_name">Facebook</li>
-                            <li id="twitter_name">Twitter</li>
-                            <li id="google_name">Google PLus</li>
-                            <li id="linkedin_name">Linked In</li>
-                            <li id="skype_name">Skype</li>
-                            <li id="fax_name">Fax</li>
-                        </ul>
-
-                    </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        Add contact field
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li id="facebook_name" role="presentation"> <a role="menuitem" tabindex="-1">Facebook</a></li>
+                        <li id="twitter_name" role="presentation"><a role="menuitem" tabindex="-1">Twitter</a></li>
+                        <li id="google_name" role="presentation"><a role="menuitem" tabindex="-1">Google PLus</a></li>
+                        <li id="linkedin_name" role="presentation"><a role="menuitem" tabindex="-1">Linked In</a></li>
+                        <li id="skype_name" role="presentation"><a role="menuitem" tabindex="-1">Skype</a></li>
+                        <li id="fax_name" role="presentation"><a role="menuitem" tabindex="-1">Fax</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -236,12 +261,12 @@
         readImageURL(this);
     });
 
-    $("#add_contact_btn").click(function () {
-        if ($("#add_contact_fieldnames").is(':visible'))
-            $("#add_contact_fieldnames").hide();
-        else
-            $("#add_contact_fieldnames").show();
-    });
+    //$("#add_contact_btn").click(function () {
+    //    if ($("#add_contact_fieldnames").is(':visible'))
+    //        $("#add_contact_fieldnames").hide();
+    //    else
+    //        $("#add_contact_fieldnames").show();
+    //});
 
     $("#facebook_name").click(function () {
         $("#facebook_field").show();

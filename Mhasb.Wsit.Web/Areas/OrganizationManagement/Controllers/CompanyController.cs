@@ -342,9 +342,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             var AccSet = sService.GetAllByUserId(user.Id);
             CompanyProfileCustom cpc = iCP.GetCompanyProfile(AccSet.Companies.Id);
             if (cpc != null)
-                return View("EditProfile", cpc);
+                return RedirectToAction("updateProfile");
             return View();
         }
+
 
         [HttpPost]
         public ActionResult AddProfile(CompanyProfileCustom companyProfileCustom)
@@ -431,8 +432,18 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             return View();
         }
 
+        public ActionResult updateProfile()
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
+            CompanyProfileCustom cpc = iCP.GetCompanyProfile(AccSet.Companies.Id);
+            if (cpc != null)
+                return View("EditProfile", cpc);
+            else
+                return RedirectToAction("AddProfile");
+        }
 
-
+        [HttpPost]
         public ActionResult UpdateProfile(CompanyProfileCustom companyProfileCustom) 
         {
             try
