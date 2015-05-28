@@ -90,6 +90,7 @@
                    {
                        $(".successMsg").text(data.AName + "(" + data.ACode + ") Cost Centre Saved Successfully");
                        $(".successMsg").show("slow");
+                       setTimeout(function () { $(".successMsg").hide("slow"); }, 3000);
                    }
                }
            });
@@ -98,6 +99,7 @@
        {
            $(".errorMsg").text("Please Add Some Description For Your Cost Center");
            $(".errorMsg").show("slow");
+           setTimeout(function () { $(".successMsg").hide("slow"); }, 3000);
            
        }
     })
