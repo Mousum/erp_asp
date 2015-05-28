@@ -13189,6 +13189,7 @@ label.cstm-select:before {
     z-index: 99;
     display: block;
     color: #fff;
+    display:none;
 }
 .name-drop-container:before{
     content: "";

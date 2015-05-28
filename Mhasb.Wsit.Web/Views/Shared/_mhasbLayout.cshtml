@@ -38,7 +38,7 @@
     <nav class="navbar navbar-default dashboard-nav navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll cstm-logo">
+            <div class="navbar-header page-scroll cstm-logo brand-drop">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -53,6 +53,25 @@
                         <li><a href="#">Wsit</a></li>
                         <li><a href="#">List2</a></li>
                         <li><a href="#">Wsit</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 pull-right text-right name-drop">
+                <a href="javascript:void(0)" class="profile">Mr. X is here &nbsp;<i class="fa fa-caret-down"></i></a>
+                <div class="name-drop-container text-left">
+                    <div class="row no-margin drop-pad">
+                        <div class="col-xs-8">
+                            <label>Mahbub hasan</label>
+                            <p>Description</p>
+                        </div>
+                        <div class="col-md-4 top-img">
+                            <img src="http://placehold.it/350x350" class="img-responsive">
+                        </div>
+                    </div>
+                    <ul class="quick-link">
+                        <li><a href="#"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Account</a></li>
+                        <li><a href="@Url.Action("Logout", "Users", new { area = "UserManagement" })"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -194,7 +213,7 @@
                        
                     
                 </ul>
-                <a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>
+                @*<a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>*@
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -203,21 +222,43 @@
     @RenderBody();
    
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-    <script>
+    
+    <script type="text/javascript">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('.element').popover();
         });
     </script>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $('.navbar-brand').click(function () {
                 $('#brand-cont').slideToggle("fast");
             });
+            $('.profile').click(function () {
+                $('.name-drop-container').slideToggle("fast");
+            });
+            var baseUrl = '@Url.Content("~/")';
+            $.ajax({
+                url: baseUrl + "UserManagement/Users/GetCompany",
+                type: "GET",
+                data: {},
+                success: function (data) {
+                    if (data == "False") {
+
+                    } else {
+
+                    }
+                },
+                error: function () {
+
+                }
+            });
         });
+        
+            
     </script>
+    @RenderSection("scripts", required: false)
+    
 
     <!--End welcome dashboard section-->
     <!-- Footer -->
