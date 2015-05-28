@@ -473,7 +473,6 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                        // return Content("Photo Upload Unsuccessfull!!!...");
                     }
 
-
                 }
 
                 if (iCP.UpdateCompanyProfile(cp))
