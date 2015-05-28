@@ -65,6 +65,7 @@ namespace Mhasb.Domain.Organizations
         public string LogoLocation { get; set; }
 
         public string SealLocation { get; set; }
+        public int CompleteFlag { get; set; }
 
         //public string DocumentLocation { get; set; }
 
@@ -92,4 +93,5 @@ namespace Mhasb.Domain.Organizations
         public ObjectState State { get; set; }
 
     }
+    
 }

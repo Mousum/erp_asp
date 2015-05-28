@@ -19,7 +19,9 @@ namespace Mhasb.Services.Organizations
         {
             try
             {
+                company.CompleteFlag = 0;
                 company.State = ObjectState.Added;
+
                 companyRep.AddOperation(company);
                 return true;
             }

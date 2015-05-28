@@ -347,7 +347,6 @@
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Mhasb.Wsit.Web.csprojResolveAssemblyReference.cache" />
-    <Content Include="Areas\UserManagement\Views\Users\Dashboard.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\RegistrationSuccess.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\web.config" />
     <Content Include="Areas\OrganizationManagement\Views\_ViewStart.cshtml" />
@@ -367,8 +366,6 @@
     <Content Include="Areas\NotificationManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_Layout -Backup.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Users\AccountSettings.cshtml" />
-    <Content Include="Areas\UserManagement\Views\Users\MyMhasb.cshtml" />
     <Content Include="Areas\UserManagement\Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\EmployeeProfile\Create.cshtml" />
     <Content Include="Areas\UserManagement\Views\RoleVsActions\Create.cshtml" />

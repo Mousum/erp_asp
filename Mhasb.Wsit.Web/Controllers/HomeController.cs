@@ -16,11 +16,13 @@ namespace Mhasb.Wsit.Web.Controllers
         public ActionResult Index()
         {
 
+            
             if (HttpContext.User.Identity.IsAuthenticated)
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             var model = new Login();
            // return View(model);
-            return View("Index",model);
+            //return View("Index",model);
+            return View();
         }
 
         public ActionResult About()
