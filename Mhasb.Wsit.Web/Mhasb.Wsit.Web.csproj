@@ -306,6 +306,7 @@
     <Content Include="obj\Debug\Mhasb.Wsit.Web.pdb" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-toggle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\UserManagement\Views\web.config" />

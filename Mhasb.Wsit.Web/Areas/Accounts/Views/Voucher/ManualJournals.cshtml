@@ -77,7 +77,7 @@
                         {
 
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">@item.RefferenceNo</th>
                                 <td>@item.Description</td>
                                 <td>@item.VoucherDate</td>
                                 <td>@item.Currencies.Name</td>
@@ -134,7 +134,6 @@
             var baseUrl = '@Url.Content("~/")';
             var searchString = $(this).val();
             if (searchString == "draft") {
-                alert(searchString);
                 window.location = baseUrl + "Accounts/Voucher/ManualJournals?searchString=" + searchString;
             } else if (searchString == "posted") {
                 window.location = baseUrl + "Accounts/Voucher/ManualJournals?searchString=" + searchString;

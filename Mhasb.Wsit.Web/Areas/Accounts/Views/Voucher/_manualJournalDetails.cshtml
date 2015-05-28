@@ -1,94 +1,139 @@
 ﻿@model Mhasb.Domain.Accounts.Voucher
-           @{
-               var td = 0;
-               var tc = 0;
-           }
- <div class="col-md-6">
-        <div class="row cstm-frm-row">
 
-            <div class="col-md-4">
-                Description
-            </div>
-            <div class="col-md-8">
-                @Model.Description
-            </div>
+<div class="col-md-6">
+    <div class="row cstm-frm-row">
+
+        <div class="col-md-4">
+            Description
+        </div>
+        <div class="col-md-8">
+            @Model.Description
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="row cstm-frm-row">
+
+        <div class="col-md-4">
+            Date
+        </div>
+        <div class="col-md-8">
+            @Model.VoucherDate
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="row cstm-frm-row">
-
-            <div class="col-md-4">
-                Date
-            </div>
-            <div class="col-md-8">
-                @Model.VoucherDate
-            </div>
+    <div class="row cstm-frm-row">
+        <div class="col-md-4">
+            <label>Currency</label>
         </div>
+        <div class="col-md-8">
 
-        <div class="row cstm-frm-row">
-            <div class="col-md-4">
-                <label>Currency</label>
-            </div>
-            <div class="col-md-8">
-               
-                    @Model.Currencies.Name (@Model.Currencies.Symbol)
-                
-            </div>
+            @Model.Currencies.Name (@Model.Currencies.Symbol)
+
         </div>
-
-        <div class="row cstm-frm-row">
-
-            <div class="col-md-4">
-                Reference No.
-
-            </div>
-            <div class="col-md-8">
-                @Model.RefferenceNo
-            </div>
-        </div>
-
     </div>
-    
+
+    <div class="row cstm-frm-row">
+
+        <div class="col-md-4">
+            Reference No.
+
+        </div>
+        <div class="col-md-8">
+            @Model.RefferenceNo
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-12">
+    <div class="col-md-3">
+        <h4> Details</h4>
+    </div>
+
     <div class="col-md-12">
-        <div class="col-md-3">
-            <h4> Details</h4>
-        </div>
+        <div id="errmsg"></div>
+        <table class="table table-bordered table-responsive table-hover" id="item-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Ledger Account</th>
 
-        <div class="col-md-12">
-            <div id="errmsg"></div>
-            <table class="table table-bordered table-responsive table-hover" id="item-table">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Ledger Account</th>
-                        
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        
+                    <th>Debit</th>
+                    <th>Credit</th>
+
+                </tr>
+            </thead>
+            <tbody class="tbody-content">
+                @foreach (var item in Model.VoucherDetails)
+                {
+                    <tr class="tr-content">
+                        <td>@item.Description</td>
+                        <td>@item.ChartOfAccounts.AName</td>
+                        <td>@item.Debit</td>
+                        <td>@item.Credit</td>
+
                     </tr>
-                </thead>
-                <tbody class="tbody-content">
-                    @foreach(var item in Model.VoucherDetails)
-                    {
-                        <tr class="tr-content">
-                            <td>@item.Description</td>
-                            <td>@item.ChartOfAccounts.AName</td>
-                            <td>@item.Debit</td>
-                            <td>@item.Credit</td>
+                }
+                <tr>
+                    <td colspan="2">Total</td>
+                    <td>@Model.VoucherDetails.Sum(t => t.Debit)</td>
+                    <td>@Model.VoucherDetails.Sum(t => t.Credit)</td>
 
-                        </tr>
-                    }
-                    <tr>
-                        <td colspan="2">Total</td>
-                        <td>@Model.VoucherDetails.Sum(t=>t.Debit)</td>
-                        <td>@Model.VoucherDetails.Sum(t => t.Credit)</td>
-                        
-                    </tr>
+                </tr>
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-3">
+        <h4>Attachments </h4>
+    </div>
+
+    <div class="col-md-12">
+        <div id="errmsg"></div>
+        <table class="table table-bordered table-responsive table-hover" id="item-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Date</th>
+
+                    <th>User</th>
+                    <th>Description</th>
+
+                </tr>
+            </thead>
+            <tbody class="tbody-content">
+                @foreach (var item in Model.VoucherDocuments)
+                {
+                    <tr class="tr-content">
+                        <td>@item.DocumentType</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.Employees.Users.FirstName @item.Employees.Users.LastName</td>
+                        <td>
+                            @if (item.DocumentType == "note") 
+                            {
+                                @item.Description;
+                            }
+                            else
+                            {
+                                <a href="@Url.Content("~/" +@item.FileLocation)" target="_blank">
+                                   File Added
+                                </a>  
+                            }
+
+                        </td>
+
+                    </tr>
+                }
+              
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 
