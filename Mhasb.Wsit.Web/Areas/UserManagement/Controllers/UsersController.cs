@@ -297,6 +297,20 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             return Json(setObj, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetUserProfile()
+        {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var myProfule = uService.GetUserProfile(user.Id);
+            if (myProfule==null)
+            {
+                var success = "False";
+                return Json(success, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(myProfule, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }

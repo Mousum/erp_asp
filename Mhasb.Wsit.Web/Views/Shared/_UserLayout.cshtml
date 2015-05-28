@@ -43,20 +43,20 @@
                 </div>
             </div>
             <div class="col-md-3 pull-right text-right name-drop">
-                <a href="javascript:void(0)" class="profile">Mr. X is here &nbsp;<i class="fa fa-caret-down"></i></a>
+                <a href="javascript:void(0)" class="profile showName"></a>
                 <div class="name-drop-container text-left">
                     <div class="row no-margin drop-pad">
                         <div class="col-xs-8">
-                            <label>Mahbub hasan</label>
-                            <p>Description</p>
+                            <label class="profileName"></label>
+                            <p id="dio">Description</p>
                         </div>
                         <div class="col-md-4 top-img">
                             <img src="http://placehold.it/350x350" class="img-responsive">
                         </div>
                     </div>
                     <ul class="quick-link">
-                        <li><a href="#"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
-                        <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Account</a></li>
+                        <li><a href="@Url.Action("Logout", "Users", new { area = "UserManagement" })"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                        <li><a href="@Url.Action("AccountSettings", "Users", new { area = "UserManagement" })"><i class="fa fa-gear"></i>&nbsp;Account</a></li>
                         <li><a href="@Url.Action("Logout", "Users", new { area = "UserManagement" })"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
                     </ul>
                 </div>
@@ -125,6 +125,37 @@
 
                 }
             });
+
+            $.ajax({
+                url: baseUrl + "UserManagement/Users/GetUserProfile",
+                type: "GET",
+                data: {},
+                success: function (data) {
+
+                    if (data == "False") {
+
+                    } else {
+                        console.log(data);
+                        
+                        var json = $.parseJSON(JSON.stringify(data));
+                        if (json.FirstName != "" && json.LastName) {
+                            var name = json.FirstName + " " + json.LastName;
+                            $('.showName').html(name + '&nbsp;<i class="fa fa-caret-down"></i>');
+                            $('.profileName').text(name);
+                        }
+                        //var companyhtm = "";
+                        //$.each(json, function (key, value) {
+                        //    companyhtm = ' <li><a href="#">' + value['DisplayName'] + '</a></li>';
+                        //    $('#companyhtm').append(companyhtm);
+                        //});
+
+                    }
+                },
+                error: function () {
+
+                }
+            });
+
         });
 
 
