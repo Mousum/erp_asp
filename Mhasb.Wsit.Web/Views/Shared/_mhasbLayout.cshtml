@@ -46,7 +46,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 @*<a class="navbar-brand" href="#page-top"><img src="~/img/logo.png" alt="logo"></a>*@
-                <a class="navbar-brand" href="#page-top"><img src="~/img/dyn-logo.png" alt="logo"><p>MHSAB</p></a>
+                <a class="navbar-brand" href="#page-top"><img src="~/img/dyn-logo.png" alt="logo"><label>MHSAB</label></a>
+                <div class="brand-drop-container" id="brand-cont">
+                    <h4>MHSAB</h4>
+                    <ul class="drop-list">
+                        <li><a href="#">Wsit</a></li>
+                        <li><a href="#">List2</a></li>
+                        <li><a href="#">Wsit</a></li>
+                    </ul>
+                </div>
             </div>
             <!-- nav links -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -197,6 +205,20 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.element').popover();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.navbar-brand').click(function () {
+                $('#brand-cont').slideToggle("fast");
+            });
+        });
+    </script>
+
     <!--End welcome dashboard section-->
     <!-- Footer -->
     <footer class="text-center">

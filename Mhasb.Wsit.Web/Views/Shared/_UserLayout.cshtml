@@ -9,6 +9,12 @@
     <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
     <title>MHASB ERP</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- Custom Theme JavaScript -->
+    @Scripts.Render("~/bundles/custome")
+
+
     <link href='~/Content/font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="~/Scripts/jquery-1.10.2.min.js">
 
@@ -66,10 +72,8 @@
         <!-- /.container-fluid -->
     </nav>
     @RenderBody();
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    <!-- Custom Theme JavaScript -->
-    @Scripts.Render("~/bundles/custome")
+
+
 
 
     @RenderSection("scripts", required: false)
