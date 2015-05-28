@@ -1,62 +1,58 @@
 ﻿@model Mhasb.Domain.Users.UserInRole
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <h2>Control User In Role</h2>
+            @using (Html.BeginForm(new { @class = "" }))
+            {
 
-@{
-    ViewBag.Title = "Create";
-    Layout = Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
-    var rr = ViewBag.roleList;
-}
-<h2>Control User In Role</h2>
-@using (Html.BeginForm(new { @class = "" }))
-{
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="row clearfix">
+                    <div class="col-md-12 column body-permission">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <label style="margin-top: auto;margin-left: 0px;"> Select Employee:</label>
+                                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList, "---Select Employee---", htmlAttributes: new { @class = "dropdown-table", id = "employee" })
 
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-<div class="row clearfix">
-    <div class="col-md-12 column body-permission">
-        <div class="row clearfix">
-            <div class="col-md-4 column permisn">
-               <label style="margin-top: auto;margin-left: 0px;"> Select Employee:</label>
-                @Html.DropDownList("EmployeeId", (SelectList)ViewBag.UserList,"---Select Employee---", htmlAttributes: new { @class="dropdown-table" ,id = "employee"})
-               
+                            </div>
+                            <div class="col-md-6 roles">
+                                
+                            </div>
+                            @*<div class="col-md-4 column permisn1">
 
+                            </div>
+                            <div class="col-md-6 column permisn1">
+                                <div class="form-group">
 
-            </div>
-            <div class="col-md-6 column permisn">
-                <div class="form-group">
-                    <div class="col-sm-12 roles">
+                                </div>
+                            </div>
+                            <div class="col-md-4 column permisn1">
 
+                            </div>*@
+                            <div class="col-md-6">
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row cstm-frm-row">
+                                    <input type="submit" value="Save" class="btn  btn-info" style="float: right; margin-top: 5px; width: 30%;">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 column permisn1">
 
-            </div>
-            <div class="col-md-6 column permisn1">
-                <div class="form-group">
-
-                </div>
-            </div>
-            <div class="col-md-4 column permisn1">
-
-            </div>
-            <div class="col-md-6 column permisn1">
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn  btn-info" style="float: right; margin-top: 5px; width: 30%;">
-                </div>
-            </div>
+                @*<input type="submit" value="Save" class="btn btn-default fa-long-arrow-left" >*@
+            }
 
         </div>
     </div>
 </div>
 
-       @*<input type="submit" value="Save" class="btn btn-default fa-long-arrow-left" >*@
-}
-
-
-
 <script>
     $("#employee").change(function () {
-
+        $(".roles").hide("slow");
         var baseUrl = '@Url.Content("~/")';
         var Id = $(this).val();
         var data = { Id: Id }
@@ -66,15 +62,15 @@
             data: data,
             datatype: "html",
             success: function (data) {
-                $(".roles").html(data);
+                $(".roles").html(data).show("slow");
             }
         });
 
     });
 
 </script>
-   
 
-   
-</div>
+
+
+        
 

@@ -69,8 +69,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 userInRoleService.AddUserInRole(uIR);
 
             }
-          
-            return Content("Role Added Successfully");
+            TempData.Add("SucMsg","Role Added Successfully");
+            return RedirectToAction("Index", "UserInRoles", new { area = "UserManagement" });
            
            
         }

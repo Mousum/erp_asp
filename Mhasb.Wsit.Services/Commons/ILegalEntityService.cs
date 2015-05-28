@@ -10,5 +10,9 @@ namespace Mhasb.Services.Commons
     public interface ILegalEntityService
     {
         List<LegalEntity> GetAllLegalEntities();
+        bool AddLegalEntiy(LegalEntity legalEntity);
+        bool UpdateLegalEntiy(LegalEntity legalEntity);
+        bool DeleteLegalEntity(int lEId);
+        LegalEntity GetSingleLegalEntity(int lEId);
     }
 }
