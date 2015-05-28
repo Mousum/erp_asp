@@ -23,7 +23,7 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.ToTable("org.employee_profiles");
 
             this.HasRequired(ep => ep.Users)
-                .WithOptional()
+                .WithOptional(ep=>ep.EmployeeProfiles)
                 .Map(ep => ep.MapKey("userid"))
                 .WillCascadeOnDelete(false);
         }

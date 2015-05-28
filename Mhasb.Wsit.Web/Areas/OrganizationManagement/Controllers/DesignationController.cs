@@ -52,6 +52,16 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 return View();
             }
         }
+        [HttpPost, ActionName("Delete")]
 
+        public string DeleteConfirmed(int id)
+        {
+            if (iDesignation.DeleteDesignation(id))
+            {
+                return "Success";
+            }
+            return "Failed";
+            //return RedirectToAction("Index");
+        }
 	}
 }

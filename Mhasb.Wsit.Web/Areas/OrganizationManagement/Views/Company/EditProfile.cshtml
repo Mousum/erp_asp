@@ -1,7 +1,6 @@
 ﻿@model Mhasb.Wsit.CustomModel.Organizations.CompanyProfileCustom
 
 @{
-    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
     ViewBag.Title = "AddProfile";
 }
 
@@ -193,6 +192,7 @@
                     <h4 class="all-head">Contact Details</h4>
                     <div class="row cstm-frm-row">
                         <div class="col-md-12 pad-right-null">
+                            <div class="col-md-12"><label id="errmsg"></label></div>
                             <label class="btn-block-dis">Phone:</label>
                             <div class="col-md-3 no-padding">
                                 @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
@@ -244,7 +244,7 @@
                                 <label class="pull-right">www.linkedin.com/</label>
                             </div>
                             <div class="col-md-9 no-padding cstm-cross">
-                                @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                                @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "cstm-input"})
                                 @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
                                 <button id="linkedin_remove" type="button">X</button>
 
@@ -327,8 +327,7 @@
 
 
     $(document).ready(function () {
-        console.log("ready!");
-        if ($("#Facebook_FieldValueOne").val() != '')
+        if ($("#Facebook_FieldValueOne").val() != '' )
             $("#facebook_field").show();
         if ($("#Skype_FieldValueOne").val() != '')
             $("#skype_field").show();
@@ -336,10 +335,16 @@
             $("#twitter_field").show();
         if ($("#Fax_FieldValueOne").val() != '')
             $("#fax_field").show();
-        if ($("#Linkedin_FieldValueOne").val() != '')
+        if ($("#LinkedIn_FieldValueOne").val() != "")
+        {
             $("#linkedin_field").show();
+        }
+            
         if ($("#Google_FieldValueOne").val() != '')
             $("#google_field").show();
+
+        console.log($("#LinkedIn_FieldValueOne").val());
+        console.log($("#Google_FieldValueOne").val());
 
     });
 
@@ -364,6 +369,52 @@
     //    else
     //        $("#add_contact_fieldnames").show();
     //});
+
+
+    $(document).on('keypress', '#Phone_FieldValueOne', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+
+            return false;
+        }
+        if ($("#Phone_FieldValueOne").val().length > 3) {
+            //display error message
+            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+
+            return false;
+        }
+    });
+
+    $(document).on('keypress', '#Phone_FieldValueTwo', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            return false;
+        }
+        if ($("#Phone_FieldValueTwo").val().length > 3) {
+            //display error message
+            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+
+            return false;
+        }
+    });
+
+    $(document).on('keypress', '#Phone_FieldValueThree', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            return false;
+        }
+        if ($("#Phone_FieldValueThree").val().length > 5) {
+            //display error message
+            $("#errmsg").html("Maximum 6 digit").show().fadeOut("slow");
+
+            return false;
+        }
+    });
+
+
 
     $("#facebook_name").click(function () {
         $("#facebook_field").show();

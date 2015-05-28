@@ -1,43 +1,46 @@
 ﻿@model Mhasb.Domain.Organizations.Designation
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
-}
 
-<h2>Edit</h2>
+<div class="container my-dashboard">
+    <div class="row clearfix">
+        <div class="col-md-6">
+            <h2>Create</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Designation</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DesignationName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DesignationName)
-                @Html.ValidationMessageFor(model => model.DesignationName)
-            </div>
-        </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <div class="form-horizontal">
+                    <h4>Designation</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
+
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DesignationName)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.DesignationName, new { @class = "cstm-input" })
+                            @Html.ValidationMessageFor(model => model.DesignationName)
+                        </div>
+                    </div>
+
+                    <div class="row cstm-frm-row">
+                        <div class=" col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

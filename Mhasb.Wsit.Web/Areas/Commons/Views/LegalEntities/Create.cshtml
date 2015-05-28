@@ -1,34 +1,30 @@
-﻿@model Mhasb.Domain.Organizations.Designation
-
+﻿@model Mhasb.Domain.Commons.LegalEntity
 
 <div class="container my-dashboard">
     <div class="row clearfix">
         <div class="col-md-6">
             <h2>Create</h2>
 
-
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>Designation</h4>
+                    <h4>LegalEntity</h4>
                     <hr />
                     @Html.ValidationSummary(true)
-
                     <div class="row cstm-frm-row">
                         <div class="col-md-4">
-                            @Html.LabelFor(model => model.DesignationName)
+                            @Html.LabelFor(model => model.LegalEntityName)
                         </div>
                         <div class="col-md-8">
-                            @Html.TextBoxFor(model => model.DesignationName, new { @class="cstm-input"})
-                            @Html.ValidationMessageFor(model => model.DesignationName)
+                            @Html.TextBoxFor(model => model.LegalEntityName, new { @class="cstm-input"})
+                            @Html.ValidationMessageFor(model => model.LegalEntityName)
                         </div>
                     </div>
 
                     <div class="row cstm-frm-row">
-                        <div class=" col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Create" class="btn btn-default" />
                         </div>
                     </div>
@@ -41,6 +37,3 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -1,12 +1,11 @@
-﻿@model IEnumerable<Mhasb.Domain.Organizations.Designation>
-
+﻿@model IEnumerable<Mhasb.Domain.Commons.LegalEntity>
 <div class="container my-dashboard">
     <div class="row">
         <div class="col-md-10">
 
             <div class="col-md-2">
 
-                @Html.ActionLink("Create New", "Create", new { area = "OrganizationManagement" }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "btn btn-success" })
             </div>
             <div class="col-md-6 pull-right no-padding">
 
@@ -27,8 +26,8 @@
                 }
                 <table class="table table-bordered" style="text-align: center;">
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DesignationName)
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model => model.LegalEntityName)
                         </th>
                         <th></th>
                     </tr>
@@ -37,10 +36,11 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DesignationName)
+                                @Html.DisplayFor(modelItem => item.LegalEntityName)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class="btn btn-success"}) 
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
                                     Delete
                                 </button>
@@ -74,22 +74,24 @@
         </div>
     </div>
 </div>
+
+
 <script>
     $(".confirmDelete").click(function () {
-
+      
         var baseUrl = '@Url.Content("~/")';
         var data = { id: $(this).attr("data-id") }
-
+        
         $.ajax({
             type: "POST",
-            url: baseUrl + "OrganizationManagement/Designation/Delete",
+            url: baseUrl + "Commons/LegalEntities/Delete",
             data: data,
             success: function (data) {
                 if (data == "Success") {
                     $('.close').trigger('click');
                     $(".alert").text("Successfully Deleted ! Loading New Data...").show("slow");
                     setTimeout(function () {
-                        window.location.replace(baseUrl + "OrganizationManagement/Designation");//will redirect to your blog page (an ex: blog.html)
+                        window.location.replace(baseUrl + "Commons/LegalEntities");//will redirect to your blog page (an ex: blog.html)
                     }, 2000);
 
                 }

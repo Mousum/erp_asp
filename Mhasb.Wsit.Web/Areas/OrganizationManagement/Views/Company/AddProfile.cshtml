@@ -1,7 +1,6 @@
 ﻿@model Mhasb.Wsit.CustomModel.Organizations.CompanyProfileCustom
 
 @{
-    Layout = "~/Areas/UserManagement/Views/Shared/_mhasbLayout.cshtml";
     ViewBag.Title = "AddProfile";
 }
 
@@ -111,7 +110,9 @@
                 <h4 class="all-head">Contact Details</h4>
                 <div class="row cstm-frm-row">
                     <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
                         <label class="btn-block-dis">Phone:</label>
+                        
                         <div class="col-md-3 no-padding">
                             @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
                             @Html.ValidationMessageFor(model => model.Phone.FieldValueOne)
@@ -259,6 +260,48 @@
 
     $("#profile_pic").change(function () {
         readImageURL(this);
+    });
+
+    $(document).on('keypress', '#Phone_FieldValueOne', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            return false;
+        }
+        if ($("#Phone_FieldValueThree").val().length > 3) {
+            //display error message
+            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+
+            return false;
+        }
+    });
+
+    $(document).on('keypress', '#Phone_FieldValueTwo', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) ) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            return false;
+        }
+        if ($("#Phone_FieldValueThree").val().length > 3) {
+            //display error message
+            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+
+            return false;
+        }
+    });
+
+    $(document).on('keypress', '#Phone_FieldValueThree', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) ) {
+            //display error message
+            $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            return false;
+        }
+        if ($("#Phone_FieldValueThree").val().length > 5) {
+            //display error message
+            $("#errmsg").html("Maximum 6 digit").show().fadeOut("slow");
+
+            return false;
+        }
     });
 
     //$("#add_contact_btn").click(function () {
