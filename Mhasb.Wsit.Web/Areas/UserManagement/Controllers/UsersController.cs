@@ -147,7 +147,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
         public JsonResult GetCompany() {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
+            var myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id).Select(c => new  { c.Id, c.DisplayName }).ToList();
+            
             if (myCompanyList.Count() <=0 )
             {
                 var success = "False";
