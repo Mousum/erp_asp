@@ -23,6 +23,7 @@ namespace Mhasb.Wsit.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-toggle.min.js",
                       "~/Scripts/respond.js"));
             bundles.Add(new ScriptBundle("~/bundles/custome").Include(
                       "~/Scripts/cbpAnimatedHeader.js",

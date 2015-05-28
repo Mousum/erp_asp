@@ -45,8 +45,6 @@ namespace Mhasb.Services.Accounts
             }
 
         }
-
-
         public List<VoucherType> GetAllVoucherType()
         {
             try
@@ -79,7 +77,6 @@ namespace Mhasb.Services.Accounts
                 return null;
             }
         }
-
         public bool DeleteVoucherTypeById(int id)
         {
             try
@@ -93,6 +90,24 @@ namespace Mhasb.Services.Accounts
                 return false;
             }
 
+        }
+
+        public VoucherType GetVoucherTypeByCode(string code)
+        {
+            try
+            {
+                var vouchObj = voucherRep
+                                        .GetOperation().Get()
+                                        .SingleOrDefault(e => e.Code==code);
+
+                return vouchObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+            
         }
 
     }
