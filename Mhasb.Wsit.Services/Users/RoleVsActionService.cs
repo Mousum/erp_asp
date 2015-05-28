@@ -120,7 +120,7 @@ namespace Mhasb.Services.Users
         }
 
 
-        public List<RoleVsAction> GetActionByRoleID(int roleId)
+        public List<RoleVsAction> GetAllAndSelectedActionByRoleId(int roleId)
         {
             try
             {
@@ -167,6 +167,27 @@ namespace Mhasb.Services.Users
                 return null;
             }
         }
+
+        public List<RoleVsAction> GetActionByRoleId(int roleId)
+        {
+            try
+            {
+                var roleactionList = rVcRep.GetOperation()
+                    .Include(r => r.Roles)
+                    .Include(r => r.ActionLists)
+                    .Filter(r => r.RoleId == roleId && r.IsActive == true)
+                    .Get().ToList();
+
+                return roleactionList;
+
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
+
         public static List<T> MakeList<T>(T itemOftype)
         {
             List<T> newList = new List<T>();

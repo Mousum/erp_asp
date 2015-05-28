@@ -36,7 +36,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Create(int RoleId, string ModuleName, string ControllerName, int[] ActionId)
         {
             var roleVsAction = new RoleVsAction();
-            var model = roleVsActionService.GetActionByRoleID(RoleId);
+            var model = roleVsActionService.GetAllAndSelectedActionByRoleId(RoleId);
             model = model.Where(m => m.ActionLists.ModuleName == ModuleName && m.ActionLists.ControllerName == ControllerName).ToList();
             foreach (var item in model)
             {
@@ -73,7 +73,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public PartialViewResult GetActionList(int RoleId, string moduleName, string controllerName)
         {
-            var model = roleVsActionService.GetActionByRoleID(RoleId);
+            var model = roleVsActionService.GetAllAndSelectedActionByRoleId(RoleId);
             if (moduleName != "" && controllerName != "")
             {
                 model = model.Where(m => m.ActionLists.ModuleName == moduleName && m.ActionLists.ControllerName == controllerName).ToList();
