@@ -9,11 +9,11 @@ namespace Mhasb.Services.Organizations
 {
     public interface IEmployeeService
     {
-           bool CreateEmployee(Employee emp);
-           bool UpdateEmployee(Employee emp);
-           bool DeleteEmployee(int empId);
-           Employee GetEmpByUserId(int UserId);
-           List<Employee> GetEmpByCompanyId(int CompanyId);
+        bool CreateEmployee(Employee emp);
+        bool UpdateEmployee(Employee emp);
+        bool DeleteEmployee(int empId);
+        Employee GetEmpByUserId(int UserId);
+        List<Employee> GetEmpByCompanyId(int CompanyId);
         Employee GetEmpByEmpId(int empId);
         Employee GetEmployeeByUserId(long userId);
 
