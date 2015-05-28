@@ -15,7 +15,7 @@
     }
 
 
-    @using (Html.BeginForm("AddAuditor", "Auditor", FormMethod.Post, new { @class = "" }))
+    @using (Html.BeginForm("AddAuditor", "Auditor", FormMethod.Post, new { @class = "", @id="auditor_form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -176,7 +176,8 @@
 </div>*@
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/jqueryval")
+
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -209,6 +210,19 @@
     $(document).ready(function () {
         var data=@Html.Raw(Json.Encode(ViewBag.dataset));
         data=data.Data;
+
+        $( "#auditor_form" ).submit(function( event ) {
+            if($("#combobox").val()=='' || $("#combobox1").val()==''){
+                alert("Please select both Auditor and Manager...");
+                event.preventDefault();
+            }
+
+            if($("#combobox").val()== $("#combobox1").val()){
+                alert("Please Check Again...Auditor and Manager are same...");
+                event.preventDefault();
+            }
+                
+        });
        
         $("#combobox").combobox({ 
             select: function (event, ui) { 

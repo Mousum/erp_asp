@@ -73,10 +73,20 @@ namespace Mhasb.Wsit.Web.Controllers
                 return;
 
             var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
-            if (roleList.SelectMany(role => rvaService.GetActionByRoleID(role.RoleId)).Any(accessableAction => accessableAction.ActionId == actionList.Id))
+            foreach (var role in roleList)
             {
-                return;
+                var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
+                foreach (var accessableAction in accessableActionList)
+                {
+                    if (accessableAction.ActionId == actionList.Id)
+                        return;
+                }
+
             }
+            //if (roleList.SelectMany(role => rvaService.GetActionByRoleID(role.RoleId)).Any(accessableAction => accessableAction.ActionId == actionList.Id))
+            //{
+            //    return;
+            //}
 
             filterContext.Result = new RedirectResult("~/Home/AccessDenied");
         }

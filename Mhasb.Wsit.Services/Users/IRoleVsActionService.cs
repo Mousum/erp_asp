@@ -16,8 +16,9 @@ namespace Mhasb.Services.Users
 
         RoleVsAction GetSingleRoleVsAction(int Id);
 
-        List<RoleVsAction> GetActionByRoleID(int Id);
+        List<RoleVsAction> GetAllAndSelectedActionByRoleId(int Id);
         List<RoleVsAction> GetAllRoleVsAction();
+        List<RoleVsAction> GetActionByRoleId(int roleId);
 
 
     }
