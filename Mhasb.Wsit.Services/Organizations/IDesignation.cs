@@ -13,7 +13,7 @@ namespace Mhasb.Services.Organizations
        bool UpdateDesignation(Designation designation);
        List<Designation> GetDesignations();
        Designation GetSingleDesignationById(int id);
-
+       bool DeleteDesignation(int dId);
        Designation GetSingleDesignationByDesignationName(string designation);
 
    }

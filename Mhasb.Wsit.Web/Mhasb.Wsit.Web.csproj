@@ -175,6 +175,7 @@
     <Compile Include="Areas\Commons\Controllers\CountryController.cs" />
     <Compile Include="Areas\Commons\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Commons\Controllers\LanguageController.cs" />
+    <Compile Include="Areas\Commons\Controllers\LegalEntitiesController.cs" />
     <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
@@ -479,6 +480,11 @@
     <Content Include="Areas\Accounts\Views\Voucher\Index.cshtml" />
     <Content Include="Areas\OrgSettings\Views\Currency\Index1.cshtml" />
     <Content Include="Areas\Commons\Views\Lookups\List.cshtml" />
+    <Content Include="Areas\Commons\Views\LegalEntities\Create.cshtml" />
+    <Content Include="Areas\Commons\Views\LegalEntities\Delete.cshtml" />
+    <Content Include="Areas\Commons\Views\LegalEntities\Details.cshtml" />
+    <Content Include="Areas\Commons\Views\LegalEntities\Edit.cshtml" />
+    <Content Include="Areas\Commons\Views\LegalEntities\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

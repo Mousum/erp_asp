@@ -94,5 +94,18 @@ namespace Mhasb.Services.Organizations
                 return null;
             }
         }
+        public bool DeleteDesignation(int dId) 
+        {
+            try
+            {
+                _crudOperation.DeleteOperation(dId);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return false;
+            }
+        }
     }
 }

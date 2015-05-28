@@ -7,9 +7,11 @@ else
 {
     foreach (var item in Model)
     {
-        <div class="checkbox checkbox-element">
-            <label><input type="checkbox" name="RoleId" value="@item.RoleId" checked="@item.IsActive" /> @item.Roles.RoleName </label>
-        </div><br />
+        <div class="row">
+            <div class="checkbox checkbox-element">
+                <label><input type="checkbox" name="RoleId" value="@item.RoleId" checked="@item.IsActive" /> @item.Roles.RoleName </label>
+            </div>
+        </div>
 
     }
 }
