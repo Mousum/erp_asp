@@ -178,7 +178,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/"+AccSet.Companies.DisplayName.Replace(" ","_")+"/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -186,7 +186,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                             vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -259,6 +259,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
+            ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
                 TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
@@ -386,7 +387,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -394,7 +395,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                             vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -417,6 +418,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
+            ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
@@ -541,7 +543,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         if ("documentLocation[]" == Request.Files.GetKey(i))
                         {
                             documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                            documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                            documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
                             if (fileUpload(Request.Files[i], documentName, documentLocation))
                             {
                                 VoucherDocument VDoc = new VoucherDocument();
@@ -549,7 +551,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                                 VDoc.DocumentType = "File";
                                 VDoc.EmployeeId = empObj.Id;
                                 VDoc.VoucherId = voucher.Id;
-                                VDoc.FileLocation = documentLocation + "/" + documentName;
+                                VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                                 vDocSar.AddDocument(VDoc);
                             }
                         }
@@ -576,6 +578,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
+            ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
@@ -702,7 +705,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -710,7 +713,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
                             vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -860,7 +863,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -868,7 +871,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId =  empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = documentLocation + "/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
                             vDocSar.AddDocument(VDoc);
                         }
                     }
