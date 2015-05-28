@@ -18,6 +18,7 @@ namespace Mhasb.Services.Users
         List<User> GetAllUsers();
         bool isSupperAdmin(long userId, int CompanyId);
         List<Company> GetcompanyByUserID(long userId);
+       User GetUserProfile(long userId);
 
     }
 }

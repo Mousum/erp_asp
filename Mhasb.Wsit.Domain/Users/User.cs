@@ -42,6 +42,7 @@ namespace Mhasb.Domain.Users
         public DateTime CreatedTime { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual EmployeeProfile EmployeeProfiles { get; set; }
 
         [ScaffoldColumn(false)]
         public string Status { get; set; }

@@ -113,8 +113,6 @@ namespace Mhasb.Services.Users
             }
         }
 
-
-
         public bool isSupperAdmin(long userId, int CompanyId)
         {
             try {
@@ -136,7 +134,6 @@ namespace Mhasb.Services.Users
 
         }
 
-
         public List<Company> GetcompanyByUserID(long userId)
         {
             try
@@ -154,5 +151,15 @@ namespace Mhasb.Services.Users
                 return null;
             }
         }
+
+        public User GetUserProfile(long userId)
+        {
+            var userObj = userRep.GetOperation()
+                .Include(u => u.EmployeeProfiles)
+                .Get().SingleOrDefault(u => u.Id == userId);
+            //    .
+            return userObj;
+        }
+
     }
 }
