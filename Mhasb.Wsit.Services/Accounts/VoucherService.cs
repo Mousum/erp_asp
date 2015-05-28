@@ -211,6 +211,8 @@ namespace Mhasb.Services.Accounts
                                         .Include(c => c.VoucherTypes)
                                         .Include(c => c.FinancialSettings)
                                         .Include(c => c.Currencies)
+                                        .Include(c=>c.VoucherDocuments)
+                                        .Include(u=>u.Employees.Users)
                                         .Filter(c => c.Id == VId)
                                         .Get().SingleOrDefault();
 

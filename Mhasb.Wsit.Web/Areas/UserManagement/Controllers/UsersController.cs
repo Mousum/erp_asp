@@ -130,7 +130,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             if (user==null)
             {
-               return RedirectToAction("Index", "Home");
+                return RedirectToAction("Logout");
             }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
@@ -144,6 +144,19 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb_new", myCompanyList);
 
+        }
+        public JsonResult GetCompany() {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
+            if (myCompanyList.Count() <=0 )
+            {
+                var success = "False";
+                return Json(success, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                return Json(myCompanyList, JsonRequestBehavior.AllowGet);
+            }
+           
         }
 
         public ActionResult AccountSettings()

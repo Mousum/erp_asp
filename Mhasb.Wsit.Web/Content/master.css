@@ -13103,3 +13103,132 @@ label.cstm-select:before {
         border: none !important;
         border-top-right-radius: 5px;
     }
+/*Author:Tanveer , Date:5-28-2015, Menu*/
+
+.nav-dashboard{
+    width: 100% !important;
+    border-top: 1px solid #234674;
+    margin-top: 7px;
+}
+.external-link{
+
+}
+.external-link ul{
+    margin: 20px 0px 0px;
+    padding: 0px;
+}
+.external-link ul li{
+    list-style: outside none none;
+    display: inline-block;
+    margin-left: 30px;
+    font-size: 24px;
+}
+.external-link ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.brand-drop{
+    position: relative;
+}
+.brand-drop-container{
+    position: absolute;
+    width: 300px;
+    min-height: 130px;
+    left: 0px;
+    top: 66px;
+    background: #000;
+    z-index: 99;
+    display: none;
+    color: #fff;
+}
+.brand-drop-container:before{
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #000;
+    position: absolute;
+    top: -10px;
+    left: 25px;
+}
+.brand-drop-container h4{
+    color: #fff;
+    padding: 0px 10px 10px 10px;
+}
+.brand-drop-container .drop-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+.brand-drop-container .drop-list li{
+    list-style: none;
+    border-bottom: 1px solid #111;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+}
+.brand-drop-container .drop-list li a{
+    color: #fff;
+    display: block;
+    padding: 7px 10px;
+    background: #1d1d1d;
+}
+.name-drop{
+    position: relative;
+    margin-top: 15px;
+}
+.name-drop-container{
+    position: absolute;
+    width: 300px;
+    min-height: 130px;
+    left: 0px;
+    top: 28px;
+    background: #000;
+    z-index: 99;
+    display: block;
+    color: #fff;
+    display:none;
+}
+.name-drop-container:before{
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #000;
+    position: absolute;
+    top: -10px;
+    right: 25px;
+}
+.top-img{
+    height: 100px;
+}
+.drop-pad{
+    padding: 10px 0px;
+}
+.name-drop-container .quick-link{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    border-top: 1px solid #1d1d1d;
+}
+.name-drop-container .quick-link li{
+    list-style: none;
+    width: 33.333333%;
+    float: left;
+    display: inline;
+    border-right: 1px solid #1d1d1d;
+}
+.name-drop-container .quick-link li a{
+    color: #FFF;
+    padding: 14px 0px;
+    display: block;
+}
+.name-drop-container .quick-link li a:hover{
+    background: #1d1d1d;
+    color: #fff;
+    text-decoration: none;
+}
+/*Author:Tanveer , Date:5-28-2015, Menu*/

@@ -88,8 +88,8 @@
                                                 }
                                             </select>
                                         </td>
-                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input debit", autocomplete = "off", Value = '0', required = "required" })</td>
-                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input credit", autocomplete = "off", Value = '0', required = "required" })</td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input debit", autocomplete = "off", Value = '0', required = "required", style = "text-align: right;" })</td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input credit", autocomplete = "off", Value = '0', required = "required", style = "text-align: right;" })</td>
                                         <td class="text-center"><a onclick="deleteRow(this)" href="javascript:void(0)"><i class="fa fa-remove cstm-remove"></i></a></td>
                                     </tr>
                                 }
@@ -97,8 +97,8 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="2">Total</td>
-                                    <td><div id="totaldebit">0</div></td>
-                                    <td><div id="totalcredit">0</div></td>
+                                    <td><div id="totaldebit" style="text-align: right;">0</div></td>
+                                    <td><div id="totalcredit" style="text-align: right;">0</div></td>
                                     <td></td>
                                 </tr>
                             </tfoot>
@@ -229,8 +229,8 @@
                                 + options
                             + '</select>'
                       + '</td>'
-                      + '<td><input Value="0" autocomplete="off" class="cstm-input debit" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="" /></td>'
-                      + '<td><input Value="0" autocomplete="off" class="cstm-input credit" data-val="true" data-val-number="The field Credit must be a number." data-val-required="The Credit field is required." id="voucherDetails_' + numItems + '__Credit" name="voucherDetails[' + numItems + '].Credit" type="text" value="" /></td>'
+                      + '<td><input Value="0" autocomplete="off" class="cstm-input debit" data-val="true" data-val-number="The field Debit must be a number." data-val-required="The Debit field is required." id="voucherDetails_' + numItems + '__Debit" name="voucherDetails[' + numItems + '].Debit" type="text" value="" style="text-align: right;" /></td>'
+                      + '<td><input Value="0" autocomplete="off" class="cstm-input credit" data-val="true" data-val-number="The field Credit must be a number." data-val-required="The Credit field is required." id="voucherDetails_' + numItems + '__Credit" name="voucherDetails[' + numItems + '].Credit" type="text" value="" style="text-align: right;"/></td>'
                       + '<td class="text-center"><a onclick="deleteRow(this)" href="javascript:void(0)"><i class="fa fa-remove cstm-remove"></i></a></td>'
                     + '</tr>';
         $("#tbd-jour").append(htmlStr);
@@ -241,6 +241,7 @@
         $('.debit').keyup(function () {
             $(this).parents('tr.tr-content').find('.credit').val(0.00);
             var result = 0;
+            if (isNaN($(this).val())) $(this).val(0.00)
             $('.debit').each(function () {
                 result += parseFloat($(this).val());
                 if (!isNaN(result)) {
@@ -258,7 +259,7 @@
 
         $('.credit').keyup(function () {
             $(this).parents('tr.tr-content').find('.debit').val(0.00);
-
+            if (isNaN($(this).val())) $(this).val(0.00)
             var result = 0;
             $('.credit').each(function () {
                 result += parseFloat($(this).val());
@@ -469,6 +470,7 @@
             $('.debit').keyup(function () {
                 $(this).parents('tr.tr-content').find('.credit').val(0.00);
                 var result = 0;
+                if (isNaN($(this).val())) $(this).val(0.00)
                 $('.debit').each(function () {
                     result += parseFloat($(this).val());
                     if (!isNaN(result)) {
@@ -486,7 +488,7 @@
 
             $('.credit').keyup(function () {
                 $(this).parents('tr.tr-content').find('.debit').val(0.00);
-
+                if (isNaN($(this).val())) $(this).val(0.00)
                 var result = 0;
                 $('.credit').each(function () {
                     result += parseFloat($(this).val());
