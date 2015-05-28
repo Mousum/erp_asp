@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <ul class="quick-link">
-                        <li><a href="@Url.Action("Logout", "Users", new { area = "UserManagement" })"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                        <li><a href="@Url.Action("create", "EmployeeProfile", new { area = "OrganizationManagement" })"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
                         <li><a href="@Url.Action("AccountSettings", "Users", new { area = "UserManagement" })"><i class="fa fa-gear"></i>&nbsp;Account</a></li>
                         <li><a href="@Url.Action("Logout", "Users", new { area = "UserManagement" })"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
                     </ul>
@@ -284,6 +284,11 @@
                             var name = json.FirstName + " " + json.LastName;
                             $('.showName').html(name + '&nbsp;<i class="fa fa-caret-down"></i>');
                             $('.profileName').text(name);
+                        }
+                        if (json.EmployeeProfiles !== null) {
+
+                        } else {
+
                         }
                     }
                 },

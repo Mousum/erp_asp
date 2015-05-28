@@ -1,5 +1,7 @@
 ﻿@model Mhasb.Wsit.CustomModel.Organizations.EmployeeProfileCustom
-
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
 @using (Html.BeginForm("Create", "EmployeeProfile", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
@@ -280,7 +282,7 @@
 
 }
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+
 <script>
     function readImageURL(input) {
         if (input.files && input.files[0]) {
