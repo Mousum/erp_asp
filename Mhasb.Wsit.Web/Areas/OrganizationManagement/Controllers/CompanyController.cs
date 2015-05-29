@@ -200,6 +200,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                         }
 
                     }
+                    msg = "Success";
                 }
                 else
                     msg = "Registration Failed";

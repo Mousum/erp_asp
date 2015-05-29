@@ -32,6 +32,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
             var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);
+
             if (Atypes.Count == 0)
             {
                 cSer.AddBaseAccountTypes();

@@ -12,6 +12,7 @@ namespace Mhasb.Domain.OrgSettings
     {
        public string Name { get; set; }
        public string Symbol { get; set; }
+       public string Code { get; set; }
        public int Id { get; set; }
         public ObjectState State { get; set; }
 

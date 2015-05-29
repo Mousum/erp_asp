@@ -15,12 +15,21 @@ namespace Mhasb.DAL.Mapping.OrgSettings
            //primary key
            this.HasKey(c => c.Id);
            this.Ignore(c => c.State);
+
            this.Property(c => c.Name)
                .HasColumnName("name")
                .HasMaxLength(100)
                .IsRequired();
+           this.Property(c => c.Symbol)
+               .HasColumnName("symbol")
+               .HasMaxLength(50)
+               .IsRequired();
+           this.Property(c => c.Code)
+               .HasColumnName("code")
+               .HasMaxLength(50)
+               .IsRequired();
 
-           this.ToTable("set.currencies");
+           this.ToTable("com.currencies");
        }
     }
 }

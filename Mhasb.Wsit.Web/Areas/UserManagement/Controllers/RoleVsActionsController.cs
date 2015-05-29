@@ -37,7 +37,18 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             var roleVsAction = new RoleVsAction();
             var model = roleVsActionService.GetAllAndSelectedActionByRoleId(RoleId);
-            model = model.Where(m => m.ActionLists.ModuleName == ModuleName && m.ActionLists.ControllerName == ControllerName).ToList();
+            if (ModuleName != "" && ControllerName != "")
+            {
+                model = model.Where(m => m.ActionLists.ModuleName == ModuleName && m.ActionLists.ControllerName == ControllerName).ToList();
+            }
+            else if (ModuleName != "")
+            {
+                model = model.Where(m => m.ActionLists.ModuleName == ModuleName).ToList();
+            }
+            else if (ControllerName != "")
+            {
+                model = model.Where(m => m.ActionLists.ControllerName == ControllerName).ToList();
+            }
             foreach (var item in model)
             {
                 if (ActionId == null)
@@ -65,9 +76,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
                 roleVsActionService.AddRoleVsAction(roleVsAction);
             }
-            ViewBag.Msg = "Operation SuccessFull";
-
-            return View("CreateSucess");
+            TempData.Add("succMsg", "Access Controll Saved");
+            return RedirectToAction("Create", "RoleVsActions", new { area = "UserManagement" });
         }
 
         [HttpPost]
