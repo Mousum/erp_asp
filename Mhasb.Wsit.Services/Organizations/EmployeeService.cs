@@ -129,5 +129,25 @@ namespace Mhasb.Services.Organizations
                 return null;
             }
         }
+
+        public Employee GetEmployeeByUserIdAndCompanyId(long userId,int companyId)
+        {
+            try
+            {
+                var empObj = empRep.GetOperation()
+                    .Include(c => c.Users)
+                    .Include(c => c.Companies)
+                    .Include(d => d.Designations)
+                    .Filter(c => c.UserId == userId && c.CompanyId==companyId)
+                    .Get().SingleOrDefault();
+                return empObj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
+
     }
 }
