@@ -32,9 +32,6 @@ $(document).ready(function () {
                 $('.msg-danger').show('slow');
                 return false;
             }
-            console.log(chackOne);
-            console.log(chackTwo);
-            console.log(chackThree);
             //var setting = { "Settings": { "lgcompany": chackOne, "lgdash": chackTwo, "lglast": chackThree, "TimezoneId": zoneId } };
             var url = $('.UpdateSettings').attr("data-url");
             $.ajax({
