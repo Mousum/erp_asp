@@ -154,11 +154,22 @@ namespace Mhasb.Services.Users
 
         public User GetUserProfile(long userId)
         {
-            var userObj = userRep.GetOperation()
-                .Include(u => u.EmployeeProfiles)
-                .Get().SingleOrDefault(u => u.Id == userId);
-            //    .
-            return userObj;
+            try
+            {
+                var userObj = userRep.GetOperation()
+               .Include(u => u.EmployeeProfiles)
+               .Filter(u => u.Id == userId)
+               .Get().SingleOrDefault();
+
+                return userObj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+
+           
         }
 
     }

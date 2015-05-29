@@ -146,7 +146,7 @@
                         <th>Auditor Email</th>
                         <th>Postion</th>
                         <th>Reporting Manager</th>
-                        <th>Action</th>
+                        @*<th>Action</th>*@
                     </tr>
                 </thead>
                 <tbody>
@@ -158,7 +158,7 @@
                             <td>@item.AuditorEmail</td>
                             <td>@item.Employees.Designations.DesignationName</td>
                             <td>@item.Managers.Users.FirstName @item.Managers.Users.LastName</td>
-                            <td>Edit</td>
+                            @*<td>Edit</td>*@
                         </tr>
                     }
 
@@ -215,6 +215,7 @@
             if($("#combobox").val()=='' || $("#combobox1").val()==''){
                 alert("Please select both Auditor and Manager...");
                 event.preventDefault();
+                return;
             }
 
             if($("#combobox").val()== $("#combobox1").val()){

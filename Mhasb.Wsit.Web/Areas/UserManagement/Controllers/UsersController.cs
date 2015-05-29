@@ -128,7 +128,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult MyMhasb()
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            if (user==null)
+            if (user == null)
             {
                 return RedirectToAction("Logout");
             }
@@ -140,26 +140,42 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             ViewBag.CompanyArr = user.Id;
             var accountsetting = setService.GetAllByUserId(user.Id);
             ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = accountsetting!=null? accountsetting.Companies.DisplayName:"Company was not set.";
+            ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
             ViewBag.lastLoginTime = DateTime.Now;
             return View("MyMhasb_new", myCompanyList);
 
         }
-        public JsonResult GetCompany() {
+        public JsonResult GetCompany()
+        {
+
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id).Select(c => new  { c.Id, c.DisplayName }).ToList();
-            
-            if (myCompanyList.Count() <=0 )
+            var myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
+
+            if (myCompanyList.Count() <= 0)
             {
                 var success = "False";
                 return Json(success, JsonRequestBehavior.AllowGet);
             }
-            else {
+            else
+            {
                 return Json(myCompanyList, JsonRequestBehavior.AllowGet);
             }
-           
-        }
 
+        }
+        public JsonResult GetSelectedCompanyName()
+        {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var setObj = setService.GetAllByUserId(user.Id);
+            if (setObj == null)
+            {
+                var success = "False";
+                return Json(success, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(setObj, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult AccountSettings()
         {
 
@@ -177,10 +193,10 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             catch (Exception ex)
             {
-                
+
                 var rr = ex.Message;
             }
-          
+
 
             return View("AccountSettings_new", accsetting);
 
@@ -189,7 +205,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult UpdateEmail(string Email)
         {
 
-            if (String.IsNullOrEmpty(Email) )
+            if (String.IsNullOrEmpty(Email))
             {
                 return Json(new { msg = "False" });
             }
@@ -235,11 +251,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 CustomPrincipal.Login(email, User.Password, false);
                 return Json(new { success = "True", msg = email, msgpass = User.Password });
             }
-            else 
+            else
             {
                 return Json(new { success = "False" });
             }
-          
+
         }
 
         [HttpPost]
@@ -278,6 +294,41 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
 
         }
+        [HttpPost]
+        public ActionResult UpdateCompnay(int ComanyId)
+        {
+            var email = HttpContext.User.Identity.Name;
+            var users = uService.GetSingleUserByEmail(email);
+            var setObj = setService.GetAllByUserId(users.Id);
+
+            try
+            {
+                if (setObj != null)
+                {
+                    setObj.userId = users.Id;
+                    setObj.CompanyId = ComanyId;
+                    setService.UpdateSettings(setObj);
+                    return Json(new { success = "True" });
+                }
+                else
+                {
+                    Settings newObj = new Settings();
+                    newObj.userId = users.Id;
+                    newObj.CompanyId = ComanyId;
+                    setService.AddSettings(newObj);
+
+                    return Json(new { success = "True" });
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return Json(new { success = "False" });
+            }
+
+
+
+        }
 
         public JsonResult GetSettingsByUserId()
         {
@@ -290,10 +341,10 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             catch (Exception ex)
             {
-                
-                var rr =ex.Message;
+
+                var rr = ex.Message;
             }
-           
+
 
             return Json(setObj, JsonRequestBehavior.AllowGet);
         }
@@ -301,14 +352,16 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var myProfule = uService.GetUserProfile(user.Id);
-            if (myProfule==null)
+            
+            if (myProfule == null)
             {
                 var success = "False";
                 return Json(success, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(myProfule, JsonRequestBehavior.AllowGet);
+                var dataSet = new { myProfule.FirstName, myProfule.LastName, myProfule.EmployeeProfiles.Bio, myProfule.EmployeeProfiles.ImageLocation };
+                return Json(dataSet, JsonRequestBehavior.AllowGet);
             }
         }
 

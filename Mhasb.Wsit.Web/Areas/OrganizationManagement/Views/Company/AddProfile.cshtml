@@ -15,12 +15,21 @@
     <div class="container my-dashboard">
         <div class="row clearfix no-margin">
             <div class="col-md-12 no-padding">
+                @if (TempData["SucMasg"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SucMasg"]</div>
+                }
+                @if (TempData["errMsg"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["errMsg"]</div>
+                }
                 <h2 class="txt-bold promo-text"><span class="promo-highlight">Join</span> to the MHASB Community for FREE !!</h2>
                 <p class="promo-p text-center">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula nunc blandit eros facilisis malesuada. Integer in orci turpis. Praesent id risus ullamcorper, iaculis est eget, scelerisque nulla. Integer magna risus
                 </p>
             </div>
         </div>
+
         <div class="row clearfix no-margin">
             <h3 class="all-head">Profile Settings</h3>
             <div class="col-md-6 clearfix pull-right text-right">
@@ -112,7 +121,7 @@
                     <div class="col-md-12 pad-right-null">
                         <div class="col-md-12"><label id="errmsg"></label></div>
                         <label class="btn-block-dis">Phone:</label>
-                        
+
                         <div class="col-md-3 no-padding">
                             @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
                             @Html.ValidationMessageFor(model => model.Phone.FieldValueOne)
@@ -129,7 +138,7 @@
                 </div>
                 <div class="row cstm-frm-row">
                     <div class="col-md-12">
-                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input",placeholder="Website"})
+                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input", placeholder = "Website" })
                         @Html.ValidationMessageFor(model => model.Website.FieldValueOne)
                     </div>
                 </div>
@@ -240,136 +249,136 @@
         @Html.ActionLink("Back to List", "Index")
     </div>*@
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
+@section Scripts {
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function readImageURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profile_pic_target').attr('src', e.target.result);
+                }
 
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
-<script>
-    function readImageURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#profile_pic_target').attr('src', e.target.result);
+                reader.readAsDataURL(input.files[0]);
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
 
-    $("#profile_pic").change(function () {
-        readImageURL(this);
-    });
+        $("#profile_pic").change(function () {
+            readImageURL(this);
+        });
 
-    $(document).on('keypress', '#Phone_FieldValueOne', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
-            //display error message
-            $("#errmsg").html("Digits Only").show().fadeOut("slow");
-            return false;
-        }
-        if ($("#Phone_FieldValueThree").val().length > 3) {
-            //display error message
-            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+        $(document).on('keypress', '#Phone_FieldValueOne', function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+            if ($("#Phone_FieldValueThree").val().length > 3) {
+                //display error message
+                $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
 
-            return false;
-        }
-    });
+                return false;
+            }
+        });
 
-    $(document).on('keypress', '#Phone_FieldValueTwo', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) ) {
-            //display error message
-            $("#errmsg").html("Digits Only").show().fadeOut("slow");
-            return false;
-        }
-        if ($("#Phone_FieldValueThree").val().length > 3) {
-            //display error message
-            $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
+        $(document).on('keypress', '#Phone_FieldValueTwo', function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+            if ($("#Phone_FieldValueThree").val().length > 3) {
+                //display error message
+                $("#errmsg").html("Maximum 4 digit").show().fadeOut("slow");
 
-            return false;
-        }
-    });
+                return false;
+            }
+        });
 
-    $(document).on('keypress', '#Phone_FieldValueThree', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) ) {
-            //display error message
-            $("#errmsg").html("Digits Only").show().fadeOut("slow");
-            return false;
-        }
-        if ($("#Phone_FieldValueThree").val().length > 5) {
-            //display error message
-            $("#errmsg").html("Maximum 6 digit").show().fadeOut("slow");
+        $(document).on('keypress', '#Phone_FieldValueThree', function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+            if ($("#Phone_FieldValueThree").val().length > 5) {
+                //display error message
+                $("#errmsg").html("Maximum 6 digit").show().fadeOut("slow");
 
-            return false;
-        }
-    });
+                return false;
+            }
+        });
 
-    //$("#add_contact_btn").click(function () {
-    //    if ($("#add_contact_fieldnames").is(':visible'))
-    //        $("#add_contact_fieldnames").hide();
-    //    else
-    //        $("#add_contact_fieldnames").show();
-    //});
+        //$("#add_contact_btn").click(function () {
+        //    if ($("#add_contact_fieldnames").is(':visible'))
+        //        $("#add_contact_fieldnames").hide();
+        //    else
+        //        $("#add_contact_fieldnames").show();
+        //});
 
-    $("#facebook_name").click(function () {
-        $("#facebook_field").show();
-        $("#Facebook_FieldValueOne").select();
-    });
+        $("#facebook_name").click(function () {
+            $("#facebook_field").show();
+            $("#Facebook_FieldValueOne").select();
+        });
 
-    $("#twitter_name").click(function () {
-        $("#twitter_field").show();
-        $("#Twitter_FieldValueOne").select();
-    });
+        $("#twitter_name").click(function () {
+            $("#twitter_field").show();
+            $("#Twitter_FieldValueOne").select();
+        });
 
-    $("#skype_name").click(function () {
-        $("#skype_field").show();
-        $("#Skype_FieldValueOne").select();
-    });
+        $("#skype_name").click(function () {
+            $("#skype_field").show();
+            $("#Skype_FieldValueOne").select();
+        });
 
-    $("#fax_name").click(function () {
-        $("#fax_field").show();
-        $("#Fax_FieldValueOne").select();
-    });
+        $("#fax_name").click(function () {
+            $("#fax_field").show();
+            $("#Fax_FieldValueOne").select();
+        });
 
-    $("#google_name").click(function () {
-        $("#google_field").show();
-        $("#Google_FieldValueOne").select();
-    });
-    $("#linkedin_name").click(function () {
-        $("#linkedin_field").show();
-        $("#Linkedin_FieldValueOne").select();
-    });
-    $("#facebook_remove").click(function () {
-        $("#facebook_field").hide();
-        $("#Facebook_FieldValueOne").val("");
+        $("#google_name").click(function () {
+            $("#google_field").show();
+            $("#Google_FieldValueOne").select();
+        });
+        $("#linkedin_name").click(function () {
+            $("#linkedin_field").show();
+            $("#Linkedin_FieldValueOne").select();
+        });
+        $("#facebook_remove").click(function () {
+            $("#facebook_field").hide();
+            $("#Facebook_FieldValueOne").val("");
 
-    });
-    $("#twitter_remove").click(function () {
-        $("#twitter_field").hide();
-        $("#Twitter_FieldValueOne").val("");
+        });
+        $("#twitter_remove").click(function () {
+            $("#twitter_field").hide();
+            $("#Twitter_FieldValueOne").val("");
 
-    });
-    $("#google_remove").click(function () {
-        $("#google_field").hide();
-        $("#Google_FieldValueOne").val("");
+        });
+        $("#google_remove").click(function () {
+            $("#google_field").hide();
+            $("#Google_FieldValueOne").val("");
 
-    });
-    $("#linkedin_remove").click(function () {
-        $("#linkedin_field").hide();
-        $("#Linkedin_FieldValueOne").val("");
+        });
+        $("#linkedin_remove").click(function () {
+            $("#linkedin_field").hide();
+            $("#Linkedin_FieldValueOne").val("");
 
-    });
-    $("#skype_remove").click(function () {
-        $("#skype_field").hide();
-        $("#Skype_FieldValueOne").val("");
+        });
+        $("#skype_remove").click(function () {
+            $("#skype_field").hide();
+            $("#Skype_FieldValueOne").val("");
 
-    });
-    $("#fax_remove").click(function () {
-        $("#fax_field").hide();
-        $("#Fax_FieldValueOne").val("");
+        });
+        $("#fax_remove").click(function () {
+            $("#fax_field").hide();
+            $("#Fax_FieldValueOne").val("");
 
-    });
+        });
 
-</script>
+    </script>
+}
+
+
 
 

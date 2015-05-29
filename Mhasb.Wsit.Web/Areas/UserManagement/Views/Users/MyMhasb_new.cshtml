@@ -11,6 +11,21 @@
                 <h4><a href="#"> My MHASB</a></h4>
                 <p>Hi @ViewBag.userName , you last logged into @ViewBag.lastLoginCompany at @ViewBag.lastLoginTime O'Clock</p>
             </div>
+
+
+
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
+
+
+
+
             <div class="table-responsive">
                 <h3>Organisations</h3>
                 <table class="table organization-table">
@@ -27,7 +42,8 @@
                         @foreach (Mhasb.Domain.Organizations.Company company in Model)
                         {
                             <tr>
-                                <td>@Html.ActionLink(@company.TradingName, "Dashboard", "Users", new { area = "UserManagement" }, new { @class = "link" })</td>
+                                <td><a href="javascript:void(0)" class="gotoCompany" id="@company.Id">@company.TradingName</a></td>
+                                @*<td>@Html.ActionLink(@company.TradingName, "Dashboard", "Users", new { area = "UserManagement" }, new { @class = "link" })</td>*@
                                 <td>21 Feb 3:54 p.m. By <br /> Khalid AL Kubaisi</td>
                                 <td>Adviser <br /> Manage users</td>
                                 <td>@company.Users.FirstName @company.Users.LastName <br />In Trial</td>
@@ -50,3 +66,28 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    @*$(document).ready(function () {
+        $('.gotoCompany').click(function () {
+            var companyID = $(this).attr('id');
+            var baseUrl = '@Url.Content("~/")';
+
+            $.ajax({
+                url: "/UserManagement/Users/UpdateCompnay",
+                type: "POST",
+                data: { ComanyId: companyID },
+                success: function (data) {
+                    if (data.success == "True") {
+                        window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                    } else {
+
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        });
+        
+    });*@
+</script>

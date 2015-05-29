@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @*<a class="navbar-brand" href="#page-top"><img src="~/img/logo.png" alt="logo"></a>*@
-                <a class="navbar-brand" href="#page-top"><img src="~/img/dyn-logo.png" alt="logo"><label>MHSAB</label></a>
+                <a class="navbar-brand" href="#page-top"><img src="~/img/dyn-logo.png" alt="logo"><label class="selectedCompany"></label></a>
                 <div class="brand-drop-container" id="brand-cont">
                     <h4>MHSAB</h4>
                     <ul class="drop-list" id="companyhtm">
@@ -240,6 +240,29 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $.ajax({
+                url: "/UserManagement/Users/GetSelectedCompanyName",
+                type: "POST",
+                data: {  },
+                success: function (data) {
+                    console.log(data);
+                    if (data.success == "False") {
+                       
+                    } else {
+                        if (data.success == "False") {
+                            $('.selectedCompany').text("MHSAB");
+                        } else {
+                            if (data.Companies.DisplayName !== "") {
+                                $('.selectedCompany').text(data.Companies.DisplayName);
+                            }
+
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            });
             $('.navbar-brand').click(function () {
                 $('#brand-cont').slideToggle("fast");
             });
@@ -252,17 +275,37 @@
                 type: "GET",
                 data: {},
                 success: function (data) {
-                    
+
                     if (data == "False") {
-                        
+
                     } else {
                         var json = $.parseJSON(JSON.stringify(data));
                         var companyhtm = "";
                         $.each(json, function (key, value) {
-                            companyhtm = ' <li><a href="#">' + value['DisplayName'] + '</a></li>';
+                            companyhtm = ' <li><a href="javascript:void(0)" class="gotoCompany" id="' + value['Id'] + '">' + value['DisplayName'] + '</a></li>';
                             $('#companyhtm').append(companyhtm);
+                            $('.gotoCompany').click(function () {
+                                var companyID = $(this).attr('id');
+                                var baseUrl = '@Url.Content("~/")';
+
+                                $.ajax({
+                                    url: "/UserManagement/Users/UpdateCompnay",
+                                    type: "POST",
+                                    data: { ComanyId: companyID },
+                                    success: function (data) {
+                                        if (data.success == "True") {
+                                            window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                                        } else {
+
+                                        }
+                                    },
+                                    error: function () {
+
+                                    }
+                                });
+                            });
                         });
-                        
+
                     }
                 },
                 error: function () {
@@ -285,11 +328,7 @@
                             $('.showName').html(name + '&nbsp;<i class="fa fa-caret-down"></i>');
                             $('.profileName').text(name);
                         }
-                        if (json.EmployeeProfiles !== null) {
-
-                        } else {
-
-                        }
+                       
                     }
                 },
                 error: function () {
