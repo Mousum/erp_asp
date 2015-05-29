@@ -164,7 +164,8 @@
                         }
                   
                         if (json.ImageLocation !== "") {
-                            var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
+                            // var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
+                            var imagePath = '/'+json.ImageLocation;
                             $('.profileImage').attr("src", imagePath)
                         } else {
                             $('.profileImage').attr("src", "")
