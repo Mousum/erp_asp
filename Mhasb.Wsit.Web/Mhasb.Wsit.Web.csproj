@@ -353,7 +353,6 @@
     <Content Include="Areas\OrganizationManagement\Views\web.config" />
     <Content Include="Areas\OrganizationManagement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\RegistrationResult.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\Index.cshtml" />
     <Content Include="Areas\UserManagement\Views\Roles\CreateRole.cshtml" />
@@ -376,7 +375,6 @@
     <Content Include="Areas\UserManagement\Views\UserInRoles\GetUserInRole.cshtml" />
     <Content Include="Areas\UserManagement\Views\UserInRoles\Index.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Shared\_mhasbLayout.cshtml" />
-    <Content Include="Areas\OrganizationManagement\Views\Company\CompanyRegistration.cshtml" />
     <Content Include="Areas\NotificationManagement\Views\Invitations\InvitationConfirm.cshtml" />
     <Content Include="Areas\Commons\Views\AreaTime\Create.cshtml" />
     <Content Include="Areas\Commons\Views\AreaTime\Details.cshtml" />
@@ -485,6 +483,7 @@
     <Content Include="Areas\Commons\Views\LegalEntities\Details.cshtml" />
     <Content Include="Areas\Commons\Views\LegalEntities\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\LegalEntities\Index.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

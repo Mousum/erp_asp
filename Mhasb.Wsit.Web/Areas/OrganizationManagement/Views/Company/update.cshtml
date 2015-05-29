@@ -22,6 +22,7 @@
             @Html.HiddenFor(m => m.Users.Id, new { Value = Model.Users.Id })
             @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
             @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
+            @Html.HiddenFor(m => m.Email, new { Value = Model.Email })
 
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
@@ -191,17 +192,17 @@
                         @Html.ValidationMessageFor(model => model.LogoLocation)
                     </div>
                     <div class="col-md-6">
-                        <img id="logo_target" src="http://placehold.it/160x120" alt="Logo" width="160" height="120" />
+                        <img id="logo_target" src="@Url.Content("~/"+Model.LogoLocation)" alt="Logo" width="160" height="120" />
                     </div>
                 </div>
                 <div class="row cstm-frm-row">
                     <div class="col-md-2 cstm-lbl">@Html.LabelFor(model => model.SealLocation, "Seal")</div>
                     <div class="col-md-4 cstm-reg-label-1">
-                        <input name="logoImage" type="file" id="logoImage" />
+                        <input name="sealImage" type="file" id="sealImage" />
                         @Html.ValidationMessageFor(model => model.SealLocation)
                     </div>
                     <div class="col-md-6">
-                        <img id="logo_target" src="http://placehold.it/160x120" alt="Logo" width="160" height="120" />
+                        <img id="seal_target" src="@Url.Content("~/"+Model.SealLocation)" alt="Seal" width="160" height="120" />
                     </div>
                 </div>
 
@@ -214,7 +215,19 @@
                         <input name="documentLocation[]" type="file" multiple />
                     </div>
 
+                    @{int i = 1;}
+                    @foreach (var item in Model.Documents)
+                    {
+                        <div id="Document_@item.Id">
+                            <a href="@Url.Content("~/" +item.DocumentLocation)" target="_blank">
+                                @i . @item.DocumentOriginalName
+                                @{i++;}
+                                @*@Html.DisplayFor(Model.Documents)*@
+                            </a>
+                            <button type="button" class="CompanyDocumentList" cdid="@item.Id">X</button>
+                        </div>
 
+                    }
                     @*@Html.ValidationMessageFor(model => model.DocumentLocation)*@
 
                 </div>
@@ -230,61 +243,62 @@
     </div>
 </div>
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
-<script>
-    $(".CompanyDocumentList").click(function () {
-        //alert($(this).attr("CDId"));
-        //$("#Document_" + $(this).attr("CDId")).hide();
-        var rr = '@Url.Action("deleteCompanyDocument", "Company", new { area = "OrganizationManagement" })';
-        var doc = $("#Document_" + $(this).attr("CDId"));
-        $.ajax({
-            url: rr + '/' + $(this).attr("CDId"),
-            //data:"id="+$(this).attr("CDId"),
-            success: function (result) {
-                doc.hide();
-                alert(result);
-            }
+@section Scripts {
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(".CompanyDocumentList").click(function () {
+            //alert($(this).attr("CDId"));
+            //$("#Document_" + $(this).attr("CDId")).hide();
+            var rr = '@Url.Action("deleteCompanyDocument", "Company", new { area = "OrganizationManagement" })';
+            var doc = $("#Document_" + $(this).attr("CDId"));
+            $.ajax({
+                url: rr + '/' + $(this).attr("CDId"),
+                //data:"id="+$(this).attr("CDId"),
+                success: function (result) {
+                    doc.hide();
+                    alert(result);
+                }
+            });
         });
-    });
 
 
 
-    function readLogoURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#logo_target').attr('src', e.target.result);
+        function readLogoURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#logo_target').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
 
-    $("#logoImage").change(function () {
-        readLogoURL(this);
-    });
+        $("#logoImage").change(function () {
+            readLogoURL(this);
+        });
 
-    function readSealURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#seal_target').attr('src', e.target.result);
+        function readSealURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#seal_target').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
 
-    $("#sealImage").change(function () {
-        readSealURL(this);
-    });
+        $("#sealImage").change(function () {
+            readSealURL(this);
+        });
 
-    $("#addDoc").click(function () {
-        $("#documentDiv").append("<input name='documentLocation[]' type='file' multiple />");
-        $("documentDiv").focus();
-    });
+        $("#addDoc").click(function () {
+            $("#documentDiv").append("<input name='documentLocation[]' type='file' multiple />");
+            $("documentDiv").focus();
+        });
 
-</script>
+    </script>
+}
+

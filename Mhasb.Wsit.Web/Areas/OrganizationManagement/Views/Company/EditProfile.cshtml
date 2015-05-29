@@ -4,16 +4,12 @@
     ViewBag.Title = "AddProfile";
 }
 
-<h2>AddProfile</h2>
-
 
 @using (Html.BeginForm("UpdateProfile", "Company", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>CompanyProfileCustom</h4>
-        <hr />
+
         @Html.ValidationSummary(true)
 
 
@@ -40,63 +36,17 @@
         @Html.HiddenFor(m => m.Skype.CompanyProfileId, new { Value = Model.Skype.CompanyProfileId })
 
 
-
-
-
-
-
-
-
-
-
-
-
-        @*<div class="row clearfix welcome-container">
-            <div class="col-md-8 column">
-                <h2 class="text-center welcome-header">
-                    Join to the MHASB community .. FREE
-                </h2>
-                <p class="text-center">
-                    List your profile on MHASB community to become listed in our users directory and become part of our growing community and expanded your commercial relationships
-                </p>
-                <div class="row clearfix">
-                    <div class="col-md-12 column choose-setting form-inline">
-                        <label class="italic">List My Profile:</label>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Turn On
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 column">
-                <div class="row clearfix">
-                    <div class="col-md-12 column">
-                        <div class="profile-image-div">
-                            <img id="profile_pic_target" src="@Url.Content("~/"+Model.companyProfile.ImageLocation)" alt="" width="120" />
-                        </div>
-                        <span class="img-div-txt">Profile Cover</span>
-                        <div class="form-group">
-                            <label for="profile-pic">Upload Photo</label>
-                            <input name="profile_pic" id="profile_pic" type="file" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
-
-
         <div class="container my-dashboard">
             <div class="row clearfix no-margin">
                 <div class="col-md-12 no-padding">
+                    @if (TempData["SucMasg"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SucMasg"]</div>
+                    }
+                    @if (TempData["errMsg"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["errMsg"]</div>
+                    }
                     <h2 class="txt-bold promo-text"><span class="promo-highlight">Join</span> to the MHASB Community for FREE !!</h2>
                     <p class="promo-p text-center">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula nunc blandit eros facilisis malesuada. Integer in orci turpis. Praesent id risus ullamcorper, iaculis est eget, scelerisque nulla. Integer magna risus
@@ -310,7 +260,7 @@
 
 
 
-    </div>
+
 }
 
 @*<div>

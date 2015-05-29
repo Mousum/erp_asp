@@ -20,13 +20,13 @@ namespace Mhasb.Domain.Organizations
         //public long UserId { get; set; }
 
         [Required(ErrorMessage = "Trading Name is required")]
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters.")]
         public string TradingName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters.")]
         public string LegalName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters.")]
         public string DisplayName { get; set; }
 
         [Required(ErrorMessage = "Industry is required")]
@@ -38,24 +38,26 @@ namespace Mhasb.Domain.Organizations
         [Required(ErrorMessage = "Language is required")]
         public int LanguageId { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Cannot be longer than 50 characters.")]
         public string Tel { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Cannot be longer than 40 characters.")]
         public string Fax { get; set; }
+
+        [Range(1, 999999999999999, ErrorMessage = "Exceed Limit")]  
         public int? P_O_Box { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Cannot be longer than 50 characters.")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Location is required")]
-        [StringLength(200)]
+        [StringLength(200, ErrorMessage = "Cannot be longer than 200 characters.")]
         public string Location { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Cannot be longer than 50 characters.")]
         public string Website { get; set; }
 
         public int? LegalEntityId { get; set; }
