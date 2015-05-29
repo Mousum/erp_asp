@@ -54,7 +54,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
                 string profilePicName = "Employee" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
-                string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles");
+                string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
                 EmployeeProfile ep = new EmployeeProfile();
                 ep = employeeProfileCustom.employeeProfile;
                 ep.Users = new User { Id = user.Id, Email = user.Email };
