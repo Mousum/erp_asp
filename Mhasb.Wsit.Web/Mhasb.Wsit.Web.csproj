@@ -581,6 +581,58 @@
     <Content Include="Scripts\treeview\jquery-treeview-async-0.1.0.js" />
     <Content Include="Scripts\treeview\jquery-treeview.css" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\abcd\Logo_abcd_1_q1bov21u.xrd.png" />
+    <Content Include="Uploads\abcd\Logo_abcd_1_uifv0q4z.vrr.png" />
+    <Content Include="Uploads\abcd\Logo_abcd_7_e1fp5bxm.rxb.png" />
+    <Content Include="Uploads\abcd\Seal_abcd_1_tg4b2vo5.sl3.png" />
+    <Content Include="Uploads\abcd\Seal_abcd_1_y33dajia.rxy.png" />
+    <Content Include="Uploads\abcd\Seal_abcd_7_xnwdp3yt.squ.png" />
+    <Content Include="Uploads\CompanyProfiles\Employee__1_frikkkod.30f.png" />
+    <Content Include="Uploads\CompanyProfiles\Employee__1_m40hidog.noh.png" />
+    <Content Include="Uploads\CompanyProfiles\Employee__1_svk3b0ih.42a.png" />
+    <Content Include="Uploads\dfgh\Logo_dfgh_1_kmw1pay3.ic5.png" />
+    <Content Include="Uploads\dfgh\Seal_dfgh_1_c4dvkbtq.orf.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_0pgzec1h.yqa.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_1ymjvurg.g1m.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_5rr25g2d.i1e.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_bbt3k3gd.uas.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_bqjslyo0.x0a.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_itgig2hu.udr.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_lawo4z0t.key.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__1_xpahssjd.d1z.png" />
+    <Content Include="Uploads\EmployeeProfiles\Employee__2_5vazp2i2.w5k.png" />
+    <Content Include="Uploads\Google\Document_Google_2_sywnh51y.fhc.txt" />
+    <Content Include="Uploads\Google\Logo_Google_2_c232tz45.0lb.png" />
+    <Content Include="Uploads\Google\Seal_Google_2_ithqq1vz.gz2.png" />
+    <Content Include="Uploads\mmkllkjklj\Logo_mmkllkjklj_1_0di11mly.vch.png" />
+    <Content Include="Uploads\mmkllkjklj\Logo_mmkllkjklj_9_age4guba.r1k.png" />
+    <Content Include="Uploads\mmkllkjklj\Seal_mmkllkjklj_1_3cogo3fm.vw3.png" />
+    <Content Include="Uploads\mmkllkjklj\Seal_mmkllkjklj_9_w5y4rirj.vun.png" />
+    <Content Include="Uploads\Test\Logo_Test_2_fd4l4zlr.icw.png" />
+    <Content Include="Uploads\Test\Logo_Test_8_44hw2g4a.ip1.png" />
+    <Content Include="Uploads\Test\Seal_Test_2_f43liccc.tj5.png" />
+    <Content Include="Uploads\Test\Seal_Test_8_crs0ocmj.n4s.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_1_aind1mzm.ivw.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_1_f4hre2py.xtb.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_1_gfitaadg.wm3.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_1_i2r20tzu.i2w.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_1_z3v15re1.5gc.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Logo_Workspace_InfoTech_2_5thwkes2.mv1.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_1_1rbtihob.ya4.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_1_4rb4xijj.ade.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_1_jn50wmlt.0ap.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_1_q4ml3yp0.z5g.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_1_y4bayhwp.tro.png" />
+    <Content Include="Uploads\Workspace_InfoTech\Seal_Workspace_InfoTech_2_gr1cseky.0j2.png" />
+    <Content Include="Uploads\Wsit\Document_Wsit_1_jd4hlggk.fw0.jpg" />
+    <Content Include="Uploads\Wsit\Document_WSIT_1_xvr13axv.kme.txt" />
+    <Content Include="Uploads\Wsit\Document_Wsit_4_3ckznoou.3re.jpg" />
+    <Content Include="Uploads\Wsit\Logo_Wsit_1_hzkrqbuv.ljb.png" />
+    <Content Include="Uploads\Wsit\Logo_WSIT_1_sepn5ue5.nol.png" />
+    <Content Include="Uploads\Wsit\Logo_Wsit_4_okgjyprk.kut.png" />
+    <Content Include="Uploads\Wsit\Seal_Wsit_1_4zpjhbui.1hf.png" />
+    <Content Include="Uploads\Wsit\Seal_WSIT_1_bm3iiqwc.pt5.png" />
+    <Content Include="Uploads\Wsit\Seal_Wsit_4_zrlpsa2x.req.png" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -597,6 +649,7 @@
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
+    <Content Include="Uploads\Wsit\Document_WSIT_1_lpg5lku4.s3p.pdf" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -616,7 +669,9 @@
     <Folder Include="Areas\OrgSettings\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\Al-Qalam_Media_\" />
+    <Folder Include="Uploads\New_Company\" />
+    <Folder Include="Uploads\sdfsdf\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

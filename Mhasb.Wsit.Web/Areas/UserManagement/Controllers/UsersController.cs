@@ -352,6 +352,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var myProfule = uService.GetUserProfile(user.Id);
+            
             if (myProfule == null)
             {
                 var success = "False";
@@ -359,7 +360,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             else
             {
-                return Json(myProfule, JsonRequestBehavior.AllowGet);
+                var dataSet = new { myProfule.FirstName, myProfule.LastName, myProfule.EmployeeProfiles.Bio, myProfule.EmployeeProfiles.ImageLocation };
+                return Json(dataSet, JsonRequestBehavior.AllowGet);
             }
         }
 
