@@ -51,7 +51,7 @@
                             <p id="dio">Description</p>
                         </div>
                         <div class="col-md-4 top-img">
-                            <img src="http://placehold.it/350x350" class="img-responsive">
+                            <img src="http://placehold.it/350x350" class="img-responsive profileImage">
                         </div>
                     </div>
                     <ul class="quick-link">
@@ -95,6 +95,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+
             $('.navbar-brand').click(function () {
                 $('#brand-cont').toggle();
             });
@@ -115,8 +116,28 @@
                         var json = $.parseJSON(JSON.stringify(data));
                         var companyhtm = "";
                         $.each(json, function (key, value) {
-                            companyhtm = ' <li><a href="#">' + value['DisplayName'] + '</a></li>';
+                            companyhtm = ' <li><a href="javascript:void(0)" class="gotoCompany" id="'+value['Id']+'">' + value['DisplayName'] + '</a></li>';
                             $('#companyhtm').append(companyhtm);
+                            $('.gotoCompany').click(function () {
+                                var companyID = $(this).attr('id');
+                                var baseUrl = '@Url.Content("~/")';
+                               
+                                $.ajax({
+                                    url: "/UserManagement/Users/UpdateCompnay",
+                                    type: "POST",
+                                    data: { ComanyId: companyID },
+                                    success: function (data) {
+                                        if (data.success == "True") {
+                                            window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                                        } else {
+
+                                        }
+                                    },
+                                    error: function () {
+
+                                    }
+                                });
+                            });
                         });
 
                     }
@@ -135,13 +156,23 @@
                     if (data == "False") {
 
                     } else {
-                        console.log(data);
-                        
                         var json = $.parseJSON(JSON.stringify(data));
-                        if (json.FirstName != "" && json.LastName) {
+                        if (json.FirstName != "" && json.LastName != "") {
                             var name = json.FirstName + " " + json.LastName;
                             $('.showName').html(name + '&nbsp;<i class="fa fa-caret-down"></i>');
                             $('.profileName').text(name);
+                        }
+                  
+                        if (json.ImageLocation !== "") {
+                            var imagePath="/"+json.ImageLocation;
+                            $('.profileImage').attr("src", imagePath)
+                        } else {
+                            $('.profileImage').attr("src", "")
+                        }
+                        if (LastName !== "") {
+
+                        } else {
+
                         }
                         
                         //var companyhtm = "";

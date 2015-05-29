@@ -52,7 +52,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
                 string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
-                string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
+                string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles");
                 if (ImageUpload(profilePic, profilePicName, profilePicLocation))
                 {
                     EmployeeProfile ep = new EmployeeProfile();
@@ -201,7 +201,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                 string uploadPath = filePath;
                 bool isValid = false;
-                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg"};
+                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg",".JPG"};
                 for (int i = 0; i < fileExtensions.Length; i++)
                 {
 
