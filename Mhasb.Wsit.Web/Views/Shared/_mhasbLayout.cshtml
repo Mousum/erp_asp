@@ -63,7 +63,7 @@
                             <p id="dio">Description</p>
                         </div>
                         <div class="col-md-4 top-img">
-                            <img src="http://placehold.it/350x350" class="img-responsive">
+                            <img src="http://placehold.it/350x350" class="img-responsive profileImage">
                         </div>
                     </div>
                     <ul class="quick-link">
@@ -323,12 +323,30 @@
 
                     } else {
                         var json = $.parseJSON(JSON.stringify(data));
-                        if (json.FirstName != "" && json.LastName) {
+                        if (json.FirstName != "" && json.LastName != "") {
                             var name = json.FirstName + " " + json.LastName;
                             $('.showName').html(name + '&nbsp;<i class="fa fa-caret-down"></i>');
                             $('.profileName').text(name);
                         }
-                       
+
+                        if (json.ImageLocation !== "") {
+                            var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
+                            $('.profileImage').attr("src", imagePath)
+                        } else {
+                            $('.profileImage').attr("src", "")
+                        }
+                        //if (json.Bio !== "") {
+                        //    $('#bio').text(json.Bio);
+                        //} else {
+                        //    $('#bio').text("Description");
+                        //}
+
+                        //var companyhtm = "";
+                        //$.each(json, function (key, value) {
+                        //    companyhtm = ' <li><a href="#">' + value['DisplayName'] + '</a></li>';
+                        //    $('#companyhtm').append(companyhtm);
+                        //});
+
                     }
                 },
                 error: function () {
