@@ -22,6 +22,7 @@
                 @Html.HiddenFor(model => model.voucher.FinancialSettingId, new { Value = ViewBag.FinancialSettingId })
                 <div class="row clearfix no-margin card">
                     <div class="col-md-12">
+                        <div class="alert alert-danger" id="error" style="display:none;"></div>
                         <div class="row clearfix">
                             <div class="col-md-8">
                                 <div class="row cstm-frm-row">
@@ -71,7 +72,9 @@
                 </div>
                 <div class="row clearfix no-margin">
                     <div class="col-md-12">
-                        <div class="alert alert-danger msg" style="display:none;"></div>
+                        <div class="alert alert-danger" id="msg" style="display:none;"></div>
+                        <div class="alert alert-danger" id="msg1" style="display:none;"></div>
+                        
                         <table class="table table-bordered table-responsive table-hover table-journal">
                             <thead>
                                 <tr>
@@ -86,9 +89,9 @@
                                 @for (int i = 0; i < 2; i++)
                                 {
                                     <tr class="tr-content">
-                                        <th scope="row">@Html.TextAreaFor(m => m.voucherDetails[i].Description, new { @class = "cstm-input description", required = "required" })</th>
+                                        <th scope="row">@Html.TextAreaFor(m => m.voucherDetails[i].Description, new { @class = "cstm-input description" })</th>
                                         <td>
-                                            <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control select-option" required="required">
+                                            <select id="combobox_@i" name="voucherDetails[@i].CoaId" class="form-control select-option">
                                                 <option value="">Select one...</option>
                                                 @foreach (var coa in ViewBag.coaList)
                                                 {
@@ -96,8 +99,8 @@
                                                 }
                                             </select>
                                         </td>
-                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input debit", autocomplete = "off", Value = '0', required = "required" ,style="text-align: right;" })</td>
-                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input credit", autocomplete = "off", Value = '0', required = "required", style = "text-align: right;" })</td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Debit, new { @class = "cstm-input debit", autocomplete = "off", Value = '0', style = "text-align: right;" })</td>
+                                        <td>@Html.TextBoxFor(m => m.voucherDetails[i].Credit, new { @class = "cstm-input credit", autocomplete = "off", Value = '0', style = "text-align: right;" })</td>
                                         <td class="text-center"><a onclick="deleteRow(this)" href="javascript:void(0)"><i class="fa fa-remove cstm-remove"></i></a></td>
                                     </tr>
                                 }
@@ -247,7 +250,7 @@
             $("#combobox_" + numItems).toggle();
         });
         $('.debit').keyup(function () {
-            
+
             $(this).parents('tr.tr-content').find('.credit').val(0.00);
             var result = 0;
             if (isNaN($(this).val())) $(this).val(0.00)
@@ -465,13 +468,78 @@
         $(document).ready(function () {
 
             $("#form-id").submit(function (event) {
-                if (!checkValidation()) {
-                    $(".msg").text("Debit And Credit not Equal").show("slow");
-
-                    event.preventDefault();
+                if ($("#voucherdate").val() == "") {
+                    $("#error").text("Voucher Date Is Required").show("slow");
+                    setTimeout(function () { $("#error").hide("slow") }, 5000);
+                  
+                    return false;
                 }
-            });
+                else if ($("#voucher_Description").val() == "") {
+                    $("#error").text("Voucher Description Is Required").show("slow");
+                    setTimeout(function () { $("#error").hide("slow") }, 5000);
+                    return false;
+                }
+                else if (!checkValidation()) {
+                    $("#msg").text("Debit And Credit not Equal").show("slow");
+                    setTimeout(function () { $("#msg").hide("slow") }, 5000);
+                    return false;
 
+                }
+                else if (!checkDescription()) {
+                    $("#msg").text("One Or More Description is Empty").show("slow");
+                    setTimeout(function () { $("#msg").hide("slow") }, 5000);
+                    return false;
+                }
+                else if (!CheckledgerAccount()) {
+                    $("#msg1").text("One Or More Ledger Account Is Not Selected").show("slow");
+                    setTimeout(function () { $("#msg1").hide("slow") }, 5000);
+                    return false;
+                }
+               
+            });
+            function checkValidation() {
+                var td = $('#totaldebit').text();
+                var tc = $('#totalcredit').text();
+                var valid = false;
+                if (td != 0 && tc != 0 && td == tc)
+                    valid = true;
+
+                return valid;
+
+            }
+            function checkDescription()
+            {
+                var flag = true;
+                $(".description").each(function () {
+                    if ($(this).val() == "") {
+                       
+                        flag = false;
+                    }
+                });
+                return flag;
+            }
+            function CheckledgerAccount()
+            {
+                var flag = true;
+                $(".select-option").each(function () {
+                    if ($(this).val() == "") {
+                        flag = false;
+                    }
+
+                });
+                return flag;
+
+            }
+            function checkValidation() {
+                var td = $('#totaldebit').text();
+                var tc = $('#totalcredit').text();
+                var valid = false;
+                if (td != 0 && tc != 0 && td == tc)
+                    valid = true;
+
+                return valid;
+
+            }
             $('#voucherdate').datepicker({
                 format: 'dd/mm/yyyy'
             });
@@ -531,15 +599,7 @@
             });
         });
 
-        function checkValidation() {
-            var td = $('#totaldebit').text();
-            var tc = $('#totalcredit').text();
-            var valid = false;
-            if (td == tc)
-                valid = true;
-            return valid;
-
-        }
+        
 
     </script>
 }
