@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class EmployeeProfileController : BaseController
+    public class EmployeeProfileController : Controller
     {
         //
         // GET: /OrganizationManagement/EmployeeProfile/
@@ -53,7 +53,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 HttpPostedFileBase profilePic = Request.Files["profile_pic"];
                 //HttpPostedFileBase doc = Request.Files["documentLocation[]"];
 
-                string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                string profilePicName = "Employee" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
                 string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles");
                 EmployeeProfile ep = new EmployeeProfile();
                 ep = employeeProfileCustom.employeeProfile;
@@ -106,6 +106,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                         var tt = e;
                         contactDetailErr = "One or more Contact Details could not added successfully..";
                     }
+                    msg = "Success";
 
                 }
                 else
@@ -149,7 +150,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                     if (ep.ImageLocation== null)
                     {
-                        profilePicName =  "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                        profilePicName =  "Employee" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
                         profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
                     }
                     else
