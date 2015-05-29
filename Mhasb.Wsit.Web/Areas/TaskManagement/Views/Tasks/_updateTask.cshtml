@@ -13,16 +13,13 @@
 <div class="row">
     <div class="col-md-6">
         <label>Status</label>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker3'>
-                 @Html.DropDownList("Status", (SelectList)ViewBag.status, "--Select Status--", htmlAttributes: new { @class = "cstm-input", id = "utstatus", required = "required" })
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
+
+        @Html.DropDownList("Status", (SelectList)ViewBag.status, "--Select Status--", htmlAttributes: new { @class = "cstm-input", id = "utstatus", required = "required" })
+
+
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6">
         <label>Starting Date</label>
@@ -32,7 +29,7 @@
                 @*@Html.TextBoxFor(m => m.StartingDate, new { @class = "cstm-input", id = "utstart" })*@
                 <span class="input-group-addon">
                     <i class="fa fa-calendar"></i>
-                    </span>
+                </span>
             </div>
         </div>
     </div>
@@ -41,24 +38,25 @@
         <div class="form-group">
             <div class='input-group date' id='datetimepicker8'>
                 <input class="cstm-input" data-val="true" data-val-date="The field FinishingDate must be a date." data-val-required="The FinishingDate field is required." id="utfinish" name="FinishingDate" type="text" value="@Model.FinishingDate.ToString("dd/MM/yyyy")">
-              @* @Html.TextBoxFor(m => m.FinishingDate, new { @class = "cstm-input", id = "utfinish" })*@
+                @* @Html.TextBoxFor(m => m.FinishingDate, new { @class = "cstm-input", id = "utfinish" })*@
                 <span class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </span>
             </div>
         </div>
     </div>
-    @Html.HiddenFor(m => m.Id, new { @id="utId"})
+    @Html.HiddenFor(m => m.Id, new { @id = "utId" })
 </div>
 <script>
     $(document).ready(function () {
         //   $('#datetimepicker1').datetimepicker();
         $('#datetimepicker7').datepicker({
-            format: 'dd/mm/yyyy'
-            });
-        $('#datetimepicker8').datepicker({
-            format: 'dd/mm/yyyy'
+            format: "dd/mm/yyyy"
         });
+        $('#datetimepicker8').datepicker(
+            {
+                format: "dd/mm/yyyy"
+            });
     });
 
 </script>

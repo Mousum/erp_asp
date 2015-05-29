@@ -37,7 +37,7 @@
                         <td>@item.StartingDate</td>
                         <td>@item.FinishingDate</td>
                         <td>@item.Status</td>
-                        <td><button class="update-task" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-4"> Update</button></td>
+                        <td><button class="update-task btn-success" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-4"> Update</button></td>
                     </tr>
                    }
                 </tbody>
@@ -62,7 +62,7 @@
         });
     });
     $("#UpTask").click(function () {
-
+        
         if ($("#utempId").val() == "") {
             $("#utempId").focus();
             $("#utempId").css("border-color", "red");
@@ -82,6 +82,12 @@
         else if ($("#utstatus").val() == "") {
             $("#utstatus").focus();
             $("#utstatus").css("border-color", "red");
+        }
+        else if (new Date($("#utstart").val()) > new Date($("#utfinish").val())) {
+           
+            $("#utstart").css("border-color", "red");
+            $("#utfinish").css("border-color", "red");
+            
         }
         else {
 

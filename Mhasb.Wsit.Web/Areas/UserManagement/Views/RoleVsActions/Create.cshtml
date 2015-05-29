@@ -5,6 +5,10 @@
 }
 <div class="container">
     <div class="row clearfix">
+        @if (TempData["succMsg"] !=null) 
+        {
+            <div class="alert alert-success">@TempData["succMsg"]</div>
+        }
         @using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -25,7 +29,7 @@
                     <div class="col-md-4"> Module Name</div>
                     <div class="col-md-8">
                         <div class="dropdown">
-                            @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "modules", required = "required" })
+                            @Html.DropDownList("ModuleName", (SelectList)ViewBag.moduleList, "--Select Module--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "modules" })
                         </div>
                         <div id="alert"></div>
                     </div>
@@ -36,7 +40,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="dropdown">
-                            @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Submodule--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "controllers", required = "required" })
+                            @Html.DropDownList("ControllerName", (SelectList)ViewBag.ControllerList, "--Select Submodule--", htmlAttributes: new { @class = "dropdown-toggle droper cstm-input", id = "controllers" })
                         </div>
                         <div id="alert1"></div>
                     </div>
@@ -47,7 +51,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th><input type="checkbox" id="control"></th>
                             <th>Module Name</th>
                             <th>Submodule</th>
                             <th>Action Name</th>
@@ -62,6 +66,27 @@
         }
     </div>
 </div>
+<script>
+    $("#control").click(function () {
+        if ($(this).is(':checked')) {
+            $(".checkbox-element").each(function () {
+                if (!$(this).is(':checked')) {
+                    
+                    $(this).prop('checked', true);
+                } 
+            })
+
+        }
+        else {
+            $(".checkbox-element").each(function () {
+                if ($(this).is(':checked')) {
+                    $(this).prop('checked', false);
+                   
+                }
+            })
+        }
+    })
+</script>
 <script>
     $(document).ready(function () {
         $("#roles").change(function () {
@@ -101,14 +126,15 @@
             var data = { RoleId: roleId, moduleName: moduleName, controllerName: controllerName }
             AjaxCall(data);
         });
-        $("#save").click(function () {
-            if ($("#modules").val() == "") {
-                $("#alert").html("Module Name Is reqiured!");
-            }
-            else if ($("#controllers").val() == "") {
-                $("#alert1").html(" Sub Module Name Is reqiured!");
-            }
-        })
+        //$("#save").click(function () {
+        //    if ($("#modules").val() == "") {
+        //        $("#alert").html("Module Name Is reqiured!");
+        //        return false;
+        //    }
+        //    //else if ($("#controllers").val() == "") {
+        //    //    $("#alert1").html(" Sub Module Name Is reqiured!");
+        //    //}
+        //})
     });
 
     function AjaxCall(data) {

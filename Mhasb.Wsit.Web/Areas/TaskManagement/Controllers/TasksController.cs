@@ -204,13 +204,13 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         {
             EnumStatus enumDisplayStatus = (EnumStatus)Status;
             string StatusValue = enumDisplayStatus.ToString();
-            
-            
+
+
             string[] date1 = StartingDate.Split(' ');
             string[] date2 = FinishingDate.Split(' ');
             string[] dateString = date1[0].Split('/');
             DateTime start_date = Convert.ToDateTime(dateString[1] + "/" + dateString[0] + "/" + dateString[2]);
-            
+
             string[] dateString1 = date2[0].Split('/');
             DateTime end_date = Convert.ToDateTime(dateString1[1] + "/" + dateString1[0] + "/" + dateString1[2]);
            
