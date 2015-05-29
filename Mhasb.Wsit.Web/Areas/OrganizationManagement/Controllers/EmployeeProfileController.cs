@@ -45,6 +45,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         [HttpPost]
         public ActionResult Create(EmployeeProfileCustom employeeProfileCustom)
         {
+            string msg="", profilePicErr = "",contactDetailErr="";
+            bool success = false;
             try
             {
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
@@ -53,64 +55,72 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                 string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
                 string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles");
-                if (ImageUpload(profilePic, profilePicName, profilePicLocation))
+                EmployeeProfile ep = new EmployeeProfile();
+                ep = employeeProfileCustom.employeeProfile;
+                ep.Users = new User { Id = user.Id, Email = user.Email };
+                if (profilePic.ContentLength > 1) 
                 {
-                    EmployeeProfile ep = new EmployeeProfile();
-                    ep = employeeProfileCustom.employeeProfile;
-                    ep.Users = new User { Id = user.Id, Email = user.Email };
-                    ep.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
-                    if (iEP.AddEmployeeProfile(ep))
+                    if (ImageUpload(profilePic, profilePicName, profilePicLocation))
                     {
-                        try
-                        {
-                            ContactDetail phone = employeeProfileCustom.Phone;
-                            phone.EmployeeProfileId = ep.Id;
-
-                            ContactDetail fax = employeeProfileCustom.Fax;
-                            fax.EmployeeProfileId = ep.Id;
-
-                            ContactDetail facebook = employeeProfileCustom.Facebook;
-                            facebook.EmployeeProfileId = ep.Id;
-
-                            ContactDetail google = employeeProfileCustom.Google;
-                            google.EmployeeProfileId = ep.Id;
-
-                            ContactDetail linkedin = employeeProfileCustom.LinkedIn;
-                            linkedin.EmployeeProfileId = ep.Id;
-
-                            ContactDetail skype = employeeProfileCustom.Skype;
-                            skype.EmployeeProfileId = ep.Id;
-
-                            ContactDetail twitter = employeeProfileCustom.Twitter;
-                            twitter.EmployeeProfileId = ep.Id;
-
-                            ContactDetail website = employeeProfileCustom.Website;
-                            website.EmployeeProfileId = ep.Id;
-
-                            iCD.AddContactDetail(phone);
-                            iCD.AddContactDetail(fax);
-                            iCD.AddContactDetail(website);
-                            iCD.AddContactDetail(facebook);
-                            iCD.AddContactDetail(twitter);
-                            iCD.AddContactDetail(google);
-                            iCD.AddContactDetail(linkedin);
-                            iCD.AddContactDetail(skype);
-                        }
-                        catch (Exception e)
-                        {
-                            var tt = e;
-                        }
-
+                        ep.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
                     }
+                    else
+                        profilePicErr = "Picture Upload Unsuccessfull!!!";
                 }
+
+
+                if (iEP.AddEmployeeProfile(ep))
+                {
+                    success = true;
+                    try
+                    {
+                        ContactDetail phone = employeeProfileCustom.Phone;
+                        phone.EmployeeProfileId = ep.Id;
+
+                        ContactDetail fax = employeeProfileCustom.Fax;
+                        fax.EmployeeProfileId = ep.Id;
+
+                        ContactDetail facebook = employeeProfileCustom.Facebook;
+                        facebook.EmployeeProfileId = ep.Id;
+
+                        ContactDetail google = employeeProfileCustom.Google;
+                        google.EmployeeProfileId = ep.Id;
+
+                        ContactDetail linkedin = employeeProfileCustom.LinkedIn;
+                        linkedin.EmployeeProfileId = ep.Id;
+
+                        ContactDetail skype = employeeProfileCustom.Skype;
+                        skype.EmployeeProfileId = ep.Id;
+
+                        ContactDetail twitter = employeeProfileCustom.Twitter;
+                        twitter.EmployeeProfileId = ep.Id;
+
+                        ContactDetail website = employeeProfileCustom.Website;
+                        website.EmployeeProfileId = ep.Id;
+
+                        if (!(iCD.AddContactDetail(phone) && iCD.AddContactDetail(fax) && iCD.AddContactDetail(website) && iCD.AddContactDetail(facebook) && iCD.AddContactDetail(twitter) && iCD.AddContactDetail(google) && iCD.AddContactDetail(linkedin) && iCD.AddContactDetail(skype)))
+                            contactDetailErr = "One or more Contact Details could not added successfully..";
+                    }
+                    catch (Exception e)
+                    {
+                        var tt = e;
+                        contactDetailErr = "One or more Contact Details could not added successfully..";
+                    }
+
+                }
+                else
+                    msg = "Profile could not Added Successfully....";
+
 
             }
             catch (Exception ex)
             {
-
+                msg = "Profile could not Added Successfully....";
             }
+            TempData.Add("errMsg",msg+profilePicErr+contactDetailErr);
+            if (!success)
+                return RedirectToAction("Create");
 
-            //return Content("sdffs");
             return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
 
@@ -119,32 +129,57 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         [HttpPost]
         public ActionResult Update(EmployeeProfileCustom employeeProfileCustom)
         {
-
+            string msg="", profilePicErr = "",contactDetailErr="";
+            bool success = false;
             try
             {
                 EmployeeProfile ep = new EmployeeProfile();
                 ep = employeeProfileCustom.employeeProfile;
                 HttpPostedFileBase profilePic = Request.Files["profile_pic"];
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                string profilePicName;
+                string profilePicLocation;
+                string tempPath = Server.MapPath("~/Uploads/Temp");
                 if(profilePic.ContentLength>0)
                 {
-                    string prevImage = Request.MapPath("~/" + ep.ImageLocation);
+                    if (!Directory.Exists(tempPath))
+                    {
+                        Directory.CreateDirectory(tempPath);
+                    }
+
+                    if (ep.ImageLocation== null)
+                    {
+                        profilePicName =  "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
+                        profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
+                    }
+                    else
+                    {
+                        profilePicName = ep.ImageLocation.Split('/').Last();
+                        profilePicLocation = ep.ImageLocation;
+                        profilePicLocation = Path.GetDirectoryName(profilePicLocation);
+                        profilePicLocation = Server.MapPath("~/" + profilePicLocation + "/");
+                        if (System.IO.File.Exists(profilePicLocation+profilePic))
+                        {
+                            System.IO.File.Move(profilePicLocation + profilePic, tempPath + profilePic);
+                        }
+                    }
                     
-                    string profilePicName = "Employee_" + "_" + user.Id.ToString() + "_" + Path.GetRandomFileName() + ".png";
-                    string profilePicLocation = Server.MapPath("~/Uploads/EmployeeProfiles/");
+                    
                     if (ImageUpload(profilePic, profilePicName, profilePicLocation)) 
                     {
                         ep.ImageLocation = "Uploads/EmployeeProfiles/" + profilePicName;
-                        if (System.IO.File.Exists(prevImage))
+                        if (System.IO.File.Exists(tempPath+profilePicName))
                         {
-                            System.IO.File.Delete(prevImage);
+                            System.IO.File.Delete(tempPath+profilePicName);
                         }
                     }
                     else
                     {
-                        TempData.Add("errMsg", "Photo Upload Unsuccessfull");
-                        return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-                      //  return Content("Photo Upload Unsuccessfull!!!...");
+                        if (System.IO.File.Exists(tempPath + profilePic))
+                        {
+                            System.IO.File.Move(tempPath + profilePic, profilePicLocation + profilePic);
+                        }
+                        profilePicErr = "New Image could not uploaded Successfully....";
                     }
                     
                     
@@ -152,43 +187,40 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
                 if (iEP.UpdateEmployeeProfile(ep))
                 {
+                    success = true;
                     try
                     {
-                        iCD.UpdateContactDetail(employeeProfileCustom.Phone);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Fax);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Website);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Facebook);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Twitter);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Google);
-                        iCD.UpdateContactDetail(employeeProfileCustom.LinkedIn);
-                        iCD.UpdateContactDetail(employeeProfileCustom.Skype);
+                        if (!(iCD.UpdateContactDetail(employeeProfileCustom.Phone) && iCD.UpdateContactDetail(employeeProfileCustom.Fax) && iCD.UpdateContactDetail(employeeProfileCustom.Website) && iCD.UpdateContactDetail(employeeProfileCustom.Facebook) && iCD.UpdateContactDetail(employeeProfileCustom.Twitter) && iCD.UpdateContactDetail(employeeProfileCustom.Google) && iCD.UpdateContactDetail(employeeProfileCustom.LinkedIn) && iCD.UpdateContactDetail(employeeProfileCustom.Skype)))
+                            contactDetailErr="One or more Contact Field Updating Unsuccessfull!!!";
+
+
                     }
                     catch (Exception ex)
                     {
-                        TempData.Add("errMsg", "One or more Contact Field Updating Unsuccessfull");
-                        return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-                       // return Content("One or more Contact Field Updating Unsuccessfull!!!!");
+                        contactDetailErr = "One or more Contact Field Updating Unsuccessfull!!!!";
                     }
                     
                 }
                 else
                 {
-                    TempData.Add("errMsg", "Profile Updating cannot done successfully");
-                    return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-                  //  return Content("Profile Updating cannot done successfully!!!!");
+                    //if (System.IO.File.Exists(tempPath + profilePic))
+                    //{
+                    //    System.IO.File.Move(tempPath + profilePic, profilePicLocation + profilePic);
+                    //}
+                    msg="Profile Updating cannot done successfully";
                 }
             }
             catch (Exception ex)
             {
-                TempData.Add("errMsg", "Failed");
-                return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-                //return Content("Failed");
+                msg = "Profile Updating cannot done successfully";
             }
 
-            TempData.Add("SucMasg", "Success");
+            TempData.Add("errMsg",msg+profilePicErr+contactDetailErr);
+            if (!success)
+                return RedirectToAction("Update");
+
             return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
-            //return Content("Success");
-            //return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+
         }
 
 
