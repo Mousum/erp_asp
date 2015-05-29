@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.IO;
+using System.Linq;
 using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Commons;
 
@@ -26,7 +30,7 @@ namespace Mhasb.Wsit.DAL.Data
 
                 foreach (var lookup in lookupList)
                 {
-                    context.Set<Lookup>().Add(lookup);
+                    context.Set<Lookup>().AddOrUpdate(lookup);
                 }
                
                
@@ -34,7 +38,7 @@ namespace Mhasb.Wsit.DAL.Data
 
 
                 //base.Seed(context);
-                context.SaveChanges();
+                //context.SaveChanges();
             }
             catch (Exception ee)
             {
@@ -42,5 +46,36 @@ namespace Mhasb.Wsit.DAL.Data
             }
            
         }
+
+        private void ExecuteScripts(DbContext context)
+        {
+            foreach (string script in GetScripts())
+            {
+                var sql = GetFromResources(script);
+                if (!string.IsNullOrWhiteSpace(sql))
+                {
+                    context.Database.ExecuteSqlCommand(sql);
+                }
+            }
+        }
+
+        private IEnumerable GetScripts()
+        {
+            return GetType().Assembly
+                .GetManifestResourceNames()
+                .Where(r => r.EndsWith(".sql"));
+        }
+
+        private string GetFromResources(string resourceName)
+        {
+            using (var stream = GetType().Assembly.GetManifestResourceStream(resourceName))
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
     }
 }

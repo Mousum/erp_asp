@@ -15,7 +15,7 @@ namespace Mhasb.Domain.Commons
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
         public string ShortName { get; set; }
-
+        public string ShortName1 { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
         public int Id { get; set; }
         public ObjectState State { get; set; }

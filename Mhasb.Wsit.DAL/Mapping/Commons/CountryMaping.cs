@@ -18,6 +18,7 @@ namespace Mhasb.DAL.Mapping.Commons
             this.Property(l => l.CountryName).HasMaxLength(100).HasColumnName("country_name");
             this.Property(l => l.CountryCode).HasMaxLength(100).HasColumnName("country_code");
             this.Property(l => l.ShortName).HasMaxLength(100).HasColumnName("short_name");
+            this.Property(l => l.ShortName1).HasMaxLength(100).HasColumnName("short_name1");
 
             this.ToTable("com.countries");
 

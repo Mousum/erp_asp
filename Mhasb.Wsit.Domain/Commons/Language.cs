@@ -15,6 +15,9 @@ namespace Mhasb.Domain.Commons
        [Required(ErrorMessage = "Language Name is required")]
         public string LanguageName { get; set; }
 
+        public string Code { get; set; }
+        public string Code1 { get; set; }
+        public string Native { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
         public int Id
         {

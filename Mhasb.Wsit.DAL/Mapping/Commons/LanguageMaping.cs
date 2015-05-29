@@ -17,6 +17,10 @@ namespace Mhasb.DAL.Mapping.Commons
            this.Ignore(l => l.State);
 
            this.Property(l => l.LanguageName).HasMaxLength(100).HasColumnName("language_name");
+           this.Property(l => l.Code).HasMaxLength(50).HasColumnName("code");
+           this.Property(l => l.Code1).HasMaxLength(50).HasColumnName("code1");
+           this.Property(l => l.Native).HasMaxLength(50).HasColumnName("native");
+
            this.ToTable("com.languages");
        }
     }
