@@ -164,7 +164,7 @@ INSERT INTO [com].[currencies] (Symbol, code, name) VALUES
 ('TRY', '949', 'Turkish Lira'),
 ('AED', '784', 'UAE Dirham'),
 ('UGX', '800', 'Uganda Shilling'),
-('XFU', NULL, 'UIC-Franc'),
+('XFU', ' ', 'UIC-Franc'),
 ('COU', '970', 'Unidad de Valor Real'),
 ('CLF', '990', 'Unidades de fomento'),
 ('UYI', '940', 'Uruguay Peso en Unidades Indexadas'),
