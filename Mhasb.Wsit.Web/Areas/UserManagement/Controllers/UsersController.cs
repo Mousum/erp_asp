@@ -360,7 +360,10 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             else
             {
-                var dataSet = new { myProfule.FirstName, myProfule.LastName, myProfule.EmployeeProfiles.Bio, myProfule.EmployeeProfiles.ImageLocation };
+                var dataSet = new { myProfule.FirstName, myProfule.LastName,
+                                    Bio = (myProfule.EmployeeProfiles!=null)? myProfule.EmployeeProfiles.Bio: "",
+                    ImageLocation=(myProfule.EmployeeProfiles!=null)? myProfule.EmployeeProfiles.ImageLocation : "" 
+                };
                 return Json(dataSet, JsonRequestBehavior.AllowGet);
             }
         }
