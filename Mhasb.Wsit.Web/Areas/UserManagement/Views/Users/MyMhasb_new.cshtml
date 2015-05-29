@@ -11,6 +11,21 @@
                 <h4><a href="#"> My MHASB</a></h4>
                 <p>Hi @ViewBag.userName , you last logged into @ViewBag.lastLoginCompany at @ViewBag.lastLoginTime O'Clock</p>
             </div>
+
+
+
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
+
+
+
+
             <div class="table-responsive">
                 <h3>Organisations</h3>
                 <table class="table organization-table">
