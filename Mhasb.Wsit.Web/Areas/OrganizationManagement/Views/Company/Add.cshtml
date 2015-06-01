@@ -1,0 +1,47 @@
+﻿@model Mhasb.Domain.Organizations.Company
+<div class="container my-dashboard">
+
+    <div class="row clearfix no-margin">
+        <h3 class="all-head">New Organisation</h3>
+    </div>
+    <div class="row clearfix">
+        @using (Html.BeginForm("Add", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="col-md-12 p-setting-container-cost">
+                <div class="col-md-8">
+
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4">
+                            <label>What's the name of your organisation?</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.TradingName, new { @class = "cstm-input", @placeholder = "Organisation Name*" })
+                            @Html.ValidationMessageFor(model => model.TradingName)
+                        </div>
+                    </div>
+
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-4 cstm-lab">
+                            <label>Where does your organisation pay taxes?</label>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="cstm-select">
+                                @Html.DropDownList("CountryId", ViewBag.CountryList as SelectList, new { @class = "cstm-input" })
+                                @Html.ValidationMessageFor(model => model.CountryId)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-7">
+                            <div>
+                                <input type="submit" value="Start Trial" name="startTrial" class="btn btn-success" />
+                                OR
+                                <input type="submit" value="Buy Now" name="buyNow" class="btn btn-info" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
