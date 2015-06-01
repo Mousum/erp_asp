@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-
-<h2>Create Employee Profile</h2>
 @if (TempData["SucMasg"] != null)
 {
     <div class="alert alert-success">@TempData["SucMasg"]</div>
@@ -43,9 +41,9 @@
 
 
 
-    <div class="container my-dashboard">
+    <div class="container">
         <div class="row clearfix">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <p class="text-center">
                     List your profile on MHASB community to become listed in our users directory and become part of our growing community and expanded your commercial relationships
                 </p>
@@ -83,6 +81,9 @@
                 </div>
                 <div class="row cstm-frm-row">
                     <div class="col-md-4"> Name </div>
+                    <div class="col-md-8">
+                        @ViewBag.FirstName @ViewBag.LastName
+                    </div>
 
                 </div>
                 <div class="row cstm-frm-row">
@@ -111,113 +112,124 @@
                         </select>
                     </div>
                 </div>
+                <h4>Contact Details</h4>
                 <div class="row cstm-frm-row">
-                    <p>Contact Details</p>
-                </div>
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12"><label id="errmsg"></label></div>
-                    <div class="col-md-4"> Phone</div>
-                    <div class="col-md-8">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Phone:</label>
 
-                        @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
-
-                        @Html.TextBoxFor(model => model.Phone.FieldValueTwo, new { @class = "cstm-input", @placeholder = "Area Code" })
-                        @Html.TextBoxFor(model => model.Phone.FieldValueThree, new { @class = "cstm-input", @placeholder = "Number" })
-
+                        <div class="col-md-3 no-padding">
+                            @Html.TextBoxFor(model => model.Phone.FieldValueOne, new { @class = "cstm-input", @placeholder = "Country Code" })
+                            @Html.ValidationMessageFor(model => model.Phone.FieldValueOne)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.Phone.FieldValueTwo, new { @class = "cstm-input", @placeholder = "Area Code" })
+                            @Html.ValidationMessageFor(model => model.Phone.FieldValueTwo)
+                        </div>
+                        <div class="col-md-5 pad-left-null">
+                            @Html.TextBoxFor(model => model.Phone.FieldValueThree, new { @class = "cstm-input", @placeholder = "Number" })
+                            @Html.ValidationMessageFor(model => model.Phone.FieldValueThree)
+                        </div>
                     </div>
                 </div>
                 <div class="row cstm-frm-row">
-                    <div class="col-md-4">Website</div>
-                    <div class="col-sm-10">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.Website.FieldValueOne, new { @class = "cstm-input", placeholder = "Website" })
                         @Html.ValidationMessageFor(model => model.Website.FieldValueOne)
                     </div>
                 </div>
+                <div class="row cstm-frm-row social-add">
+                    <div class="col-md-12 cstm-frm-row" id="facebook_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-facebook facebook-color"></i></label>
+                            <label class="pull-right">www.facebook.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Facebook.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Facebook.FieldValueOne)
+                            <button id="facebook_remove" type="button">X</button>
+                        </div>
+                    </div>
 
-                <div class="form-group" id="facebook_field" hidden="hidden">
-                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Facebook</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/facebook.png">www.facebook.com/</label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Facebook.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Facebook.FieldValueOne)
-                        <button id="facebook_remove" type="button">X</button>
+                    <div class="col-md-12 cstm-frm-row" id="fax_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            Fax
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Fax.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Fax.FieldValueOne)
+                            <button id="fax_remove" type="button">X</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 cstm-frm-row" id="linkedin_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-linkedin"></i></label>
+                            <label class="pull-right">www.linkedin.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
+                            <button id="linkedin_remove" type="button">X</button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 cstm-frm-row" id="twitter_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-twitter twitter-color"></i></label>
+                            <label class="pull-right">www.twitter.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Twitter.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Twitter.FieldValueOne)
+                            <button id="twitter_remove" type="button">X</button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 cstm-frm-row" id="google_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-google-plus google-color"></i></label>
+                            <label class="pull-right">plus.google.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Google.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Google.FieldValueOne)
+                            <button id="google_remove" type="button">X</button>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 cstm-frm-row" id="skype_field" style="display:none;">
+                        <div class="col-md-3 no-padding">
+                            <label class="social-label"><i class="fa fa-skype skype-color"></i></label>
+                            <label class="pull-right">www.skype.com/</label>
+                        </div>
+                        <div class="col-md-9 no-padding cstm-cross">
+                            @Html.TextBoxFor(model => model.Skype.FieldValueOne, new { @class = "cstm-input", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Skype.FieldValueOne)
+                            <button id="skype_remove" type="button">X</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group" id="fax_field" hidden="hidden">
-                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Fax</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/fax.png"></label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Fax.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Fax.FieldValueOne)
-                        <button id="fax_remove" type="button">X</button>
-                    </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        Add contact field
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li id="facebook_name" role="presentation"> <a role="menuitem" tabindex="-1">Facebook</a></li>
+                        <li id="twitter_name" role="presentation"><a role="menuitem" tabindex="-1">Twitter</a></li>
+                        <li id="google_name" role="presentation"><a role="menuitem" tabindex="-1">Google PLus</a></li>
+                        <li id="linkedin_name" role="presentation"><a role="menuitem" tabindex="-1">Linked In</a></li>
+                        <li id="skype_name" role="presentation"><a role="menuitem" tabindex="-1">Skype</a></li>
+                        <li id="fax_name" role="presentation"><a role="menuitem" tabindex="-1">Fax</a></li>
+                    </ul>
                 </div>
 
-                <div class="form-group" id="linkedin_field" hidden="hidden">
-                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Linked In</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/linkedin.png">www.linkedin.com/</label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.LinkedIn.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.LinkedIn.FieldValueOne)
-                        <button id="linkedin_remove" type="button">X</button>
-                    </div>
-                </div>
 
-                <div class="form-group" id="twitter_field" hidden="hidden">
-                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Twitter</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/twitter.png">www.twitter.com/</label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Twitter.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Twitter.FieldValueOne)
-                        <button id="twitter_remove" type="button">X</button>
-                    </div>
-                </div>
-
-                <div class="form-group" id="skype_field" hidden="hidden">
-                    <label for="inputEmail3" class="col-sm-2 control-label font-padding">Skype</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/skype.png"></label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Skype.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Skype.FieldValueOne)
-                        <button id="skype_remove" type="button">X</button>
-                    </div>
-                </div>
-
-                <div class="form-group" id="google_field" hidden="hidden">
-                    <label for="google" class="col-sm-2 control-label font-padding">Google</label>
-                    <label class="col-sm-2 control-label font-padding area-social"><img src="~/mhasbStyle\img/google.png">www.google.com/</label>
-                    <div class="col-sm-10 social-list-cont social-list-hidden-field">
-                        @*<input class="form-control" id="inputEmail3" type="text">*@
-                        @Html.TextBoxFor(model => model.Google.FieldValueOne, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Google.FieldValueOne)
-                        ><button id="google_remove" type="button">X</button>
-                    </div>
-                </div>
-                <div id="add_contact_btn" class="text-left contact-field pos-rel">
-                    + Add Contact Field
-                    <div class="social-list" id="add_contact_fieldnames" hidden="hidden">
-                        <ul>
-                            <li id="facebook_name">Facebook</li>
-                            <li id="twitter_name">Twitter</li>
-                            <li id="google_name">Google PLus</li>
-                            <li id="linkedin_name">Linked In</li>
-                            <li id="skype_name">Skype</li>
-                            <li id="fax_name">Fax</li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
+                <div class="row cstm-frm-row">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Save" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -235,8 +247,9 @@
             $("#twitter_field").show();
         if ($("#Fax_FieldValueOne").val() != '')
             $("#fax_field").show();
-        if ($("#Linkedin_FieldValueOne").val() != '')
+        if ($("#LinkedIn_FieldValueOne").val() != "") 
             $("#linkedin_field").show();
+        
         if ($("#Google_FieldValueOne").val() != '')
             $("#google_field").show();
 

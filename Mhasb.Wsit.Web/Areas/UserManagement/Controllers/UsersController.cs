@@ -2,6 +2,7 @@
 using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
+using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.Areas.UserManagement.Models;
 using Mhasb.Wsit.Web.AuthSecurity;
@@ -22,6 +23,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private ISettingsService setService = new SettingsService();
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
         private readonly ICompanyService cService = new CompanyService();
+        private readonly IFinalcialSetting fService = new FinalcialSettingService();
 
         //
         // GET: /UserManagement/Users/
@@ -40,7 +42,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         //    return View();
         //}
 
-        private readonly ICompanyService iCompany = new CompanyService();
+        //private readonly ICompanyService iCompany = new CompanyService();
 
 
 
@@ -118,10 +120,15 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult Dashboard()
         {
             var tt = HttpContext.User.Identity.Name;
-            //if (Session["uEmail"] != null)
-            //    return View();
-            //else
-            //return Redirect("Home/Index");
+            var user = uService.GetSingleUserByEmail(tt);
+            var userSettings = setService.GetAllByUserId(user.Id);
+            var activatedCompany = cService.GetSingleCompany(userSettings.Companies.Id);
+            ViewBag.CompanyLocation = activatedCompany.Location;
+            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+            ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
+
+            
+
             return View("Deshboard_new");
         }
 
@@ -134,7 +141,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            List<Company> myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id);
+            List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
             var compamyArray = uService.GetcompanyByUserID(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.CompanyArr = user.Id;
@@ -149,7 +156,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
 
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var myCompanyList = iCompany.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
+            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
 
             if (myCompanyList.Count() <= 0)
             {
