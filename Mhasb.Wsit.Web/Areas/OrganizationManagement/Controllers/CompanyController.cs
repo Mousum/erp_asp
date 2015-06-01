@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 {
-    public class CompanyController : BaseController
+    public class CompanyController : Controller
     {
         private readonly ICompanyService iCompany = new CompanyService();
 
@@ -50,7 +50,46 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         //    return View("RegistrationResult");
         //}
 
+        public ActionResult Add()
+        {
+            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+            return View("Add");
+        }
+        [HttpPost]
+        public ActionResult Add(Company company)
+        {
+            try
+            {
+                string startTrial = Request.Form["startTrial"];
+                string buyNow = Request.Form["buyNow"];
+                company.Email = HttpContext.User.Identity.Name;
+                var tt = uService.GetSingleUserByEmail(company.Email);
+                company.Users = new User { Id = tt.Id, Email = tt.Email };
+                if (startTrial != null)
+                {
+                    if (iCompany.AddCompany(company))
+                    {
+                        
+                        return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
+                    }
+                    else {
+                        return RedirectToAction("Add", "Company", new { Area = "OrganizationManagement" });
+                    }
+                    
+                }
+                else
+                {
+                    iCompany.AddCompany(company);
+                    return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
+                }
 
+            }
+            catch (Exception Ex)
+            {
+                return RedirectToAction("Add", "Company", new { Area = "OrganizationManagement" });
+            }
+
+        }
         public ActionResult Registration()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -223,7 +262,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
 
 
-        public ActionResult update()
+        public ActionResult Update()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
@@ -567,7 +606,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 {
                     try
                     {
-                        if(!(iCD.UpdateContactDetail(companyProfileCustom.Phone) && iCD.UpdateContactDetail(companyProfileCustom.Fax) && iCD.UpdateContactDetail(companyProfileCustom.Website) && iCD.UpdateContactDetail(companyProfileCustom.Facebook) && iCD.UpdateContactDetail(companyProfileCustom.Twitter) && iCD.UpdateContactDetail(companyProfileCustom.Google) && iCD.UpdateContactDetail(companyProfileCustom.LinkedIn) && iCD.UpdateContactDetail(companyProfileCustom.Skype)))
+                        if (!(iCD.UpdateContactDetail(companyProfileCustom.Phone) && iCD.UpdateContactDetail(companyProfileCustom.Fax) && iCD.UpdateContactDetail(companyProfileCustom.Website) && iCD.UpdateContactDetail(companyProfileCustom.Facebook) && iCD.UpdateContactDetail(companyProfileCustom.Twitter) && iCD.UpdateContactDetail(companyProfileCustom.Google) && iCD.UpdateContactDetail(companyProfileCustom.LinkedIn) && iCD.UpdateContactDetail(companyProfileCustom.Skype)))
                             ContactAddError = "One or more Contact Field Updating Unsuccessfull";
                     }
                     catch (Exception ex)
@@ -585,7 +624,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             {
                 msg = "Profile Updating cannot done successfully!!!!";
             }
-            TempData.Add("errMsg",msg+ContactAddError+proPicErrorMsg);
+            TempData.Add("errMsg", msg + ContactAddError + proPicErrorMsg);
             return RedirectToAction("UpdateProfile");
         }
 
