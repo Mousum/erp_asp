@@ -9,7 +9,7 @@ using Mhasb.Wsit.Web.Controllers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class FinalcialSettingController : BaseController
+    public class FinalcialSettingController : Controller
     {
         private readonly ICompanyService iCompany = new CompanyService();
         private readonly ICurrency cService = new CurrencyService();
