@@ -56,7 +56,7 @@
     <Compile Include="Commons\Language.cs" />
     <Compile Include="Commons\LegalEntity.cs" />
     <Compile Include="Commons\AreaTime.cs" />
-    <Compile Include="Loggers\LogUserLogin.cs" />
+    <Compile Include="Loggers\CompanyViewLog.cs" />
     <Compile Include="Notifications\Invitation.cs" />
     <Compile Include="ObjectState.cs" />
     <Compile Include="Organizations\Company.cs" />

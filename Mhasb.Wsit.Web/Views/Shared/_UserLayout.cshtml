@@ -13,6 +13,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     <!-- Custom Theme JavaScript -->
     @Scripts.Render("~/bundles/custome")
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     <link href='http://fonts.googleapis.com/css?family=Rambla:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -164,11 +165,12 @@
                         }
                   
                         if (json.ImageLocation !== "") {
+                            var baseUrl = "@Url.Content("~")";
                             // var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
-                            var imagePath = '/'+json.ImageLocation;
-                            $('.profileImage').attr("src", imagePath)
+                            var imagePath = baseUrl + '' + json.ImageLocation;
+                            $('.profileImage').attr("src", imagePath);
                         } else {
-                            $('.profileImage').attr("src", "")
+                            $('.profileImage').attr("src", "");
                         }
                         //if (json.Bio !== "") {
                         //    $('#bio').text(json.Bio);

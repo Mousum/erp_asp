@@ -3,10 +3,12 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using Mhasb.DAL.Mapping.Accounts;
 using Mhasb.DAL.Mapping.Commons;
+using Mhasb.DAL.Mapping.Loggers;
 using Mhasb.DAL.Mapping.Notifications;
 using Mhasb.DAL.Mapping.Organizations;
 using Mhasb.DAL.Mapping.OrgSettings;
 using Mhasb.DAL.Mapping.Users;
+using Mhasb.Domain.Loggers;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -99,6 +101,9 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new VoucherMapping());
             modelBuilder.Configurations.Add(new VoucherDetailMapping());
             modelBuilder.Configurations.Add(new VoucherDocumentMapping());
+
+            // logger
+            modelBuilder.Configurations.Add(new CompanyViewLogMapping());
 
 
         }
