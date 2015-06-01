@@ -20,7 +20,12 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         // GET: /OrgSettings/FinancialSetting/
         public ActionResult Index(int id)
         {
-            return View(fService.GetFinalcialSetting(id));
+            var fs=fService.GetFinalcialSetting(id);
+            if (fs != null)
+                return View(fs);
+            else
+                TempData.Add("errMsg","Financial Settings not found");
+            return RedirectToAction("Create");
         }
         public ActionResult Create()
         {

@@ -29,6 +29,16 @@
             <div class="col-md-6">
                 <h4>FinalcialSetting </h4>
 
+                @if (TempData["SucMasg"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SucMasg"]</div>
+                }
+                @if (TempData["errMsg"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["errMsg"]</div>
+                }
+
+
                 <div class="row cstm-frm-row">
                     <div class="col-md-4">
                         <label>@Html.LabelFor(model => model.FoundedYear) :</label>
