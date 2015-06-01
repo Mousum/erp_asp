@@ -35,7 +35,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [HttpPost]
         public ActionResult Create(int RoleId, string ModuleName, string ControllerName, int[] ActionId)
         {
-            var roleVsAction = new RoleVsAction();
+           
             var model = roleVsActionService.GetAllAndSelectedActionByRoleId(RoleId);
             if (ModuleName != "" && ControllerName != "")
             {
@@ -51,6 +51,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             foreach (var item in model)
             {
+                var roleVsAction = new RoleVsAction();
                 if (ActionId == null)
                 {
                     roleVsAction.ActionId = item.ActionId;

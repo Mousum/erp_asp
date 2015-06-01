@@ -43,7 +43,7 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-            if (action == "Registration" && controller == "Company")
+            if ((action == "Registration" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
                 return;
 
 

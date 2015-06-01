@@ -26,22 +26,33 @@
             }
             else
             {
+                var i = 1;
                 foreach (var item in Model)
                 {
                     <tr class="projectList" data-id="@item.Id">
-                        <td>2</td>
+                        <td>@i</td>
                         <td>@item.ProjectName</td>
                         <td>@item.Employees.Users.FirstName  @item.Employees.Users.LastName </td>
-                        <td>@item.TaskManagers.Count</td>
-                        <td>@item.ProjectDate</td>
-                        <td>@item.StartingDate</td>
-                        <td>@item.FinishingDate</td>
-                        <td>@item.TaskManagers.Count</td>
+                        <td class="memb">@{ var m = (int)item.TaskManagers.Count+1;}@m</td>
+                        <td>@item.ProjectDate.ToString("MMMM dd, yyyy")</td>
+                        <td>
+                            @if (item.StartingDate.HasValue)
+                            {
+                                var sd = Convert.ToDateTime(item.StartingDate).ToString("MMMM dd, yyyy");@sd }
+                        </td>
+                        <td>
+                            @if (item.StartingDate.HasValue)
+                            {
+                                var fd = Convert.ToDateTime(item.FinishingDate).ToString("MMMM dd, yyyy");@fd
+                            }
+                        </td>
+                        <td class="TaskNum">@item.TaskManagers.Count</td>
                         <td>
                             <a href="javascript:void(0)" class="task btn btn-info" data-id="@item.Id">View Tasks</a>
                             <button class="btn btn-success update-btn" data-id="@item.Id" data-toggle="modal" data-target="#pop-up-3">Update</button>
                         </td>
                     </tr>
+                    i++;
                 }
             }
 
@@ -75,7 +86,7 @@
     });
 
     $(".update-btn").click(function () {
-       
+
         var baseUrl = '@Url.Content("~/")';
         var data = { id: $(this).attr("data-id") };
         $.ajax({
@@ -93,7 +104,6 @@
         id = $(this).attr("data-id")
         $(".projectList").each(function () {
             if ($(this).attr("data-id") != id) {
-                // $(this).remove();
                 $(this).hide("slow");
             }
         })

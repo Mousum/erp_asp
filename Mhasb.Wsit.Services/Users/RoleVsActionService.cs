@@ -26,6 +26,7 @@ namespace Mhasb.Services.Users
                 {
                     rolevsaction.State = ObjectState.Added;
                     rVcRep.AddOperation(rolevsaction);
+                    rolevsaction.State = ObjectState.Unchanged;
                     return true;
                 }
                 else
@@ -51,6 +52,7 @@ namespace Mhasb.Services.Users
                 dbObj.State = ObjectState.Modified;
                 dbObj.IsActive = rolevsaction.IsActive;
                 rVcRep.UpdateOperation(dbObj);
+                dbObj.State = ObjectState.Unchanged;
                 return true;
 
             }
