@@ -104,8 +104,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             // This EmpId is static must be changed by Emp table 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserId(user.Id);
+            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id,(int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -117,8 +118,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 //   return Content("User must be a employee for this Transaction.");
             }
 
-            var AccSet = sService.GetAllByUserId(user.Id);
-
+            
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
             if (Request.Form["post"] != null)
             {
@@ -315,7 +315,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var empObj = empService.GetEmployeeByUserId(user.Id);
+            var AccSet = sService.GetAllByUserId(user.Id);
+
+            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -327,7 +329,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 //   return Content("User must be a employee for this Transaction.");
             }
 
-            var AccSet = sService.GetAllByUserId(user.Id);
+           
 
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
             if (Request.Form["post"] != null)
@@ -472,7 +474,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var empObj = empService.GetEmployeeByUserId(user.Id);
+            var AccSet = sService.GetAllByUserId(user.Id);
+
+            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -484,8 +488,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 //return Content("User must be a employee for this Transaction.");
             }
 
-            var AccSet = sService.GetAllByUserId(user.Id);
-
+          
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
             if (Request.Form["post"] != null)
             {
@@ -633,7 +636,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var empObj = empService.GetEmployeeByUserId(user.Id);
+            var AccSet = sService.GetAllByUserId(user.Id);
+
+            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -645,7 +650,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 // return Content("User must be a employee for this Transaction.");
             }
 
-            var AccSet = sService.GetAllByUserId(user.Id);
+           
 
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
             if (Request.Form["post"] != null)
@@ -789,7 +794,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var empObj = empService.GetEmployeeByUserId(user.Id);
+            var AccSet = sService.GetAllByUserId(user.Id);
+
+            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -801,8 +808,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 //return Content("User must be a employee for this Transaction.");
             }
 
-            var AccSet = sService.GetAllByUserId(user.Id);
-
+           
             if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
             if (Request.Form["post"] != null)
             {

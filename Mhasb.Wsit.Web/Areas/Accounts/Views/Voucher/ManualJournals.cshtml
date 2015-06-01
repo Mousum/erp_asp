@@ -30,9 +30,10 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="btn-group" role="group" aria-label="..." style="bottom:10px;">
-                <button type="button" class="btn btn-info">Add New Journal</button>
-                <button type="button" class="btn btn-info">Add New Repeating Journal</button>
+            <div class="btn-group" role="group" aria-label="..." style="bottom: 10px;">
+                @Html.ActionLink("Add New Journal", "NewJournal", "Voucher", new { area = "Accounts" }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Add New Repeating Journal", "RepeatingJournal", "Voucher", new { area = "Accounts" }, new { @class = "btn btn-info" })
+               
             </div>
 
         </div>
