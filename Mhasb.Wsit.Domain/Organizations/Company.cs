@@ -29,14 +29,14 @@ namespace Mhasb.Domain.Organizations
         [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters.")]
         public string DisplayName { get; set; }
 
-        [Required(ErrorMessage = "Industry is required")]
-        public int IndustryId { get; set; }
+        //[Required(ErrorMessage = "Industry is required")]
+        public int? IndustryId { get; set; }
 
         [Required(ErrorMessage = "Country is required")]
         public int CountryId { get; set; }
 
-        [Required(ErrorMessage = "Language is required")]
-        public int LanguageId { get; set; }
+        //[Required(ErrorMessage = "Language is required")]
+        public int? LanguageId { get; set; }
 
         [StringLength(50, ErrorMessage = "Cannot be longer than 50 characters.")]
         public string Tel { get; set; }
@@ -53,7 +53,7 @@ namespace Mhasb.Domain.Organizations
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Location is required")]
+        //[Required(ErrorMessage = "Location is required")]
         [StringLength(200, ErrorMessage = "Cannot be longer than 200 characters.")]
         public string Location { get; set; }
 

@@ -484,6 +484,7 @@
     <Content Include="Areas\Commons\Views\LegalEntities\Edit.cshtml" />
     <Content Include="Areas\Commons\Views\LegalEntities\Index.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\Add.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -715,7 +716,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2376</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

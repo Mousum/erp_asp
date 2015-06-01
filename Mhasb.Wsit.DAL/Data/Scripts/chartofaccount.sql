@@ -1,6 +1,6 @@
 
 
-INSERT [acc].[chartofaccount] (acode,aname,alevel,showsnsashboard,showinexpenseclaims,iscostcenter) 
+INSERT [acc].[chartofaccount] (acode,aname,level,showsnsashboard,showinexpenseclaims,iscostcenter) 
 							VALUES (N'1', N'Assets',1, 0, 0, 0),
 							 (N'2', N'Liabilities',1, 0, 0, 0),
 							 (N'3', N'Equity',1, 0, 0, 0),

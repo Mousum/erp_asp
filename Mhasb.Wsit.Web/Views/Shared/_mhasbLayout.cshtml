@@ -331,7 +331,9 @@
 
                         if (json.ImageLocation !== "") {
                             // var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
-                            var imagePath = '/' + json.ImageLocation;
+                            var baseUrl = "@Url.Content("~")";
+                            // var imagePath = "/Uploads/EmployeeProfiles/Employee__2_5vazp2i2.w5k.png";
+                            var imagePath = baseUrl + '' + json.ImageLocation;
                             $('.profileImage').attr("src", imagePath);
 
                         } else {

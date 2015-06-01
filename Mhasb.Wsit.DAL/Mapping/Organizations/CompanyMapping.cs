@@ -17,24 +17,24 @@ namespace Mhasb.DAL.Mapping.Organizations
             this.HasKey(c => c.Id);
             // ignor
             this.Ignore(c => c.State);
-            this.Property(c => c.TradingName).HasMaxLength(100).HasColumnName("trading_name");
-            this.Property(c => c.LegalName).HasMaxLength(100).HasColumnName("legal_name");
-            this.Property(c => c.DisplayName).HasMaxLength(100).HasColumnName("display_name");
-            this.Property(c => c.Tel).HasMaxLength(100).HasColumnName("tel");
-            this.Property(c=>c.Fax).HasMaxLength(100).HasColumnName("fax");
-            this.Property(c => c.P_O_Box).HasColumnName("p_o_box");
-            this.Property(c => c.Email).HasMaxLength(100).HasColumnName("email");
-            this.Property(c => c.Location).HasMaxLength(200).HasColumnName("location");
-            this.Property(c => c.Website).HasMaxLength(100).HasColumnName("web_site");
-            this.Property(c => c.CountryId).HasColumnName("countryid");
-            this.Property(c => c.LanguageId).HasColumnName("languageid");
-            this.Property(c => c.IndustryId).HasColumnName("industryid");
+            this.Property(c => c.TradingName).IsOptional().HasMaxLength(100).HasColumnName("trading_name");
+            this.Property(c => c.LegalName).IsOptional().HasMaxLength(100).HasColumnName("legal_name");
+            this.Property(c => c.DisplayName).IsOptional().HasMaxLength(100).HasColumnName("display_name");
+            this.Property(c => c.Tel).IsOptional().HasMaxLength(100).HasColumnName("tel");
+            this.Property(c => c.Fax).IsOptional().HasMaxLength(100).HasColumnName("fax");
+            this.Property(c => c.P_O_Box).IsOptional().HasColumnName("p_o_box");
+            this.Property(c => c.Email).IsOptional().HasMaxLength(100).HasColumnName("email");
+            this.Property(c => c.Location).IsOptional().HasMaxLength(200).HasColumnName("location");
+            this.Property(c => c.Website).IsOptional().HasMaxLength(100).HasColumnName("web_site");
+            this.Property(c => c.CountryId).IsOptional().HasColumnName("countryid");
+            this.Property(c => c.LanguageId).IsOptional().HasColumnName("languageid");
+            this.Property(c => c.IndustryId).IsOptional().HasColumnName("industryid");
 
-            this.Property(c => c.LegalEntityId).HasColumnName("legal_entity_id");
-            this.Property(c => c.TimezoneId).HasColumnName("time_zone_id");
-            this.Property(c => c.SealLocation).HasMaxLength(100).HasColumnName("seal_location");
-            this.Property(c => c.LogoLocation).HasMaxLength(100).HasColumnName("logo_location");
-            this.Property(c => c.CompleteFlag).HasColumnName("complete_flag");
+            this.Property(c => c.LegalEntityId).IsOptional().HasColumnName("legal_entity_id");
+            this.Property(c => c.TimezoneId).IsOptional().HasColumnName("time_zone_id");
+            this.Property(c => c.SealLocation).IsOptional().HasMaxLength(100).HasColumnName("seal_location");
+            this.Property(c => c.LogoLocation).IsOptional().HasMaxLength(100).HasColumnName("logo_location");
+            this.Property(c => c.CompleteFlag).IsOptional().HasColumnName("complete_flag");
             this.ToTable("org.companies");
 
             //Relationship
@@ -49,10 +49,10 @@ namespace Mhasb.DAL.Mapping.Organizations
                 .WithMany(co=>co.Companies)
                 .HasForeignKey(c=>c.CountryId);
 
-            this.HasRequired(c => c.Languages)
+            this.HasOptional(c => c.Languages)
                 .WithMany(co => co.Companies)
                 .HasForeignKey(c => c.LanguageId);
-            this.HasRequired(c => c.Industries)
+            this.HasOptional(c => c.Industries)
                 .WithMany(co => co.Companies)
                 .HasForeignKey(c => c.IndustryId);
 

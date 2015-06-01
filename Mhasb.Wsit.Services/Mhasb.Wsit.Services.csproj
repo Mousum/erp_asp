@@ -72,6 +72,8 @@
     <Compile Include="Commons\LegalEntityService.cs" />
     <Compile Include="Commons\LookupService.cs" />
     <Compile Include="CsvDataInsert.cs" />
+    <Compile Include="Loggers\CompanyViewLogService.cs" />
+    <Compile Include="Loggers\ICompanyViewLog.cs" />
     <Compile Include="Notifications\IInvitationService.cs" />
     <Compile Include="Notifications\InvitationService.cs" />
     <Compile Include="Organizations\CompanyDocumentService.cs" />
