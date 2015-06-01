@@ -26,6 +26,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IRoleService rService = new RoleService();
         private readonly ISettingsService sService = new SettingsService();
         private IDesignation degRep = new DesignationService();
+        private IUserInRoleService URSer = new UserInRoleService();
 
         public ActionResult Index()
         {
@@ -119,7 +120,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [AllowAnonymous]
         public ActionResult InvitationConfirm(int id, string token)
         {
             var Invitation = inService.GetSingleInvitation(id);
@@ -144,22 +145,19 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                             var emp = new Employee();
                             emp.UserId = user.Id;
                             emp.CompanyId = Invitation.CompanyId;
-
-                            // get designation 
-                            //var degObj = degRep.GetDesignations().FirstOrDefault();
-                            //// if designation not exist then insert data into designation table
-                            //if (degObj == null)
-                            //{
-                            //    var designation = new Designation { DesignationName = "Employee Type" };
-                            //    degRep.AddDesignation(designation);
-
-                            //    degObj = degRep.GetDesignations().FirstOrDefault();
-                            //}
                             emp.DesignationId = Invitation.DesignationId;
                             if (eService.CreateEmployee(emp))
                             {
+                                var userInRole = new UserInRole();
+                                userInRole.EmployeeId = emp.Id;
+                                userInRole.RoleId = Invitation.RoleId;
+                                userInRole.IsActive = true;
+                                URSer.AddUserInRole(userInRole);
+
                                 Session.Add("msg", "You have to login first");
                                 return Redirect(Url.Content("~/"));
+
+
                             }
                             else
                             {
@@ -203,18 +201,6 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                         var emp = new Employee();
                         emp.UserId = user.Id;
                         emp.CompanyId = Invitation.CompanyId;
-
-                        // get designation 
-                        //var degObj = degRep.GetDesignations().FirstOrDefault();
-                        //// if designation not exist then insert data into designation table
-                        //if (degObj == null)
-                        //{
-                        //    var designation = new Designation {DesignationName ="Employee Type"};
-                        //    degRep.AddDesignation(designation);
-
-                        //    degObj = degRep.GetDesignations().FirstOrDefault();
-                        //}
-                        //emp.DesignationId = degObj.Id;
                         emp.DesignationId = Invitation.DesignationId;
                         if (eService.CreateEmployee(emp))
                         {
@@ -227,8 +213,15 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
                             if (sService.AddSettings(accountSetting))
                             {
-                                CustomPrincipal.Login(user.Email, user.Password, false);
-                                return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                                var userInRole = new UserInRole();
+                                userInRole.EmployeeId = emp.Id;
+                                userInRole.RoleId = Invitation.RoleId;
+                                userInRole.IsActive = true;
+                                if (URSer.AddUserInRole(userInRole))
+                                {
+                                    CustomPrincipal.Login(user.Email, user.Password, false);
+                                    return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+                                }
                             }
                         }
                         else
