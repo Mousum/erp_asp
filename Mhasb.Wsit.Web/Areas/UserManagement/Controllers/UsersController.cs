@@ -148,7 +148,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
             //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
             List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
-            var compamyArray = uService.GetcompanyByUserID(user.Id);
+            var companyArray = uService.GetcompanyByUserID(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.CompanyArr = user.Id;
             var accountsetting = setService.GetAllByUserId(user.Id);
