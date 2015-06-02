@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Mhasb.Services.Commons;
 using Mhasb.Wsit.Web.Utilities;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
+using Mhasb.Services.Organizations;
 
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
@@ -19,6 +21,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private IUserService uService = new UserService();
         private ISettingsService setService = new SettingsService();
         private ILookupService luSer = new LookupService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICompanyService iCompany = new CompanyService();
 
         // GET: OrgSettings/ChartOfAccounts
         public ActionResult Index()
@@ -30,13 +34,19 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
-            var Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);
+           /// var AccSet = setService.GetAllByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
 
             if (Atypes.Count == 0)
             {
                 cSer.AddBaseAccountTypes();
-                Atypes = cSer.GetAllChartOfAccountByCompanyId(AccSet.Companies.Id);
+                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
             }
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.Id, Value =u.Value+"("+u.Quantity+"%)"});
             ViewBag.Lookups = new SelectList(lookups,"Id","Value");
@@ -49,12 +59,25 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
-            chartOfAccount.CompanyId = AccSet.Companies.Id;
+           
 
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            int flag = 4;
+            chartOfAccount.CompanyId = companyId;
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                TempData.Add("SucMasg","Chart Of Account Added Sucessfully!");
-                return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
+                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                {
+                    return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+                }
+                else {
+                    return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
+                }
             }
             else {
                 TempData.Add("errMsg", "Chart Of Account Addtion Failed");

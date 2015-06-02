@@ -3,7 +3,20 @@
     ViewBag.Title = "Create Invitation";
 
 }
-
+<div class="container">
+    <ul class="cstm-breadcrumb">
+        <li><a href="#" class="active">Start</a></li>
+        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
+        @*<li><a href="#">Invoice Settings</a></li>*@
+        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
+        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+        @*<li><a href="#">Account Balances</a></li>*@
+        <li><a href="#">Done.</a></li>
+    </ul>
+</div>
 
 <div class="container my-dashboard">
     <div class="row">

@@ -13255,213 +13255,70 @@ label.cstm-select:before {
 
 /*Author: Rafi , Date: 01.06.2015 , breadcrumbs*/
 
-.cstm-breadcrumb {
-    list-style: none;
-    overflow: hidden;
+.cstm-breadcrumb { 
+    list-style: none; 
+    overflow: hidden; 
     font: 12px Helvetica, Arial, Sans-Serif;
     margin-left: -36px;
     margin-top: -10px;
 }
-
-    .cstm-breadcrumb li {
-        float: left;
-    }
-
-        .cstm-breadcrumb li a {
-            color: #FFF;
-            text-decoration: none;
-            padding: 7px 0px 7px 44px;
-            background: #A6A8A9 none repeat scroll 0% 0%;
-            position: relative;
-            display: block;
-            float: left;
-        }
-
-            .cstm-breadcrumb li a:after {
-                content: " ";
-                display: block;
-                width: 0;
-                height: 0;
-                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-                border-bottom: 50px solid transparent;
-                border-left: 30px solid #A6A8A9;
-                position: absolute;
-                top: 50%;
-                margin-top: -50px;
-                left: 100%;
-                z-index: 2;
-            }
-
-            .cstm-breadcrumb li a:before {
-                content: " ";
-                display: block;
-                width: 0;
-                height: 0;
-                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-                border-bottom: 50px solid transparent;
-                border-left: 30px solid white;
-                position: absolute;
-                top: 50%;
-                margin-top: -50px;
-                margin-left: 1px;
-                left: 100%;
-                z-index: 1;
-            }
-
-        .cstm-breadcrumb li:first-child a {
-            padding-left: 10px;
-        }
-
-        .cstm-breadcrumb li:nth-child(2) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(2) a:after {
-                border-left-color: #A6A8A9;
-            }
-
-        .cstm-breadcrumb li:nth-child(3) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(3) a:after {
-                border-left-color: #A6A8A9;
-            }
-
-        .cstm-breadcrumb li:nth-child(4) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(4) a:after {
-                border-left-color: #A6A8A9;
-            }
-
-        .cstm-breadcrumb li:nth-child(5) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(5) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(6) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(6) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(7) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(7) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(8) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(8) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(9) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(9) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(10) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(10) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(11) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(11) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(12) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(12) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(13) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(13) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(14) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(14) a:after {
-                border-left-color: #A6A8A9;
-            }
-            .cstm-breadcrumb li:nth-child(15) a {
-            background: #A6A8A9 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li:nth-child(15) a:after {
-                border-left-color: #A6A8A9;
-            }
-
-        .cstm-breadcrumb li a:hover {
-            background: #233140 none repeat scroll 0% 0%;
-        }
-
-            .cstm-breadcrumb li a:hover:after {
-                border-left-color: #233140 !important;
-            }
-
-.active-breadcrumb li a {
+.cstm-breadcrumb li { 
+    float: left; 
+}
+.cstm-breadcrumb li a {
     color: #FFF;
     text-decoration: none;
-    padding: 7px 0px 7px 44px;
-    background: #233140 none repeat scroll 0% 0%;
+    padding: 5px 0px 5px 44px;
+    background: #A6A8A9 none repeat scroll 0% 0%;
     position: relative;
     display: block;
     float: left;
 }
+.cstm-breadcrumb li a:after { 
+    content: " "; 
+    display: block; 
+    width: 0; 
+    height: 0;
+    border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid #A6A8A9;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px; 
+    left: 100%;
+    z-index: 2; 
+}	
+.cstm-breadcrumb li a:before { 
+    content: " "; 
+    display: block; 
+    width: 0; 
+    height: 0;
+    border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+    border-bottom: 50px solid transparent;
+    border-left: 30px solid white;
+    position: absolute;
+    top: 50%;
+    margin-top: -50px; 
+    margin-left: 1px;
+    left: 100%;
+    z-index: 1; 
+}	
+.cstm-breadcrumb li:first-child a {
+    padding-left: 10px;
+}
 
-    .active-breadcrumb li a:after {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid #233140;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        left: 100%;
-        z-index: 2;
-    }
 
-    .active-breadcrumb li a:before {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid white;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        margin-left: 1px;
-        left: 100%;
-        z-index: 1;
-    }
-
+.cstm-breadcrumb li a:hover              { background: #233140 none repeat scroll 0% 0%;  }
+.cstm-breadcrumb li a:hover:after        { border-left-color: #233140 !important; }
+.active-breadcrumb li a{ background: #233140 none repeat scroll 0% 0%;  }
+.active-breadcrumb a{
+    background: #A6A8A9;
+}
+.cstm-breadcrumb li a.active              { background: #233140 none repeat scroll 0% 0%;  }
+.cstm-breadcrumb li a.active:after        { border-left-color: #233140 !important; }
+.active-breadcrumb li a{ background: #233140 none repeat scroll 0% 0%;  }
+.active-breadcrumb a{
+    background: #A6A8A9;
+}
 
 /*Author: Rafi , Date: 01.06.2015 , breadcrumbs*/

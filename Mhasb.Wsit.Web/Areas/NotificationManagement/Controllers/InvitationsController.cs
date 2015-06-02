@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
 
 
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
@@ -27,6 +28,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private readonly ISettingsService sService = new SettingsService();
         private IDesignation degRep = new DesignationService();
         private IUserInRoleService URSer = new UserInRoleService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         public ActionResult Index()
         {
@@ -99,6 +101,22 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //Send the email
                 mysmtpserver.Send(myemail);
 
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                var AccSet = sService.GetAllByUserId(user.Id);
+                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+                int flag = 3;
+                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                {
+                    return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+                }
+                else {
+                    return RedirectToAction("Create");
+                }
                 //string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
 
 
@@ -117,7 +135,8 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //sendMail(to, subject, body);
 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
+            
         }
 
         [AllowAnonymous]

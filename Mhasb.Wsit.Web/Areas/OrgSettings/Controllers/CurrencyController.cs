@@ -29,11 +29,11 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         [HttpPost]
         public ActionResult Create(Currency cr)
         {
-            if(cService.AddCurrency(cr))
+            if (cService.AddCurrency(cr))
                 return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
             else
             {
-                ModelState.AddModelError("msg","Currency did not inserted successfully");
+                ModelState.AddModelError("msg", "Currency did not inserted successfully");
                 return View();
             }
         }
@@ -67,7 +67,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             {
                 return "Failed";
             }
-            
+
             //if (cService.DeleteCurrency(id))
             //    return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
             //else
@@ -77,6 +77,6 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             //}
         }
 
-	
-	}
+
+    }
 }

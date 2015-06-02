@@ -1,6 +1,7 @@
 ﻿using Mhasb.Domain.Organizations;
 using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
@@ -24,6 +25,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly IAreaTimeService iTimeZone = new AreaTimeService();
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICompanyService iCompany = new CompanyService();
 
         //
         // GET: /UserManagement/Users/
@@ -125,6 +128,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var activatedCompany = cService.GetSingleCompany(userSettings.Companies.Id);
             ViewBag.CompanyLocation = activatedCompany.Location;
             var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+
             ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
 
             
@@ -373,6 +377,31 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 };
                 return Json(dataSet, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult Finish() {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Finish(int flag=5)
+        {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            if (iCompany.UpdateCompleteFlag(companyId, flag))
+            {
+                return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
+            }
+            else
+            {
+                return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
+            }
+            return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
+           
         }
 
     }
