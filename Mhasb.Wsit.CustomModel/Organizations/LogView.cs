@@ -8,16 +8,16 @@ namespace Mhasb.Wsit.CustomModel.Organizations
 {
     public class LogView
     {
-        int companyId { get; set; }
-        long userId { get; set; }
-        string companyName { get; set; }
-        DateTime lastViewedTime { get; set; }
-        string lastViewerFirstName { get; set; }
-        string lastViewerLastName { get; set; }
-        string roleName { get; set; }
-        string roleDescription { get; set; }
-        string subscriper { get; set; }
-        string subscriptionType { get; set; }
+       public int CompanyId { get; set; }
+       public long UserId { get; set; }
+       public string CompanyName { get; set; }
+       public DateTime LastViewedTime { get; set; }
+       public string LastViewerFirstName { get; set; }
+       public string LastViewerLastName { get; set; }
+       public string RoleName { get; set; }
+       public string RoleDescription { get; set; }
+       public string Subscriper { get; set; }
+       public string SubscriptionType { get; set; }
 
     }
 }
