@@ -2,9 +2,22 @@
 
 @{
     ViewBag.Title = "update";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_mhasbLayout.cshtml";
 }
-
+<div class="container">
+    <ul class="cstm-breadcrumb active-breadcrumb">
+        <li><a href="#">Start</a></li>
+        <li><a href="#">Organisation Settings</a></li>
+        <li><a href="#">Financial Settings</a></li>
+        <li><a href="#">Invoice Settings</a></li>
+        <li><a href="#">Invite Users</a></li>
+        <li><a href="#">Currencies</a></li>
+        <li><a href="#">Tax Rates</a></li>
+        <li><a href="#">Chart of Accounts</a></li>
+        <li><a href="#">Account Balances</a></li>
+        <li><a href="#">Done.</a></li>
+    </ul>
+</div>
 <div class="container my-dashboard">
     <div class="row clearfix">
 
@@ -244,7 +257,7 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+ 
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(".CompanyDocumentList").click(function () {
