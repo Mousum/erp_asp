@@ -44,7 +44,7 @@ namespace Mhasb.Services.Loggers
                .Include(u => u.Users)
                .Include(c => c.Companies)
                .Filter(e => e.UserId == userId)
-               .Get().Max()  ;
+               .Get().OrderByDescending(l => l.Id).FirstOrDefault();
                return dbObj;
            }
            catch (Exception ex)
@@ -52,7 +52,6 @@ namespace Mhasb.Services.Loggers
                return null;
            }
        }
-
    }
     
 
