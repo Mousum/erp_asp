@@ -81,7 +81,7 @@ namespace Mhasb.Services.Organizations
                                         .Include(l => l.LegalEntities)
                                         .Include(u => u.Users)
                                         .Include(cd=>cd.Documents)
-                                        .Filter(c => c.Id == companyId)
+                                        .Filter(c => c.Id == companyId )
                                         .Get().SingleOrDefault();
 
                 //companyRep.GetSingleObject(companyId);

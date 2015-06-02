@@ -43,7 +43,7 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-            if ((action == "Registration" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
+            if ((action == "Update" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
                 return;
 
 
@@ -61,28 +61,33 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult("~/");
                 return;
             }
-            var comSet = setService.GetAllByUserId(user.Id);
-            if (comSet == null)
-            {
-                filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Registration");
-                return;
-            }
-            var myCompany = comSet.Companies.Id;
-            var activatedCompany = cService.GetSingleCompany(myCompany);
-            if (activatedCompany.Users.Id == user.Id)
-                return;
+            // Block this code for companies setup follow 
+            //var comSet = setService.GetAllByUserId(user.Id);
+            //if (comSet == null)
+            //{
+            //    filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Update");
+            //    return;
+            //}
+            //var myCompany = comSet.Companies.Id;
+            //var activatedCompany = cService.GetSingleCompany(myCompany);
+            //if (activatedCompany.Users.Id == user.Id)
+            //    return;
 
-            var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
-            foreach (var role in roleList)
-            {
-                var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
-                foreach (var accessableAction in accessableActionList)
-                {
-                    if (accessableAction.ActionId == actionList.Id)
-                        return;
-                }
+            //var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
+            //foreach (var role in roleList)
+            //{
+            //    var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
+            //    foreach (var accessableAction in accessableActionList)
+            //    {
+            //        if (accessableAction.ActionId == actionList.Id)
+            //            return;
+            //    }
 
-            }
+            //}
+
+
+
+            // Old Block Dont upBlock pls brothers 
             //if (roleList.SelectMany(role => rvaService.GetActionByRoleID(role.RoleId)).Any(accessableAction => accessableAction.ActionId == actionList.Id))
             //{
             //    return;

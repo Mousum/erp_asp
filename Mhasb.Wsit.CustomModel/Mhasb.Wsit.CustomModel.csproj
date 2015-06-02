@@ -43,6 +43,7 @@
     <Compile Include="Accounts\VoucherCustom.cs" />
     <Compile Include="Organizations\CompanyProfileCustom.cs" />
     <Compile Include="Organizations\EmployeeProfileCustom.cs" />
+    <Compile Include="Organizations\LogView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

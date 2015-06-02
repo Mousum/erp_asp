@@ -1,7 +1,9 @@
 ﻿using Mhasb.Domain.Commons;
+using Mhasb.Domain.Loggers;
 using Mhasb.Domain.Organizations;
 using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.CustomModel.Organizations;
@@ -22,6 +24,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         private readonly ICompanyDocument iCompanyDocument = new CompanyDocumentService();
 
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         private readonly IIndustryService iIndustry = new IndustryService();
         private readonly ICountryService iCountry = new CountryService();
@@ -65,22 +68,28 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 company.Email = HttpContext.User.Identity.Name;
                 var tt = uService.GetSingleUserByEmail(company.Email);
                 company.Users = new User { Id = tt.Id, Email = tt.Email };
-                if (startTrial != null)
+
+                if (iCompany.AddCompany(company))
                 {
-                    if (iCompany.AddCompany(company))
+                    // company view log
+                    var cViewlog = new CompanyViewLog();
+                    cViewlog.CompanyId = company.Id;
+                    cViewlog.UserId = tt.Id;
+                    cViewlog.LoginTime = DateTime.Now;
+                    _companyViewLog.AddCompanyViewLog(cViewlog);
+                    if (startTrial != null)
                     {
-                        
                         return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
                     }
-                    else {
-                        return RedirectToAction("Add", "Company", new { Area = "OrganizationManagement" });
+                    else
+                    {
+                        return RedirectToAction("payment", "Company", new { Area = "OrganizationManagement" });
                     }
-                    
+
                 }
                 else
                 {
-                    iCompany.AddCompany(company);
-                    return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });
+                    return RedirectToAction("Add", "Company", new { Area = "OrganizationManagement" });
                 }
 
             }
@@ -266,9 +275,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int id = AccSet.Companies.Id;
+            //int id = AccSet.Companies.Id;
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
 
-            var company = iCompany.GetSingleCompany(id);
+            var company = iCompany.GetSingleCompany(companyId);
 
             if (company == null)
             {
@@ -425,6 +440,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                         }
 
                     }
+                    return RedirectToAction("Create", "FinalcialSetting", new { Area = "OrgSettings" });
                 }
                 else
                     msg = "Update Failed";

@@ -200,6 +200,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     {
                         contactDetailErr = "One or more Contact Field Updating Unsuccessfull!!!!";
                     }
+
+                    msg = "Your profile is successfully Updated";
                     
                 }
                 else
@@ -220,7 +222,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             if (!success)
                 return RedirectToAction("Update");
 
-            return RedirectToAction("Create", "EmployeeProfile", new { area = "OrganizationManagement" });
+            return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
 
         }
 
