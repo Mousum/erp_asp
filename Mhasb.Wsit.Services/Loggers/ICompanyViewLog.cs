@@ -11,7 +11,6 @@ namespace Mhasb.Services.Loggers
    {
        bool AddCompanyViewLog(CompanyViewLog companyViewLog);
        CompanyViewLog GetLogByUserAndCompanyId(long userId,int companyId);
-
        CompanyViewLog GetLastViewCompanyByUserId(long userId);
 
    }

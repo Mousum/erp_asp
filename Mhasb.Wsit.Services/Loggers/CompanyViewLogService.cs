@@ -35,8 +35,24 @@ namespace Mhasb.Services.Loggers
                 .Get().SingleOrDefault();
             return dbObj;
         }
-       
 
+       public CompanyViewLog GetLastViewCompanyByUserId(long userId)
+       {
+           try
+           {
+               var dbObj = _crudOperation.GetOperation()
+               .Include(u => u.Users)
+               .Include(c => c.Companies)
+               .Filter(e => e.UserId == userId)
+               .Get().Max();
+               return dbObj;
+           }
+           catch (Exception ex)
+           {
+               return null;
+           }
+       }
+   }
+    
 
-    }
 }

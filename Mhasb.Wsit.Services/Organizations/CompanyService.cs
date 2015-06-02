@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Wsit.CustomModel.Organizations;
 using Mhasb.Wsit.DAL.Data;
 
 namespace Mhasb.Services.Organizations
@@ -207,7 +208,7 @@ namespace Mhasb.Services.Organizations
         }
 
 
-        public List<Company> GetLastVisitorWiseCompanyList(long userId)
+        public List<LogView> GetLastVisitorWiseCompanyList(long userId)
         {
             using (var context = new WsDbContext())
             {
@@ -216,9 +217,9 @@ namespace Mhasb.Services.Organizations
                 var param3 = new SqlParameter("@companyid", 1);
 
                 const string query = "EXEC spget_lastvisitorwisecompanylist @queryoption,@userid,@companyid";
-               // var rr = context.Database.SqlQuery<InvoicePrint>(query, param1).ToList();
+                var rr = context.Database.SqlQuery<LogView>(query, param1,param2,param3).ToList();
 
-                return null;
+                return rr;
             }
         }
 
