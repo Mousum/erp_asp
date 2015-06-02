@@ -93,7 +93,7 @@ namespace Mhasb.Wsit.Web.Controllers
             //    return;
             //}
 
-            filterContext.Result = new RedirectResult("~/Home/AccessDenied");
+            //filterContext.Result = new RedirectResult("~/Home/AccessDenied");
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {

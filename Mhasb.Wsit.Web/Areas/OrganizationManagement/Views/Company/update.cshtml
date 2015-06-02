@@ -5,19 +5,21 @@
     Layout = "~/Views/Shared/_mhasbLayout.cshtml";
 }
 <div class="container">
-    <ul class="cstm-breadcrumb active-breadcrumb">
-        <li><a href="#">Start</a></li>
-        <li><a href="#">Organisation Settings</a></li>
-        <li><a href="#">Financial Settings</a></li>
-        <li><a href="#">Invoice Settings</a></li>
-        <li><a href="#">Invite Users</a></li>
-        <li><a href="#">Currencies</a></li>
-        <li><a href="#">Tax Rates</a></li>
-        <li><a href="#">Chart of Accounts</a></li>
-        <li><a href="#">Account Balances</a></li>
+    <ul class="cstm-breadcrumb">
+        <li><a href="@Url.Action("Add", "Company", new { area = "OrganizationManagement" })" class="active">Start</a></li>
+        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })">Financial Settings</a></li>
+        @*<li><a href="#">Invoice Settings</a></li>*@
+        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })">Invite Users</a></li>
+        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+        @*<li><a href="#">Account Balances</a></li>*@
         <li><a href="#">Done.</a></li>
     </ul>
 </div>
+
+
 <div class="container my-dashboard">
     <div class="row clearfix">
 

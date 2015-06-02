@@ -88,7 +88,7 @@ namespace Mhasb.Services.OrgSettings
                     //.Filter(fs => fs.CompanyId == CompanyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate, DateTime.Now) >= 0)
                     .Filter(fs => fs.CompanyId == CompanyId)
                     .Get()
-                    .SingleOrDefault();
+                    .FirstOrDefault();
 
 
                 return fSetttingObj;

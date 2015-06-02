@@ -485,6 +485,7 @@
     <Content Include="Areas\Commons\Views\LegalEntities\Index.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Add.cshtml" />
+    <Content Include="Areas\UserManagement\Views\Users\Finish.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

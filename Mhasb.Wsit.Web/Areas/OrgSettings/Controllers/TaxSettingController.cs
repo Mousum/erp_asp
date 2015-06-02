@@ -10,7 +10,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
     public class TaxSettingController : BaseController
     {
-        private readonly ITaxSetting _taxSettingService=new TaxSettingService();
+        private readonly ITaxSetting _taxSettingService = new TaxSettingService();
         private readonly IUserService uService = new UserService();
         private readonly ISettingsService sService = new SettingsService();
 
@@ -22,11 +22,11 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         // GET: /OrgSettings/TaxSetting/
         public ActionResult Create()
         {
-            var periodList  = Enum.GetValues(typeof(EnumFinalcialPeriod))
+            var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
                                     .Cast<EnumFinalcialPeriod>()
                                     .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
                                     .ToList();
-            ViewBag.PeriodList = new SelectList(periodList,"Id","Name");
+            ViewBag.PeriodList = new SelectList(periodList, "Id", "Name");
             return View();
         }
 
@@ -37,7 +37,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             {
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
                 var AccSet = sService.GetAllByUserId(user.Id);
-                taxSetting.CompanyId = Int32.Parse( AccSet.Companies.Id.ToString());
+                taxSetting.CompanyId = Int32.Parse(AccSet.Companies.Id.ToString());
 
                 if (_taxSettingService.AddTaxSetting(taxSetting))
                     return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
@@ -67,14 +67,14 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             try
             {
-                if(_taxSettingService.UpdateTaxSetting(taxSetting))
+                if (_taxSettingService.UpdateTaxSetting(taxSetting))
                     return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
                 else
                 {
                     ModelState.AddModelError("msg", "Data Update Failed");
                     return View();
                 }
-                    
+
             }
             catch (Exception ex)
             {
@@ -91,5 +91,5 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             return View(taxObj);
         }
 
-	}
+    }
 }

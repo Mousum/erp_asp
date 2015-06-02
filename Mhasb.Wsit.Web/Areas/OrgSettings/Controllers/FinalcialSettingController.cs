@@ -6,6 +6,7 @@ using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
@@ -16,6 +17,9 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ISettingsService sService = new SettingsService();
         private readonly IUserService uService = new UserService();
+        private readonly ICompanyService comService = new CompanyService();
+
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /OrgSettings/FinancialSetting/
         public ActionResult Index(int id)
@@ -54,11 +58,22 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            
-            fs.CompanyId = AccSet.Companies.Id;
+
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            fs.CompanyId = companyId;
             fs.IsActive = true;
-            fService.AddFinalcialSetting(fs);
-            return RedirectToAction("Index", "FinalcialSetting", new { Area = "OrgSettings", id = fs.Id });
+            if (fService.AddFinalcialSetting(fs))
+            {
+                int flag=2;
+                comService.UpdateCompleteFlag(companyId,flag);
+            }
+
+            return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
         }
 
         public ActionResult Edit(int id)
