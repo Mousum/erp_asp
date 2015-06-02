@@ -3,9 +3,12 @@ using Mhasb.Wsit.DAL.Operations;
 using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Wsit.CustomModel.Organizations;
+using Mhasb.Wsit.DAL.Data;
 
 namespace Mhasb.Services.Organizations
 {
@@ -205,19 +208,20 @@ namespace Mhasb.Services.Organizations
         }
 
 
-
-
-        public bool UpdateCompleteFlag(int id, int flag)
+        public List<LogView> GetLastVisitorWiseCompanyList(long userId)
         {
-            try {
-                var dbObj = companyRep.GetSingleObject(id);
-                dbObj.CompleteFlag = flag;
-                dbObj.State = ObjectState.Modified;
-                companyRep.UpdateOperation(dbObj);
-                return true;
-            }catch(Exception ex){
-                return false;
+            using (var context = new WsDbContext())
+            {
+                var param1 = new SqlParameter("@queryoption", 1);
+                var param2 = new SqlParameter("@userid", userId);
+                var param3 = new SqlParameter("@companyid", 1);
+
+                const string query = "EXEC spget_lastvisitorwisecompanylist @queryoption,@userid,@companyid";
+                var rr = context.Database.SqlQuery<LogView>(query, param1,param2,param3).ToList();
+
+                return rr;
             }
         }
+
     }
 }

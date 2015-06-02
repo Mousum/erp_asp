@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.CustomModel.Organizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,12 @@ namespace Mhasb.Services.Organizations
 
         bool DeleteCompany(int id);
 
-        bool UpdateCompleteFlag(int id,int flag);
-
         Company GetSingleCompany(int id);
 
         List<Company> GetAllCompanies();
         List<Company> GetAllCompaniesByUserId(long UserId);
         int GetMaxId();
         List<Company> GetAllCompaniesByUserEmployee(long userId);
-
-
-
+        List<LogView> GetLastVisitorWiseCompanyList(long userId);
     }
 }

@@ -114,6 +114,7 @@
     <Content Include="Data\Scripts\currencies.sql" />
     <Content Include="Data\Scripts\languages.sql" />
     <Content Include="Data\Scripts\areazone.sql" />
+    <Content Include="Data\Scripts\sp_CompanyListWithLastVisitor.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

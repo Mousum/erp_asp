@@ -18,9 +18,9 @@ namespace Mhasb.DAL.Mapping.Loggers
            this.Property(u => u.UserId).HasColumnName("userid");
            this.Property(u => u.CompanyId).HasColumnName("companyid");
            this.Property(u => u.IpAddress).HasColumnName("ip_address").HasMaxLength(50).IsOptional();
-           this.Property(u => u.LoginTime).HasColumnName("login_time");
+           this.Property(u => u.LoginTime).HasColumnName("visiting_time");
 
-           this.ToTable("lger.login");
+           this.ToTable("log.company_visitors");
            // relationship
            this.HasRequired(u=>u.Users)
                .WithMany()
