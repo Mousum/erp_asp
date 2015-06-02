@@ -42,9 +42,9 @@
                         @foreach (var company in Model)
                         {
                             <tr>
-                                <td><a href="javascript:void(0)" class="gotoCompany" id="@company.CompanyId">@company.</a></td>
+                                <td><a href="javascript:void(0)" class="gotoCompany" id="@company.CompanyId">@company.CompanyName</a></td>
                                 @*<td>@Html.ActionLink(@company.TradingName, "Dashboard", "Users", new { area = "UserManagement" }, new { @class = "link" })</td>*@
-                                <td>@company.LastViewedTime +" "+By <br /> @company.LastViewerFirstName @company.LastViewerLastName</td>
+                                <td>@company.LastViewedTime By <br /> @company.LastViewerFirstName @company.LastViewerLastName</td>
                                 <td>Adviser <br /> Manage users</td>
                                 <td>@company.LastViewerFirstName @company.LastViewerLastName <br />In Trial</td>
                                 @if (@ViewBag.CompanyArr == @company.UserId)
