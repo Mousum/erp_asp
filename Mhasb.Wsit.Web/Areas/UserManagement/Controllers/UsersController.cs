@@ -4,6 +4,7 @@ using Mhasb.Services.Commons;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.CustomModel.Organizations;
 using Mhasb.Wsit.Web.Areas.UserManagement.Models;
 using Mhasb.Wsit.Web.AuthSecurity;
 using Mhasb.Wsit.Web.Controllers;
@@ -141,7 +142,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
+            //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
+            List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
             var compamyArray = uService.GetcompanyByUserID(user.Id);
             //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
             ViewBag.CompanyArr = user.Id;

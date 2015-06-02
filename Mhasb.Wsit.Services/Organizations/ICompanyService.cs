@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.CustomModel.Organizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,6 @@ namespace Mhasb.Services.Organizations
         List<Company> GetAllCompaniesByUserId(long UserId);
         int GetMaxId();
         List<Company> GetAllCompaniesByUserEmployee(long userId);
-
+        List<LogView> GetLastVisitorWiseCompanyList(long userId);
     }
 }
