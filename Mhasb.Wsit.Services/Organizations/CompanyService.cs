@@ -3,9 +3,11 @@ using Mhasb.Wsit.DAL.Operations;
 using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Wsit.DAL.Data;
 
 namespace Mhasb.Services.Organizations
 {
@@ -203,7 +205,22 @@ namespace Mhasb.Services.Organizations
             }
 
         }
-        
+
+
+        public List<Company> GetLastVisitorWiseCompanyList(long userId)
+        {
+            using (var context = new WsDbContext())
+            {
+                var param1 = new SqlParameter("@queryoption", 1);
+                var param2 = new SqlParameter("@userid", userId);
+                var param3 = new SqlParameter("@companyid", 1);
+
+                const string query = "EXEC spget_lastvisitorwisecompanylist @queryoption,@userid,@companyid";
+               // var rr = context.Database.SqlQuery<InvoicePrint>(query, param1).ToList();
+
+                return null;
+            }
+        }
 
     }
 }

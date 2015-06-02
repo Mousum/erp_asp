@@ -1,0 +1,30 @@
+﻿ALTER PROCEDURE [dbo].[spget_lastvisitorwisecompanylist]
+@queryoption int,
+@userid bigint,
+@companyid int
+
+AS
+BEGIN
+	
+	Select tb_com.CompanyId,tb_user.UserId,	tb_com.display_name As CompanyName,
+	tb_user.visiting_time As lastViewedTime,tb_user.first_name As lastViewerFirstName,
+	tb_user.last_name As lastViewerLastName,' 'As RoleName,' 'As roleDescription,
+	' 'As Subscriper, ' 'As SubscriptionType
+	
+	from
+	( select * from org.employees emp
+	  where emp.userid =@userid
+	)As tb_emp inner join 
+	(
+	select com.Id as CompanyId,com.display_name from org.companies com
+	)As tb_com on tb_emp.companyid = tb_com.companyid inner join
+	(
+		select Max(vtor.Id)as visitorid, vtor.companyid,vtor.visiting_time,
+		u.last_name,u.first_name,u.Id as userid
+		from log.company_visitors vtor inner join
+		sec.users u on vtor.userid = u.Id
+		group by  vtor.companyid,vtor.visiting_time,
+		u.Id,u.last_name,u.first_name
+	)As tb_user on tb_com.companyid = tb_user.companyid
+	
+END

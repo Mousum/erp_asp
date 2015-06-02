@@ -12,7 +12,7 @@ using Mhasb.Domain.Loggers;
 
 namespace Mhasb.Wsit.DAL.Data
 {
- class WsDbContext: DbContext, IDbContext
+ public class WsDbContext: DbContext, IDbContext
     {
         public WsDbContext()
             : base("Name=DbConString")

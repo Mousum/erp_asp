@@ -22,6 +22,5 @@ namespace Mhasb.Services.Organizations
         int GetMaxId();
         List<Company> GetAllCompaniesByUserEmployee(long userId);
 
-
     }
 }
