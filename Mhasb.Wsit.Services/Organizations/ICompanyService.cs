@@ -23,5 +23,7 @@ namespace Mhasb.Services.Organizations
         int GetMaxId();
         List<Company> GetAllCompaniesByUserEmployee(long userId);
         List<LogView> GetLastVisitorWiseCompanyList(long userId);
+
+        bool UpdateCompleteFlag(int id, int flag);
     }
 }
