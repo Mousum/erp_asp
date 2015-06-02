@@ -206,7 +206,7 @@ namespace Mhasb.Services.Organizations
             }
 
         }
-
+        
 
         public List<LogView> GetLastVisitorWiseCompanyList(long userId)
         {
@@ -223,21 +223,19 @@ namespace Mhasb.Services.Organizations
             }
         }
 
+
+
         public bool UpdateCompleteFlag(int id, int flag)
         {
-            try
-            {
+            try {
                 var dbObj = companyRep.GetSingleObject(id);
                 dbObj.CompleteFlag = flag;
                 dbObj.State = ObjectState.Modified;
                 companyRep.UpdateOperation(dbObj);
                 return true;
-            }
-            catch (Exception ex)
-            {
+            }catch(Exception ex){
                 return false;
             }
         }
-
     }
 }
