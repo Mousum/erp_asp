@@ -126,7 +126,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var tt = HttpContext.User.Identity.Name;
             var user = uService.GetSingleUserByEmail(tt);
             var userSettings = setService.GetAllByUserId(user.Id);
-            var activatedCompany = cService.GetSingleCompany(userSettings.Companies.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var activatedCompany = cService.GetSingleCompany(companyId);
             ViewBag.CompanyLocation = activatedCompany.Location;
             var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
 
