@@ -22,10 +22,9 @@ namespace Mhasb.Domain.Subscriptions
     }
     public enum PackageEnum
     {
-        test1 = 1,
-        test2 = 2,
-        test3 = 3,
-        test4 = 4
+        Active = 1,
+        Suspended = 2,
+        Expired = 3
     }
 
 }

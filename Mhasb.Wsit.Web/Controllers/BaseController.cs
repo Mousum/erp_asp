@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Mhasb.Services.Accounts;
 using Mhasb.Services.Organizations;
+using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -43,7 +44,7 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
 
-            if ((action == "Update" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
+            if ((action == "Add" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
                 return;
 
 
@@ -54,11 +55,46 @@ namespace Mhasb.Wsit.Web.Controllers
             ISettingsService setService = new SettingsService();
             IRoleVsActionService rvaService = new RoleVsActionService();
             ICompanyService cService = new CompanyService();
+            ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+
 
             var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             if (user == null)
             {
                 filterContext.Result = new RedirectResult("~/");
+                return;
+            }
+
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+
+            var myCompany = cService.GetSingleCompany(companyId);
+            if(myCompany==null)
+            {
+                filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Add");
+                return;
+            }
+            if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
+            {
+                if(myCompany.CompleteFlag==0)
+                    filterContext.Result = new RedirectResult(Url.Action("Update", "Company", new { area = "OrganizationManagement" }));
+                else if (myCompany.CompleteFlag == 1)
+                    filterContext.Result = new RedirectResult(Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" }));
+                else if (myCompany.CompleteFlag == 2)
+                    filterContext.Result = new RedirectResult(Url.Action("Create", "Invitations", new { area = "NotificationManagement" }));
+                else if (myCompany.CompleteFlag == 3)
+                    filterContext.Result = new RedirectResult(Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" }));
+                else if (myCompany.CompleteFlag == 4)
+                    filterContext.Result = new RedirectResult(Url.Action("Finish", "Users", new { area = "UserManagement" }));
+                return;
+            }
+            else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != user.Id)
+            {
+                filterContext.Result = new RedirectResult("~/Home/AccessDenied");
                 return;
             }
             // Block this code for companies setup follow 
