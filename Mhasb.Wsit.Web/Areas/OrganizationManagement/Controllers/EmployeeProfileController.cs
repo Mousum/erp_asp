@@ -222,7 +222,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             if (!success)
                 return RedirectToAction("Update");
 
-            return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
+            return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
 
         }
 

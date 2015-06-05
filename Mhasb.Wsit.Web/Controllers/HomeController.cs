@@ -10,15 +10,21 @@ using Mhasb.Wsit.Web.Areas.UserManagement.Models;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CommonBaseController
     {
         private IRoleVsActionService arService = new RoleVsActionService();
         public ActionResult Index()
         {
-
-            
             if (HttpContext.User.Identity.IsAuthenticated)
-                return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+                
             var model = new Login();
            // return View(model);
             //return View("Index",model);

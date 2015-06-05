@@ -208,6 +208,7 @@
     <Compile Include="AuthSecurity\ICustomPrincipal.cs" />
     <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -677,6 +678,7 @@
     <Folder Include="Uploads\New_Company\" />
     <Folder Include="Uploads\sdfsdf\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\CommonBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

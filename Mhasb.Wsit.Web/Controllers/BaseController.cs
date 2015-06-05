@@ -14,7 +14,7 @@ using Mhasb.Services.Loggers;
 namespace Mhasb.Wsit.Web.Controllers
 {
     [Authorize]
-    public class BaseController : Controller
+    public class BaseController : CommonBaseController
     {
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
@@ -64,40 +64,57 @@ namespace Mhasb.Wsit.Web.Controllers
             // if user null, then redirect to login page and  clear session/cookie data.
             if (user == null)
             {
-                filterContext.Result = new RedirectResult("~/");
+                filterContext.Result = new RedirectResult(Url.Action("Logout", "Users", new { area = "UserManagement" }));
                 return;
             }
 
             var logObj = companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
-            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-            
-
+            if (logObj != null)
+                companyId = (int)logObj.CompanyId;
+            else
+            {
+                filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
+                return;
+            }
+            if (companyId == 0)
+            {
+                filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
+                return;
+            }
+            string absUrl;
+            if (!checkCompanyFlow(out absUrl))
+            {
+                filterContext.Result = new RedirectResult(absUrl);
+                return;
+            }
             var myCompany = cService.GetSingleCompany(companyId);
-            if(myCompany==null)
+            if (myCompany == null)
             {
-                filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Add");
+                filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
-            if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
-            {
-                if(myCompany.CompleteFlag==0)
-                    filterContext.Result = new RedirectResult(Url.Action("Update", "Company", new { area = "OrganizationManagement" }));
-                else if (myCompany.CompleteFlag == 1)
-                    filterContext.Result = new RedirectResult(Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" }));
-                else if (myCompany.CompleteFlag == 2)
-                    filterContext.Result = new RedirectResult(Url.Action("Create", "Invitations", new { area = "NotificationManagement" }));
-                else if (myCompany.CompleteFlag == 3)
-                    filterContext.Result = new RedirectResult(Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" }));
-                else if (myCompany.CompleteFlag == 4)
-                    filterContext.Result = new RedirectResult(Url.Action("Finish", "Users", new { area = "UserManagement" }));
-                return;
-            }
-            else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != user.Id)
-            {
-                filterContext.Result = new RedirectResult("~/Home/AccessDenied");
-                return;
-            }
+
+            //if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
+            //{
+            //    if(myCompany.CompleteFlag==0)
+            //        filterContext.Result = new RedirectResult(Url.Action("Update", "Company", new { area = "OrganizationManagement" }));
+            //    else if (myCompany.CompleteFlag == 1)
+            //        filterContext.Result = new RedirectResult(Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" }));
+            //    else if (myCompany.CompleteFlag == 2)
+            //        filterContext.Result = new RedirectResult(Url.Action("Create", "Invitations", new { area = "NotificationManagement" }));
+            //    else if (myCompany.CompleteFlag == 3)
+            //        filterContext.Result = new RedirectResult(Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" }));
+            //    else if (myCompany.CompleteFlag == 4)
+            //        filterContext.Result = new RedirectResult(Url.Action("Finish", "Users", new { area = "UserManagement" }));
+            //    return;
+            //}
+            //else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != user.Id)
+            //{
+            //    //should be change 
+            //    filterContext.Result = new RedirectResult("~/Home/AccessDenied");
+            //    return;
+            //}
 
             // Block this code for companies setup follow 
             //var comSet = setService.GetAllByUserId(user.Id);
@@ -107,21 +124,21 @@ namespace Mhasb.Wsit.Web.Controllers
             //    return;
             //}
             //var myCompany = comSet.Companies.Id;
-            //var activatedCompany = cService.GetSingleCompany(myCompany);
-            //if (activatedCompany.Users.Id == user.Id)
-            //    return;
+            var activatedCompany = cService.GetSingleCompany(companyId);
+            if (activatedCompany.Users.Id == user.Id)
+                return;
 
-            //var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, myCompany);
-            //foreach (var role in roleList)
-            //{
-            //    var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
-            //    foreach (var accessableAction in accessableActionList)
-            //    {
-            //        if (accessableAction.ActionId == actionList.Id)
-            //            return;
-            //    }
+            var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, companyId);
+            foreach (var role in roleList)
+            {
+                var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
+                foreach (var accessableAction in accessableActionList)
+                {
+                    if (accessableAction.ActionId == actionList.Id)
+                        return;
+                }
 
-            //}
+            }
 
 
 
