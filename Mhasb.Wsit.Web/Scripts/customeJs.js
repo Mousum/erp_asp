@@ -1,7 +1,7 @@
 ﻿// for account setting Page
 
 $(document).ready(function () {
- 
+
 
     $('#zoneId').click(function () {
         hideMsg();
@@ -114,15 +114,7 @@ $(document).ready(function () {
     });
     $("#passSave").click(function () {
 
-        if ($("#dbpass").val() != $("#oldPass").val()) {
-            $(".email-danger").text("Your Entered Wrong Current Password").show('slow');
-
-        }
-        else if ($("#dbpass").val() == $("#nPassWord").val()) {
-            $(".email-danger").text("Your Current Password and New Password Are Same,Please Try New One").show('slow');
-
-        }
-        else if ($("#nPassWord").val().length < 5) {
+        if ($("#nPassWord").val().length < 5) {
             $(".email-danger").text("Password Must Be Longer Then 5 Charecter").show('slow');
 
         }
@@ -130,33 +122,51 @@ $(document).ready(function () {
             $(".email-danger").text("'New Password' and 'Confirm New Password' Are Must Be The Same").show('slow');
         }
         else {
-            var url = $('.UpdatePassword').attr("data-url");
-            var Password = $("#nPassWord").val();
+            var matchurl = $('.MatchPass').attr("data-url");
+            var data = { oldpass: $("#oldPass").val(), newPass: $("#nPassWord").val() }
             $.ajax({
-                url: url,
+                url: matchurl,
                 type: "post",
-                data: { password: Password },
+                data: data,
                 success: function (data) {
-                    if (data.success == "True") {
-                        $("#dbMail").val(data.msg);
-                        $("#dbpass").val(data.msgpass);
-                        $('.email-danger').text("Password Successfully Updated");
-                        $('.email-danger').show('slow');
-                        $("#nPassWord").val("");
-                        $("#cnPassWord").val("");
-                        $("#oldPass").val("");
-                        $("#editpassdiv").hide("slow");
-
-                    } else {
-                        $('.email-danger').text("Password Cannot Updated this time");
-                        $('.email-danger').show('slow');
+                    if (data.msg == "InvalidOldPass") {
+                        $(".email-danger").text("Your Entered Wrong Current Password").show('slow');
                     }
+                    else if (data.msg == "OldAndNewPassAreSame") {
+                        $(".email-danger").text("Your Current Password and New Password Are Same,Please Try New One").show('slow');
+                    }
+                    else if (data.msg == "Alright") {
+                        var url = $('.UpdatePassword').attr("data-url");
+                        var Password = $("#nPassWord").val();
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: { password: Password },
+                            success: function (data) {
+                                if (data.success == "True") {
+                                    $("#dbMail").val(data.msg);
+                                    //$("#dbpass").val(data.msgpass);
+                                    $('.email-danger').text("Password Successfully Updated");
+                                    $('.email-danger').show('slow');
+                                    $("#nPassWord").val("");
+                                    $("#cnPassWord").val("");
+                                    $("#oldPass").val("");
+                                    $("#editpassdiv").hide("slow");
 
-                },
-                error: function () {
+                                } else {
+                                    $('.email-danger').text("Password Cannot Updated this time");
+                                    $('.email-danger').show('slow');
+                                }
 
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    }
                 }
             });
+
         }
 
     });
@@ -164,7 +174,7 @@ $(document).ready(function () {
 
     //Update Email 
     $("#editmail").click(function () {
-       
+
         $("#editmaildiv").toggle("slow");
     });
     $("#EmailCancel").click(function () {
@@ -172,37 +182,54 @@ $(document).ready(function () {
     })
     $("#emailSave").click(function () {
         var Email = $("#newmail").val();
-
-        if ($("#dbpass").val() != $("#PassWord").val()) {
-            $(".email-danger").text("Wrong Current Password").show('slow');
-        }
-        else if (Email == $("#dbMail").val()) {
+        if (Email == $("#dbMail").val()) {
             $(".email-danger").text("Entered Same Email , Please Enter A New Email").show('slow');
         }
-        else if (isValidEmailAddress(Email)) {
+
+        else if (!isValidEmailAddress(Email)) {
+
             $('.email-danger').text("Invalid Email Address");
             $('.email-danger').show('slow');
 
         }
         else {
-            var url = $('.UpdateEmail').attr("data-url");
+            alert();
+            var matchurl = $('.MatchPass').attr("data-url");
+            var data = { oldpass: $("#PassWord").val(), newPass: "" }
             $.ajax({
-                url: url,
+                url: matchurl,
                 type: "post",
-                data: { Email: Email },
+                data: data,
                 success: function (data) {
-                    if (data.success == "True") {
-                        $("#dbMail").val(data.msg);
-                        $("#dbpass").val(data.msgpass);
-                        $('.email-danger').text("Email Successfully Updated");
-                        $('.email-danger').show('slow');
-                        $("#newmail").val("");
-                        $("#PassWord").val("")
-                        $("#editmaildiv").hide("slow");
+                    if (data.msg == "InvalidOldPass") {
+                        $(".email-danger").text("Wrong Current Password").show('slow');
+                    }
+                    else if (data.msg == "OldPassMatched") {
+                        var url = $('.UpdateEmail').attr("data-url");
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: { Email: Email },
+                            success: function (data) {
+                                if (data.success == "True") {
+                                    $("#dbMail").val(data.msg);
+                                    $("#dbpass").val(data.msgpass);
+                                    $('.email-danger').text("Email Successfully Updated");
+                                    $('.email-danger').show('slow');
+                                    $("#newmail").val("");
+                                    $("#PassWord").val("")
+                                    $("#editmaildiv").hide("slow");
 
-                    } else {
-                        $('.email-danger').text("Email Address Already Used");
-                        $('.email-danger').show('slow');
+                                } else {
+                                    $('.email-danger').text("Email Address Already Used");
+                                    $('.email-danger').show('slow');
+                                }
+
+                            },
+                            error: function () {
+
+                            }
+                        });
                     }
 
                 },
@@ -210,12 +237,14 @@ $(document).ready(function () {
 
                 }
             });
+
         }
     })
 
     function isValidEmailAddress(emailAddress) {
         var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
-        return emailReg.test(emailAddress);
+        //return emailReg.test(emailAddress);
+        return false;
     }
 
 

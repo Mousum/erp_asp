@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mhasb.Wsit.Web.Utilities;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
@@ -66,6 +67,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             {
                 if (uService.GetSingleUserByEmail(user.Email) == null)
                 {
+                    Encryptor encrypt = new Encryptor();
+                    user.Password = encrypt.GetMD5(user.Password);
                     if (uService.AddUser(user))
                     {
                         //return View("RegistrationSuccess");
@@ -98,6 +101,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [AllowAnonymous]
         public ActionResult Login(string email, string password)
         {
+            Encryptor encryptor = new Encryptor();
+            password = encryptor.GetMD5(password);
             if (CustomPrincipal.Login(email, password, false) != false)
             {
 
@@ -195,6 +200,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var accsetting = new AccountSetting();
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
+            users.Password = "Password is hidden.";
             try
             {
                 accsetting.Users = users;
@@ -257,8 +263,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             var email = HttpContext.User.Identity.Name;
             var User = uService.GetSingleUserByEmail(email);
-            User.Password = password;
-            User.ConfirmPassword = password;
+            var Encryptor = new Encryptor();
+            User.Password = Encryptor.GetMD5(password);
+            User.ConfirmPassword = Encryptor.GetMD5(password);
             if (uService.UpdateUser(User))
             {
                 CustomPrincipal.Login(email, User.Password, false);
@@ -405,6 +412,28 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
            
         }
-
+        [HttpPost]
+        public ActionResult MatchPassword(string oldpass, string newPass)
+        {
+          var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+          var Encrypted = new Encryptor();
+          if (user.Password == Encrypted.GetMD5(oldpass))
+          {
+              if (newPass != "") 
+              {
+                  if (Encrypted.GetMD5(newPass.ToString()) == user.Password) 
+                  {
+                      return Json(new { msg="OldAndNewPassAreSame",flag="false"});
+                  }
+                  return Json(new { msg="Alright",flag="true"});
+              }
+              return Json(new { msg="OldPassMatched",flag="true"});
+          }
+          else 
+          {
+              return Json(new{msg="InvalidOldPass",flag="false"});
+          }
+        }
     }
+    
 }

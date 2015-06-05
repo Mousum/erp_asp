@@ -7,6 +7,7 @@
 <li style="display:none" class='GetSettingsByUserId' data-url='@Url.Action("GetSettingsByUserId", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdateEmail' data-url='@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdatePassword' data-url='@Url.Action("UpdateUserPassword", "Users", new { area = "UserManagement" })'></li>
+<li style="display:none" class='MatchPass' data-url='@Url.Action("MatchPassword", "Users", new { area = "UserManagement" })'></li>
 
 <div class="container my-dashboard">
     <div class="row clearfix no-margin">
@@ -39,7 +40,7 @@
                     <label>Your current password is</label>
                 </div>
                 <div class="col-md-5 edit-fa">
-                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", type = "password", id = "dbpass" })
+                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", id = "dbpass"})
                     <a href="javascript:void(0)" id="editpass"><i class="fa fa-pencil"></i></a>
                 </div>
 
