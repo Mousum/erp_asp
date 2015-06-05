@@ -36,7 +36,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             }
             else
             {
-                return RedirectToAction("MyMhasb","Users",new{area="Usermanagement"});
+                return RedirectToAction("MyMhasb", "LoggedInUser", new { area = "Usermanagement" });
             }
            
         }

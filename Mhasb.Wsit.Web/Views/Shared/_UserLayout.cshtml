@@ -69,7 +69,7 @@
                         <a href="#page"></a>
                     </li>
                     <li class="">
-                        <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dashboard</a>
+                        <a href='@Url.Action("Dashboard", "LoggedInUser", new { area = "UserManagement" })'>Dashboard</a>
 
                     </li>
                     <li class="">
@@ -129,7 +129,7 @@
                                     data: { ComanyId: companyID },
                                     success: function (data) {
                                         if (data.success == "True") {
-                                            window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                                            window.location = "@Url.Action("Dashboard", "LoggedInUser", new { area = "UserManagement" })";
                                         } else {
 
                                         }

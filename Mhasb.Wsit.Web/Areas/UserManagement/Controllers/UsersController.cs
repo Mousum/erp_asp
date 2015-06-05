@@ -19,7 +19,7 @@ using Mhasb.Wsit.Web.Utilities;
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
 
-    public class UsersController : BaseController
+    public class UsersController : Controller
     {
         private IUserService uService = new UserService();
 
@@ -28,7 +28,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
-        private readonly ICompanyService iCompany = new CompanyService();
+        //private readonly ICompanyService iCompany = new CompanyService();
 
         //
         // GET: /UserManagement/Users/
@@ -125,50 +125,49 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-        [AllowAnonymous]
-        public ActionResult Dashboard()
-        {
-            var tt = HttpContext.User.Identity.Name;
-            var user = uService.GetSingleUserByEmail(tt);
-            var userSettings = setService.GetAllByUserId(user.Id);
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
-            {
-                companyId = (int)logObj.CompanyId;
-            }
-            var activatedCompany = cService.GetSingleCompany(companyId);
-            ViewBag.CompanyLocation = activatedCompany.Location;
-            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+        //public ActionResult Dashboard()
+        //{
+        //    var tt = HttpContext.User.Identity.Name;
+        //    var user = uService.GetSingleUserByEmail(tt);
+        //    var userSettings = setService.GetAllByUserId(user.Id);
+        //    var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+        //    int companyId = 0;
+        //    if (logObj != null)
+        //    {
+        //        companyId = (int)logObj.CompanyId;
+        //    }
+        //    var activatedCompany = cService.GetSingleCompany(companyId);
+        //    ViewBag.CompanyLocation = activatedCompany.Location;
+        //    var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
 
-            ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
+        //    ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
 
             
 
-            return View("Deshboard_new");
-        }
+        //    return View("Deshboard_new");
+        //}
 
-        public ActionResult MyMhasb()
-        {
-            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            if (user == null)
-            {
-                return RedirectToAction("Logout");
-            }
-            //List<Company> myCompanyList = iCompany.GetAllCompanies()
-            //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
-            List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
-            var companyArray = uService.GetcompanyByUserID(user.Id);
-            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-            ViewBag.CompanyArr = user.Id;
-            var accountsetting = setService.GetAllByUserId(user.Id);
-            ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
-            ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb_new", myCompanyList);
+        //public ActionResult MyMhasb()
+        //{
+        //    User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+        //    if (user == null)
+        //    {
+        //        return RedirectToAction("Logout");
+        //    }
+        //    //List<Company> myCompanyList = iCompany.GetAllCompanies()
+        //    //                                       .Where(c => c.Users.Id == user.Id).ToList();
+        //    //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
+        //    List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
+        //    var companyArray = uService.GetcompanyByUserID(user.Id);
+        //    //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+        //    ViewBag.CompanyArr = user.Id;
+        //    var accountsetting = setService.GetAllByUserId(user.Id);
+        //    ViewBag.userName = user.FirstName + " " + user.LastName;
+        //    ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
+        //    ViewBag.lastLoginTime = DateTime.Now;
+        //    return View("MyMhasb_new", myCompanyList);
 
-        }
+        //}
         public JsonResult GetCompany()
         {
 
@@ -406,7 +405,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             int companyId = 0;
             if (logObj != null)
                 companyId = (int) logObj.CompanyId;
-            if (iCompany.UpdateCompleteFlag(companyId, flag))
+            if (cService.UpdateCompleteFlag(companyId, flag))
             {
                 return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
             }

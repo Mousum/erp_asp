@@ -115,7 +115,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 catch (Exception ex)
                 {
                     TempData.Add("errMsg", "Internal Server Error Regarding Commons Entity. Please Contact with Mhasb Team");
-                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                    return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
                 }
 
 
@@ -262,7 +262,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             TempData.Add("errMsg", msg + logoUploadMsg + sealUploadMsg + documentAddMsg + designationInsertMsg + employeeAddMsg + settingMsg);
 
             if (success && uploadSuccess)
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
             else if (!uploadSuccess)
                 return RedirectToAction("update");
             else
@@ -303,7 +303,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             catch (Exception ex)
             {
                 TempData.Add("errMsg", "Internal Server Error Regarding Commons Entity. Please Contact with Mhasb Team");
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
             }
         }
 
@@ -455,7 +455,7 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
             TempData.Add("errMsg", msg + logoUploadMsg + sealUploadMsg + documentAddMsg);
 
             if (success && uploadSuccess)
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
             else if (!uploadSuccess)
                 return RedirectToAction("update");
             else
