@@ -69,12 +69,19 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 {
                     Encryptor encrypt = new Encryptor();
                     user.Password = encrypt.GetMD5(user.Password);
+                    user.ConfirmPassword = encrypt.GetMD5(user.ConfirmPassword);
                     if (uService.AddUser(user))
                     {
                         //return View("RegistrationSuccess");
 
                         CustomPrincipal.Login(user.Email, user.Password, false);
-                        return Redirect("MyMhasb");
+                        return RedirectToAction("MyMhasb", "LoggedInUser", new { Area = "UserManagement" });
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError("Msg", "Registration Failed!!!");
+                        // return Content("Already Register");
+                        return View();
                     }
                 }
                 else
@@ -86,8 +93,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             }
 
-
-            return Content("You Must Agree with our terms and Condition");
+            else
+            {
+                ModelState.AddModelError("Msg", "You Must Agree with Terms and Condition....");
+                // return Content("Already Register");
+                return View();
+            }
         }
 
         public ActionResult Login()
