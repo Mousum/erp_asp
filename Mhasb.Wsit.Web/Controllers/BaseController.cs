@@ -33,6 +33,8 @@ namespace Mhasb.Wsit.Web.Controllers
             var module = (string)routeData.DataTokens["area"];
             var controller = routeData.GetRequiredString("controller");
             var action = routeData.GetRequiredString("action");
+
+
             // to save Action List 
             var actionList = new ActionList
             {
@@ -43,11 +45,11 @@ namespace Mhasb.Wsit.Web.Controllers
             };
             actionService.AddActionListFromBaseController(actionList);
 
-
+            // Check user type, if owner then he/she can add company. 
             if ((action == "Add" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
                 return;
 
-
+            // To get ActionList Id
             actionList = actionService.GetActionListByActionList(actionList);
 
             IUserInRoleService userInRoleService = new UserInRoleService();
@@ -55,22 +57,21 @@ namespace Mhasb.Wsit.Web.Controllers
             ISettingsService setService = new SettingsService();
             IRoleVsActionService rvaService = new RoleVsActionService();
             ICompanyService cService = new CompanyService();
-            ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+            ICompanyViewLog companyViewLog = new CompanyViewLogService();
 
 
             var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            // if user null, then redirect to login page and  clear session/cookie data.
             if (user == null)
             {
                 filterContext.Result = new RedirectResult("~/");
                 return;
             }
 
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var logObj = companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
-            if (logObj != null)
-            {
-                companyId = (int)logObj.CompanyId;
-            }
+            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+            
 
             var myCompany = cService.GetSingleCompany(companyId);
             if(myCompany==null)
@@ -97,6 +98,7 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult("~/Home/AccessDenied");
                 return;
             }
+
             // Block this code for companies setup follow 
             //var comSet = setService.GetAllByUserId(user.Id);
             //if (comSet == null)

@@ -18,7 +18,7 @@ using System.Web.Mvc;
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
 
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private IUserService uService = new UserService();
 
@@ -349,7 +349,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-        public JsonResult GetSettingsByUserId()
+        public JsonResult GetSettingsByUserId ()
         {
             var setObj = new Settings();
             try
@@ -391,25 +391,19 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             return View();
         }
         [HttpPost]
+        // ReSharper disable once MethodOverloadWithOptionalParameter
         public ActionResult Finish(int flag=5)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
             if (logObj != null)
-            {
-                companyId = (int)logObj.CompanyId;
-            }
+                companyId = (int) logObj.CompanyId;
             if (iCompany.UpdateCompleteFlag(companyId, flag))
             {
                 return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
             }
-            else
-            {
-                return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
-            }
-            return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
-           
+            return View(); //RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
         }
 
     }
