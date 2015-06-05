@@ -58,7 +58,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             if (user == null)
             {
-                return RedirectToAction("Logout","Users");
+                return RedirectToAction("Logout", "Users", new { Area = "UserManagement" });
             }
             //List<Company> myCompanyList = iCompany.GetAllCompanies()
             //                                       .Where(c => c.Users.Id == user.Id).ToList();
