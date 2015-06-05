@@ -82,12 +82,12 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
-            string absUrl;
-            if (!checkCompanyFlow(out absUrl))
-            {
-                filterContext.Result = new RedirectResult(absUrl);
-                return;
-            }
+            //string absUrl;
+            //if (!checkCompanyFlow(out absUrl))
+            //{
+            //    filterContext.Result = new RedirectResult(absUrl);
+            //    return;
+            //}
             var myCompany = cService.GetSingleCompany(companyId);
             if (myCompany == null)
             {
