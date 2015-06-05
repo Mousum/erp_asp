@@ -10,7 +10,7 @@ using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class FinalcialSettingController : Controller
+    public class FinalcialSettingController : BaseController
     {
         private readonly ICompanyService iCompany = new CompanyService();
         private readonly ICurrency cService = new CurrencyService();
