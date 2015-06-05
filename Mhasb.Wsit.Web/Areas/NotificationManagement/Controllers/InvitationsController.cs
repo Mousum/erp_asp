@@ -40,7 +40,15 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         {
             var designations = degRep.GetDesignations();
             var roles = rService.GetAllRoles();
+           
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+
+            //// Add Role if not exist
+            //var uu = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            //if (!roles.Any())
+            //{
+                
+            //}
             List<Company> myCompanyList = iCompany.GetAllCompanies()
                                                    .Where(c => c.Users.Id == user.Id).ToList();
             var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
@@ -49,7 +57,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                                     .ToList();
             ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
             ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
-            ViewBag.Companies = new SelectList(myCompanyList, "Id", "DisplayName");
+            ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
             ViewBag.roles = new SelectList(roles, "Id", "RoleName");
 
 

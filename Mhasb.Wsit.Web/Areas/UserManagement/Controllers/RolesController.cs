@@ -31,6 +31,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var accountsetting = setService.GetAllByUserId(user.Id);
+
             role.CompanyId = accountsetting.Companies.Id;
             if (rService.AddRole(role))
                 return RedirectToAction("Index");

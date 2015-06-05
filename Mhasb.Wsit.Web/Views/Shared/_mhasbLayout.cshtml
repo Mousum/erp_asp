@@ -160,7 +160,9 @@
                             <li class="">
                                 <a href='@Url.Action("Index", "designation", new { area = "OrganizationManagement" })'>Designations</a>
                             </li>
-                            
+                            <li class="">
+                                <a href='@Url.Action("Index", "Invitations", new { area = "NotificationManagement" })'>Invitation List</a>
+                            </li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">
@@ -253,7 +255,7 @@
                             $('.selectedCompany').text("MHSAB");
                         } else {
                             if (data.Companies.DisplayName !== "") {
-                                $('.selectedCompany').text(data.Companies.DisplayName);
+                                $('.selectedCompany').text(data.Companies.TradingName);
                             }
 
                         }

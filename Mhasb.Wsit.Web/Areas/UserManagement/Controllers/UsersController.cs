@@ -193,7 +193,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
 
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
+            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, DisplayName = c.TradingName }).ToList();
 
             if (myCompanyList.Count() <= 0)
             {
