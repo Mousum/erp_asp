@@ -19,6 +19,12 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
              base.OnActionExecuted(filterContext);
+             //string absUrl;
+             //if (!checkCompanyFlow(out absUrl))
+             //{
+             //    filterContext.Result = new RedirectResult(absUrl);
+             //    return;
+             //}
 
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -82,18 +88,23 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
-            //string absUrl;
-            //if (!checkCompanyFlow(out absUrl))
-            //{
-            //    filterContext.Result = new RedirectResult(absUrl);
-            //    return;
-            //}
+            
             var myCompany = cService.GetSingleCompany(companyId);
             if (myCompany == null)
             {
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
+
+            //if(!((action == "Update" && controller == "Company") || (action == "Create" && controller == "FinalcialSetting")|| (action == "Create" && controller == "Invitations")|| (action == "Create" && controller == "ChartOfAccounts")|| (action == "Finish" && controller == "Users")))
+            //{
+            //    string absUrl;
+            //    if (!checkCompanyFlow(out absUrl))
+            //    {
+            //        filterContext.Result = new RedirectResult(absUrl);
+            //        return;
+            //    }
+            //}
 
             //if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
             //{
