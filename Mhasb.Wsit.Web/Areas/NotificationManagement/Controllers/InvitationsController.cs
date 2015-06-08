@@ -38,31 +38,48 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
         public ActionResult Create()
         {
-            var designations = degRep.GetDesignations();
-            var roles = rService.GetAllRoles();
-           
+
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 2) 
+            {
+                var designations = degRep.GetDesignations();
+                var roles = rService.GetAllRoles();
 
-            //// Add Role if not exist
-            //var uu = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            //if (!roles.Any())
-            //{
-                
-            //}
-            List<Company> myCompanyList = iCompany.GetAllCompanies()
-                                                   .Where(c => c.Users.Id == user.Id).ToList();
-            var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
-                                    .Cast<EmpTypeEnum>()
-                                    .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
-                                    .ToList();
-            ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
-            ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
-            ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
-            ViewBag.roles = new SelectList(roles, "Id", "RoleName");
+                //// Add Role if not exist
+                //var uu = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                //if (!roles.Any())
+                //{
 
+                //}
+                List<Company> myCompanyList = iCompany.GetAllCompanies()
+                                                       .Where(c => c.Users.Id == user.Id).ToList();
+                var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
+                                        .Cast<EmpTypeEnum>()
+                                        .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                        .ToList();
+                ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
+                ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
+                ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
+                ViewBag.roles = new SelectList(roles, "Id", "RoleName");
 
+                return View();
 
-            return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg","Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+
+            
+           
+
         }
         [HttpPost]
         public ActionResult Create(Invitation invitation)

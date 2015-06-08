@@ -15,6 +15,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Utilities;
+using Mhasb.Domain.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
@@ -313,6 +314,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
 
+            var logEntry = new CompanyViewLog();
+            logEntry.UserId = users.Id;
+            logEntry.CompanyId = ComanyId;
+            logEntry.LoginTime = DateTime.Now;
+            //logEntry.IpAddress = "";
+            _companyViewLog.AddCompanyViewLog(logEntry);
+
             if (setObj != null)
             {
                 setObj.userId = users.Id;
@@ -346,6 +354,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
+            var logEntry = new CompanyViewLog();
+            logEntry.UserId = users.Id;
+            logEntry.CompanyId = ComanyId;
+            logEntry.LoginTime = DateTime.Now;
+            //logEntry.IpAddress = "";
+            _companyViewLog.AddCompanyViewLog(logEntry);
 
             try
             {
@@ -415,7 +429,29 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         public ActionResult Finish() {
-            return View();
+
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag == 5 )
+            {
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else if(logObj.Companies.CompleteFlag == 4)
+            {
+                return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+
+            
         }
         [HttpPost]
         // ReSharper disable once MethodOverloadWithOptionalParameter
