@@ -96,15 +96,15 @@ namespace Mhasb.Wsit.Web.Controllers
                 return;
             }
 
-            //if(!((action == "Update" && controller == "Company") || (action == "Create" && controller == "FinalcialSetting")|| (action == "Create" && controller == "Invitations")|| (action == "Create" && controller == "ChartOfAccounts")|| (action == "Finish" && controller == "Users")))
-            //{
-            //    string absUrl;
-            //    if (!checkCompanyFlow(out absUrl))
-            //    {
-            //        filterContext.Result = new RedirectResult(absUrl);
-            //        return;
-            //    }
-            //}
+            if (!((action == "Update" && controller == "Company") || (action == "Create" && controller == "FinalcialSetting") || (action == "Create" && controller == "Invitations") || (action == "Create" && controller == "ChartOfAccounts") || (action == "Finish" && controller == "Users")))
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    filterContext.Result = new RedirectResult(absUrl);
+                    return;
+                }
+            }
 
             //if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
             //{
