@@ -1,0 +1,15 @@
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\Mhasb.DAL.dll.config
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\Mhasb.DAL.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\Mhasb.DAL.pdb
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\CsvHelper.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\EntityFramework.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\Mhasb.Domain.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\Mhasb.Domain.pdb
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\CsvHelper.pdb
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\CsvHelper.xml
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\EntityFramework.xml
+F:\Erp\erp-team\Mhasb.Wsit.DAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Erp\erp-team\Mhasb.Wsit.DAL\obj\Debug\Mhasb.Wsit.DAL.csprojResolveAssemblyReference.cache
+F:\Erp\erp-team\Mhasb.Wsit.DAL\obj\Debug\Mhasb.DAL.dll
+F:\Erp\erp-team\Mhasb.Wsit.DAL\obj\Debug\Mhasb.DAL.pdb
