@@ -197,7 +197,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 //var accountsetting = setService.GetAllByUserId(user.Id);
                 var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
                 ViewBag.userName = user.FirstName + " " + user.LastName;
-                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
+                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.TradingName : "Company was not set.";
                 ViewBag.lastLoginTime = DateTime.Now;
                 return View("MyMhasb_new", myCompanyList);
             }
