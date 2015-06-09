@@ -1,0 +1,6 @@
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\bin\Debug\Mhasb.Wsit.CustomModel.dll
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\bin\Debug\Mhasb.Wsit.CustomModel.pdb
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\bin\Debug\Mhasb.Domain.dll
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\bin\Debug\Mhasb.Domain.pdb
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\obj\Debug\Mhasb.Wsit.CustomModel.dll
+F:\Erp\erp-team\Mhasb.Wsit.CustomModel\obj\Debug\Mhasb.Wsit.CustomModel.pdb
