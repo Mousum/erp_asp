@@ -37,6 +37,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 3)
             {
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
                 /// var AccSet = setService.GetAllByUserId(user.Id);
                 int companyId = 0;
                 if (logObj != null)
@@ -87,17 +88,26 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 companyId = (int)logObj.CompanyId;
             }
+
+
+
             int flag = 4;
             chartOfAccount.CompanyId = companyId;
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                if (logObj.Companies.CompleteFlag ==3)
                 {
-                    return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+                    if (iCompany.UpdateCompleteFlag(companyId, flag))
+                    {
+                        return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
+                    }
                 }
-                else {
-                    return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
-                }
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                
             }
             else {
                 TempData.Add("errMsg", "Chart Of Account Addtion Failed");

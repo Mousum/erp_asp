@@ -425,7 +425,8 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
             try
             {
-                company.CompleteFlag = 1;
+                if(company.CompleteFlag==0)
+                    company.CompleteFlag = 1;
                 if (iCompany.UpdateCompany(company))
                 {
                     msg = "Success";

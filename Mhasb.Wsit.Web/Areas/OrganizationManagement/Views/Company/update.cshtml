@@ -4,20 +4,25 @@
     ViewBag.Title = "update";
     Layout = "~/Views/Shared/_mhasbLayout.cshtml";
 }
-<div class="container">
-    <ul class="cstm-breadcrumb">
-        <li><a href="@Url.Action("Add", "Company", new { area = "OrganizationManagement" })" class="active">Start</a></li>
-        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
-        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })">Financial Settings</a></li>
-        @*<li><a href="#">Invoice Settings</a></li>*@
-        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })">Invite Users</a></li>
-        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
-        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
-        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
-        @*<li><a href="#">Account Balances</a></li>*@
-        <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
-    </ul>
-</div>
+
+@if (Model.CompleteFlag < 5)
+{
+    <div class="container">
+        <ul class="cstm-breadcrumb">
+            <li><a href="@Url.Action("Add", "Company", new { area = "OrganizationManagement" })" class="active">Start</a></li>
+            <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+            <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })">Financial Settings</a></li>
+            @*<li><a href="#">Invoice Settings</a></li>*@
+            <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })">Invite Users</a></li>
+            @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+                <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+            <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+            @*<li><a href="#">Account Balances</a></li>*@
+            <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
+        </ul>
+    </div>
+}
+
 
 
 <div class="container my-dashboard">
@@ -221,7 +226,7 @@
                     </div>
                 </div>
 
-                <div class="row cstm-frm-row" >
+                <div class="row cstm-frm-row">
                     <div class="col-md-4 min-hg-reg">
                         @Html.LabelFor(model => model.Documents, "Add Document")
                         <button id="addDoc" class="btn btn-success btn-xs" type="button"><i class="fa fa-plus-circle"></i></button>
@@ -259,7 +264,7 @@
 </div>
 
 @section Scripts {
- 
+
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(".CompanyDocumentList").click(function () {

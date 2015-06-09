@@ -43,6 +43,8 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 2) 
             {
+
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
                 var designations = degRep.GetDesignations();
                 var roles = rService.GetAllRoles();
 
@@ -134,14 +136,19 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 {
                     companyId = (int)logObj.CompanyId;
                 }
-                int flag = 3;
-                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                if (logObj.Companies.CompleteFlag ==2)
                 {
-                    return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+                    int flag = 3;
+                    if (iCompany.UpdateCompleteFlag(companyId, flag))
+                    {
+                        return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create");
+                    }
                 }
-                else {
-                    return RedirectToAction("Create");
-                }
+                
                 //string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
 
 

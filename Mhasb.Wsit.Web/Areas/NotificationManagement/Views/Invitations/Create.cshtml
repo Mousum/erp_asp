@@ -3,20 +3,24 @@
     ViewBag.Title = "Create Invitation";
 
 }
-<div class="container">
-    <ul class="cstm-breadcrumb">
-        <li><a href="#" class="active">Start</a></li>
-        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
-        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
-        @*<li><a href="#">Invoice Settings</a></li>*@
-        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
-        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
-        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
-        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
-        @*<li><a href="#">Account Balances</a></li>*@
-        <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
-    </ul>
-</div>
+@if (ViewBag.CompanyCompleteFlag < 5)
+{
+    <div class="container">
+        <ul class="cstm-breadcrumb">
+            <li><a href="#" class="active">Start</a></li>
+            <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+            <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
+            @*<li><a href="#">Invoice Settings</a></li>*@
+            <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
+            @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+                <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+            <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+            @*<li><a href="#">Account Balances</a></li>*@
+            <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
+        </ul>
+    </div>
+}
+
 
 <div class="container my-dashboard">
     <div class="row">
@@ -36,7 +40,7 @@
                     <div class="row cstm-frm-row">
                         @Html.DropDownList("CompanyId", (SelectList)ViewBag.Companies, "--Select Company--", htmlAttributes: new { @class = "cstm-input", id = "roles", required = "required" })
                         @Html.ValidationMessageFor(model => model.CompanyId)
-                      
+
                     </div>
                 </div>
                 <div class=" col-md-6">
@@ -44,7 +48,7 @@
                     <div class="row cstm-frm-row">
                         @Html.DropDownList("EmployeeType", ViewBag.employeeType as SelectList, new { @class = "cstm-input" })
                         @Html.ValidationMessageFor(model => model.EmployeeType)
-                       
+
                     </div>
                     <div class="row cstm-frm-row">
                         @Html.DropDownList("DesignationId", ViewBag.Desginations as SelectList, "--Select Designations--", new { @class = "cstm-input" })
@@ -67,6 +71,6 @@
         </div>
     </div>
 </div>
-  
+
 
 @Scripts.Render("~/bundles/jqueryval")
