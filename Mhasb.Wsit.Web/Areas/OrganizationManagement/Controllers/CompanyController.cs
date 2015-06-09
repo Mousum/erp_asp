@@ -274,35 +274,48 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         public ActionResult Update()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
-            //int id = AccSet.Companies.Id;
+
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 0)
             {
-                companyId = (int)logObj.CompanyId;
+                var AccSet = sService.GetAllByUserId(user.Id);
+                //int id = AccSet.Companies.Id;
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+
+                var company = iCompany.GetSingleCompany(companyId);
+
+                if (company == null)
+                {
+                    return RedirectToAction("Add");
+                }
+
+                try
+                {
+                    ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
+                    ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+                    ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
+                    ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
+                    ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
+                    return View("update", company);
+                }
+                catch (Exception ex)
+                {
+                    TempData.Add("errMsg", "Internal Server Error Regarding Commons Entity. Please Contact with Mhasb Team");
+                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                }
             }
-
-            var company = iCompany.GetSingleCompany(companyId);
-
-            if (company == null)
+            else
             {
-                return RedirectToAction("Registration");
-            }
-
-
-            try
-            {
-                ViewBag.IndustryList = new SelectList(iIndustry.GetAllIndustries(), "Id", "IndustryName");
-                ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
-                ViewBag.LanguageList = new SelectList(iLang.GetAllLanguages(), "Id", "LanguageName");
-                ViewBag.TimeZoneList = new SelectList(iTimeZone.GetAllAreaTimes(), "Id", "ZoneName");
-                ViewBag.LegalEntityList = new SelectList(iLegalEntity.GetAllLegalEntities(), "Id", "LegalEntityName");
-                return View("update", company);
-            }
-            catch (Exception ex)
-            {
-                TempData.Add("errMsg", "Internal Server Error Regarding Commons Entity. Please Contact with Mhasb Team");
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
         }

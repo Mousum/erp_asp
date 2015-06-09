@@ -33,24 +33,40 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         }
         public ActionResult Create()
         {
-            int yearDiff = DateTime.Now.Year - 1929;
-            var list = Enumerable.Range(1930, yearDiff).ToList().Select(r => new
+
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 1)
             {
-                Id = r,
-                Name = r
-            });
-            ViewBag.yearList = new SelectList(list, "Id", "Name");
+                int yearDiff = DateTime.Now.Year - 1929;
+                var list = Enumerable.Range(1930, yearDiff).ToList().Select(r => new
+                {
+                    Id = r,
+                    Name = r
+                });
+                ViewBag.yearList = new SelectList(list, "Id", "Name");
 
 
-            var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
-                                    .Cast<EnumFinalcialPeriod>()
-                                    .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
-                                    .ToList();
-            ViewBag.PeriodList = new SelectList(periodList, "Id", "Name");
+                var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
+                                        .Cast<EnumFinalcialPeriod>()
+                                        .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                        .ToList();
+                ViewBag.PeriodList = new SelectList(periodList, "Id", "Name");
 
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            return View();
+                ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
+                return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
         }
 
         [HttpPost]
