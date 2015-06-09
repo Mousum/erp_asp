@@ -17,3 +17,22 @@ F:\Erp\erp-team\Mhasb.Wsit.Services\bin\Debug\EntityFramework.SqlServer.xml
 F:\Erp\erp-team\Mhasb.Wsit.Services\obj\Debug\Mhasb.Wsit.Services.csprojResolveAssemblyReference.cache
 F:\Erp\erp-team\Mhasb.Wsit.Services\obj\Debug\Mhasb.Services.dll
 F:\Erp\erp-team\Mhasb.Wsit.Services\obj\Debug\Mhasb.Services.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Services.dll.config
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Services.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Services.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\CsvHelper.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\EntityFramework.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\EntityFramework.SqlServer.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.DAL.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Domain.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Wsit.CustomModel.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Wsit.CustomModel.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.DAL.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\Mhasb.Domain.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\CsvHelper.pdb
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\CsvHelper.xml
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\EntityFramework.xml
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\bin\Debug\EntityFramework.SqlServer.xml
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\obj\Debug\Mhasb.Wsit.Services.csprojResolveAssemblyReference.cache
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\obj\Debug\Mhasb.Services.dll
+F:\Project\Online ERP\Mhasb\Mhasb.Wsit.Services\obj\Debug\Mhasb.Services.pdb
