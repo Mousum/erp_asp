@@ -181,25 +181,35 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult MyMhasb()
         {
-            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            if (user == null)
+            try
             {
-                return RedirectToAction("Logout");
-            }
+                User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (user == null)
+                {
+                    return RedirectToAction("Logout");
+                }
 
-            //List<Company> myCompanyList = iCompany.GetAllCompanies()
-            //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
-            List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
-            var companyArray = uService.GetcompanyByUserID(user.Id);
-            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-            ViewBag.CompanyArr = user.Id;
-            //var accountsetting = setService.GetAllByUserId(user.Id);
-            var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
-            ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb_new", myCompanyList);
+                var myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
+
+                var companyArray = uService.GetcompanyByUserID(user.Id);
+                //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+                ViewBag.CompanyArr = user.Id;
+                //var accountsetting = setService.GetAllByUserId(user.Id);
+                var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                ViewBag.userName = user.FirstName + " " + user.LastName;
+                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
+                ViewBag.lastLoginTime = DateTime.Now;
+                return View("MyMhasb_new", myCompanyList);
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                ModelState.AddModelError("Msg", rr);
+                // return Content("Already Register");
+                return View("MyMhasb_new",new List<LogView>());
+                
+            }
+            
 
         }
         public JsonResult GetCompany()

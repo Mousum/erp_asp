@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Controllers;
 using Mhasb.Services.Loggers;
+using Mhasb.Wsit.Web.Utilities;
 
 
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
@@ -237,8 +238,13 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
             {
+                Encryptor encrypt = new Encryptor();
+                user.Password = encrypt.GetMD5(user.Password);
+                user.ConfirmPassword = encrypt.GetMD5(user.ConfirmPassword);
                 if (uService.GetSingleUserByEmail(user.Email) == null)
-                {
+                { 
+
+
                     if (uService.AddUser(user))
                     {
                         var Invitation = inService.GetSingleInvitation(id);

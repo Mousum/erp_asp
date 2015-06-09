@@ -22,7 +22,7 @@ namespace Mhasb.Wsit.Web.Controllers
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
                 var userSetting = setService.GetAllByUserId(user.Id);
 
-                if (userSetting.lglast == true)
+                if (userSetting !=null && userSetting.lglast)
                 {
                     string absUrl;
                     if (!checkCompanyFlow(out absUrl))
