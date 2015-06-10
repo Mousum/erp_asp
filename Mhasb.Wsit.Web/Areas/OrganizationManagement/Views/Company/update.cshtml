@@ -43,6 +43,7 @@
             @Html.HiddenFor(m => m.LogoLocation, new { Value = Model.LogoLocation })
             @Html.HiddenFor(m => m.SealLocation, new { Value = Model.SealLocation })
             @Html.HiddenFor(m => m.Email, new { Value = Model.Email })
+            @Html.HiddenFor(m => m.CompleteFlag, new { Value = Model.CompleteFlag })
 
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)

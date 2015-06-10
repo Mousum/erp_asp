@@ -29,6 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICountryService countryService = new CountryService();
         //private readonly ICompanyService iCompany = new CompanyService();
 
         //

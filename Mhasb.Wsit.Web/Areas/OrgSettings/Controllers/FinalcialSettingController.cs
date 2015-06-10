@@ -90,11 +90,18 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
                 {
                     int flag = 2;
                     comService.UpdateCompleteFlag(companyId, flag);
+                    return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
                 }
-                
+                TempData.Add("errMsg","Successfully created Financial Settings..");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else
+            {
+                TempData.Add("errMsg", "Error in creating Financial Settings!!!");
+                return RedirectToAction("Create");
             }
 
-            return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
+            
         }
 
         public ActionResult Edit(int id)

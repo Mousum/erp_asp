@@ -449,13 +449,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                                     documentAddMsg = "One or more document did not upload successfully";
                                     uploadSuccess = false;
                                 }
-
-
                             }
                         }
 
                     }
-                    return RedirectToAction("Create", "FinalcialSetting", new { Area = "OrgSettings" });
+                    if (company.CompleteFlag == 1)
+                        return RedirectToAction("Create", "FinalcialSetting", new { Area = "OrgSettings" });
+                    else
+                        return RedirectToAction("update");
                 }
                 else
                     msg = "Update Failed";
