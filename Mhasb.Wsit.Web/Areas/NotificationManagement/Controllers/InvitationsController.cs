@@ -46,6 +46,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             {
 
                 ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+                ViewBag.CompanyName = logObj.Companies.TradingName;
                 var designations = degRep.GetDesignations();
                 var roles = rService.GetAllRoles();
 
@@ -63,7 +64,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                                         .ToList();
                 ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
                 ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
-                ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
+                //ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
                 ViewBag.roles = new SelectList(roles, "Id", "RoleName");
 
                 return View();
@@ -87,10 +88,13 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         [HttpPost]
         public ActionResult Create(Invitation invitation)
         {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             Random random = new Random();
             string rand = random.Next().ToString();
             invitation.SendDate = DateTime.Now;
             invitation.UpdateDate = DateTime.Now;
+            invitation.CompanyId = logObj.Companies.Id;
             invitation.Token = rand;
             invitation.Status = StatusEnum.test1;
             if (inService.CreateInvitation(invitation))
@@ -129,9 +133,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //Send the email
                 mysmtpserver.Send(myemail);
 
-                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
                 var AccSet = sService.GetAllByUserId(user.Id);
-                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
                 int companyId = 0;
                 if (logObj != null)
                 {
