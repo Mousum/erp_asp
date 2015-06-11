@@ -34,25 +34,46 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
 
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-           /// var AccSet = setService.GetAllByUserId(user.Id);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 3)
             {
-                companyId = (int)logObj.CompanyId;
-            }
-            var Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+                /// var AccSet = setService.GetAllByUserId(user.Id);
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+                var Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
 
-            if (Atypes.Count == 0)
+                if (Atypes.Count == 0)
+                {
+                    cSer.AddBaseAccountTypes();
+                    Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+                }
+                var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+                ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+
+                ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
+                return View();
+            }
+            else
             {
-                cSer.AddBaseAccountTypes();
-                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id= u.Id, Value =u.Value+"("+u.Quantity+"%)"});
-            ViewBag.Lookups = new SelectList(lookups,"Id","Value");
 
-            ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
-            return View();
+
+
+
+
+
+           
         }
         [HttpPost]
         public ActionResult Create(ChartOfAccount chartOfAccount) 
@@ -67,17 +88,26 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 companyId = (int)logObj.CompanyId;
             }
+
+
+
             int flag = 4;
             chartOfAccount.CompanyId = companyId;
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                if (logObj.Companies.CompleteFlag ==3)
                 {
-                    return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+                    if (iCompany.UpdateCompleteFlag(companyId, flag))
+                    {
+                        return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
+                    }
                 }
-                else {
-                    return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
-                }
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                
             }
             else {
                 TempData.Add("errMsg", "Chart Of Account Addtion Failed");

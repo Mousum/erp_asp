@@ -15,6 +15,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Utilities;
+using Mhasb.Domain.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
@@ -28,6 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICountryService countryService = new CountryService();
         //private readonly ICompanyService iCompany = new CompanyService();
 
         //
@@ -116,12 +118,21 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             password = encryptor.GetMD5(password);
             if (CustomPrincipal.Login(email, password, false) != false)
             {
-                string absUrl;
-                if (!checkCompanyFlow(out absUrl))
+                var user = uService.GetSingleUserByEmail(email);
+                var userSetting = setService.GetAllByUserId(user.Id);
+
+                if(userSetting.lglast==true)
                 {
-                    return Redirect(absUrl);
+                    string absUrl;
+                    if (!checkCompanyFlow(out absUrl))
+                    {
+                        return Redirect(absUrl);
+                    }
+                    return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
+
                 }
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                else
+                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
             else
             {
@@ -158,7 +169,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             var activatedCompany = cService.GetSingleCompany(companyId);
             ViewBag.CompanyLocation = activatedCompany.Location;
-            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+            //var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(logObj.Companies.Id);
+
 
             ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
 
@@ -169,31 +182,42 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         public ActionResult MyMhasb()
         {
-            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            if (user == null)
+            try
             {
-                return RedirectToAction("Logout");
-            }
+                User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (user == null)
+                {
+                    return RedirectToAction("Logout");
+                }
 
-            //List<Company> myCompanyList = iCompany.GetAllCompanies()
-            //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
-            List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
-            var companyArray = uService.GetcompanyByUserID(user.Id);
-            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-            ViewBag.CompanyArr = user.Id;
-            var accountsetting = setService.GetAllByUserId(user.Id);
-            ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
-            ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb_new", myCompanyList);
+                var myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
+
+                var companyArray = uService.GetcompanyByUserID(user.Id);
+                //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+                ViewBag.CompanyArr = user.Id;
+                //var accountsetting = setService.GetAllByUserId(user.Id);
+                var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                ViewBag.userName = user.FirstName + " " + user.LastName;
+                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.TradingName : "Company was not set.";
+                ViewBag.lastLoginTime = DateTime.Now;
+                return View("MyMhasb_new", myCompanyList);
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                ModelState.AddModelError("Msg", rr);
+                // return Content("Already Register");
+                return View("MyMhasb_new",new List<LogView>());
+                
+            }
+            
 
         }
         public JsonResult GetCompany()
         {
 
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
+            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, DisplayName = c.TradingName }).ToList();
 
             if (myCompanyList.Count() <= 0)
             {
@@ -305,13 +329,20 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId, int ComanyId)
+        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId, int? ComanyId)
         //public ActionResult UpdateSettings(Settings setting)
         {
 
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
+
+            //var logEntry = new CompanyViewLog();
+            //logEntry.UserId = users.Id;
+            //logEntry.CompanyId = ComanyId;
+            //logEntry.LoginTime = DateTime.Now;
+            ////logEntry.IpAddress = "";
+            //_companyViewLog.AddCompanyViewLog(logEntry);
 
             if (setObj != null)
             {
@@ -346,6 +377,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
+            var logEntry = new CompanyViewLog();
+            logEntry.UserId = users.Id;
+            logEntry.CompanyId = ComanyId;
+            logEntry.LoginTime = DateTime.Now;
+            //logEntry.IpAddress = "";
+            _companyViewLog.AddCompanyViewLog(logEntry);
 
             try
             {
@@ -415,7 +452,29 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         public ActionResult Finish() {
-            return View();
+
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag == 5 )
+            {
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else if(logObj.Companies.CompleteFlag == 4)
+            {
+                return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+
+            
         }
         [HttpPost]
         // ReSharper disable once MethodOverloadWithOptionalParameter

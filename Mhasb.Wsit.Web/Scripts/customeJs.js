@@ -16,16 +16,16 @@ $(document).ready(function () {
         var chackTwo = "false";
         var chackThree = "false";
         if (radio == "radio-1") {
-            chackOne = "true";
+            chackOne = "false";
         } else if (radio == "radio-2") {
             chackTwo = "true";
         } else if (radio == "radio-3") {
-            chackThree = "true";
+            chackOne = "true";
         }
         var zoneId = $("#zoneId").val();
         var ComanyId = $('#ComanyId').val();
 
-        if (chackOne == "true" || chackTwo == "true" || chackThree == "true") {
+        //if (chackOne == "true" || chackTwo == "true" || chackThree == "true") {
 
             if (zoneId == "") {
                 $('.msg-danger').text("Please Select timeZone");
@@ -37,7 +37,7 @@ $(document).ready(function () {
             $.ajax({
                 url: url,
                 type: "post",
-                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackThree, TimezoneId: zoneId, ComanyId: ComanyId },
+                data: { lgcompany: chackOne, lgdash: chackTwo, lglast: chackOne, TimezoneId: zoneId, ComanyId: ComanyId },
                 success: function (data) {
                     $('.msg-danger').text("Successfully Added");
                     $('.msg-danger').show('slow');
@@ -46,11 +46,11 @@ $(document).ready(function () {
 
                 }
             });
-        } else {
+        //} else {
 
-            $('.msg-danger').text("Please Select When You Log-In");
-            $('.msg-danger').show('slow');
-        }
+        //    $('.msg-danger').text("Please Select When You Log-In");
+        //    $('.msg-danger').show('slow');
+        //}
     });
     $("#Users_Email").click(function () {
         $('.email-danger').hide('slow');

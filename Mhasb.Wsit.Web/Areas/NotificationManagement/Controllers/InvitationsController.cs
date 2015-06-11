@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mhasb.Wsit.Web.Controllers;
 using Mhasb.Services.Loggers;
+using Mhasb.Wsit.Web.Utilities;
 
 
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
@@ -38,31 +39,62 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
         public ActionResult Create()
         {
-            var designations = degRep.GetDesignations();
-            var roles = rService.GetAllRoles();
+
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            List<Company> myCompanyList = iCompany.GetAllCompanies()
-                                                   .Where(c => c.Users.Id == user.Id).ToList();
-            var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
-                                    .Cast<EmpTypeEnum>()
-                                    .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
-                                    .ToList();
-            ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
-            ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
-            ViewBag.Companies = new SelectList(myCompanyList, "Id", "DisplayName");
-            ViewBag.roles = new SelectList(roles, "Id", "RoleName");
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 2)
+            {
+
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+                ViewBag.CompanyName = logObj.Companies.TradingName;
+                var designations = degRep.GetDesignations();
+                var roles = rService.GetAllRoles();
+
+                //// Add Role if not exist
+                //var uu = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                //if (!roles.Any())
+                //{
+
+                //}
+                List<Company> myCompanyList = iCompany.GetAllCompanies()
+                                                       .Where(c => c.Users.Id == user.Id).ToList();
+                var employeeType = Enum.GetValues(typeof(EmpTypeEnum))
+                                        .Cast<EmpTypeEnum>()
+                                        .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                        .ToList();
+                ViewBag.Desginations = new SelectList(designations, "Id", "DesignationName");
+                ViewBag.EmployeeType = new SelectList(employeeType, "Name", "Name");
+                //ViewBag.Companies = new SelectList(myCompanyList, "Id", "TradingName");
+                ViewBag.roles = new SelectList(roles, "Id", "RoleName");
+
+                return View();
+
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
 
 
 
-            return View();
+
         }
         [HttpPost]
         public ActionResult Create(Invitation invitation)
         {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             Random random = new Random();
             string rand = random.Next().ToString();
             invitation.SendDate = DateTime.Now;
             invitation.UpdateDate = DateTime.Now;
+            invitation.CompanyId = logObj.Companies.Id;
             invitation.Token = rand;
             invitation.Status = StatusEnum.test1;
             if (inService.CreateInvitation(invitation))
@@ -70,21 +102,21 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //Create the key email objects
                 MailMessage myemail = new MailMessage(); //Create message object
                 SmtpClient mysmtpserver = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("sumon20@gmail.com", "638848")
-            }; ; //Set mail server
+                {
+                    Host = "marcosha.arvixevps.com",
+                    Port = 25,
+                    EnableSsl = false,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential("info@mhasb.com", "marco1989")
+                }; //Set mail server
 
                 //Set mail recipients
                 myemail.To.Add(invitation.Email);
                 //   myemail.To.Add("user2@example.com");
 
                 //Set email properties
-                myemail.From = new MailAddress("sumon20@gmail.com", "HHASB ERP");
+                myemail.From = new MailAddress("info@mhasb.com", "MHASB ERP");
 
                 myemail.Subject = "This is the Email Subject";
                 string host = Url.Content(HttpContext.Request.Url.Host + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
@@ -101,22 +133,25 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //Send the email
                 mysmtpserver.Send(myemail);
 
-                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
                 var AccSet = sService.GetAllByUserId(user.Id);
-                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
                 int companyId = 0;
                 if (logObj != null)
                 {
                     companyId = (int)logObj.CompanyId;
                 }
-                int flag = 3;
-                if (iCompany.UpdateCompleteFlag(companyId, flag))
+                if (logObj.Companies.CompleteFlag == 2)
                 {
-                    return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+                    int flag = 3;
+                    if (iCompany.UpdateCompleteFlag(companyId, flag))
+                    {
+                        return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create");
+                    }
                 }
-                else {
-                    return RedirectToAction("Create");
-                }
+
                 //string host = HttpContext.Request.Url.Host + ":2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token;
 
 
@@ -135,8 +170,8 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //sendMail(to, subject, body);
 
             }
-            return RedirectToAction("Create");
-            
+            return RedirectToAction("Index");
+
         }
 
         [AllowAnonymous]
@@ -212,8 +247,13 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
             var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
             {
+                Encryptor encrypt = new Encryptor();
+                user.Password = encrypt.GetMD5(user.Password);
+                user.ConfirmPassword = encrypt.GetMD5(user.ConfirmPassword);
                 if (uService.GetSingleUserByEmail(user.Email) == null)
                 {
+
+
                     if (uService.AddUser(user))
                     {
                         var Invitation = inService.GetSingleInvitation(id);
@@ -265,7 +305,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
         public bool sendMail(string to, string mailSubject, string mailBody)
         {
-            var fromAddress = new MailAddress("sumon20@gmail.com", "HHASB ERP");
+            var fromAddress = new MailAddress("info@mhasb.com", "MHASB ERP");
             var toAddress = new MailAddress(to, "Employee");
             string fromPassword = "638848";
             string subject = mailSubject;
@@ -273,12 +313,12 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
 
             var smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
+                Host = "marcosha.arvixevps.com",
+                Port = 25,
+                EnableSsl = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                Credentials = new NetworkCredential("info@mhasb.com", "marco1989")
             };
             using (var message = new MailMessage(fromAddress, toAddress)
             {

@@ -13,16 +13,28 @@ namespace Mhasb.Wsit.Web.Controllers
     public class HomeController : CommonBaseController
     {
         private IRoleVsActionService arService = new RoleVsActionService();
+        private IUserService uService = new UserService();
+        private ISettingsService setService = new SettingsService();
         public ActionResult Index()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                string absUrl;
-                if (!checkCompanyFlow(out absUrl))
+
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                var userSetting = setService.GetAllByUserId(user.Id);
+
+                if (userSetting !=null && userSetting.lglast)
                 {
-                    return Redirect(absUrl);
+                    string absUrl;
+                    if (!checkCompanyFlow(out absUrl))
+                    {
+                        return Redirect(absUrl);
+                    }
+                    return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
+
                 }
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                else
+                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
                 
             var model = new Login();

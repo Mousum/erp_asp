@@ -19,6 +19,12 @@ namespace Mhasb.Wsit.Web.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
              base.OnActionExecuted(filterContext);
+             //string absUrl;
+             //if (!checkCompanyFlow(out absUrl))
+             //{
+             //    filterContext.Result = new RedirectResult(absUrl);
+             //    return;
+             //}
 
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -46,7 +52,7 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
             // Check user type, if owner then he/she can add company. 
-            if ((action == "Add" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
+            if (action == "Add" && controller == "Company")
                 return;
 
             // To get ActionList Id
@@ -82,16 +88,22 @@ namespace Mhasb.Wsit.Web.Controllers
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
-            //string absUrl;
-            //if (!checkCompanyFlow(out absUrl))
-            //{
-            //    filterContext.Result = new RedirectResult(absUrl);
-            //    return;
-            //}
+            
             var myCompany = cService.GetSingleCompany(companyId);
             if (myCompany == null)
             {
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
+                return;
+            }
+
+            if (!((action == "Update" && controller == "Company") || (action == "Create" && controller == "FinalcialSetting") || (action == "Create" && controller == "Invitations") || (action == "Create" && controller == "ChartOfAccounts") || (action == "Finish" && controller == "Users")))
+            {
+                //string absUrl;
+                //if (!checkCompanyFlow(out absUrl))
+                //{
+                //    filterContext.Result = new RedirectResult(absUrl);
+                //    return;
+                //}
                 return;
             }
 

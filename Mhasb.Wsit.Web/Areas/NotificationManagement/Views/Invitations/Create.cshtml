@@ -3,26 +3,30 @@
     ViewBag.Title = "Create Invitation";
 
 }
-<div class="container">
-    <ul class="cstm-breadcrumb">
-        <li><a href="#" class="active">Start</a></li>
-        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
-        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
-        @*<li><a href="#">Invoice Settings</a></li>*@
-        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
-        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
-        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
-        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
-        @*<li><a href="#">Account Balances</a></li>*@
-        <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
-    </ul>
-</div>
+@if (ViewBag.CompanyCompleteFlag < 5)
+{
+    <div class="container">
+        <ul class="cstm-breadcrumb">
+            <li><a href="#" class="active">Start</a></li>
+            <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+            <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
+            @*<li><a href="#">Invoice Settings</a></li>*@
+            <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
+            @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+                <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+            <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+            @*<li><a href="#">Account Balances</a></li>*@
+            <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
+        </ul>
+    </div>
+}
+
 
 <div class="container my-dashboard">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="welcome">
-                <h4>Invitaton </h4>
+                <h4>Invitaton for @ViewBag.CompanyName Company</h4>
             </div>
             @using (Html.BeginForm(new { @class = "organization-details-form" }))
             {
@@ -33,10 +37,15 @@
                         @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "cstm-input", placeholder = "Email", id = "email", validate = "RequiredField", style = "border:1px solid #b6b6b6;" })
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
+                    @*<div class="row cstm-frm-row">
+                            @Html.DropDownList("CompanyId", (SelectList)ViewBag.Companies, "--Select Company--", htmlAttributes: new { @class = "cstm-input", id = "roles", required = "required" })
+                            @Html.ValidationMessageFor(model => model.CompanyId)
+
+                        </div>*@
                     <div class="row cstm-frm-row">
-                        @Html.DropDownList("CompanyId", (SelectList)ViewBag.Companies, "--Select Company--", htmlAttributes: new { @class = "cstm-input", id = "roles", required = "required" })
+                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roles, "--Select Role--", htmlAttributes: new { @class = "cstm-input", id = "roles", required = "required" })
                         @Html.ValidationMessageFor(model => model.CompanyId)
-                      
+
                     </div>
                 </div>
                 <div class=" col-md-6">
@@ -44,19 +53,14 @@
                     <div class="row cstm-frm-row">
                         @Html.DropDownList("EmployeeType", ViewBag.employeeType as SelectList, new { @class = "cstm-input" })
                         @Html.ValidationMessageFor(model => model.EmployeeType)
-                       
+
                     </div>
                     <div class="row cstm-frm-row">
                         @Html.DropDownList("DesignationId", ViewBag.Desginations as SelectList, "--Select Designations--", new { @class = "cstm-input" })
                         @Html.ValidationMessageFor(model => model.EmployeeType)
                     </div>
                 </div>
-                <div class="row cstm-frm-row">
-                    <div class="col-md-6">
-                        @Html.DropDownList("RoleId", (SelectList)ViewBag.roles, "--Select Role--", htmlAttributes: new { @class = "cstm-input", id = "roles", required = "required" })
-                        @Html.ValidationMessageFor(model => model.CompanyId)
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <div class="col-md-12">
@@ -67,6 +71,6 @@
         </div>
     </div>
 </div>
-  
+
 
 @Scripts.Render("~/bundles/jqueryval")
