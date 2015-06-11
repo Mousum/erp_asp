@@ -489,6 +489,8 @@
     <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Add.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\Finish.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create_new.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\_AddAccount.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
