@@ -38,6 +38,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 1)
             {
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
                 int yearDiff = DateTime.Now.Year - 1929;
                 var list = Enumerable.Range(1930, yearDiff).ToList().Select(r => new
                 {
@@ -85,11 +86,22 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             fs.IsActive = true;
             if (fService.AddFinalcialSetting(fs))
             {
-                int flag=2;
-                comService.UpdateCompleteFlag(companyId,flag);
+                if (logObj.Companies.CompleteFlag == 1)
+                {
+                    int flag = 2;
+                    comService.UpdateCompleteFlag(companyId, flag);
+                    return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
+                }
+                TempData.Add("errMsg","Successfully created Financial Settings..");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else
+            {
+                TempData.Add("errMsg", "Error in creating Financial Settings!!!");
+                return RedirectToAction("Create");
             }
 
-            return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
+            
         }
 
         public ActionResult Edit(int id)

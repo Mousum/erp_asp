@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.OrgSettings;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
@@ -19,6 +20,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         private readonly IUserService uService = new UserService();
         private readonly ISettingsService sService = new SettingsService();
         private readonly IAuditor aService = new AuditorService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /OrgSettings/Auditor/
         public ActionResult Index()
@@ -31,7 +33,11 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int companyId = AccSet.Companies.Id;
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            
+            
+            //int companyId = AccSet.Companies.Id;
+            int companyId = logObj.Companies.Id;
 
             var tt = eService.GetEmpByCompanyId(companyId);       
             var dbObj = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();
@@ -54,7 +60,13 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = sService.GetAllByUserId(user.Id);
-            int companyId = AccSet.Companies.Id;
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            //int companyId = AccSet.Companies.Id;
+
+            int companyId = logObj.Companies.Id;
+
+
             ViewBag.Title = "External Auditor";
             var tt = eService.GetEmpByCompanyId(companyId);
             var dbObj = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();

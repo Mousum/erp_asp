@@ -489,6 +489,8 @@
     <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Add.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\Finish.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create_new.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\_AddAccount.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -645,21 +647,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Shared\_LandLayout.cshtml" />
     <Content Include="Views\Home\Clients.cshtml" />
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Uploads\Wsit\Document_WSIT_1_lpg5lku4.s3p.pdf" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

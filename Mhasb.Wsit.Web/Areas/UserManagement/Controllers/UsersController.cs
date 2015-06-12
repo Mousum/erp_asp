@@ -29,6 +29,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICountryService countryService = new CountryService();
         //private readonly ICompanyService iCompany = new CompanyService();
 
         //
@@ -197,7 +198,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
                 //var accountsetting = setService.GetAllByUserId(user.Id);
                 var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
                 ViewBag.userName = user.FirstName + " " + user.LastName;
-                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
+                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.TradingName : "Company was not set.";
                 ViewBag.lastLoginTime = DateTime.Now;
                 return View("MyMhasb_new", myCompanyList);
             }
@@ -240,6 +241,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             else
             {
+
                 return Json(setObj, JsonRequestBehavior.AllowGet);
             }
         }

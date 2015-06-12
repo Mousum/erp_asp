@@ -19,6 +19,7 @@ namespace Mhasb.Wsit.Web.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
+
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
                 var userSetting = setService.GetAllByUserId(user.Id);
 

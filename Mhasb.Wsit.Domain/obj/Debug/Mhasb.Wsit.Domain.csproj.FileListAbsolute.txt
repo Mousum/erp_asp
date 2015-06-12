@@ -1,5 +1,0 @@
-F:\Erp\erp-team\Mhasb.Wsit.Domain\bin\Debug\Mhasb.Domain.dll
-F:\Erp\erp-team\Mhasb.Wsit.Domain\bin\Debug\Mhasb.Domain.pdb
-F:\Erp\erp-team\Mhasb.Wsit.Domain\obj\Debug\Mhasb.Wsit.Domain.csprojResolveAssemblyReference.cache
-F:\Erp\erp-team\Mhasb.Wsit.Domain\obj\Debug\Mhasb.Domain.dll
-F:\Erp\erp-team\Mhasb.Wsit.Domain\obj\Debug\Mhasb.Domain.pdb
