@@ -164,6 +164,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminLogin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1335,6 +1336,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj">
+      <Project>{06bc9fb9-6608-4262-812e-c705d9f6c076}</Project>
+      <Name>Mhasb.Wsit.CustomModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mhasb.Wsit.DAL\Mhasb.Wsit.DAL.csproj">
+      <Project>{aea63c3a-868b-4f14-ba25-d0369620c064}</Project>
+      <Name>Mhasb.Wsit.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mhasb.Wsit.Domain\Mhasb.Wsit.Domain.csproj">
+      <Project>{2cb004ab-7649-4bed-a385-bb80f2bb0ad2}</Project>
+      <Name>Mhasb.Wsit.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mhasb.Wsit.Services\Mhasb.Wsit.Services.csproj">
+      <Project>{cb47ae35-93bb-4696-9338-b700bfc0a5e6}</Project>
+      <Name>Mhasb.Wsit.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

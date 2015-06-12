@@ -22,7 +22,7 @@ namespace Mhasb.DAL.Mapping.AdminUsers
             this.Property(l => l.ActionId).HasColumnName("actionid");
             this.Property(l=>l.Ip).HasColumnName("ip");
             this.Property(l => l.ActionTime).HasColumnName("actionname");
-            this.ToTable("sys.adminuserlog");
+            this.ToTable("app.adminuserlog");
           //Relationships
             this.HasRequired(l => l.AdminUser)
                 .WithMany()

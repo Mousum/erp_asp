@@ -26,7 +26,7 @@ namespace Mhasb.DAL.Mapping.AdminUsers
             this.Property(au => au.Password).HasColumnName("password");
             this.Property(au => au.type).HasColumnName("type");
             this.Property(au => au.PhoneNo).HasColumnName("phoneno");
-            this.ToTable("sys.adminuser");
+            this.ToTable("app.adminuser");
 
         }
 

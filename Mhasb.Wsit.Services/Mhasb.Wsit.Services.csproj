@@ -57,6 +57,8 @@
     <Compile Include="Accounts\VoucherDocumentService.cs" />
     <Compile Include="Accounts\VoucherService.cs" />
     <Compile Include="Accounts\VoucherTypeService.cs" />
+    <Compile Include="AdminUsers\AdminUserService.cs" />
+    <Compile Include="AdminUsers\IAdminUserServices.cs" />
     <Compile Include="Commons\AreaTimeService.cs" />
     <Compile Include="Commons\ContactDetailService.cs" />
     <Compile Include="Commons\CountryService.cs" />

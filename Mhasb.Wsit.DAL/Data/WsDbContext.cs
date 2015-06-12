@@ -9,6 +9,8 @@ using Mhasb.DAL.Mapping.Organizations;
 using Mhasb.DAL.Mapping.OrgSettings;
 using Mhasb.DAL.Mapping.Users;
 using Mhasb.Domain.Loggers;
+using Mhasb.DAL.Mapping.AdminUsers;
+using Mhasb.Domain.AdminUsers;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -105,6 +107,9 @@ namespace Mhasb.Wsit.DAL.Data
             // logger
             modelBuilder.Configurations.Add(new CompanyViewLogMapping());
 
+            //System Admin
+            modelBuilder.Configurations.Add(new AdminUserMapping());
+            modelBuilder.Configurations.Add(new AdminUserLogMapping());
 
         }
 
