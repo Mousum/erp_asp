@@ -30,9 +30,34 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             return View();
         }
 
-        public ActionResult Create() 
+        public ActionResult PartialAddAccount()
         {
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+            /// var AccSet = setService.GetAllByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var Atypes = cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+
+            if (Atypes.Count == 0)
+            {
+                cSer.AddBaseAccountTypes();
+                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+            }
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+
+            ViewBag.ATypes = Atypes;
+            return View("_AddAccount");
+        }
+
+        public ActionResult Create()
+        {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 3)
@@ -44,18 +69,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 {
                     companyId = (int)logObj.CompanyId;
                 }
-                var Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+                var Atypes = cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId,"4");
 
-                if (Atypes.Count == 0)
-                {
-                    cSer.AddBaseAccountTypes();
-                    Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
-                }
-                var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
-                ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
-
-                ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
-                return View("Create_new",Atypes);
+                return View("Create_new", Atypes);
             }
             else
             {
@@ -67,14 +83,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 TempData.Add("errMsg", "Something Wrong...");
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
-           
+
         }
         [HttpPost]
-        public ActionResult Create(ChartOfAccount chartOfAccount) 
+        public ActionResult Create(ChartOfAccount chartOfAccount)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
-           
+
 
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
@@ -89,7 +105,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             chartOfAccount.CompanyId = companyId;
             if (cSer.AddChartOfAccount(chartOfAccount))
             {
-                if (logObj.Companies.CompleteFlag ==3)
+                if (logObj.Companies.CompleteFlag == 3)
                 {
                     if (iCompany.UpdateCompleteFlag(companyId, flag))
                     {
@@ -101,29 +117,31 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     }
                 }
                 return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
-                
+
             }
-            else {
+            else
+            {
                 TempData.Add("errMsg", "Chart Of Account Addtion Failed");
                 return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
             }
         }
         [HttpPost]
-        public ActionResult GetCode(int id) 
+        public ActionResult GetCode(int id)
         {
-           var chartHead = cSer.GetSingleChartOfAccount(id);
-          var  Acode = cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
-          return Json(new { code = Acode, lavel = chartHead.Level + 1 });
+            var chartHead = cSer.GetSingleChartOfAccount(id);
+            var Acode = cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
+            return Json(new { code = Acode, lavel = chartHead.Level + 1 });
 
         }
-        public ActionResult CostCentresSettings() {
+        public ActionResult CostCentresSettings()
+        {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
-            var centers= cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
+            var centers = cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
             ViewBag.centers = new SelectList(centers, "Id", "AName");
             return View("Costcentre");
         }
-        public ActionResult Edit(int id) 
+        public ActionResult Edit(int id)
         {
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
@@ -148,13 +166,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
         }
         [HttpPost]
-        public ActionResult GetCostCentreDetails(int id) 
+        public ActionResult GetCostCentreDetails(int id)
         {
             var coa = cSer.GetSingleChartOfAccount(id);
-            return Json(new { Acode = coa.ACode,des = coa.Description});
+            return Json(new { Acode = coa.ACode, des = coa.Description });
         }
         [HttpPost]
-        public ActionResult SetCostCentreDetails(int id,string ACode,string description)
+        public ActionResult SetCostCentreDetails(int id, string ACode, string description)
         {
             var coa = cSer.GetSingleChartOfAccount(id);
             coa.Description = description;
@@ -163,10 +181,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             if (cSer.UpdateChartOfAccount(coa))
             {
-                return Json(new {ACode= coa.ACode,AName = coa.AName ,msg = "success" });
+                return Json(new { ACode = coa.ACode, AName = coa.AName, msg = "success" });
 
             }
-            else 
+            else
             {
                 return Json(new { ACode = coa.ACode, AName = coa.AName, msg = "failed" });
             }
@@ -191,7 +209,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             //    level = 0;
             //}
 
-           code = root == "source" ? "0" : root;
+            code = root == "source" ? "0" : root;
             var level = UtilityManager.GetLedgerLevel(code);
             var nodes = cSer.TreeViewList(code, level);
             return Json(nodes);

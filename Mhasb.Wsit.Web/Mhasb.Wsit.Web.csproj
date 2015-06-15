@@ -655,7 +655,9 @@
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Uploads\Wsit\Document_WSIT_1_lpg5lku4.s3p.pdf" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

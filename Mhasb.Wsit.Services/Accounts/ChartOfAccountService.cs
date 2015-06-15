@@ -81,6 +81,7 @@ namespace Mhasb.Services.Accounts
                                         .Include(c=>c.Companies)
                                         .Filter(c=>c.CompanyId == CompanyId || c.CompanyId.HasValue ==false)
                                         .Get()
+                                        .OrderBy(c=>c.ACode)
                                         .ToList();
                 return cAObj;
             }
@@ -90,6 +91,46 @@ namespace Mhasb.Services.Accounts
                 return null;
             }
         }
+
+
+        public List<ChartOfAccount> GetAllChartOfAccountByCompanyIdForSecondLevel(int CompanyId)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c => c.Companies)
+                                        .Filter(c => c.CompanyId == CompanyId || c.CompanyId.HasValue == false && c.Level<=2)
+                                        .Get()
+                                        .OrderBy(c => c.ACode)
+                                        .ToList();
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public List<ChartOfAccount> CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(int CompanyId,string code)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c => c.Companies)
+                                        .Filter(c => c.CompanyId == CompanyId || c.CompanyId.HasValue == false && c.Level > 2 && c.ACode.StartsWith(code))
+                                        .Get()
+                                        .OrderBy(c => c.ACode)
+                                        .ToList();
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
         public List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId)
         {
             try

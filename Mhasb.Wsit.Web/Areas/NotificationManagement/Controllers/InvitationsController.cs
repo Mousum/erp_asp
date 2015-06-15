@@ -118,8 +118,12 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 //Set email properties
                 myemail.From = new MailAddress("info@mhasb.com", "MHASB ERP");
 
-                myemail.Subject = "This is the Email Subject";
-                string host = Url.Content(HttpContext.Request.Url.Host + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+
+                myemail.Subject = "This is the Email Subject";//HttpContext.Request.Url.Host
+                //string host = Url.Content(baseUrl + "/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
+                string host = HttpContext.Request.Url.Host+Url.Action("InvitationConfirm", "Invitations", new { area = "NotificationManagement" });
+                host += "/"+invitation.Id + "?token=" + invitation.Token;
+
                 //    string host = Url.Content("http://localhost:2376/NotificationManagement/Invitations/InvitationConfirm/" + invitation.Id + "?token=" + invitation.Token);
                 myemail.Body = "<p>Hello There"
                     + ", </p><p>To verify your account, please click the following link:</p>"

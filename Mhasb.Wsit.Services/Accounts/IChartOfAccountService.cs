@@ -17,6 +17,8 @@ namespace Mhasb.Services.Accounts
         ChartOfAccount GetSingleChartOfAccount(int caId);
         List<ChartOfAccount> GetAllChartOfAccountByCompanyId(int CompanyId);
         List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId);
+        List<ChartOfAccount> GetAllChartOfAccountByCompanyIdForSecondLevel(int CompanyId);
+        List<ChartOfAccount> CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(int CompanyId, string code);
         string GeneratedCode(string pCode, int level);
         List<TreeViewNode> TreeViewList(string pcode, int level);
         bool AddBaseAccountTypes();
