@@ -12,7 +12,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
  
     public class AreaTimeController : Controller
     {
-        private IAreaTimeService arService = new AreaTimeService();
+         private IAreaTimeService arService = new AreaTimeService();
         //
         // GET: /Commons/AreaTime/
         public ActionResult Index()

@@ -241,6 +241,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             else
             {
+
                 return Json(setObj, JsonRequestBehavior.AllowGet);
             }
         }

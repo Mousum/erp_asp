@@ -13,21 +13,21 @@ namespace Mhasb.Domain.Accounts
     public class ChartOfAccount : IObjectStateInt
     {
         [Key]
-       public int Id { get; set; }
-       public int? CompanyId { get; set; }
-       public int? TaxId { get; set; }
-      
-       public string ACode { get; set; }
-       public string AName { get; set; }
-       public string Description { get; set; }
-      
-       public bool ShowInDashboard { get; set; }
-       public bool ShowInExpenseClaims { get; set; }
-       public bool IsCostCenter { get; set; }
+        public int Id { get; set; }
+        public int? CompanyId { get; set; }
+        public int? TaxId { get; set; }
+
+        public string ACode { get; set; }
+        public string AName { get; set; }
+        public string Description { get; set; }
+
+        public bool ShowInDashboard { get; set; }
+        public bool ShowInExpenseClaims { get; set; }
+        public bool IsCostCenter { get; set; }
         public int Level { get; set; }
         public ObjectState State { get; set; }
-       public virtual Company Companies { get; set; }
-       public virtual Lookup Lookups { get; set; }
+        public virtual Company Companies { get; set; }
+        public virtual Lookup Lookups { get; set; }
         public virtual ICollection<VoucherDetail> VoucherDetails { get; set; }
 
 

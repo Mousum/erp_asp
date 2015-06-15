@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.DAL", "Mhasb.Wsit.DAL\Mhasb.Wsit.DAL.csproj", "{AEA63C3A-868B-4F14-BA25-D0369620C064}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.Web", "Mhasb.Wsit.Web\Mhasb.Wsit.Web.csproj", "{C704BB4B-1EE6-4489-9FA6-8B7A8BB593A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.CustomModel", "Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj", "{06BC9FB9-6608-4262-812E-C705D9F6C076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.Web.Admin", "Mhasb.Wsit.Web.Admin\Mhasb.Wsit.Web.Admin.csproj", "{F2979666-1C15-4669-ACA0-E2AC3E687DFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

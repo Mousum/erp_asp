@@ -1,0 +1,52 @@
+﻿@model Mhasb.Wsit.Web.Admin.Models.AdminLogin
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+<body class='login'>
+    <div class="wrapper">
+        <h1>
+            <a href="index.html">
+                <img src="~/img/mhasb/logo.png" alt="" class='retina-ready' width="59" height="49">Mhasb Admin
+            </a>
+        </h1>
+        <div class="login-body">
+            <h2>SIGN IN</h2>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-validate" }))
+            {
+
+                @*<form action="index.html" method='get' class='form-validate' id="test">*@
+                <div class="form-group">
+                    <div class="email controls">
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email address", @class = "form-control" })
+                        @* <input type="text" name='uemail' placeholder="Email address" class='form-control' data-rule-required="true" data-rule-email="true">*@
+                    </div>
+                    <div class="row" style="color:#FD6E6E;"> @Html.ValidationMessageFor(model => model.Email)</div>
+                </div>
+                <div class="form-group">
+                    <div class="pw controls">
+                        @Html.TextBoxFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                        @* <input type="password" name="upw" placeholder="Password" class='form-control' data-rule-required="true">*@
+                    </div>
+                    <div class="row" style="color:#FD6E6E;"> @Html.ValidationMessageFor(model => model.Password)</div>
+                </div>
+                <div class="submit">
+                    <div class="remember">
+                        <input type="checkbox" name="remember" class='icheck-me' data-skin="square" data-color="blue" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <input type="submit" value="Sign me in" class='btn btn-primary'>
+                </div>
+            }
+            @* </form> *@
+            <div class="forget">
+                <a href="#">
+                    <span>Forgot password?</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+
