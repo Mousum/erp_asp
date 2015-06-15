@@ -122,9 +122,9 @@
                             $('.gotoCompany').click(function () {
                                 var companyID = $(this).attr('id');
                                 var baseUrl = '@Url.Content("~/")';
-                               
                                 $.ajax({
-                                    url: "/UserManagement/Users/UpdateCompnay",
+                                    //url: "/UserManagement/Users/UpdateCompnay",
+                                    url: "@Url.Action("UpdateCompnay", "Users", new { area = "UserManagement" })",
                                     type: "POST",
                                     data: { ComanyId: companyID },
                                     success: function (data) {

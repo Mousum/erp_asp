@@ -55,7 +55,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
 
                 ViewBag.ATypes = new SelectList(Atypes, "Id", "AName");
-                return View("Create_new",Atypes);
+                return View();
             }
             else
             {

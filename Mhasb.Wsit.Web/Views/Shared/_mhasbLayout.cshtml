@@ -243,11 +243,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "/UserManagement/Users/GetSelectedCompanyName",
+                url: "@Url.Action("GetSelectedCompanyName", "Users", new { area = "UserManagement" })",
                 type: "POST",
                 data: {  },
                 success: function (data) {
-                    console.log(data);
                     if (data.success == "False") {
                        
                     } else {
@@ -288,15 +287,13 @@
                             $('#companyhtm').append(companyhtm);
                             $('.gotoCompany').click(function () {
                                 var companyID = $(this).attr('id');
-                                var baseUrl = '@Url.Content("~/")';
-
                                 $.ajax({
-                                    url: "/UserManagement/Users/UpdateCompnay",
+                                    url: "@Url.Action("UpdateCompnay", "Users", new { area = "UserManagement" })",
                                     type: "POST",
                                     data: { ComanyId: companyID },
                                     success: function (data) {
                                         if (data.success == "True") {
-                                            window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                                           window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
                                         } else {
 
                                         }
