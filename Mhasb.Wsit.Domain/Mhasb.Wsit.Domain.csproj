@@ -44,6 +44,8 @@
     <Compile Include="Accounts\VoucherDetail.cs" />
     <Compile Include="Accounts\VoucherDocument.cs" />
     <Compile Include="Accounts\VoucherType.cs" />
+    <Compile Include="AdminUsers\AdminUser.cs" />
+    <Compile Include="AdminUsers\AdminUserLog.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Commons\Lookup.cs" />
