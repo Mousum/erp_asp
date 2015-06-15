@@ -1,0 +1,45 @@
+﻿@model Mhasb.Domain.Commons.Industry
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i>Country
+                </h3>
+            </div>
+            <div class="box-content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+
+
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.IndustryName)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.IndustryName, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.IndustryName)</span>
+                            </div>
+                        </div>
+                       
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+
+
