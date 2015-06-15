@@ -40,7 +40,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             int companyId = logObj.Companies.Id;
 
             var tt = eService.GetEmpByCompanyId(companyId);       
-            var dbObj = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();
+            var dbObj = eService.GetEmpByCompanyId(companyId).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();
             ViewBag.Title = "Internal Auditor";
             ViewBag.Employees = tt;
             //ViewBag.Employees = eService.GetEmpByCompanyId(AccSet.Companies.Id);
@@ -66,10 +66,9 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 
             int companyId = logObj.Companies.Id;
 
-
             ViewBag.Title = "External Auditor";
             var tt = eService.GetEmpByCompanyId(companyId);
-            var dbObj = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();
+            var dbObj = eService.GetEmpByCompanyId(companyId).Select(e => new { empid = e.Id, empname = e.Users.FirstName + e.Users.LastName, designation = e.Designations.DesignationName, email = e.Users.Email }).ToList();
 
             ViewBag.Employees = tt;
             //ViewBag.Employees = eService.GetEmpByCompanyId(AccSet.Companies.Id);
