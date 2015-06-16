@@ -27,12 +27,60 @@
     {
         <div class="alert alert-danger">@TempData["errMsg"]</div>
     }
-    
+
     <div class="row clearfix">
         <h4 class="all-head">Chart Of Accounts</h4>
-        @foreach(var item in Model)
-        {
-            <div>@item.AName</div>
-        }
+
+        @{ Html.RenderAction("PartialAddAccount"); }
+
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <h4>Account List:</h4>
+            </div>
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-3 edit-fa">
+                <div class="input-group col-md-12">
+                    <input type="text" class="search-query form-control cstm-input" placeholder="Search">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger btn-tag-search" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Account Code</th>
+                            <th>Account Type</th>
+                            <th>Tax Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.AName</td>
+                                    <td>@item.ACode</td>
+                                    <td>@item.Level</td>
+                                    @*<td>@item.Lookups.Value @item.Lookups.Quantity</td>*@
+                                    <td></td>
+                                </tr>
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
     </div>
 </div>

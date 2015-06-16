@@ -1,0 +1,114 @@
+﻿@model Mhasb.Domain.Accounts.ChartOfAccount
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i>Chart Of Accounts
+                </h3>
+            </div>
+            <div class="box-content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                       
+                        @Html.ValidationSummary(true)
+                        @*<div class="form-group">
+                                <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.CompanyId)</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.CompanyId, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                    <span class="help-block">@Html.ValidationMessageFor(model => model.CompanyId)</span>
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.TaxId)</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.TaxId, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                    <span class="help-block">@Html.ValidationMessageFor(model => model.TaxId)</span>
+                                </div>
+                            </div>*@
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">Account Code</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.ACode, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.ACode)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">Account Name</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.AName, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.AName)</span>
+                            </div>
+                        </div>
+
+                       <div class="form-group">
+                                <label for="textfield" class="control-label col-sm-2">Description</label>
+                                <div class="col-sm-10">
+                                    @Html.TextAreaFor(model => model.Description, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                    <span class="help-block">@Html.ValidationMessageFor(model => model.Description)</span>
+                                </div>
+                            </div>
+@*
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShowInDashboard, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ShowInDashboard)
+            @Html.ValidationMessageFor(model => model.ShowInDashboard)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShowInExpenseClaims, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ShowInExpenseClaims)
+            @Html.ValidationMessageFor(model => model.ShowInExpenseClaims)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsCostCenter, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IsCostCenter)
+            @Html.ValidationMessageFor(model => model.IsCostCenter)
+        </div>
+    </div>*@
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Level)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Level, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Level)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                                @Html.ActionLink("Back to List", "Index",null ,new {@class="btn btn-default"})
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+
