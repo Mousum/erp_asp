@@ -19,7 +19,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         // GET: ChartOfAccounts
         public ActionResult Index()
         {
-            var chartOfAccounts = chser.GetAllChartOfAccount();
+            var chartOfAccounts = chser.GetDefaultChartOfAccounts();
             return View(chartOfAccounts.ToList());
         }
 
