@@ -1,0 +1,98 @@
+﻿@model Mhasb.Domain.AdminUsers.AdminUser
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i>AreaTime
+                </h3>
+            </div>
+            <div class="box-content">
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>AdminUser</h4>
+                        <hr />
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.FirstName)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.FirstName, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.FirstName)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.LastName)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.LastName, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.LastName)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Email)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Email, new { type = "email", name = "textfield", id = "textfield", @class = "form-control", required = "required" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Email)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Password)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Password, new { type = "password", name = "textfield", id = "textfield", @class = "form-control", required = "required" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Password)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.type)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.type, new { type = "text", name = "textfield", id = "textfield", @class = "form-control", required = "required" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.type)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.PhoneNo)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.PhoneNo, new { type = "text", name = "textfield", id = "textfield", @class = "form-control", required = "required" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Password)</span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                        </div>
+
+
+                    </div>
+
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+

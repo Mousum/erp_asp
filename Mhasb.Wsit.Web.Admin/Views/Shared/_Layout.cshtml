@@ -442,7 +442,7 @@
     </div>
     <div id="navigation">
         <div class="container-fluid">
-            <a href="#" id="brand">FLAT</a>
+            <a href="#" id="brand">Mhasb</a>
             <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </a>
@@ -832,7 +832,7 @@
                     </button>
                 </div>
             </form>
-            <div class="subnav">
+            @*<div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-down"></i>
@@ -875,8 +875,8 @@
                         <a href="#">Comments</a>
                     </li>
                 </ul>
-            </div>
-            <div class="subnav">
+            </div>*@
+            @*<div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-down"></i>
@@ -919,7 +919,7 @@
                         <a href="#">SEO optimization</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
             <div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
@@ -929,39 +929,35 @@
                 </div>
                 <ul class="subnav-menu">
                     <li>
-                        <a href="#">Theme settings</a>
-                    </li>
-                    <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Page settings</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Action #1</a>
-                            </li>
-                            <li>
-                                <a href="#">Antoher Link</a>
-                            </li>
-                            <li class='dropdown-submenu'>
-                                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>Go to level 3</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#">This is level 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Unlimited levels</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Easy to use</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href='@Url.Action("Index","Country")'>Country</a>
                     </li>
                     <li>
-                        <a href="#">Security settings</a>
+                        <a href='@Url.Action("Index","Currency")'>Currency</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Language")'>Language</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","AreaTime")'>Area Time</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Industry")'>Industry</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","ChartOfAccounts")'>Chart Of Accounts</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index", "LegalEntities")'>Legal Entities</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index", "Lookups")'>Lookups</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index", "AdminUsers")'>Admin Users</a>
                     </li>
                 </ul>
             </div>
-            <div class="subnav subnav-hidden">
+            @*<div class="subnav subnav-hidden">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-right"></i>
@@ -998,10 +994,10 @@
                         <a href="#">Security settings</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div>
         <div id="main">
-            @RenderBody();
+            @RenderBody()
         </div>
     </div>
 </body>

@@ -273,5 +273,23 @@ namespace Mhasb.Services.Accounts
 
           
        }
+       public List<ChartOfAccount> GetDefaultChartOfAccounts()  //This function Will Return Only The Default COAs
+       {
+
+           try
+           {
+               var cAObj = _finalCrudOperation.GetOperation()
+                                       .Filter(c=>c.CompanyId.HasValue == false)
+                                       .Get()
+                                       .OrderBy(c => c.ACode)
+                                       .ToList();
+               return cAObj;
+           }
+           catch (Exception ex)
+           {
+               var rr = ex.Message;
+               return null;
+           }
+       }
     }
 }

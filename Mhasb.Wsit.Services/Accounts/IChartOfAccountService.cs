@@ -22,5 +22,6 @@ namespace Mhasb.Services.Accounts
         string GeneratedCode(string pCode, int level);
         List<TreeViewNode> TreeViewList(string pcode, int level);
         bool AddBaseAccountTypes();
+        List<ChartOfAccount> GetDefaultChartOfAccounts();
     }
 }

@@ -1,0 +1,85 @@
+﻿@model Mhasb.Domain.Commons.Lookup
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i>Legal Entities
+                </h3>
+            </div>
+            <div class="box-content">
+                @using (Html.BeginForm("Edit", "Lookups", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.LookupType)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.LookupType, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.LookupType)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Key)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Key, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.Key)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Value)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Value, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.Value)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Quantity)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Quantity, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.Quantity)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Description)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Description, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.Description)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Order)</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.Order, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                            <span class="help-block">@Html.ValidationMessageFor(model => model.Order)</span>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">SAve Changes</button>
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                    </div>
+
+
+
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

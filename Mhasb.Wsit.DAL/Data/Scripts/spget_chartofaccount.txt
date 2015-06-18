@@ -1,0 +1,19 @@
+﻿ALTER PROCEDURE spget_chartofaccount
+@queryoption int,
+@accounttypeid int,
+@companyid int
+AS
+BEGIN
+	Select coa.Id ,coa.aname AS AName,coa.acode AS ACode,
+	coa.description as Description,coa.iscostcenter As IsCostCenter,
+	coa.Level,coa.showinexpenseclaims as ShowInExpenseClaims, 
+	coa.showsnsashboard As ShowInDashboard,coa.taxid As TaxId,
+	(Select aname from acc.chartofaccount where acode = left(coa.acode,3)) As AccountType,
+	lk.value as Tax
+
+	from acc.chartofaccount coa inner join 
+	com.lookup lk on coa.taxid =lk.lookupid
+	where coa.companyid = @companyid and coa.Level=3
+	and (0=@accounttypeid or left(coa.acode,1) = (select acode from acc.chartofaccount where Id = @accounttypeid))
+END
+GO
