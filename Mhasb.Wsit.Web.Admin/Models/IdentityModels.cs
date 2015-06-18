@@ -13,5 +13,7 @@ namespace Mhasb.Wsit.Web.Admin.Models
             : base("DefaultConnection")
         {
         }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.AdminUsers.AdminUser> AdminUsers { get; set; }
     }
 }

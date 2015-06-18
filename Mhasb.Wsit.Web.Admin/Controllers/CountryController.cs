@@ -40,6 +40,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 Country = Country.Where(s => s.CountryName.Contains(searchString)).ToList();
             }
 
+            
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return PartialView(Country.ToPagedList(pageNumber, pageSize));

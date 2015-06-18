@@ -832,7 +832,7 @@
                     </button>
                 </div>
             </form>
-            <div class="subnav">
+            @*<div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-down"></i>
@@ -875,8 +875,8 @@
                         <a href="#">Comments</a>
                     </li>
                 </ul>
-            </div>
-            <div class="subnav">
+            </div>*@
+            @*<div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-down"></i>
@@ -919,7 +919,7 @@
                         <a href="#">SEO optimization</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
             <div class="subnav">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
@@ -952,9 +952,12 @@
                     <li>
                         <a href='@Url.Action("Index", "Lookups")'>Lookups</a>
                     </li>
+                    <li>
+                        <a href='@Url.Action("Index", "AdminUsers")'>Admin Users</a>
+                    </li>
                 </ul>
             </div>
-            <div class="subnav subnav-hidden">
+            @*<div class="subnav subnav-hidden">
                 <div class="subnav-title">
                     <a href="#" class='toggle-subnav'>
                         <i class="fa fa-angle-right"></i>
@@ -991,7 +994,7 @@
                         <a href="#">Security settings</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div>
         <div id="main">
             @RenderBody()
