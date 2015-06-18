@@ -56,7 +56,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             return View("_AddAccount");
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int account=0)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
@@ -69,7 +69,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 {
                     companyId = (int)logObj.CompanyId;
                 }
-                var Atypes = cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId,"4");
+                var Atypes = cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId, account);
 
                 return View("Create_new", Atypes);
             }
@@ -136,8 +136,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult CostCentresSettings()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
-            var centers = cSer.GetAllChartOfAccountByComIdCostCentre(AccSet.Companies.Id);
+            //var AccSet = setService.GetAllByUserId(user.Id);
+
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+
+            var centers = cSer.GetAllChartOfAccountByComIdCostCentre(companyId);
             ViewBag.centers = new SelectList(centers, "Id", "AName");
             return View("Costcentre");
         }

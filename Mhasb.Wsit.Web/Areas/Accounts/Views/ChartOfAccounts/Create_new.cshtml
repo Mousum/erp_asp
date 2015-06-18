@@ -1,4 +1,4 @@
-﻿@model List<Mhasb.Domain.Accounts.ChartOfAccount>
+﻿@model List<Mhasb.Wsit.CustomModel.Accounts.ChartOfAccountCustom>
 
 @if (ViewBag.CompanyCompleteFlag < 5)
 {
@@ -50,6 +50,12 @@
                 </div>
             </div>
             <div class="col-md-12">
+                <div>
+                    <ul>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=0})">ALL</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=1})">Assets</a></li>
+                    </ul>
+                </div>
                 <table class="table table-bordered table-responsive table-hover">
                     <thead>
                         <tr>
@@ -67,8 +73,8 @@
                                 <tr>
                                     <td>@item.AName</td>
                                     <td>@item.ACode</td>
-                                    <td>@item.Level</td>
-                                    @*<td>@item.Lookups.Value @item.Lookups.Quantity</td>*@
+                                    <td>@item.AccountType</td>
+                                    <td>@item.Tax</td>
                                     <td></td>
                                 </tr>
 
