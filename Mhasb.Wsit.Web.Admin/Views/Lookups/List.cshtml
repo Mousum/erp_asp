@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+
+@model PagedList.IPagedList<Mhasb.Domain.Commons.Lookup>
+@using PagedList.Mvc;
+
+<div id="content">
+    <table class="table table-hover table-nomargin table-bordered">
+        <tr>
+            <th style="text-align: center;">
+                Lookup Type
+            </th>
+            <th style="text-align: center;">
+                Name
+            </th>
+            <th style="text-align: center;">
+                Key
+            </th>
+            <th style="text-align: center;">
+                Value
+
+            </th>
+            <th style="text-align: center;">
+                Quantity
+            </th>
+            <th style="text-align: center;">
+                Description
+            </th>
+            <th style="text-align: center;">
+                Order
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div id="contentPager" class="contentPager">
+        @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).on("click", ".contentPager a", function () {
+        var currentFilter = $("#SearchString").val();
+        var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#content').html(result);
+            }
+        });
+        return false;
+    });
+
+</script>
+
+@*<script>
+    $(".confirmDelete").click(function () {
+        var baseUrl = '@Url.Content("~/")';
+        var data = { id: $(this).attr("data-id") }
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "Commons/Language/Delete",
+            data: data,
+            success: function (data) {
+                if (data == "Success") {
+                    $('.close').trigger('click');
+                    $(".alert").text("Successfully Deleted ! Loading New Data...").show("slow");
+                    setTimeout(function () {
+                        window.location.replace(baseUrl + "Commons/Language");//will redirect to your blog page (an ex: blog.html)
+                    }, 2000);
+
+                }
+            }
+        });
+    })
+</script>*@
+

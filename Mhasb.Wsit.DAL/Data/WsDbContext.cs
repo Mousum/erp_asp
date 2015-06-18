@@ -113,6 +113,12 @@ namespace Mhasb.Wsit.DAL.Data
 
         }
 
+        public System.Data.Entity.DbSet<Mhasb.Domain.Accounts.ChartOfAccount> ChartOfAccounts { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Organizations.Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<Mhasb.Domain.Commons.Lookup> Lookups { get; set; }
+
 
     }
 }

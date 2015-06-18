@@ -1,0 +1,90 @@
+﻿@model Mhasb.Domain.Accounts.ChartOfAccount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChartOfAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Companies.TradingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companies.TradingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lookups.LookupType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lookups.LookupType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowInDashboard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowInDashboard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowInExpenseClaims)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowInExpenseClaims)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCostCenter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCostCenter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
