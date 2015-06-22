@@ -11,6 +11,7 @@ using Mhasb.DAL.Mapping.Users;
 using Mhasb.Domain.Loggers;
 using Mhasb.DAL.Mapping.AdminUsers;
 using Mhasb.Domain.AdminUsers;
+using Mhasb.DAL.Mapping.Subscriptions;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -110,6 +111,10 @@ namespace Mhasb.Wsit.DAL.Data
             //System Admin
             modelBuilder.Configurations.Add(new AdminUserMapping());
             modelBuilder.Configurations.Add(new AdminUserLogMapping());
+
+            //Subscriptions 
+            modelBuilder.Configurations.Add(new PackageMapping());
+            modelBuilder.Configurations.Add(new SubscriptionMapping());
 
         }
 

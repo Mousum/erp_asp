@@ -89,6 +89,8 @@
     <Compile Include="Mapping\OrgSettings\AuditorMapping.cs" />
     <Compile Include="Mapping\OrgSettings\FinalcialSettingMapping.cs" />
     <Compile Include="Mapping\OrgSettings\TaxSettingMapping.cs" />
+    <Compile Include="Mapping\Subscriptions\PackageMapping.cs" />
+    <Compile Include="Mapping\Subscriptions\SubscriptionMapping.cs" />
     <Compile Include="Mapping\Users\ActionListMapping.cs" />
     <Compile Include="Mapping\Users\RoleMapping.cs" />
     <Compile Include="Mapping\Users\RoleVsActionMapping.cs" />

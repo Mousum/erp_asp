@@ -178,6 +178,7 @@
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\LegalEntitiesController.cs" />
     <Compile Include="Controllers\LookupsController.cs" />
+    <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1394,6 +1395,11 @@
     <Content Include="Views\Companies\Index.cshtml" />
     <Content Include="Views\Companies\List.cshtml" />
     <Content Include="Views\Companies\Details.cshtml" />
+    <Content Include="Views\Packages\Create.cshtml" />
+    <Content Include="Views\Packages\Delete.cshtml" />
+    <Content Include="Views\Packages\Details.cshtml" />
+    <Content Include="Views\Packages\Edit.cshtml" />
+    <Content Include="Views\Packages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
