@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using PagedList;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
@@ -31,6 +32,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         private readonly IEmployeeService empService = new EmployeeService();
 
         private readonly IVoucherDocument vDocSar = new VoucherDocumentService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /Accounts/Voucher/
         public ActionResult Index()
@@ -52,7 +54,15 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
 
-            int branchId = AccSet.Companies.Id;
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+
+            //int branchId = AccSet.Companies.Id;
+            int branchId = companyId;
 
             string str = "G";
 
