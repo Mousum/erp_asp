@@ -49,6 +49,12 @@
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Commons\Lookup.cs" />
+    <Compile Include="Contacts\ContactDetails.cs" />
+    <Compile Include="Contacts\ContactInformation.cs" />
+    <Compile Include="Contacts\FinancialDetails.cs" />
+    <Compile Include="Contacts\Person.cs" />
+    <Compile Include="Contacts\Note.cs" />
+    <Compile Include="Contacts\TelePhone.cs" />
     <Compile Include="Loggers\CompanyViewLog.cs" />
     <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
