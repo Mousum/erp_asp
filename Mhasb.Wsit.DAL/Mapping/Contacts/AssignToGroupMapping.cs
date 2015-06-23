@@ -21,12 +21,14 @@ namespace Mhasb.DAL.Mapping.Contacts
 
             this.ToTable("con.assign_to_group");
 
-            this.HasOptional(p => p.ContactGroups)
+            this.HasRequired(p => p.ContactGroups)
                 .WithMany(p => p.AssignToGroups)
                 .HasForeignKey(p => p.ContactGroupId);
-            this.HasOptional(p => p.ContactInformations)
+
+            this.HasRequired(p => p.ContactInformations)
                 .WithMany()
-                .HasForeignKey(p => p.ContactInfoId);
+                .HasForeignKey(p => p.ContactInfoId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
