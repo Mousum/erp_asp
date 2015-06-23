@@ -24,7 +24,7 @@ namespace Mhasb.DAL.Mapping.Contacts
 
             this.ToTable("con.Notes");
             this.HasRequired(i=>i.Users)
-                .WithMany()
+                .WithMany(i=>i.Notess)
                 .HasForeignKey(i=>i.UserId)
                 .WillCascadeOnDelete(false);
             this.HasRequired(i=>i.ContactInformations)

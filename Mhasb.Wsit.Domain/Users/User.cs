@@ -45,7 +45,8 @@ namespace Mhasb.Domain.Users
         public virtual ICollection<Employee> Employees { get; set; }
         
         public virtual EmployeeProfile EmployeeProfiles { get; set; }
-        public virtual Notes Notes { get; set; }
+
+        public virtual ICollection<Notes> Notess { get; set; }
         public virtual ContactInformation ContactInformations { get; set; }
 
         [ScaffoldColumn(false)]
