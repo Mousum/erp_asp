@@ -28,7 +28,7 @@ namespace Mhasb.DAL.Mapping.Contacts
                 .HasForeignKey(i=>i.UserId)
                 .WillCascadeOnDelete(false);
             this.HasRequired(i=>i.ContactInformations)
-                .WithMany()
+                .WithMany(i=>i.Notes)
                 .HasForeignKey(i=>i.ContactInfoId);
         }
     }

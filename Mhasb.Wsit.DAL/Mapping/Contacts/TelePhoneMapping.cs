@@ -13,7 +13,7 @@ namespace Mhasb.DAL.Mapping.Contacts
         public TelePhoneMapping() {
             this.HasKey(i=>i.Id);
             this.Ignore(i=>i.State);
-            //this.Property(i => i.ContactInfoId).HasColumnName("contactinfoId");
+            this.Property(i => i.ContactInfoId).HasColumnName("contactinfoId");
             this.Property(i => i.CellPhone).HasColumnName("cellphone");
             this.Property(i => i.Mobile).HasColumnName("mobile");
             this.Property(i => i.DirectDial).HasColumnName("directdial");
@@ -23,8 +23,8 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.ToTable("con.telephone");
 
             this.HasRequired(i=>i.ContactInformations)
-                .WithOptional(i=>i.TelePhones)
-                .Map(h => h.MapKey("contactinfoId"));
+                .WithMany()
+                .HasForeignKey(i=>i.ContactInfoId);
         }
     }
 }

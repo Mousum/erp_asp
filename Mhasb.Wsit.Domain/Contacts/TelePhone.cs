@@ -10,7 +10,7 @@ namespace Mhasb.Domain.Contacts
     public class TelePhone : IObjectStateLong
     {
         public long Id { get; set; }
-        //public long ContactInfoId { get; set; }
+        public long ContactInfoId { get; set; }
         public string CellPhone { get; set; }
         public string Mobile { get; set; }
         public string DirectDial { get; set; }

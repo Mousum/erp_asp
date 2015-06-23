@@ -49,7 +49,9 @@
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Commons\Lookup.cs" />
+    <Compile Include="Contacts\AssignToGroup.cs" />
     <Compile Include="Contacts\ContactDetails.cs" />
+    <Compile Include="Contacts\ContactGroup.cs" />
     <Compile Include="Contacts\ContactInformation.cs" />
     <Compile Include="Contacts\FinancialDetails.cs" />
     <Compile Include="Contacts\Person.cs" />

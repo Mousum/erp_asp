@@ -10,6 +10,7 @@ using Mhasb.DAL.Mapping.OrgSettings;
 using Mhasb.DAL.Mapping.Users;
 using Mhasb.Domain.Loggers;
 using Mhasb.DAL.Mapping.AdminUsers;
+using Mhasb.DAL.Mapping.Contacts;
 using Mhasb.Domain.AdminUsers;
 using Mhasb.DAL.Mapping.Subscriptions;
 
@@ -116,6 +117,14 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new PackageMapping());
             modelBuilder.Configurations.Add(new SubscriptionMapping());
 
+        // contacts
+            modelBuilder.Configurations.Add(new ContactInformationMapping());
+            modelBuilder.Configurations.Add(new ContactsDetailsMapping());
+            modelBuilder.Configurations.Add(new NotesMapping());
+            modelBuilder.Configurations.Add(new PersonMapping());
+            modelBuilder.Configurations.Add(new TelePhoneMapping());
+            modelBuilder.Configurations.Add(new AssignToGroupMapping());
+            modelBuilder.Configurations.Add(new ContactGroupMapping());
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Accounts.ChartOfAccount> ChartOfAccounts { get; set; }

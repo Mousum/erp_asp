@@ -14,7 +14,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.HasKey(i=>i.Id);
             //Ignore this fld
             this.Ignore(i => i.State);
-            this.Property(i => i.ContactInfoId).HasColumnName("ContactInfoId");
+            this.Property(i => i.ContactInfoId).HasColumnName("contactInfoid");
             this.Property(i => i.FirstName).HasMaxLength(200).HasColumnName("firstname");
             this.Property(i => i.LastName).HasMaxLength(200).HasColumnName("lastname");
             this.Property(i => i.Email).HasMaxLength(200).HasColumnName("email");
@@ -25,7 +25,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.ToTable("con.person");
 
             this.HasRequired(i=>i.ContactInformations)
-                .WithMany()
+                .WithMany(i=>i.Persons)
                 .HasForeignKey(i=>i.ContactInfoId);
         }
     }

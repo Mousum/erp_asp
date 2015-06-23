@@ -71,7 +71,9 @@
     <Compile Include="Mapping\Commons\LanguageMaping.cs" />
     <Compile Include="Mapping\Commons\LegalEntityMaping.cs" />
     <Compile Include="Mapping\Commons\LookupMapping.cs" />
+    <Compile Include="Mapping\Contacts\AssignToGroupMapping.cs" />
     <Compile Include="Mapping\Contacts\ContactDetailsMapping.cs" />
+    <Compile Include="Mapping\Contacts\ContactGroupMapping.cs" />
     <Compile Include="Mapping\Contacts\ContactInformationMapping.cs" />
     <Compile Include="Mapping\Contacts\FinancialDetailsMapping.cs" />
     <Compile Include="Mapping\Contacts\NotesMapping.cs" />
