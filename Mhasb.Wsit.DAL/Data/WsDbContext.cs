@@ -86,6 +86,8 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new FounderMapping());
             modelBuilder.Configurations.Add(new DesignationMapping());
             modelBuilder.Configurations.Add(new ShareTransferMapping());
+
+
             // Project Task
             modelBuilder.Configurations.Add(new TaskManageMapping());
             modelBuilder.Configurations.Add(new ProjectMapping());
