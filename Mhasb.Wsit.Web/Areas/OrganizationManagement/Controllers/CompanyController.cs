@@ -269,7 +269,10 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 return View();
         }
 
-
+        public ActionResult Settings()
+        {
+            return View();
+        }
 
         public ActionResult Update()
         {
