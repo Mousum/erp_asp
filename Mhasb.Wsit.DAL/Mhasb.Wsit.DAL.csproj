@@ -77,6 +77,7 @@
     <Compile Include="Mapping\Contacts\NotesMapping.cs" />
     <Compile Include="Mapping\Contacts\PersonMapping.cs" />
     <Compile Include="Mapping\Contacts\TelePhoneMapping.cs" />
+    <Compile Include="Mapping\Inventories\ItemMapping.cs" />
     <Compile Include="Mapping\Loggers\CompanyViewLogMapping.cs" />
     <Compile Include="Mapping\Notifications\InvitationMapping.cs" />
     <Compile Include="Mapping\Organizations\CompanyDocumentMapping.cs" />
