@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Mhasb.Services.Loggers;
+using Mhasb.Services.Organizations;
+using Mhasb.Services.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly IUserService uService = new UserService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICompanyService cService = new CompanyService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
@@ -26,6 +32,16 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         // GET: /Contacts/Contact/Create
         public ActionResult Create()
         {
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var activatedCompany = cService.GetSingleCompany(companyId);
+            ViewData["Company"] = activatedCompany;
             return View();
         }
 
