@@ -43,6 +43,8 @@
     <Compile Include="Accounts\TreeViewNode.cs" />
     <Compile Include="Accounts\VoucherCustom.cs" />
     <Compile Include="AdminUsers\AdminUserModel.cs" />
+    <Compile Include="GridView\DataGridView.cs" />
+    <Compile Include="GridView\OptionList.cs" />
     <Compile Include="Organizations\CompanyProfileCustom.cs" />
     <Compile Include="Organizations\EmployeeProfileCustom.cs" />
     <Compile Include="Organizations\LogView.cs" />

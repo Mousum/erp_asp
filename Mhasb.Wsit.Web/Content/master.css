@@ -13255,70 +13255,135 @@ label.cstm-select:before {
 
 /*Author: Rafi , Date: 01.06.2015 , breadcrumbs*/
 
-.cstm-breadcrumb { 
-    list-style: none; 
-    overflow: hidden; 
+.cstm-breadcrumb {
+    list-style: none;
+    overflow: hidden;
     font: 12px Helvetica, Arial, Sans-Serif;
     margin-left: -36px;
     margin-top: -10px;
 }
-.cstm-breadcrumb li { 
-    float: left; 
-}
-.cstm-breadcrumb li a {
-    color: #FFF;
-    text-decoration: none;
-    padding: 5px 0px 5px 44px;
-    background: #A6A8A9 none repeat scroll 0% 0%;
-    position: relative;
-    display: block;
-    float: left;
-}
-.cstm-breadcrumb li a:after { 
-    content: " "; 
-    display: block; 
-    width: 0; 
-    height: 0;
-    border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-    border-bottom: 50px solid transparent;
-    border-left: 30px solid #A6A8A9;
-    position: absolute;
-    top: 50%;
-    margin-top: -50px; 
-    left: 100%;
-    z-index: 2; 
-}	
-.cstm-breadcrumb li a:before { 
-    content: " "; 
-    display: block; 
-    width: 0; 
-    height: 0;
-    border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-    border-bottom: 50px solid transparent;
-    border-left: 30px solid white;
-    position: absolute;
-    top: 50%;
-    margin-top: -50px; 
-    margin-left: 1px;
-    left: 100%;
-    z-index: 1; 
-}	
-.cstm-breadcrumb li:first-child a {
-    padding-left: 10px;
-}
+
+    .cstm-breadcrumb li {
+        float: left;
+    }
+
+        .cstm-breadcrumb li a {
+            color: #FFF;
+            text-decoration: none;
+            padding: 5px 0px 5px 44px;
+            background: #A6A8A9 none repeat scroll 0% 0%;
+            position: relative;
+            display: block;
+            float: left;
+        }
+
+            .cstm-breadcrumb li a:after {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid #A6A8A9;
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                left: 100%;
+                z-index: 2;
+            }
+
+            .cstm-breadcrumb li a:before {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid white;
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                margin-left: 1px;
+                left: 100%;
+                z-index: 1;
+            }
+
+        .cstm-breadcrumb li:first-child a {
+            padding-left: 10px;
+        }
 
 
-.cstm-breadcrumb li a:hover              { background: #233140 none repeat scroll 0% 0%;  }
-.cstm-breadcrumb li a:hover:after        { border-left-color: #233140 !important; }
-.active-breadcrumb li a{ background: #233140 none repeat scroll 0% 0%;  }
-.active-breadcrumb a{
+        .cstm-breadcrumb li a:hover {
+            background: #233140 none repeat scroll 0% 0%;
+        }
+
+            .cstm-breadcrumb li a:hover:after {
+                border-left-color: #233140 !important;
+            }
+
+.active-breadcrumb li a {
+    background: #233140 none repeat scroll 0% 0%;
+}
+
+.active-breadcrumb a {
     background: #A6A8A9;
 }
-.cstm-breadcrumb li a.active              { background: #233140 none repeat scroll 0% 0%;  }
-.cstm-breadcrumb li a.active:after        { border-left-color: #233140 !important; }
-.active-breadcrumb li a{ background: #233140 none repeat scroll 0% 0%;  }
-.active-breadcrumb a{
+
+.cstm-breadcrumb li a.active {
+    background: #233140 none repeat scroll 0% 0%;
+}
+
+    .cstm-breadcrumb li a.active:after {
+        border-left-color: #233140 !important;
+    }
+
+.active-breadcrumb li a {
+    background: #233140 none repeat scroll 0% 0%;
+}
+
+.active-breadcrumb a {
     background: #A6A8A9;
 }
 
 /*Author: Rafi , Date: 01.06.2015 , breadcrumbs*/
+
+/*Author: Rafi , Date: 23.06.2015 , general-set*/
+.general-set {
+    background: #ccc;
+    margin-top: -20px;
+}
+
+    .general-set h2 {
+        margin-left: 196px;
+    }
+.org-gen {
+    margin-top: 35px;
+    border-bottom: 1px solid #E5E5E5;
+}
+.cstm-org {
+    margin-top: 15px;
+}
+.cstm-menu p i {
+    color: #40B5E2;
+}
+.cstm-menu p a {
+    margin-left: 7px;
+    font-size: 20px;
+}
+.cstm-para-gen {
+    margin-top: -12px; 
+    margin-left: 24px;
+}
+.org-gen1 {
+    border-bottom: 1px solid #E5E5E5;
+    margin-top: 40px;
+}
+.org-gen2 {
+    border-bottom: 1px solid #E5E5E5;
+    margin-left: 20px;
+}
+.cstm-org1 {
+    margin-left: -15px;
+}
+
+/*Author: Rafi , Date: 23.06.2015 , general-set*/

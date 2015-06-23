@@ -10,6 +10,7 @@ using System.Web.Security;
 using Mhasb.Services.Accounts;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Loggers;
+using Mhasb.Wsit.CustomModel.GridView;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
@@ -93,6 +94,46 @@ namespace Mhasb.Wsit.Web.Controllers
 
 
 
+        }
+
+        public ActionResult DataGridView()
+        {
+            List<DataGridView> dgvObj = new List<DataGridView>();
+            DataGridView dgv = new DataGridView();
+            dgv.Name = "A";
+            dgv.Type = "text";
+            dgv.Options = null;
+            dgvObj.Add(dgv);
+            dgv = new DataGridView();
+            List<OptionList> optObj = new List<OptionList>();
+            OptionList opt = new OptionList();
+            opt.Name = "Option 1";
+            opt.Value = "1";
+            optObj.Add(opt);
+            opt = new OptionList();
+            opt.Name = "Option 2";
+            opt.Value = "2";
+            optObj.Add(opt);
+
+            dgv.Name = "B";
+            dgv.Type = "dropdown";
+            dgv.Options = optObj;
+            dgvObj.Add(dgv);
+            
+            //string[,] opt = new string[,]{
+            //                                {"name","val"},
+            //                                {"name2","val2"}
+            //                            };
+          
+
+                  
+            //string[,] HeaderList = new string[,]{
+            //                                        { "Name", "text", null},
+            //                                        {"Type","Dropdown", string.Format(opt.ToString())}
+            //                                    };
+            //ViewBag.HeaderList = HeaderList;
+            //ViewBag.HeaderCount = HeaderList.LongLength/3;
+            return View( dgvObj);
         }
 
     }

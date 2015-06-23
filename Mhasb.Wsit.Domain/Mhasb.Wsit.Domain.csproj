@@ -55,7 +55,7 @@
     <Compile Include="Contacts\ContactInformation.cs" />
     <Compile Include="Contacts\FinancialDetails.cs" />
     <Compile Include="Contacts\Person.cs" />
-    <Compile Include="Contacts\Note.cs" />
+    <Compile Include="Contacts\Notes.cs" />
     <Compile Include="Contacts\TelePhone.cs" />
     <Compile Include="Inventories\Item.cs" />
     <Compile Include="Loggers\CompanyViewLog.cs" />
