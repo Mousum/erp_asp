@@ -74,9 +74,11 @@
     <Compile Include="Commons\LegalEntityService.cs" />
     <Compile Include="Commons\LookupService.cs" />
     <Compile Include="Contact\ContactDetailsService.cs" />
+    <Compile Include="Contact\ContactGroupService.cs" />
     <Compile Include="Contact\ContactInformationService.cs" />
     <Compile Include="Contact\FinancialDetailsService.cs" />
     <Compile Include="Contact\IContactDetailsService.cs" />
+    <Compile Include="Contact\IContactGroupService.cs" />
     <Compile Include="Contact\IContactInformationService.cs" />
     <Compile Include="Contact\IFinancialDetailsService.cs" />
     <Compile Include="Contact\INotesService.cs" />
