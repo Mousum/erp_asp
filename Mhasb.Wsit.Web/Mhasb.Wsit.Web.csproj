@@ -182,6 +182,8 @@
     <Compile Include="Areas\Commons\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Commons\Controllers\LegalEntitiesController.cs" />
     <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
+    <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
+    <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -497,6 +499,10 @@
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create_new.cshtml" />
     <Content Include="Areas\Accounts\Views\ChartOfAccounts\_AddAccount.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Settings.cshtml" />
+    <Content Include="Areas\Contacts\Views\web.config" />
+    <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Contacts\Views\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -677,6 +683,7 @@
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
+    <Folder Include="Areas\OrganizationManagements\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="Areas\Organizations\Views\Employee\" />
     <Folder Include="Areas\OrgSettings\Models\" />

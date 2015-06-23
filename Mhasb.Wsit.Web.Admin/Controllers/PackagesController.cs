@@ -19,7 +19,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         // GET: Packages
         public ActionResult Index()
         {
-            var test = db.GetAllPackages();
+           
             return View(db.GetAllPackages());
         }
 
