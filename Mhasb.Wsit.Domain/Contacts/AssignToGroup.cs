@@ -9,7 +9,7 @@ namespace Mhasb.Domain.Contacts
 {
     public class AssignToGroup:IObjectStateLong
     {
-        public long? ContactInfoId { get; set; }
+        public long ContactInfoId { get; set; }
         public int ContactGroupId { get; set; }
         public DateTime CreatedTime { get; set; }
         public long Id { get; set; }
