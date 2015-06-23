@@ -23,7 +23,7 @@ namespace Mhasb.Domain.Contacts
         public long CreateBy { get; set; }
         public long UpdateBy { get; set; }
         public virtual ICollection<ContactDetails> ContactDtails{ get; set; }
-        public virtual FinancialDetails FinancialDetails { get; set; }
+        //public virtual FinancialDetails FinancialDetails { get; set; }
         public virtual TelePhone TelePhones { get; set; }
         public virtual ICollection<Notes> Notes { get; set; }
         public virtual ICollection<Person> Persons { get; set; }

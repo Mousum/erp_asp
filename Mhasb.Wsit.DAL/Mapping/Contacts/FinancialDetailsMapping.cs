@@ -15,7 +15,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             // ignore 
             this.Ignore(i => i.State);
             // Entities
-            this.Property(i=>i.ContactInfoId).HasColumnName("contactinfoid");
+            this.Property(i => i.ContactInfoId).HasColumnName("contactinfoid");
             this.Property(i => i.SalesDefaultTax).HasMaxLength(100).HasColumnName("salesdefaulttax");
             this.Property(i => i.SalesDefaultAccount).HasMaxLength(100).HasColumnName("salesdefaultaccount");
             this.Property(i => i.PurchasesDefaultTax).HasMaxLength(100).HasColumnName("purchasesdefaulttax");
@@ -34,7 +34,8 @@ namespace Mhasb.DAL.Mapping.Contacts
 
             this.HasRequired(i => i.ContactInformations)
                 .WithMany()
-                .HasForeignKey(i=>i.ContactInfoId);
+                .HasForeignKey(i=>i.ContactInfoId)
+                .WillCascadeOnDelete(false);
 
         }
     }
