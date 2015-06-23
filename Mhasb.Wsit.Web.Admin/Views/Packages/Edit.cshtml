@@ -1,0 +1,109 @@
+﻿@model Mhasb.Domain.Subscriptions.Package
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i>Package
+                </h3>
+            </div>
+            <div class="box-content">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Name)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Name, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Name)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Amount)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Amount, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Amount)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Duration)</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Duration, new { type = "text", name = "textfield", id = "textfield", @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Duration)</span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Status)</label>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Status, new List<SelectListItem>{new SelectListItem{ Text="Active", Value = "1" },new SelectListItem{ Text="Not-Active", Value = "0" }
+                                                             }, new { @class = "form-control" })
+
+                                <span class="help-block">@Html.ValidationMessageFor(model => model.Status)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2">@Html.LabelFor(model => model.Descriptions)</label>
+                            <div class="col-sm-10 desDiv">
+
+                                @{
+
+                                    string[] words = Model.Descriptions.Split(',');
+                                    foreach (string word in words)
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="Text" name="descriptions" value="@word" class="form-control desc">
+                                        </div>
+                                    }
+                                }
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textfield" class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+                                <div class="col-md-6">
+                                    <a class="btn btn-mini addnew" data-role="button"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".addnew").click(function () {
+        var htmlStr = '<div class="col-md-6"> <input type="Text" name="descriptions" class="form-control"> </div>';
+        if ($(".desc").last().val() != "") {
+            $(".desDiv").append(htmlStr);
+        }
+        else {
+            alert("Please Fill Up The Last field ");
+        }
+       
+    });
+</script>

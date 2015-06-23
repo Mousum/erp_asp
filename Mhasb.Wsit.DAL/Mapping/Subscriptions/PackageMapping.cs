@@ -17,8 +17,7 @@ namespace Mhasb.DAL.Mapping.Subscriptions
             this.Property(p => p.Name).HasMaxLength(100).HasColumnName("Name");
             this.Property(p => p.Amount).HasColumnName("Amount");
             this.Property(p => p.Duration).HasColumnName("Duration");
-            this.Property(p => p.StartDate).HasColumnName("StartDate");
-            this.Property(p => p.EndDate).HasColumnName("EndDate");
+            this.Property(p => p.Descriptions).HasColumnName("Description");
             this.Property(p => p.Status).HasColumnName("Status");
 
             // ignor

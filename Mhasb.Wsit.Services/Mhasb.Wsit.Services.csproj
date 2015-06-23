@@ -121,6 +121,8 @@
     <Compile Include="OrgSettings\ITaxSetting.cs" />
     <Compile Include="OrgSettings\TaxSettingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subscriptions\IPackagesServices.cs" />
+    <Compile Include="Subscriptions\PackageServices.cs" />
     <Compile Include="Users\ActionListService.cs" />
     <Compile Include="Users\IActionListService.cs" />
     <Compile Include="Users\IRoleService.cs" />
