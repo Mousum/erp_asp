@@ -11,6 +11,7 @@ using Mhasb.DAL.Mapping.Users;
 using Mhasb.Domain.Loggers;
 using Mhasb.DAL.Mapping.AdminUsers;
 using Mhasb.Domain.AdminUsers;
+using Mhasb.DAL.Mapping.Subscriptions;
 
 namespace Mhasb.Wsit.DAL.Data
 {
@@ -85,6 +86,8 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new FounderMapping());
             modelBuilder.Configurations.Add(new DesignationMapping());
             modelBuilder.Configurations.Add(new ShareTransferMapping());
+
+
             // Project Task
             modelBuilder.Configurations.Add(new TaskManageMapping());
             modelBuilder.Configurations.Add(new ProjectMapping());
@@ -110,6 +113,10 @@ namespace Mhasb.Wsit.DAL.Data
             //System Admin
             modelBuilder.Configurations.Add(new AdminUserMapping());
             modelBuilder.Configurations.Add(new AdminUserLogMapping());
+
+            //Subscriptions 
+            modelBuilder.Configurations.Add(new PackageMapping());
+            modelBuilder.Configurations.Add(new SubscriptionMapping());
 
         }
 

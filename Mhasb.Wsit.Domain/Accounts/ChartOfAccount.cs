@@ -12,6 +12,7 @@ namespace Mhasb.Domain.Accounts
 {
     public class ChartOfAccount : IObjectStateInt
     {
+
         [Key]
         public int Id { get; set; }
         public int? CompanyId { get; set; }

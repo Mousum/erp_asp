@@ -40,6 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mhasb.Wsit.Web\bin\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -159,7 +167,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminUsersController.cs" />
+    <Compile Include="Controllers\AreaTimeController.cs" />
+    <Compile Include="Controllers\ChartOfAccountsController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndustryController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\LegalEntitiesController.cs" />
+    <Compile Include="Controllers\LookupsController.cs" />
+    <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1325,6 +1344,62 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\AreaTime\Create.cshtml" />
+    <Content Include="Views\AreaTime\Details.cshtml" />
+    <Content Include="Views\AreaTime\Edit.cshtml" />
+    <Content Include="Views\AreaTime\Index.cshtml" />
+    <Content Include="Views\ChartOfAccounts\Create.cshtml" />
+    <Content Include="Views\ChartOfAccounts\Delete.cshtml" />
+    <Content Include="Views\ChartOfAccounts\Details.cshtml" />
+    <Content Include="Views\ChartOfAccounts\Edit.cshtml" />
+    <Content Include="Views\ChartOfAccounts\Index.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Details.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Index1.cshtml" />
+    <Content Include="Views\Country\List.cshtml" />
+    <Content Include="Views\Currency\Create.cshtml" />
+    <Content Include="Views\Currency\Edit.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\Index1.cshtml" />
+    <Content Include="Views\Industry\Create.cshtml" />
+    <Content Include="Views\Industry\Details.cshtml" />
+    <Content Include="Views\Industry\Edit.cshtml" />
+    <Content Include="Views\Industry\Index.cshtml" />
+    <Content Include="Views\Industry\Index1.cshtml" />
+    <Content Include="Views\Industry\List.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Delete.cshtml" />
+    <Content Include="Views\Language\Details.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\Language\Index1.cshtml" />
+    <Content Include="Views\Language\List.cshtml" />
+    <Content Include="Views\LegalEntities\Create.cshtml" />
+    <Content Include="Views\LegalEntities\Delete.cshtml" />
+    <Content Include="Views\LegalEntities\Details.cshtml" />
+    <Content Include="Views\LegalEntities\Edit.cshtml" />
+    <Content Include="Views\LegalEntities\Index.cshtml" />
+    <Content Include="Views\Lookups\Create.cshtml" />
+    <Content Include="Views\Lookups\Delete.cshtml" />
+    <Content Include="Views\Lookups\Details.cshtml" />
+    <Content Include="Views\Lookups\Edit.cshtml" />
+    <Content Include="Views\Lookups\Index.cshtml" />
+    <Content Include="Views\Lookups\List.cshtml" />
+    <Content Include="Views\AdminUsers\Create.cshtml" />
+    <Content Include="Views\AdminUsers\Delete.cshtml" />
+    <Content Include="Views\AdminUsers\Details.cshtml" />
+    <Content Include="Views\AdminUsers\Edit.cshtml" />
+    <Content Include="Views\AdminUsers\Index.cshtml" />
+    <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Companies\List.cshtml" />
+    <Content Include="Views\Companies\Details.cshtml" />
+    <Content Include="Views\Packages\Create.cshtml" />
+    <Content Include="Views\Packages\Delete.cshtml" />
+    <Content Include="Views\Packages\Details.cshtml" />
+    <Content Include="Views\Packages\Edit.cshtml" />
+    <Content Include="Views\Packages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1336,6 +1411,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj">
