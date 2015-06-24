@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Domain.Accounts;
+using Mhasb.Domain.Inventories;
 
 namespace Mhasb.Domain.Organizations      
 {
@@ -25,6 +26,7 @@ namespace Mhasb.Domain.Organizations
         public virtual ICollection<Project> Projects { get; set; }
         public virtual Designation Designations { get; set; }
         public virtual ICollection<Voucher> Vouchers { get; set; }
+        public virtual ICollection<PurchaseTransaction> PurchaseTransactions { get; set; }
         public long Id { get; set; }
 
         public ObjectState State { get; set; }

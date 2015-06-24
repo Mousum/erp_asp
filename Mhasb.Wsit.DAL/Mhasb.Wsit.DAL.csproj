@@ -80,6 +80,9 @@
     <Compile Include="Mapping\Contacts\PersonMapping.cs" />
     <Compile Include="Mapping\Contacts\TelePhoneMapping.cs" />
     <Compile Include="Mapping\Inventories\ItemMapping.cs" />
+    <Compile Include="Mapping\Inventories\PurchaseTransactionDetailMapping.cs" />
+    <Compile Include="Mapping\Inventories\PurchaseTransactionDocumentMapping.cs" />
+    <Compile Include="Mapping\Inventories\PurchaseTransactionMapping.cs" />
     <Compile Include="Mapping\Loggers\CompanyViewLogMapping.cs" />
     <Compile Include="Mapping\Notifications\InvitationMapping.cs" />
     <Compile Include="Mapping\Organizations\CompanyDocumentMapping.cs" />

@@ -46,6 +46,8 @@
     <Compile Include="Accounts\VoucherType.cs" />
     <Compile Include="AdminUsers\AdminUser.cs" />
     <Compile Include="AdminUsers\AdminUserLog.cs" />
+    <Compile Include="BankAccounts\Bank.cs" />
+    <Compile Include="BankAccounts\TransferMoney.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Commons\Lookup.cs" />
@@ -58,6 +60,9 @@
     <Compile Include="Contacts\Notes.cs" />
     <Compile Include="Contacts\TelePhone.cs" />
     <Compile Include="Inventories\Item.cs" />
+    <Compile Include="Inventories\PurchaseTransaction.cs" />
+    <Compile Include="Inventories\PurchaseTransactionDetail.cs" />
+    <Compile Include="Inventories\PurchaseTransactionDocument.cs" />
     <Compile Include="Loggers\CompanyViewLog.cs" />
     <Compile Include="Organizations\Designation.cs" />
     <Compile Include="Organizations\Founder.cs" />
