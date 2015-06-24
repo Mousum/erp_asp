@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Users;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.Controllers;
 using System;
@@ -15,6 +16,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private IRoleService rService = new RoleService();
         private readonly IUserService uService = new UserService();
         private readonly ISettingsService setService = new SettingsService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         public ActionResult Index() {
             var model = rService.GetAllRoles();
@@ -30,9 +32,17 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         public ActionResult CreateRole(Role role) 
         {
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var accountsetting = setService.GetAllByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
 
-            role.CompanyId = accountsetting.Companies.Id;
+            //var accountsetting = setService.GetAllByUserId(user.Id);
+
+            //role.CompanyId = accountsetting.Companies.Id;
+            role.CompanyId = companyId;
             if (rService.AddRole(role))
                 return RedirectToAction("Index");
             else return Content("Failed to add Role");

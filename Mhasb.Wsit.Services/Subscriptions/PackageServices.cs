@@ -74,5 +74,21 @@ namespace Mhasb.Services.Subscriptions
 
             }
         }
+        public List<Package> GetActivePackages()
+        {
+            try
+            {
+                var packageObj = _finalCrud.GetOperation()
+                    .Filter(mp=>mp.Status==PackageEnum.Active)
+                    .Get().ToList();
+                return packageObj;
+            }
+            catch (Exception Ex)
+            {
+                var msg = Ex.Message;
+                return null;
+
+            }
+        }
     }
 }
