@@ -1,116 +1,58 @@
-﻿@model Mhasb.Domain.Contacts.ContactInformation
+﻿@model Mhasb.Wsit.CustomModel.Contact.ContactCustome
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>ContactInformation</h4>
-            <hr />
-            @Html.ValidationSummary(true)
-    
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.CompanyId, "CompanyId", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Company", String.Empty)
-                    @Html.ValidationMessageFor(model => model.CompanyId)
-                </div>
-            </div>*@
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactName, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ContactName)
-                    @Html.ValidationMessageFor(model => model.ContactName)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.AccountNumber, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.AccountNumber)
-                    @Html.ValidationMessageFor(model => model.AccountNumber)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.PostalAddId, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PostalAddId)
-                    @Html.ValidationMessageFor(model => model.PostalAddId)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.PhysicalAddId, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PhysicalAddId)
-                    @Html.ValidationMessageFor(model => model.PhysicalAddId)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactType, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ContactType)
-                    @Html.ValidationMessageFor(model => model.ContactType)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreateDate, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreateDate)
-                    @Html.ValidationMessageFor(model => model.CreateDate)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.UpdateDate, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UpdateDate)
-                    @Html.ValidationMessageFor(model => model.UpdateDate)
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreateBy, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreateBy)
-                    @Html.ValidationMessageFor(model => model.CreateBy)
-                </div>
-            </div>
-    
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.UpdateBy, "UpdateBy", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("UpdateBy", String.Empty)
-                    @Html.ValidationMessageFor(model => model.UpdateBy)
-                </div>
-            </div>*@
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
+<div class="container my-dashboard">
+    <div class="row clearfix no-margin">
+        <div class="col-md-12 no-padding">
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
+            <h2 class="txt-bold promo-text"><span class="promo-highlight">Join</span> to the MHASB Community for FREE !!</h2>
+            <p class="promo-p text-center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula nunc blandit eros facilisis malesuada. Integer in orci turpis. Praesent id risus ullamcorper, iaculis est eget, scelerisque nulla. Integer magna risus
+            </p>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+    <div class="row clearfix no-margin">
+        <h3 class="all-head">Add Contact</h3>
+        <div class="col-md-6 clearfix pull-right text-right">
+            <label class="text-uppercase">List My profile:</label>
+            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-width="100" data-size="small">
+        </div>
+    </div>
+    <div class="row clearfix p-setting-container">
+        <div class="col-md-8 base-block no-margin clearfix">
+
+            <h4 class="all-head">Contact Details</h4>
+            <div class="row cstm-frm-row">
+                <div class="col-md-12 pad-right-null">
+                    <div class="col-md-12"><label id="errmsg"></label></div>
+                    <label class="btn-block-dis">Contact Name:</label>
+                    <div class="col-md-6 no-padding">
+                        @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                        @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <input type="submit" class="btn btn-success btn-block-dis pull-right" value="Save">
+    </div>
+</div>
+
+
+
+
+
+
+
+

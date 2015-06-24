@@ -501,8 +501,9 @@
     <Content Include="Areas\OrganizationManagement\Views\Company\Settings.cshtml" />
     <Content Include="Areas\Contacts\Views\web.config" />
     <Content Include="Areas\Contacts\Views\Contact\Index.cshtml" />
-    <Content Include="Areas\Contacts\Views\Contact\Create.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Create_old.cshtml" />
     <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Create.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
