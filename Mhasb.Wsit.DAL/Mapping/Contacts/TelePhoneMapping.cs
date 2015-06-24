@@ -14,11 +14,11 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.HasKey(i=>i.Id);
             this.Ignore(i=>i.State);
             this.Property(i => i.ContactInfoId).HasColumnName("contactinfoId");
-            this.Property(i => i.CellPhone).HasColumnName("cellphone");
-            this.Property(i => i.Mobile).HasColumnName("mobile");
-            this.Property(i => i.DirectDial).HasColumnName("directdial");
-            this.Property(i => i.Skype).HasColumnName("skype");
-            this.Property(i => i.WebSite).HasColumnName("webSite");
+            this.Property(i => i.CellPhone).HasColumnName("cellphone").HasMaxLength(100);
+            this.Property(i => i.Mobile).HasColumnName("mobile").HasMaxLength(100);
+            this.Property(i => i.DirectDial).HasColumnName("directdial").HasMaxLength(100);
+            this.Property(i => i.Skype).HasColumnName("skype").HasMaxLength(100);
+            this.Property(i => i.WebSite).HasColumnName("webSite").HasMaxLength(100);
 
             this.ToTable("con.telephone");
 
