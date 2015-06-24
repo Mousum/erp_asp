@@ -11,6 +11,7 @@ using Mhasb.DAL.Mapping.Users;
 using Mhasb.Domain.Loggers;
 using Mhasb.DAL.Mapping.AdminUsers;
 using Mhasb.DAL.Mapping.Contacts;
+using Mhasb.DAL.Mapping.Inventories;
 using Mhasb.Domain.AdminUsers;
 using Mhasb.DAL.Mapping.Subscriptions;
 
@@ -127,6 +128,8 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new TelePhoneMapping());
             modelBuilder.Configurations.Add(new AssignToGroupMapping());
             modelBuilder.Configurations.Add(new ContactGroupMapping());
+            modelBuilder.Configurations.Add(new ItemMapping());
+            ;
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Accounts.ChartOfAccount> ChartOfAccounts { get; set; }
