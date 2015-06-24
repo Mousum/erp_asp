@@ -16,13 +16,13 @@ namespace Mhasb.Domain.Inventories
        public int? AssetAccountId { get; set; }
 
        public double PurchaseUnitPrice { get; set; }
-       public int PurchasesAccountId { get; set; }
-       public int PTaxRateId { get; set; }
+       public int? PurchasesAccountId { get; set; }
+       public int? PTaxRateId { get; set; }
        public string PurchaseDescription { get; set; }
 
        public double SellUnitPrice { get; set; }
-       public int SalesAccountId { get; set; }
-       public int STaxRateId { get; set; }
+       public int? SalesAccountId { get; set; }
+       public int? STaxRateId { get; set; }
        public string SalesDescription { get; set; }
 
 
