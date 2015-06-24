@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Mhasb.Domain.Contacts;
+using Mhasb.Domain.Users;
+using Mhasb.Services.Contact;
+using Mhasb.Services.Loggers;
+using Mhasb.Services.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +13,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly IContactGroupService ConGSer = new ContactGroupService();
+        private readonly IUserService uService = new UserService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
@@ -92,6 +100,22 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult CreateGroup(string name)
+        {
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            var group = new ContactGroup();
+            group.GroupName = name;
+            group.CompanyId = logObj.Companies.Id;
+            if (ConGSer.CreateContactGroup(group)) 
+            {
+                return   Json(new { msg = "Success"});
+            }
+            return Json(new { msg = "Failed" });
+
         }
     }
 }

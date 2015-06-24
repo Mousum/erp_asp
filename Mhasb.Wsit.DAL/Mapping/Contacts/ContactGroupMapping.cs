@@ -16,7 +16,12 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.Ignore(i => i.State);
 
             this.Property(p => p.GroupName).HasColumnName("group_name").HasMaxLength(200);
+            this.Property(p => p.CompanyId).HasColumnName("company_id");
             this.ToTable("con.contact_group");
+
+            this.HasRequired(gr => gr.Companies).
+               WithMany().
+               HasForeignKey(gr => gr.CompanyId);
         }
     }
 }
