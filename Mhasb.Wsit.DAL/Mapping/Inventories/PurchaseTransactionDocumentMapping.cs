@@ -22,7 +22,7 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.Property(d => d.Description).HasColumnName("description").HasMaxLength(500).IsOptional();
             this.Property(d => d.FileLocation).HasColumnName("file_location").HasMaxLength(200).IsOptional();
 
-            this.ToTable("acc.voucher_documents");
+            this.ToTable("inv.purchase_transaction_documents");
 
             // Relationship
             this.HasRequired(e => e.PurchaseTransactions)
