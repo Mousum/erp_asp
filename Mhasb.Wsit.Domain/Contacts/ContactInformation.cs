@@ -18,7 +18,7 @@ namespace Mhasb.Domain.Contacts
         public string AccountNumber { get; set; }
         public long PostalAddId { get; set; }
         public long PhysicalAddId { get; set; }
-        public string ContactType { get; set; }
+        public EnumContactType ContactType { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public long CreateBy { get; set; }
@@ -38,9 +38,13 @@ namespace Mhasb.Domain.Contacts
             get;
             set;
         }
+    }
 
-        
-    
-
+    public enum EnumContactType
+    {
+        Customer=1,
+        Supplier=2,
+        Employee=3,
+        Archive=4
     }
 }

@@ -29,7 +29,8 @@ namespace Mhasb.DAL.Mapping.Organizations
 
             this.HasRequired(emp => emp.Companies).
                 WithMany(emp => emp.Employees).
-                HasForeignKey(emp => emp.CompanyId);
+                HasForeignKey(emp => emp.CompanyId)
+                .WillCascadeOnDelete(false);
 
             this.HasRequired(emp => emp.Designations).
                 WithMany().

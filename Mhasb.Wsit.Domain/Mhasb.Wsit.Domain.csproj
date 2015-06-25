@@ -46,8 +46,8 @@
     <Compile Include="Accounts\VoucherType.cs" />
     <Compile Include="AdminUsers\AdminUser.cs" />
     <Compile Include="AdminUsers\AdminUserLog.cs" />
-    <Compile Include="BankAccounts\Bank.cs" />
-    <Compile Include="BankAccounts\TransferMoney.cs" />
+    <Compile Include="Accounts\Bank.cs" />
+    <Compile Include="Accounts\TransferMoney.cs" />
     <Compile Include="Commons\ContactDetail.cs" />
     <Compile Include="Commons\Country.cs" />
     <Compile Include="Commons\Lookup.cs" />

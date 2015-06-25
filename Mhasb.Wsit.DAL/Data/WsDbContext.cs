@@ -102,6 +102,8 @@ namespace Mhasb.Wsit.DAL.Data
             //modelBuilder.Configurations.Add(new FinalcialSettingMapping());
 
             // Accounting Module
+            modelBuilder.Configurations.Add(new BankMapping());
+            modelBuilder.Configurations.Add(new TransferMoneyMapping());
             modelBuilder.Configurations.Add(new ChartOfAccountMapping());
             modelBuilder.Configurations.Add(new VoucherTypeMapping());
 
@@ -130,7 +132,9 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new ContactGroupMapping());
 
             modelBuilder.Configurations.Add(new ItemMapping());
-            ;
+            modelBuilder.Configurations.Add(new PurchaseTransactionMapping());
+            modelBuilder.Configurations.Add(new PurchaseTransactionDetailMapping());
+            modelBuilder.Configurations.Add(new PurchaseTransactionDocumentMapping());
         }
 
         public System.Data.Entity.DbSet<Mhasb.Domain.Accounts.ChartOfAccount> ChartOfAccounts { get; set; }
