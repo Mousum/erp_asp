@@ -13,6 +13,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly IContactInformationService _sContact = new ContactInformationService();
         private readonly IUserService uService = new UserService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         private readonly ICompanyService cService = new CompanyService();
@@ -78,26 +79,65 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 companyId = (int)logObj.CompanyId;
             }
             var activatedCompany = cService.GetSingleCompany(companyId);
+
             ViewData["Company"] = activatedCompany;
             return View();
         }
 
         //
         // POST: /Contacts/Contact/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //[HttpPost]
+        //public ActionResult Create(ContactInformation ContactData)
+        //{
+        //    try
+        //    {
+        //        var tt = HttpContext.User.Identity.Name;
+        //        var user = uService.GetSingleUserByEmail(tt);
+        //        var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+        //        int companyId = 0;
+        //        if (logObj != null)
+        //        {
+        //            companyId = (int)logObj.CompanyId;
+        //        }
+        //        var activatedCompany = cService.GetSingleCompany(companyId);
+        //        try{
+        //            ContactData.CompanyId = companyId;
+        //            ContactData.CreateBy = user.Id;
+        //            ContactData.UpdateBy = user.Id;
+        //            ContactData.CreateDate = DateTime.Now;
+        //            ContactData.UpdateDate = DateTime.Now;
+        //            if (_sContact.CreateContInfo(ContactData))
+        //            {
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        //                return RedirectToAction("Index");
+        //            }
+        //            else {
+        //                TempData.Add("errMsg", "Please FillUp Every Field");
+        //                return RedirectToAction("Create");
+        //            }
+                    
+        //        }catch(Exception ex){
+        //            return Content("Somthing Wrong");
+        //        }
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
+
+        [HttpPost]
+        public ActionResult Create(CustomModel.Contact.ContactCustome cc) 
+        {
+            return Content("hi");
         }
+
+
+
 
         //
         // GET: /Contacts/Contact/Edit/5

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Domain.Inventories;
 
 namespace Mhasb.Domain.Contacts
 {
@@ -29,6 +30,9 @@ namespace Mhasb.Domain.Contacts
         public virtual ICollection<Person> Persons { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+
+        public virtual ICollection<PurchaseTransaction> PurchaseTransactions { get; set; }
+
         public ObjectState State
         {
             get;
