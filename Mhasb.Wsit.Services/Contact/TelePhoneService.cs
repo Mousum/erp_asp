@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Services.Contact
 {
-    class TelePhoneService : ITelePhoneService
+    public class TelePhoneService : ITelePhoneService
     {
         private readonly CrudOperation<TelePhone> _rep = new CrudOperation<TelePhone>();
         public bool CreateTelePhone(TelePhone telephone)

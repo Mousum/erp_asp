@@ -12,6 +12,7 @@ namespace Mhasb.Wsit.CustomModel.Contact
         public ContactInformation ContactInformation { get; set; }
         public ContactDetails PostalAddress { get; set; }
         public ContactDetails PhysicalAddress { get; set; }
+        public Person PrimaryPerson { get; set; }
         public List<Person> Person { get; set; }
         public FinancialDetails FinancialDetails { get; set; }
         public Notes Notes { get; set; }
