@@ -17,13 +17,48 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private readonly IUserService uService = new UserService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         private readonly ICompanyService cService = new CompanyService();
+        private readonly IContactInformationService ConInSer = new ContactInformationService();
+        private readonly IPersonService pSer = new PersonService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
         {
-            return View();
+            var model = ConInSer.GetAllContactInformation();
+            return View(model);
         }
+        [HttpGet]
+        public ActionResult FilterContact(string Filter, string SearchString) 
+        {
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var contacts = pSer.GetAllContactsByCompany(companyId);
+            if (Filter != null && SearchString!=null) 
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)&&r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+             
+            }
+            else if (Filter == null && SearchString != null)
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)).ToList();
+            }
+            else if (Filter != null && SearchString == null) 
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+            }
 
+
+
+            return View(contacts);
+            
+
+           
+        }
         //
         // GET: /Contacts/Contact/Details/5
         public ActionResult Details(int id)
@@ -51,47 +86,58 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 
         //
         // POST: /Contacts/Contact/Create
-        [HttpPost]
-        public ActionResult Create(ContactInformation ContactData)
-        {
-            try
-            {
-                var tt = HttpContext.User.Identity.Name;
-                var user = uService.GetSingleUserByEmail(tt);
-                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-                int companyId = 0;
-                if (logObj != null)
-                {
-                    companyId = (int)logObj.CompanyId;
-                }
-                var activatedCompany = cService.GetSingleCompany(companyId);
-                try{
-                    ContactData.CompanyId = companyId;
-                    ContactData.CreateBy = user.Id;
-                    ContactData.UpdateBy = user.Id;
-                    ContactData.CreateDate = DateTime.Now;
-                    ContactData.UpdateDate = DateTime.Now;
-                    if (_sContact.CreateContInfo(ContactData))
-                    {
+        //[HttpPost]
+        //public ActionResult Create(ContactInformation ContactData)
+        //{
+        //    try
+        //    {
+        //        var tt = HttpContext.User.Identity.Name;
+        //        var user = uService.GetSingleUserByEmail(tt);
+        //        var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+        //        int companyId = 0;
+        //        if (logObj != null)
+        //        {
+        //            companyId = (int)logObj.CompanyId;
+        //        }
+        //        var activatedCompany = cService.GetSingleCompany(companyId);
+        //        try{
+        //            ContactData.CompanyId = companyId;
+        //            ContactData.CreateBy = user.Id;
+        //            ContactData.UpdateBy = user.Id;
+        //            ContactData.CreateDate = DateTime.Now;
+        //            ContactData.UpdateDate = DateTime.Now;
+        //            if (_sContact.CreateContInfo(ContactData))
+        //            {
 
-                        return RedirectToAction("Index");
-                    }
-                    else {
-                        TempData.Add("errMsg", "Please FillUp Every Field");
-                        return RedirectToAction("Create");
-                    }
+        //                return RedirectToAction("Index");
+        //            }
+        //            else {
+        //                TempData.Add("errMsg", "Please FillUp Every Field");
+        //                return RedirectToAction("Create");
+        //            }
                     
-                }catch(Exception ex){
-                    return Content("Somthing Wrong");
-                }
+        //        }catch(Exception ex){
+        //            return Content("Somthing Wrong");
+        //        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
+
+        [HttpPost]
+        public ActionResult Create(CustomModel.Contact.ContactCustome cc) 
+        {
+            return Content("hi");
         }
+
+
+
 
         //
         // GET: /Contacts/Contact/Edit/5
@@ -140,5 +186,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 return View();
             }
         }
+
     }
 }

@@ -31,6 +31,8 @@ namespace Mhasb.Domain.Inventories
        public virtual ChartOfAccount SalesAccount { get; set; }
        public virtual Lookup PTaxRate { get; set; }
        public virtual Lookup STaxRate { get; set; }
+
+       public virtual ICollection<PurchaseTransactionDetail> PurchaseTransactionDetails { get; set; }
        public ObjectState State { get; set; }
        public long Id { get; set; }
     }

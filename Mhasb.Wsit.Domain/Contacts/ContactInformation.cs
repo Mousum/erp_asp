@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Domain.Inventories;
 
 namespace Mhasb.Domain.Contacts
 {
@@ -24,11 +25,14 @@ namespace Mhasb.Domain.Contacts
         public long UpdateBy { get; set; }
         public virtual ICollection<ContactDetails> ContactDtails{ get; set; }
         //public virtual FinancialDetails FinancialDetails { get; set; }
-        //public virtual TelePhone TelePhones { get; set; }
+        public virtual ICollection<TelePhone> TelePhones { get; set; }
         public virtual ICollection<Notes> Notes { get; set; }
         public virtual ICollection<Person> Persons { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+
+        public virtual ICollection<PurchaseTransaction> PurchaseTransactions { get; set; }
+
         public ObjectState State
         {
             get;

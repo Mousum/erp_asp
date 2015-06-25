@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Domain.Inventories;
 
 namespace Mhasb.Domain.Accounts
 {
@@ -30,7 +31,7 @@ namespace Mhasb.Domain.Accounts
         public virtual Company Companies { get; set; }
         public virtual Lookup Lookups { get; set; }
         public virtual ICollection<VoucherDetail> VoucherDetails { get; set; }
-
+        public virtual ICollection<PurchaseTransactionDetail> PurchaseTransactionDetails { get; set; }
 
 
 
