@@ -14,6 +14,8 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.Property(i => i.ItemCode).HasColumnName("item_code").HasMaxLength(50);
             this.Property(i => i.AssetAccountId).HasColumnName("asset_accountid");
 
+            this.Property(i => i.Quantity).HasColumnName("quantity");
+
             this.Property(i => i.PurchaseUnitPrice).HasColumnName("purchase_unit_price");
             this.Property(i => i.PurchasesAccountId).HasColumnName("purchase_accountid");
             this.Property(i => i.PTaxRateId).HasColumnName("purchase_tax_rateid");
