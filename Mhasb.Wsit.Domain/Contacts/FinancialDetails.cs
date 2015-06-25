@@ -26,7 +26,7 @@ namespace Mhasb.Domain.Contacts
         public string Details { get; set; }
         public string BillsTerms { get; set; }
         public string SalesTerms { get; set; }
-        public string NetworkKey { get; set; }
+        public string NetworkKey { get; set; } 
         public virtual ContactInformation ContactInformations { get; set; }
 
         public virtual FinancialSetting FinancialSettings { get; set; }
