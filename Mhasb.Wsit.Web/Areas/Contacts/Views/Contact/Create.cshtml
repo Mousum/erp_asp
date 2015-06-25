@@ -298,20 +298,34 @@
                                             <div class="col-md-4">
                                                 <h5>Default Tax</h5>
                                                 <label class="cstm-select">
-                                                    <select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
+                                                    <select name="FinancialDetails.SalesDefaultTax">
+                                                        <option selected value="0"> None </option>
+                                                        <option value="1">Amounts Are Tax Inclusive</option>
+                                                        <option value="2">Amounts AreTaxExclusive</option>
+                                                        <option value="3">Amounts Dont Include Tax</option>
                                                     </select>
                                                 </label>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Default Account</h5>
                                                 <label class="cstm-select">
-                                                    <select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
+
+
+
+                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SaleLookups, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
+                                                    <select class="cstm-input" name="FinancialDetails.SalesCoaId" required="required">
+                                                        <option value="">--Select Account Type--</option>
+                                                        @foreach (var items in ViewBag.Atypes)
+                                                        {
+                                                            if (items.Level == 1)
+                                                            {
+                                                                <optgroup label=@items.AName></optgroup>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@items.Id">@items.AName</option>
+                                                            }
+                                                        }
                                                     </select>
                                                 </label>
                                             </div>
@@ -323,20 +337,31 @@
                                             <div class="col-md-4">
                                                 <h5>Default Tax</h5>
                                                 <label class="cstm-select">
-                                                    <select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
+                                                    <select name="FinancialDetails.PurchasesDefaultTax">
+                                                        <option selected value="0"> None </option>
+                                                        <option value="1">Amounts Are Tax Inclusive</option>
+                                                        <option value="2">Amounts AreTaxExclusive</option>
+                                                        <option value="3">Amounts Dont Include Tax</option>
                                                     </select>
                                                 </label>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Default Account</h5>
                                                 <label class="cstm-select">
-                                                    <select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
+                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SalesCoaId, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
+                                                    <select class="cstm-input" name="FinancialDetails.PurchasesCoaId" required="required">
+                                                        <option value="">--Select Account Type--</option>
+                                                        @foreach (var items in ViewBag.Atypes)
+                                                        {
+                                                            if (items.Level == 1)
+                                                            {
+                                                                <optgroup label=@items.AName></optgroup>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@items.Id">@items.AName</option>
+                                                            }
+                                                        }
                                                     </select>
                                                 </label>
                                             </div>
@@ -354,26 +379,29 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Tax ID Number</h5>
-                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                                @Html.TextBoxFor(model => model.FinancialDetails.TaxNumber, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.TaxNumber)
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Sales Tax</h5>
                                                 <label class="cstm-select">
-                                                    <select>
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.SalesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
+                                                    @*<select>
                                                         <option selected> USA </option>
                                                         <option>UK</option>
                                                         <option>Bangladesh</option>
-                                                    </select>
+                                                    </select>*@
                                                 </label>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Purchases Tax</h5>
                                                 <label class="cstm-select">
-                                                    <select>
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.PurchasesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
+                                                    @*<select>
                                                         <option selected> USA </option>
                                                         <option>UK</option>
                                                         <option>Bangladesh</option>
-                                                    </select>
+                                                    </select>*@
                                                 </label>
                                             </div>
                                         </div>
@@ -384,6 +412,7 @@
                                         <div class="col-md-8">
                                             <div class="col-md-3">
                                                 <h5>Discount %</h5>
+
                                                 <input class="cstm-input-con3" type="text" placeholder="">
                                             </div>
                                         </div>
@@ -395,11 +424,13 @@
                                             <div class="col-md-3">
                                                 <h5>Default Currency</h5>
                                                 <label class="cstm-select">
-                                                    <select>
+                                                    @Html.DropDownListFor(model=>model.FinancialDetails.CurrencyId, ViewBag.CurrencyList as SelectList, new { reqiured = "reqiured" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.CurrencyId)
+                                                    @*<select>
                                                         <option selected> USA </option>
                                                         <option>UK</option>
                                                         <option>Bangladesh</option>
-                                                    </select>
+                                                    </select>*@
                                                 </label>
                                             </div>
                                         </div>
@@ -417,11 +448,14 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Bank Account Number</h5>
-                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Bank Account Name</h5>
-                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountName)
+                                               
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Details</h5>

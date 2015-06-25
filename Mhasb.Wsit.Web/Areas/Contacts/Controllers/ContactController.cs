@@ -1,7 +1,10 @@
 ﻿using Mhasb.Domain.Contacts;
+using Mhasb.Services.Accounts;
+using Mhasb.Services.Commons;
 using Mhasb.Services.Contact;
 using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
+using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using System;
 using System.Collections.Generic;
@@ -24,6 +27,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IContactInformationService ConInSer = new ContactInformationService();
         private readonly IPersonService pSer = new PersonService();
+        private ILookupService luSer = new LookupService();
+        private IChartOfAccountService cSer = new ChartOfAccountService();
+        private readonly ICurrency currencyService = new CurrencyService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
@@ -76,17 +82,29 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         [AllowAnonymous]
         public ActionResult Create()
         {
-            //var tt = HttpContext.User.Identity.Name;
-            //var user = uService.GetSingleUserByEmail(tt);
-            //var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            //int companyId = 0;
-            //if (logObj != null)
-            //{
-            //    companyId = (int)logObj.CompanyId;
-            //}
-            //var activatedCompany = cService.GetSingleCompany(companyId);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
-            //ViewData["Company"] = activatedCompany;
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+            /// var AccSet = setService.GetAllByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var Atypes = cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+
+            if (Atypes.Count == 0)
+            {
+                cSer.AddBaseAccountTypes();
+                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+            }
+
+
+            ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+
             return View();
         }
 
@@ -102,8 +120,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             FinancialDetails FinancialDetail = cc.FinancialDetails;
             Notes Note = cc.Notes;
             TelePhone Telephone = cc.TelePhone;
-
-
 
             try
             {

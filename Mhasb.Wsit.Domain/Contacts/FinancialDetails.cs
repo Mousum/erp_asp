@@ -24,8 +24,8 @@ namespace Mhasb.Domain.Contacts
         public int? PurchasesTax { get; set; }
         public int? CurrencyId { get; set; }
 
-        public int BankAccountNumber { get; set; }
-        public int BankAccountName { get; set; }
+        public string BankAccountNumber { get; set; }
+        public string BankAccountName { get; set; }
         public string Details { get; set; }
         public string BillsTerms { get; set; }
         public string SalesTerms { get; set; }
@@ -50,6 +50,7 @@ namespace Mhasb.Domain.Contacts
 
     public enum EnumDefaultTax
     {
+        None=0,
         AmountsAreTaxInclusive=1,
         AmountsAreTaxExclusive=2,
         AmountsDontIncludeTax=3
