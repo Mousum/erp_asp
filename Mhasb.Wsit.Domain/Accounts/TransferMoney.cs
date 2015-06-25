@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Wsit.Domain;
 
-namespace Mhasb.Domain.BankAccounts
+namespace Mhasb.Domain.Accounts
 {
     public class TransferMoney : IObjectStateLong
     {
