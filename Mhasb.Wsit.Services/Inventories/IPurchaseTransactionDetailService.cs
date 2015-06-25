@@ -12,6 +12,7 @@ namespace Mhasb.Services.Inventories
         bool AddPurchaseTransDetailService(PurchaseTransactionDetail PurchaseTS);
         bool UpdatePurchaseTransDetailService(PurchaseTransactionDetail PurchaseTS);
         bool DeletePurchaseTransDetailService(int Id);
+      
 
     }
 }

@@ -12,5 +12,9 @@ namespace Mhasb.Services.Inventories
         bool AddPurchaseTransaction(PurchaseTransaction purchasetransaction);
         bool UpdatePurchaseTransaction(PurchaseTransaction purchasetransaction);
         bool DeletePurchaseTransaction(int Id);
+        List<PurchaseTransaction> GetAllPurchaseTransaction();
+        //PurchaseTransaction GetRelationalDataByTansId();
+        List<PurchaseTransaction> GetRelationalDataByTansId(int tansId);
+
     }
 }

@@ -12,6 +12,9 @@ namespace Mhasb.Services.Inventories
    public class ItemService:IItemService
     {
        private readonly CrudOperation<Item> _rep = new CrudOperation<Item>();
+       private readonly CrudOperation<PurchaseTransaction> _repPt = new CrudOperation<PurchaseTransaction>();
+       private readonly CrudOperation<PurchaseTransactionDetail> _repPtdl = new CrudOperation<PurchaseTransactionDetail>();
+       private readonly CrudOperation<PurchaseTransactionDocument> _repPtdc = new CrudOperation<PurchaseTransactionDocument>();
         public bool AddItem(Item item)
         {
             try { 
@@ -47,5 +50,22 @@ namespace Mhasb.Services.Inventories
             
             }
         }
+        public List<Item> GetAllItems()
+        {
+            try { 
+                var _obj=_rep.GetOperation()
+                    .Get()
+                    .ToList();
+                return _obj;
+            }catch(Exception ex){
+                var msg = ex.Message;
+                return null;
+            }
+        }
+
+
+
+
+       
     }
 }

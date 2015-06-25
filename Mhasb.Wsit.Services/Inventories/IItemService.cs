@@ -12,5 +12,6 @@ namespace Mhasb.Services.Inventories
         bool AddItem(Item item);
         bool UpdateItem(Item item);
         bool DeleteItem(long Id);
+        List<Item> GetAllItems();
     }
 }
