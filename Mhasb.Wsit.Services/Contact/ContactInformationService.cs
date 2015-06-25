@@ -15,7 +15,8 @@ namespace Mhasb.Services.Contact
 
         public bool CreateContInfo(ContactInformation ContactInformation)
         {
-            try {
+            try
+            {
                 ContactInformation.State = ObjectState.Added;
                 _rep.AddOperation(ContactInformation);
                 return true;
@@ -46,7 +47,7 @@ namespace Mhasb.Services.Contact
         {
             try
             {
-              
+
                 _rep.DeleteOperation(Id);
                 return true;
             }
@@ -61,11 +62,14 @@ namespace Mhasb.Services.Contact
 
         public List<ContactInformation> GetAllContactInformation()
         {
-            try {
+            try
+            {
                 var _Obj = _rep.GetOperation()
                     .Get().ToList();
                 return _Obj;
-            }catch(Exception ex){
+            }
+            catch (Exception ex)
+            {
                 var msg = ex.Message;
                 return null;
             }
@@ -73,12 +77,31 @@ namespace Mhasb.Services.Contact
 
         public ContactInformation GetAllContactInformationById(long Id)
         {
-            try {
+            try
+            {
                 var _Obj = _rep.GetOperation()
                     .Filter(i => i.Id == Id)
                     .Get().FirstOrDefault();
                 return _Obj;
-            }catch(Exception ex){
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
+        public List<ContactInformation> GetAllByFirstLetter(string StartingLetter,int CompanyId)
+        {
+            try
+            {
+                var _Obj = _rep.GetOperation()
+                    .Filter(c=>c.ContactName.StartsWith(StartingLetter)&&c.CompanyId==CompanyId)
+                    .Include(c=>c.Persons)
+                    .Get().ToList();
+                return _Obj;
+            }
+            catch (Exception ex)
+            {
                 var msg = ex.Message;
                 return null;
             }

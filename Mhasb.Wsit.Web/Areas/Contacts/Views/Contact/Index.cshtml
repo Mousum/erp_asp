@@ -1,17 +1,8 @@
-﻿@*@model IEnumerable<Mhasb.Domain.Contacts.ContactInformation>
+﻿@model IEnumerable<Mhasb.Domain.Contacts.ContactInformation>
 
-    @{
-        Layout = null;
-    }
+   
 
-    <!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Index</title>
-    </head>
-    <body>
+   
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
@@ -81,8 +72,7 @@
         }
 
         </table>
-    </body>
-    </html>*@
+    
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pop-up-1">
     New Group
 </button>
@@ -117,17 +107,21 @@
         var data = { name: $("#gname").val() }
         $.ajax({
             type: "POST",
-            url: baseUrl + "Contacts/Contact/CreateGroup",
+            url: baseUrl + "Contacts/ContactGroup/Create",
             data: data,
             success: function (data) {
-                alert(data);
+               
                 if (data.msg == "Success") {
                     $('.close').trigger('click');
-                    
+
                     setTimeout(function () {
-                       
+
                     }, 2000);
 
+                }
+                else
+                {
+                    alert(data.msg);
                 }
             }
         });

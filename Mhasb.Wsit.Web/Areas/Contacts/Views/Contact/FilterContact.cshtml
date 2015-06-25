@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Mhasb.Domain.Contacts.Person>
+
+<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <div class="welcome">
+                <h3 class="all-head">Contacts</h3>
+            </div>
+            <hr>
+            <p>What's this &nbsp;<i class="fa fa-comments"></i></p>
+            <div class="row clearfix no-margin card">
+                <div class="col-md-12">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="row cstm-frm-row">
+                                <a href="#" class="btn btn-default" data-role="button">+ Add Contact</a>
+                                <a href="#" class="btn btn-default" data-role="button">+ New Group</a>
+                                <a href="#" class="btn btn-default" data-role="button">Import</a>
+                                <a href="#" class="btn btn-default" data-role="button">Export</a>
+                            </div>
+                            <div class="row cstm-frm-row">
+                                <ul class="nav nav-tabs cstm-tab">
+                                    <li role="presentation" class="active"><a href="#">All (1)</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" data-value="1">Customers (0)</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" data-value="2">Suppliers (0)</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" data-value="3">Man (0)</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" data-value="4">Archived (0)</a></li>
+                                </ul>
+                            </div>
+                            <div class="row cstm-frm-row">
+                                <nav>
+                                    <ul class="pagination cstm-pagination">
+                                        <li><a href="@Url.Content("FilterContact")">All</a></li>
+                                        <li><a href="#">123</a></li>
+                                        @for (char c = 'A'; c < 'Z'; c++)
+                                        {
+                                            <li><a href="@Url.Content("FilterContact?Filter="+c)">@c</a></li>
+                                        }
+
+                                    </ul>
+                                </nav>
+                            </div>
+                            @if (!Model.Any())
+                            {
+                                <div class="alert-success" colspan="4">There are no Contacts</div>
+                            }
+                            else
+                            {
+                                <div class="row cstm-frm-row">
+                                    <table class="table table-bordered table-responsive table-hover table-journal">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-btn"><a href="#" class="btn btn-default" data-role="button">Add to Group</a><a href="#" class="btn btn-default" data-role="button">Merge</a><a href="#" class="btn btn-default" data-role="button">Archive</a><span>No contacts selected</span><span class=""><input class="cstm-input1" id="SearchString" type="text"><a href="javascript:void(0)" class="btn btn-success cstm-btn-search" data-role="button">Search</a></span></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="table table-bordered table-responsive table-hover table-journal">
+                                        <tbody>
+                                            <tr class="cstm-table-clr">
+                                                <th scope="row"><input type="checkbox"></th>
+                                                <td>Name</td>
+                                                <td>Account No.</td>
+                                                <td>Email Address</td>
+                                                <td>Phone No.</td>
+                                                <td>Bills Due&nbsp;<i class="fa fa-caret-up"></i></td>
+                                                <td>Overdue Bills</td>
+                                                <td>Sales Invoices Due</td>
+                                                <td>Overdue Sale Invoices</td>
+                                            </tr>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <th scope="row"><input type="checkbox" class="check"></th>
+                                                    <td>@item.ContactInformations.ContactName</td>
+                                                    <td>@item.ContactInformations.AccountNumber</td>
+                                                    <td>@item.Email</td>
+                                                    <td>+88 01711 123456</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            <div class="row cstm-frm-row cstm-opt">
+                                <p>
+                                    Page&nbsp;<select>
+                                        <option>1</option>
+                                        <option>1</option>
+                                        <option>1</option>
+                                    </select>&nbsp;of 1 <span class="cstm-itm">(1 Total items)</span><span class="cstm-itm2">|</span><span class="cstm-itm1">
+                                        Showing &nbsp;<select>
+                                            <option>1</option>
+                                            <option>1</option>
+                                            <option>1</option>
+                                        </select>&nbsp;items per page
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cstm-btn-search").click(function () {
+        //alert($("#SearchString").val());
+        var str = window.location.toString();
+        var locString = '';
+        if (str.indexOf("&SearchString=") > 0) {
+          var n=   str.indexOf("&SearchString=");
+          locString = str.substring(0, n != -1 ? n : str.length) + "&SearchString=" + $("#SearchString").val();;
+          
+        }
+        else {
+            locString = str + "&SearchString=" + $("#SearchString").val();
+        }
+        window.location.replace(locString);
+    })
+    $(".presentation").click(function () {
+        alert($(this).attr("data-value"));
+    })
+</script>

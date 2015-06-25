@@ -14,5 +14,6 @@ namespace Mhasb.Services.Contact
          bool DeleteContInfo(long Id);
          List<ContactInformation> GetAllContactInformation();
          ContactInformation GetAllContactInformationById(long Id);
+         List<ContactInformation> GetAllByFirstLetter(string StartingLetter, int CompanyId);
     }
 }

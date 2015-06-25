@@ -1,4 +1,6 @@
-﻿using Mhasb.Services.Loggers;
+﻿using Mhasb.Domain.Contacts;
+using Mhasb.Services.Contact;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using System;
@@ -14,13 +16,48 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private readonly IUserService uService = new UserService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         private readonly ICompanyService cService = new CompanyService();
+        private readonly IContactInformationService ConInSer = new ContactInformationService();
+        private readonly IPersonService pSer = new PersonService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
         {
-            return View();
+            var model = ConInSer.GetAllContactInformation();
+            return View(model);
         }
+        [HttpGet]
+        public ActionResult FilterContact(string Filter, string SearchString) 
+        {
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var contacts = pSer.GetAllContactsByCompany(companyId);
+            if (Filter != null && SearchString!=null) 
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)&&r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+             
+            }
+            else if (Filter == null && SearchString != null)
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)).ToList();
+            }
+            else if (Filter != null && SearchString == null) 
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+            }
 
+
+
+            return View(contacts);
+            
+
+           
+        }
         //
         // GET: /Contacts/Contact/Details/5
         public ActionResult Details(int id)
@@ -109,5 +146,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 return View();
             }
         }
+
     }
 }

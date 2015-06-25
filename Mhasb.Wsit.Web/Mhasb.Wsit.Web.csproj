@@ -184,6 +184,7 @@
     <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -504,6 +505,7 @@
     <Content Include="Areas\Contacts\Views\Contact\Create.cshtml" />
     <Content Include="Areas\Contacts\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\FilterContact.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -684,6 +686,7 @@
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\Contacts\Models\" />
+    <Folder Include="Areas\Contacts\Views\ContactGroup\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="Areas\Organizations\Views\Employee\" />
