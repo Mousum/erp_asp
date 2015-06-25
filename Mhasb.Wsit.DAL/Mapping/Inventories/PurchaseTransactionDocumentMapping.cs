@@ -27,7 +27,8 @@ namespace Mhasb.DAL.Mapping.Inventories
             // Relationship
             this.HasRequired(e => e.PurchaseTransactions)
                 .WithMany(e => e.PurchaseTransactionDocuments)
-                .HasForeignKey(e => e.PurchaseTransactionId);
+                .HasForeignKey(e => e.PurchaseTransactionId)
+                .WillCascadeOnDelete(false);
 
             this.HasRequired(e => e.Employees)
                .WithMany()
