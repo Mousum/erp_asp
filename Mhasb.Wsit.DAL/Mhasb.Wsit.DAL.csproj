@@ -59,6 +59,8 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\RepositoryQuery.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Mapping\Accounts\BankMapping.cs" />
+    <Compile Include="Mapping\Accounts\TransferMoneyMapping.cs" />
     <Compile Include="Mapping\Accounts\VoucherDetailMapping.cs" />
     <Compile Include="Mapping\Accounts\VoucherDocumentMapping.cs" />
     <Compile Include="Mapping\Accounts\VoucherMapping.cs" />

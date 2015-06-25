@@ -88,6 +88,14 @@
     <Compile Include="Contact\PersonService.cs" />
     <Compile Include="Contact\TelePhoneService.cs" />
     <Compile Include="CsvDataInsert.cs" />
+    <Compile Include="Inventories\IItemService.cs" />
+    <Compile Include="Inventories\IPurchaseTransactionDetailService.cs" />
+    <Compile Include="Inventories\IPurchaseTransactionDocumentService.cs" />
+    <Compile Include="Inventories\IPurchaseTransactionService.cs" />
+    <Compile Include="Inventories\ItemService.cs" />
+    <Compile Include="Inventories\PurchaseTransactionDetailService.cs" />
+    <Compile Include="Inventories\PurchaseTransactionDocumentService.cs" />
+    <Compile Include="Inventories\PurchaseTransactionService.cs" />
     <Compile Include="Loggers\CompanyViewLogService.cs" />
     <Compile Include="Loggers\ICompanyViewLog.cs" />
     <Compile Include="Notifications\IInvitationService.cs" />

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mhasb.Domain.OrgSettings;
 using Mhasb.Wsit.Domain;
 
-namespace Mhasb.Domain.BankAccounts
+namespace Mhasb.Domain.Accounts
 {
    public class Bank:IObjectStateInt
     {
@@ -17,7 +18,7 @@ namespace Mhasb.Domain.BankAccounts
        public EnumAccountType AccountType { get; set; }
        public ObjectState State { get; set; }
        public int Id { get; set; }
-
+       public virtual Currency Currencies { get; set; }
        public virtual ICollection<TransferMoney> FromTransferMoney { get; set; }
        public virtual ICollection<TransferMoney> ToTransferMoney { get; set; }
     }

@@ -18,6 +18,7 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.Property(t => t.PurchaseTransactionId).HasColumnName("purchase_transactionid");
             this.Property(t => t.ItemId).HasColumnName("itemid");
             this.Property(t => t.CoaId).HasColumnName("coaid");
+            this.Property(t => t.TaxId).HasColumnName("taxid");
             this.Property(t => t.Quantity).HasColumnName("quantity");
             this.Property(t => t.UnitPrice).HasColumnName("unit_price");
             this.Property(t => t.Discount).HasColumnName("discount");
@@ -36,6 +37,9 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.HasRequired(t => t.PurchaseTransactions)
               .WithMany(t => t.PurchaseTransactionDetails)
               .HasForeignKey(t => t.PurchaseTransactionId);
+            this.HasRequired(t => t.Lookups)
+             .WithMany()
+             .HasForeignKey(t => t.TaxId);
         }
     }
 }
