@@ -10,7 +10,7 @@ namespace Mhasb.DAL.Mapping.Accounts
        {
            // key
            this.HasKey(c => c.Id);
-           this.Ignore(b => b.Id);
+           this.Ignore(b => b.State);
 
            this.Property(b => b.FromBankId).HasColumnName("from_bankid");
            this.Property(b => b.ToBankId).HasColumnName("to_bankid");

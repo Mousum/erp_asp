@@ -10,8 +10,8 @@ namespace Mhasb.Domain.Accounts
 {
     public class TransferMoney : IObjectStateLong
     {
-        public int FromBankId { get; set; }
-        public int ToBankId { get; set; }
+        public int? FromBankId { get; set; }
+        public int? ToBankId { get; set; }
         public DateTime TransferDate { get; set; }
         public double Amount { get; set; }
 
