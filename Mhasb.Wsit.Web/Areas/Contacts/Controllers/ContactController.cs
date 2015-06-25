@@ -14,7 +14,12 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly IContactInformationService _sContact = new ContactInformationService();
+        private readonly IContactInformationService contactInfoService = new ContactInformationService();
+        private readonly IContactDetailsService contactDetailsService = new ContactDetailsService();
+        private readonly IPersonService personService = new PersonService();
+        private readonly IFinancialDetailsService financialDetailsService = new FinancialDetailsService();
+        private readonly INotesService noteService = new NotesService();
+        private readonly ITelePhoneService telephoneService = new TelePhoneService();
         private readonly IUserService uService = new UserService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         private readonly ICompanyService cService = new CompanyService();
@@ -71,7 +76,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 {
                     contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.Contains(Filter)).ToList();
                 }
-
+             
 
             }
             //0 1 0
@@ -84,9 +89,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
 
                 if (!IsNum)
-                {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
-                }
+            {
+                contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+            }
                 else
                 {
                     contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter)).ToList();
@@ -133,9 +138,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 
 
             return View(contacts);
+            
 
-
-
+           
         }
         //
         // GET: /Contacts/Contact/Details/5
@@ -146,8 +151,40 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 
         //
         // GET: /Contacts/Contact/Create
+        [AllowAnonymous]
         public ActionResult Create()
         {
+            //var tt = HttpContext.User.Identity.Name;
+            //var user = uService.GetSingleUserByEmail(tt);
+            //var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            //int companyId = 0;
+            //if (logObj != null)
+            //{
+            //    companyId = (int)logObj.CompanyId;
+            //}
+            //var activatedCompany = cService.GetSingleCompany(companyId);
+
+            //ViewData["Company"] = activatedCompany;
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(CustomModel.Contact.ContactCustome cc)
+        {
+            ContactInformation ContactInfo = cc.ContactInformation;
+            ContactDetails PostalAddress = cc.PostalAddress;
+            ContactDetails PhysicalAddress = cc.PhysicalAddress;
+            Person PrimaryPerson = cc.PrimaryPerson;
+            List<Person> Peoples = cc.Person;
+            FinancialDetails FinancialDetail = cc.FinancialDetails;
+            Notes Note = cc.Notes;
+            TelePhone Telephone = cc.TelePhone;
+
+
+
+            try
+            {
             var tt = HttpContext.User.Identity.Name;
             var user = uService.GetSingleUserByEmail(tt);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
@@ -158,63 +195,43 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
             var activatedCompany = cService.GetSingleCompany(companyId);
 
-            ViewData["Company"] = activatedCompany;
-            return View();
-        }
+                ContactInfo.CompanyId = companyId;
+                ContactInfo.CreateBy = user.Id;
+                ContactInfo.UpdateBy = user.Id;
+                ContactInfo.CreateDate = DateTime.Now;
+                ContactInfo.UpdateDate = DateTime.Now;
+                if (contactInfoService.CreateContInfo(ContactInfo))
+                {
 
-        //
-        // POST: /Contacts/Contact/Create
-        //[HttpPost]
-        //public ActionResult Create(ContactInformation ContactData)
-        //{
-        //    try
-        //    {
-        //        var tt = HttpContext.User.Identity.Name;
-        //        var user = uService.GetSingleUserByEmail(tt);
-        //        var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-        //        int companyId = 0;
-        //        if (logObj != null)
-        //        {
-        //            companyId = (int)logObj.CompanyId;
-        //        }
-        //        var activatedCompany = cService.GetSingleCompany(companyId);
-        //        try{
-        //            ContactData.CompanyId = companyId;
-        //            ContactData.CreateBy = user.Id;
-        //            ContactData.UpdateBy = user.Id;
-        //            ContactData.CreateDate = DateTime.Now;
-        //            ContactData.UpdateDate = DateTime.Now;
-        //            if (_sContact.CreateContInfo(ContactData))
-        //            {
+                    PostalAddress.ContactInfoId = ContactInfo.Id;
+                    PhysicalAddress.ContactInfoId = ContactInfo.Id;
+                    if (!(contactDetailsService.CreateContactDetails(PostalAddress) && contactDetailsService.CreateContactDetails(PhysicalAddress)))
+                        TempData.Add("errMsg","Postal Address and Physical Address not set properly.");
+                    PrimaryPerson.ContactInfoId = ContactInfo.Id;
+                    personService.CreatePersons(PrimaryPerson);
 
-        //                return RedirectToAction("Index");
-        //            }
-        //            else {
-        //                TempData.Add("errMsg", "Please FillUp Every Field");
-        //                return RedirectToAction("Create");
-        //            }
-
-        //        }catch(Exception ex){
-        //            return Content("Somthing Wrong");
-        //        }
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
-
-        [HttpPost]
-        public ActionResult Create(CustomModel.Contact.ContactCustome cc)
+                    foreach (var people in Peoples)
         {
-            return Content("hi");
+                        people.ContactInfoId = ContactInfo.Id;
+                        personService.CreatePersons(people);
         }
 
+                    FinancialDetail.ContactInfoId = ContactInfo.Id;
+                    //FinancialDetail.
 
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData.Add("errMsg", "Please FillUp Every Field");
+                    return RedirectToAction("Create");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("Somthing Wrong");
+            }
+        }
 
 
         //
