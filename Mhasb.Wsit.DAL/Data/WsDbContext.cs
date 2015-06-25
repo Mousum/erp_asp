@@ -102,6 +102,8 @@ namespace Mhasb.Wsit.DAL.Data
             //modelBuilder.Configurations.Add(new FinalcialSettingMapping());
 
             // Accounting Module
+            modelBuilder.Configurations.Add(new BankMapping());
+            modelBuilder.Configurations.Add(new TransferMoneyMapping());
             modelBuilder.Configurations.Add(new ChartOfAccountMapping());
             modelBuilder.Configurations.Add(new VoucherTypeMapping());
 

@@ -19,6 +19,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.Property(i => i.DirectDial).HasColumnName("directdial").HasMaxLength(100);
             this.Property(i => i.Skype).HasColumnName("skype").HasMaxLength(100);
             this.Property(i => i.WebSite).HasColumnName("webSite").HasMaxLength(100);
+            this.Property(i => i.Fax).HasColumnName("fax").HasMaxLength(100);
 
             this.ToTable("con.telephone");
 

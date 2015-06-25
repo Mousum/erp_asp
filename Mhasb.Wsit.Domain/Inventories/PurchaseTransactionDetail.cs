@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Domain.Accounts;
 using Mhasb.Wsit.Domain;
+using Mhasb.Domain.Commons;
 
 namespace Mhasb.Domain.Inventories
 {
@@ -18,11 +19,14 @@ namespace Mhasb.Domain.Inventories
         public double Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double Discount { get; set; }
+        public int? TaxId { get; set; }
         public string Description { get; set; }
         
         //
         public virtual PurchaseTransaction PurchaseTransactions { get; set; }
         public virtual Item Items { get; set; }
+
+        public virtual Lookup Lookups { get; set; }
         public virtual ChartOfAccount ChartOfAccounts { get; set; }// on side relation
 
         public ObjectState State { get; set; }

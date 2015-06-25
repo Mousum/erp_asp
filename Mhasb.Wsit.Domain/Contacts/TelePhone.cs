@@ -14,6 +14,7 @@ namespace Mhasb.Domain.Contacts
         public string CellPhone { get; set; }
         public string Mobile { get; set; }
         public string DirectDial { get; set; }
+        public string Fax { get; set; }
         public string Skype { get; set; }
         public string WebSite { get; set; }
         public virtual ContactInformation ContactInformations { get; set; }

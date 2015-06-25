@@ -1,8 +1,8 @@
 ﻿@model Mhasb.Wsit.CustomModel.Contact.ContactCustome
 
 
-
 <div class="container my-dashboard">
+
     <div class="row clearfix no-margin">
         <div class="col-md-12 no-padding">
             @if (TempData["SucMasg"] != null)
@@ -19,239 +19,500 @@
             </p>
         </div>
     </div>
-    <div class="row clearfix no-margin">
-        <h3 class="all-head">Add Contact</h3>
-        <div class="col-md-6 clearfix pull-right text-right">
-            <label class="text-uppercase">List My profile:</label>
-            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-width="100" data-size="small">
-        </div>
-    </div>
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        <div class="row clearfix p-setting-container">
-            <div class="col-md-8 base-block no-margin clearfix">
 
-                <h4 class="all-head">Contact Details</h4>
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Contact Name:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="welcome">
+                    <h3 class="all-head">Add Contact</h3>
+                </div>
+                <hr>
+                <p>What's this &nbsp;<i class="fa fa-comments"></i></p>
+                <div class="row clearfix no-margin card">
+                    <div class="col-md-12">
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Contact Information</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <h5>Add Contact</h5>
+                                    <h6>Contact</h6>
+                                    @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input-con", @placeholder = "Contact Name" })
+                                    @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
+                                    <a href="#">+ Add Account Number</a><span class="cstm-opt12"> (optional - create a unique code for each Contact)</span>
+                                    <h6>Account Number</h6>
+                                    @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                    @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Primary Person</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <div class="col-md-3">
 
-                    </div>
-                </div>
+                                        <h6>First Name</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.FirstName, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.FirstName)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Last Name</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.LastName, new { @class = "cstm-input-con2", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.LastName)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Email</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.Email, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.Email)
+                                        @Html.HiddenFor(model => model.PrimaryPerson.IsPrimaryPerson, new { Value = true })
+                                    </div>
 
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Contact No:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                                    <div class="col-md-12">
+                                        <a href="#">+ Add Another Person</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>First Name</h6>
+
+                                        @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.Person[0].FirstName)
+                                        <br><br>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Last Name</h6>
+                                        @Html.TextBoxFor(model => model.Person[0].LastName, new { @class = "cstm-input-con2", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.Person[0].LastName)
+                                        <br><br>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Email</h6>
+                                        @Html.TextBoxFor(model => model.Person[0].Email, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                        @Html.ValidationMessageFor(model => model.Person[0].Email)
+                                        <br><br>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Input Emails</h6>
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="col-md-1 cstm-crs">
+                                        <br><br>
+                                        <a href="">X</a>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Contact Details</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <div class="col-md-4 cstrm-p">
+                                        <div class="col-md-12">
+                                            <h5>Postal Address</h5>
+                                        </div>
+                                        <div class="col-md-3 cstm-p">
+                                            <p>Attention</p>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(model => model.PostalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.ValidationMessageFor(model => model.PostalAddress.Attention)
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Street Address or PO Box</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(model => model.PostalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.Address)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Town/City</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.City)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>State/Region</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.State, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.State)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Postal/Zip Code</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.ZipeCode)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Country</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.Country)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 cstrm-p">
+                                        <div class="col-md-12">
+                                            <h5>Physical Address<span class="cstm-sp"> [Same as postal address]</span></h5>
+                                        </div>
+                                        <div class="col-md-3 cstm-p">
+                                            <p>Attention</p>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(model => model.PhysicalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.ValidationMessageFor(model => model.PhysicalAddress.Attention)
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Street Address or PO Box</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(model => model.PhysicalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.Address)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Town/City</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.City)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>State/Region</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.State, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.State)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Postal/Zip Code</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.ZipeCode)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Country</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.Country)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-12 cstm-opt12345">
+                                            <h4>
+                                                Telephone <a class="tooltips" href="#">
+                                                    <i class="fa fa-question-circle">
+                                                        <span>Tooltip</span>
+                                                    </i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.CellPhone)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Fax</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.Fax, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.Fax)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Mobile</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.Mobile)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Direct Dial</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.DirectDial)
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12 cstm-inpu">
+                                            <p>Skype Name/Number</p>
+                                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.ValidationMessageFor(model => model.TelePhone.Skype)
+                                        </div>
+                                        <div class="col-md-12 cstm-inpu">
+                                            <p>Website</p>
+                                            @Html.TextBoxFor(model => model.TelePhone.WebSite, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.ValidationMessageFor(model => model.TelePhone.WebSite)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h3>Financial Details</h3>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Default account settings <span class="cstm-opt123">These settings can be overridden on individual transactions</span></h4>
+                                        <h4>For Sales</h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Default Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Default Account</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4>For Purchases</h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Default Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Default Account</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4 class="cstm-opt12345">
+                                            Tax <a class="tooltips" href="#">
+                                                <i class="fa fa-question-circle">
+                                                    <span>Tooltip</span>
+                                                </i>
+                                            </a><span class="cstm-opt123"> This default tax rates can be overridden on individual transactions</span>
+                                        </h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Tax ID Number</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Sales Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Purchases Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Sales Discount <span class="cstm-opt123"> This default sales discount rate can be overridden on individual transactions in sales invoices and quotes</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-3">
+                                                <h5>Discount %</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Currency <span class="cstm-opt123"> This default currency can be overridden on individual transactions.</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-3">
+                                                <h5>Default Currency</h5>
+                                                <label class="cstm-select">
+                                                    <select>
+                                                        <option selected> USA </option>
+                                                        <option>UK</option>
+                                                        <option>Bangladesh</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4 class="cstm-opt12345">
+                                            Batch Payments <a class="tooltips" href="#">
+                                                <i class="fa fa-question-circle">
+                                                    <span>Tooltip</span>
+                                                </i>
+                                            </a>
+                                        </h4>
+                                        <div class="col-md-12 cstm-border-con"></div>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Bank Account Number</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Bank Account Name</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Details</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Invoice Settings <span class="cstm-opt123"> This settings can be overridden on individual sales invoices credit notes, statements, purchase orders and quotes</span></h4>
+                                        <div class="col-md-5">
+                                            <h5>Bills Default Due Date (optional)</h5>
+                                            <div class="col-md-12">
+                                                <div class="col-md-1 cstm-p">
+                                                    <p>Due</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="cstm-input-con3" type="text" placeholder="">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="cstm-select">
+                                                        <select>
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h5>Sales Invoices Default Due Date(optional)</h5>
+                                            <div class="col-md-12">
+                                                <div class="col-md-1 cstm-p">
+                                                    <p>Due</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="cstm-input-con3" type="text" placeholder="">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="cstm-select">
+                                                        <select>
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>MHSAB Network Key <span class="cstm-opt123"> This must be provided by the contact</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Key</h5>
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12 cstm-btn-submit pull-right">
 
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Primay Person:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.Person[0].FirstName)
-                            @Html.HiddenFor(model => model.Person[0].IsPrimaryPerson, new { Value=true })
+                                        <button type="button" class="btn btn-danger pull-right">Cancel</button>
+                                        <button type="submit" class="btn btn-info pull-right cstm-btn-s">Save</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row cstm-his">
+                            <span class="cstm-opt1234">
+                                History & Notes
+                                <!-- Button trigger modal -->
 
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Postal Address:</label>
-
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Address:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PostalAddress.Address, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PostalAddress.Address)
+                                <a class="tooltips" href="#">
+                                    <i class="fa fa-question-circle">
+                                        <span>Tooltip</span>
+                                    </i>
+                                </a>
+                            </span>
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">City:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PostalAddress.City)
+                        <div class="row">
+                            <input class="btn btn-default" type="button" value="Show History (0 entries)">
+                            <input class="btn btn-default" type="button" value="Add Note">
                         </div>
-
                     </div>
                 </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">ZipCode:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PostalAddress.ZipeCode)
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Physical Address:</label>
-
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Address:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PhysicalAddress.Address, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PhysicalAddress.Address)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">City:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PhysicalAddress.City)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">ZipCode:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.PhysicalAddress.ZipeCode)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Telephone:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.TelePhone.CellPhone)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Mobile:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.TelePhone.Mobile)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Direct Dial:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.TelePhone.DirectDial)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Skype:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.TelePhone.Skype)
-                        </div>
-
-                    </div>
-                </div>
-
-                <label class="btn-block-dis">Financial Settings:</label>
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Bank Account Name:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountName)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Bank Account Number:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row cstm-frm-row">
-                    <div class="col-md-12 pad-right-null">
-                        <div class="col-md-12"><label id="errmsg"></label></div>
-                        <label class="btn-block-dis">Financial Details:</label>
-                        <div class="col-md-6 no-padding">
-                            @Html.TextBoxFor(model => model.FinancialDetails.Details, new { @class = "cstm-input", @placeholder = "Contact Name" })
-                            @Html.ValidationMessageFor(model => model.FinancialDetails.Details)
-                        </div>
-
-                    </div>
-                </div>
-
-
             </div>
         </div>
-        <div class="col-md-6">
-            <input type="submit" class="btn btn-success btn-block-dis pull-right" value="Save">
-        </div>
+
     }
 </div>
+<!--End welcome dashboard section-->

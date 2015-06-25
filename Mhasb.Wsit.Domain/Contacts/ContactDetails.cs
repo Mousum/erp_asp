@@ -16,7 +16,7 @@ namespace Mhasb.Domain.Contacts
         public string City { get; set; }
         public string StateRegion { get; set; }
         public string ZipeCode { get; set; }
-        public int Country { get; set; }
+        public string Country { get; set; }
         public string Type { get; set; }
         public virtual ContactInformation ContactInformations { get; set; }
 

@@ -13387,6 +13387,7 @@ label.cstm-select:before {
 }
 
 /*Author: Rafi , Date: 23.06.2015 , general-set*/
+
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
 .cstm-tab{
     border-bottom: 1px solid #ccc;
@@ -13456,5 +13457,181 @@ label.cstm-select:before {
     color: #A3A3A3;
     margin-left: 50px;
 }
+
+/*Author: Rafi , Date: 23.06.2015 , add-contact*/
+https://go.xero.com/AccountsPayable/Edit.aspx
+
+/*Author: Rafi , Date: 23.06.2015 , add-contact*/
+.cstm-frm-row-hed{
+    margin-bottom: 15px;
+    overflow: visible;
+    display: block;
+    margin-left: 15px;
+}
+.cstm-input-con{
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    height: 35px;
+    width: 30%;
+}
+.cstm-border-con {
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px; 
+}
+.cstm-anc a{
+    text-decoration: none;
+    padding-top: 5px;
+}
+.cstm-opt12{
+    color: #a3a3a3;
+}
+.cstm-input-con1{
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    height: 35px;
+    width: 55%;
+}
+.cstm-input-con2{
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    height: 35px;
+    width: 55%;
+}
+.cstm-input-con3{
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    height: 35px;
+    width: 100%;
+}
+.cstm-p{
+    margin-top: 9px;
+}
+.cstm-inpu{
+    margin-top: 10px;
+}
+.cstrm-p p{
+    font-size: 15px;
+    font-family: "Rambla", sans-serif !important;
+}
+.cstm-sp{
+    font-size: 12px;
+    color: #22ADE3;
+}
+.cstm-opt123{
+    font-size: 13px;
+    color: #a3a3a3;
+}
+.cstm-opt123:hover i{
+    cursor: pointer;
+}
+.cstm-btn-submit{
+    float: right;
+    margin-top: 10px;
+    background: #D7E7FF;
+    padding: 20px;
+}
+.cstm-btn-submit btn{
+    margin-right: 15px;
+}
+.cstm-btn-s{
+    margin-right: 10px;
+}
+.cstm-opt1234{
+    font-size: 18px;
+    color: #a3a3a3;
+
+}
+.cstm-opt1234:hover i{
+    cursor: pointer;
+}
+.cstm-opt12345:hover i{
+    cursor: pointer;
+}
+.cstm-his{
+    margin-top: 10px;
+}
+.cstm-crs a{
+    color: #000;
+}
+.cstm-crs a{
+    text-decoration: none;
+}
+.cstm-crs a:hover{
+    color: #f00;
+}
+
+
+a.tooltips {
+    position: relative;
+    display: inline;
+}
+a.tooltips span {
+    position: absolute;
+    width:330px;
+    color: #FFFFFF;
+    background: #112255;
+    height: 400px;
+    line-height: 30px;
+    text-align: center;
+    visibility: hidden;
+    border-radius: 6px;
+}
+a.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 3%;
+    right: 100%;
+    margin-top: -8px;
+    width: 0; height: 0;
+    border-right: 8px solid #112255;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+a:hover.tooltips span {
+    visibility: visible;
+    opacity: 0.8;
+    left: 100%;
+    top: 50%;
+    margin-top: -15px;
+    margin-left: 15px;
+    z-index: 999;
+}
+
 
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/

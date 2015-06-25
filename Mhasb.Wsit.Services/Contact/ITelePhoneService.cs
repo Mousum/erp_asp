@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Services.Contact
 {
-    interface ITelePhoneService
+    public interface ITelePhoneService
     {
         bool CreateTelePhone(TelePhone telephone);
         bool UpdateTelePhone(TelePhone telephone);
