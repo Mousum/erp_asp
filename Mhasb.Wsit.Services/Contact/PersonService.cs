@@ -83,5 +83,22 @@ namespace Mhasb.Services.Contact
                 return null;
             }
         }
+        public List<Person> GetAllContactsByCompany(int CompanyId) 
+        {
+            try
+            {
+                var _obj = _rep.GetOperation()
+                    .Filter(c=>c.ContactInformations.CompanyId==CompanyId)
+                    .Include(c=>c.ContactInformations)
+                    .Include(c=>c.ContactInformations.TelePhones)
+                    .Get().ToList();
+                return _obj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
     }
 }

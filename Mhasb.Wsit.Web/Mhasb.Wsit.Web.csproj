@@ -184,6 +184,7 @@
     <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -501,9 +502,10 @@
     <Content Include="Areas\OrganizationManagement\Views\Company\Settings.cshtml" />
     <Content Include="Areas\Contacts\Views\web.config" />
     <Content Include="Areas\Contacts\Views\Contact\Index.cshtml" />
-    <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Contacts\Views\Contact\Create_old.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Create.cshtml" />
+    <Content Include="Areas\Contacts\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\FilterContact.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -666,8 +668,10 @@
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Uploads\Wsit\Document_WSIT_1_lpg5lku4.s3p.pdf" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\CommonBase\DataGridView.cshtml" />
-    <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -682,7 +686,7 @@
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
     <Folder Include="Areas\Contacts\Models\" />
-    <Folder Include="Areas\Contacts\Views\Shared\" />
+    <Folder Include="Areas\Contacts\Views\ContactGroup\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
     <Folder Include="Areas\Organizations\Views\Employee\" />

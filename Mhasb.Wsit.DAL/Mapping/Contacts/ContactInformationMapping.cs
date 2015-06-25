@@ -18,7 +18,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.Property(i => i.AccountNumber).HasMaxLength(100).HasColumnName("accountnumber");
             this.Property(i => i.PostalAddId).HasColumnName("postaladdid");
             this.Property(i => i.PhysicalAddId).HasColumnName("physicaladdid");
-            this.Property(i => i.ContactType).HasMaxLength(100).HasColumnName("contacttype");
+            this.Property(i => i.ContactType).HasColumnName("contacttype");
             this.Property(i => i.CreateBy).HasColumnName("createby");
             this.Property(i => i.UpdateBy).HasColumnName("updateby");
             this.Property(i => i.CreateDate).HasColumnName("createdate");
