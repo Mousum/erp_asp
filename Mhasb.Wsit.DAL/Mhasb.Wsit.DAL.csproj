@@ -42,6 +42,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +51,182 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Db Diagram\actionlist.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\adminuser.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\adminuserlog.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\areazone.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\assign_to_group.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\auditor.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\bank.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\chartofaccount.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\company.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\companydocument.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\company_profiles.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\company_visitors.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\contactdetail.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\contactinformation.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\contact_detail.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\contact_group.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\country.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\currency.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\C__MigrationHistory.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\designation.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\employee.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\employee_profiles.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\finalcial_setting.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\founder.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\industry.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\invitation.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\item.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\language.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\legal_entities.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\lookup.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\money_transfer.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\Note.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\package.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\person.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\Project.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\purchase_transaction.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\purchase_transaction_details.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\purchase_transaction_documents.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\role.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\rolevsaction.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\setting.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\sharetransfer.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\subscription.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\TaskManager.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\tax_settings.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\telephone.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\user.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\userinrole.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\voucher.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\vouchertype.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\voucher_details.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\voucher_documents.cs">
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\WebProjectDbDiagram.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebProjectDbDiagram.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\WebProjectDbDiagram.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebProjectDbDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Db Diagram\WebProjectDbDiagram.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebProjectDbDiagram.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\DbContextExtension.cs" />
     <Compile Include="Data\DropCreateWSDb.cs" />
     <Compile Include="Data\IDbContext.cs" />
@@ -115,9 +293,35 @@
     <Compile Include="Operations\ICrudOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Data\Db Diagram\WebProjectDbDiagram.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebProjectDbDiagram.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Data\Db Diagram\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\Db Diagram\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="Data\Db Diagram\WebProjectDbDiagram.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebProjectDbDiagram.edmx</DependentUpon>
+      <LastGenOutput>WebProjectDbDiagram.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Data\Db Diagram\WebProjectDbDiagram.edmx.diagram">
+      <DependentUpon>WebProjectDbDiagram.edmx</DependentUpon>
+    </None>
+    <None Include="Data\Db Diagram\WebProjectDbDiagram.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebProjectDbDiagram.edmx</DependentUpon>
+      <LastGenOutput>WebProjectDbDiagram.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

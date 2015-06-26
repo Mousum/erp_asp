@@ -82,8 +82,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 {
                     contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.Contains(Filter)).ToList();
                 }
-             
-
             }
             //0 1 0
             else if (Filter == null && SearchString != null && Type == null)
@@ -178,7 +176,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
             }
 
-
+            ViewBag.ATypes = Atypes;
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
@@ -233,6 +231,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         }
 
                     FinancialDetail.ContactInfoId = ContactInfo.Id;
+                    financialDetailsService.CreateFinancialDetails(FinancialDetail);
                     //FinancialDetail.
 
                     return RedirectToAction("Index");
