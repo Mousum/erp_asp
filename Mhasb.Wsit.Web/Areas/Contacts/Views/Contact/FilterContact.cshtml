@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mhasb.Domain.Contacts.Person>
+﻿@model IEnumerable<Mhasb.Domain.Contacts.ContactInformation>
 
 <div class="container my-dashboard">
     <div class="row">
@@ -72,10 +72,10 @@
                                             {
                                                 <tr>
                                                     <th scope="row"><input type="checkbox" class="check"></th>
-                                                    <td>@item.ContactInformations.ContactName</td>
-                                                    <td>@item.ContactInformations.AccountNumber</td>
-                                                    <td>@item.Email</td>
-                                                    <td>@item.ContactInformations.TelePhones.Select(r=>r.CellPhone)</td>
+                                                    <td>@item.ContactName</td>
+                                                    <td>@item.AccountNumber</td>
+                                                    <td>@item.Persons.Select(p=>p.Email).FirstOrDefault()</td>
+                                                    <td>@item.TelePhones.Select(r=>r.CellPhone).FirstOrDefault()</td>
                                                 </tr>
                                             }
 

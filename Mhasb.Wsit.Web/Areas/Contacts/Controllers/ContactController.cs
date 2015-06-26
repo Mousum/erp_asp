@@ -63,64 +63,65 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
             }
-            var contacts = pSer.GetAllContactsByCompany(companyId);
+           // var contacts = pSer.GetAllContactsByCompany(companyId);
+            var contacts = ConInSer.GetAllContactInfoByCompanyId(companyId);
             ViewBag.AllCount = contacts.Count();
-            ViewBag.CustomerCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Customer).Count();
-            ViewBag.SupllierCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Supplier).Count();
-            ViewBag.EmployeeCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Employee).Count();
-            ViewBag.ArchiveCount= contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Archive).Count();
- 
+            ViewBag.CustomerCount = contacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
+            ViewBag.SupllierCount = contacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
+            ViewBag.EmployeeCount = contacts.Where(r => r.ContactType == EnumContactType.Employee).Count();
+            ViewBag.ArchiveCount = contacts.Where(r => r.ContactType == EnumContactType.Archive).Count();
+            if (Filter != null && SearchString != null && Type == null)
             //Take As binary ,we have 3 oparents
             //1 1 0
             if (Filter != null && SearchString != null && Type == null)
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(SearchString) && r.ContactName.StartsWith(Filter)).ToList();
                 }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.Contains(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(SearchString) && r.ContactName.Contains(Filter)).ToList();
                 }
             }
             //0 1 0
             else if (Filter == null && SearchString != null && Type == null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)).ToList();
+                contacts = contacts.Where(r => r.ContactName.Contains(SearchString)).ToList();
             }
             //1 0 0
             else if (Filter != null && SearchString == null && Type == null)
             {
 
                 if (!IsNum)
-            {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
-            }
+                {
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter)).ToList();
+                }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(Filter)).ToList();
                 }
             }
             //0 0 1
             else if (Filter == null && SearchString == null && Type != null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactType == ContactType).ToList();
+                contacts = contacts.Where(r => r.ContactType == ContactType).ToList();
             }
             //0 1 0 
             else if (Filter == null && SearchString != null && Type != null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                contacts = contacts.Where(r => r.ContactName.Contains(SearchString) && r.ContactType == ContactType).ToList();
             }
             //1 0 1
             else if (Filter != null && SearchString == null && Type != null)
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter) && r.ContactType == ContactType).ToList();
                 }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(Filter) && r.ContactType == ContactType).ToList();
                 }
 
 
@@ -130,14 +131,15 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter) && r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter) && r.ContactName.Contains(SearchString) && r.ContactType == ContactType).ToList();
                 }
-                else 
+                else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter) && r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(Filter) && r.ContactName.Contains(SearchString) && r.ContactType == ContactType).ToList();
                 }
 
             }
+           
 
 
 

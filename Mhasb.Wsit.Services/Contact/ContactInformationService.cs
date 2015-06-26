@@ -90,13 +90,16 @@ namespace Mhasb.Services.Contact
                 return null;
             }
         }
-        public List<ContactInformation> GetAllByFirstLetter(string StartingLetter,int CompanyId)
+        public List<ContactInformation> GetAllContactInfoByCompanyId(int Id) 
         {
             try
             {
                 var _Obj = _rep.GetOperation()
-                    .Filter(c=>c.ContactName.StartsWith(StartingLetter)&&c.CompanyId==CompanyId)
-                    .Include(c=>c.Persons)
+                   
+                    .Include(r=>r.ContactDtails)
+                    .Include(r=>r.TelePhones)
+                    .Include(r=>r.Persons)
+                    .Filter(r => r.CompanyId == Id)
                     .Get().ToList();
                 return _Obj;
             }
