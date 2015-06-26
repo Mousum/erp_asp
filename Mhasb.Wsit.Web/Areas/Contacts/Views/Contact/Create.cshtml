@@ -47,7 +47,7 @@
                                     @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
                                     <a href="#">+ Add Account Number</a><span class="cstm-opt12"> (optional - create a unique code for each Contact)</span>
                                     <h6>Account Number</h6>
-                                    @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                    @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Account Number" })
                                     @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
                                     <div class="col-md-12 cstm-border-con"></div>
                                 </div>
@@ -62,17 +62,17 @@
                                     <div class="col-md-3">
 
                                         <h6>First Name</h6>
-                                        @Html.TextBoxFor(model => model.PrimaryPerson.FirstName, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
                                         @Html.ValidationMessageFor(model => model.PrimaryPerson.FirstName)
                                     </div>
                                     <div class="col-md-3">
                                         <h6>Last Name</h6>
-                                        @Html.TextBoxFor(model => model.PrimaryPerson.LastName, new { @class = "cstm-input-con2", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
                                         @Html.ValidationMessageFor(model => model.PrimaryPerson.LastName)
                                     </div>
                                     <div class="col-md-3">
                                         <h6>Email</h6>
-                                        @Html.TextBoxFor(model => model.PrimaryPerson.Email, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
                                         @Html.ValidationMessageFor(model => model.PrimaryPerson.Email)
                                         @Html.HiddenFor(model => model.PrimaryPerson.IsPrimaryPerson, new { Value = true })
                                     </div>
@@ -83,19 +83,19 @@
                                     <div class="col-md-3">
                                         <h6>First Name</h6>
 
-                                        @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input-con1", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
                                         @Html.ValidationMessageFor(model => model.Person[0].FirstName)
                                         <br><br>
                                     </div>
                                     <div class="col-md-3">
                                         <h6>Last Name</h6>
-                                        @Html.TextBoxFor(model => model.Person[0].LastName, new { @class = "cstm-input-con2", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.Person[0].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
                                         @Html.ValidationMessageFor(model => model.Person[0].LastName)
                                         <br><br>
                                     </div>
                                     <div class="col-md-3">
                                         <h6>Email</h6>
-                                        @Html.TextBoxFor(model => model.Person[0].Email, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                        @Html.TextBoxFor(model => model.Person[0].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
                                         @Html.ValidationMessageFor(model => model.Person[0].Email)
                                         <br><br>
                                     </div>
@@ -125,7 +125,7 @@
                                             <p>Attention</p>
                                         </div>
                                         <div class="col-md-9">
-                                            @Html.TextBoxFor(model => model.PostalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.TextBoxFor(model => model.PostalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Attention" })
                                             @Html.ValidationMessageFor(model => model.PostalAddress.Attention)
                                         </div>
                                         <div class="col-md-12 no-margin no-padding">
@@ -133,7 +133,7 @@
                                                 <p>Street Address or PO Box</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextAreaFor(model => model.PostalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Contact Name" })
+                                                @Html.TextAreaFor(model => model.PostalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Address" })
                                                 @Html.ValidationMessageFor(model => model.PostalAddress.Address)
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@
                                                 <p>Town/City</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input-con3", @placeholder = "City" })
                                                 @Html.ValidationMessageFor(model => model.PostalAddress.City)
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                                 <p>State/Region</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PostalAddress.State, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PostalAddress.State, new { @class = "cstm-input-con3", @placeholder = "State" })
                                                 @Html.ValidationMessageFor(model => model.PostalAddress.State)
                                             </div>
                                         </div>
@@ -160,7 +160,7 @@
                                                 <p>Postal/Zip Code</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Zip" })
                                                 @Html.ValidationMessageFor(model => model.PostalAddress.ZipeCode)
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                                 <p>Country</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PostalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PostalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Country" })
                                                 @Html.ValidationMessageFor(model => model.PostalAddress.Country)
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@
                                             <p>Attention</p>
                                         </div>
                                         <div class="col-md-9">
-                                            @Html.TextBoxFor(model => model.PhysicalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.TextBoxFor(model => model.PhysicalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Attention" })
                                             @Html.ValidationMessageFor(model => model.PhysicalAddress.Attention)
                                         </div>
                                         <div class="col-md-12 no-margin no-padding">
@@ -190,7 +190,7 @@
                                                 <p>Street Address or PO Box</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextAreaFor(model => model.PhysicalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Contact Name" })
+                                                @Html.TextAreaFor(model => model.PhysicalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Address" })
                                                 @Html.ValidationMessageFor(model => model.PhysicalAddress.Address)
                                             </div>
                                         </div>
@@ -199,7 +199,7 @@
                                                 <p>Town/City</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input-con3", @placeholder = "City" })
                                                 @Html.ValidationMessageFor(model => model.PhysicalAddress.City)
                                             </div>
                                         </div>
@@ -208,7 +208,7 @@
                                                 <p>State/Region</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PhysicalAddress.State, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.State, new { @class = "cstm-input-con3", @placeholder = "State" })
                                                 @Html.ValidationMessageFor(model => model.PhysicalAddress.State)
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@
                                                 <p>Postal/Zip Code</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Zip" })
                                                 @Html.ValidationMessageFor(model => model.PhysicalAddress.ZipeCode)
                                             </div>
                                         </div>
@@ -226,7 +226,7 @@
                                                 <p>Country</p>
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PhysicalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.Country, new { @class = "cstm-input-con3", @placeholder = "Country" })
                                                 @Html.ValidationMessageFor(model => model.PhysicalAddress.Country)
                                             </div>
                                         </div>
@@ -243,7 +243,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12 cstm-inpu">
-                                                @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input-con3", @placeholder = "Telephone" })
                                                 @Html.ValidationMessageFor(model => model.TelePhone.CellPhone)
                                             </div>
                                         </div>
@@ -252,7 +252,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12 cstm-inpu">
-                                                @Html.TextBoxFor(model => model.TelePhone.Fax, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.TelePhone.Fax, new { @class = "cstm-input-con3", @placeholder = "Fax" })
                                                 @Html.ValidationMessageFor(model => model.TelePhone.Fax)
                                             </div>
                                         </div>
@@ -261,7 +261,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12 cstm-inpu">
-                                                @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input-con3", @placeholder = "Mobile" })
                                                 @Html.ValidationMessageFor(model => model.TelePhone.Mobile)
                                             </div>
                                         </div>
@@ -270,19 +270,19 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12 cstm-inpu">
-                                                @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input-con3", @placeholder = "Direct Dial" })
                                                 @Html.ValidationMessageFor(model => model.TelePhone.DirectDial)
                                             </div>
                                         </div>
                                         <br>
                                         <div class="col-md-12 cstm-inpu">
                                             <p>Skype Name/Number</p>
-                                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input-con3", @placeholder = "Skype" })
                                             @Html.ValidationMessageFor(model => model.TelePhone.Skype)
                                         </div>
                                         <div class="col-md-12 cstm-inpu">
                                             <p>Website</p>
-                                            @Html.TextBoxFor(model => model.TelePhone.WebSite, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                            @Html.TextBoxFor(model => model.TelePhone.WebSite, new { @class = "cstm-input-con3", @placeholder = "Website" })
                                             @Html.ValidationMessageFor(model => model.TelePhone.WebSite)
                                         </div>
                                     </div>
@@ -379,7 +379,7 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Tax ID Number</h5>
-                                                @Html.TextBoxFor(model => model.FinancialDetails.TaxNumber, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.FinancialDetails.TaxNumber, new { @class = "cstm-input-con3", @placeholder = "Tax Id No" })
                                                 @Html.ValidationMessageFor(model => model.FinancialDetails.TaxNumber)
                                             </div>
                                             <div class="col-md-4">
@@ -387,10 +387,10 @@
                                                 <label class="cstm-select">
                                                     @Html.DropDownListFor(model => model.FinancialDetails.SalesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
                                                     @*<select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
-                                                    </select>*@
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
                                                 </label>
                                             </div>
                                             <div class="col-md-4">
@@ -398,10 +398,10 @@
                                                 <label class="cstm-select">
                                                     @Html.DropDownListFor(model => model.FinancialDetails.PurchasesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
                                                     @*<select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
-                                                    </select>*@
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
                                                 </label>
                                             </div>
                                         </div>
@@ -424,13 +424,13 @@
                                             <div class="col-md-3">
                                                 <h5>Default Currency</h5>
                                                 <label class="cstm-select">
-                                                    @Html.DropDownListFor(model=>model.FinancialDetails.CurrencyId, ViewBag.CurrencyList as SelectList, new { reqiured = "reqiured" })
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.CurrencyId, ViewBag.CurrencyList as SelectList, new { reqiured = "reqiured" })
                                                     @Html.ValidationMessageFor(model => model.FinancialDetails.CurrencyId)
                                                     @*<select>
-                                                        <option selected> USA </option>
-                                                        <option>UK</option>
-                                                        <option>Bangladesh</option>
-                                                    </select>*@
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
                                                 </label>
                                             </div>
                                         </div>
@@ -448,18 +448,19 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Bank Account Number</h5>
-                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Bank Account Number" })
                                                 @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Bank Account Name</h5>
-                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input-con3", @placeholder = "Contact Name" })
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input-con3", @placeholder = "Bank Account Name" })
                                                 @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountName)
-                                               
+
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Details</h5>
-                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                                @Html.TextBoxFor(model => model.FinancialDetails.Details, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.Details)
                                             </div>
                                         </div>
                                     </div>
@@ -513,7 +514,8 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Key</h5>
-                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                                @Html.TextBoxFor(model => model.FinancialDetails.NetworkKey, new { @class = "cstm-input-con3", @placeholder = "Network Key" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.NetworkKey)
                                             </div>
                                         </div>
                                     </div>
