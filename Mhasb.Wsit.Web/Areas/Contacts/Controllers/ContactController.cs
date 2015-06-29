@@ -1,7 +1,10 @@
 ﻿using Mhasb.Domain.Contacts;
+using Mhasb.Services.Accounts;
+using Mhasb.Services.Commons;
 using Mhasb.Services.Contact;
 using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
+using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using System;
 using System.Collections.Generic;
@@ -25,6 +28,9 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IContactInformationService ConInSer = new ContactInformationService();
         private readonly IPersonService pSer = new PersonService();
+        private ILookupService luSer = new LookupService();
+        private IChartOfAccountService cSer = new ChartOfAccountService();
+        private readonly ICurrency currencyService = new CurrencyService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
@@ -35,88 +41,87 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         [HttpGet]
         public ActionResult FilterContact(string Filter, string SearchString, string Type)
         {
-            
+
             var tt = HttpContext.User.Identity.Name;
             var user = uService.GetSingleUserByEmail(tt);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
             EnumContactType ContactType = EnumContactType.Archive;
-            var IsNum =false;
+            var IsNum = false;
             if (logObj != null)
             {
                 companyId = (int)logObj.CompanyId;
             }
             Regex regex = new Regex(@"^\d");
-            if (Filter != null) 
+            if (Filter != null)
             {
                 IsNum = regex.IsMatch(Filter);
             }
-           
-           
+
+
             if (Type != null)
             {
                 ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
             }
-            var contacts = pSer.GetAllContactsByCompany(companyId);
+            // var contacts = pSer.GetAllContactsByCompany(companyId);
+            var contacts = ConInSer.GetAllContactInfoByCompanyId(companyId);
             ViewBag.AllCount = contacts.Count();
-            ViewBag.CustomerCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Customer).Count();
-            ViewBag.SupllierCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Supplier).Count();
-            ViewBag.EmployeeCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Employee).Count();
-            ViewBag.ArchiveCount= contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Archive).Count();
- 
+            ViewBag.CustomerCount = contacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
+            ViewBag.SupllierCount = contacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
+            ViewBag.EmployeeCount = contacts.Where(r => r.ContactType == EnumContactType.Employee).Count();
+            ViewBag.ArchiveCount = contacts.Where(r => r.ContactType == EnumContactType.Archive).Count();
+
             //Take As binary ,we have 3 oparents
             //1 1 0
             if (Filter != null && SearchString != null && Type == null)
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && r.ContactName.StartsWith(Filter)).ToList();
                 }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactName.Contains(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && r.ContactName.Contains("1") || r.ContactName.Contains("2") || r.ContactName.Contains("3")).ToList();
                 }
-             
-
             }
             //0 1 0
             else if (Filter == null && SearchString != null && Type == null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString)).ToList();
+                contacts = contacts.Where(r => r.ContactName.Contains(CapitalizeFirstLetter(SearchString))).ToList();
             }
             //1 0 0
             else if (Filter != null && SearchString == null && Type == null)
             {
 
                 if (!IsNum)
-            {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter)).ToList();
-            }
+                {
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter)).ToList();
+                }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter)).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains("1") || r.ContactName.Contains("2") || r.ContactName.Contains("3")).ToList();
                 }
             }
             //0 0 1
             else if (Filter == null && SearchString == null && Type != null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactType == ContactType).ToList();
+                contacts = contacts.Where(r => r.ContactType == ContactType).ToList();
             }
             //0 1 0 
             else if (Filter == null && SearchString != null && Type != null)
             {
-                contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                contacts = contacts.Where(r => r.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && r.ContactType == ContactType).ToList();
             }
             //1 0 1
             else if (Filter != null && SearchString == null && Type != null)
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter) && r.ContactType == ContactType).ToList();
                 }
                 else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains("1") || r.ContactName.Contains("2") || r.ContactName.Contains("3") && r.ContactType == ContactType).ToList();
                 }
 
 
@@ -126,21 +131,30 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 if (!IsNum)
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.StartsWith(Filter) && r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.StartsWith(Filter) && r.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && r.ContactType == ContactType).ToList();
                 }
-                else 
+                else
                 {
-                    contacts = contacts.Where(r => r.ContactInformations.ContactName.Contains(Filter) && r.ContactInformations.ContactName.Contains(SearchString) && r.ContactInformations.ContactType == ContactType).ToList();
+                    contacts = contacts.Where(r => r.ContactName.Contains("1") || r.ContactName.Contains("2") || r.ContactName.Contains("3") && r.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && r.ContactType == ContactType).ToList();
                 }
 
             }
 
 
 
-            return View(contacts);
-            
 
-           
+            return View(contacts);
+
+
+
+        }
+        public string CapitalizeFirstLetter(string s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return s;
+            if (s.Length == 1)
+                return s.ToUpper();
+            return s.Remove(1).ToUpper() + s.Substring(1);
         }
         //
         // GET: /Contacts/Contact/Details/5
@@ -154,17 +168,29 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         [AllowAnonymous]
         public ActionResult Create()
         {
-            //var tt = HttpContext.User.Identity.Name;
-            //var user = uService.GetSingleUserByEmail(tt);
-            //var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            //int companyId = 0;
-            //if (logObj != null)
-            //{
-            //    companyId = (int)logObj.CompanyId;
-            //}
-            //var activatedCompany = cService.GetSingleCompany(companyId);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
-            //ViewData["Company"] = activatedCompany;
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+            /// var AccSet = setService.GetAllByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var Atypes = cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+
+            if (Atypes.Count == 0)
+            {
+                cSer.AddBaseAccountTypes();
+                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+            }
+
+            ViewBag.ATypes = Atypes;
+            ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+
             return View();
         }
 
@@ -181,19 +207,17 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             Notes Note = cc.Notes;
             TelePhone Telephone = cc.TelePhone;
 
-
-
             try
             {
-            var tt = HttpContext.User.Identity.Name;
-            var user = uService.GetSingleUserByEmail(tt);
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
-            {
-                companyId = (int)logObj.CompanyId;
-            }
-            var activatedCompany = cService.GetSingleCompany(companyId);
+                var tt = HttpContext.User.Identity.Name;
+                var user = uService.GetSingleUserByEmail(tt);
+                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+                var activatedCompany = cService.GetSingleCompany(companyId);
 
                 ContactInfo.CompanyId = companyId;
                 ContactInfo.CreateBy = user.Id;
@@ -206,17 +230,18 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     PostalAddress.ContactInfoId = ContactInfo.Id;
                     PhysicalAddress.ContactInfoId = ContactInfo.Id;
                     if (!(contactDetailsService.CreateContactDetails(PostalAddress) && contactDetailsService.CreateContactDetails(PhysicalAddress)))
-                        TempData.Add("errMsg","Postal Address and Physical Address not set properly.");
+                        TempData.Add("errMsg", "Postal Address and Physical Address not set properly.");
                     PrimaryPerson.ContactInfoId = ContactInfo.Id;
                     personService.CreatePersons(PrimaryPerson);
 
                     foreach (var people in Peoples)
-        {
+                    {
                         people.ContactInfoId = ContactInfo.Id;
                         personService.CreatePersons(people);
-        }
+                    }
 
                     FinancialDetail.ContactInfoId = ContactInfo.Id;
+                    financialDetailsService.CreateFinancialDetails(FinancialDetail);
                     //FinancialDetail.
 
                     return RedirectToAction("Index");
