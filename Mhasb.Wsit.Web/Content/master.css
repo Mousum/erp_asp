@@ -13805,4 +13805,13 @@ table a:not(.btn), .table a:not(.btn){
     width: 20%;
     float: left;
 }
+.x-new {
+    position: relative;
+}
+    .x-new-indicator {
+        position: absolute;
+        right: 25px;
+        margin-top: 7px;
+        color: #ccc;
+    }
 /*Author: Rafi , Date: 25.06.2015 , new-bill*/
