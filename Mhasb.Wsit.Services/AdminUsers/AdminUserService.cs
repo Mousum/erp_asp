@@ -66,11 +66,11 @@ namespace Mhasb.Services.AdminUsers
                 return false;
             }
         }
-        public bool DeleteAdminUser(int AdminUserId) 
+        public bool DeleteAdminUser(int adminUserId) 
         {
             try
             {
-                adRep.DeleteOperation(AdminUserId);
+                adRep.DeleteOperation(adminUserId);
                 return true;
             }
             catch (Exception e)
@@ -94,12 +94,12 @@ namespace Mhasb.Services.AdminUsers
                 return null;
             }
         }
-        public AdminUser GetSingleAdminUser(int UserId) 
+        public AdminUser GetSingleAdminUser(int userId) 
         {
             try
             {
                 var voObj = adRep.GetOperation()
-                                        .Filter(ad => ad.Id == UserId)
+                                        .Filter(ad => ad.Id == userId)
                                         .Get().SingleOrDefault();
 
                 return voObj;
