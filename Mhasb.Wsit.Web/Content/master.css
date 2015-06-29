@@ -13635,3 +13635,174 @@ a:hover.tooltips span {
 
 
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
+
+/*Author: Rafi , Date: 23.06.2015 , add-contact*/
+/*Author: Rafi , Date: 25.06.2015 , new-bill*/
+.cstm-box{
+    background: #CCA19C;
+}
+.cstm-txt3{
+    color: #5191FF;
+}
+.cstm-box i{
+    font-size: 28px;
+    color: #fff;
+}
+.cstm-ii{
+    font-size: 54px;
+    margin-top: 10px;
+    color: #7D798D;
+}
+.cstm-place{
+    text-align: right;
+}
+.cch h6{
+    text-align: right;
+}
+.cstm-head{
+    margin-top: 10px;
+}
+.cstm-head1 h6{
+    text-align: right;
+    margin-top: 20px;
+}
+.crossx2{
+    text-decoration: none;
+}
+.crossx2 a{
+    text-decoration: none;
+    color: #f00;
+}
+.crossx2 a:hover{
+    text-decoration: none;
+    color: #008000;
+}
+.cstm-div-border-3{
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.cstm-div-border-4{
+    border-bottom: 1px solid #ccc;
+}
+.cstm-div-border6{
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.cstm-div-border7{
+    border-bottom: 1px solid #ccc;
+}
+.cstm-div-border8{
+    border-top: 1px solid #ccc;
+    margin-top: 2px;
+    font-weight: bold;
+}
+.cstm-bn a{
+    float: right !important;
+    margin-right: 5px;
+}
+.cstm-dro-btn btn{
+    margin-left: -110px;
+}
+.cstm-brd{
+    border-bottom: 3px solid #ccc;
+}
+.cstm-aa{
+    margin-bottom: 15px;
+}
+.cstm-aa a{
+    margin-top: 10px;
+    margin-left: -15px;
+    width: 15%;
+}
+table a:not(.btn), .table a:not(.btn){
+    text-decoration: none;
+    font-weight: bold;
+}
+.cstm-tarea-click{
+    padding:3px 7px;
+    margin: 0px;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    outline: medium none;
+    display: inline-block;
+    border: 1px solid #FBFBFB;
+    -moz-appearance: none;
+    height: 80%;
+    width: 100%;
+    margin-top: 12px;
+    opacity: 0;
+}
+.cstm-tarea-click:focus{
+    height: 100px;
+    width: 100%;
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    opacity: 1;
+}
+.cstm-tarea-click1{
+    padding:3px 7px;
+    margin: 0px;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    outline: medium none;
+    display: inline-block;
+    border: 1px solid #FBFBFB;
+    -moz-appearance: none;
+    height: 80%;
+    width: 100%;
+    margin-top: 12px;
+    opacity: 0;
+}
+.cstm-tarea-click1:focus{
+    height: 40px;
+    width: 100%;
+    padding:3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #fff none repeat scroll 0% 0%;
+    color: #888;
+    border: medium none;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    margin-top: 12px;
+    opacity: 1;
+}
+.form-border input{
+    border: #FBFBFB;
+    height: 46px;
+    margin-top: 12px;
+    opacity: 0;
+}
+.form-border input:focus{
+    opacity: 1;
+}
+.cstm-tbl-brd tr:hover{
+    background: none !important;
+}
+.cstm-dro-btn button{
+    margin-left: -9px !important;
+}
+.cstm-wd{
+    display: inline;
+}
+.cstm-wd .cs-bn{
+    width: 80%;
+    float: left;
+}
+.cstm-wd .cs-bn1{
+    width: 20%;
+    float: left;
+}
+/*Author: Rafi , Date: 25.06.2015 , new-bill*/
