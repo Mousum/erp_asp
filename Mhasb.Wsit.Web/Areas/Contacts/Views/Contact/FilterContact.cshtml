@@ -154,14 +154,20 @@
         var locString = '';
         if (str.indexOf("&SearchString=") > 0) {
             var n = str.indexOf("&SearchString=");
-            locString = str.substring(0, n != -1 ? n : str.length) + "&SearchString=" + $("#SearchString").val();;
+            locString = str.substring(0, n != -1 ? n : str.length) + "&SearchString=" + $("#SearchString").val();
 
         }
         else {
             var n = str.indexOf("?");
 
             if (n > 0) {
-                locString = str + "&SearchString=" + $("#SearchString").val();
+                x = str.indexOf("?SearchString=");
+                if (x > 0) {
+                    locString = str.substring(0, x != -1 ? x : str.length) + "?SearchString=" + $("#SearchString").val();
+                }
+                else {
+                    locString = str + "&SearchString=" + $("#SearchString").val();
+                }
             }
             else {
                 locString = str + "?SearchString=" + $("#SearchString").val();
@@ -180,9 +186,16 @@
         }
         else {
             var n = str.indexOf("?");
-
+            
             if (n > 0) {
-                locString = str + "&Filter=" + $(this).attr("data-value");
+                x = str.indexOf("?Filter=");
+                if (x > 0) {
+                    locString = str.substring(0, x != -1 ? x : str.length) + "?Filter=" + $(this).attr("data-value");
+                }
+                else {
+                    locString = str + "&Filter=" + $(this).attr("data-value");
+                }
+                
             }
             else {
                 locString = str + "?Filter=" + $(this).attr("data-value");
