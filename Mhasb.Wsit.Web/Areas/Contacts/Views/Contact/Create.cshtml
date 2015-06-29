@@ -45,10 +45,13 @@
                                     <h6>Contact</h6>
                                     @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input-con", @placeholder = "Contact Name" })
                                     @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
-                                    <a href="#">+ Add Account Number</a><span class="cstm-opt12"> (optional - create a unique code for each Contact)</span>
-                                    <h6>Account Number</h6>
-                                    @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Account Number" })
-                                    @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                                    <span id="AccNum"><a>+ Add Account Number</a><span class="cstm-opt12"> (optional - create a unique code for each Contact)</span></span>
+                                    <div id="AccNumField" style="display:none;">
+                                        <h6>Account Number</h6>
+                                        @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Account Number" })
+                                        @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                                    </div>
+
                                     <div class="col-md-12 cstm-border-con"></div>
                                 </div>
                             </div>
@@ -77,36 +80,66 @@
                                         @Html.HiddenFor(model => model.PrimaryPerson.IsPrimaryPerson, new { Value = true })
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <a href="#">+ Add Another Person</a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h6>First Name</h6>
 
-                                        @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
-                                        @Html.ValidationMessageFor(model => model.Person[0].FirstName)
-                                        <br><br>
+                                    <div id="people_header" class="col-md-12" style="display:none;">
+
+                                        <div class="row cstm-frm-row cstm-ro">
+                                            <h4>People</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>First Name</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>Last Name</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>Email</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-1 cstm-crs">
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <h6>Last Name</h6>
-                                        @Html.TextBoxFor(model => model.Person[0].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
-                                        @Html.ValidationMessageFor(model => model.Person[0].LastName)
-                                        <br><br>
+
+                                    <div class="col-md-12">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            string personDetail = "PersonDetail" + i.ToString();
+
+                                            <div id=@personDetail style="display:none;">
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.Person[@i].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                                    @Html.ValidationMessageFor(model => model.Person[@i].FirstName)
+                                                    <br><br>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.Person[@i].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                                    @Html.ValidationMessageFor(model => model.Person[@i].LastName)
+                                                    <br><br>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.Person[@i].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                                    @Html.ValidationMessageFor(model => model.Person[@i].Email)
+                                                    <br><br>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="checkbox">
+                                                </div>
+                                                <div class="col-md-1 cstm-crs">
+                                                    <br><br>
+                                                    <a class="remove_person">X</a>
+                                                </div>
+                                            </div>
+
+                                        }
+                                        <div class="col-md-12" id="AddPersonBtn">
+                                            <a>+ Add Another Person</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <h6>Email</h6>
-                                        @Html.TextBoxFor(model => model.Person[0].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
-                                        @Html.ValidationMessageFor(model => model.Person[0].Email)
-                                        <br><br>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h6>Input Emails</h6>
-                                        <input type="checkbox">
-                                    </div>
-                                    <div class="col-md-1 cstm-crs">
-                                        <br><br>
-                                        <a href="">X</a>
-                                    </div>
+
                                     <div class="col-md-12 cstm-border-con"></div>
                                 </div>
                             </div>
@@ -176,7 +209,7 @@
                                     </div>
                                     <div class="col-md-4 cstrm-p">
                                         <div class="col-md-12">
-                                            <h5>Physical Address<span class="cstm-sp"> [Same as postal address]</span></h5>
+                                            <h5>Physical Address<span id="address_copy" class="cstm-sp"> [Same as postal address]</span></h5>
                                         </div>
                                         <div class="col-md-3 cstm-p">
                                             <p>Attention</p>
@@ -412,7 +445,8 @@
                                         <div class="col-md-8">
                                             <div class="col-md-3">
                                                 <h5>Discount %</h5>
-
+                                                @*@Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Bank Account Number" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)*@
                                                 <input class="cstm-input-con3" type="text" placeholder="">
                                             </div>
                                         </div>
@@ -542,7 +576,16 @@
                         </div>
                         <div class="row">
                             <input class="btn btn-default" type="button" value="Show History (0 entries)">
-                            <input class="btn btn-default" type="button" value="Add Note">
+                            <div class="col-md-12">
+                                <h4>Note (Optional)</h4>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <h5>Note</h5>
+                                        @Html.TextAreaFor(model => model.Notes.Details, new { @class = "cstm-input-con3", @placeholder = "Note" })
+                                        @Html.ValidationMessageFor(model => model.Notes.Details)
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -552,3 +595,73 @@
     }
 </div>
 <!--End welcome dashboard section-->
+
+<script>
+    $("#AccNum").click(function () {
+        $("#AccNumField").show();
+        $("#AccNum").hide();
+    });
+
+    $("#AddPersonBtn").click(function () {
+        $("#people_header").show();
+        AddNew();
+    });
+
+    $(".remove_person").click(function () {
+        RemoveOne();
+        $("#AddPersonBtn").show();
+    });
+
+    function RemoveOne() {
+        var done = false;
+        var affected = 0;
+        for (var i = 4; i >=0; i--) {
+            console.log(i);
+            console.log(($("#PersonDetail" + i).css('display')));
+            if (($("#PersonDetail" + i).css('display') == 'block') && done == false) {
+                $("#PersonDetail" + i).hide();
+                affected = i;
+                done = true;
+                $("#AddPersonBtn").show();
+            }
+            else {
+                //alert(($("#PersonDetail" + i).css('display')));
+            }
+            
+        }
+        if (done == false || affected == 0)
+            $("#people_header").hide();
+    }
+
+    function AddNew() {
+        var done = false;
+        var affected = 0;
+        
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+            if (($("#PersonDetail" + i).css('display') == 'none') && done == false) {
+                $("#PersonDetail" + i).show();
+                affected = i;
+                done = true;
+                
+            }
+            else {
+                //alert(($("#PersonDetail" + i).css('display')));
+            }
+            
+        }
+        if (done == false || affected == 4)
+            $("#AddPersonBtn").hide();
+    }
+
+    $("#address_copy").click(function () {
+        $("#PhysicalAddress_Attention").val($("#PostalAddress_Attention").val());
+
+        $("#PhysicalAddress_Address").val($("#PostalAddress_Address").val());
+        $("#PhysicalAddress_City").val($("#PostalAddress_City").val());
+        $("#PhysicalAddress_State").val($("#PostalAddress_State").val());
+        $("#PhysicalAddress_ZipeCode").val($("#PostalAddress_ZipeCode").val());
+        $("#PhysicalAddress_Country").val($("#PostalAddress_Country").val());
+    });
+
+</script>

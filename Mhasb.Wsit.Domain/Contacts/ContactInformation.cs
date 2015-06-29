@@ -45,6 +45,7 @@ namespace Mhasb.Domain.Contacts
         Customer=1,
         Supplier=2,
         Employee=3,
-        Archive=4
+        Archive=4,
+        All = 5
     }
 }

@@ -42,17 +42,23 @@ namespace Mhasb.DAL.Mapping.Contacts
                 .HasForeignKey(i=>i.ContactInfoId);
             this.HasRequired(i => i.SaleLookups)
                 .WithMany()
-                .HasForeignKey(i => i.SalesTax);
+                .HasForeignKey(i => i.SalesTax)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(i => i.PurchaseLookups)
                 .WithMany()
-                .HasForeignKey(i => i.PurchaseLookups);
+                .HasForeignKey(i => i.PurchasesTax)
+                .WillCascadeOnDelete(false);
 
             this.HasRequired(i => i.PurchasesAccounts)
                 .WithMany()
-                .HasForeignKey(i => i.PurchasesCoaId);
+                .HasForeignKey(i => i.PurchasesCoaId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(i => i.SalesAccounts)
                 .WithMany()
-                .HasForeignKey(i => i.SalesCoaId);
+                .HasForeignKey(i => i.SalesCoaId)
+                .WillCascadeOnDelete(false);
 
             this.HasRequired(i => i.Currencies)
                .WithMany()
