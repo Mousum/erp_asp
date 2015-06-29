@@ -81,7 +81,7 @@
                             </div>
                             <div class="row cstm-frm-row">
                                 <table class="table table-bordered table-responsive table-hover table-journal cstm-tbl-brd">
-                                    <tbody>
+                                    <tbody id="itemLoader">
                                         <tr class="cstm-table-clr">
                                             <td>Item</td>
                                             <td>Description</td>
@@ -137,7 +137,7 @@
                             </div>
                             <div class="row cstm-frm-row">
                                 <div class="col-md-2">
-                                    <a href="#" class="btn btn-success" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
+                                    <a href="javascript:void(0);" class="btn btn-success" id="new_line" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
                                 </div>
                                 <div class="col-md-4 pull-right">
                                     <div class="col-md-6 cstm-div-border6">
@@ -223,9 +223,39 @@
                 </div>
             </div>
             <div class="col-md-12 cstm-aa">
-                <a href="#" class="btn btn-default" data-role="button">Add note</a>
+                <a href="javascript:void(0)" class="btn btn-default add-note" data-role="button">Add note</a>
             </div>
             <br>
+            <div class="hidden-note" style="display:none;">
+                <div class="row cstm-frm-row">
+                    <div class="col-md-6 no-padding">
+                        <textarea class="cstm-tarea" id="note-des"></textarea>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <a href="javascript:void(0)" class="btn btn-success note-save" data-role="button">Save</a>
+                    <a href="javascript:void(0)" class="btn btn-danger note-cancel" data-role="button">Cancel</a>
+                </div>
+            </div>
+            <input type="hidden" value="@ViewBag.User" id="usename" />
+            <div class="col-md-9 no-padding">
+                <table class="table table-bordered table-responsive table-hover table-journal">
+                    <thead>
+                        <tr>
+                            <th>Change</th>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th width="30%">Details</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbd"></tbody>
+                </table>
+                @Html.Hidden("changes[]", "", new { id = "change" })
+                @Html.Hidden("notedate[]", "", new { id = "date" })
+                @Html.Hidden("Notedes[]", "", new { })
+                <input type="hidden" name="note_data" id="notes" value="" />
+            </div>
         </div>
     </div>
 </div>
@@ -253,6 +283,42 @@
     //                   $("#m-tooltip").removeClass("showTooltips");
     //               }
     //            });
+
+    $("#new_line").click(function () {
+        $.get("ItemRow", function (data) {
+            $("#itemLoader").append(data);
+        });
+      
+        
+    });
+    $(".add-note").click(function () {
+        $(".hidden-note").toggle("slow");
+    })
+    $(".note-cancel").click(function () {
+        $(".hidden-note").hide("slow");
+    })
+    $(".note-save").click(function () {
+        var user = $("#usename").val();
+        var currentdate = new Date();
+        var cd = currentdate.toLocaleString();
+        var note = $("#note-des").val();
+        var curVal = $("#notes").val();
+        var ar = [];
+        if (curVal !== "") {
+            ar = JSON.parse(curVal);
+
+        }
+        var c = { "type": "note", "des": note, "date": cd };
+        ar.push(c);
+
+        $("#notes").val(JSON.stringify(ar));
+
+
+        var htmlStr = "<tr><td>Note</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>" + $("#note-des").val() + "</td></tr>";
+        $("#tbd").append(htmlStr);
+        $("#note-des").val("");
+        $(".hidden-note").hide("slow");
+    })
 </script>
 
 <script type="text/javascript">

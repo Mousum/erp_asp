@@ -23,5 +23,9 @@ namespace Mhasb.Wsit.Web.Areas.Inventories
             
             return View();
         }
+        public PartialViewResult ItemRow() 
+        {
+            return PartialView();
+        }
 	}
 }
