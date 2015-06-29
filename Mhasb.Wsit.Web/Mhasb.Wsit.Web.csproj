@@ -513,6 +513,7 @@
     <Content Include="Areas\Inventories\Views\web.config" />
     <Content Include="Areas\Inventories\Views\Purchases\EditBill.cshtml" />
     <Content Include="Areas\Inventories\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\RepeatTransection.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />

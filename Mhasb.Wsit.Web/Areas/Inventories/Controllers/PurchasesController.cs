@@ -18,5 +18,10 @@ namespace Mhasb.Wsit.Web.Areas.Inventories
         {
             return View();
         }
+        public ActionResult RepeatTransection()
+        {
+            
+            return View();
+        }
 	}
 }
