@@ -17,97 +17,94 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
     public class ChartOfAccountsController : BaseController
     {
-        private IChartOfAccountService cSer = new ChartOfAccountService();
-        private IUserService uService = new UserService();
-        private ISettingsService setService = new SettingsService();
-        private ILookupService luSer = new LookupService();
+        private readonly IChartOfAccountService _cSer = new ChartOfAccountService();
+        private readonly IUserService _uService = new UserService();
+        private readonly ISettingsService _setService = new SettingsService();
+        private readonly ILookupService _luSer = new LookupService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
-        private readonly ICompanyService iCompany = new CompanyService();
+        private readonly ICompanyService _iCompany = new CompanyService();
 
         // GET: OrgSettings/ChartOfAccounts
-        public ActionResult Index()
-        {
-            return View();
-        }
+
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public ActionResult PartialAddAccount()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
             ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
-            /// var AccSet = setService.GetAllByUserId(user.Id);
+            
+            // var AccSet = setService.GetAllByUserId(user.Id);
             int companyId = 0;
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             if (logObj != null)
             {
-                companyId = (int)logObj.CompanyId;
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
             }
-            var Atypes = cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+            var atypes = _cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
 
-            if (Atypes.Count == 0)
+            if (atypes.Count == 0)
             {
-                cSer.AddBaseAccountTypes();
-                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+                _cSer.AddBaseAccountTypes();
+                atypes = _cSer.GetAllChartOfAccountByCompanyId(companyId);
             }
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
 
-            ViewBag.ATypes = Atypes;
+            ViewBag.ATypes = atypes;
             return View("_AddAccount");
         }
 
         public ActionResult Create(int account=0)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 3)
             {
                 ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
-                /// var AccSet = setService.GetAllByUserId(user.Id);
+                // var AccSet = setService.GetAllByUserId(user.Id);
+                
                 int companyId = 0;
-                if (logObj != null)
-                {
-                    companyId = (int)logObj.CompanyId;
-                }
-                var Atypes = cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId, account);
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+                var atypes = _cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId, account);
 
-                return View("Create_new", Atypes);
+                return View("Create_new", atypes);
             }
-            else
+            string absUrl;
+            if (!checkCompanyFlow(out absUrl))
             {
-                string absUrl;
-                if (!checkCompanyFlow(out absUrl))
-                {
-                    return Redirect(absUrl);
-                }
-                TempData.Add("errMsg", "Something Wrong...");
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                return Redirect(absUrl);
             }
-
+            TempData.Add("errMsg", "Something Wrong...");
+            return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
         }
         [HttpPost]
         public ActionResult Create(ChartOfAccount chartOfAccount)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var accSet = _setService.GetAllByUserId(user.Id);
 
 
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
+
             if (logObj != null)
             {
-                companyId = (int)logObj.CompanyId;
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
             }
-
-
 
             int flag = 4;
             chartOfAccount.CompanyId = companyId;
-            if (cSer.AddChartOfAccount(chartOfAccount))
+            if (_cSer.AddChartOfAccount(chartOfAccount))
             {
+                // ReSharper disable once PossibleNullReferenceException
                 if (logObj.Companies.CompleteFlag == 3)
                 {
-                    if (iCompany.UpdateCompleteFlag(companyId, flag))
+                    if (_iCompany.UpdateCompleteFlag(companyId, flag))
                     {
                         return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
                     }
@@ -128,14 +125,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult GetCode(int id)
         {
-            var chartHead = cSer.GetSingleChartOfAccount(id);
-            var Acode = cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
-            return Json(new { code = Acode, lavel = chartHead.Level + 1 });
+            var chartHead = _cSer.GetSingleChartOfAccount(id);
+            var acode = _cSer.GeneratedCode(chartHead.ACode, chartHead.Level + 1);
+            return Json(new { code = acode, lavel = chartHead.Level + 1 });
 
         }
         public ActionResult CostCentresSettings()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             //var AccSet = setService.GetAllByUserId(user.Id);
 
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
@@ -145,24 +142,24 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 companyId = (int)logObj.CompanyId;
             }
 
-            var centers = cSer.GetAllChartOfAccountByComIdCostCentre(companyId);
+            var centers = _cSer.GetAllChartOfAccountByComIdCostCentre(companyId);
             ViewBag.centers = new SelectList(centers, "Id", "AName");
             return View("Costcentre");
         }
         public ActionResult Edit(int id)
         {
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
-            var model = cSer.GetSingleChartOfAccount(id);
+            var model = _cSer.GetSingleChartOfAccount(id);
             return View(model);
         }
         [HttpPost]
         public ActionResult Edit(ChartOfAccount ca)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _setService.GetAllByUserId(user.Id);
             ca.CompanyId = AccSet.Companies.Id;
-            if (cSer.UpdateChartOfAccount(ca))
+            if (_cSer.UpdateChartOfAccount(ca))
             {
                 TempData.Add("SucMasg", "Chart Of Account Updated Sucessfully!");
                 return RedirectToAction("Edit", "ChartOfAccounts", new { id = ca.Id });
@@ -176,25 +173,25 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult GetCostCentreDetails(int id)
         {
-            var coa = cSer.GetSingleChartOfAccount(id);
+            var coa = _cSer.GetSingleChartOfAccount(id);
             return Json(new { Acode = coa.ACode, des = coa.Description });
         }
         [HttpPost]
         public ActionResult SetCostCentreDetails(int id, string ACode, string description)
         {
-            var coa = cSer.GetSingleChartOfAccount(id);
+            var coa = _cSer.GetSingleChartOfAccount(id);
             coa.Description = description;
             coa.ACode = ACode;
             coa.IsCostCenter = true;
 
-            if (cSer.UpdateChartOfAccount(coa))
+            if (_cSer.UpdateChartOfAccount(coa))
             {
-                return Json(new { ACode = coa.ACode, AName = coa.AName, msg = "success" });
+                return Json(new { coa.ACode, coa.AName, msg = "success" });
 
             }
             else
             {
-                return Json(new { ACode = coa.ACode, AName = coa.AName, msg = "failed" });
+                return Json(new { coa.ACode, coa.AName, msg = "failed" });
             }
 
         }
@@ -219,7 +216,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             code = root == "source" ? "0" : root;
             var level = UtilityManager.GetLedgerLevel(code);
-            var nodes = cSer.TreeViewList(code, level);
+            var nodes = _cSer.TreeViewList(code, level);
             return Json(nodes);
         }
 

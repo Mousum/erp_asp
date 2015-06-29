@@ -9,6 +9,7 @@ using Mhasb.Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -224,6 +225,14 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 ContactInfo.UpdateBy = user.Id;
                 ContactInfo.CreateDate = DateTime.Now;
                 ContactInfo.UpdateDate = DateTime.Now;
+                ContactInfo.ContactType = EnumContactType.All;
+
+                //if (!(contactDetailsService.CreateContactDetails(PostalAddress) && contactDetailsService.CreateContactDetails(PhysicalAddress)))
+                //    TempData.Add("errMsg", "Postal Address and Physical Address not set properly.");
+                //ContactInfo.PostalAddId = PostalAddress.Id;
+                //ContactInfo.PhysicalAddId = PhysicalAddress.Id;
+
+
                 if (contactInfoService.CreateContInfo(ContactInfo))
                 {
 
@@ -236,13 +245,22 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
 
                     foreach (var people in Peoples)
                     {
-                        people.ContactInfoId = ContactInfo.Id;
-                        personService.CreatePersons(people);
+                        if (people.Email != null)
+                        {
+                            people.ContactInfoId = ContactInfo.Id;
+                            personService.CreatePersons(people);
+                        }
+                        
                     }
 
                     FinancialDetail.ContactInfoId = ContactInfo.Id;
                     financialDetailsService.CreateFinancialDetails(FinancialDetail);
-                    //FinancialDetail.
+                    Note.UserId = user.Id;
+                    Note.Date = DateTime.Now;
+                    Note.ContactInfoId = ContactInfo.Id;
+                    noteService.CreateNote(Note);
+                    Telephone.ContactInfoId = ContactInfo.Id;
+                    telephoneService.CreateTelePhone(Telephone);
 
                     return RedirectToAction("Index");
                 }
@@ -305,6 +323,60 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 return View();
             }
+        }
+
+
+        public void ExportToCsv()
+        {
+            string facsCsv = GetCsvString();
+
+            // Return the file content with response body. 
+            Response.ContentType = "text/csv";
+            Response.AddHeader("Content-Disposition", "attachment;filename=Contacts.csv");
+            Response.Write(facsCsv);
+            Response.End();
+        }
+
+        private string GetCsvString()
+        {
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var contacts = ConInSer.GetAllContactInfoByCompanyId(companyId);
+            StringBuilder csv = new StringBuilder();
+            
+            csv.AppendLine("ContactName,AccountNumber,CreateDate,Type");
+
+            foreach(var contact in contacts)
+            {
+                csv.Append(contact.ContactName);
+                //csv.Append(contact.ContactDtails);
+                csv.Append(contact.AccountNumber);
+                csv.Append(contact.CreateDate);
+                csv.Append(contact.ContactType);
+                csv.AppendLine();
+
+            }
+
+            //string[] faculties = new string[5] { "asd", "asd", "wer", "wqer", "hjrth" };
+
+            //foreach (var faculty in faculties)
+            //{
+            //csv.Append("," + faculties[0] + ",");
+            //csv.Append(faculties[1] + ",");
+            //csv.Append(faculties[2] + ",");
+            //csv.Append(faculties[3] + ",");
+            //csv.Append(faculties[4]);
+
+            //csv.AppendLine();
+            //}
+
+            return csv.ToString();
         }
 
     }
