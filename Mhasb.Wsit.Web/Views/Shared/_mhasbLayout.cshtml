@@ -111,6 +111,7 @@
                             <li class="">
                                 <a href='@Url.Action("Index", "UserInRoles", new { area = "UserManagement" })'>User Roles</a>
                             </li>
+
                             
                         </ul>
                     </li>
@@ -222,7 +223,17 @@
                         </ul>
                     </li>*@
                   
-                       
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            Contacts <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu cstm-submenu" role="menu">
+                            <li class="">
+                                <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts" })'>All Contacts</a>
+                            </li>
+                        </ul>
+
+                    </li> 
                     
                 </ul>
                 @*<a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>*@
