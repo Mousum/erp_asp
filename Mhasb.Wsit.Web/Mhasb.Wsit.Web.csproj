@@ -185,6 +185,8 @@
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
+    <Compile Include="Areas\Inventories\InventoriesAreaRegistration.cs" />
+    <Compile Include="Areas\Inventories\Controllers\PurchasesController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -508,6 +510,11 @@
     <Content Include="Areas\Contacts\Views\Contact\FilterContact.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\Inventories\Views\web.config" />
+    <Content Include="Areas\Inventories\Views\Purchases\EditBill.cshtml" />
+    <Content Include="Areas\Inventories\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\RepeatTransection.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\ItemRow.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -690,6 +697,8 @@
     <Folder Include="Areas\Contacts\Models\" />
     <Folder Include="Areas\Contacts\Views\ContactGroup\" />
     <Folder Include="Areas\Contacts\Views\Shared\" />
+    <Folder Include="Areas\Inventories\Models\" />
+    <Folder Include="Areas\Inventories\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagements\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
