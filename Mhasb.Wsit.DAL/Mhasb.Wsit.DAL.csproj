@@ -42,6 +42,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -115,7 +117,9 @@
     <Compile Include="Operations\ICrudOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
@@ -134,6 +138,9 @@
     <Content Include="Data\Scripts\areazone.sql" />
     <Content Include="Data\Scripts\spget_chartofaccount.txt" />
     <Content Include="Data\Scripts\sp_CompanyListWithLastVisitor.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Db Diagram\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
