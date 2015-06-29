@@ -63,6 +63,22 @@ namespace Mhasb.Services.Inventories
             }
         }
 
+        //public List<Item> GetAllItemsByCompany(int CompanyId)
+        //{
+        //    try
+        //    {
+        //        var _obj = _rep.GetOperation()
+                    
+        //            .Get()
+        //            .ToList();
+        //        return _obj;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var msg = ex.Message;
+        //        return null;
+        //    }
+        //}
 
 
 

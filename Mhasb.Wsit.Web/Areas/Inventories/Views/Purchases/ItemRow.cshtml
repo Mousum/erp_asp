@@ -25,6 +25,7 @@
         </div>
     </td>
     <td>
+        @Html.DropDownList("Items", (IEnumerable<SelectListItem>)ViewBag.Items)
         <div class="dropdown form-border">
             <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
