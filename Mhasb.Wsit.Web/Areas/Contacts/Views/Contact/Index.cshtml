@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Mhasb.Domain.Contacts.ContactInformation>
+
+   
+
+   
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostalAddId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhysicalAddId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateBy)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalAddId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhysicalAddId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }
+
+        </table>
+    
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#pop-up-1">
+    New Group
+</button>
+@*New Group Modal*@
+<div class="modal fade" id="pop-up-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">New Contact Group</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class=" col-md-6">
+                    <div class="row cstm-frm-row">
+
+                        <input type="text" class="cstm-input" placeholder="Group Name" id="gname" validate="RequiredField" style="border:1px solid #b6b6b6;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" data-id="" class="btn btn-primary confirm">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".confirm").click(function () {
+        var baseUrl = '@Url.Content("~/")';
+        var data = { name: $("#gname").val() }
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "Contacts/ContactGroup/Create",
+            data: data,
+            success: function (data) {
+               
+                if (data.msg == "Success") {
+                    $('.close').trigger('click');
+
+                    setTimeout(function () {
+
+                    }, 2000);
+
+                }
+                else
+                {
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+</script>

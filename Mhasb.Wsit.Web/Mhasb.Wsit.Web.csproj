@@ -40,10 +40,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PagedList">
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList.Mvc">
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -177,6 +180,11 @@
     <Compile Include="Areas\Commons\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Commons\Controllers\LegalEntitiesController.cs" />
     <Compile Include="Areas\Commons\Controllers\LookupsController.cs" />
+    <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
+    <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
+    <Compile Include="Areas\Inventories\InventoriesAreaRegistration.cs" />
+    <Compile Include="Areas\Inventories\Controllers\PurchasesController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\NotificationManagement\NotificationManagementAreaRegistration.cs" />
     <Compile Include="Areas\OrganizationManagement\Controllers\CompanyController.cs" />
@@ -190,9 +198,12 @@
     <Compile Include="Areas\OrgSettings\Controllers\FinalcialSettingController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\TaxSettingController.cs" />
     <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
+    <Compile Include="Areas\Subscriptions\Controllers\SubscriptionsController.cs" />
+    <Compile Include="Areas\Subscriptions\SubscriptionsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
     <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
+    <Compile Include="Areas\UserManagement\Controllers\LoggedInUserController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RolesController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\RoleVsActionsController.cs" />
     <Compile Include="Areas\UserManagement\Controllers\UserInRolesController.cs" />
@@ -207,6 +218,7 @@
     <Compile Include="AuthSecurity\ICustomPrincipal.cs" />
     <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,6 +230,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\Encryptor.cs" />
     <Compile Include="Utilities\UtilityManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +499,29 @@
     <Content Include="Areas\OrganizationManagement\Views\Company\Registration.cshtml" />
     <Content Include="Areas\OrganizationManagement\Views\Company\Add.cshtml" />
     <Content Include="Areas\UserManagement\Views\Users\Finish.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\Create_new.cshtml" />
+    <Content Include="Areas\Accounts\Views\ChartOfAccounts\_AddAccount.cshtml" />
+    <Content Include="Areas\OrganizationManagement\Views\Company\Settings.cshtml" />
+    <Content Include="Areas\Contacts\Views\web.config" />
+    <Content Include="Areas\Contacts\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Create_old.cshtml" />
+    <Content Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Create.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\FilterContact.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\web.config" />
+    <Content Include="Areas\Inventories\Views\Purchases\EditBill.cshtml" />
+    <Content Include="Areas\Inventories\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\RepeatTransection.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\ItemRow.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\web.config" />
+    <Content Include="Areas\Subscriptions\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\Subscriptions\Index.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\Index.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Edit.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -539,6 +575,7 @@
     <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Fakes Include="Fakes\CrystalDecisions.CrystalReports.Engine.fakes" />
     <None Include="Properties\PublishProfiles\mhasb.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -642,15 +679,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Shared\_LandLayout.cshtml" />
     <Content Include="Views\Home\Clients.cshtml" />
     <Content Include="Views\Shared\_mhasbLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
     <Content Include="Uploads\Wsit\Document_WSIT_1_lpg5lku4.s3p.pdf" />
+    <Content Include="Views\CommonBase\DataGridView.cshtml" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -664,11 +702,17 @@
     <Folder Include="Areas\Accounts\Views\Shared\" />
     <Folder Include="Areas\Commons\Models\" />
     <Folder Include="Areas\Commons\Views\Shared\" />
+    <Folder Include="Areas\Contacts\Models\" />
+    <Folder Include="Areas\Contacts\Views\ContactGroup\" />
+    <Folder Include="Areas\Contacts\Views\Shared\" />
+    <Folder Include="Areas\Inventories\Models\" />
+    <Folder Include="Areas\Inventories\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
-    <Folder Include="Areas\Organizations\Views\Employee\" />
     <Folder Include="Areas\OrgSettings\Models\" />
+    <Folder Include="Areas\Subscriptions\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />
+    <Folder Include="Areas\UserManagement\Views\LoggedInUser\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Uploads\Al-Qalam_Media_\" />
     <Folder Include="Uploads\New_Company\" />
@@ -702,6 +746,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

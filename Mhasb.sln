@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.Web", "Mhasb.Wsi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.CustomModel", "Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj", "{06BC9FB9-6608-4262-812E-C705D9F6C076}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mhasb.Wsit.Web.Admin", "Mhasb.Wsit.Web.Admin\Mhasb.Wsit.Web.Admin.csproj", "{F2979666-1C15-4669-ACA0-E2AC3E687DFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06BC9FB9-6608-4262-812E-C705D9F6C076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2979666-1C15-4669-ACA0-E2AC3E687DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

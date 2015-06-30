@@ -111,6 +111,7 @@
                             <li class="">
                                 <a href='@Url.Action("Index", "UserInRoles", new { area = "UserManagement" })'>User Roles</a>
                             </li>
+
                             
                         </ul>
                     </li>
@@ -124,7 +125,8 @@
                         </a>
                         <ul class="dropdown-menu cstm-submenu" role="menu">
                             <li class="">
-                                <a href='@Url.Action("GeneralLedgerSettings", "Voucher", new { area = "Accounts" })'>General Ledger Settings</a>
+                                <a href='@Url.Action("Settings","Company", new { area = "OrganizationManagement" })'>General Settings</a>
+
                             </li>
                             <li class="">
                                 <a href='@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })'>Chart of Accounts</a>
@@ -160,7 +162,9 @@
                             <li class="">
                                 <a href='@Url.Action("Index", "designation", new { area = "OrganizationManagement" })'>Designations</a>
                             </li>
-                            
+                            <li class="">
+                                <a href='@Url.Action("Index", "Invitations", new { area = "NotificationManagement" })'>Invitation List</a>
+                            </li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">
@@ -192,7 +196,7 @@
                         </ul>
                         
                     </li>
-                    <li role="presentation" class="dropdown">
+                    @*<li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             Commons <span class="caret"></span>
                         </a>
@@ -217,9 +221,19 @@
                                 <a href='@Url.Action("Index", "LegalEntities", new { area = "Commons" })'>Legal Entities</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
                   
-                       
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            Contacts <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu cstm-submenu" role="menu">
+                            <li class="">
+                                <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts" })'>All Contacts</a>
+                            </li>
+                        </ul>
+
+                    </li> 
                     
                 </ul>
                 @*<a href='@Url.Action("Logout", "Users", new { area = "UserManagement" })' class="logout"><i class="fa fa-power-off"></i></a>*@
@@ -241,11 +255,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "/UserManagement/Users/GetSelectedCompanyName",
+                url: "@Url.Action("GetSelectedCompanyName", "Users", new { area = "UserManagement" })",
                 type: "POST",
                 data: {  },
                 success: function (data) {
-                    console.log(data);
                     if (data.success == "False") {
                        
                     } else {
@@ -253,7 +266,7 @@
                             $('.selectedCompany').text("MHSAB");
                         } else {
                             if (data.Companies.DisplayName !== "") {
-                                $('.selectedCompany').text(data.Companies.DisplayName);
+                                $('.selectedCompany').text(data.Companies.TradingName);
                             }
 
                         }
@@ -286,15 +299,13 @@
                             $('#companyhtm').append(companyhtm);
                             $('.gotoCompany').click(function () {
                                 var companyID = $(this).attr('id');
-                                var baseUrl = '@Url.Content("~/")';
-
                                 $.ajax({
-                                    url: "/UserManagement/Users/UpdateCompnay",
+                                    url: "@Url.Action("UpdateCompnay", "Users", new { area = "UserManagement" })",
                                     type: "POST",
                                     data: { ComanyId: companyID },
                                     success: function (data) {
                                         if (data.success == "True") {
-                                            window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
+                                           window.location = "@Url.Action("Dashboard", "Users", new { area = "UserManagement" })";
                                         } else {
 
                                         }

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Settings</title>
+</head>
+<body>
+    <div class="row general-set">
+        <h2>General Settings</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 org-gen">
+                <div class="col-md-8"><h4>Organization</h4></div>
+                <div class="col-md-4"><p><i class="fa fa-star"></i>Starred items will appear in the Settings menu</p></div>
+            </div>
+
+            <div class="col-md-12">
+
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("Update", "Company", new { area = "OrganizationManagement" })">Organizational Settings</a></p><p class="cstm-para-gen">Edit your organisation details.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart Of Accounts</a></p><p class="cstm-para-gen">Add, edit, archive, delete, import or export your accounts.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Tracking</a></p><p class="cstm-para-gen">Manage tracking items for more powerful reporting.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("Index", "FinalcialSetting", new { area = "OrgSettings" })">Financial Settings</a></p><p class="cstm-para-gen">Edit your financial settings such as tax period and lock dates.</p></div>
+                </div>
+
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Conversion Balances</a></p><p class="cstm-para-gen">Update account balances from previous accounting systems.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Users</a></p><p class="cstm-para-gen">Manage who has access to your organisation.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></p><p class="cstm-para-gen">Add, edit and delete the tax rates you want to use.</p></div>
+                </div>
+                <div class="col-md-6 cstm-org">
+                    <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Custom Contact List</a></p><p class="cstm-para-gen">Create custom links for your xero contacts and other systems.</p></div>
+                </div>
+                <div class="col-md-12 ">
+                    <div class="col-md-5 org-gen1">
+                        <h4>Features</h4>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-6 org-gen1">
+                        <h4>Connect</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Invoice Settings</a></p><p class="cstm-para-gen">Create branding themes for documents & add payment services to invoices.</p></div>
+                        </div>
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></p><p class="cstm-para-gen">Add foreign currencies that your organisation uses.</p></div>
+                        </div>
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Pay Items</a></p><p class="cstm-para-gen">Manage the pay items used for pay runs.</p></div>
+                        </div>
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Email Settings</a></p><p class="cstm-para-gen">Set a reply-to email address and email template content.</p></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Mhasb To Mhasb</a></p><p class="cstm-para-gen">Send and receive sales invoices and bills from other Mhasb users.</p></div>
+                        </div>
+                        <div class="col-md-12 cstm-org">
+                            <div class="cstm-menu"><p><i class="fa fa-star-o"></i><a href="@Url.Action("", "", new { area=""})">Add-ons</a></p><p class="cstm-para-gen">Connect to other online services.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

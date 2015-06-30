@@ -7,6 +7,7 @@
 <li style="display:none" class='GetSettingsByUserId' data-url='@Url.Action("GetSettingsByUserId", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdateEmail' data-url='@Url.Action("UpdateEmail", "Users", new { area = "UserManagement" })'></li>
 <li style="display:none" class='UpdatePassword' data-url='@Url.Action("UpdateUserPassword", "Users", new { area = "UserManagement" })'></li>
+<li style="display:none" class='MatchPass' data-url='@Url.Action("MatchPassword", "Users", new { area = "UserManagement" })'></li>
 
 <div class="container my-dashboard">
     <div class="row clearfix no-margin">
@@ -39,7 +40,7 @@
                     <label>Your current password is</label>
                 </div>
                 <div class="col-md-5 edit-fa">
-                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", type = "password", id = "dbpass" })
+                    @Html.TextBoxFor(u => u.Users.Password, new { @class = "cstm-input", id = "dbpass" })
                     <a href="javascript:void(0)" id="editpass"><i class="fa fa-pencil"></i></a>
                 </div>
 
@@ -128,11 +129,11 @@
                             <input type="radio" id="radio-1" name="logCheck" value="radio-1"> Go to My MHSAB
                         </label>
                     </div>
-                    <div class="col-md-3">
-                        <label>
-                            <input type="radio" id="radio-2" name="logCheck" value="radio-2"> Go to My Dashboard
-                        </label>
-                    </div>
+                    @*<div class="col-md-3">
+                            <label>
+                                <input type="radio" id="radio-2" name="logCheck" value="radio-2"> Go to My Dashboard
+                            </label>
+                        </div>*@
                     <div class="col-md-4">
                         <label>
                             <input type="radio" id="radio-3" name="logCheck" value="radio-3"> Go to The Organisation I was Last In
@@ -151,7 +152,7 @@
                     </div>
 
                 </div>
-                <div class="row cstm-frm-row">
+                @*<div class="row cstm-frm-row">
                     <div class="col-md-2">
                         <label class="txt-bold-r-1">Company</label>
                     </div>
@@ -162,7 +163,7 @@
                         </label>
                     </div>
 
-                </div>
+                </div>*@
                 <div class="row cstm-frm-row">
                     <div class="col-md-10 text-right cstm-btn-acc-st">
                         <button type="button" class="btn btn-success account2nSub">Save</button>
@@ -174,7 +175,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         var urlset = $('.GetSettingsByUserId').attr("data-url");
         $.ajax({
             url: urlset,
@@ -182,12 +183,13 @@
             data: {},
             success: function (data) {
                 //console.log(typeof data.lgcompany);
-                if (data.lgdash === true) {
-                    $('#radio-2').prop('checked', true);
-                } else if (data.lgcompany === true) {
-                    $('#radio-1').prop('checked', true);
-                } else {
+                if (data.lglast === true) {
                     $('#radio-3').prop('checked', true);
+                } //else if (data.lgcompany === true) {
+                    //    $('#radio-1').prop('checked', true);
+                    //}
+                else {
+                    $('#radio-1').prop('checked', true);
                 }
                 if (data.TimezoneId) {
                     $('#zoneId option[value=' + data.TimezoneId + ']').attr('selected', 'selected');
@@ -200,9 +202,9 @@
             error: function () {
 
             }
-        });   
+        });
     });
-    
+
     //$("#editmail").click(function () {
     //    $("#editmaildiv").toggle("slow");
     //});

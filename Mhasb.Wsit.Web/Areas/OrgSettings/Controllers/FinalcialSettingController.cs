@@ -10,7 +10,7 @@ using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
-    public class FinalcialSettingController : Controller
+    public class FinalcialSettingController : BaseController
     {
         private readonly ICompanyService iCompany = new CompanyService();
         private readonly ICurrency cService = new CurrencyService();
@@ -22,35 +22,58 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /OrgSettings/FinancialSetting/
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            var fs=fService.GetFinalcialSetting(id);
-            if (fs != null)
-                return View(fs);
-            else
-                TempData.Add("errMsg","Financial Settings not found");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            if (logObj.CompanyId != null)
+            {
+                var fs = fService.GetCurrentFinalcialSettingByComapny((int)logObj.CompanyId);
+                if (fs != null)
+                    return View(fs);
+                else
+                    TempData.Add("errMsg","Financial Settings not found");
+            }
             return RedirectToAction("Create");
         }
         public ActionResult Create()
         {
-            int yearDiff = DateTime.Now.Year - 1929;
-            var list = Enumerable.Range(1930, yearDiff).ToList().Select(r => new
+
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 1)
             {
-                Id = r,
-                Name = r
-            });
-            ViewBag.yearList = new SelectList(list, "Id", "Name");
+                ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+                int yearDiff = DateTime.Now.Year - 1929;
+                var list = Enumerable.Range(1930, yearDiff).ToList().Select(r => new
+                {
+                    Id = r,
+                    Name = r
+                });
+                ViewBag.yearList = new SelectList(list, "Id", "Name");
 
 
-            var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
-                                    .Cast<EnumFinalcialPeriod>()
-                                    .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
-                                    .ToList();
-            ViewBag.PeriodList = new SelectList(periodList, "Id", "Name");
+                var periodList = Enum.GetValues(typeof(EnumFinalcialPeriod))
+                                        .Cast<EnumFinalcialPeriod>()
+                                        .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                        .ToList();
+                ViewBag.PeriodList = new SelectList(periodList, "Id", "Name");
 
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            return View();
+                ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
+                return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
         }
 
         [HttpPost]
@@ -69,11 +92,22 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             fs.IsActive = true;
             if (fService.AddFinalcialSetting(fs))
             {
-                int flag=2;
-                comService.UpdateCompleteFlag(companyId,flag);
+                if (logObj.Companies.CompleteFlag == 1)
+                {
+                    int flag = 2;
+                    comService.UpdateCompleteFlag(companyId, flag);
+                    return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
+                }
+                TempData.Add("errMsg","Successfully created Financial Settings..");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else
+            {
+                TempData.Add("errMsg", "Error in creating Financial Settings!!!");
+                return RedirectToAction("Create");
             }
 
-            return RedirectToAction("Create", "Invitations", new { Area = "NotificationManagement" });
+            
         }
 
         public ActionResult Edit(int id)

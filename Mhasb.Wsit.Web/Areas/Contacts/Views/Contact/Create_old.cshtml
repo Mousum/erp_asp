@@ -1,0 +1,269 @@
+﻿@model Mhasb.Wsit.CustomModel.Contact.ContactCustome
+
+
+
+<div class="container my-dashboard">
+    <div class="row clearfix no-margin">
+        <div class="col-md-12 no-padding">
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
+            <h2 class="txt-bold promo-text"><span class="promo-highlight">Join</span> to the MHASB Community for FREE !!</h2>
+            <p class="promo-p text-center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula nunc blandit eros facilisis malesuada. Integer in orci turpis. Praesent id risus ullamcorper, iaculis est eget, scelerisque nulla. Integer magna risus
+            </p>
+        </div>
+    </div>
+    <div class="row clearfix no-margin">
+        <h3 class="all-head">Add Contact</h3>
+        <div class="col-md-6 clearfix pull-right text-right">
+            <label class="text-uppercase">List My profile:</label>
+            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-width="100" data-size="small">
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="row clearfix p-setting-container">
+            <div class="col-md-8 base-block no-margin clearfix">
+
+                <h4 class="all-head">Contact Details</h4>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Contact Name:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Contact No:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Primay Person:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PrimaryPerson.FirstName, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PrimaryPerson.FirstName)
+                            @Html.HiddenFor(model => model.PrimaryPerson.IsPrimaryPerson, new { Value = true })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Peoples:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.Person[0].FirstName, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.Person[0].FirstName)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Postal Address:</label>
+
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Address:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PostalAddress.Address, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PostalAddress.Address)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">City:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PostalAddress.City)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">ZipCode:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PostalAddress.ZipeCode)
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Physical Address:</label>
+
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Address:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PhysicalAddress.Address, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PhysicalAddress.Address)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">City:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PhysicalAddress.City)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">ZipCode:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.PhysicalAddress.ZipeCode)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Telephone:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.TelePhone.CellPhone)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Mobile:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.TelePhone.Mobile)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Direct Dial:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.TelePhone.DirectDial)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Skype:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.TelePhone.Skype)
+                        </div>
+
+                    </div>
+                </div>
+
+                <label class="btn-block-dis">Financial Settings:</label>
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Bank Account Name:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountName)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Bank Account Number:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row cstm-frm-row">
+                    <div class="col-md-12 pad-right-null">
+                        <div class="col-md-12"><label id="errmsg"></label></div>
+                        <label class="btn-block-dis">Financial Details:</label>
+                        <div class="col-md-6 no-padding">
+                            @Html.TextBoxFor(model => model.FinancialDetails.Details, new { @class = "cstm-input", @placeholder = "Contact Name" })
+                            @Html.ValidationMessageFor(model => model.FinancialDetails.Details)
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-success btn-block-dis pull-right" value="Save">
+        </div>
+    }
+</div>

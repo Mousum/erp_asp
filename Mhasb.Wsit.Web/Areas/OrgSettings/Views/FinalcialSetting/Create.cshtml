@@ -3,21 +3,24 @@
 @{
     ViewBag.Title = "Create";
 }
+@if (ViewBag.CompanyCompleteFlag < 5)
+{
+    <div class="container">
+        <ul class="cstm-breadcrumb">
+            <li><a href="#" class="active">Start</a></li>
+            <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+            <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
+            @*<li><a href="#">Invoice Settings</a></li>*@
+            <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })">Invite Users</a></li>
+            @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
+                <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
+            <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
+            @*<li><a href="#">Account Balances</a></li>*@
+            <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
+        </ul>
+    </div>
+}
 
-<div class="container">
-    <ul class="cstm-breadcrumb">
-        <li><a href="#" class="active">Start</a></li>
-        <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
-        <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
-        @*<li><a href="#">Invoice Settings</a></li>*@
-        <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })">Invite Users</a></li>
-        @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })">Currencies</a></li>
-        <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })">Tax Rates</a></li>*@
-        <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })">Chart of Accounts</a></li>
-        @*<li><a href="#">Account Balances</a></li>*@
-        <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
-    </ul>
-</div>
 
 
 
@@ -182,7 +185,7 @@
                 </div>
 
             </div>
-            
+
         }
     </div>
 </div>
@@ -195,7 +198,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#StartingDate').datepicker({
                 format: 'mm/dd/yyyy'
             });
@@ -210,13 +213,13 @@
                 format: 'mm/dd/yyyy'
             });
         });
-        $("#save").click(function() {
+        $("#save").click(function () {
             //alert();
             //return false;
 
             if (new Date($("#StartingDate").val()) > new Date($("#EndingDate").val())) {
                 $("#enddate").text("End Date Must Come After Start Date").show("slow");
-                setTimeout(function() { $("#enddate").hide("slow")}, 3000);
+                setTimeout(function () { $("#enddate").hide("slow") }, 3000);
                 return false;
             } else if (new Date($("#StartingDate").val()) > new Date($("#PeriodLockDate").val()) || new Date($("#PeriodLockDate").val()) > new Date($("#EndingDate").val())) {
                 $("#lockdate").text("Period Locak Date Must Come After Start Date And Before End Date").show("slow");

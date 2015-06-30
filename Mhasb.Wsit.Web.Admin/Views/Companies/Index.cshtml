@@ -1,0 +1,53 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div class="row">
+    <div class="col-sm-10">
+        <div class="box">
+
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-table"></i>
+                    Companies
+                </h3>
+                <div style="float:right">
+                    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-success" })
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "cstm-input" })
+                    <button class="btn btn-primary cstm-tbl-srch-btn" id="SearchStringBtn"><i class="fa fa-fw fa-search"></i></button>
+                </div>
+            </div>
+
+        </div>
+        <div class="box-content nopadding">
+            <div class="alert alert-success" style="display:none;"></div>
+            <div id="CompanyListShow">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+
+        $.get('@Url.Action("List", "Companies")' + '?page=', function (data) {
+            $('#CompanyListShow').html(data);
+        }
+            );
+
+    });
+    $(document).on("click", "#SearchStringBtn", function () {
+        var baseUrl = '@Url.Content("~/")';
+        var SearchString = $("#SearchString").val();
+        var url = baseUrl + " Companies/List?page=''" + "&SearchString=" + SearchString;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#CompanyListShow').html(result);
+            }
+        });
+        return false;
+    });
+</script>
+

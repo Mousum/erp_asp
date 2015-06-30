@@ -1,0 +1,96 @@
+﻿<tr class="cstm-table-clr">
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">None</a></li>
+                @foreach (var item in ViewBag.Items)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="@item.Id" href="javascript:void(0)">@item.ItemCode -  @item.ItemName</a></li>
+                }
+            </ul>
+        </div>
+    </td>
+    <td><textarea class="cstm-tarea-click" placeholder="" id="description"></textarea></td>
+    <td><textarea class="cstm-tarea-click1" placeholder="" id="quantity"></textarea></td>
+    <td><textarea class="cstm-tarea-click1" placeholder="" id="unitPrice"></textarea></td>
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle" type="text" id="coAccount" data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" data-toggle="modal" data-target="#accountModal">+ Add new account...</a></li>
+                @foreach (var item in ViewBag.CoaList)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                }
+            </ul>
+        </div>
+    </td>
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle" type="text" id="taxPer" data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#taxModal">+ Add new tax rate...</a></li>
+                @foreach (var item in ViewBag.Lookups)
+                {
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
+                }
+            </ul>
+        </div>
+    </td>
+    <td id="ammount"></td>
+    <td class="crossx2"><a class="RemoveRow" href="Javascript:Void(0);">X</a></td>
+</tr>
+
+
+
+
+<script>
+    $(".RemoveRow").click(function () {
+        $(this).closest('tr').remove();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.itemCliked').click(function () {
+            var Id = $(this).attr("id");
+            $.ajax({
+                url: "@Url.Action("GetjsonItem", "Purchases", new { area = "Inventories" })",
+                type: "POST",
+                data: { Id: Id },
+                success: function (data) {
+                    var json = $.parseJSON(JSON.stringify(data));
+                    var data = json.itemList[0];
+                    console.log(data);
+                    if (json.success == "False") {
+                        console.log("Error");
+                    } else {
+                        var ammount = data.Quantity * data.UnitPrice;
+                        $('#itemtXt').val(data.ItemName);
+                        $('#description').val(data.Description);
+                        $('#quantity').val(data.Quantity);
+                        $('#unitPrice').val(data.UnitPrice);
+                        $('#coAccount').val(data.AccountCode + " - " + data.AccountName);
+                        $('#taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity+".00"+ "%)");
+                        $('#ammount').text(ammount + ".00");
+                        $('#sub-total').text(ammount + ".00");
+                        $('#calTax').text(data.PtxtQuantity + ".00");
+                        var total;
+                        if (data.PtxtQuantity >=0) {
+                            total = ammount + (ammount * (data.PtxtQuantity / 100));
+                            }else{
+                            total = ammount;
+                            }
+                       
+                        $('#total').text(total);
+                    }
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        });
+    });
+</script>

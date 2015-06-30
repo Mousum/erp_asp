@@ -5,6 +5,7 @@ using Mhasb.Domain.OrgSettings;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
@@ -13,6 +14,7 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         private readonly ITaxSetting _taxSettingService = new TaxSettingService();
         private readonly IUserService uService = new UserService();
         private readonly ISettingsService sService = new SettingsService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         public ActionResult Index()
         {
@@ -36,9 +38,16 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             try
             {
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-                var AccSet = sService.GetAllByUserId(user.Id);
-                taxSetting.CompanyId = Int32.Parse(AccSet.Companies.Id.ToString());
+                //var AccSet = sService.GetAllByUserId(user.Id);
+                //taxSetting.CompanyId = Int32.Parse(AccSet.Companies.Id.ToString());
 
+                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+                taxSetting.CompanyId = companyId;
                 if (_taxSettingService.AddTaxSetting(taxSetting))
                     return RedirectToAction("Details", "TaxSetting", new { Area = "OrgSettings", id = taxSetting.Id });
                 else

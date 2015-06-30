@@ -10,6 +10,7 @@ using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Users;
 using Mhasb.Domain.Commons;
 using Mhasb.Domain.OrgSettings;
+using Mhasb.Domain.Contacts;
 
 namespace Mhasb.Domain.Organizations
 {
@@ -80,6 +81,8 @@ namespace Mhasb.Domain.Organizations
         public virtual AreaTime AreaTimes { get; set; }
         public virtual LegalEntity LegalEntities { get; set; }
         public virtual CompanyProfile CompanyProfiles { get; set; }
+
+        public virtual ContactInformation ContactInformations { get; set; }
 
         public virtual ICollection<CompanyDocument> Documents { get; set; }
         public virtual ICollection<FinancialSetting> FinalcialSettings { get; set; }

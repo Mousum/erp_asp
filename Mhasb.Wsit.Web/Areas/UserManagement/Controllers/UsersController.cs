@@ -14,11 +14,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mhasb.Wsit.Web.Utilities;
+using Mhasb.Domain.Loggers;
 
 namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 {
 
-    public class UsersController : Controller
+    public class UsersController : CommonBaseController
     {
         private IUserService uService = new UserService();
 
@@ -27,7 +29,8 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private readonly ICompanyService cService = new CompanyService();
         private readonly IFinalcialSetting fService = new FinalcialSettingService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
-        private readonly ICompanyService iCompany = new CompanyService();
+        private readonly ICountryService countryService = new CountryService();
+        //private readonly ICompanyService iCompany = new CompanyService();
 
         //
         // GET: /UserManagement/Users/
@@ -66,12 +69,21 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             {
                 if (uService.GetSingleUserByEmail(user.Email) == null)
                 {
+                    Encryptor encrypt = new Encryptor();
+                    user.Password = encrypt.GetMD5(user.Password);
+                    user.ConfirmPassword = encrypt.GetMD5(user.ConfirmPassword);
                     if (uService.AddUser(user))
                     {
                         //return View("RegistrationSuccess");
 
                         CustomPrincipal.Login(user.Email, user.Password, false);
-                        return Redirect("MyMhasb");
+                        return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError("Msg", "Registration Failed!!!");
+                        // return Content("Already Register");
+                        return View();
                     }
                 }
                 else
@@ -83,8 +95,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
             }
 
-
-            return Content("You Must Agree with our terms and Condition");
+            else
+            {
+                ModelState.AddModelError("Msg", "You Must Agree with Terms and Condition....");
+                // return Content("Already Register");
+                return View();
+            }
         }
 
         public ActionResult Login()
@@ -98,10 +114,25 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         [AllowAnonymous]
         public ActionResult Login(string email, string password)
         {
-            if (CustomPrincipal.Login(email, password, false) != false)
+            Encryptor encryptor = new Encryptor();
+            password = encryptor.GetMD5(password);
+            if (CustomPrincipal.Login(email, password, false))
             {
+                var user = uService.GetSingleUserByEmail(email);
+                var userSetting = setService.GetAllByUserId(user.Id);
 
-                return Redirect("MyMhasb");
+                if(userSetting!=null && userSetting.lglast==true)
+                {
+                    string absUrl;
+                    if (!checkCompanyFlow(out absUrl))
+                    {
+                        return Redirect(absUrl);
+                    }
+                    return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
+
+                }
+                else
+                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
             }
             else
             {
@@ -120,9 +151,13 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-        [AllowAnonymous]
         public ActionResult Dashboard()
         {
+            string absUrl;
+            if (!checkCompanyFlow(out absUrl))
+            {
+                return Redirect(absUrl);
+            }
             var tt = HttpContext.User.Identity.Name;
             var user = uService.GetSingleUserByEmail(tt);
             var userSettings = setService.GetAllByUserId(user.Id);
@@ -134,41 +169,55 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             var activatedCompany = cService.GetSingleCompany(companyId);
             ViewBag.CompanyLocation = activatedCompany.Location;
-            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+            //var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
+            var financialSettings = fService.GetCurrentFinalcialSettingByComapny(logObj.Companies.Id);
+
 
             ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
 
-            
+
 
             return View("Deshboard_new");
         }
 
         public ActionResult MyMhasb()
         {
-            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            if (user == null)
+            try
             {
-                return RedirectToAction("Logout");
+                User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (user == null)
+                {
+                    return RedirectToAction("Logout");
+                }
+
+                var myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
+
+                var companyArray = uService.GetcompanyByUserID(user.Id);
+                //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
+                ViewBag.CompanyArr = user.Id;
+                //var accountsetting = setService.GetAllByUserId(user.Id);
+                var accountsetting = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                ViewBag.userName = user.FirstName + " " + user.LastName;
+                ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.TradingName : "Company was not set.";
+                ViewBag.lastLoginTime = DateTime.Now;
+                return View("MyMhasb_new", myCompanyList);
             }
-            //List<Company> myCompanyList = iCompany.GetAllCompanies()
-            //                                       .Where(c => c.Users.Id == user.Id).ToList();
-            //List<Company> myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id);
-            List<LogView> myCompanyList = cService.GetLastVisitorWiseCompanyList(user.Id);
-            var companyArray = uService.GetcompanyByUserID(user.Id);
-            //User user = uService.GetSingleUserByEmail("zahedwsit@dfg.com");
-            ViewBag.CompanyArr = user.Id;
-            var accountsetting = setService.GetAllByUserId(user.Id);
-            ViewBag.userName = user.FirstName + " " + user.LastName;
-            ViewBag.lastLoginCompany = accountsetting != null ? accountsetting.Companies.DisplayName : "Company was not set.";
-            ViewBag.lastLoginTime = DateTime.Now;
-            return View("MyMhasb_new", myCompanyList);
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                ModelState.AddModelError("Msg", rr);
+                // return Content("Already Register");
+                return View("MyMhasb_new",new List<LogView>());
+                
+            }
+            
 
         }
         public JsonResult GetCompany()
         {
 
             User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, c.DisplayName }).ToList();
+            var myCompanyList = cService.GetAllCompaniesByUserEmployee(user.Id).Select(c => new { c.Id, DisplayName = c.TradingName }).ToList();
 
             if (myCompanyList.Count() <= 0)
             {
@@ -192,6 +241,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             }
             else
             {
+
                 return Json(setObj, JsonRequestBehavior.AllowGet);
             }
         }
@@ -201,6 +251,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var accsetting = new AccountSetting();
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
+            users.Password = "Password is hidden.";
             try
             {
                 accsetting.Users = users;
@@ -263,8 +314,9 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             var email = HttpContext.User.Identity.Name;
             var User = uService.GetSingleUserByEmail(email);
-            User.Password = password;
-            User.ConfirmPassword = password;
+            var Encryptor = new Encryptor();
+            User.Password = Encryptor.GetMD5(password);
+            User.ConfirmPassword = Encryptor.GetMD5(password);
             if (uService.UpdateUser(User))
             {
                 CustomPrincipal.Login(email, User.Password, false);
@@ -278,13 +330,20 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId, int ComanyId)
+        public ActionResult UpdateSettings(bool lgcompany, bool lgdash, bool lglast, int TimezoneId, int? ComanyId)
         //public ActionResult UpdateSettings(Settings setting)
         {
 
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
+
+            //var logEntry = new CompanyViewLog();
+            //logEntry.UserId = users.Id;
+            //logEntry.CompanyId = ComanyId;
+            //logEntry.LoginTime = DateTime.Now;
+            ////logEntry.IpAddress = "";
+            //_companyViewLog.AddCompanyViewLog(logEntry);
 
             if (setObj != null)
             {
@@ -319,6 +378,12 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var email = HttpContext.User.Identity.Name;
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
+            var logEntry = new CompanyViewLog();
+            logEntry.UserId = users.Id;
+            logEntry.CompanyId = ComanyId;
+            logEntry.LoginTime = DateTime.Now;
+            //logEntry.IpAddress = "";
+            _companyViewLog.AddCompanyViewLog(logEntry);
 
             try
             {
@@ -349,7 +414,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
 
         }
 
-        public JsonResult GetSettingsByUserId()
+        public JsonResult GetSettingsByUserId ()
         {
             var setObj = new Settings();
             try
@@ -388,29 +453,67 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         }
 
         public ActionResult Finish() {
-            return View();
+
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            if (logObj.Companies.CompleteFlag == 5 )
+            {
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+            else if(logObj.Companies.CompleteFlag == 4)
+            {
+                return View();
+            }
+            else
+            {
+                string absUrl;
+                if (!checkCompanyFlow(out absUrl))
+                {
+                    return Redirect(absUrl);
+                }
+                TempData.Add("errMsg", "Something Wrong...");
+                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+
+            
         }
         [HttpPost]
+        // ReSharper disable once MethodOverloadWithOptionalParameter
         public ActionResult Finish(int flag=5)
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
             if (logObj != null)
-            {
-                companyId = (int)logObj.CompanyId;
-            }
-            if (iCompany.UpdateCompleteFlag(companyId, flag))
+                companyId = (int) logObj.CompanyId;
+            if (cService.UpdateCompleteFlag(companyId, flag))
             {
                 return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
             }
-            else
-            {
-                return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
-            }
-            return RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
-           
+            return View(); //RedirectToAction("Finish", "Usres", new { area = "UserManagement" });
         }
-
+        [HttpPost]
+        public ActionResult MatchPassword(string oldpass, string newPass)
+        {
+          var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+          var Encrypted = new Encryptor();
+          if (user.Password == Encrypted.GetMD5(oldpass))
+          {
+              if (newPass != "") 
+              {
+                  if (Encrypted.GetMD5(newPass.ToString()) == user.Password) 
+                  {
+                      return Json(new { msg="OldAndNewPassAreSame",flag="false"});
+                  }
+                  return Json(new { msg="Alright",flag="true"});
+              }
+              return Json(new { msg="OldPassMatched",flag="true"});
+          }
+          else 
+          {
+              return Json(new{msg="InvalidOldPass",flag="false"});
+          }
+        }
     }
+    
 }

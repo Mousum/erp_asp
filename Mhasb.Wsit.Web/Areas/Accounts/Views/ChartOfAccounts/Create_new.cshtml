@@ -1,0 +1,96 @@
+﻿@model List<Mhasb.Wsit.CustomModel.Accounts.ChartOfAccountCustom>
+
+@if (ViewBag.CompanyCompleteFlag < 5)
+{
+    <div class="container">
+        <ul class="cstm-breadcrumb">
+            <li><a href="#" class="active">Start</a></li>
+            <li><a href="@Url.Action("update", "Company", new { area = "OrganizationManagement" })" class="active">Organisation Settings</a></li>
+            <li><a href="@Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" })" class="active">Financial Settings</a></li>
+            @*<li><a href="#">Invoice Settings</a></li>*@
+            <li><a href="@Url.Action("Create", "Invitations", new { area = "NotificationManagement" })" class="active">Invite Users</a></li>
+            @*<li><a href="@Url.Action("Create", "Currency", new { area = "OrgSettings" })" class="active">Currencies</a></li>
+                <li><a href="@Url.Action("Create", "TaxSetting", new { area = "OrgSettings" })" class="active">Tax Rates</a></li>*@
+            <li><a href="@Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" })" class="active">Chart of Accounts</a></li>
+            @*<li><a href="#">Account Balances</a></li>*@
+            <li><a href="@Url.Action("Finish", "Users", new { area = "UserManagement" })">Done.</a></li>
+        </ul>
+    </div>
+}
+
+<div class="container my-dashboard">
+    @if (TempData["SucMasg"] != null)
+    {
+        <div class="alert alert-success">@TempData["SucMasg"]</div>
+    }
+    @if (TempData["errMsg"] != null)
+    {
+        <div class="alert alert-danger">@TempData["errMsg"]</div>
+    }
+
+    <div class="row clearfix">
+        <h4 class="all-head">Chart Of Accounts</h4>
+
+        @{ Html.RenderAction("PartialAddAccount"); }
+
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <h4>Account List:</h4>
+            </div>
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-3 edit-fa">
+                <div class="input-group col-md-12">
+                    <input type="text" class="search-query form-control cstm-input" placeholder="Search">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger btn-tag-search" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <ul>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=0})">ALL</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=1})">Assets</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=2})">Liabilities</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=3})">Equity</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=4})">Expense</a></li>
+                        <li style="display:inline;"><a href="@Url.Action("Create", "ChartOfAccounts", new { account=5})">Revenue</a></li>
+                    </ul>
+                </div>
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Account Code</th>
+                            <th>Account Type</th>
+                            <th>Tax Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.AName</td>
+                                    <td>@item.ACode</td>
+                                    <td>@item.AccountType</td>
+                                    <td>@item.Tax</td>
+                                    <td></td>
+                                </tr>
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

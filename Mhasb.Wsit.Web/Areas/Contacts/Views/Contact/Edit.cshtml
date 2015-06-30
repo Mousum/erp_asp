@@ -1,0 +1,880 @@
+﻿@model Mhasb.Wsit.CustomModel.Contact.ContactCustome
+
+
+<div class="container my-dashboard">
+
+    <div class="row clearfix no-margin">
+        <div class="col-md-12 no-padding">
+            @if (TempData["SucMasg"] != null)
+            {
+                <div class="alert alert-success">@TempData["SucMasg"]</div>
+            }
+            @if (TempData["errMsg"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errMsg"]</div>
+            }
+            <h2 class="txt-bold promo-text"><span class="promo-highlight">Join</span> to the MHASB Community for FREE !!</h2>
+            <p class="promo-p text-center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula nunc blandit eros facilisis malesuada. Integer in orci turpis. Praesent id risus ullamcorper, iaculis est eget, scelerisque nulla. Integer magna risus
+            </p>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.ContactInformation.Id, new { Value = Model.ContactInformation.Id })
+        @Html.HiddenFor(m => m.PostalAddress.Id, new { Value = Model.PostalAddress.Id })
+        @Html.HiddenFor(m => m.PhysicalAddress.Id, new { Value = Model.PhysicalAddress.Id })
+        @Html.HiddenFor(m => m.PrimaryPerson.Id, new { Value = Model.PrimaryPerson.Id })
+        @Html.HiddenFor(m => m.FinancialDetails.Id, new { Value = Model.FinancialDetails.Id })
+        @Html.HiddenFor(m => m.Notes.Id, new { Value = Model.Notes.Id })
+        @Html.HiddenFor(m => m.TelePhone.Id, new { Value = Model.TelePhone.Id })
+
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="welcome">
+                    <h3 class="all-head">Add Contact</h3>
+                </div>
+                <hr>
+                <p>What's this &nbsp;<i class="fa fa-comments"></i></p>
+                <div class="row clearfix no-margin card">
+                    <div class="col-md-12">
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Contact Information</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <h5>Add Contact</h5>
+                                    <h6>Contact</h6>
+                                    @Html.TextBoxFor(model => model.ContactInformation.ContactName, new { @class = "cstm-input-con", @placeholder = "Contact Name" })
+                                    @Html.ValidationMessageFor(model => model.ContactInformation.ContactName)
+                                    <span id="AccNum"><a>+ Add Account Number</a><span class="cstm-opt12"> (optional - create a unique code for each Contact)</span></span>
+                                    <div id="AccNumField" style="display:none;">
+                                        <h6>Account Number</h6>
+                                        @Html.TextBoxFor(model => model.ContactInformation.AccountNumber, new { @class = "cstm-input-con1", @placeholder = "Account Number" })
+                                        @Html.ValidationMessageFor(model => model.ContactInformation.AccountNumber)
+                                    </div>
+
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Primary Person</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <div class="col-md-3">
+
+                                        <h6>First Name</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.FirstName)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Last Name</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.LastName)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6>Email</h6>
+                                        @Html.TextBoxFor(model => model.PrimaryPerson.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPerson.Email)
+                                        @Html.HiddenFor(model => model.PrimaryPerson.IsPrimaryPerson, new { Value = true })
+                                    </div>
+
+
+                                    <div id="people_header" class="col-md-12" style="display:block;">
+
+                                        <div class="row cstm-frm-row cstm-ro">
+                                            <h4>People</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>First Name</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>Last Name</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h6>Email</h6>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-1 cstm-crs">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            string personDetail = "PersonDetail" + i.ToString();
+                                            if (i < Model.Person.Count)
+                                            {
+                                                @Html.HiddenFor(m => m.Person[@i].Id, new { Value = Model.Person[@i].Id })
+
+                                                <div id=@personDetail style="display:block;">
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].FirstName)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].LastName)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].Email)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                    <div class="col-md-1 cstm-crs">
+                                                        <br><br>
+                                                        <a class="remove_person">X</a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            @*else
+                                            {
+                                                var abc = new Mhasb.Domain.Contacts.Person();
+                                                <div id=@personDetail style="display:block;">
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                                       
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                                     
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                                        
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                    <div class="col-md-1 cstm-crs">
+                                                        <br><br>
+                                                        <a class="remove_person">X</a>
+                                                    </div>
+                                                </div>
+                                            }*@
+
+                                        }
+                                        <div class="col-md-12" id="AddPersonBtn">
+                                            <a>+ Add Another Person</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="row cstm-frm-row cstm-ro">
+                                <h4>Contact Details</h4>
+                            </div>
+                            <div class="row cstm-frm-row-hed">
+                                <div class="col-md-12 cstm-anc">
+                                    <div class="col-md-4 cstrm-p">
+                                        <div class="col-md-12">
+                                            <h5>Postal Address</h5>
+                                        </div>
+                                        <div class="col-md-3 cstm-p">
+                                            <p>Attention</p>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(model => model.PostalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Attention" })
+                                            @Html.ValidationMessageFor(model => model.PostalAddress.Attention)
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Street Address or PO Box</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(model => model.PostalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Address" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.Address)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Town/City</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.City, new { @class = "cstm-input-con3", @placeholder = "City" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.City)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>State/Region</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.State, new { @class = "cstm-input-con3", @placeholder = "State" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.State)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Postal/Zip Code</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PostalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Zip" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.ZipeCode)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Country</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.DropDownListFor(model => model.PostalAddress.CountryId, ViewBag.CountryList as SelectList, new { @class = "cstm-input-con3 combobox" })
+                                                @Html.ValidationMessageFor(model => model.PostalAddress.Country)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 cstrm-p">
+                                        <div class="col-md-12">
+                                            <h5>Physical Address<span id="address_copy" class="cstm-sp"> [Same as postal address]</span></h5>
+                                        </div>
+                                        <div class="col-md-3 cstm-p">
+                                            <p>Attention</p>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(model => model.PhysicalAddress.Attention, new { @class = "cstm-input-con3", @placeholder = "Attention" })
+                                            @Html.ValidationMessageFor(model => model.PhysicalAddress.Attention)
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Street Address or PO Box</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(model => model.PhysicalAddress.Address, new { @class = "cstm-tarea", @placeholder = "Address" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.Address)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Town/City</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.City, new { @class = "cstm-input-con3", @placeholder = "City" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.City)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>State/Region</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.State, new { @class = "cstm-input-con3", @placeholder = "State" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.State)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Postal/Zip Code</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PhysicalAddress.ZipeCode, new { @class = "cstm-input-con3", @placeholder = "Zip" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.ZipeCode)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 no-margin no-padding">
+                                            <div class="col-md-3 cstm-p">
+                                                <p>Country</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                @Html.DropDownListFor(model => model.PhysicalAddress.CountryId, ViewBag.CountryList as SelectList, new { @class = "cstm-input-con3 combobox" })
+                                                @Html.ValidationMessageFor(model => model.PhysicalAddress.CountryId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-12 cstm-opt12345">
+                                            <h4>
+                                                Telephone <a class="tooltips" href="#">
+                                                    <i class="fa fa-question-circle">
+                                                        <span>Tooltip</span>
+                                                    </i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.CellPhone, new { @class = "cstm-input-con3", @placeholder = "Telephone" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.CellPhone)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Fax</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.Fax, new { @class = "cstm-input-con3", @placeholder = "Fax" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.Fax)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Mobile</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.Mobile, new { @class = "cstm-input-con3", @placeholder = "Mobile" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.Mobile)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h4>Direct Dial</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 cstm-inpu">
+                                                @Html.TextBoxFor(model => model.TelePhone.DirectDial, new { @class = "cstm-input-con3", @placeholder = "Direct Dial" })
+                                                @Html.ValidationMessageFor(model => model.TelePhone.DirectDial)
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12 cstm-inpu">
+                                            <p>Skype Name/Number</p>
+                                            @Html.TextBoxFor(model => model.TelePhone.Skype, new { @class = "cstm-input-con3", @placeholder = "Skype" })
+                                            @Html.ValidationMessageFor(model => model.TelePhone.Skype)
+                                        </div>
+                                        <div class="col-md-12 cstm-inpu">
+                                            <p>Website</p>
+                                            @Html.TextBoxFor(model => model.TelePhone.WebSite, new { @class = "cstm-input-con3", @placeholder = "Website" })
+                                            @Html.ValidationMessageFor(model => model.TelePhone.WebSite)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h3>Financial Details</h3>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Default account settings <span class="cstm-opt123">These settings can be overridden on individual transactions</span></h4>
+                                        <h4>For Sales</h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Default Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select name="FinancialDetails.SalesDefaultTax">
+                                                        <option selected value="0"> None </option>
+                                                        <option value="1">Amounts Are Tax Inclusive</option>
+                                                        <option value="2">Amounts AreTaxExclusive</option>
+                                                        <option value="3">Amounts Dont Include Tax</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Default Account</h5>
+                                                <label class="cstm-select">
+
+
+
+                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SaleLookups, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
+                                                    <select class="cstm-input" name="FinancialDetails.SalesCoaId" required="required">
+                                                        <option value="">--Select Account Type--</option>
+                                                        @foreach (var items in ViewBag.Atypes)
+                                                        {
+                                                            if (items.Level == 1)
+                                                            {
+                                                                <optgroup label=@items.AName></optgroup>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@items.Id">@items.AName</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4>For Purchases</h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Default Tax</h5>
+                                                <label class="cstm-select">
+                                                    <select name="FinancialDetails.PurchasesDefaultTax">
+                                                        <option selected value="0"> None </option>
+                                                        <option value="1">Amounts Are Tax Inclusive</option>
+                                                        <option value="2">Amounts AreTaxExclusive</option>
+                                                        <option value="3">Amounts Dont Include Tax</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Default Account</h5>
+                                                <label class="cstm-select">
+                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SalesCoaId, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
+                                                    <select class="cstm-input" name="FinancialDetails.PurchasesCoaId" required="required">
+                                                        <option value="">--Select Account Type--</option>
+                                                        @foreach (var items in ViewBag.Atypes)
+                                                        {
+                                                            if (items.Level == 1)
+                                                            {
+                                                                <optgroup label=@items.AName></optgroup>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@items.Id">@items.AName</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4 class="cstm-opt12345">
+                                            Tax <a class="tooltips" href="#">
+                                                <i class="fa fa-question-circle">
+                                                    <span>Tooltip</span>
+                                                </i>
+                                            </a><span class="cstm-opt123"> This default tax rates can be overridden on individual transactions</span>
+                                        </h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Tax ID Number</h5>
+                                                @Html.TextBoxFor(model => model.FinancialDetails.TaxNumber, new { @class = "cstm-input-con3", @placeholder = "Tax Id No" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.TaxNumber)
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Sales Tax</h5>
+                                                <label class="cstm-select">
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.SalesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
+                                                    @*<select>
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Purchases Tax</h5>
+                                                <label class="cstm-select">
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.PurchasesTax, (SelectList)ViewBag.Lookups, "--Select Tax --")
+                                                    @*<select>
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Sales Discount <span class="cstm-opt123"> This default sales discount rate can be overridden on individual transactions in sales invoices and quotes</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-3">
+                                                <h5>Discount %</h5>
+                                                @*@Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Bank Account Number" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)*@
+                                                <input class="cstm-input-con3" type="text" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Currency <span class="cstm-opt123"> This default currency can be overridden on individual transactions.</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-3">
+                                                <h5>Default Currency</h5>
+                                                <label class="cstm-select">
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.CurrencyId, ViewBag.CurrencyList as SelectList, new { reqiured = "reqiured" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.CurrencyId)
+                                                    @*<select>
+                                                            <option selected> USA </option>
+                                                            <option>UK</option>
+                                                            <option>Bangladesh</option>
+                                                        </select>*@
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4 class="cstm-opt12345">
+                                            Batch Payments <a class="tooltips" href="#">
+                                                <i class="fa fa-question-circle">
+                                                    <span>Tooltip</span>
+                                                </i>
+                                            </a>
+                                        </h4>
+                                        <div class="col-md-12 cstm-border-con"></div>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Bank Account Number</h5>
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Bank Account Number" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Bank Account Name</h5>
+                                                @Html.TextBoxFor(model => model.FinancialDetails.BankAccountName, new { @class = "cstm-input-con3", @placeholder = "Bank Account Name" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountName)
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Details</h5>
+                                                @Html.TextBoxFor(model => model.FinancialDetails.Details, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.Details)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>Invoice Settings <span class="cstm-opt123"> This settings can be overridden on individual sales invoices credit notes, statements, purchase orders and quotes</span></h4>
+                                        <div class="col-md-5">
+                                            <h5>Bills Default Due Date (optional)</h5>
+                                            <div class="col-md-12">
+                                                <div class="col-md-1 cstm-p">
+                                                    <p>Due</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.FinancialDetails.BillsDue, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.BillsDue)
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="cstm-select">
+
+                                                        <select name="FinancialDetails.BillsTerms">
+                                                            <option selected value="0"> of the following month </option>
+                                                            <option value="1">day(s) after the bill date</option>
+                                                            <option value="2">day(s) after the end of the bill month</option>
+                                                            <option value="3">of the current month</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h5>Sales Invoices Default Due Date(optional)</h5>
+                                            <div class="col-md-12">
+                                                <div class="col-md-1 cstm-p">
+                                                    <p>Due</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.FinancialDetails.SakesDue, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.SakesDue)
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="cstm-select">
+                                                        <select name="FinancialDetails.SalesTerms">
+                                                            <option selected value="0"> of the following month </option>
+                                                            <option value="1">day(s) after the bill date</option>
+                                                            <option value="2">day(s) after the end of the bill month</option>
+                                                            <option value="3">of the current month</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12">
+                                        <h4>MHSAB Network Key <span class="cstm-opt123"> This must be provided by the contact</span></h4>
+                                        <div class="col-md-8">
+                                            <div class="col-md-4">
+                                                <h5>Key</h5>
+                                                @Html.TextBoxFor(model => model.FinancialDetails.NetworkKey, new { @class = "cstm-input-con3", @placeholder = "Network Key" })
+                                                @Html.ValidationMessageFor(model => model.FinancialDetails.NetworkKey)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 cstm-border-con"></div>
+                                    <div class="col-md-12 cstm-btn-submit pull-right">
+
+                                        <button type="button" class="btn btn-danger pull-right">Cancel</button>
+                                        <button type="submit" class="btn btn-info pull-right cstm-btn-s">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row cstm-his">
+                            <span class="cstm-opt1234">
+                                History & Notes
+                                <!-- Button trigger modal -->
+
+                                <a class="tooltips" href="#">
+                                    <i class="fa fa-question-circle">
+                                        <span>Tooltip</span>
+                                    </i>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <input class="btn btn-default" type="button" value="Show History (0 entries)">
+                            <div class="col-md-12">
+                                <h4>Note (Optional)</h4>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <h5>Note</h5>
+                                        @Html.TextAreaFor(model => model.Notes.Details, new { @class = "cstm-input-con3", @placeholder = "Note" })
+                                        @Html.ValidationMessageFor(model => model.Notes.Details)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<!--End welcome dashboard section-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 5px 10px;
+    }
+</style>
+
+<script>
+    $("#AccNum").click(function () {
+        $("#AccNumField").show();
+        $("#AccNum").hide();
+    });
+
+    $("#AddPersonBtn").click(function () {
+        $("#people_header").show();
+        AddNew();
+    });
+
+    $(".remove_person").click(function () {
+        RemoveOne();
+        $("#AddPersonBtn").show();
+    });
+
+    function RemoveOne() {
+        var done = false;
+        var affected = 0;
+        for (var i = 4; i >= 0; i--) {
+            console.log(i);
+            console.log(($("#PersonDetail" + i).css('display')));
+            if (($("#PersonDetail" + i).css('display') == 'block') && done == false) {
+                $("#PersonDetail" + i).hide();
+                affected = i;
+                done = true;
+                $("#AddPersonBtn").show();
+            }
+            else {
+                //alert(($("#PersonDetail" + i).css('display')));
+            }
+
+        }
+        if (done == false || affected == 0)
+            $("#people_header").hide();
+    }
+
+    function AddNew() {
+        var done = false;
+        var affected = 0;
+
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+            if (($("#PersonDetail" + i).css('display') == 'none') && done == false) {
+                $("#PersonDetail" + i).show();
+                affected = i;
+                done = true;
+
+            }
+            else {
+                //alert(($("#PersonDetail" + i).css('display')));
+            }
+
+        }
+        if (done == false || affected == 4)
+            $("#AddPersonBtn").hide();
+    }
+
+    $("#address_copy").click(function () {
+        $("#PhysicalAddress_Attention").val($("#PostalAddress_Attention").val());
+
+        $("#PhysicalAddress_Address").val($("#PostalAddress_Address").val());
+        $("#PhysicalAddress_City").val($("#PostalAddress_City").val());
+        $("#PhysicalAddress_State").val($("#PostalAddress_State").val());
+        $("#PhysicalAddress_ZipeCode").val($("#PostalAddress_ZipeCode").val());
+        $("#PhysicalAddress_Country").val($("#PostalAddress_Country").val());
+    });
+
+
+
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .attr("title", "Show All Items")
+                  .tooltip()
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                  .attr("title", value + " didn't match any item")
+                  .tooltip("open");
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.autocomplete("instance").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+
+    $(function () {
+        $(".combobox").combobox();
+        $("#toggle").click(function () {
+            $(".combobox").toggle();
+        });
+
+        $("#combobox1").combobox();
+        $("#toggle1").click(function () {
+            $("#combobox1").toggle();
+        });
+
+    });
+
+</script>

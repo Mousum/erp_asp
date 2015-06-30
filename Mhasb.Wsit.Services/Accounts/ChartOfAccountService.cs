@@ -9,6 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Mhasb.Wsit.CustomModel.Accounts;
+using Mhasb.Wsit.DAL.Data;
+using System.Data.SqlClient;
 
 namespace Mhasb.Services.Accounts
 {
@@ -81,6 +83,7 @@ namespace Mhasb.Services.Accounts
                                         .Include(c=>c.Companies)
                                         .Filter(c=>c.CompanyId == CompanyId || c.CompanyId.HasValue ==false)
                                         .Get()
+                                        .OrderBy(c=>c.ACode)
                                         .ToList();
                 return cAObj;
             }
@@ -90,13 +93,64 @@ namespace Mhasb.Services.Accounts
                 return null;
             }
         }
+
+
+        public List<ChartOfAccount> GetAllChartOfAccountByCompanyIdForSecondLevel(int CompanyId)
+        {
+            try
+            {
+                var cAObj = _finalCrudOperation.GetOperation()
+                                        .Include(c => c.Companies)
+                                        .Filter(c => c.CompanyId == CompanyId || c.CompanyId.HasValue == false && c.Level<=2)
+                                        .Get()
+                                        .OrderBy(c => c.ACode)
+                                        .ToList();
+                return cAObj;
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
+        public List<ChartOfAccountCustom> CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(int CompanyId,int code)
+        {
+            try
+            {
+                //var cAObj = _finalCrudOperation.GetOperation()
+                //                        .Include(c => c.Companies)
+                //                        .Filter(c => c.CompanyId == CompanyId || c.CompanyId.HasValue == false && c.Level > 2 && c.ACode.StartsWith(code))
+                //                        .Get()
+                //                        .OrderBy(c => c.ACode)
+                //                        .ToList();
+                //return cAObj;
+                using (var context = new WsDbContext())
+                {
+                    var param1 = new SqlParameter("@queryoption", 1);
+                    var param2 = new SqlParameter("@accounttypeid", code);
+                    var param3 = new SqlParameter("@companyid", CompanyId);
+
+                    const string query = "EXEC spget_chartofaccount @queryoption,@accounttypeid,@companyid";
+                    var rr = context.Database.SqlQuery<ChartOfAccountCustom>(query, param1, param2,param3).ToList();
+
+                    return rr;
+                }
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+        }
+
         public List<ChartOfAccount> GetAllChartOfAccountByComIdCostCentre(int CompanyId)
         {
             try
             {
                 var cAObj = _finalCrudOperation.GetOperation()
                                         .Include(c => c.Companies)
-                                        .Filter(c => c.CompanyId == CompanyId && c.IsCostCenter == false &&c.Level==4)
+                                        .Filter(c => c.CompanyId == CompanyId && c.IsCostCenter == true &&c.Level==3)
                                      //   .Filter(c => c.IsCostCenter == false)
                                         .Get().ToList();
 
@@ -138,7 +192,7 @@ namespace Mhasb.Services.Accounts
            {
                var tt = maxVal.Substring(1, 2);
                maxValue = Convert.ToInt32(tt)+1;
-               if (level != 4)
+               if (level != 3)
                {
                    returnCode = pCode + maxValue.ToString().PadLeft(2, '0');
                }
@@ -150,7 +204,7 @@ namespace Mhasb.Services.Accounts
            }
            else
            {
-               if (level != 4)
+               if (level != 3)
                {
                    returnCode = pCode + maxValue.ToString().PadLeft(2, '0');
                }
@@ -218,6 +272,24 @@ namespace Mhasb.Services.Accounts
            }
 
           
+       }
+       public List<ChartOfAccount> GetDefaultChartOfAccounts()  //This function Will Return Only The Default COAs
+       {
+
+           try
+           {
+               var cAObj = _finalCrudOperation.GetOperation()
+                                       .Filter(c=>c.CompanyId.HasValue == false)
+                                       .Get()
+                                       .OrderBy(c => c.ACode)
+                                       .ToList();
+               return cAObj;
+           }
+           catch (Exception ex)
+           {
+               var rr = ex.Message;
+               return null;
+           }
        }
     }
 }

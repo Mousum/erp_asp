@@ -10,15 +10,33 @@ using Mhasb.Wsit.Web.Areas.UserManagement.Models;
 
 namespace Mhasb.Wsit.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CommonBaseController
     {
         private IRoleVsActionService arService = new RoleVsActionService();
+        private IUserService uService = new UserService();
+        private ISettingsService setService = new SettingsService();
         public ActionResult Index()
         {
-
-            
             if (HttpContext.User.Identity.IsAuthenticated)
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            {
+
+                var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                var userSetting = setService.GetAllByUserId(user.Id);
+
+                if (userSetting !=null && userSetting.lglast)
+                {
+                    string absUrl;
+                    if (!checkCompanyFlow(out absUrl))
+                    {
+                        return Redirect(absUrl);
+                    }
+                    return RedirectToAction("Dashboard", "Users", new { Area = "UserManagement" });
+
+                }
+                else
+                    return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+            }
+                
             var model = new Login();
            // return View(model);
             //return View("Index",model);

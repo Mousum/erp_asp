@@ -78,15 +78,15 @@ namespace Mhasb.Services.OrgSettings
             }
         }
 
-        public FinancialSetting GetCurrentFinalcialSettingByComapny(int CompanyId)
+        public FinancialSetting GetCurrentFinalcialSettingByComapny(int companyId)
         {
             try
             {
                 var fSetttingObj = _finalCrudOperation.GetOperation()
                     .Include(fs => fs.Companies)
                     .Include(fs => fs.Currencies)
-                    //.Filter(fs => fs.CompanyId == CompanyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate, DateTime.Now) >= 0)
-                    .Filter(fs => fs.CompanyId == CompanyId)
+                    .Filter(fs => fs.CompanyId == companyId && DateTime.Compare(fs.StartingDate, DateTime.Now) <= 0 && DateTime.Compare(fs.EndingDate, DateTime.Now) >= 0)
+                    //.Filter(fs => fs.CompanyId == companyId)
                     .Get()
                     .FirstOrDefault();
 

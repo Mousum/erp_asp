@@ -49,6 +49,7 @@ namespace Mhasb.Services.Loggers
            }
            catch (Exception ex)
            {
+               var msg = ex.Message;
                return null;
            }
        }
