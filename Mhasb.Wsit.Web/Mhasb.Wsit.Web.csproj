@@ -515,6 +515,7 @@
     <Content Include="Areas\Inventories\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\RepeatTransection.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\ItemRow.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\Index.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
