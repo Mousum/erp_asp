@@ -6,6 +6,7 @@ using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Wsit.CustomModel.Contact;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -284,6 +285,11 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         // GET: /Contacts/Contact/Edit/5
         public ActionResult Edit(int id)
         {
+            ContactInformation ContactInfo = contactInfoService.GetContactInformationById(id);
+            //ContactCustome ContactInfo = contactInfoService.GetContactInformationById(id);
+
+
+
             return View();
         }
 

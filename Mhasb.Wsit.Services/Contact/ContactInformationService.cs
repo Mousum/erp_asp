@@ -75,11 +75,13 @@ namespace Mhasb.Services.Contact
             }
         }
 
-        public ContactInformation GetAllContactInformationById(long Id)
+        public ContactInformation GetContactInformationById(long Id)
         {
             try
             {
                 var _Obj = _rep.GetOperation()
+                    .Include(k=>k.ContactDtails)
+                    
                     .Filter(i => i.Id == Id)
                     .Get().FirstOrDefault();
                 return _Obj;
