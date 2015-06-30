@@ -13815,3 +13815,92 @@ table a:not(.btn), .table a:not(.btn){
         color: #ccc;
     }
 /*Author: Rafi , Date: 25.06.2015 , new-bill*/
+
+/*Author: Tanveer , Date: 04.06.2015 , 3 pages, Pricing*/
+.center-div{
+    float: none;
+    margin: 0px auto;
+}
+.standard-head{
+    margin-top: -150px;
+    text-align: center;
+    color:#fff;
+}
+.price-tab-container{
+    margin-top: 60px;
+}
+.price-tab-container .btn{
+    border: 0px;
+}
+.price-tab-container button.active{
+    background: #fff;
+    color: #000;
+}
+.plans-container{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.price-info{
+    background: #f3f7fb;
+    min-height: 200px;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+.price-info .btn{
+    width: 100%;
+}
+.price-info ul{
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+}
+.price-info ul li{
+    list-style: none;
+    margin-bottom: 10px;
+    display: block;
+}
+.price-p{
+    margin: 15px 0px;
+}
+.tag-small{
+    font-size: 20px;
+}
+.tag-large{
+    font-size: 3.5em;
+}
+.plans-block{
+    padding: 15px;
+}
+.plans-block h4{
+    text-transform: capitalize;
+}
+.plans-block p{
+    color: #909090;
+}
+.pricing-div{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.pricing-single{
+    border: 1px solid #d8d8d8;
+    padding: 15px;
+}
+.pricing-popular{
+    background: #E4FBE3;
+    border-color: #9AFF94;
+}
+.select-check-p{
+    font-size: 18px;
+    font-weight: bold;
+}
+.price-green{
+    color:#0F9E5E;
+    font-size: 18px;
+}
+.plan-desc{
+    border-top: 1px solid #d8d8d8;
+    padding-top: 10px;
+}
+/*Author: Tanveer , Date: 04.06.2015 , 3 pages, Pricing*/

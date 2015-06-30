@@ -30,7 +30,7 @@ namespace Mhasb.Services.Contact
             try
             {
                 contactdetails.State = ObjectState.Modified;
-                _rep.AddOperation(contactdetails);
+                _rep.UpdateOperation(contactdetails);
                 return true;
             }
             catch (Exception ex)

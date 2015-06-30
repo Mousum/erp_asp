@@ -73,10 +73,12 @@
     <Compile Include="Commons\LanguageService.cs" />
     <Compile Include="Commons\LegalEntityService.cs" />
     <Compile Include="Commons\LookupService.cs" />
+    <Compile Include="Contact\AssignToGroupService.cs" />
     <Compile Include="Contact\ContactDetailsService.cs" />
     <Compile Include="Contact\ContactGroupService.cs" />
     <Compile Include="Contact\ContactInformationService.cs" />
     <Compile Include="Contact\FinancialDetailsService.cs" />
+    <Compile Include="Contact\IAssignToGroupService.cs" />
     <Compile Include="Contact\IContactDetailsService.cs" />
     <Compile Include="Contact\IContactGroupService.cs" />
     <Compile Include="Contact\IContactInformationService.cs" />
