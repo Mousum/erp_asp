@@ -20,18 +20,18 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 {
     public class VoucherController : BaseController
     {
-        private readonly ICurrency cService = new CurrencyService();
-        private readonly IVoucherService vService = new VoucherService();
-        private readonly IVoucherDetailService vdService = new VoucherDetailService();
-        private readonly IFinalcialSetting fService = new FinalcialSettingService();
-        private readonly IChartOfAccountService coaService = new ChartOfAccountService();
-        private readonly ISettingsService sService = new SettingsService();
-        private readonly IUserService uService = new UserService();
+        private readonly ICurrency _cService = new CurrencyService();
+        private readonly IVoucherService _vService = new VoucherService();
+        private readonly IVoucherDetailService _vdService = new VoucherDetailService();
+        private readonly IFinalcialSetting _fService = new FinalcialSettingService();
+        private readonly IChartOfAccountService _coaService = new ChartOfAccountService();
+        private readonly ISettingsService _sService = new SettingsService();
+        private readonly IUserService _uService = new UserService();
         private readonly IVoucherType _voucherType = new VoucherTypeService();
 
-        private readonly IEmployeeService empService = new EmployeeService();
+        private readonly IEmployeeService _empService = new EmployeeService();
 
-        private readonly IVoucherDocument vDocSar = new VoucherDocumentService();
+        private readonly IVoucherDocument _vDocSar = new VoucherDocumentService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /Accounts/Voucher/
@@ -44,8 +44,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult NewJournal()
         {
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
@@ -66,8 +66,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             string str = "G";
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+            ViewBag.CurrencyList = new SelectList(_cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = _vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if (maxBrach < 1)
             {
@@ -75,14 +75,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
-            var tt = coaService.GetAllChartOfAccountByCompanyId(branchId);
+            var tt = _coaService.GetAllChartOfAccountByCompanyId(branchId);
 
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 3);
 
 
             var code = "Gj-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            var fsObj = _fService.GetCurrentFinalcialSettingByComapny(branchId);
             if (fsObj == null) 
             {
                 TempData.Add("errMsg", "Please add company financial settings");
@@ -113,10 +113,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             // This EmpId is static must be changed by Emp table 
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id,(int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id,(int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -138,7 +138,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 voucher.Posted = 0;
             }
-            if (vService.CreateVoucher(voucher))
+            if (_vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
 
@@ -147,7 +147,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                        if (!_vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("NewJournal", "Voucher", new { area = "Accounts" });
@@ -177,7 +177,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.DocumentType = noteData[i]["type"].ToString();
                         VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
-                        vDocSar.AddDocument(VDoc);
+                        _vDocSar.AddDocument(VDoc);
                     }
                 }
 
@@ -197,7 +197,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
-                            vDocSar.AddDocument(VDoc);
+                            _vDocSar.AddDocument(VDoc);
                         }
                     }
 
@@ -267,8 +267,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         //DebitVoucher
         public ActionResult DebitVoucher()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
@@ -281,20 +281,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             string str = "D";
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+            ViewBag.CurrencyList = new SelectList(_cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = _vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if (maxBrach < 1)
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             // ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Dr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            var fsObj = _fService.GetCurrentFinalcialSettingByComapny(branchId);
             if (fsObj == null) 
             {
                 TempData.Add("errMsg", "Please add company financial settings");
@@ -324,10 +324,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -350,7 +350,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 voucher.Posted = 0;
             }
-            if (vService.CreateVoucher(voucher))
+            if (_vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
 
@@ -359,7 +359,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                        if (!_vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("DebitVoucher", "Voucher", new { area = "Accounts" });
@@ -388,7 +388,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.DocumentType = noteData[i]["type"].ToString();
                         VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
-                        vDocSar.AddDocument(VDoc);
+                        _vDocSar.AddDocument(VDoc);
                     }
                 }
 
@@ -408,7 +408,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
-                            vDocSar.AddDocument(VDoc);
+                            _vDocSar.AddDocument(VDoc);
                         }
                     }
 
@@ -428,8 +428,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         //Credit Voucher
         public ActionResult CreditVoucher()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
@@ -443,20 +443,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             string str = "C";
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+            ViewBag.CurrencyList = new SelectList(_cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = _vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if (maxBrach < 1)
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Cr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            var fsObj = _fService.GetCurrentFinalcialSettingByComapny(branchId);
             if (fsObj == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings");
@@ -483,10 +483,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
             }
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -508,7 +508,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 voucher.Posted = 0;
             }
-            if (vService.CreateVoucher(voucher))
+            if (_vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
 
@@ -517,7 +517,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                        if (!_vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("CreditVoucher", "Voucher", new { area = "Accounts" });
@@ -545,7 +545,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = noteData[i]["type"].ToString();
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            vDocSar.AddDocument(VDoc);
+                            _vDocSar.AddDocument(VDoc);
                         }
                     }
 
@@ -565,7 +565,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                                 VDoc.EmployeeId = empObj.Id;
                                 VDoc.VoucherId = voucher.Id;
                                 VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
-                                vDocSar.AddDocument(VDoc);
+                                _vDocSar.AddDocument(VDoc);
                             }
                         }
 
@@ -589,8 +589,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult AccountVoucher()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
             if (AccSet == null)
             {
@@ -602,20 +602,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             string str = "O";
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+            ViewBag.CurrencyList = new SelectList(_cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = _vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if (maxBrach < 1)
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "Op-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            var fsObj = _fService.GetCurrentFinalcialSettingByComapny(branchId);
             if (fsObj == null) 
             {
                 TempData.Add("errMsg", "Please add company financial settings");
@@ -645,10 +645,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -671,7 +671,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             {
                 voucher.Posted = 0;
             }
-            if (vService.CreateVoucher(voucher))
+            if (_vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
 
@@ -680,7 +680,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                        if (!_vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
@@ -709,7 +709,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.DocumentType = noteData[i]["type"].ToString();
                         VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
-                        vDocSar.AddDocument(VDoc);
+                        _vDocSar.AddDocument(VDoc);
                     }
                 }
 
@@ -729,7 +729,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
-                            vDocSar.AddDocument(VDoc);
+                            _vDocSar.AddDocument(VDoc);
                         }
                     }
 
@@ -749,8 +749,8 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         //Repeating Journal
         public ActionResult RepeatingJournal()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             if (AccSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
@@ -763,20 +763,20 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
             string str = "C";
 
-            ViewBag.CurrencyList = new SelectList(cService.GetAllCurrency(), "Id", "Name");
-            long maxBrach = vService.CountByBranchIdAndPrefix(branchId, str) + 1;
+            ViewBag.CurrencyList = new SelectList(_cService.GetAllCurrency(), "Id", "Name");
+            long maxBrach = _vService.CountByBranchIdAndPrefix(branchId, str) + 1;
 
             if (maxBrach < 1)
                 maxBrach = 1;
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
 
 
             var code = "RJ-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
             ViewBag.RefferenceNo = code;
-            var fsObj = fService.GetCurrentFinalcialSettingByComapny(branchId);
+            var fsObj = _fService.GetCurrentFinalcialSettingByComapny(branchId);
             if (fsObj == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings");
@@ -803,10 +803,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -829,7 +829,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 voucher.Posted = 0;
             }
             voucher.BillNo = Request.Form["billnop1"] + " " + Request.Form["billnop2"]; //I have no Idea why??
-            if (vService.CreateVoucher(voucher))
+            if (_vService.CreateVoucher(voucher))
             {
                 List<VoucherDetail> vds = vc.voucherDetails;
 
@@ -838,7 +838,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     voucherDetail.VoucherId = voucher.Id;
                     try
                     {
-                        if (!vdService.CreateVoucherDetail(voucherDetail))
+                        if (!_vdService.CreateVoucherDetail(voucherDetail))
                         {
                             TempData.Add("errMsg", "One or more Voucher details could not added Successfully");
                             return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
@@ -868,7 +868,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         VDoc.DocumentType = noteData[i]["type"].ToString();
                         VDoc.EmployeeId = empObj.Id;
                         VDoc.VoucherId = voucher.Id;
-                        vDocSar.AddDocument(VDoc);
+                        _vDocSar.AddDocument(VDoc);
                     }
                 }
 
@@ -888,7 +888,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.EmployeeId =  empObj.Id;
                             VDoc.VoucherId = voucher.Id;
                             VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
-                            vDocSar.AddDocument(VDoc);
+                            _vDocSar.AddDocument(VDoc);
                         }
                     }
 
@@ -921,15 +921,15 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             ViewBag.CurrentFilter = searchString;
 
 
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = sService.GetAllByUserId(user.Id);
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var AccSet = _sService.GetAllByUserId(user.Id);
             if (AccSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
             int branchId = AccSet.Companies.Id;
-            List<Voucher> Voucher = vService.GetAllVoucherByBranchId(branchId);
+            List<Voucher> Voucher = _vService.GetAllVoucherByBranchId(branchId);
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             short searchPosted = 0;
@@ -962,7 +962,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public PartialViewResult GetManualJournalDetails(int id)
         {
-            var model = vService.GetSingleVoucher(id);
+            var model = _vService.GetSingleVoucher(id);
             ViewBag.data = model;
             return PartialView("_manualJournalDetails", model);
         }

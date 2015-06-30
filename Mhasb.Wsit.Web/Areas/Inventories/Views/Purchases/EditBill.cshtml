@@ -1,4 +1,6 @@
-﻿
+﻿@model Mhasb.Wsit.CustomModel.Inventories.InventoriesEditBill
+
+
 <div class="container my-dashboard">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -12,9 +14,12 @@
                 <div class="col-md-12">
                     <div class="row clearfix">
                         <div class="col-md-12">
-                            <div class="col-md-1">
+                            <div class="col-md-2 x-new">
                                 <h6>From</h6>
-                                <input class="cstm-input" type="text" placeholder="">
+                                <span id="ext-comp-1022" class="x-new-indicator" style="display:none;">NEW</span>
+                                <input class="cstm-input" id="cutomer" type="text" placeholder="">
+                                <input class="cstm-input" value="" id="cutomer-value" type="hidden">
+
                             </div>
                             <div class="col-md-2">
                                 <h6>Date</h6>
@@ -81,7 +86,7 @@
                             </div>
                             <div class="row cstm-frm-row">
                                 <table class="table table-bordered table-responsive table-hover table-journal cstm-tbl-brd">
-                                    <tbody>
+                                    <tbody id="itemLoader">
                                         <tr class="cstm-table-clr">
                                             <td>Item</td>
                                             <td>Description</td>
@@ -137,7 +142,7 @@
                             </div>
                             <div class="row cstm-frm-row">
                                 <div class="col-md-2">
-                                    <a href="#" class="btn btn-success" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
+                                    <a href="javascript:void(0);" class="btn btn-success" id="new_line" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
                                 </div>
                                 <div class="col-md-4 pull-right">
                                     <div class="col-md-6 cstm-div-border6">
@@ -223,16 +228,139 @@
                 </div>
             </div>
             <div class="col-md-12 cstm-aa">
-                <a href="#" class="btn btn-default" data-role="button">Add note</a>
+                <a href="javascript:void(0)" class="btn btn-default add-note" data-role="button">Add note</a>
+            </div>
+            <br>
+            <div class="hidden-note" style="display:none;">
+                <div class="row cstm-frm-row">
+                    <div class="col-md-6 no-padding">
+                        <textarea class="cstm-tarea" id="note-des"></textarea>
+                    </div>
+                </div>
+                <div class="row cstm-frm-row">
+                    <a href="javascript:void(0)" class="btn btn-success note-save" data-role="button">Save</a>
+                    <a href="javascript:void(0)" class="btn btn-danger note-cancel" data-role="button">Cancel</a>
+                </div>
+            </div>
+            <input type="hidden" value="@ViewBag.User" id="usename" />
+            <div class="col-md-9 no-padding">
+                <table class="table table-bordered table-responsive table-hover table-journal">
+                    <thead>
+                        <tr>
+                            <th>Change</th>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th width="30%">Details</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbd"></tbody>
+                </table>
+                @Html.Hidden("changes[]", "", new { id = "change" })
+                @Html.Hidden("notedate[]", "", new { id = "date" })
+                @Html.Hidden("Notedes[]", "", new { })
+                <input type="hidden" name="note_data" id="notes" value="" />
             </div>
             <br>
         </div>
     </div>
 </div>
 
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content newAutocomplete" id="ui-id-1" tabindex="0" style="display: none; top: 373.5px; left: 145px; z-index: 1000; width: 152px;">
+    <span>+ New Contact</span>
+    <li class="ui-menu-item" id="ui-id-1-100" tabindex="-1">R</li>
+</ul>
+
 <script type="text/javascript">
+
     $(document).ready(function () {
+        
         $(".datepicker").datepicker();
+        $("#new_line").click(function () {
+            $.get("ItemRow", function (data) {
+                $("#itemLoader").append(data);
+            });
+        });
+
+        $(".add-note").click(function () {
+            $(".hidden-note").toggle("slow");
+        })
+        $(".note-cancel").click(function () {
+            $(".hidden-note").hide("slow");
+        })
+        $(".note-save").click(function () {
+            var user = $("#usename").val();
+            var currentdate = new Date();
+            var cd = currentdate.toLocaleString();
+            var note = $("#note-des").val();
+            var curVal = $("#notes").val();
+            var ar = [];
+            if (curVal !== "") {
+                ar = JSON.parse(curVal);
+
+            }
+            var c = { "type": "note", "des": note, "date": cd };
+            ar.push(c);
+
+            $("#notes").val(JSON.stringify(ar));
+
+
+            var htmlStr = "<tr><td>Note</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>" + $("#note-des").val() + "</td></tr>";
+            $("#tbd").append(htmlStr);
+            $("#note-des").val("");
+            $(".hidden-note").hide("slow");
+        })
+
+
+        var baseUrl = '@Url.Content("~/")';
+        $('#ui-id-1-100').click(function () {
+            var newName = $("#cutomer").val();
+            $("#cutomer").val(newName)
+            $('.ui-autocomplete').hide();
+            $('.x-new-indicator').show();
+            $('#cutomer-value').val(0);
+        });
+        
+        $("#cutomer").autocomplete({
+            source: baseUrl + "Inventories/Purchases/GetServiceNames",
+            minLength: 1,
+            select: function (event, ui) {
+                var $Id = ui.item.id;
+                $('#cutomer-value').val($Id);
+            },
+            html: true,
+            open: function (event, ui) {
+                $('.x-new-indicator').hide();
+                var newName = $("#cutomer").val();
+                
+                $(".ui-autocomplete").css("z-index", 1000);
+                var html = '<span>+ New Contact</span>';
+                html += '<li class="ui-menu-item" id="ui-id-1-100" tabindex="-1">' + newName + '</li>';
+                $(".ui-autocomplete").last('.ui-menu-item').append(html);
+                var newHtml = '<div id="ext-comp-1022" class="x-new-indicator">NEW</div>';
+
+                var click=$('#ui-id-1-100').bind('click', function () {
+                    $("#cutomer").val(newName)
+                    $('.ui-autocomplete').hide();
+                    $('.x-new-indicator').show();
+                    $('#cutomer-value').val(0);
+                    
+                });
+            },
+            response: function (event, ui) {
+                // var obj = jQuery.parseJSON(event);
+                var newName = $("#cutomer").val();
+                $('#ui-id-1-100').text(newName);
+                var obj = JSON.stringify(ui);
+                var res = obj.slice(11);
+                var str = res.slice(0, -1);
+                if (str.length <= 2) {
+                    $(".newAutocomplete").show();
+                } else {
+                    console.log("RusseNotEmpty");
+                }
+            },
+        });
     });
 </script>
 <script type="text/javascript">

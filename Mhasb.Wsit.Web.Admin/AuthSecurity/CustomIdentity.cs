@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Mhasb.Services.Users;
+using Mhasb.Services.AdminUsers;
 
-namespace Mhasb.Wsit.Web.AuthSecurity
+namespace Mhasb.Wsit.Web.Admin.AuthSecurity
 {
     public class CustomIdentity : ICustomIdentity
     {
@@ -18,9 +18,9 @@ namespace Mhasb.Wsit.Web.AuthSecurity
         public static CustomIdentity GetCustomIdentity(string email, string password)
         {
             var identity = new CustomIdentity();
-            var uServcice = new UserService();
+            var uServcice = new AdminUserService();
 
-            bool loginResponse = uServcice.UserLogin(email, password);
+            bool loginResponse = uServcice.AdminLogin(email, password);
 
 
             if (loginResponse)

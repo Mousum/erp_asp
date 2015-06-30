@@ -22,13 +22,19 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         //
         // GET: /OrgSettings/FinancialSetting/
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            var fs=fService.GetFinalcialSetting(id);
-            if (fs != null)
-                return View(fs);
-            else
-                TempData.Add("errMsg","Financial Settings not found");
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            if (logObj.CompanyId != null)
+            {
+                var fs = fService.GetCurrentFinalcialSettingByComapny((int)logObj.CompanyId);
+                if (fs != null)
+                    return View(fs);
+                else
+                    TempData.Add("errMsg","Financial Settings not found");
+            }
             return RedirectToAction("Create");
         }
         public ActionResult Create()

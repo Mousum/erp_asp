@@ -1,11 +1,6 @@
 ﻿using Mhasb.Domain.Commons;
 using Mhasb.Domain.Organizations;
 using Mhasb.Wsit.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mhasb.Domain.Users
 {

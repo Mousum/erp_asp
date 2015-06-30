@@ -15,9 +15,9 @@ namespace Mhasb.Services.AdminUsers
         bool AdminLogin(string email, string password);
         bool AddAdminUser(AdminUser admin);
         bool UpdateAdminUser(AdminUser admin);
-        bool DeleteAdminUser(int AdminUserId);
+        bool DeleteAdminUser(int adminUserId);
         List<AdminUser> GetAllAdminUsers();
-        AdminUser GetSingleAdminUser(int UserId);
+        AdminUser GetSingleAdminUser(int userId);
 
     }
 }
