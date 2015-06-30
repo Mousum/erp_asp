@@ -13,7 +13,7 @@ namespace Mhasb.Services.Contact
          bool UpdateContInfo(ContactInformation ContactInformation);
          bool DeleteContInfo(long Id);
          List<ContactInformation> GetAllContactInformation();
-         ContactInformation GetAllContactInformationById(long Id);
+         ContactInformation GetContactInformationById(long Id);
          List<ContactInformation> GetAllContactInfoByCompanyId(int Id);
          
     }
