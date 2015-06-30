@@ -1,4 +1,5 @@
-﻿using Mhasb.Wsit.Domain;
+﻿using Mhasb.Domain.Commons;
+using Mhasb.Wsit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace Mhasb.Domain.Contacts
         public string City { get; set; }
         public string StateRegion { get; set; }
         public string ZipeCode { get; set; }
-        public string Country { get; set; }
+        public int? CountryId { get; set; }
         public string Type { get; set; }
         public virtual ContactInformation ContactInformations { get; set; }
+        public virtual Country Country{ get; set; }
 
         public ObjectState State
         {
