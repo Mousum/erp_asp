@@ -378,10 +378,12 @@
         },
         response: function (event, ui) {
             // var obj = jQuery.parseJSON(event);
+            var newName = $("#cutomer").val();
+            $('#ui-id-1-100').text(newName);
             var obj = JSON.stringify(ui);
             var res = obj.slice(11);
             var str = res.slice(0, -1);
-            console.log(str.length);
+           
             if (str.length <= 2) {
                 $(".newAutocomplete").show();
             } else {
