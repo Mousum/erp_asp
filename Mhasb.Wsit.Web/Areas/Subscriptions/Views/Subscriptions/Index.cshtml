@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Mhasb.Domain.Subscriptions.Package>
+
+@*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                <ul>
+                    @{ string[] words = item.Descriptions.Split(',');
+                     foreach (string word in words)
+                     {
+                        <li>@word</li>
+                     }
+                    }
+                </ul>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+
+
+            </td>
+        </tr>
+    }*@
+
+<div class="container">
+    <h3 class="">Choose a pricing plan</h3>
+    <div class="row clearfix pricing-div">
+
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 pricing-single">
+                <div class="row no-margin">
+                    <p class="select-check-p"><input type="radio">@Html.DisplayFor(modelItem => item.Name)</p>
+                    <p><span class="price-green">$@Html.DisplayFor(modelItem => item.Amount)/@Html.DisplayFor(modelItem => item.Duration) Day(s)</span></p>
+                    <p>Freelancers this one is for you</p>
+                </div>
+                <div class="row clearfix plan-desc">
+                    <ul>
+                        @{ string[] words = item.Descriptions.Split(',');
+                         foreach (string word in words)
+                         {
+                            <li>@word</li>
+                         }
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+
+        <br>
+    </div>
+    <hr>
+    <a href="#" class="btn btn-success pull-right" data-role="button">Continue</a>
+</div>
