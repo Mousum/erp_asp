@@ -33,7 +33,7 @@ namespace Mhasb.Services.Contact
             try
             {
                 ContactInformation.State = ObjectState.Modified;
-                _rep.AddOperation(ContactInformation);
+                _rep.UpdateOperation(ContactInformation);
                 return true;
             }
             catch (Exception ex)
@@ -80,8 +80,10 @@ namespace Mhasb.Services.Contact
             try
             {
                 var _Obj = _rep.GetOperation()
-                    .Include(k=>k.ContactDtails)
-                    
+                    .Include(r => r.ContactDtails)
+                    .Include(r => r.TelePhones)
+                    .Include(r => r.Persons)
+                    .Include(r=>r.Notes)
                     .Filter(i => i.Id == Id)
                     .Get().FirstOrDefault();
                 return _Obj;
