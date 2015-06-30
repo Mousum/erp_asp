@@ -200,6 +200,8 @@
     <Compile Include="Areas\OrgSettings\Controllers\FinalcialSettingController.cs" />
     <Compile Include="Areas\OrgSettings\Controllers\TaxSettingController.cs" />
     <Compile Include="Areas\OrgSettings\OrgSettingsAreaRegistration.cs" />
+    <Compile Include="Areas\Subscriptions\Controllers\SubscriptionsController.cs" />
+    <Compile Include="Areas\Subscriptions\SubscriptionsAreaRegistration.cs" />
     <Compile Include="Areas\TaskManagement\Controllers\TasksController.cs" />
     <Compile Include="Areas\TaskManagement\TaskManagementAreaRegistration.cs" />
     <Compile Include="Areas\UserManagement\Controllers\ActionListController.cs" />
@@ -515,6 +517,11 @@
     <Content Include="Areas\Inventories\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\RepeatTransection.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\ItemRow.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\web.config" />
+    <Content Include="Areas\Subscriptions\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Subscriptions\Views\Subscriptions\Index.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\Index.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Edit.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
@@ -701,10 +708,9 @@
     <Folder Include="Areas\Inventories\Models\" />
     <Folder Include="Areas\Inventories\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
-    <Folder Include="Areas\OrganizationManagements\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
-    <Folder Include="Areas\Organizations\Views\Employee\" />
     <Folder Include="Areas\OrgSettings\Models\" />
+    <Folder Include="Areas\Subscriptions\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />
     <Folder Include="Areas\UserManagement\Views\LoggedInUser\" />
     <Folder Include="obj\Debug\TempPE\" />

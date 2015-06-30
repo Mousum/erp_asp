@@ -11,5 +11,6 @@ namespace Mhasb.Services.Contact
     {
        bool CreateContactGroup(ContactGroup contactGroup);
        bool DeleteContactGroup(int groupId);
+       List<ContactGroup> GetAllGroupsByCompanyId(int companyId);
     }
 }
