@@ -45,9 +45,10 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         {
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
+
             ViewBag.User = user.FirstName + "  " + user.LastName;
-            if (AccSet == null)
+            if (accSet == null)
             {
                 //  return Content("Please add company financial settings ");
                 TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
@@ -114,9 +115,17 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             // This EmpId is static must be changed by Emp table 
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id,(int)AccSet.CompanyId);
+            //var AccSet = _sService.GetAllByUserId(user.Id);
+
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+            }
+
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, companyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -129,7 +138,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
             
-            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            voucher.BranchId = companyId;
             if (Request.Form["post"] != null)
             {
                 voucher.Posted = 1;
@@ -188,7 +197,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/"+AccSet.Companies.DisplayName.Replace(" ","_")+"/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + empObj.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -196,7 +205,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + empObj.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                             _vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -268,16 +277,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult DebitVoucher()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
-            if (AccSet == null)
+            if (accSet == null)
             {
                 TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
                 
             }
 
-            int branchId = AccSet.Companies.Id;
+            int branchId = accSet.Companies.Id;
 
             string str = "D";
 
@@ -289,7 +298,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             // ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 3);
 
 
             var code = "Dr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -325,9 +334,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)accSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -341,7 +350,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
            
 
-            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (accSet.CompanyId != null) voucher.BranchId = (int)accSet.CompanyId;
             if (Request.Form["post"] != null)
             {
                 voucher.Posted = 1;
@@ -399,7 +408,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -407,7 +416,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
+                            VDoc.FileLocation = "Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                             _vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -429,15 +438,15 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult CreditVoucher()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
-            if (AccSet == null)
+            if (accSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
 
-            int branchId = AccSet.Companies.Id;
+            int branchId = accSet.Companies.Id;
 
             // int branchId = 2;
 
@@ -451,7 +460,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 3);
 
 
             var code = "Cr-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -484,9 +493,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)accSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -499,7 +508,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
           
-            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (accSet.CompanyId != null) voucher.BranchId = (int)accSet.CompanyId;
             if (Request.Form["post"] != null)
             {
                 voucher.Posted = 1;
@@ -556,7 +565,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         if ("documentLocation[]" == Request.Files.GetKey(i))
                         {
                             documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                            documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
+                            documentLocation = Server.MapPath("~/Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/");
                             if (fileUpload(Request.Files[i], documentName, documentLocation))
                             {
                                 VoucherDocument VDoc = new VoucherDocument();
@@ -564,7 +573,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                                 VDoc.DocumentType = "File";
                                 VDoc.EmployeeId = empObj.Id;
                                 VDoc.VoucherId = voucher.Id;
-                                VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
+                                VDoc.FileLocation = "Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/" + documentName;
                                 _vDocSar.AddDocument(VDoc);
                             }
                         }
@@ -590,15 +599,15 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         public ActionResult AccountVoucher()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
             ViewBag.User = user.FirstName + "  " + user.LastName;
-            if (AccSet == null)
+            if (accSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
 
-            int branchId = AccSet.Companies.Id;
+            int branchId = accSet.Companies.Id;
 
             string str = "O";
 
@@ -610,7 +619,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 3);
 
 
             var code = "Op-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -646,9 +655,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)accSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -662,7 +671,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
            
 
-            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (accSet.CompanyId != null) voucher.BranchId = (int)accSet.CompanyId;
             if (Request.Form["post"] != null)
             {
                 voucher.Posted = 1;
@@ -720,7 +729,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -728,7 +737,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId = empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
+                            VDoc.FileLocation = "Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
                             _vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -771,7 +780,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             //return Content("Referencing Problem. No Branch found of your Company. Please Create a company First");
 
             //ViewBag.coaList = coaService.GetAllChartOfAccountByCompanyId(branchId);
-            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 4);
+            ViewBag.coaList = _coaService.GetAllChartOfAccountByCompanyId(branchId).Where(c => c.Level == 3);
 
 
             var code = "RJ-" + branchId.ToString() + "-" + maxBrach.ToString().PadLeft(5, '0') + "-" + DateTime.Now.ToString("yy");
@@ -804,9 +813,9 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
+            var accSet = _sService.GetAllByUserId(user.Id);
 
-            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)AccSet.CompanyId);
+            var empObj = _empService.GetEmployeeByUserIdAndCompanyId(user.Id, (int)accSet.CompanyId);
             if (empObj != null)
             {
                 voucher.EmployeeId = empObj.Id;
@@ -819,7 +828,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
 
            
-            if (AccSet.CompanyId != null) voucher.BranchId = (int)AccSet.CompanyId;
+            if (accSet.CompanyId != null) voucher.BranchId = (int)accSet.CompanyId;
             if (Request.Form["post"] != null)
             {
                 voucher.Posted = 1;
@@ -879,7 +888,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                     if ("documentLocation[]" == Request.Files.GetKey(i))
                     {
                         documentName = "Document_" + voucher.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
-                        documentLocation = Server.MapPath("~/Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/");
+                        documentLocation = Server.MapPath("~/Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/");
                         if (fileUpload(Request.Files[i], documentName, documentLocation))
                         {
                             VoucherDocument VDoc = new VoucherDocument();
@@ -887,7 +896,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                             VDoc.DocumentType = "File";
                             VDoc.EmployeeId =  empObj.Id;
                             VDoc.VoucherId = voucher.Id;
-                            VDoc.FileLocation = "Uploads/" + AccSet.Companies.DisplayName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
+                            VDoc.FileLocation = "Uploads/" + accSet.Companies.TradingName.Replace(" ", "_") + "/VoucherDocuments/"+ documentName;
                             _vDocSar.AddDocument(VDoc);
                         }
                     }
@@ -922,13 +931,13 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
 
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = _sService.GetAllByUserId(user.Id);
-            if (AccSet == null)
+            var accSet = _sService.GetAllByUserId(user.Id);
+            if (accSet == null)
             {
                 TempData.Add("errMsg", "Please add company financial settings ");
                 return RedirectToAction("Index", "Voucher", new { area = "Accounts" });
             }
-            int branchId = AccSet.Companies.Id;
+            int branchId = accSet.Companies.Id;
             List<Voucher> Voucher = _vService.GetAllVoucherByBranchId(branchId);
             int pageSize = 6;
             int pageNumber = (page ?? 1);

@@ -113,7 +113,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                         return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
                     }
                 }
-                return RedirectToAction("MyMhasb", "Users", new { Area = "UserManagement" });
+                return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
 
             }
             else
