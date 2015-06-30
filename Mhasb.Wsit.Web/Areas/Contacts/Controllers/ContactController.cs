@@ -32,6 +32,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private ILookupService luSer = new LookupService();
         private IChartOfAccountService cSer = new ChartOfAccountService();
         private readonly ICurrency currencyService = new CurrencyService();
+        private readonly ICountryService iCountry = new CountryService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
@@ -188,6 +189,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
 
             ViewBag.ATypes = Atypes;
+            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
@@ -262,7 +264,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     Telephone.ContactInfoId = ContactInfo.Id;
                     telephoneService.CreateTelePhone(Telephone);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("FilterContact");
                 }
                 else
                 {
@@ -275,6 +277,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 return Content("Somthing Wrong");
             }
         }
+
 
 
         //

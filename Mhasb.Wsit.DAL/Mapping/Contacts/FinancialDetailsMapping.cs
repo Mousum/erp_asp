@@ -32,8 +32,10 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.Property(i => i.BankAccountNumber).HasMaxLength(150).HasColumnName("bankaccountnumber");
             this.Property(i => i.BankAccountName).HasMaxLength(150).HasColumnName("bankaccountname");
             this.Property(i => i.Details).HasMaxLength(100).HasColumnName("details");
-            this.Property(i => i.BillsTerms).HasMaxLength(100).HasColumnName("billsterms");
-            this.Property(i => i.SalesTerms).HasMaxLength(100).HasColumnName("salesterms");
+            this.Property(i => i.BillsTerms).HasColumnName("billsterms");
+            this.Property(i => i.SalesTerms).HasColumnName("salesterms");
+            this.Property(i => i.BillsDue).HasColumnName("billsdue");
+            this.Property(i => i.SakesDue).HasColumnName("salesdue");
             this.Property(i => i.NetworkKey).HasMaxLength(100).HasColumnName("networkKey");
             this.ToTable("con.financial_details");
 
