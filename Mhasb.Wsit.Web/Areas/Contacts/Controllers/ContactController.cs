@@ -188,11 +188,15 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 cSer.AddBaseAccountTypes();
                 Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
             }
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+
 
             ViewBag.ATypes = Atypes;
+            
             ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+            
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
-            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
 
             return View();
@@ -286,6 +290,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         public ActionResult Edit(int id)
         {
             ContactInformation ContactInfo = contactInfoService.GetContactInformationById(id);
+
             //ContactCustome ContactInfo = contactInfoService.GetContactInformationById(id);
 
 
