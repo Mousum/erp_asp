@@ -40,7 +40,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult FilterContact(string Filter, string SearchString, string Type)
+        public ActionResult FilterContact(string Filter, string SearchString, string Type,int Group)
         {
 
             var tt = HttpContext.User.Identity.Name;
