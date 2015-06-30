@@ -29,7 +29,7 @@ namespace Mhasb.Services.Contact
             try
             {
                 telephone.State = ObjectState.Modified;
-                _rep.AddOperation(telephone);
+                _rep.UpdateOperation(telephone);
                 return true;
             }
             catch (Exception ex)
