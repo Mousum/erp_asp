@@ -26,6 +26,10 @@
                                     <li role="presentation" id="Supplier"><a href="@Url.Content("FilterContact?Type=Supplier")">Suppliers (@ViewBag.SupllierCount)</a></li>
                                     <li role="presentation" id="Employee"><a href="@Url.Content("FilterContact?Type=Employee")">Employee (@ViewBag.EmployeeCount)</a></li>
                                     <li role="presentation" id="Archive"><a href="@Url.Content("FilterContact?Type=Archive")">Archived (@ViewBag.ArchiveCount)</a></li>
+                                    @foreach (var items in ViewBag.Groups)
+                                    {
+                                        <li role="presentation" id="Archive"><a href="@Url.Content("FilterContact?Group="+items.Id)">@items.GroupName (@ViewBag.ArchiveCount)</a></li>
+                                    }
                                 </ul>
                             </div>
                             <div class="row cstm-frm-row">
@@ -37,7 +41,7 @@
                                         {
                                             <li id="@c"><a href="javascript:void(0)" class="filter" data-value="@c">@c</a></li>
                                         }
-
+                                      
                                     </ul>
                                 </nav>
                             </div>

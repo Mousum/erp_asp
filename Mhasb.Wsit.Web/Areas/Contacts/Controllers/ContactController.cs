@@ -27,21 +27,20 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         private readonly IUserService uService = new UserService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         private readonly ICompanyService cService = new CompanyService();
-        private readonly IContactInformationService ConInSer = new ContactInformationService();
         private readonly IPersonService pSer = new PersonService();
         private ILookupService luSer = new LookupService();
         private IChartOfAccountService cSer = new ChartOfAccountService();
         private readonly ICurrency currencyService = new CurrencyService();
-        private readonly ICountryService iCountry = new CountryService();
+        private readonly IContactGroupService conGrpSer = new ContactGroupService();
         //
         // GET: /Contacts/Contact/
         public ActionResult Index()
         {
-            var model = ConInSer.GetAllContactInformation();
+            var model = contactInfoService.GetAllContactInformation();
             return View(model);
         }
         [HttpGet]
-        public ActionResult FilterContact(string Filter, string SearchString, string Type,int Group)
+        public ActionResult FilterContact(string Filter, string SearchString, string Type, int? Group)
         {
 
             var tt = HttpContext.User.Identity.Name;
@@ -66,7 +65,10 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
             }
             // var contacts = pSer.GetAllContactsByCompany(companyId);
-            var contacts = ConInSer.GetAllContactInfoByCompanyId(companyId);
+            var contacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
+
+            //ViewBags
+            ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
             ViewBag.AllCount = contacts.Count();
             ViewBag.CustomerCount = contacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
             ViewBag.SupllierCount = contacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
@@ -189,7 +191,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
 
             ViewBag.ATypes = Atypes;
-            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
@@ -252,7 +253,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                             people.ContactInfoId = ContactInfo.Id;
                             personService.CreatePersons(people);
                         }
-                        
+
                     }
 
                     FinancialDetail.ContactInfoId = ContactInfo.Id;
@@ -264,7 +265,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     Telephone.ContactInfoId = ContactInfo.Id;
                     telephoneService.CreateTelePhone(Telephone);
 
-                    return RedirectToAction("FilterContact");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -277,7 +278,6 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 return Content("Somthing Wrong");
             }
         }
-
 
 
         //
@@ -350,12 +350,12 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             {
                 companyId = (int)logObj.CompanyId;
             }
-            var contacts = ConInSer.GetAllContactInfoByCompanyId(companyId);
+            var contacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
             StringBuilder csv = new StringBuilder();
-            
+
             csv.AppendLine("ContactName,AccountNumber,CreateDate,Type");
 
-            foreach(var contact in contacts)
+            foreach (var contact in contacts)
             {
                 csv.Append(contact.ContactName);
                 //csv.Append(contact.ContactDtails);

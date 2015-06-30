@@ -40,5 +40,20 @@ namespace Mhasb.Services.Contact
                 return false;
             }
         }
+        public List<ContactGroup> GetAllGroupsByCompanyId(int companyId) 
+        {
+            try
+            {
+                var _Obj = _finalCrud.GetOperation()
+                    .Filter(g => g.CompanyId == companyId)
+                    .Get().ToList();
+                return _Obj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
     }
 }
