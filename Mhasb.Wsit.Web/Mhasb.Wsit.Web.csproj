@@ -523,6 +523,7 @@
     <Content Include="Areas\Subscriptions\Views\Subscriptions\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\Index.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Edit.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
