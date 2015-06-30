@@ -1,0 +1,33 @@
+﻿<div class="container my-dashboard">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <div class="welcome">
+                <h3 class="all-head">Error !!</h3>
+            </div>
+            <div class="row clearfix no-margin">
+                <div class="col-md-8 no-padding">
+                    @if (TempData["SucMasg"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SucMasg"]</div>
+                    }
+                    @if (TempData["errMsg"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["errMsg"]</div>
+                    }
+                </div>
+                <div class="col-md-4">
+                    <div class="row clearfix no-margin p-setting-container sidebar-right">
+                        <h3>Quick Links</h3>
+                        <ul class="nav nav-sidebar">
+                            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Reports</a></li>
+                            <li><a href="#">Analytics</a></li>
+                            <li><a href="#">Export</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
