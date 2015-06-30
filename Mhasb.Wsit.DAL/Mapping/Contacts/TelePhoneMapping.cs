@@ -24,7 +24,7 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.ToTable("con.telephone");
 
             this.HasRequired(i=>i.ContactInformations)
-                .WithMany()
+                .WithMany(i=>i.TelePhones)
                 .HasForeignKey(i=>i.ContactInfoId);
         }
     }
