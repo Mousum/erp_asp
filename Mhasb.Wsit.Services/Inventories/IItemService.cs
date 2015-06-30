@@ -13,5 +13,6 @@ namespace Mhasb.Services.Inventories
         bool UpdateItem(Item item);
         bool DeleteItem(long Id);
         List<Item> GetAllItems();
+        List<Item> GetAllItemsByConmanyId(int CompanyId);
     }
 }
