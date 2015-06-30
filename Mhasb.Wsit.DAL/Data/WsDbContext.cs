@@ -130,6 +130,7 @@ namespace Mhasb.Wsit.DAL.Data
             modelBuilder.Configurations.Add(new TelePhoneMapping());
             modelBuilder.Configurations.Add(new AssignToGroupMapping());
             modelBuilder.Configurations.Add(new ContactGroupMapping());
+            modelBuilder.Configurations.Add(new FinancialDetailsMapping());
 
             modelBuilder.Configurations.Add(new ItemMapping());
             modelBuilder.Configurations.Add(new PurchaseTransactionMapping());

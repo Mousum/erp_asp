@@ -1,16 +1,9 @@
-﻿using Mhasb.Wsit.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Mhasb.Domain.Organizations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Contacts;
-
+using Mhasb.Domain.Organizations;
+using Mhasb.Wsit.Domain;
 
 namespace Mhasb.Domain.Users
 {

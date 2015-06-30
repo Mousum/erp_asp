@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mhasb.Wsit.Web.Admin.AuthSecurity;
 
 namespace Mhasb.Wsit.Web.Admin.Controllers
 {
@@ -13,7 +14,14 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            //Session.Clear();
+            CustomPrincipal.Logout();
+            return RedirectToAction("Login", "Account", new { area = "" });
 
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

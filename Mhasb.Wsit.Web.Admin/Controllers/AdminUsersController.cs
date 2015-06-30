@@ -25,10 +25,6 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         // GET: AdminUsers/Details/5
         public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             AdminUser adminUser = db.GetSingleAdminUser(id);
             if (adminUser == null)
             {
@@ -63,10 +59,6 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         // GET: AdminUsers/Edit/5
         public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             AdminUser adminUser = db.GetSingleAdminUser(id);
             if (adminUser == null)
             {

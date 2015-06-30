@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using Mhasb.Wsit.Web.Admin.Models;
 using Mhasb.Domain;
 using Mhasb.Services.AdminUsers;
-
+using Mhasb.Wsit.Web.Admin.AuthSecurity;
 
 
 namespace Mhasb.Wsit.Web.Admin.Controllers
@@ -50,8 +50,9 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = AdminSer.AdminLogin(model.Email, model.Password);
-                if (user != false)
+               // var user = AdminSer.AdminLogin(model.Email, model.Password);
+
+                if(CustomPrincipal.Login(model.Email, model.Password, false))
                 {
                     //await SignInAsync(user, model.RememberMe);
                     return RedirectToAction("Index","Home");
@@ -66,6 +67,8 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
             return View(model);
         }
 
+
+        
         ////
         //// GET: /Account/Register
         //[AllowAnonymous]

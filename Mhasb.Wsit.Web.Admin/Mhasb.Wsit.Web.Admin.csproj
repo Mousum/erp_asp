@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -166,6 +167,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthSecurity\CustomIdentity.cs" />
+    <Compile Include="AuthSecurity\CustomPrincipal.cs" />
+    <Compile Include="AuthSecurity\ICustomIdentity.cs" />
+    <Compile Include="AuthSecurity\ICustomPrincipal.cs" />
+    <Compile Include="AuthSecurity\IdentityRepresentation.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AreaTimeController.cs" />

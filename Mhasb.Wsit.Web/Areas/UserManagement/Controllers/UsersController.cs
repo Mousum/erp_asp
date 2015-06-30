@@ -116,7 +116,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         {
             Encryptor encryptor = new Encryptor();
             password = encryptor.GetMD5(password);
-            if (CustomPrincipal.Login(email, password, false) != false)
+            if (CustomPrincipal.Login(email, password, false))
             {
                 var user = uService.GetSingleUserByEmail(email);
                 var userSetting = setService.GetAllByUserId(user.Id);
