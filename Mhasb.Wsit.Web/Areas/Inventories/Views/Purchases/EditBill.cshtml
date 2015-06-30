@@ -142,7 +142,7 @@
                             </div>
                             <div class="row cstm-frm-row">
                                 <div class="col-md-2">
-                                    <a href="#" class="btn btn-success" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
+                                    <a href="javascript:void(0);" class="btn btn-success" id="new_line" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
                                 </div>
                                 <div class="col-md-4 pull-right">
                                     <div class="col-md-6 cstm-div-border6">
@@ -244,6 +244,14 @@
 
     $(document).ready(function () {
         $(".datepicker").datepicker();
+        alert("Russel");
+        $("#new_line").click(function () {
+            
+            $.get("ItemRow", function (data) {
+                $("#itemLoader").append(data);
+            });
+
+
         var baseUrl = '@Url.Content("~/")';
         $('#ui-id-1-100').click(function () {
             var newName = $("#cutomer").val();
@@ -264,24 +272,28 @@
             open: function (event, ui) {
                 $('.x-new-indicator').hide();
                 var newName = $("#cutomer").val();
+                
                 $(".ui-autocomplete").css("z-index", 1000);
                 var html = '<span>+ New Contact</span>';
                 html += '<li class="ui-menu-item" id="ui-id-1-100" tabindex="-1">' + newName + '</li>';
                 $(".ui-autocomplete").last('.ui-menu-item').append(html);
                 var newHtml = '<div id="ext-comp-1022" class="x-new-indicator">NEW</div>';
+
                 var click=$('#ui-id-1-100').bind('click', function () {
                     $("#cutomer").val(newName)
                     $('.ui-autocomplete').hide();
                     $('.x-new-indicator').show();
                     $('#cutomer-value').val(0);
+                    
                 });
             },
             response: function (event, ui) {
-               // var obj = jQuery.parseJSON(event);
+                // var obj = jQuery.parseJSON(event);
+                var newName = $("#cutomer").val();
+                $('#ui-id-1-100').text(newName);
                 var obj = JSON.stringify(ui);
                 var res = obj.slice(11);
                 var str = res.slice(0, -1);
-                console.log(str.length);
                 if (str.length <= 2) {
                     $(".newAutocomplete").show();
                 } else {
