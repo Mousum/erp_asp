@@ -37,7 +37,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         // GET: /Accounts/Voucher/
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("NewJournal");
         }
 
 
