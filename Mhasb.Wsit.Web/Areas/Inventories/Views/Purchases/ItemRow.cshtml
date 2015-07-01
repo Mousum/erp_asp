@@ -59,8 +59,21 @@
                 type: "POST",
                 data: { Id: Id },
                 success: function (data) {
-                    
-                    
+                    var json = $.parseJSON(JSON.stringify(data));
+                    var data = json.itemList[0];
+                    console.log(data);
+                    if (json.success == "False") {
+                        console.log("Error");
+                    } else {
+                        var ammount = data.Quantity * data.UnitPrice;
+                        $('#itemtXt').val(data.ItemName);
+                        $('#description').val(data.Description);
+                        $('#quantity').val(data.Quantity);
+                        $('#unitPrice').val(data.UnitPrice);
+                        $('#coAccount').val(data.AccountCode + " - " + data.AccountName);
+                        $('#taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity+".00"+ "%)");
+                        $('#ammount').text(ammount);
+                    }
                 },
                 error: function () {
                     console.log("Error");

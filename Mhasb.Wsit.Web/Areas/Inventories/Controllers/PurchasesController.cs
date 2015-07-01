@@ -112,7 +112,9 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                     UnitPrice=u.PurchaseUnitPrice,
                     AccountId = u.PurchasesAccount.Id,
                     AccountCode=u.PurchasesAccount.ACode,
-                    AccountName = u.PurchasesAccount.AName
+                    AccountName = u.PurchasesAccount.AName,
+                    PtxtValue=u.PTaxRate.Key,
+                    PtxtQuantity =  u.PTaxRate.Quantity,
                 });
             if (itemList != null)
             {
