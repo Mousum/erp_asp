@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE [dbo].[spget_lastvisitorwisecompanylist]
+﻿CREATE PROCEDURE [dbo].[spget_lastvisitorwisecompanylist]
 @queryoption int,
 @userid bigint,
 @companyid int

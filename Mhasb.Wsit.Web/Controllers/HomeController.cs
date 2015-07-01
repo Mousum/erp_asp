@@ -21,6 +21,10 @@ namespace Mhasb.Wsit.Web.Controllers
             {
 
                 var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (user == null)
+                {
+                    return RedirectToAction("Logout", "Users", new { area = "UserManagement" });
+                }
                 var userSetting = setService.GetAllByUserId(user.Id);
 
                 if (userSetting !=null && userSetting.lglast)
