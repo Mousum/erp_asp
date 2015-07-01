@@ -238,7 +238,7 @@ namespace Mhasb.Services.Organizations
             }
         }
 
-        public bool InsertDefaultDataForCompany(int companyId)
+        public string InsertDefaultDataForCompany(int companyId)
         {
 
             using (var context = new WsDbContext())
@@ -247,8 +247,9 @@ namespace Mhasb.Services.Organizations
 
                 const string query = "EXEC spset_company_wise_data_entry @companyid";
                 var rr = context.Database.ExecuteSqlCommand(query, param1);
-
-                return true;
+                if (rr > 0)
+                    return "Default Data Added Successfully!";
+                return "Default Data Already Inserted,No need to do again!";
             }
         }
     }

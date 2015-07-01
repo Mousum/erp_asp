@@ -114,7 +114,7 @@ namespace Mhasb.Services.AdminUsers
             }
         }
 
-        public bool InsertDefaultData()
+        public string InsertDefaultData()
         {
             using (var context = new WsDbContext())
             {
@@ -122,7 +122,9 @@ namespace Mhasb.Services.AdminUsers
                 const string query = "EXEC spset_general_data_entry";
                 var rr = context.Database.ExecuteSqlCommand(query);
 
-                return true;
+                if (rr > 0)
+                    return "Default Data Added Successfully!";
+                return "Default Data Already Inserted,No need to do again!";
             }
             
         }
