@@ -98,44 +98,15 @@ namespace Mhasb.Wsit.Web.Controllers
 
             if (!((action == "Update" && controller == "Company") || (action == "Create" && controller == "FinalcialSetting") || (action == "Create" && controller == "Invitations") || (action == "Create" && controller == "ChartOfAccounts") || (action == "Finish" && controller == "Users")))
             {
-                string absUrl;
-                if (!checkCompanyFlow(out absUrl))
-                {
-                    filterContext.Result = new RedirectResult(absUrl);
-                    return;
-                }
-                //return;
+                //string absUrl;
+                //if (!checkCompanyFlow(out absUrl))
+                //{
+                //    filterContext.Result = new RedirectResult(absUrl);
+                //    return;
+                //}
+                return;
             }
 
-            //if (myCompany.CompleteFlag != 5  && myCompany.Users.Id==user.Id)
-            //{
-            //    if(myCompany.CompleteFlag==0)
-            //        filterContext.Result = new RedirectResult(Url.Action("Update", "Company", new { area = "OrganizationManagement" }));
-            //    else if (myCompany.CompleteFlag == 1)
-            //        filterContext.Result = new RedirectResult(Url.Action("Create", "FinalcialSetting", new { area = "OrgSettings" }));
-            //    else if (myCompany.CompleteFlag == 2)
-            //        filterContext.Result = new RedirectResult(Url.Action("Create", "Invitations", new { area = "NotificationManagement" }));
-            //    else if (myCompany.CompleteFlag == 3)
-            //        filterContext.Result = new RedirectResult(Url.Action("Create", "ChartOfAccounts", new { area = "Accounts" }));
-            //    else if (myCompany.CompleteFlag == 4)
-            //        filterContext.Result = new RedirectResult(Url.Action("Finish", "Users", new { area = "UserManagement" }));
-            //    return;
-            //}
-            //else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != user.Id)
-            //{
-            //    //should be change 
-            //    filterContext.Result = new RedirectResult("~/Home/AccessDenied");
-            //    return;
-            //}
-
-            // Block this code for companies setup follow 
-            //var comSet = setService.GetAllByUserId(user.Id);
-            //if (comSet == null)
-            //{
-            //    filterContext.Result = new RedirectResult("~/OrganizationManagement/Company/Update");
-            //    return;
-            //}
-            //var myCompany = comSet.Companies.Id;
             var activatedCompany = cService.GetSingleCompany(companyId);
             if (activatedCompany.Users.Id == user.Id)
                 return;
@@ -152,6 +123,7 @@ namespace Mhasb.Wsit.Web.Controllers
 
             }
 
+            //filterContext.Result = new RedirectResult("~/Home/AccessDenied");
 
 
             // Old Block Dont upBlock pls brothers 
@@ -160,7 +132,6 @@ namespace Mhasb.Wsit.Web.Controllers
             //    return;
             //}
 
-            filterContext.Result = new RedirectResult("~/Home/AccessDenied");
         }
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
