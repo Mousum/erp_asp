@@ -94,5 +94,23 @@ namespace Mhasb.Services.Notifications
 
             }
         }
+
+        public List<Invitation> GetAllInvitationByCompany(int companyId)
+        {
+            try
+            {
+                var invitationObj = inviteRep.GetOperation()
+                    .Filter(c=>c.CompanyId==companyId)
+                    .Get().ToList();
+                return invitationObj;
+            }
+            catch (Exception Ex)
+            {
+                var msg = Ex.Message;
+                return null;
+
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Mhasb.Domain.Users;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.Web.Controllers;
@@ -18,6 +19,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
         private ISettingsService setService = new SettingsService();
         private IEmployeeService eService = new EmployeeService();
         private IRoleService rService    = new RoleService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         public ActionResult Index() 
         {
@@ -31,9 +33,15 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             IUserService uService = new UserService();
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Select(u => new { Id = u.Users.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(companyId).Select(u => new { Id = u.Users.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.UserList = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)

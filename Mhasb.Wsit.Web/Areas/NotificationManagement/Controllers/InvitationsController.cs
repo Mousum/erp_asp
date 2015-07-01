@@ -15,6 +15,7 @@ using System.Web.Mvc;
 using Mhasb.Wsit.Web.Controllers;
 using Mhasb.Services.Loggers;
 using Mhasb.Wsit.Web.Utilities;
+using Mhasb.Domain.Loggers;
 
 
 namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
@@ -30,10 +31,18 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         private IDesignation degRep = new DesignationService();
         private IUserInRoleService URSer = new UserInRoleService();
         private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private ISettingsService setService = new SettingsService();
 
         public ActionResult Index()
         {
-            var model = inService.GetAllInvitation();
+            User user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var model = inService.GetAllInvitationByCompany(companyId);
             return View(model);
         }
 
@@ -247,6 +256,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
         [HttpPost]
         public ActionResult InvitationConfirm(int id, User user)
         {
+            
 
             var tnc = Request.Params.Get("tnc");
             if (tnc != null && tnc == "on")
@@ -262,6 +272,15 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                     {
                         var Invitation = inService.GetSingleInvitation(id);
                         var emp = new Employee();
+
+                        var setObj = setService.GetAllByUserId(user.Id);
+                        var logEntry = new CompanyViewLog();
+                        logEntry.UserId = user.Id;
+                        logEntry.CompanyId = Invitation.CompanyId; ;
+                        logEntry.LoginTime = DateTime.Now;
+                        //logEntry.IpAddress = "";
+                        _companyViewLog.AddCompanyViewLog(logEntry);
+
                         emp.UserId = user.Id;
                         emp.CompanyId = Invitation.CompanyId;
                         emp.DesignationId = Invitation.DesignationId;

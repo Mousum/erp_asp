@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
 using Mhasb.Wsit.Web.Controllers;
+using Mhasb.Services.Loggers;
 
 
 namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
@@ -22,16 +23,22 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         private readonly IEmployeeService eService = new EmployeeService();
         private ISettingsService setService = new SettingsService();
         private IUserService uService = new UserService();
-
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
 
         // GET: TaskManagement/Tasks
         public ActionResult Index()
         {
             var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var AccSet = setService.GetAllByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(companyId).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
