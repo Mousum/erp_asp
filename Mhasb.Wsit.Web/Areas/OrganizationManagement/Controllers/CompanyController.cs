@@ -77,6 +77,11 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                     cViewlog.UserId = tt.Id;
                     cViewlog.LoginTime = DateTime.Now;
                     _companyViewLog.AddCompanyViewLog(cViewlog);
+
+                    // insert default data for company
+                    var rr = iCompany.InsertDefaultDataForCompany(company.Id);
+
+
                     if (startTrial != null)
                     {
                         return RedirectToAction("Update", "Company", new { Area = "OrganizationManagement" });

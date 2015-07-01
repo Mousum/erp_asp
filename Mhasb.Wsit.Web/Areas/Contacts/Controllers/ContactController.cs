@@ -73,7 +73,11 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             var allContacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
             //ViewBags
             ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
-            ViewBag.AllCount = allContacts.Count();
+            var allCount =0;
+            if(allContacts!=null)
+                allCount= allContacts.Count();
+
+            ViewBag.AllCount = allCount;
             ViewBag.CustomerCount = allContacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
             ViewBag.SupllierCount = allContacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
             ViewBag.EmployeeCount = allContacts.Where(r => r.ContactType == EnumContactType.Employee).Count();

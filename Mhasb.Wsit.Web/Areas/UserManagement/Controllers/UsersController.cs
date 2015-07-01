@@ -338,7 +338,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             var users = uService.GetSingleUserByEmail(email);
             var setObj = setService.GetAllByUserId(users.Id);
 
-            //var logEntry = new CompanyViewLog();
+            //var logEntry = new CompanyViewLog()AddCompanyViewLog;
             //logEntry.UserId = users.Id;
             //logEntry.CompanyId = ComanyId;
             //logEntry.LoginTime = DateTime.Now;

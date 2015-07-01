@@ -237,5 +237,19 @@ namespace Mhasb.Services.Organizations
                 return false;
             }
         }
+
+        public bool InsertDefaultDataForCompany(int companyId)
+        {
+
+            using (var context = new WsDbContext())
+            {
+                var param1 = new SqlParameter("@companyid", companyId);
+
+                const string query = "EXEC spset_company_wise_data_entry @companyid";
+                var rr = context.Database.ExecuteSqlCommand(query, param1);
+
+                return true;
+            }
+        }
     }
 }
