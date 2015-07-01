@@ -1,7 +1,8 @@
-﻿@model PagedList.IPagedList<Mhasb.Domain.Commons.Country>
+﻿@model PagedList.IPagedList<Mhasb.Domain.OrgSettings.Currency>
+
 @using PagedList.Mvc;
 <div id="content">
-  
+
     <table class="table table-hover table-nomargin table-bordered">
         <tr>
             <th style="text-align: center;">
@@ -26,23 +27,21 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CountryName)
+                        @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CountryCode)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ShortName)
+                        @Html.DisplayFor(modelItem => item.Symbol)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
 
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
-
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#pop-up-@item.Id">
                             Delete
                         </button>
-                        @*<a href="javascript:void(0)"  class="btn btn-primary" data-toggle="modal" data-target="#pop-up-1" data-id="@item.Id">Delete</a>*@
+
                         <div class="modal fade" id="pop-up-@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -67,51 +66,53 @@
                 </tr>
             }
         }
+
     </table>
+
 
     <div id="contentPager" class="contentPager">
         @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
     </div>
 </div>
 @*<script type="text/javascript">
-    $(document).on("click", ".contentPager a", function () {
-        var currentFilter = $("#SearchString").val();
-       
-        var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            cache: false,
-           
-            success: function (result) {
-                $('#content').html(result);
+        $(document).on("click", ".contentPager a", function () {
+            var currentFilter = $("#SearchString").val();
 
-            },
-           
+            var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+
+                success: function (result) {
+                    $('#content').html(result);
+
+                },
+
+            });
+            return false;
         });
-        return false;
-    });
 
-    $(document).ready(function () {
-       
-    });
+        $(document).ready(function () {
 
-    $(document).on("click", "#SearchStringBtn", function () {
-        var baseUrl = '@Url.Content("~/")';
-        var SearchString = $("#SearchString").val();
-        var url = baseUrl + "Country/List?page=''" + "&SearchString=" + currentFilter;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#content').html(result);
-            }
         });
-        return false;
-    });
 
-</script>*@
+        $(document).on("click", "#SearchStringBtn", function () {
+            var baseUrl = '@Url.Content("~/")';
+            var SearchString = $("#SearchString").val();
+            var url = baseUrl + "Country/List?page=''" + "&SearchString=" + currentFilter;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+
+    </script>*@
 
 <script>
     $(".confirmDelete").click(function () {
@@ -119,7 +120,7 @@
         var data = { id: $(this).attr("data-id") }
         $.ajax({
             type: "POST",
-            url: baseUrl + "Country/Delete",
+            url: baseUrl + "Currency/Delete",
             data: data,
             success: function (data) {
                 if (data == "Success") {

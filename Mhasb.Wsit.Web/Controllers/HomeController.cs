@@ -25,7 +25,6 @@ namespace Mhasb.Wsit.Web.Controllers
                 {
                     return RedirectToAction("Logout", "Users", new { area = "UserManagement" });
                 }
-
                 var userSetting = setService.GetAllByUserId(user.Id);
 
                 if (userSetting !=null && userSetting.lglast)

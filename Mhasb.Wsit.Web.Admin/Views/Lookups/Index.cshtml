@@ -46,5 +46,19 @@
             });
             return false;
         });
+        $(document).on("click", ".contentPager a", function () {
+            var currentFilter = $("#SearchString").val();
+            var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#content').html(result);
+                }
+            });
+            return false;
+        });
+
     </script>
 

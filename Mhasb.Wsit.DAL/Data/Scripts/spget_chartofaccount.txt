@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE spget_chartofaccount
+﻿CREATE PROCEDURE spget_chartofaccount
 @queryoption int,
 @accounttypeid int,
 @companyid int

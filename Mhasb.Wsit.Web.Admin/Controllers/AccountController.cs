@@ -59,7 +59,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("error", "Invalid username or password.");
                 }
             }
 
