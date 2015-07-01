@@ -46,40 +46,48 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         [HttpGet]
         public ActionResult FilterContact(string Filter, string SearchString, string Type, string Group)
         {
+
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            EnumContactType ContactType = EnumContactType.Archive;
+            var IsNum = false;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            Regex regex = new Regex(@"^\d");
+            if (Filter != null)
+            {
+                IsNum = regex.IsMatch(Filter);
+            }
+
+
+            if (Type != null)
+            {
+                ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
+            }
+            // var contacts = pSer.GetAllContactsByCompany(companyId);
+
+            var allContacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
+            //ViewBags
+            ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
+            ViewBag.AllCount = allContacts.Count();
+            ViewBag.CustomerCount = allContacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
+            ViewBag.SupllierCount = allContacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
+            ViewBag.EmployeeCount = allContacts.Where(r => r.ContactType == EnumContactType.Employee).Count();
+            ViewBag.ArchiveCount = allContacts.Where(r => r.ContactType == EnumContactType.Archive).Count();
+            foreach (var group in conGrpSer.GetAllGroupsByCompanyId(companyId))
+            {
+
+                ViewData[group.GroupName] = AssTGSer.GetAllContactsByGroupId(group.Id).Count();
+            }
+
+
             if (Group == null)
             {
-                var tt = HttpContext.User.Identity.Name;
-                var user = uService.GetSingleUserByEmail(tt);
-                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-                int companyId = 0;
-                EnumContactType ContactType = EnumContactType.Archive;
-                var IsNum = false;
-                if (logObj != null)
-                {
-                    companyId = (int)logObj.CompanyId;
-                }
-                Regex regex = new Regex(@"^\d");
-                if (Filter != null)
-                {
-                    IsNum = regex.IsMatch(Filter);
-                }
-
-
-                if (Type != null)
-                {
-                    ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
-                }
-                // var contacts = pSer.GetAllContactsByCompany(companyId);
                 var contacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
-
-                //ViewBags
-                ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
-                ViewBag.AllCount = contacts.Count();
-                ViewBag.CustomerCount = contacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
-                ViewBag.SupllierCount = contacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
-                ViewBag.EmployeeCount = contacts.Where(r => r.ContactType == EnumContactType.Employee).Count();
-                ViewBag.ArchiveCount = contacts.Where(r => r.ContactType == EnumContactType.Archive).Count();
-
                 //Take As binary ,we have 3 oparents
                 //1 1 0
                 if (Filter != null && SearchString != null && Type == null)
@@ -157,44 +165,13 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             else
             {
                 var contacts = AssTGSer.GetAllContactsByGroupId(Int32.Parse(Group));
-                var tt = HttpContext.User.Identity.Name;
-                var user = uService.GetSingleUserByEmail(tt);
-                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-                int companyId = 0;
-                EnumContactType ContactType = EnumContactType.Archive;
-                var IsNum = false;
-                if (logObj != null)
-                {
-                    companyId = (int)logObj.CompanyId;
-                }
-                Regex regex = new Regex(@"^\d");
-                if (Filter != null)
-                {
-                    IsNum = regex.IsMatch(Filter);
-                }
-
-
-                if (Type != null)
-                {
-                    ContactType = (EnumContactType)Enum.Parse(typeof(EnumContactType), Type);
-                }
-                // var contacts = pSer.GetAllContactsByCompany(companyId);
-
-
-                //ViewBags
-                ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
-                ViewBag.AllCount = contacts.Count();
-                ViewBag.CustomerCount = contacts.Where(c => c.ContactInformations.ContactType == EnumContactType.Customer).Count();
-                ViewBag.SupllierCount = contacts.Where(c => c.ContactInformations.ContactType == EnumContactType.Supplier).Count();
-                ViewBag.EmployeeCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Employee).Count();
-                ViewBag.ArchiveCount = contacts.Where(r => r.ContactInformations.ContactType == EnumContactType.Archive).Count();
                 if (Filter != null && SearchString == null)
                 {
                     if (!IsNum)
                     {
                         contacts = contacts.Where(c => c.ContactInformations.ContactName.StartsWith(Filter)).ToList();
                     }
-                    else 
+                    else
                     {
                         contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains("1") || c.ContactInformations.ContactName.Contains("2") || c.ContactInformations.ContactName.Contains("3")).ToList();
                     }
@@ -203,13 +180,13 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 {
                     contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString)).ToList();
                 }
-                else if(Filter!=null &&SearchString!=null)
+                else if (Filter != null && SearchString != null)
                 {
                     if (!IsNum)
                     {
-                         contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString) && c.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+                        contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString) && c.ContactInformations.ContactName.StartsWith(Filter)).ToList();
                     }
-                    else 
+                    else
                     {
                         contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString) && c.ContactInformations.ContactName.Contains("1") || c.ContactInformations.ContactName.Contains("2") || c.ContactInformations.ContactName.Contains("3")).ToList();
                     }
@@ -373,8 +350,8 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
 
-
-            ViewBag.ATypes = Atypes;
+            
+            ViewBag.ATypes = new SelectList(Atypes.Where(i => i.Level == 3), "Id", "AName");
             ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
 
@@ -392,7 +369,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             model.PrimaryPerson = contactInfo.Persons.Where(p=>p.IsPrimaryPerson==true).FirstOrDefault();
             model.Person = contactInfo.Persons.Where(p => p.IsPrimaryPerson == false).ToList();
             model.TelePhone = contactInfo.TelePhones.SingleOrDefault();
-            model.Notes = contactInfo.Notes.SingleOrDefault();
+            model.Notes = contactInfo.Notes.FirstOrDefault();
             model.FinancialDetails = financialDetailsService.GetFinancialDetailsByContactInfoId(contactInfo.Id);
 
             return View(model);
@@ -463,7 +440,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     Note.UserId = user.Id;
                     Note.Date = DateTime.Now;
                     Note.ContactInfoId = ContactInfo.Id;
-                    noteService.CreateNote(Note);
+                    noteService.UpdateNote(Note);
                     Telephone.ContactInfoId = ContactInfo.Id;
                     telephoneService.UpdateTelePhone(Telephone);
 
@@ -607,6 +584,53 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     }
                 }
             }
+        }
+        public string RemoveFromGroup(int groupId)
+        {
+            var items = Request["contacts"].ToString(); // Get the JSON string
+
+            JArray contactData = JArray.Parse(items);
+
+
+            int count = 0;
+            for (int i = 0; i < contactData.Count(); i++)
+            {
+                var contactId = contactData[i]["id"].ToString();
+                var assTgrp = AssTGSer.GetSingleAssignToGroup(groupId, Int32.Parse(contactId));
+                if (AssTGSer.DeleteAssignToGroup((int)assTgrp.Id))
+                {
+                    count++;
+                }
+            }
+            if (contactData.Count() == count)
+            {
+                return "Success";
+            }
+            else
+            {
+                return "Failed";
+            }
+
+        }
+        public string DeleteGroup(int GroupId) 
+        {
+            var contacts = AssTGSer.GetAllContactsByGroupId(GroupId);
+            int orginalCount = contacts.Count();
+            int count = 0;
+            foreach (var item in contacts) {
+                AssTGSer.DeleteAssignToGroup((int)item.Id);
+                count++;
+            }
+            if (orginalCount == count)
+            {
+                conGrpSer.DeleteContactGroup(GroupId);
+                return "Success";
+            }
+            else 
+            {
+                return "Failed";
+            }
+           
         }
 
     }

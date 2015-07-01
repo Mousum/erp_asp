@@ -96,16 +96,29 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             return PartialView();
         }
 
-        public ActionResult GetjsonItem(long Id)
+        public ActionResult GetjsonItem(int Id)
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             var companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-            var itemList = _itemService.GetAllItemsByConmanyId();
+            var itemList = _itemService.GetAllItemsByConmanyId(companyId, Id)
+                .Select(u => new {
+                    Id=u.Id,
+                    ItemCode=u.ItemCode,
+                    ItemName=u.ItemName,
+                    Description=u.PurchaseDescription,
+                    Quantity=u.Quantity,
+                    UnitPrice=u.PurchaseUnitPrice,
+                    AccountId = u.PurchasesAccount.Id,
+                    AccountCode=u.PurchasesAccount.ACode,
+                    AccountName = u.PurchasesAccount.AName,
+                    PtxtValue=u.PTaxRate.Key,
+                    PtxtQuantity =  u.PTaxRate.Quantity,
+                });
             if (itemList != null)
             {
-                return Json(new { success = "Success", itemList });
+                return Json(new { itemList });
             }
             else {
                 return Json(new { success = "False" });

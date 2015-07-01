@@ -11,5 +11,8 @@ namespace Mhasb.Services.Contact
     {
         bool CreateAssignToGroup(AssignToGroup assignToGroup);
         List<AssignToGroup> GetAllContactsByGroupId(int groupId);
+        AssignToGroup GetSingleAssignToGroup(int GroupId, int InfoId);
+
+        bool DeleteAssignToGroup(int Id);
     }
 }

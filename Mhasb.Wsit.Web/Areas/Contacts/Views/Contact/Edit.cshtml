@@ -147,33 +147,33 @@
                                                 </div>
                                             }
                                             @*else
-                                            {
-                                                var abc = new Mhasb.Domain.Contacts.Person();
-                                                <div id=@personDetail style="display:block;">
-                                                    <div class="col-md-3">
-                                                        @Html.TextBox(abc.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
-                                                       
-                                                        <br><br>
+                                                {
+                                                    var abc = new Mhasb.Domain.Contacts.Person();
+                                                    <div id=@personDetail style="display:block;">
+                                                        <div class="col-md-3">
+                                                            @Html.TextBox(abc.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+
+                                                            <br><br>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBox(abc.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+
+                                                            <br><br>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBox(abc.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+
+                                                            <br><br>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="checkbox">
+                                                        </div>
+                                                        <div class="col-md-1 cstm-crs">
+                                                            <br><br>
+                                                            <a class="remove_person">X</a>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        @Html.TextBox(abc.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
-                                                     
-                                                        <br><br>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        @Html.TextBox(abc.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
-                                                        
-                                                        <br><br>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input type="checkbox">
-                                                    </div>
-                                                    <div class="col-md-1 cstm-crs">
-                                                        <br><br>
-                                                        <a class="remove_person">X</a>
-                                                    </div>
-                                                </div>
-                                            }*@
+                                                }*@
 
                                         }
                                         <div class="col-md-12" id="AddPersonBtn">
@@ -372,11 +372,49 @@
                                             <div class="col-md-4">
                                                 <h5>Default Tax</h5>
                                                 <label class="cstm-select">
+                                                    @{
+                                                        int sdt = (int)Model.FinancialDetails.SalesDefaultTax;
+                                                    }
                                                     <select name="FinancialDetails.SalesDefaultTax">
                                                         <option selected value="0"> None </option>
                                                         <option value="1">Amounts Are Tax Inclusive</option>
                                                         <option value="2">Amounts AreTaxExclusive</option>
                                                         <option value="3">Amounts Dont Include Tax</option>
+                                                        @if (sdt == 0)
+                                                        {
+                                                            <option selected value="0"> None </option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="0"> None </option>
+                                                        }
+
+                                                        @if (sdt == 1)
+                                                        {
+                                                            <option selected value="1">Amounts Are Tax Inclusive</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="1">Amounts Are Tax Inclusive</option>
+                                                        }
+
+                                                        @if (sdt == 2)
+                                                        {
+                                                            <option selected value="2">Amounts AreTaxExclusive</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="2">Amounts AreTaxExclusive</option>
+                                                        }
+
+                                                        @if (sdt == 3)
+                                                        {
+                                                            <option selected value="3">Amounts Dont Include Tax</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="3">Amounts Dont Include Tax</option>
+                                                        }
                                                     </select>
                                                 </label>
                                             </div>
@@ -386,8 +424,8 @@
 
 
 
-                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SaleLookups, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
-                                                    <select class="cstm-input" name="FinancialDetails.SalesCoaId" required="required">
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.SalesCoaId, (SelectList)ViewBag.Atypes, "--Select Tax --", htmlAttributes: new { id = "Aid" })
+                                                    @*<select class="cstm-input" name="FinancialDetails.SalesCoaId" required="required">
                                                         <option value="">--Select Account Type--</option>
                                                         @foreach (var items in ViewBag.Atypes)
                                                         {
@@ -401,7 +439,7 @@
                                                             }
                                                         }
                                                     </select>
-                                                </label>
+                                                </label>*@
                                             </div>
                                         </div>
                                     </div>
@@ -410,20 +448,55 @@
                                         <div class="col-md-8">
                                             <div class="col-md-4">
                                                 <h5>Default Tax</h5>
+                                                @{
+                                                    int pdt = (int) Model.FinancialDetails.PurchasesDefaultTax;
+                                                }
                                                 <label class="cstm-select">
                                                     <select name="FinancialDetails.PurchasesDefaultTax">
-                                                        <option selected value="0"> None </option>
-                                                        <option value="1">Amounts Are Tax Inclusive</option>
-                                                        <option value="2">Amounts AreTaxExclusive</option>
-                                                        <option value="3">Amounts Dont Include Tax</option>
+                                                        @if (pdt == 0)
+                                                        {
+                                                            <option selected value="0"> None </option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="0"> None </option>
+                                                        }
+
+                                                        @if (pdt == 1)
+                                                        {
+                                                            <option selected value="1">Amounts Are Tax Inclusive</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="1">Amounts Are Tax Inclusive</option>
+                                                        }
+
+                                                        @if (pdt == 2)
+                                                        {
+                                                            <option selected value="2">Amounts AreTaxExclusive</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="2">Amounts AreTaxExclusive</option>
+                                                        }
+
+                                                        @if (pdt == 3)
+                                                        {
+                                                             <option selected value="3">Amounts Dont Include Tax</option>
+                                                        }
+                                                        else
+                                                        {
+                                                             <option value="3">Amounts Dont Include Tax</option>
+                                                        }
+
                                                     </select>
                                                 </label>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5>Default Account</h5>
                                                 <label class="cstm-select">
-                                                    @*@Html.DropDownListFor(model => model.FinancialDetails.SalesCoaId, (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { id = "Aid" })*@
-                                                    <select class="cstm-input" name="FinancialDetails.PurchasesCoaId" required="required">
+                                                    @Html.DropDownListFor(model => model.FinancialDetails.PurchasesCoaId, (SelectList)ViewBag.Atypes, "--Select Tax --", htmlAttributes: new { id = "Aid" })
+                                                    @*<select class="cstm-input" name="FinancialDetails.PurchasesCoaId" required="required">
                                                         <option value="">--Select Account Type--</option>
                                                         @foreach (var items in ViewBag.Atypes)
                                                         {
@@ -436,7 +509,7 @@
                                                                 <option value="@items.Id">@items.AName</option>
                                                             }
                                                         }
-                                                    </select>
+                                                    </select>*@
                                                 </label>
                                             </div>
                                         </div>

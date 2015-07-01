@@ -101,19 +101,19 @@
                                     <div class="col-md-6 cstm-div-border6">
                                         Sub-Total:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border7">
+                                    <div class="col-md-6 cstm-div-border7" id="sub-total">
                                         0.00
                                     </div>
                                     <div class="col-md-6 cstm-div-border-3">
                                         Tax:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border-4">
+                                    <div class="col-md-6 cstm-div-border-4" id="calTax">
                                         0.00
                                     </div>
                                     <div class="col-md-6 cstm-div-border8">
                                         Total:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border8">
+                                    <div class="col-md-6 cstm-div-border8" id="total">
                                         0.00
                                     </div>
 
@@ -225,8 +225,8 @@
 </ul>
 
 
-<!-- Pop Up Update Project-->
-<div class="modal fade" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Pop Up New Account-->
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header cstm-pop-up-header">
@@ -239,7 +239,7 @@
                         <label>Item Code</label>
                         <div class="form-group">
                             <div class="input-group date">
-                                <input type="text" class="cstm-input"/>
+                                <input type="text" class="cstm-input" />
                             </div>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                         <label>Item Name</label>
                         <div class="form-group">
                             <div class="input-group date">
-                                <input type="text" class="cstm-input"/>
+                                <input type="text" class="cstm-input" />
                             </div>
                         </div>
                     </div>
@@ -260,7 +260,186 @@
         </div>
     </div>
 </div>
-<!-- Pop Up Update Project -->
+<!-- Pop Up Add Account -->
+<!-- Pop Up Add Tax -->
+<div class="modal fade" id="taxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">New Item</h4>
+            </div>
+            <div class="modal-body" id="ItemDepertment">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Item Code</label>
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input type="text" class="cstm-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 label-marg">
+                        <label>Item Name</label>
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input type="text" class="cstm-input" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="UpProj">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pop Up Add Tax -->
+<!-- Pop Up Add New Item -->
+<div id="itemsModal" class="modal fade">
+    <div class="modal-dialog modal-lg" style="width: 88%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Item</h4>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <h6>Item Code</h6>
+                        <input class="cstm-input" type="text" placeholder="">
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Item Code</h6>
+                        <input class="cstm-input" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-12 cstm-border-con">
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4 modal-cs">
+                        <label>
+                            <input type="checkbox"> Check me out
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Inventory Asset Account</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected=""> USA </option>
+                                <option>UK</option>
+                                <option>Bangladesh</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-8 cstm-icon-div">
+                        <a class="tooltips newtooltips" href="javascript:void(0);">
+                            <i class="fa fa-question-circle"></i>
+                            <span id="m-tooltip">
+                                <p class="toolhead">
+                                    Header
+                                </p>
+                                <div class="toolbody">
+                                    <p>Body text is here</p>
+                                </div>
+                            </span>
+                        </a><p>lkxjdfghdxriudxriuty</p>
+                    </div>
+                </div>
+                <div class="col-md-12 cstm-border-con">
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4 modal-cs">
+                        <label>
+                            <input type="checkbox"> Check me out
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <h6>Inventory Asset Account</h6>
+                        <input class="cstm-input" type="text" placeholder="">
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Inventory Asset Account</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected=""> USA </option>
+                                <option>UK</option>
+                                <option>Bangladesh</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Inventory Asset Account</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected=""> USA </option>
+                                <option>UK</option>
+                                <option>Bangladesh</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-12 cstm-di">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="cstm-tarea" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 cstm-border-con">
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4 modal-cs">
+                    <label>
+                        <input type="checkbox"> Check me out
+                    </label>
+                </div>
+                <div class="col-md-2">
+                    <h6>Inventory Asset Account</h6>
+                    <input class="cstm-input" type="text" placeholder="">
+                </div>
+                <div class="col-md-3">
+                    <h6>Inventory Asset Account</h6>
+                    <label class="cstm-select">
+                        <select>
+                            <option selected=""> USA </option>
+                            <option>UK</option>
+                            <option>Bangladesh</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <h6>Inventory Asset Account</h6>
+                    <label class="cstm-select">
+                        <select>
+                            <option selected=""> USA </option>
+                            <option>UK</option>
+                            <option>Bangladesh</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-12 cstm-di">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <textarea class="cstm-tarea" placeholder=""></textarea>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script type="text/javascript">
 
