@@ -57,7 +57,7 @@ namespace Mhasb.Wsit.Web.Areas.NotificationManagement.Controllers
                 ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
                 ViewBag.CompanyName = logObj.Companies.TradingName;
                 var designations = degRep.GetDesignations();
-                var roles = rService.GetAllRoles();
+                var roles = rService.GetAllRolesByCompany((int)logObj.CompanyId);
 
                 //// Add Role if not exist
                 //var uu = _companyViewLog.GetLastViewCompanyByUserId(user.Id);

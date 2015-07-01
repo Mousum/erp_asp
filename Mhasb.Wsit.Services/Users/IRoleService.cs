@@ -14,5 +14,6 @@ namespace Mhasb.Services.Users
        bool DeleteRole(int RoleId);
        Role GetSingleRole(int RoleId);
        List<Role> GetAllRoles();
+       List<Role> GetAllRolesByCompany(int companyId);
     }
 }
