@@ -334,7 +334,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     Telephone.ContactInfoId = ContactInfo.Id;
                     telephoneService.CreateTelePhone(Telephone);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("FilterContact");
                 }
                 else
                 {
@@ -353,30 +353,133 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
         // GET: /Contacts/Contact/Edit/5
         public ActionResult Edit(int id)
         {
-            ContactInformation ContactInfo = contactInfoService.GetContactInformationById(id);
 
-            //ContactCustome ContactInfo = contactInfoService.GetContactInformationById(id);
+            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+            /// var AccSet = setService.GetAllByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var Atypes = cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+
+            if (Atypes.Count == 0)
+            {
+                cSer.AddBaseAccountTypes();
+                Atypes = cSer.GetAllChartOfAccountByCompanyId(companyId);
+            }
+            var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+
+
+            ViewBag.ATypes = Atypes;
+            ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
+            ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
+
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
 
 
 
-            return View();
+
+
+            ContactInformation contactInfo = contactInfoService.GetContactInformationById(id);
+            ContactCustome model = new ContactCustome();
+            model.ContactInformation = contactInfo;
+            model.PostalAddress = contactInfo.ContactDtails.FirstOrDefault();
+            model.PhysicalAddress = contactInfo.ContactDtails.LastOrDefault();
+            model.PrimaryPerson = contactInfo.Persons.Where(p=>p.IsPrimaryPerson==true).FirstOrDefault();
+            model.Person = contactInfo.Persons.Where(p => p.IsPrimaryPerson == false).ToList();
+            model.TelePhone = contactInfo.TelePhones.SingleOrDefault();
+            model.Notes = contactInfo.Notes.SingleOrDefault();
+            model.FinancialDetails = financialDetailsService.GetFinancialDetailsByContactInfoId(contactInfo.Id);
+
+            return View(model);
         }
 
         //
         // POST: /Contacts/Contact/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ContactCustome cc)
         {
+
+            ContactInformation ContactInfo = cc.ContactInformation;
+            ContactDetails PostalAddress = cc.PostalAddress;
+            ContactDetails PhysicalAddress = cc.PhysicalAddress;
+            Person PrimaryPerson = cc.PrimaryPerson;
+            List<Person> Peoples = cc.Person;
+            FinancialDetails FinancialDetail = cc.FinancialDetails;
+            Notes Note = cc.Notes;
+            TelePhone Telephone = cc.TelePhone;
+
             try
             {
-                // TODO: Add update logic here
+                var tt = HttpContext.User.Identity.Name;
+                var user = uService.GetSingleUserByEmail(tt);
+                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                int companyId = 0;
+                if (logObj != null)
+                {
+                    companyId = (int)logObj.CompanyId;
+                }
+                var activatedCompany = cService.GetSingleCompany(companyId);
 
-                return RedirectToAction("Index");
+                ContactInfo.CompanyId = companyId;
+                ContactInfo.CreateBy = user.Id;
+                ContactInfo.UpdateBy = user.Id;
+                ContactInfo.CreateDate = DateTime.Now;
+                ContactInfo.UpdateDate = DateTime.Now;
+                ContactInfo.ContactType = EnumContactType.All;
+
+                //if (!(contactDetailsService.CreateContactDetails(PostalAddress) && contactDetailsService.CreateContactDetails(PhysicalAddress)))
+                //    TempData.Add("errMsg", "Postal Address and Physical Address not set properly.");
+                //ContactInfo.PostalAddId = PostalAddress.Id;
+                //ContactInfo.PhysicalAddId = PhysicalAddress.Id;
+
+
+                if (contactInfoService.UpdateContInfo(ContactInfo))
+                {
+
+                    PostalAddress.ContactInfoId = ContactInfo.Id;
+                    PhysicalAddress.ContactInfoId = ContactInfo.Id;
+                    if (!(contactDetailsService.UpdateContactDetails(PostalAddress) && contactDetailsService.UpdateContactDetails(PhysicalAddress)))
+                        TempData.Add("errMsg", "Postal Address and Physical Address not set properly.");
+                    PrimaryPerson.ContactInfoId = ContactInfo.Id;
+                    personService.UpdatePersons(PrimaryPerson);
+
+                    foreach (var people in Peoples)
+                    {
+                        if (people.Email != null)
+                        {
+                            people.ContactInfoId = ContactInfo.Id;
+                            personService.CreatePersons(people);
+                        }
+
+                    }
+
+                    FinancialDetail.ContactInfoId = ContactInfo.Id;
+                    financialDetailsService.UpdateFinancialDetails(FinancialDetail);
+                    Note.UserId = user.Id;
+                    Note.Date = DateTime.Now;
+                    Note.ContactInfoId = ContactInfo.Id;
+                    noteService.CreateNote(Note);
+                    Telephone.ContactInfoId = ContactInfo.Id;
+                    telephoneService.UpdateTelePhone(Telephone);
+
+                    return RedirectToAction("FilterContact");
+                }
+                else
+                {
+                    TempData.Add("errMsg", "Please FillUp Every Field");
+                    return RedirectToAction("Create");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return Content("Somthing Wrong");
             }
+
         }
 
         //

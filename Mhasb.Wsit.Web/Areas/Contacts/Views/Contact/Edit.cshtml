@@ -25,6 +25,15 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
+        @Html.HiddenFor(m => m.ContactInformation.Id, new { Value = Model.ContactInformation.Id })
+        @Html.HiddenFor(m => m.PostalAddress.Id, new { Value = Model.PostalAddress.Id })
+        @Html.HiddenFor(m => m.PhysicalAddress.Id, new { Value = Model.PhysicalAddress.Id })
+        @Html.HiddenFor(m => m.PrimaryPerson.Id, new { Value = Model.PrimaryPerson.Id })
+        @Html.HiddenFor(m => m.FinancialDetails.Id, new { Value = Model.FinancialDetails.Id })
+        @Html.HiddenFor(m => m.Notes.Id, new { Value = Model.Notes.Id })
+        @Html.HiddenFor(m => m.TelePhone.Id, new { Value = Model.TelePhone.Id })
+
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
 
@@ -81,7 +90,7 @@
                                     </div>
 
 
-                                    <div id="people_header" class="col-md-12" style="display:none;">
+                                    <div id="people_header" class="col-md-12" style="display:block;">
 
                                         <div class="row cstm-frm-row cstm-ro">
                                             <h4>People</h4>
@@ -108,31 +117,63 @@
                                         @for (int i = 0; i < 5; i++)
                                         {
                                             string personDetail = "PersonDetail" + i.ToString();
+                                            if (i < Model.Person.Count)
+                                            {
+                                                @Html.HiddenFor(m => m.Person[@i].Id, new { Value = Model.Person[@i].Id })
 
-                                            <div id=@personDetail style="display:none;">
-                                                <div class="col-md-3">
-                                                    @Html.TextBoxFor(model => model.Person[@i].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
-                                                    @Html.ValidationMessageFor(model => model.Person[@i].FirstName)
-                                                    <br><br>
+                                                <div id=@personDetail style="display:block;">
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].FirstName)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].LastName)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(model => model.Person[@i].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                                        @Html.ValidationMessageFor(model => model.Person[@i].Email)
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                    <div class="col-md-1 cstm-crs">
+                                                        <br><br>
+                                                        <a class="remove_person">X</a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    @Html.TextBoxFor(model => model.Person[@i].LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
-                                                    @Html.ValidationMessageFor(model => model.Person[@i].LastName)
-                                                    <br><br>
+                                            }
+                                            @*else
+                                            {
+                                                var abc = new Mhasb.Domain.Contacts.Person();
+                                                <div id=@personDetail style="display:block;">
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.FirstName, new { @class = "cstm-input-con1", @placeholder = "First Name" })
+                                                       
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.LastName, new { @class = "cstm-input-con2", @placeholder = "Last Name" })
+                                                     
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBox(abc.Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
+                                                        
+                                                        <br><br>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                    <div class="col-md-1 cstm-crs">
+                                                        <br><br>
+                                                        <a class="remove_person">X</a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    @Html.TextBoxFor(model => model.Person[@i].Email, new { @class = "cstm-input-con3", @placeholder = "Email" })
-                                                    @Html.ValidationMessageFor(model => model.Person[@i].Email)
-                                                    <br><br>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="checkbox">
-                                                </div>
-                                                <div class="col-md-1 cstm-crs">
-                                                    <br><br>
-                                                    <a class="remove_person">X</a>
-                                                </div>
-                                            </div>
+                                            }*@
 
                                         }
                                         <div class="col-md-12" id="AddPersonBtn">

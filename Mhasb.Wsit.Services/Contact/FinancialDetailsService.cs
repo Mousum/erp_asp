@@ -29,7 +29,7 @@ namespace Mhasb.Services.Contact
             try
             {
                 financialdetails.State = ObjectState.Modified;
-                _rep.AddOperation(financialdetails);
+                _rep.UpdateOperation(financialdetails);
                 return true;
             }
             catch (Exception ex)
@@ -60,6 +60,23 @@ namespace Mhasb.Services.Contact
 
                 var _obj = _rep.GetOperation()
                     .Filter(i=>i.Id==Id)
+                    .Get().SingleOrDefault();
+                return _obj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
+
+        public FinancialDetails GetFinancialDetailsByContactInfoId(long Id)
+        {
+            try
+            {
+
+                var _obj = _rep.GetOperation()
+                    .Filter(i => i.ContactInfoId == Id)
                     .Get().SingleOrDefault();
                 return _obj;
             }

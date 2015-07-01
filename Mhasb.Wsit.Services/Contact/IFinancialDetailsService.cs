@@ -14,7 +14,7 @@ namespace Mhasb.Services.Contact
         bool DeleteFinancialDetails(long Id);
         FinancialDetails GetFinancialDetailsById(long Id);
         List<FinancialDetails> GetAllFinancialDetails();
-      
+        FinancialDetails GetFinancialDetailsByContactInfoId(long Id);
 
     }
 }
