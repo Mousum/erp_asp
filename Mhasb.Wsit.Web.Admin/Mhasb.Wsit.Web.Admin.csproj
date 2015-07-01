@@ -1400,6 +1400,7 @@
     <Content Include="Views\Packages\Edit.cshtml" />
     <Content Include="Views\Packages\Index.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Currency\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
