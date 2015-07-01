@@ -285,6 +285,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\chartofaccount.png" />
     <Content Include="img\client.jpg" />
     <Content Include="img\dyn-logo.png" />
     <Content Include="img\favicon.ico" />

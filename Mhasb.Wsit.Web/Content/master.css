@@ -13904,3 +13904,26 @@ table a:not(.btn), .table a:not(.btn){
     padding-top: 10px;
 }
 /*Author: Tanveer , Date: 04.06.2015 , 3 pages, Pricing*/
+
+/*Author: Rafi , Date: 30.06.2015 , cstm-modal*/
+.modal-cs label{
+    margin-top: 5px;
+}
+.cstm-icon-div{
+    display: inline;
+}
+.cstm-icon-div i{
+    margin-top: 10px;
+    float: left;
+}
+.cstm-icon-div p{
+    margin-top: 7px;
+    margin-left: 15px;
+}
+.cstm-di {
+    margin-top: 20px;
+}
+.cstm-fm{
+    margin-top: 30px;
+}
+/*Author: Rafi , Date: 30.06.2015 , cstm-modal*/

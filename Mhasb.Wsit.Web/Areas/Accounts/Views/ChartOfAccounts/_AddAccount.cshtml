@@ -9,7 +9,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content clearfix">
 
-
+            <div class="modal-header cstm-pop-up-header">
+                <button type="button" class="close pop-cross" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title sign-up-title" id="myModalLabel">Add New Account</h4>
+            </div>
 
             @using (Html.BeginForm())
             {
@@ -117,8 +120,10 @@
                     <div class="row cstm-frm-row">
                         <div class="col-md-12">
                             <div class="btn-group" role="group" aria-label="...">
-                                <button type="submit" class="btn btn-success">Save</button>
-                                <button type="button" class="btn btn-danger">Cancel</button>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
