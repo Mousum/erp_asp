@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using PagedList;
+using PagedList.Mvc;
 namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
 {
     public class CurrencyController : Controller
@@ -18,7 +19,8 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(cService.GetAllCurrency());
+            //return View(cService.GetAllCurrency());
+            return View("Index1");
         }
 
         public ActionResult Create()
@@ -76,7 +78,29 @@ namespace Mhasb.Wsit.Web.Areas.OrgSettings.Controllers
             //    return RedirectToAction("Index", "Currency", new { Area = "OrgSettings" });
             //}
         }
+        public ActionResult List(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            List<Currency> currency = cService.GetAllCurrency();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                currency = currency.Where(s => s.Name.Contains(searchString)).ToList();
+            }
 
+
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            return PartialView(currency.ToPagedList(pageNumber, pageSize));
+
+        }
 
     }
 }

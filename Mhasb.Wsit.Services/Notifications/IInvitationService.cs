@@ -18,5 +18,6 @@ namespace Mhasb.Services.Notifications
 
         Invitation GetSingleInvitation(int Id);
         List<Invitation> GetAllInvitation();
+        List<Invitation> GetAllInvitationByCompany(int companyId);
     }
 }

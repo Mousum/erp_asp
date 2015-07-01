@@ -46,6 +46,8 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             var  companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
 
+            var coalist = _coaService.GetAllChartOfAccountByComIdCostCentre(companyId);
+            ViewBag.CoaList = coalist;
 
             var currencyList = _currencycService.GetAllCurrency();
             ViewBag.CurrencyList = new SelectList(currencyList, "Id", "Name");
@@ -56,10 +58,44 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                                         .ToList();
             ViewBag.AmountsareList = new SelectList(amountsareenum, "Id", "Name");
 
+            var lookups = _luSer.GetLookupByType("Tax");//.Select(u => new { u.Id, TValue = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = lookups;
+
+            
+
 
 
             return View();
         }
+        public ActionResult PartialAddAccount()
+        {
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+
+            // var AccSet = setService.GetAllByUserId(user.Id);
+            int companyId = 0;
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            if (logObj != null)
+            {
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+            }
+            var atypes = _coaService.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+           
+
+            if (atypes.Count == 0)
+            {
+                _coaService.AddBaseAccountTypes();
+                atypes = _coaService.GetAllChartOfAccountByCompanyId(companyId);
+            }
+            var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+
+            ViewBag.ATypes = atypes;
+            return PartialView("_AddAccount");
+        }
+
         public ActionResult RepeatTransection()
          {
 

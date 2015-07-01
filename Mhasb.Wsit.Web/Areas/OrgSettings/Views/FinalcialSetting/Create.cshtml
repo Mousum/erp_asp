@@ -22,14 +22,15 @@
 }
 
 
-
-
 <div class="container my-dashboard">
     <div class="row clearfix">
         @using (Html.BeginForm("Create", "FinalcialSetting", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
+
+
+           
 
             <div class="col-md-6">
                 <h4>FinalcialSetting </h4>
