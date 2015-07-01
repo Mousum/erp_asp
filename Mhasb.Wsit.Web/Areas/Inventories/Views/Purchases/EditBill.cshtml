@@ -463,56 +463,18 @@
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="purchesemodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
 @{ Html.RenderAction("PartialAddAccount");}
 <script type="text/javascript">
-
+    
     $(document).ready(function () {
         $.get("ItemRow", function (data) {
             $("#itemLoader").append(data);
-            $(".crossx2").bind('click', function (event) {
-                $(this).parent().remove();
-                console.log($(this));
-                //var i = 0;
-                //if (i == 0) {
-                //    $(this).closest('tr').remove();
-                //    console.log("Russel");
-                //    i++;
-                //}
-                //event.preventDefault();
-            });
         });
-
-        @*var baseUrl = '@Url.Content("~/")';
-        var url = baseUrl + "Inventories/PurchasesController/PartialAddAccount";
-        $.ajax({
-            url: url,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#itemLoader').html(result);
-            }
-        });*@
-
-
 
         $(".datepicker").datepicker();
         $("#new_line").click(function () {
             $.get("ItemRow", function (data) {
                 $("#itemLoader").append(data);
-                $(".crossx2").bind('click', function (event) {
-                    $(this).parent().remove();
-                });
             });
-            @*var baseUrl = '@Url.Content("~/")';
-            var url = baseUrl + "Inventories/PurchasesController/PartialAddAccount";
-            $.ajax({
-                url: url,
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $('#itemLoader').html(result);
-                }
-            });*@
         });
-
         $(".add-note").click(function () {
             $(".hidden-note").toggle("slow");
         })

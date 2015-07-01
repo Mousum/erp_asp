@@ -44,7 +44,7 @@
     </td>
     <td  class="ammount"></td>
     <td  class="ammounttax" style="display:none;"></td>
-    <td class="crossx2 RemoveRow"><a href="javascript:void(0);">X</a></td>
+    <td class="crossx2"><a href="javascript:void(0);" class="presentation RemoveRow">X</a></td>
 </tr>
 
 @*@{ Html.RenderAction("PartialAddAccount"); }*@
@@ -54,10 +54,39 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-       
+        $(".RemoveRow").unbind("click").bind("click", function () {
+            var th=$(this).parent('.crossx2').parent('.tr-parent');
+            var amount = parseFloat(th.find('.ammount').text()).toFixed(2);
+            var ammounttax = parseFloat(th.find('.ammounttax').text()).toFixed(2);
+            var sub_total = parseFloat($("#sub-total").text()).toFixed(2);
+            var Tax_total = parseFloat($("#calTax").text()).toFixed(2);
+            var total = parseFloat($("#total").text()).toFixed(2);
+            if (sub_total >= amount) {
+                sub_total = (sub_total - amount).toFixed(2);
+                $("#sub-total").text(sub_total);
+            }
+            if (Tax_total >= ammounttax) {
+                Tax_total = parseFloat(Tax_total - ammounttax).toFixed(2);
+                $("#calTax").text(Tax_total);
+            }
+            
+            if (total >= sub_total) {
+                
+                var t = parseFloat((amount * (ammounttax / 100))).toFixed(2);
+                
+                var amountDitect = parseFloat(amount) + parseFloat(t);
+                
+                total =parseFloat( total - amountDitect.toFixed(2)).toFixed(2);
+                $("#total").text(total);
+            }
+           
+            $(this).closest('tr').remove();
+        });
         $('.itemCliked').click(function () {
             var Id = $(this).attr("id");
             var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            
+            console.log(par);
             var presubtotal = $('#sub-total').text();
             var prevcalTax = $('#calTax').text();
             var prevtotal = $('#total').text();
@@ -80,14 +109,14 @@
                         par.find('.quantity').val(data.Quantity);
                         par.find('.unitPrice').val(data.UnitPrice);
                         par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
-                        par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + ".00" + "%)");
-                        par.find('.ammount').text(ammount + ".00");
-                        par.find('.ammounttax').text(data.PtxtQuantity);
+                        par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + "%)");
+                        par.find('.ammount').text(ammount );
+                        par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
                         presubtotal = parseFloat(presubtotal) + ammount;
                         
-                        $('#sub-total').text(presubtotal + ".00");
+                        $('#sub-total').text(parseFloat(presubtotal).toFixed(2));
                         prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
-                        $('#calTax').text(parseFloat(prevcalTax));
+                        $('#calTax').text(parseFloat(prevcalTax).toFixed(2));
                         var total;
                         if (data.PtxtQuantity >=0) {
                             total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
@@ -95,7 +124,7 @@
                             total = ammount + parseFloat(prevtotal);
                             }
                         
-                        $('#total').text(parseFloat(total));
+                        $('#total').text(parseFloat(total).toFixed(2));
                     }
                 },
                 error: function () {

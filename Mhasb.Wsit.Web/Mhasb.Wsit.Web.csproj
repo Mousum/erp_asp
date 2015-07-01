@@ -712,6 +712,7 @@
     <Folder Include="Areas\Inventories\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
+    <Folder Include="Areas\Organizations\Views\Employee\" />
     <Folder Include="Areas\OrgSettings\Models\" />
     <Folder Include="Areas\Subscriptions\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />
