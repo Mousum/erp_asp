@@ -1,12 +1,14 @@
 ﻿<tr class="cstm-table-clr">
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="" data-toggle="modal" data-target="#myModal">Add note</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" class="" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">None</a></li>
+                @foreach (var item in ViewBag.Items)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="@item.Id" href="javascript:void(0)">@item.ItemCode -  @item.ItemName</a></li>
+                }
             </ul>
         </div>
     </td>
@@ -17,10 +19,11 @@
         <div class="dropdown form-border">
             <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">+ Add new account...</a></li>
+                @foreach (var item in ViewBag.CoaList)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                }
             </ul>
         </div>
     </td>
@@ -28,20 +31,40 @@
         <div class="dropdown form-border">
             <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">+ Add new tax rate...</a></li>
+                @foreach (var item in ViewBag.Lookups)
+                {
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
+                }
             </ul>
         </div>
     </td>
     <td></td>
-    <td class="crossx2"><a  class="RemoveRow" href="Javascript:Void(0);">X</a></td>
+    <td class="crossx2"><a class="RemoveRow" href="Javascript:Void(0);">X</a></td>
 </tr>
 
 
 <script>
     $(".RemoveRow").click(function () {
         $(this).closest('tr').remove();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.itemCliked').click(function () {
+            var Id = $(this).attr("id");
+            $.ajax({
+                url: "@Url.Action("GetjsonItem", "Purchases", new { area = "Inventories" })",
+                type: "POST",
+                data: { Id: Id },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+
+                }
+            });
+        });
     });
 </script>

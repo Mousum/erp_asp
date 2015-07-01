@@ -7,6 +7,8 @@ using Mhasb.Services.Inventories;
 using Mhasb.Services.Loggers;
 using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
+using Mhasb.Domain.Inventories;
+using System;
 
 namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 {
@@ -48,6 +50,12 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             var currencyList = _currencycService.GetAllCurrency();
             ViewBag.CurrencyList = new SelectList(currencyList, "Id", "Name");
 
+            var amountsareenum = Enum.GetValues(typeof(EnumTransactionType))
+                                        .Cast<EnumTransactionType>()
+                                        .Select(v => new { Id = Convert.ToInt32(v), Name = v.ToString() })
+                                        .ToList();
+            ViewBag.AmountsareList = new SelectList(amountsareenum, "Id", "Name");
+
 
 
             return View();
@@ -75,17 +83,34 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
 
 
-            
 
-            ViewBag.CoaList = _coaService.GetAllChartOfAccountByCompanyId(companyId).Where(c => c.Level == 3);
+            var coalist = _coaService.GetAllChartOfAccountByComIdCostCentre(companyId);
+            ViewBag.CoaList = coalist;
 
-            var itemList = _itemService.GetAllItems().Select(u => new { u.Id, Name = u.ItemName });
-            ViewBag.Items = new SelectList(itemList, "Id", "Name");
-            var lookups = _luSer.GetLookupByType("Tax").Select(u => new { u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
-            ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
+            var itemList = _itemService.GetAllItems();
+            ViewBag.Items = itemList;
+            var lookups = _luSer.GetLookupByType("Tax");//.Select(u => new { u.Id, TValue = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.Lookups = lookups;
 
 
             return PartialView();
+        }
+
+        public ActionResult GetjsonItem(long Id)
+        {
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+            var itemList = _itemService.GetAllItemsByConmanyId();
+            if (itemList != null)
+            {
+                return Json(new { success = "Success", itemList });
+            }
+            else {
+                return Json(new { success = "False" });
+            }
+            
         }
 	}
 }
