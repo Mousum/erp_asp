@@ -21,13 +21,18 @@ namespace Mhasb.DAL.Mapping.Contacts
             this.Property(i => i.City).HasMaxLength(100).HasColumnName("city");
             this.Property(i => i.StateRegion).HasMaxLength(100).HasColumnName("stateregion");
             this.Property(i => i.ZipeCode).HasMaxLength(100).HasColumnName("zipecode");
-            this.Property(i => i.Country).HasMaxLength(100).HasColumnName("country");
+            this.Property(i => i.CountryId).HasColumnName("countryid");
             this.Property(i => i.Type).HasColumnName("type");
             this.ToTable("con.contactdetails");
 
             this.HasRequired(i=>i.ContactInformations)
                 .WithMany(i=>i.ContactDtails)
                 .HasForeignKey(i=>i.ContactInfoId);
+
+            this.HasOptional(i => i.Country)
+                .WithMany()
+                .HasForeignKey(i=>i.CountryId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

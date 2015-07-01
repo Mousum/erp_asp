@@ -27,8 +27,10 @@ namespace Mhasb.Domain.Contacts
         public string BankAccountNumber { get; set; }
         public string BankAccountName { get; set; }
         public string Details { get; set; }
-        public string BillsTerms { get; set; }
-        public string SalesTerms { get; set; }
+        public DueOption BillsTerms { get; set; }
+        public DueOption SalesTerms { get; set; }
+        public double BillsDue { get; set; }
+        public double SakesDue { get; set; }
         public string NetworkKey { get; set; } 
         public virtual ContactInformation ContactInformations { get; set; }
 
@@ -54,6 +56,14 @@ namespace Mhasb.Domain.Contacts
         AmountsAreTaxInclusive=1,
         AmountsAreTaxExclusive=2,
         AmountsDontIncludeTax=3
+    }
+
+    public enum DueOption
+    {
+        OfTheFollowingMonth = 0,
+        DaysAfterTheBillDate = 1,
+        DaysAfterTheEndOfTheBillMonth= 2,
+        OfTheCurrentMonth = 3
     }
 
 }

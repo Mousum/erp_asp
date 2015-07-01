@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mhasb.Domain.Contacts.ContactInformation>
+﻿@model IEnumerable<Mhasb.Domain.Contacts.AssignToGroup>
 
 <div class="container my-dashboard">
     <div class="row">
@@ -76,10 +76,10 @@
                                             {
                                                 <tr>
                                                     <th scope="row"><input type="checkbox" class="check" value="@item.Id"></th>
-                                                    <td>@item.ContactName</td>
-                                                    <td>@item.AccountNumber</td>
-                                                    <td>@item.Persons.Where(r => r.IsPrimaryPerson == true).FirstOrDefault().Email</td>
-                                                    <td>@item.TelePhones.FirstOrDefault().CellPhone</td>
+                                                    <td>@item.ContactInformations.ContactName</td>
+                                                    <td>@item.ContactInformations.AccountNumber</td>
+                                                    <td>@item.ContactInformations.Persons.Where(r => r.IsPrimaryPerson == true).FirstOrDefault().Email</td>
+                                                    <td>@item.ContactInformations.TelePhones.FirstOrDefault().CellPhone</td>
                                                 </tr>
                                             }
 
@@ -150,9 +150,9 @@
                         <input type="text" class="cstm-input" placeholder="New Group Name" id="ng-name" validate="RequiredField" style="border:1px solid #b6b6b6;">
                     </div>
                     <div class="col-md-2">
-                       Or
+                        Or
                     </div>
-                    <div class="col-md-5" >
+                    <div class="col-md-5">
                         <select class="cstm-input" id="og-name" style="border:1px solid #b6b6b6;width:100%">
                             <option>Select Group</option>
                             @foreach (var items in ViewBag.Groups)
@@ -196,7 +196,7 @@
             $("#AllTypes").removeClass("active");
             $("#Group-" + Group).addClass("active");
         }
-       
+
 
     });
     $(".cstm-btn-search").click(function () {
@@ -325,7 +325,7 @@
                 jsonObj.push(obj)
             }
         })
-        
+
         var contacts = JSON.stringify(jsonObj);
         var group = new Object();
         if ($("#ng-name").val() == "" && $("#og-name").val() == "") {
@@ -340,7 +340,7 @@
                 group.name = $("#og-name").val();
                 group.type = 'old';
             }
-            
+
         }
         var array = [];
         array.push(group)
@@ -374,3 +374,4 @@
 
     })
 </script>
+
