@@ -43,5 +43,37 @@ namespace Mhasb.Services.Contact
                 return null;
             }
         }
+        public bool DeleteAssignToGroup(int Id) 
+        {
+            try
+            {
+
+                _finalCrud.DeleteOperation(Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return false;
+            }
+        }
+        public AssignToGroup GetSingleAssignToGroup(int GroupId,int InfoId) {
+            try
+            {
+                var _Obj = _finalCrud.GetOperation()
+
+                    .Filter(i => i.ContactGroupId == GroupId&&i.ContactInfoId==InfoId)
+                    
+                    .Get().FirstOrDefault();
+                return _Obj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        
+        }
+        
     }
 }

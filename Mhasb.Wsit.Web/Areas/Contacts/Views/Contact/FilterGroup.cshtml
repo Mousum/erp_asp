@@ -28,7 +28,7 @@
                                     <li role="presentation" id="Archive"><a href="@Url.Content("FilterContact?Type=Archive")">Archived (@ViewBag.ArchiveCount)</a></li>
                                     @foreach (var items in ViewBag.Groups)
                                     {
-                                        <li role="presentation" id="Group-@items.Id"><a href="@Url.Content("FilterContact?Group="+items.Id)">@items.GroupName (@ViewBag.ArchiveCount)</a></li>
+                                        <li role="presentation" id="Group-@items.Id"><a href="@Url.Content("FilterContact?Group="+items.Id)">@items.GroupName (@ViewData[items.GroupName])</a></li>
                                     }
                                 </ul>
                             </div>
@@ -55,14 +55,14 @@
                                     <table class="table table-bordered table-responsive table-hover table-journal">
                                         <thead>
                                             <tr>
-                                                <th class="table-btn"><a href="javascript:void(0);" class="btn btn-default" data-role="button" data-toggle="modal" data-target="#pop-up-2">Add to Group</a><a href="#" class="btn btn-default" data-role="button">Merge</a><a href="#" class="btn btn-default" data-role="button">Archive</a><span id="count"> No contact selected</span><span class=""><input class="cstm-input1" id="SearchString" type="text"><a href="javascript:void(0)" class="btn btn-success cstm-btn-search" data-role="button">Search</a></span></th>
+                                                <th class="table-btn"><a href="javascript:void(0);" class="btn btn-default" data-role="button" data-toggle="modal" data-target="#pop-up-2">Move to Group</a><a href="javascript:void(0);" class="btn btn-default" id="remove-from-group" data-role="button">Remove From Group</a><a href="javascript:void(0);" class="btn btn-danger" id="delete-group" data-role="button">Delete Group</a><span id="count"> No contact selected</span><span class=""><input class="cstm-input1" id="SearchString" type="text"><a href="javascript:void(0)" class="btn btn-success cstm-btn-search" data-role="button">Search</a></span>
                                             </tr>
                                         </thead>
                                     </table>
                                     <table class="table table-bordered table-responsive table-hover table-journal">
                                         <tbody>
                                             <tr class="cstm-table-clr">
-                                                <th scope="row"><input type="checkbox"></th>
+                                                <th scope="row"><input type="checkbox" id="control"></th>
                                                 <td>Name</td>
                                                 <td>Account No.</td>
                                                 <td>Email Address</td>
@@ -75,7 +75,7 @@
                                             @foreach (var item in Model)
                                             {
                                                 <tr>
-                                                    <th scope="row"><input type="checkbox" class="check" value="@item.Id"></th>
+                                                    <th scope="row"><input type="checkbox" class="check" value="@item.ContactInformations.Id"></th>
                                                     <td>@item.ContactInformations.ContactName</td>
                                                     <td>@item.ContactInformations.AccountNumber</td>
                                                     <td>@item.ContactInformations.Persons.Where(r => r.IsPrimaryPerson == true).FirstOrDefault().Email</td>
@@ -189,10 +189,10 @@
         } else {
             $("#" + filter).addClass("active");
         }
-        if (Group == "None" || type == "NoValue" || type =="undefined") {
+        if (Group == "None" || type == "NoValue" || type == "undefined") {
             $("#AllTypes").addClass("active");
         }
-        else{
+        else {
             $("#AllTypes").removeClass("active");
             $("#Group-" + Group).addClass("active");
         }
@@ -316,47 +316,52 @@
     }
 
     $(".add-to-group").click(function () {
-        alert();
+        var count = 0;
         var jsonObj = new Array();
         $(".check").each(function () {
             if ($(this).is(":checked")) {
                 var obj = new Object();
                 obj.id = $(this).val();
                 jsonObj.push(obj)
+                count++;
             }
         })
+        if (count != 0) {
+            var contacts = JSON.stringify(jsonObj);
+            var group = new Object();
+            if ($("#ng-name").val() == "" && $("#og-name").val() == "") {
 
-        var contacts = JSON.stringify(jsonObj);
-        var group = new Object();
-        if ($("#ng-name").val() == "" && $("#og-name").val() == "") {
-
-        } else {
-            if ($("#ng-name").val() != "") {
-                //group = { 'name': $("#ng-name").val(),'type':'new' };
-                group.name = $("#ng-name").val();
-                group.type = 'new';
             } else {
-                //group = { 'name': $("#og-name").val(), 'type': 'old' }
-                group.name = $("#og-name").val();
-                group.type = 'old';
-            }
+                if ($("#ng-name").val() != "") {
+                    //group = { 'name': $("#ng-name").val(),'type':'new' };
+                    group.name = $("#ng-name").val();
+                    group.type = 'new';
+                } else {
+                    //group = { 'name': $("#og-name").val(), 'type': 'old' }
+                    group.name = $("#og-name").val();
+                    group.type = 'old';
+                }
 
+            }
+            var array = [];
+            array.push(group)
+            var data = { contacts: contacts, group: JSON.stringify(array) }
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "AddToGroup",
+                data: data,
+                datatype: "html",
+                success: function (data) {
+                    window.location.reload();
+
+                }
+            });
+        } else
+        {
+            alert("No Contact Selected");
         }
-        var array = [];
-        array.push(group)
-        var data = { contacts: contacts, group: JSON.stringify(array) }
-        console.log(data);
-        $.ajax({
-            type: "POST",
-            url: "AddToGroup",
-            data: data,
-            datatype: "html",
-            success: function (data) {
-                $("#taskList").html(data);
-                $("#taskList").show("Slow");
-
-            }
-        });
+       
     })
     $(".check").click(function () {
         var count = 0;
@@ -372,6 +377,90 @@
             $("#count").text("No contact selected");
         }
 
+    })
+    $("#control").click(function () {
+        if ($(this).is(':checked')) {
+            $(".check").each(function () {
+                if (!$(this).is(':checked')) {
+
+                    $(this).prop('checked', true);
+                }
+            })
+
+        }
+        else {
+            $(".check").each(function () {
+                if ($(this).is(':checked')) {
+                    $(this).prop('checked', false);
+
+                }
+            })
+        }
+        var count = 0;
+        $(".check").each(function () {
+            if ($(this).is(":checked")) {
+                count++;
+            }
+        })
+        if (count != 0) {
+            $("#count").text(count + " contacts selected");
+        }
+        else {
+            $("#count").text("No contact selected");
+        }
+
+    })
+    $("#remove-from-group").click(function () {
+        var count = 0;
+        var jsonObj = new Array();
+        $(".check").each(function () {
+            if ($(this).is(":checked")) {
+                var obj = new Object();
+                obj.id = $(this).val();
+                jsonObj.push(obj);
+                count++
+            }
+        })
+        if (count != 0) {
+            var contacts = JSON.stringify(jsonObj);
+            var grp = new Object();
+
+            var data = { contacts: contacts, groupId: getURLParameters("Group") }
+            $.ajax({
+                type: "POST",
+                url: "RemoveFromGroup",
+                data: data,
+                datatype: "html",
+                success: function (data) {
+                    if (data == "Success") {
+                        window.location.reload();
+                    }
+
+
+                }
+            });
+        } else
+        {
+            alert("No Contact Selected");
+        }
+       
+    })
+    $("#delete-group").click(function () {
+        
+        var data = { groupId: getURLParameters("Group") }
+        $.ajax({
+            type: "POST",
+            url: "DeleteGroup",
+            data: data,
+            datatype: "html",
+            success: function (data) {
+                if (data == "Success") {
+                    window.location.assign('@Url.Content("~/Contacts/Contact/FilterContact")')
+                }
+
+
+            }
+        });
     })
 </script>
 
