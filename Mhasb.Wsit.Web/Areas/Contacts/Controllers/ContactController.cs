@@ -373,8 +373,8 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
             var lookups = luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
 
-
-            ViewBag.ATypes = Atypes;
+            
+            ViewBag.ATypes = new SelectList(Atypes.Where(i => i.Level == 3), "Id", "AName");
             ViewBag.CountryList = new SelectList(iCountry.GetAllCountries(), "Id", "CountryName");
             ViewBag.CurrencyList = new SelectList(currencyService.GetAllCurrency(), "Id", "Name");
 
@@ -392,7 +392,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             model.PrimaryPerson = contactInfo.Persons.Where(p=>p.IsPrimaryPerson==true).FirstOrDefault();
             model.Person = contactInfo.Persons.Where(p => p.IsPrimaryPerson == false).ToList();
             model.TelePhone = contactInfo.TelePhones.SingleOrDefault();
-            model.Notes = contactInfo.Notes.SingleOrDefault();
+            model.Notes = contactInfo.Notes.FirstOrDefault();
             model.FinancialDetails = financialDetailsService.GetFinancialDetailsByContactInfoId(contactInfo.Id);
 
             return View(model);
@@ -463,7 +463,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     Note.UserId = user.Id;
                     Note.Date = DateTime.Now;
                     Note.ContactInfoId = ContactInfo.Id;
-                    noteService.CreateNote(Note);
+                    noteService.UpdateNote(Note);
                     Telephone.ContactInfoId = ContactInfo.Id;
                     telephoneService.UpdateTelePhone(Telephone);
 
