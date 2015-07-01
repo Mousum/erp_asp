@@ -72,7 +72,9 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
          {
 
              _adminSer.InsertDefaultData();
-            return Content("Hello");
+             TempData["DefaultDataMsg"] = "Default Data Added Successfully!";
+             return RedirectToAction("Index", "Home");
+             
         }
         ////
         //// GET: /Account/Register
