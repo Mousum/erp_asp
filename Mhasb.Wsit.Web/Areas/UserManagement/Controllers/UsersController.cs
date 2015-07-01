@@ -171,7 +171,11 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             ViewBag.CompanyLocation = activatedCompany.Location;
             //var financialSettings = fService.GetCurrentFinalcialSettingByComapny(userSettings.Companies.Id);
             var financialSettings = fService.GetCurrentFinalcialSettingByComapny(logObj.Companies.Id);
-
+            if(financialSettings==null)
+            {
+                TempData.Add("errMsg","No financial settings found for current date...Please Add Financial settings.");
+                return RedirectToAction("Create", "FinalcialSetting", new { area = "OrgSettings" });
+            }
 
             ViewBag.CompanyCurrency = financialSettings.Currencies.Name;
 
