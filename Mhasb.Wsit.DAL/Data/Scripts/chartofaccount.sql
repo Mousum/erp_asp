@@ -44,7 +44,8 @@ INSERT INTO [acc].[vouchertype]([name],[code])
 								 VALUES('New journal','01'),
 								 ('Debit Voucher','02'),
 								 ('Credit Voucher','03'),
-								 ('Repeating Journal','04');
+								 ('Repeating Journal','04'),
+								  ('Openning Voucher','05');
 
 
 Insert into com.industries(industry_name)

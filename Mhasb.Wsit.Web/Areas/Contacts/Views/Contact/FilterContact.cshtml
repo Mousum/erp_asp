@@ -76,7 +76,7 @@
                                             {
                                                 <tr>
                                                     <th scope="row"><input type="checkbox" class="check" value="@item.Id"></th>
-                                                    <td>@item.ContactName</td>
+                                                    <td><a href="@Url.Action("Edit", "Contact", new { area = "Contacts", id = item.Id })">@item.ContactName</a></td>
                                                     <td>@item.AccountNumber</td>
                                                     <td>@item.Persons.Where(r => r.IsPrimaryPerson == true).FirstOrDefault().Email</td>
                                                     <td>@item.TelePhones.FirstOrDefault().CellPhone</td>
@@ -176,11 +176,12 @@
         var filter = getURLParameters("Filter");
         var type = getURLParameters("Type");
         var Group = getURLParameters("Group");
-        // alert(filter);
+        var search = getURLParameters("SearchString");
+       
         if (type == "None" || type == "NoValue" || type == "undefined") {
             $("#AllTypes").addClass("active");
         } else {
-            $("#AllTypes").removeClass("active");
+            
             $("#" + type).addClass("active");
 
         }
@@ -189,12 +190,14 @@
         } else {
             $("#" + filter).addClass("active");
         }
-        if (Group == "None" || type == "NoValue" || type =="undefined") {
-            $("#AllTypes").addClass("active");
-        }
-        else{
-            $("#AllTypes").removeClass("active");
+        if (Group != "None" &&Group != "NoValue" &&Group != "undefined") {
+            
             $("#Group-" + Group).addClass("active");
+        }
+       
+        if (search != "None" && search != "NoValue" && search != "undefined")
+        {
+            $("#SearchString").val(search)
         }
        
 

@@ -19,7 +19,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private IAdminUserServices AdminSer = new AdminUserService();
+        private IAdminUserServices _adminSer = new AdminUserService();
         //public AccountController()
            
         //{
@@ -67,8 +67,13 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
             return View(model);
         }
 
+         [AllowAnonymous]
+        public ActionResult InsertDefaultData()
+         {
 
-        
+             _adminSer.InsertDefaultData();
+            return Content("Hello");
+        }
         ////
         //// GET: /Account/Register
         //[AllowAnonymous]

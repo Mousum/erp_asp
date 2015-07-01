@@ -18,6 +18,6 @@ namespace Mhasb.Services.AdminUsers
         bool DeleteAdminUser(int adminUserId);
         List<AdminUser> GetAllAdminUsers();
         AdminUser GetSingleAdminUser(int userId);
-
+        bool InsertDefaultData();
     }
 }

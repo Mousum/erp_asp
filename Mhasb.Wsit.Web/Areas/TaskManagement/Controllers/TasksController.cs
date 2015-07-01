@@ -23,19 +23,22 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         private readonly IEmployeeService eService = new EmployeeService();
         private ISettingsService setService = new SettingsService();
         private IUserService uService = new UserService();
-        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
+        private readonly ICompanyViewLog  _companyViewLog = new CompanyViewLogService();
+
 
         // GET: TaskManagement/Tasks
         public ActionResult Index()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
+            var companyId = 0;
             if (logObj != null)
             {
                 companyId = (int)logObj.CompanyId;
             }
+            //var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
                 var Emp = eService.GetEmpByCompanyId(companyId).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
@@ -84,12 +87,21 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         [HttpPost]
         public string CreateProject(string ProjectName, int ManagerId, string StartingDate, string FinishingDate)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            //var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
+           
             var newProj = new Project();
             newProj.ProjectName = ProjectName;
             newProj.ManagerId = ManagerId;
-            newProj.CompanyId = AccSet.Companies.Id;
+            newProj.CompanyId = companyId;
             newProj.ProjectDate = DateTime.Now;
             newProj.StartingDate = Convert.ToDateTime(StartingDate);
             newProj.FinishingDate = Convert.ToDateTime(FinishingDate);
@@ -140,17 +152,24 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         [HttpPost]
         public PartialViewResult UpdateProject(int id)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            //var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(companyId).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
             {
                 var msg = ex.Message;
-              
 
             }
             var model = pService.GetSingleProject(id);
@@ -185,11 +204,19 @@ namespace Mhasb.Wsit.Web.Areas.TaskManagement.Controllers
         [HttpPost]
         public PartialViewResult UpdateTask(int id)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            //var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
             try
             {
-                var Emp = eService.GetEmpByCompanyId(AccSet.Companies.Id).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
+                var Emp = eService.GetEmpByCompanyId(companyId).Distinct().Select(u => new { Id = u.Id, Name = u.Users.FirstName + " " + u.Users.LastName });//there will be employees from employee service under compnies of the user Loged in
                 ViewBag.Employess = new SelectList(Emp, "Id", "Name");
             }
             catch (Exception ex)
