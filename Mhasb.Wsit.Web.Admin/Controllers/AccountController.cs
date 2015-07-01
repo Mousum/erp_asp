@@ -71,8 +71,9 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
         public ActionResult InsertDefaultData()
          {
 
-             _adminSer.InsertDefaultData();
-             TempData["DefaultDataMsg"] = "Default Data Added Successfully!";
+             var rr= _adminSer.InsertDefaultData();
+
+             TempData["DefaultDataMsg"] = rr;
              return RedirectToAction("Index", "Home");
              
         }
