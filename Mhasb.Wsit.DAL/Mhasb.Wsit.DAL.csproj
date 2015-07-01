@@ -139,6 +139,7 @@
     <Content Include="Data\Scripts\spget_chartofaccount.txt" />
     <Content Include="Data\Scripts\spset_general_data_entry.txt" />
     <Content Include="Data\Scripts\sp_CompanyListWithLastVisitor.txt" />
+    <Content Include="Data\Scripts\spset_company_wise_data_entry.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Db Diagram\" />

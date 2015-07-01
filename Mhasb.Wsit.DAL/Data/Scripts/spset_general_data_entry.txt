@@ -1062,4 +1062,10 @@ BEGIN
 			Insert into org.designations(designation_name)
 									VALUES('Owner'),
 									('Software Develope');
+			-- Insert into com.lookup
+			INSERT [com].[lookup] ( [lookuptype], [key], [quantity], [value], [description], [order]) VALUES 
+			(N'Tax', N'Sales Tax on Imports', CAST(0.00 AS Decimal(18, 2)), N'Sales Tax on Imports', N'ddd', 1),
+			(N'Tax', N'Tax Exempt', CAST(0.00 AS Decimal(18, 2)), N'Tax Exempt', N'ddd', 2),
+			(N'Tax', N'Tax on Purchase', CAST(0.00 AS Decimal(18, 2)), N'Tax on Purchase', N'ddd', 3),
+			(N'Tax', N'Tax on Sales', CAST(0.00 AS Decimal(18, 2)), N'Tax on Sales', N'ddd', 4);
 END
