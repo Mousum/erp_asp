@@ -62,13 +62,14 @@ namespace Mhasb.Services.Inventories
                 return null;
             }
         }
-        public List<Item> GetAllItemsByConmanyId(int CompanyId)
+        public List<Item> GetAllItemsByConmanyId(int CompanyId, int Id)
         {
             try
             {
                 var _obj = _rep.GetOperation()
                     .Include(c=>c.PurchasesAccount)
                     .Include(c => c.PTaxRate)
+                    .Filter(c => c.Id == Id)
                    // .Filter(c => c.PurchasesAccount.CompanyId == CompanyId && c.PurchasesAccount.IsCostCenter == true && c.PurchasesAccount.Level == 3)
                     .Get()
                     .ToList();

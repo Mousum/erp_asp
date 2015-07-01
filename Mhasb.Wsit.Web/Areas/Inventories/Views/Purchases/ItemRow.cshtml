@@ -12,12 +12,12 @@
             </ul>
         </div>
     </td>
-    <td><textarea class="cstm-tarea-click" placeholder=""></textarea></td>
-    <td><textarea class="cstm-tarea-click1" placeholder=""></textarea></td>
-    <td><textarea class="cstm-tarea-click1" placeholder=""></textarea></td>
+    <td><textarea class="cstm-tarea-click" placeholder="" id="description"></textarea></td>
+    <td><textarea class="cstm-tarea-click1" placeholder="" id="quantity"></textarea></td>
+    <td><textarea class="cstm-tarea-click1" placeholder="" id="unitPrice"></textarea></td>
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle" type="text" id="coAccount" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">+ Add new account...</a></li>
                 @foreach (var item in ViewBag.CoaList)
@@ -29,7 +29,7 @@
     </td>
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle" type="text" id="taxPer" data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">+ Add new tax rate...</a></li>
                 @foreach (var item in ViewBag.Lookups)
@@ -39,7 +39,7 @@
             </ul>
         </div>
     </td>
-    <td></td>
+    <td id="ammount"></td>
     <td class="crossx2"><a class="RemoveRow" href="Javascript:Void(0);">X</a></td>
 </tr>
 
@@ -59,10 +59,11 @@
                 type: "POST",
                 data: { Id: Id },
                 success: function (data) {
-                    console.log(data);
+                    
+                    
                 },
                 error: function () {
-
+                    console.log("Error");
                 }
             });
         });
