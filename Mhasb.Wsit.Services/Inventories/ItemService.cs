@@ -68,6 +68,8 @@ namespace Mhasb.Services.Inventories
             {
                 var _obj = _rep.GetOperation()
                     .Include(c=>c.PurchasesAccount)
+                    .Include(s=>s.SalesAccount)
+                    .Include(s=>s.STaxRate)
                     .Include(c => c.PTaxRate)
                     .Filter(c => c.Id == Id)
                    // .Filter(c => c.PurchasesAccount.CompanyId == CompanyId && c.PurchasesAccount.IsCostCenter == true && c.PurchasesAccount.Level == 3)
@@ -101,6 +103,25 @@ namespace Mhasb.Services.Inventories
 
 
 
-       
+
+
+
+        public List<Item> GetItemsByCompanyId(int CompanyId)
+        {
+            try
+            {
+                var _obj = _rep.GetOperation()
+                    .Include(c => c.PurchasesAccount)
+                    .Include(c => c.PTaxRate)
+                    .Get()
+                    .ToList();
+                return _obj;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
+        }
     }
 }

@@ -113,7 +113,7 @@
                 <div class="row cstm-frm-row">
                     <div class="col-md-8">
 
-                        @Html.TextBoxFor(model => model.Tel, new { @class = "cstm-input", @placeholder = "Telephone" })
+                        @Html.TextBoxFor(model => model.Tel, new { @class = "cstm-input", @placeholder = "Telephone", maxlength = "12" })
                         @Html.ValidationMessageFor(model => model.Tel)
 
                     </div>

@@ -183,7 +183,9 @@
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
+    <Compile Include="Areas\Inventories\Controllers\InventoryController.cs" />
     <Compile Include="Areas\Inventories\Controllers\ItemsController.cs" />
+    <Compile Include="Areas\Inventories\Controllers\SalesController.cs" />
     <Compile Include="Areas\Inventories\InventoriesAreaRegistration.cs" />
     <Compile Include="Areas\Inventories\Controllers\PurchasesController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
@@ -526,6 +528,12 @@
     <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\_AddAccount.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Import.cshtml" />
+    <Content Include="Areas\Inventories\Views\Sales\_AddAccount.cshtml" />
+    <Content Include="Areas\Inventories\Views\Sales\EditBill.cshtml" />
+    <Content Include="Areas\Inventories\Views\Sales\Index.cshtml" />
+    <Content Include="Areas\Inventories\Views\Sales\ItemRow.cshtml" />
+    <Content Include="Areas\Inventories\Views\Sales\RepeatTransection.cshtml" />
+    <Content Include="Areas\Inventories\Views\Inventory\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\Items\CreateItem.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
