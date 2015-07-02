@@ -5,7 +5,7 @@
             <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">None</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="noneDel">None</a></li>
                 @foreach (var item in ViewBag.Items)
                 {
                     <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="@item.Id" href="javascript:void(0)">@item.ItemCode -  @item.ItemName</a></li>
@@ -54,6 +54,21 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.noneDel').unbind("click").bind("click", function () {
+            var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            par.find('.itemtXt').val();
+            par.find('.description').val();
+            par.find('.quantity').val();
+            par.find('.unitPrice').val();
+            par.find('.coAccount').val();
+            par.find('.taxPer').val();
+            par.find('.ammount').text();
+            par.find('.ammounttax').text();
+            $('#sub-total').text();
+            $('#calTax').text();
+            $('#total').text();
+        });
+
         $(".RemoveRow").unbind("click").bind("click", function () {
             var th=$(this).parent('.crossx2').parent('.tr-parent');
             var amount = parseFloat(th.find('.ammount').text()).toFixed(2);
@@ -103,7 +118,9 @@
                         console.log("Error");
                     } else {
                         var ammount = data.Quantity * data.UnitPrice;
-
+                        var subTotal = 0.00;
+                        var TotalTax = 0.00;
+                        var allTotal = 0.00;
                         par.find('.itemtXt').val(data.ItemName);
                         par.find('.description').val(data.Description);
                         par.find('.quantity').val(data.Quantity);
@@ -113,18 +130,32 @@
                         par.find('.ammount').text(ammount );
                         par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
                         presubtotal = parseFloat(presubtotal) + ammount;
+                        $('.tr-parent').each(function () {
+                            var eachAmmount = parseFloat($(this).find('.ammount').text()).toFixed(2);
+                            subTotal = parseFloat(subTotal) + parseFloat(eachAmmount);
+                            $('#sub-total').text(subTotal.toFixed(2));
+
+                            var eachAmmounttax = parseFloat($(this).find('.ammounttax').text()).toFixed(2);
+                            TotalTax = parseFloat(TotalTax) + parseFloat(eachAmmounttax);
+                            $('#calTax').text(TotalTax.toFixed(2));
+                            eachAmmount = parseFloat(eachAmmount) + parseFloat(eachAmmount * (eachAmmounttax / 100));
+                            console.log(eachAmmount);
+                            allTotal = parseFloat(allTotal) + parseFloat(eachAmmount);
+                            $('#total').text(allTotal.toFixed(2));
+
+
+                        });
+                       // //$('#sub-total').text(parseFloat(presubtotal).toFixed(2));
+                       // //prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
+                       //// $('#calTax').text(parseFloat(prevcalTax).toFixed(2));
+                       // var total;
+                       // if (data.PtxtQuantity >=0) {
+                       //     total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
+                       //     }else{
+                       //     total = ammount + parseFloat(prevtotal);
+                       //     }
                         
-                        $('#sub-total').text(parseFloat(presubtotal).toFixed(2));
-                        prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
-                        $('#calTax').text(parseFloat(prevcalTax).toFixed(2));
-                        var total;
-                        if (data.PtxtQuantity >=0) {
-                            total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
-                            }else{
-                            total = ammount + parseFloat(prevtotal);
-                            }
-                        
-                        $('#total').text(parseFloat(total).toFixed(2));
+                       // $('#total').text(parseFloat(total).toFixed(2));
                     }
                 },
                 error: function () {
