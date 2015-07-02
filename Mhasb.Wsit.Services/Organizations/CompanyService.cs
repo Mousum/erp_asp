@@ -166,6 +166,7 @@ namespace Mhasb.Services.Organizations
             }
 
         }
+        
         public List<Company> GetAllCompaniesByUserEmployee(long userId)
         {
             try
@@ -251,6 +252,21 @@ namespace Mhasb.Services.Organizations
                     return "Default Data Added Successfully!";
                 return "Default Data Already Inserted,No need to do again!";
             }
+        }
+
+        public bool IsTradingNameUnique(Company company, out string msg)
+        {
+            msg = "";
+            var comObj = companyRep.GetOperation()
+                .Filter(p => p.TradingName == company.TradingName)
+                .Get().FirstOrDefault();
+            if (comObj != null)
+            {
+                msg = "This name is already exist. Please try another one!";
+                return false;
+            }
+
+            return true;
         }
     }
 }
