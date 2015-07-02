@@ -1,0 +1,167 @@
+﻿@model Mhasb.Domain.Inventories.Item;
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">New Item</h4>
+        </div>
+        <div class="modal-body clearfix">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <h6>Item Name</h6>
+                    <input class="cstm-input" id="txtitemcode" type="text" placeholder="Item Name">
+                </div>
+                <div class="col-md-6">
+                    <h6>Item Code</h6>
+                    <input class="cstm-input" id="txtitemname" type="text" placeholder="Item Code">
+                </div>
+            </div>
+            <div class="col-md-12 cstm-border-con">
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4 modal-cs">
+                    <label>
+                        <input type="checkbox" id="check-item"> I track this item
+                    </label>
+                </div>
+                <div class="col-md-6" id="div-check-item" style="display:none">
+                    <h6>Inventory Asset Account</h6>
+                    <div class="dropdown form-border1 cstm-drop-mod">
+                        <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
+                            @foreach (var item in ViewBag.CoaList)
+                            {
+                                <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8 cstm-icon-div">
+                    <a class="tooltips newtooltips" href="javascript:void(0);">
+                        <i class="fa fa-question-circle"></i>
+                        <span id="m-tooltip">
+                            <p class="toolhead">
+                                Header
+                            </p>
+                            <div class="toolbody">
+                                <p>Body text is here</p>
+                            </div>
+                        </span>
+                    </a><p>lkxjdfghdxriudxriuty</p>
+                </div>
+            </div>
+            <div class="col-md-12 cstm-border-con">
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4 modal-cs">
+                    <label>
+                        <input type="checkbox" id="checkpurchaseItem">I purchase this item
+                    </label>
+                </div>
+                <div id="div-purchase-item">
+                    <div class="col-md-2" id="inventory-asset-account">
+                        <h6>Unit Price</h6>
+                        <input class="cstm-input" type="text" placeholder="">
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Cost of Goods Sold Account</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected="" class="btn btn-primary" id="purcheseaddAccount"> + Add new account... </option>
+                                @foreach (var item in ViewBag.CoaList)
+                                {
+                                    <option selected=""> @item.ACode - @item.AName </option>
+                                }
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Tax Rate</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected="" class="btn btn-primary"> + Add new tax... </option>
+                                @foreach (var item in ViewBag.Lookups)
+                                {
+                                    <option> @item.Value (@item.Quantity%) </option>
+                                }
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 cstm-di">
+
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <h6>Purchases Description (for my suppliers)</h6>
+                    <textarea class="cstm-tarea" placeholder=""></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 cstm-border-con">
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 modal-cs">
+                <label>
+                    <input type="checkbox" id="checksellItem"> I sell this item
+                </label>
+            </div>
+            <div id="div-sell-item" style="display:none;">
+                <div class="col-md-2">
+                    <h6>Unit Price</h6>
+                    <input class="cstm-input" type="text" placeholder="">
+                </div>
+                <div class="col-md-3">
+                    <h6>Sales Account</h6>
+                    <label class="cstm-select">
+                        <select>
+                            <option selected="" class="btn btn-primary" id="selladdAccount"> + Add new account... </option>
+                            @foreach (var item in ViewBag.CoaList)
+                            {
+                                <option selected=""> @item.ACode - @item.AName </option>
+                            }
+                        </select>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <h6>Tax Rate</h6>
+                    <label class="cstm-select">
+                        <select>
+                            <option selected="" class="btn btn-primary"> + Add new tax... </option>
+                            @foreach (var item in ViewBag.Lookups)
+                            {
+                                <option> @item.Value (@item.Quantity%) </option>
+                            }
+
+                        </select>
+                    </label>
+                </div>
+                <div class="col-md-12 cstm-di">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="cstm-tarea" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -183,6 +183,7 @@
     <Compile Include="Areas\Contacts\ContactsAreaRegistration.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactController.cs" />
     <Compile Include="Areas\Contacts\Controllers\ContactGroupController.cs" />
+    <Compile Include="Areas\Inventories\Controllers\ItemsController.cs" />
     <Compile Include="Areas\Inventories\InventoriesAreaRegistration.cs" />
     <Compile Include="Areas\Inventories\Controllers\PurchasesController.cs" />
     <Compile Include="Areas\NotificationManagement\Controllers\InvitationsController.cs" />
@@ -525,6 +526,7 @@
     <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\_AddAccount.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Import.cshtml" />
+    <Content Include="Areas\Inventories\Views\Items\CreateItem.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
