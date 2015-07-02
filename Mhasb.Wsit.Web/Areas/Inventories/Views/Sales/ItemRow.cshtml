@@ -1,0 +1,167 @@
+﻿<tr class="cstm-table-clr tr-parent">
+    
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="noneDel">None</a></li>
+                @foreach (var item in ViewBag.Items)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="@item.Id" href="javascript:void(0)">@item.ItemCode -  @item.ItemName</a></li>
+                }
+            </ul>
+        </div>
+    </td>
+    <td><textarea class="cstm-tarea-click description" placeholder="" ></textarea></td>
+    <td><textarea class="cstm-tarea-click1 quantity" placeholder="" ></textarea></td>
+    <td><textarea class="cstm-tarea-click1 unitPrice" placeholder=""></textarea></td>
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle coAccount" type="text"  data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+               
+                <li role="presentation"><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
+                @foreach (var item in ViewBag.CoaList)
+                {
+                    <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                }
+            </ul>
+           
+        </div>
+    </td>
+    <td>
+        <div class="dropdown form-border">
+            <input class="dropdown-toggle taxPer" type="text"  data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" class="btn btn-primary" data-target="#taxModal">+ Add new tax rate...</a></li>
+                @foreach (var item in ViewBag.Lookups)
+                {
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
+                }
+            </ul>
+        </div>
+    </td>
+    <td  class="ammount"></td>
+    <td  class="ammounttax" style="display:none;"></td>
+    <td class="crossx2"><a href="javascript:void(0);" class="presentation RemoveRow">X</a></td>
+</tr>
+
+@*@{ Html.RenderAction("PartialAddAccount"); }*@
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.noneDel').unbind("click").bind("click", function () {
+            var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            par.find('.itemtXt').val();
+            par.find('.description').val();
+            par.find('.quantity').val();
+            par.find('.unitPrice').val();
+            par.find('.coAccount').val();
+            par.find('.taxPer').val();
+            par.find('.ammount').text();
+            par.find('.ammounttax').text();
+            $('#sub-total').text();
+            $('#calTax').text();
+            $('#total').text();
+        });
+
+        $(".RemoveRow").unbind("click").bind("click", function () {
+            var th=$(this).parent('.crossx2').parent('.tr-parent');
+            var amount = parseFloat(th.find('.ammount').text()).toFixed(2);
+            var ammounttax = parseFloat(th.find('.ammounttax').text()).toFixed(2);
+            var sub_total = parseFloat($("#sub-total").text()).toFixed(2);
+            var Tax_total = parseFloat($("#calTax").text()).toFixed(2);
+            var total = parseFloat($("#total").text()).toFixed(2);
+            if (sub_total >= amount) {
+                sub_total = (sub_total - amount).toFixed(2);
+                $("#sub-total").text(sub_total);
+            }
+            if (Tax_total >= ammounttax) {
+                Tax_total = parseFloat(Tax_total - ammounttax).toFixed(2);
+                $("#calTax").text(Tax_total);
+            }
+            
+            if (total >= sub_total) {
+                
+                var t = parseFloat((amount * (ammounttax / 100))).toFixed(2);
+                
+                var amountDitect = parseFloat(amount) + parseFloat(t);
+                
+                total =parseFloat( total - amountDitect.toFixed(2)).toFixed(2);
+                $("#total").text(total);
+            }
+           
+            $(this).closest('tr').remove();
+        });
+        $('.itemCliked').click(function () {
+            var Id = $(this).attr("id");
+            var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            
+            console.log(par);
+            var presubtotal = $('#sub-total').text();
+            var prevcalTax = $('#calTax').text();
+            var prevtotal = $('#total').text();
+            
+            $.ajax({
+                url: "@Url.Action("GetjsonItem", "Sales", new { area = "Inventories" })",
+                type: "POST",
+                data: { Id: Id },
+                success: function (data) {
+                    var json = $.parseJSON(JSON.stringify(data));
+                    var data = json.itemList[0];
+                    console.log(data);
+                    if (json.success == "False") {
+                        console.log("Error");
+                    } else {
+                        var ammount = data.Quantity * data.UnitPrice;
+                        var subTotal = 0.00;
+                        var TotalTax = 0.00;
+                        var allTotal = 0.00;
+                        par.find('.itemtXt').val(data.ItemName);
+                        par.find('.description').val(data.Description);
+                        par.find('.quantity').val(data.Quantity);
+                        par.find('.unitPrice').val(data.UnitPrice);
+                        par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
+                        par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + "%)");
+                        par.find('.ammount').text(ammount );
+                        par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
+                        presubtotal = parseFloat(presubtotal) + ammount;
+                        $('.tr-parent').each(function () {
+                            var eachAmmount = parseFloat($(this).find('.ammount').text()).toFixed(2);
+                            subTotal = parseFloat(subTotal) + parseFloat(eachAmmount);
+                            $('#sub-total').text(subTotal.toFixed(2));
+
+                            var eachAmmounttax = parseFloat($(this).find('.ammounttax').text()).toFixed(2);
+                            TotalTax = parseFloat(TotalTax) + parseFloat(eachAmmounttax);
+                            $('#calTax').text(TotalTax.toFixed(2));
+                            eachAmmount = parseFloat(eachAmmount) + parseFloat(eachAmmount * (eachAmmounttax / 100));
+                            console.log(eachAmmount);
+                            allTotal = parseFloat(allTotal) + parseFloat(eachAmmount);
+                            $('#total').text(allTotal.toFixed(2));
+
+
+                        });
+                       // //$('#sub-total').text(parseFloat(presubtotal).toFixed(2));
+                       // //prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
+                       //// $('#calTax').text(parseFloat(prevcalTax).toFixed(2));
+                       // var total;
+                       // if (data.PtxtQuantity >=0) {
+                       //     total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
+                       //     }else{
+                       //     total = ammount + parseFloat(prevtotal);
+                       //     }
+                        
+                       // $('#total').text(parseFloat(total).toFixed(2));
+                    }
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        });
+    });
+</script>
