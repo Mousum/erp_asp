@@ -1,7 +1,7 @@
 ﻿@model Mhasb.Wsit.CustomModel.Inventories.InventoriesEditBill
 
 
-<div class="container my-dashboard">
+<div class="container my-dashboard modal-open">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="welcome">
@@ -89,7 +89,7 @@
                                             <td>Amount BD</td>
                                             <td>Action</td>
                                         </tr>
-                                       
+
                                     </tbody>
                                 </table>
                             </div>
@@ -101,19 +101,19 @@
                                     <div class="col-md-6 cstm-div-border6">
                                         Sub-Total:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border7" id="sub-total">
+                                    <div class="col-md-6 cstm-div-border7 sub-total" id="sub-total">
                                         0.00
                                     </div>
                                     <div class="col-md-6 cstm-div-border-3">
                                         Tax:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border-4" id="calTax">
+                                    <div class="col-md-6 cstm-div-border-4 calTax" id="calTax">
                                         0.00
                                     </div>
                                     <div class="col-md-6 cstm-div-border8">
                                         Total:
                                     </div>
-                                    <div class="col-md-6 cstm-div-border8" id="total">
+                                    <div class="col-md-6 cstm-div-border8 total" id="total">
                                         0.00
                                     </div>
 
@@ -299,7 +299,7 @@
 <!-- Pop Up Add Tax -->
 <!-- Pop Up Add New Item -->
 <div id="itemsModal" class="modal fade">
-    <div class="modal-dialog modal-lg" style="width: 88%;">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -309,11 +309,11 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <h6>Item Code</h6>
-                        <input class="cstm-input" type="text" placeholder="">
+                        <input class="cstm-input" id="txtitemcode" type="text" placeholder="">
                     </div>
                     <div class="col-md-6">
                         <h6>Item Code</h6>
-                        <input class="cstm-input" type="text" placeholder="">
+                        <input class="cstm-input" id="txtitemname" type="text" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-12 cstm-border-con">
@@ -321,18 +321,22 @@
                 <div class="col-md-12">
                     <div class="col-md-4 modal-cs">
                         <label>
-                            <input type="checkbox"> Check me out
+                            <input type="checkbox" id="check-item"> I track this item
                         </label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="div-check-item" style="display:none">
                         <h6>Inventory Asset Account</h6>
-                        <label class="cstm-select">
-                            <select>
-                                <option selected=""> USA </option>
-                                <option>UK</option>
-                                <option>Bangladesh</option>
-                            </select>
-                        </label>
+                        <div class="dropdown form-border1 cstm-drop-mod">
+                            <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
+                                @foreach (var item in ViewBag.CoaList)
+                                {
+                                    <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                                }
+                            </ul>
+                        </div>
+
                     </div>
                     <div class="col-md-4">
                     </div>
@@ -355,38 +359,46 @@
                 <div class="col-md-12">
                     <div class="col-md-4 modal-cs">
                         <label>
-                            <input type="checkbox"> Check me out
+                            <input type="checkbox" id="checkpurchaseItem">I purchase this item
                         </label>
                     </div>
-                    <div class="col-md-2">
-                        <h6>Inventory Asset Account</h6>
-                        <input class="cstm-input" type="text" placeholder="">
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Inventory Asset Account</h6>
-                        <label class="cstm-select">
-                            <select>
-                                <option selected=""> USA </option>
-                                <option>UK</option>
-                                <option>Bangladesh</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Inventory Asset Account</h6>
-                        <label class="cstm-select">
-                            <select>
-                                <option selected=""> USA </option>
-                                <option>UK</option>
-                                <option>Bangladesh</option>
-                            </select>
-                        </label>
+                    <div id="div-purchase-item">
+                        <div class="col-md-2" id="inventory-asset-account">
+                            <h6>Unit Price</h6>
+                            <input class="cstm-input" type="text" placeholder="">
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Cost of Goods Sold Account</h6>
+                            <label class="cstm-select">
+                                <select>
+                                    <option selected="" class="btn btn-primary" id="purcheseaddAccount"> + Add new account... </option>
+                                    @foreach (var item in ViewBag.CoaList)
+                                    {
+                                       <option selected=""> @item.ACode - @item.AName </option> 
+                                    }
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Tax Rate</h6>
+                            <label class="cstm-select">
+                                <select>
+                                    <option selected="" class="btn btn-primary"> + Add new tax... </option>
+                                    @foreach (var item in ViewBag.Lookups)
+                                    {
+                                        <option> @item.Value (@item.Quantity%) </option>
+                                    }
+                                </select>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12 cstm-di">
+
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
+                        <h6>Purchases Description (for my suppliers)</h6>
                         <textarea class="cstm-tarea" placeholder=""></textarea>
                     </div>
                 </div>
@@ -396,39 +408,46 @@
             <div class="col-md-12">
                 <div class="col-md-4 modal-cs">
                     <label>
-                        <input type="checkbox"> Check me out
+                        <input type="checkbox" id="checksellItem"> I sell this item
                     </label>
                 </div>
-                <div class="col-md-2">
-                    <h6>Inventory Asset Account</h6>
-                    <input class="cstm-input" type="text" placeholder="">
-                </div>
-                <div class="col-md-3">
-                    <h6>Inventory Asset Account</h6>
-                    <label class="cstm-select">
-                        <select>
-                            <option selected=""> USA </option>
-                            <option>UK</option>
-                            <option>Bangladesh</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="col-md-3">
-                    <h6>Inventory Asset Account</h6>
-                    <label class="cstm-select">
-                        <select>
-                            <option selected=""> USA </option>
-                            <option>UK</option>
-                            <option>Bangladesh</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-12 cstm-di">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8">
-                    <textarea class="cstm-tarea" placeholder=""></textarea>
+                <div id="div-sell-item" style="display:none;">
+                    <div class="col-md-2">
+                        <h6>Unit Price</h6>
+                        <input class="cstm-input" type="text" placeholder="">
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Sales Account</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected="" class="btn btn-primary" id="selladdAccount"> + Add new account... </option>
+                                @foreach (var item in ViewBag.CoaList)
+                                {
+                                    <option selected=""> @item.ACode - @item.AName </option>
+                                }
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Tax Rate</h6>
+                        <label class="cstm-select">
+                            <select>
+                                <option selected="" class="btn btn-primary"> + Add new tax... </option>
+                                @foreach (var item in ViewBag.Lookups)
+                                {
+                                    <option> @item.Value (@item.Quantity%) </option>
+                                }
+
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-12 cstm-di">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                            <textarea class="cstm-tarea" placeholder=""></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row"></div>
@@ -440,13 +459,37 @@
 
     </div>
 </div>
-
+<a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="sellmodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
+<a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="purchesemodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
+@{ Html.RenderAction("PartialAddAccount");}
 <script type="text/javascript">
 
     $(document).ready(function () {
         $.get("ItemRow", function (data) {
             $("#itemLoader").append(data);
+            $(".crossx2").bind('click', function (event) {
+                $(this).parent().remove();
+                console.log($(this));
+                //var i = 0;
+                //if (i == 0) {
+                //    $(this).closest('tr').remove();
+                //    console.log("Russel");
+                //    i++;
+                //}
+                //event.preventDefault();
+            });
         });
+
+        @*var baseUrl = '@Url.Content("~/")';
+        var url = baseUrl + "Inventories/PurchasesController/PartialAddAccount";
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#itemLoader').html(result);
+            }
+        });*@
 
 
 
@@ -454,7 +497,20 @@
         $("#new_line").click(function () {
             $.get("ItemRow", function (data) {
                 $("#itemLoader").append(data);
+                $(".crossx2").bind('click', function (event) {
+                    $(this).parent().remove();
+                });
             });
+            @*var baseUrl = '@Url.Content("~/")';
+            var url = baseUrl + "Inventories/PurchasesController/PartialAddAccount";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#itemLoader').html(result);
+                }
+            });*@
         });
 
         $(".add-note").click(function () {
@@ -495,7 +551,7 @@
             $('.x-new-indicator').show();
             $('#cutomer-value').val(0);
         });
-        
+
         $("#cutomer").autocomplete({
             source: baseUrl + "Inventories/Purchases/GetServiceNames",
             minLength: 1,
@@ -507,19 +563,19 @@
             open: function (event, ui) {
                 $('.x-new-indicator').hide();
                 var newName = $("#cutomer").val();
-                
+
                 $(".ui-autocomplete").css("z-index", 1000);
                 var html = '<span>+ New Contact</span>';
                 html += '<li class="ui-menu-item" id="ui-id-1-100" tabindex="-1">' + newName + '</li>';
                 $(".ui-autocomplete").last('.ui-menu-item').append(html);
                 var newHtml = '<div id="ext-comp-1022" class="x-new-indicator">NEW</div>';
 
-                var click=$('#ui-id-1-100').bind('click', function () {
+                var click = $('#ui-id-1-100').bind('click', function () {
                     $("#cutomer").val(newName)
                     $('.ui-autocomplete').hide();
                     $('.x-new-indicator').show();
                     $('#cutomer-value').val(0);
-                    
+
                 });
             },
             response: function (event, ui) {
@@ -579,3 +635,4 @@
         });
     });
 </script>
+@Scripts.Render("~/bundles/EditBill")

@@ -1,9 +1,10 @@
-﻿<tr class="cstm-table-clr">
+﻿<tr class="cstm-table-clr tr-parent">
+    
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
+                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">None</a></li>
                 @foreach (var item in ViewBag.Items)
                 {
@@ -12,26 +13,28 @@
             </ul>
         </div>
     </td>
-    <td><textarea class="cstm-tarea-click" placeholder="" id="description"></textarea></td>
-    <td><textarea class="cstm-tarea-click1" placeholder="" id="quantity"></textarea></td>
-    <td><textarea class="cstm-tarea-click1" placeholder="" id="unitPrice"></textarea></td>
+    <td><textarea class="cstm-tarea-click description" placeholder="" ></textarea></td>
+    <td><textarea class="cstm-tarea-click1 quantity" placeholder="" ></textarea></td>
+    <td><textarea class="cstm-tarea-click1 unitPrice" placeholder=""></textarea></td>
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="coAccount" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle coAccount" type="text"  data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" data-toggle="modal" data-target="#accountModal">+ Add new account...</a></li>
+               
+                <li role="presentation"><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
                 @foreach (var item in ViewBag.CoaList)
                 {
                     <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
                 }
             </ul>
+           
         </div>
     </td>
     <td>
         <div class="dropdown form-border">
-            <input class="dropdown-toggle" type="text" id="taxPer" data-toggle="dropdown" aria-expanded="true">
+            <input class="dropdown-toggle taxPer" type="text"  data-toggle="dropdown" aria-expanded="true">
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#taxModal">+ Add new tax rate...</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" class="btn btn-primary" data-target="#taxModal">+ Add new tax rate...</a></li>
                 @foreach (var item in ViewBag.Lookups)
                 {
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
@@ -39,23 +42,26 @@
             </ul>
         </div>
     </td>
-    <td id="ammount"></td>
-    <td class="crossx2"><a class="RemoveRow" href="Javascript:Void(0);">X</a></td>
+    <td  class="ammount"></td>
+    <td  class="ammounttax" style="display:none;"></td>
+    <td class="crossx2 RemoveRow"><a href="javascript:void(0);">X</a></td>
 </tr>
 
+@*@{ Html.RenderAction("PartialAddAccount"); }*@
 
 
 
-<script>
-    $(".RemoveRow").click(function () {
-        $(this).closest('tr').remove();
-    });
-</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
+       
         $('.itemCliked').click(function () {
             var Id = $(this).attr("id");
+            var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            var presubtotal = $('#sub-total').text();
+            var prevcalTax = $('#calTax').text();
+            var prevtotal = $('#total').text();
+            
             $.ajax({
                 url: "@Url.Action("GetjsonItem", "Purchases", new { area = "Inventories" })",
                 type: "POST",
@@ -68,23 +74,28 @@
                         console.log("Error");
                     } else {
                         var ammount = data.Quantity * data.UnitPrice;
-                        $('#itemtXt').val(data.ItemName);
-                        $('#description').val(data.Description);
-                        $('#quantity').val(data.Quantity);
-                        $('#unitPrice').val(data.UnitPrice);
-                        $('#coAccount').val(data.AccountCode + " - " + data.AccountName);
-                        $('#taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity+".00"+ "%)");
-                        $('#ammount').text(ammount + ".00");
-                        $('#sub-total').text(ammount + ".00");
-                        $('#calTax').text(data.PtxtQuantity + ".00");
+
+                        par.find('.itemtXt').val(data.ItemName);
+                        par.find('.description').val(data.Description);
+                        par.find('.quantity').val(data.Quantity);
+                        par.find('.unitPrice').val(data.UnitPrice);
+                        par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
+                        par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + ".00" + "%)");
+                        par.find('.ammount').text(ammount + ".00");
+                        par.find('.ammounttax').text(data.PtxtQuantity);
+                        presubtotal = parseFloat(presubtotal) + ammount;
+                        
+                        $('#sub-total').text(presubtotal + ".00");
+                        prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
+                        $('#calTax').text(parseFloat(prevcalTax));
                         var total;
                         if (data.PtxtQuantity >=0) {
-                            total = ammount + (ammount * (data.PtxtQuantity / 100));
+                            total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
                             }else{
-                            total = ammount;
+                            total = ammount + parseFloat(prevtotal);
                             }
-                       
-                        $('#total').text(total);
+                        
+                        $('#total').text(parseFloat(total));
                     }
                 },
                 error: function () {
