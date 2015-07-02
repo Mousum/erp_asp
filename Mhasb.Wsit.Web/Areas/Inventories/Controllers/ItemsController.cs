@@ -1,7 +1,10 @@
-﻿using Mhasb.Services.Accounts;
+﻿using Mhasb.Domain.Inventories;
+using Mhasb.Services.Accounts;
 using Mhasb.Services.Commons;
+using Mhasb.Services.Inventories;
 using Mhasb.Services.Loggers;
 using Mhasb.Services.Users;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +20,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         private readonly ISettingsService _sService = new SettingsService();
         private readonly IChartOfAccountService _coaService = new ChartOfAccountService();
         private readonly ILookupService _luSer = new LookupService();
+        private readonly IItemService ItemSer = new ItemService();
         // GET: Inventories/Items
         public ActionResult Index()
         {
@@ -94,7 +98,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                 return View();
             }
         }
-        public PartialViewResult CreateItem() 
+        public PartialViewResult CreateItem()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
@@ -108,9 +112,28 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             ViewBag.Lookups = lookups;
             return PartialView();
         }
-        //public ActionResult CreateItemAjax() 
-        //{
+        public ActionResult CreateItemAjax()
+        {
+            var item = Request["item"].ToString(); // Get the JSON string
+            JArray itemData = JArray.Parse(item); // It is an array so parse into a JArray
+            Item obj = new Item();
+            obj.ItemName = itemData[0]["name"].ToString();
+            obj.ItemCode = itemData[0]["code"].ToString();
+            obj.AssetAccountId = int.Parse(itemData[0]["assetAccount"].ToString());
+            obj.PurchaseUnitPrice = double.Parse(itemData[0]["purunitprice"].ToString());
+            obj.PurchasesAccountId = int.Parse(itemData[0]["purAccount"].ToString());
+            obj.PTaxRateId = int.Parse(itemData[0]["purTax"].ToString());
+            obj.PurchaseDescription = itemData[0]["purDes"].ToString();
+            obj.SellUnitPrice = double.Parse(itemData[0]["salesUnitPrice"].ToString());
+            obj.SalesAccountId = int.Parse(itemData[0]["salesAccount"].ToString());
+            obj.STaxRateId = int.Parse(itemData[0]["salesTax"].ToString());
+            obj.SalesDescription = itemData[0]["salesDescription"].ToString();
+            
+            ItemSer.AddItem(obj);
 
-        //}
+            return Json(new { id = obj.Id , name =obj.ItemName,code=obj.ItemCode});
+
+
+        }
     }
 }
