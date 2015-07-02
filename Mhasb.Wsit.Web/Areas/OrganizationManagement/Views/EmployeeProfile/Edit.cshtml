@@ -268,7 +268,9 @@
     }
 
     $(document).on('keypress', '#Phone_FieldValueOne', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
+        if (e.which == 08)
+            return true;
+        else if ( e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 43) {
             //display error message
             $("#errmsg").html("Digits Only").show().fadeOut("slow");
             return false;
@@ -282,7 +284,9 @@
     });
 
     $(document).on('keypress', '#Phone_FieldValueTwo', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        if (e.which == 08)
+            return true;
+        else if (e.which != 0 && (e.which < 48 || e.which > 57)) {
             //display error message
             $("#errmsg").html("Digits Only").show().fadeOut("slow");
             return false;
@@ -296,7 +300,9 @@
     });
 
     $(document).on('keypress', '#Phone_FieldValueThree', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        if (e.which == 08)
+            return true;
+        else if ( e.which != 0 && (e.which < 48 || e.which > 57)) {
             //display error message
             $("#errmsg").html("Digits Only").show().fadeOut("slow");
             return false;
