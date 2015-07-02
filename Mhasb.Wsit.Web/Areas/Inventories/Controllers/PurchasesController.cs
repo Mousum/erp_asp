@@ -32,14 +32,14 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         public ActionResult EditBill()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var accSet = _sService.GetAllByUserId(user.Id);
-            ViewBag.User = user.FirstName + "  " + user.LastName;
-            if (accSet == null)
-            {
-                //  return Content("Please add company financial settings ");
-                TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
-                return RedirectToAction("Index", "Purchases", new { area = "Inventories" });
-            }
+            //var accSet = _sService.GetAllByUserId(user.Id);
+            //ViewBag.User = user.FirstName + "  " + user.LastName;
+            //if (accSet == null)
+            //{
+            //    //  return Content("Please add company financial settings ");
+            //    TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
+            //    return RedirectToAction("Index", "Purchases", new { area = "Inventories" });
+            //}
             
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
