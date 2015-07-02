@@ -127,7 +127,8 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             ViewBag.Items = itemList;
             var lookups = _luSer.GetLookupByType("Tax");//.Select(u => new { u.Id, TValue = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = lookups;
-
+            Random rnd = new Random();
+            ViewBag.rowId = rnd.Next(100);
 
             return PartialView();
         }

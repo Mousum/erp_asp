@@ -1,10 +1,10 @@
-﻿<tr class="cstm-table-clr tr-parent">
+﻿<tr class="cstm-table-clr tr-parent" >
     
     <td>
         <div class="dropdown form-border">
             <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="ul-@ViewBag.rowId">
+                <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary create-new-item" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="noneDel">None</a></li>
                 @foreach (var item in ViewBag.Items)
                 {
@@ -97,7 +97,7 @@
            
             $(this).closest('tr').remove();
         });
-        $('.itemCliked').click(function () {
+        $('.itemCliked').unbind("click").bind("click", function () {
             var Id = $(this).attr("id");
             var par = $(this).parent('li').parent('ul').parent().parent().parent();
             
@@ -164,4 +164,8 @@
             });
         });
     });
+    $(".create-new-item").click(function () {
+        
+        $("#hiddentr").val($(this).closest("ul").attr("id"));
+    })
 </script>
