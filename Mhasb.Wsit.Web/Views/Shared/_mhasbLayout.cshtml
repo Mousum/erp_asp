@@ -231,6 +231,15 @@
                             <li class="">
                                 <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts" })'>All Contacts</a>
                             </li>
+                            <li class="">
+                                <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts", Type = "Customer" })'>Customers</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts", Type = "Supplier" })'>Suppliers</a>
+                            </li>
+                            <li class="">
+                                <a href='@Url.Action("FilterContact", "Contact", new { area = "Contacts", Type = "Employee" })'>Employees</a>
+                            </li>
                         </ul>
 
                     </li> 

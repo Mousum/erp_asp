@@ -50,6 +50,15 @@
             </a>
         </div>
     </div>
+    @if (TempData["DefaultDataMsg"] != null)
+    {
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="alert alert-success alert-dismissable">@TempData["DefaultDataMsg"]</div>
+            </div>
+        </div>
+    }
+  
     <div class="row">
         <div class="col-sm-6">
             <div class="box box-color box-bordered">

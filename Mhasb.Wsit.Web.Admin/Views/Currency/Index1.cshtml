@@ -1,50 +1,72 @@
-﻿
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-@{
-    ViewBag.Title = "Currency";
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div class="row">
+    <div class="col-sm-10">
+        <div class="box">
 
-}
-<div class="container">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-table"></i>
+                    Country
+                </h3>
+                <div style="float:right">
+                    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-success" })
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "cstm-input" })
+                    <button class="btn btn-primary cstm-tbl-srch-btn" id="SearchStringBtn"><i class="fa fa-fw fa-search"></i></button>
+                </div>
+            </div>
 
-    <p class="btn btn-success link">
-        @Html.ActionLink("Create New", "Create", new { area = "Commons" }, new { @class = "link" })
-    </p>
-    <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="button" id="SearchStringBtn" value="Search" />
-    </p>
-    <div id="LanguageListShow">
+        </div>
+        <div class="box-content nopadding">
+            <div class="alert alert-success" style="display:none;"></div>
+            <div id="CurrencyListShow">
 
+            </div>
+        </div>
     </div>
-    @*@Html.Action("List")*@
 </div>
 
-@section scripts
-{
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
 
-            $.get('@Url.Action("List", "Currency", new { Area = "OrgSettings" })' + '?page=', function (data) {
-                $('#LanguageListShow').html(data);
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $.get('@Url.Action("List", "Currency")' + '?page=', function (data) {
+            $('#CurrencyListShow').html(data);
+        }
+        );
+
+    });
+
+    $(document).on("click", "#SearchStringBtn", function () {
+        var baseUrl = '@Url.Content("~/")';
+        var SearchString = $("#SearchString").val();
+        var url = baseUrl + "Currency/List?page=''" + "&SearchString=" + SearchString;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+
+            success: function (result) {
+                $('#CurrencyListShow').html(result);
             }
-                );
+        });
+        return false;
+    });
+    $(document).on("click", ".contentPager a", function () {
+        var currentFilter = $("#SearchString").val();
+
+        var url = $(this).attr("href") + "&currentFilter=" + currentFilter;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            cache: false,
+
+            success: function (result) {
+                $('#CurrencyListShow').html(result);
+
+            },
 
         });
-        $(document).on("click", "#SearchStringBtn", function () {
-            var baseUrl = '@Url.Content("~/")';
-            var SearchString = $("#SearchString").val();
-            var url = baseUrl + "OrgSettings/Currency/List?page=''" + "&SearchString=" + SearchString;
-            console.log(url);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $('#content').html(result);
-                }
-            });
-            return false;
-        });
-    </script>
-}
+        return false;
+    });
+
+</script>
 

@@ -19,7 +19,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private IAdminUserServices AdminSer = new AdminUserService();
+        private IAdminUserServices _adminSer = new AdminUserService();
         //public AccountController()
            
         //{
@@ -59,7 +59,7 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("error", "Invalid username or password.");
                 }
             }
 
@@ -67,8 +67,16 @@ namespace Mhasb.Wsit.Web.Admin.Controllers
             return View(model);
         }
 
+         [AllowAnonymous]
+        public ActionResult InsertDefaultData()
+         {
 
-        
+             var rr= _adminSer.InsertDefaultData();
+
+             TempData["DefaultDataMsg"] = rr;
+             return RedirectToAction("Index", "Home");
+             
+        }
         ////
         //// GET: /Account/Register
         //[AllowAnonymous]

@@ -49,9 +49,9 @@
                                 <td>@company.LastViewerFirstName @company.LastViewerLastName <br />In Trial</td>
                                 @if (@ViewBag.CompanyArr == @company.UserId)
                                 {
-                                <td>@Html.ActionLink("Update", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
+                                <td>@Html.ActionLink("Update", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" }) <br /> @Html.ActionLink("Profile", "AddProfile", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
                                 }else{
-                                <td>@Html.ActionLink("View", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
+                                <td>@Html.ActionLink("View", "Update", "Company", new { area = "OrganizationManagement" }, new { @class = "link" }) <br /> @Html.ActionLink("Profile", "AddProfile", "Company", new { area = "OrganizationManagement" }, new { @class = "link" })</td>
                                 }
                             </tr>
                         }

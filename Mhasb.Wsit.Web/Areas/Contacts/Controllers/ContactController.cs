@@ -51,7 +51,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             var user = uService.GetSingleUserByEmail(tt);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             int companyId = 0;
-            EnumContactType ContactType = EnumContactType.Archive;
+            EnumContactType ContactType = EnumContactType.All;
             var IsNum = false;
             if (logObj != null)
             {
@@ -73,7 +73,11 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             var allContacts = contactInfoService.GetAllContactInfoByCompanyId(companyId);
             //ViewBags
             ViewBag.Groups = conGrpSer.GetAllGroupsByCompanyId(companyId);
-            ViewBag.AllCount = allContacts.Count();
+            var allCount =0;
+            if(allContacts!=null)
+                allCount= allContacts.Count();
+
+            ViewBag.AllCount = allCount;
             ViewBag.CustomerCount = allContacts.Where(c => c.ContactType == EnumContactType.Customer).Count();
             ViewBag.SupllierCount = allContacts.Where(c => c.ContactType == EnumContactType.Supplier).Count();
             ViewBag.EmployeeCount = allContacts.Where(r => r.ContactType == EnumContactType.Employee).Count();
@@ -178,17 +182,17 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 }
                 else if (Filter == null && SearchString != null)
                 {
-                    contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString)).ToList();
+                    contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(CapitalizeFirstLetter(SearchString))).ToList();
                 }
                 else if (Filter != null && SearchString != null)
                 {
                     if (!IsNum)
                     {
-                        contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString) && c.ContactInformations.ContactName.StartsWith(Filter)).ToList();
+                        contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && c.ContactInformations.ContactName.StartsWith(Filter)).ToList();
                     }
                     else
                     {
-                        contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(SearchString) && c.ContactInformations.ContactName.Contains("1") || c.ContactInformations.ContactName.Contains("2") || c.ContactInformations.ContactName.Contains("3")).ToList();
+                        contacts = contacts.Where(c => c.ContactInformations.ContactName.Contains(CapitalizeFirstLetter(SearchString)) && c.ContactInformations.ContactName.Contains("1") || c.ContactInformations.ContactName.Contains("2") || c.ContactInformations.ContactName.Contains("3")).ToList();
                     }
                 }
                 return View("FilterGroup", contacts);
@@ -366,7 +370,7 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             model.ContactInformation = contactInfo;
             model.PostalAddress = contactInfo.ContactDtails.FirstOrDefault();
             model.PhysicalAddress = contactInfo.ContactDtails.LastOrDefault();
-            model.PrimaryPerson = contactInfo.Persons.Where(p=>p.IsPrimaryPerson==true).FirstOrDefault();
+            model.PrimaryPerson = contactInfo.Persons.Where(p => p.IsPrimaryPerson == true).FirstOrDefault();
             model.Person = contactInfo.Persons.Where(p => p.IsPrimaryPerson == false).ToList();
             model.TelePhone = contactInfo.TelePhones.SingleOrDefault();
             model.Notes = contactInfo.Notes.FirstOrDefault();
@@ -549,11 +553,18 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 {
                     for (int i = 0; i < contactData.Count(); i++)
                     {
-                        AssignToGroup asshole = new AssignToGroup();
-                        asshole.ContactGroupId = Int32.Parse(groupdata[0]["name"].ToString());
-                        asshole.ContactInfoId = Int32.Parse(contactData[i]["id"].ToString());
-                        asshole.CreatedTime = DateTime.Now;
-                        AssTGSer.CreateAssignToGroup(asshole);
+                        var groupid = Int32.Parse(groupdata[0]["name"].ToString());
+                        var conInfoId = Int32.Parse(contactData[i]["id"].ToString());
+                        var find = AssTGSer.GetSingleAssignToGroup(groupid, conInfoId);
+                        if (find == null) 
+                        {
+                            AssignToGroup asshole = new AssignToGroup();
+                            asshole.ContactGroupId = groupid;
+                            asshole.ContactInfoId = conInfoId;
+                            asshole.CreatedTime = DateTime.Now;
+                            AssTGSer.CreateAssignToGroup(asshole);
+                        }
+                        
 
                     }
                 }
@@ -574,12 +585,17 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                     {
                         for (int i = 0; i < contactData.Count(); i++)
                         {
-                            AssignToGroup asshole = new AssignToGroup();
-                            asshole.ContactGroupId = Group.Id;
-                            asshole.ContactInfoId = Int32.Parse(contactData[i]["id"].ToString());
-                            asshole.CreatedTime = DateTime.Now;
-                            AssTGSer.CreateAssignToGroup(asshole);
-
+                            var groupid = Group.Id;
+                            var conInfoId = Int32.Parse(contactData[i]["id"].ToString());
+                            var find = AssTGSer.GetSingleAssignToGroup(groupid, conInfoId);
+                            if (find == null)
+                            {
+                                AssignToGroup asshole = new AssignToGroup();
+                                asshole.ContactGroupId = groupid;
+                                asshole.ContactInfoId = conInfoId;
+                                asshole.CreatedTime = DateTime.Now;
+                                AssTGSer.CreateAssignToGroup(asshole);
+                            }
                         }
                     }
                 }
@@ -612,12 +628,13 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
 
         }
-        public string DeleteGroup(int GroupId) 
+        public string DeleteGroup(int GroupId)
         {
             var contacts = AssTGSer.GetAllContactsByGroupId(GroupId);
             int orginalCount = contacts.Count();
             int count = 0;
-            foreach (var item in contacts) {
+            foreach (var item in contacts)
+            {
                 AssTGSer.DeleteAssignToGroup((int)item.Id);
                 count++;
             }
@@ -626,11 +643,11 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
                 conGrpSer.DeleteContactGroup(GroupId);
                 return "Success";
             }
-            else 
+            else
             {
                 return "Failed";
             }
-           
+
         }
 
     }

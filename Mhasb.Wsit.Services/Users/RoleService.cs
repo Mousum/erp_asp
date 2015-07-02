@@ -99,5 +99,27 @@ namespace Mhasb.Services.Users
             }
 
         }
+
+        public List<Role> GetAllRolesByCompany(int companyId)
+        {
+            try
+            {
+                //role.State = ObjectState.Unchanged;
+                var comObj = roleRep.GetOperation()
+                    .Filter(c=>c.CompanyId==companyId)
+                                    .Get().ToList();
+
+                //roleRep.GetSingleObject(roleId);
+                return comObj;
+
+            }
+            catch (Exception ex)
+            {
+                var rr = ex.Message;
+                return null;
+            }
+
+        }
+
     }
 }

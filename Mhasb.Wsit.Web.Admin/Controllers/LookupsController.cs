@@ -143,7 +143,7 @@ namespace Mhasb.Wsit.Web.Areas.Commons.Controllers
                 Lookup = Lookup.Where(s => s.LookupType.Contains(searchString)).ToList();
             }
 
-            int pageSize = 5;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
             return PartialView(Lookup.ToPagedList(pageNumber, pageSize));
 

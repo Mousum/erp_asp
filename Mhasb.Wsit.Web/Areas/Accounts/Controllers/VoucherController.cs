@@ -37,7 +37,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         // GET: /Accounts/Voucher/
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("NewJournal");
         }
 
 
@@ -642,14 +642,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            var vtObj = _voucherType.GetVoucherTypeByCode("04");
+            var vtObj = _voucherType.GetVoucherTypeByCode("05");
             if (vtObj != null)
             {
                 voucher.VoucherTypeId = vtObj.Id;
             }
             else
             {
-                TempData.Add("errMsg", "Please Add voucher type as Openning Voucher with 04 Code.");
+                TempData.Add("errMsg", "Please Add voucher type as Openning Voucher with 05 Code.");
                 return RedirectToAction("AccountVoucher", "Voucher", new { area = "Accounts" });
             }
 
@@ -800,14 +800,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             VoucherCustom v = vc;
             Voucher voucher = vc.voucher;
 
-            var vtObj = _voucherType.GetVoucherTypeByCode("05");
+            var vtObj = _voucherType.GetVoucherTypeByCode("04");
             if (vtObj != null)
             {
                 voucher.VoucherTypeId = vtObj.Id;
             }
             else
             {
-                TempData.Add("errMsg", "Please Add voucher type as RepeatingJournal with 05 Code.");
+                TempData.Add("errMsg", "Please Add voucher type as RepeatingJournal with 04 Code.");
                 return RedirectToAction("RepeatingJournal", "Voucher", new { area = "Accounts" });
             }
 

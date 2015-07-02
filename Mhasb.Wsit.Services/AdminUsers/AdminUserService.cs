@@ -1,10 +1,13 @@
 ﻿using Mhasb.Wsit.DAL.Operations;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mhasb.Domain.AdminUsers;
+using Mhasb.Wsit.CustomModel.Organizations;
+using Mhasb.Wsit.DAL.Data;
 using Mhasb.Wsit.Domain;
 
 namespace Mhasb.Services.AdminUsers
@@ -110,5 +113,21 @@ namespace Mhasb.Services.AdminUsers
                 return null;
             }
         }
+
+        public string InsertDefaultData()
+        {
+            using (var context = new WsDbContext())
+            {
+
+                const string query = "EXEC spset_general_data_entry";
+                var rr = context.Database.ExecuteSqlCommand(query);
+
+                if (rr > 0)
+                    return "Default Data Added Successfully!";
+                return "Default Data Already Inserted,No need to do again!";
+            }
+            
+        }
+
     }
 }

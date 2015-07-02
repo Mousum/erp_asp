@@ -2,6 +2,7 @@
 using Mhasb.Domain.Organizations;
 using Mhasb.Domain.Users;
 using Mhasb.Services.Commons;
+using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
 using Mhasb.Services.Users;
 using Mhasb.Wsit.CustomModel.Organizations;
@@ -24,14 +25,23 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         private ISettingsService setService = new SettingsService();
         private IUserService uService = new UserService();
         private readonly IShareTransferService stService = new ShareTransferService();
+        private readonly ICompanyViewLog _companyViewLog = new CompanyViewLogService();
         // GET: OrganizationManagement/Founders
         public ActionResult Index()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
-            if (AccSet != null) 
-            { 
-                 var model = fService.GetFounders(AccSet.Companies.Id);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            //var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
+            if (logObj != null) 
+            {
+                var model = fService.GetFounders(companyId);
                  return View(model); 
             }
             else
@@ -56,9 +66,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Settings(Founder founder)
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
-            founder.CompanyId = AccSet.Companies.Id;
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            founder.CompanyId = companyId;
 
             if (fService.AddFounder(founder))
             {
@@ -100,10 +116,15 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
 
         public ActionResult ShareTransfer()
         {
-            var user = uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var AccSet = setService.GetAllByUserId(user.Id);
-            int comId = AccSet.Companies.Id;
-            var FounderList=fService.GetFounders(comId);
+            var tt = HttpContext.User.Identity.Name;
+            var user = uService.GetSingleUserByEmail(tt);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            var FounderList = fService.GetFounders(companyId);
             ViewBag.FounderList = FounderList;
 
 
@@ -131,10 +152,12 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 reciever.SharesOwned += st.TransferAmount;
                 fService.UpdateFounder(reciever);
 
-                return Content("Success");
+                TempData.Add("Msg", "Share Transffered Successfully");
+                return RedirectToAction("Index");
             }
-                
-            return Content("Failed");
+
+            TempData.Add("errMsg", "Transfer Failed!");
+            return RedirectToAction("Index");
         }
 
 

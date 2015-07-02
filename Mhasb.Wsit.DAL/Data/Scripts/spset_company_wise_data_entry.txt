@@ -1,0 +1,12 @@
+﻿CREATE PROCEDURE [dbo].[spset_company_wise_data_entry]
+@CompanyId int
+AS
+BEGIN
+	-- Insert Data into Roles
+
+	Insert Into sec.roles(role_name,remarks,ccompanyid) VALUES
+				('HR','n/a',@CompanyId),
+				('Accountant','n/a',@CompanyId),
+				('Admin','n/a',@CompanyId);
+	
+END
