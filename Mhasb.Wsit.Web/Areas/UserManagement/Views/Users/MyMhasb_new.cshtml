@@ -8,8 +8,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-8">
             <div class="welcome">
-                <h4><a href="#"> My MHASB</a></h4>
-                <p>Hi @ViewBag.userName , you last logged into @ViewBag.lastLoginCompany at @ViewBag.lastLoginTime O'Clock</p>
+                <h4><p> My MHASB</p></h4>
+                <p>Hi @ViewBag.userName , you last logged into <a href="@Url.Action("Dashboard")">@ViewBag.lastLoginCompany </a> at @ViewBag.lastLoginTime O'Clock</p>
             </div>
 
 
@@ -43,6 +43,7 @@
                         {
                             <tr>
                                 <td><a href="javascript:void(0)" class="gotoCompany" id="@company.CompanyId">@company.CompanyName</a></td>
+
                                 @*<td>@Html.ActionLink(@company.TradingName, "Dashboard", "Users", new { area = "UserManagement" }, new { @class = "link" })</td>*@
                                 <td>@company.LastViewedTime By <br /> @company.LastViewerFirstName @company.LastViewerLastName</td>
                                 <td>Adviser <br /> Manage users</td>

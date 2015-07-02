@@ -68,6 +68,8 @@ namespace Mhasb.Services.Inventories
             {
                 var _obj = _rep.GetOperation()
                     .Include(c=>c.PurchasesAccount)
+                    .Include(s=>s.SalesAccount)
+                    .Include(s=>s.STaxRate)
                     .Include(c => c.PTaxRate)
                     .Filter(c => c.Id == Id)
                    // .Filter(c => c.PurchasesAccount.CompanyId == CompanyId && c.PurchasesAccount.IsCostCenter == true && c.PurchasesAccount.Level == 3)
