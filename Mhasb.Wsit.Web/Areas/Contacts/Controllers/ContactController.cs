@@ -487,6 +487,10 @@ namespace Mhasb.Wsit.Web.Areas.Contacts.Controllers
             }
         }
 
+        public ActionResult Import()
+        {
+            return View();
+        }
 
         public void ExportToCsv()
         {

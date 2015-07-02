@@ -176,9 +176,9 @@
                                                 }*@
 
                                         }
-                                        <div class="col-md-12" id="AddPersonBtn">
+                                        @*<div class="col-md-12" id="AddPersonBtn">
                                             <a>+ Add Another Person</a>
-                                        </div>
+                                        </div>*@
                                     </div>
 
                                     <div class="col-md-12 cstm-border-con"></div>
@@ -554,17 +554,15 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 cstm-border-con"></div>
-                                    <div class="col-md-12">
+                                    @*<div class="col-md-12">
                                         <h4>Sales Discount <span class="cstm-opt123"> This default sales discount rate can be overridden on individual transactions in sales invoices and quotes</span></h4>
                                         <div class="col-md-8">
                                             <div class="col-md-3">
                                                 <h5>Discount %</h5>
-                                                @*@Html.TextBoxFor(model => model.FinancialDetails.BankAccountNumber, new { @class = "cstm-input-con3", @placeholder = "Bank Account Number" })
-                                                    @Html.ValidationMessageFor(model => model.FinancialDetails.BankAccountNumber)*@
                                                 <input class="cstm-input-con3" type="text" placeholder="">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-md-12 cstm-border-con"></div>
                                     <div class="col-md-12">
                                         <h4>Currency <span class="cstm-opt123"> This default currency can be overridden on individual transactions.</span></h4>
@@ -622,7 +620,7 @@
                                                     <p>Due</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    @Html.TextBoxFor(model => model.FinancialDetails.BillsDue, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                    @Html.TextBoxFor(model => model.FinancialDetails.BillsDue, new { @class = "cstm-input-con3", @placeholder = "Due" })
                                                     @Html.ValidationMessageFor(model => model.FinancialDetails.BillsDue)
                                                 </div>
                                                 <div class="col-md-8">
@@ -645,7 +643,7 @@
                                                     <p>Due</p>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    @Html.TextBoxFor(model => model.FinancialDetails.SakesDue, new { @class = "cstm-input-con3", @placeholder = "Details" })
+                                                    @Html.TextBoxFor(model => model.FinancialDetails.SakesDue, new { @class = "cstm-input-con3", @placeholder = "Due" })
                                                     @Html.ValidationMessageFor(model => model.FinancialDetails.SakesDue)
                                                 </div>
                                                 <div class="col-md-8">

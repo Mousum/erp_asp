@@ -524,6 +524,7 @@
     <Content Include="Areas\Contacts\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
     <Content Include="Areas\Inventories\Views\Purchases\_AddAccount.cshtml" />
+    <Content Include="Areas\Contacts\Views\Contact\Import.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
