@@ -523,6 +523,7 @@
     <Content Include="Areas\Inventories\Views\Purchases\Index.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Contacts\Views\Contact\FilterGroup.cshtml" />
+    <Content Include="Areas\Inventories\Views\Purchases\_AddAccount.cshtml" />
     <None Include="bin\Mhasb.Wsit.Web.dll.config" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="mhasbStyle\fonts\glyphicons-halflings-regular.ttf" />
@@ -586,6 +587,7 @@
     <Content Include="Scripts\cbpAnimatedHeader.min.js" />
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\customeJs.js" />
+    <Content Include="Scripts\Inventories\EditBill.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -710,6 +712,7 @@
     <Folder Include="Areas\Inventories\Views\Shared\" />
     <Folder Include="Areas\NotificationManagement\Models\" />
     <Folder Include="Areas\OrganizationManagement\Models\" />
+    <Folder Include="Areas\Organizations\Views\Employee\" />
     <Folder Include="Areas\OrgSettings\Models\" />
     <Folder Include="Areas\Subscriptions\Models\" />
     <Folder Include="Areas\TaskManagement\Models\" />

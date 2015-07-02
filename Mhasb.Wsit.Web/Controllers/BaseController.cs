@@ -52,7 +52,7 @@ namespace Mhasb.Wsit.Web.Controllers
             actionService.AddActionListFromBaseController(actionList);
 
             // Check user type, if owner then he/she can add company. 
-            if (action == "Add" && controller == "Company")
+            if ((action == "Add" && controller == "Company") || (action == "InvitationConfirm" && controller == "Invitations"))
                 return;
 
             // To get ActionList Id

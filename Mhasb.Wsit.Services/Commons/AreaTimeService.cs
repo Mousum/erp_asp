@@ -75,7 +75,7 @@ namespace Mhasb.Services.Commons
             }
 
         }
-        public AreaTime GetSingleAreaTime(int areaTimeId)
+        public AreaTime GetSingleAreaTime(int areaTimeId) 
         {
             try
             {

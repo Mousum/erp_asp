@@ -13356,32 +13356,40 @@ label.cstm-select:before {
     .general-set h2 {
         margin-left: 196px;
     }
+
 .org-gen {
     margin-top: 35px;
     border-bottom: 1px solid #E5E5E5;
 }
+
 .cstm-org {
     margin-top: 15px;
 }
+
 .cstm-menu p i {
     color: #40B5E2;
 }
+
 .cstm-menu p a {
     margin-left: 7px;
     font-size: 20px;
 }
+
 .cstm-para-gen {
-    margin-top: -12px; 
+    margin-top: -12px;
     margin-left: 24px;
 }
+
 .org-gen1 {
     border-bottom: 1px solid #E5E5E5;
     margin-top: 40px;
 }
+
 .org-gen2 {
     border-bottom: 1px solid #E5E5E5;
     margin-left: 20px;
 }
+
 .cstm-org1 {
     margin-left: -15px;
 }
@@ -13389,34 +13397,41 @@ label.cstm-select:before {
 /*Author: Rafi , Date: 23.06.2015 , general-set*/
 
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
-.cstm-tab{
+.cstm-tab {
     border-bottom: 1px solid #ccc;
 }
-.cstm-tab li{
+
+    .cstm-tab li {
+        margin-right: 5px;
+    }
+
+    .cstm-tab li {
+        border-top: 1px solid #ccc !important;
+        border-right: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+    }
+
+        .cstm-tab li a {
+            border-width: 0px !important;
+        }
+
+.cstm-pagination li {
+}
+
+    .cstm-pagination li a {
+        border: 1px solid #ccc;
+        margin-right: 5px;
+        margin-top: 5px;
+        background: #fff;
+        color: #40B5E2;
+    }
+
+.table-btn a {
     margin-right: 5px;
-} 
-.cstm-tab li{
-    border-top: 1px solid #ccc !important;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
 }
-.cstm-tab li a{
-    border-width: 0px !important;
-}
-.cstm-pagination li{
-}
-.cstm-pagination li a{
-    border: 1px solid #ccc;
-    margin-right: 5px;
-    margin-top: 5px;
-    background: #fff;
-    color: #40B5E2;
-}
-.table-btn a{
-    margin-right: 5px;
-}
-.cstm-input1{
-    padding:3px 7px;
+
+.cstm-input1 {
+    padding: 3px 7px;
     margin: 0px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -13432,7 +13447,8 @@ label.cstm-select:before {
     width: 20%;
     margin-left: 312px;
 }
-.cstm-btn-search{
+
+.cstm-btn-search {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     height: 35px;
@@ -13440,36 +13456,41 @@ label.cstm-select:before {
     line-height: 14px;
     box-shadow: 0px 3px 0px #CCC, 0px 0px #FFF inset !important;
 }
-.cstm-table-clr{
+
+.cstm-table-clr {
     color: #22ADE3;
 }
-.cstm-opt{
+
+.cstm-opt {
     display: inline;
 }
-.cstm-itm{
+
+.cstm-itm {
     color: #A3A3A3;
 }
-.cstm-itm1{
+
+.cstm-itm1 {
     color: #A3A3A3;
     margin-left: 50px;
 }
-.cstm-itm2{
+
+.cstm-itm2 {
     color: #A3A3A3;
     margin-left: 50px;
 }
 
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
 https://go.xero.com/AccountsPayable/Edit.aspx
-
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
-.cstm-frm-row-hed{
+.cstm-frm-row-hed {
     margin-bottom: 15px;
     overflow: visible;
     display: block;
     margin-left: 15px;
 }
-.cstm-input-con{
-    padding:3px 7px;
+
+.cstm-input-con {
+    padding: 3px 7px;
     margin: 0px;
     border-radius: 4px;
     box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
@@ -13483,19 +13504,23 @@ https://go.xero.com/AccountsPayable/Edit.aspx
     height: 35px;
     width: 30%;
 }
+
 .cstm-border-con {
     border-bottom: 1px solid #ccc;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
-.cstm-anc a{
+
+.cstm-anc a {
     text-decoration: none;
     padding-top: 5px;
 }
-.cstm-opt12{
+
+.cstm-opt12 {
     color: #a3a3a3;
 }
-.cstm-input-con1{
-    padding:3px 7px;
+
+.cstm-input-con1 {
+    padding: 3px 7px;
     margin: 0px;
     border-radius: 4px;
     box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
@@ -13509,8 +13534,9 @@ https://go.xero.com/AccountsPayable/Edit.aspx
     height: 35px;
     width: 55%;
 }
-.cstm-input-con2{
-    padding:3px 7px;
+
+.cstm-input-con2 {
+    padding: 3px 7px;
     margin: 0px;
     border-radius: 4px;
     box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
@@ -13524,8 +13550,9 @@ https://go.xero.com/AccountsPayable/Edit.aspx
     height: 35px;
     width: 55%;
 }
-.cstm-input-con3{
-    padding:3px 7px;
+
+.cstm-input-con3 {
+    padding: 3px 7px;
     margin: 0px;
     border-radius: 4px;
     box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
@@ -13539,90 +13566,109 @@ https://go.xero.com/AccountsPayable/Edit.aspx
     height: 35px;
     width: 100%;
 }
-.cstm-p{
+
+.cstm-p {
     margin-top: 9px;
 }
-.cstm-inpu{
+
+.cstm-inpu {
     margin-top: 10px;
 }
-.cstrm-p p{
+
+.cstrm-p p {
     font-size: 15px;
     font-family: "Rambla", sans-serif !important;
 }
-.cstm-sp{
+
+.cstm-sp {
     font-size: 12px;
     color: #22ADE3;
 }
-.cstm-opt123{
+
+.cstm-opt123 {
     font-size: 13px;
     color: #a3a3a3;
 }
-.cstm-opt123:hover i{
-    cursor: pointer;
-}
-.cstm-btn-submit{
+
+    .cstm-opt123:hover i {
+        cursor: pointer;
+    }
+
+.cstm-btn-submit {
     float: right;
     margin-top: 10px;
     background: #D7E7FF;
     padding: 20px;
 }
-.cstm-btn-submit btn{
-    margin-right: 15px;
-}
-.cstm-btn-s{
+
+    .cstm-btn-submit btn {
+        margin-right: 15px;
+    }
+
+.cstm-btn-s {
     margin-right: 10px;
 }
-.cstm-opt1234{
+
+.cstm-opt1234 {
     font-size: 18px;
     color: #a3a3a3;
+}
 
-}
-.cstm-opt1234:hover i{
+    .cstm-opt1234:hover i {
+        cursor: pointer;
+    }
+
+.cstm-opt12345:hover i {
     cursor: pointer;
 }
-.cstm-opt12345:hover i{
-    cursor: pointer;
-}
-.cstm-his{
+
+.cstm-his {
     margin-top: 10px;
 }
-.cstm-crs a{
+
+.cstm-crs a {
     color: #000;
 }
-.cstm-crs a{
+
+.cstm-crs a {
     text-decoration: none;
 }
-.cstm-crs a:hover{
-    color: #f00;
-}
+
+    .cstm-crs a:hover {
+        color: #f00;
+    }
 
 
 a.tooltips {
     position: relative;
     display: inline;
 }
-a.tooltips span {
-    position: absolute;
-    width:330px;
-    color: #FFFFFF;
-    background: #112255;
-    height: 400px;
-    line-height: 30px;
-    text-align: center;
-    visibility: hidden;
-    border-radius: 6px;
-}
-a.tooltips span:after {
-    content: '';
-    position: absolute;
-    top: 3%;
-    right: 100%;
-    margin-top: -8px;
-    width: 0; height: 0;
-    border-right: 8px solid #112255;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-}
+
+    a.tooltips span {
+        position: absolute;
+        width: 330px;
+        color: #FFFFFF;
+        background: #112255;
+        height: 400px;
+        line-height: 30px;
+        text-align: center;
+        visibility: hidden;
+        border-radius: 6px;
+    }
+
+        a.tooltips span:after {
+            content: '';
+            position: absolute;
+            top: 3%;
+            right: 100%;
+            margin-top: -8px;
+            width: 0;
+            height: 0;
+            border-right: 8px solid #112255;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
 a:hover.tooltips span {
     visibility: visible;
     opacity: 0.8;
@@ -13638,88 +13684,110 @@ a:hover.tooltips span {
 
 /*Author: Rafi , Date: 23.06.2015 , add-contact*/
 /*Author: Rafi , Date: 25.06.2015 , new-bill*/
-.cstm-box{
+.cstm-box {
     background: #CCA19C;
 }
-.cstm-txt3{
+
+.cstm-txt3 {
     color: #5191FF;
 }
-.cstm-box i{
+
+.cstm-box i {
     font-size: 28px;
     color: #fff;
 }
-.cstm-ii{
+
+.cstm-ii {
     font-size: 54px;
     margin-top: 10px;
     color: #7D798D;
 }
-.cstm-place{
+
+.cstm-place {
     text-align: right;
 }
-.cch h6{
+
+.cch h6 {
     text-align: right;
 }
-.cstm-head{
+
+.cstm-head {
     margin-top: 10px;
 }
-.cstm-head1 h6{
+
+.cstm-head1 h6 {
     text-align: right;
     margin-top: 20px;
 }
-.crossx2{
+
+.crossx2 {
     text-decoration: none;
 }
-.crossx2 a{
-    text-decoration: none;
-    color: #f00;
-}
-.crossx2 a:hover{
-    text-decoration: none;
-    color: #008000;
-}
-.cstm-div-border-3{
+
+    .crossx2 a {
+        text-decoration: none;
+        color: #f00;
+    }
+
+        .crossx2 a:hover {
+            text-decoration: none;
+            color: #008000;
+        }
+
+.cstm-div-border-3 {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
-.cstm-div-border-4{
+
+.cstm-div-border-4 {
     border-bottom: 1px solid #ccc;
 }
-.cstm-div-border6{
+
+.cstm-div-border6 {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
-.cstm-div-border7{
+
+.cstm-div-border7 {
     border-bottom: 1px solid #ccc;
 }
-.cstm-div-border8{
+
+.cstm-div-border8 {
     border-top: 1px solid #ccc;
     margin-top: 2px;
     font-weight: bold;
 }
-.cstm-bn a{
+
+.cstm-bn a {
     float: right !important;
     margin-right: 5px;
 }
-.cstm-dro-btn btn{
+
+.cstm-dro-btn btn {
     margin-left: -110px;
 }
-.cstm-brd{
+
+.cstm-brd {
     border-bottom: 3px solid #ccc;
 }
-.cstm-aa{
+
+.cstm-aa {
     margin-bottom: 15px;
 }
-.cstm-aa a{
-    margin-top: 10px;
-    margin-left: -15px;
-    width: 15%;
-}
-table a:not(.btn), .table a:not(.btn){
+
+    .cstm-aa a {
+        margin-top: 10px;
+        margin-left: -15px;
+        width: 15%;
+    }
+
+table a:not(.btn), .table a:not(.btn) {
     text-decoration: none;
     font-weight: bold;
 }
-.cstm-tarea-click{
-    padding:3px 7px;
+
+.cstm-tarea-click {
+    padding: 3px 7px;
     margin: 0px;
     background: #fff none repeat scroll 0% 0%;
     color: #888;
@@ -13730,26 +13798,28 @@ table a:not(.btn), .table a:not(.btn){
     height: 80%;
     width: 100%;
     margin-top: 12px;
-    opacity: 0;
-}
-.cstm-tarea-click:focus{
-    height: 100px;
-    width: 100%;
-    padding:3px 7px;
-    margin: 0px;
-    border-radius: 4px;
-    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
-    background: #fff none repeat scroll 0% 0%;
-    color: #888;
-    border: medium none;
-    border: 1px solid #CCC;
-    outline: medium none;
-    display: inline-block;
-    -moz-appearance: none;
     opacity: 1;
 }
-.cstm-tarea-click1{
-    padding:3px 7px;
+
+    .cstm-tarea-click:focus {
+        height: 100px;
+        width: 100%;
+        padding: 3px 7px;
+        margin: 0px;
+        border-radius: 4px;
+        box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+        background: #fff none repeat scroll 0% 0%;
+        color: #888;
+        border: medium none;
+        border: 1px solid #CCC;
+        outline: medium none;
+        display: inline-block;
+        -moz-appearance: none;
+        opacity: 1;
+    }
+
+.cstm-tarea-click1 {
+    padding: 3px 7px;
     margin: 0px;
     background: #fff none repeat scroll 0% 0%;
     color: #888;
@@ -13760,170 +13830,236 @@ table a:not(.btn), .table a:not(.btn){
     height: 80%;
     width: 100%;
     margin-top: 12px;
-    opacity: 0;
-}
-.cstm-tarea-click1:focus{
-    height: 40px;
-    width: 100%;
-    padding:3px 7px;
-    margin: 0px;
-    border-radius: 4px;
-    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
-    background: #fff none repeat scroll 0% 0%;
-    color: #888;
-    border: medium none;
-    border: 1px solid #CCC;
-    outline: medium none;
-    display: inline-block;
-    -moz-appearance: none;
-    margin-top: 12px;
     opacity: 1;
 }
-.form-border input{
+
+    .cstm-tarea-click1:focus {
+        height: 40px;
+        width: 100%;
+        padding: 3px 7px;
+        margin: 0px;
+        border-radius: 4px;
+        box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+        background: #fff none repeat scroll 0% 0%;
+        color: #888;
+        border: medium none;
+        border: 1px solid #CCC;
+        outline: medium none;
+        display: inline-block;
+        -moz-appearance: none;
+        margin-top: 12px;
+        opacity: 1;
+    }
+
+.form-border input {
     border: #FBFBFB;
     height: 46px;
     margin-top: 12px;
-    opacity: 0;
-}
-.form-border input:focus{
     opacity: 1;
+    color: #888;
 }
-.cstm-tbl-brd tr:hover{
+
+    .form-border input:focus {
+        opacity: 1;
+    }
+
+.cstm-tbl-brd tr:hover {
     background: none !important;
 }
-.cstm-dro-btn button{
+
+.cstm-dro-btn button {
     margin-left: -9px !important;
 }
-.cstm-wd{
+
+.cstm-wd {
     display: inline;
 }
-.cstm-wd .cs-bn{
-    width: 80%;
-    float: left;
-}
-.cstm-wd .cs-bn1{
-    width: 20%;
-    float: left;
-}
+
+    .cstm-wd .cs-bn {
+        width: 80%;
+        float: left;
+    }
+
+    .cstm-wd .cs-bn1 {
+        width: 20%;
+        float: left;
+    }
+
 .x-new {
     position: relative;
 }
-    .x-new-indicator {
-        position: absolute;
-        right: 25px;
-        margin-top: 7px;
-        color: #ccc;
-    }
+
+.x-new-indicator {
+    position: absolute;
+    right: 25px;
+    margin-top: 7px;
+    color: #ccc;
+}
 /*Author: Rafi , Date: 25.06.2015 , new-bill*/
 
 /*Author: Tanveer , Date: 04.06.2015 , 3 pages, Pricing*/
-.center-div{
+.center-div {
     float: none;
     margin: 0px auto;
 }
-.standard-head{
+
+.standard-head {
     margin-top: -150px;
     text-align: center;
-    color:#fff;
+    color: #fff;
 }
-.price-tab-container{
+
+.price-tab-container {
     margin-top: 60px;
 }
-.price-tab-container .btn{
-    border: 0px;
-}
-.price-tab-container button.active{
-    background: #fff;
-    color: #000;
-}
-.plans-container{
+
+    .price-tab-container .btn {
+        border: 0px;
+    }
+
+    .price-tab-container button.active {
+        background: #fff;
+        color: #000;
+    }
+
+.plans-container {
     margin-top: 30px;
     margin-bottom: 30px;
 }
-.price-info{
+
+.price-info {
     background: #f3f7fb;
     min-height: 200px;
     padding: 15px;
     border-radius: 15px;
     text-align: center;
 }
-.price-info .btn{
-    width: 100%;
-}
-.price-info ul{
-    margin: 0px;
-    padding: 0px;
-    padding-bottom: 15px;
-    margin-top: 10px;
-}
-.price-info ul li{
-    list-style: none;
-    margin-bottom: 10px;
-    display: block;
-}
-.price-p{
+
+    .price-info .btn {
+        width: 100%;
+    }
+
+    .price-info ul {
+        margin: 0px;
+        padding: 0px;
+        padding-bottom: 15px;
+        margin-top: 10px;
+    }
+
+        .price-info ul li {
+            list-style: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+.price-p {
     margin: 15px 0px;
 }
-.tag-small{
+
+.tag-small {
     font-size: 20px;
 }
-.tag-large{
+
+.tag-large {
     font-size: 3.5em;
 }
-.plans-block{
+
+.plans-block {
     padding: 15px;
 }
-.plans-block h4{
-    text-transform: capitalize;
-}
-.plans-block p{
-    color: #909090;
-}
-.pricing-div{
+
+    .plans-block h4 {
+        text-transform: capitalize;
+    }
+
+    .plans-block p {
+        color: #909090;
+    }
+
+.pricing-div {
     margin-top: 10px;
     margin-bottom: 30px;
 }
-.pricing-single{
+
+.pricing-single {
     border: 1px solid #d8d8d8;
     padding: 15px;
 }
-.pricing-popular{
+
+.pricing-popular {
     background: #E4FBE3;
     border-color: #9AFF94;
 }
-.select-check-p{
+
+.select-check-p {
     font-size: 18px;
     font-weight: bold;
 }
-.price-green{
-    color:#0F9E5E;
+
+.price-green {
+    color: #0F9E5E;
     font-size: 18px;
 }
-.plan-desc{
+
+.plan-desc {
     border-top: 1px solid #d8d8d8;
     padding-top: 10px;
 }
 /*Author: Tanveer , Date: 04.06.2015 , 3 pages, Pricing*/
 
 /*Author: Rafi , Date: 30.06.2015 , cstm-modal*/
-.modal-cs label{
+.modal-cs label {
     margin-top: 5px;
 }
-.cstm-icon-div{
+
+.cstm-icon-div {
     display: inline;
 }
-.cstm-icon-div i{
-    margin-top: 10px;
-    float: left;
-}
-.cstm-icon-div p{
-    margin-top: 7px;
-    margin-left: 15px;
-}
+
+    .cstm-icon-div i {
+        margin-top: 10px;
+        float: left;
+    }
+
+    .cstm-icon-div p {
+        margin-top: 7px;
+        margin-left: 15px;
+    }
+
 .cstm-di {
     margin-top: 20px;
 }
-.cstm-fm{
+
+.cstm-fm {
     margin-top: 30px;
 }
+
+.cstm-drop-mod {
+    padding: 3px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px #CCC, 0px -1px #FFF inset !important;
+    background: #FFF none repeat scroll 0% 0%;
+    color: #888;
+    border: 1px solid #CCC;
+    outline: medium none;
+    display: inline-block;
+    -moz-appearance: none;
+    height: 35px;
+    width: 100%;
+    
+}
+.cstm-drop-mod{
+    
+}
+.form-border1 input {
+    border: #FBFBFB;
+    height: 30px;
+    opacity: 1;
+    color: #888;
+}
+
+    .form-border1 input:focus {
+        opacity: 1;
+    }
 /*Author: Rafi , Date: 30.06.2015 , cstm-modal*/
