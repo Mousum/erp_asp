@@ -68,7 +68,14 @@ namespace Mhasb.Wsit.Web.Areas.OrganizationManagement.Controllers
                 company.Email = HttpContext.User.Identity.Name;
                 var tt = uService.GetSingleUserByEmail(company.Email);
                 company.Users = new User { Id = tt.Id, Email = tt.Email };
+                string msg="";
+                var chkTrading = iCompany.IsTradingNameUnique(company, out msg);
 
+                if (!chkTrading)
+                {
+                    TempData.Add("errMsg",msg);
+                    return RedirectToAction("Add");
+                }
                 if (iCompany.AddCompany(company))
                 {
                     // company view log

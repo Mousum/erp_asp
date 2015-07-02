@@ -27,5 +27,7 @@ namespace Mhasb.Services.Organizations
         List<LogView> GetLastVisitorWiseCompanyList(long userId);
         string InsertDefaultDataForCompany(int companyId);
 
+        bool IsTradingNameUnique(Company company, out string msg);
+
     }
 }
