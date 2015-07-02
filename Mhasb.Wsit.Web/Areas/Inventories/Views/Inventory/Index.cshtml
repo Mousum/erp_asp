@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Mhasb.Domain.Inventories.Item>
+
+<hr>
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <h4>@ViewBag.Title List:</h4>
+        </div>
+        <div class="col-md-6">
+        </div>
+
+
+
+
+
+        @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+
+
+        @*<div id="itemsModal" class="modal fade">
+            @{ Html.RenderAction("CreateItem", "Items", new { area = "Inventories" });}
+        </div>*@
+
+
+
+
+
+
+        <div class="col-md-3 edit-fa">
+            <div class="input-group col-md-12">
+                <input type="text" class="search-query form-control cstm-input" placeholder="Search" />
+                <span class="input-group-btn">
+                    <button class="btn btn-danger btn-tag-search" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssetAccount.ACode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PTaxRate.LookupType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchasesAccount.ACode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalesAccount.ACode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STaxRate.LookupType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchaseUnitPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchaseDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SellUnitPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalesDescription)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetAccount.ACode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PTaxRate.LookupType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchasesAccount.ACode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalesAccount.ACode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.STaxRate.LookupType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseUnitPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SellUnitPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalesDescription)
+                        </td>
+                       
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+<hr>
