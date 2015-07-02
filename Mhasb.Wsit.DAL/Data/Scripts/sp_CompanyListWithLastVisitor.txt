@@ -22,11 +22,11 @@ BEGIN
 		u.last_name,u.first_name,u.Id as userid
 		from log.company_visitors vtor inner join
 		sec.users u on vtor.userid = u.Id
-		where vtor.Id IN (select cc.cvId from (
+		where vtor.userid = @userid AND vtor.Id IN (select cc.cvId from (
 											Select Max(cv.Id) As cvId,cv.companyid 
 											from log.company_visitors cv INNER JOIN 
 											org.companies c on cv.companyid = c.Id 	
-											WHERE cv.userid = @userid						
+											--WHERE cv.userid = @userid						
 											GROUP BY cv.companyid)As cc
 											)
 	)As tb_user on tb_com.companyid = tb_user.companyid
