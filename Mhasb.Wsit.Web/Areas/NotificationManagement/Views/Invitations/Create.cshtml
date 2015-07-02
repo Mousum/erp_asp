@@ -34,7 +34,7 @@
                 @Html.ValidationSummary(true)
                 <div class=" col-md-6">
                     <div class="row cstm-frm-row">
-                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "cstm-input", placeholder = "Email", id = "email", validate = "RequiredField", style = "border:1px solid #b6b6b6;" })
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "cstm-input", placeholder = "Email", id = "email", required = "required", style = "border:1px solid #b6b6b6;" })
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
                     @*<div class="row cstm-frm-row">
@@ -51,12 +51,12 @@
                 <div class=" col-md-6">
 
                     <div class="row cstm-frm-row">
-                        @Html.DropDownList("EmployeeType", ViewBag.employeeType as SelectList, new { @class = "cstm-input" })
+                        @Html.DropDownList("EmployeeType", ViewBag.employeeType as SelectList, new { @class = "cstm-input" ,required = "required"})
                         @Html.ValidationMessageFor(model => model.EmployeeType)
 
                     </div>
                     <div class="row cstm-frm-row">
-                        @Html.DropDownList("DesignationId", ViewBag.Desginations as SelectList, "--Select Designations--", new { @class = "cstm-input" })
+                        @Html.DropDownList("DesignationId", ViewBag.Desginations as SelectList, "--Select Designations--", new { @class = "cstm-input", required = "required" })
                         @Html.ValidationMessageFor(model => model.EmployeeType)
                     </div>
                 </div>

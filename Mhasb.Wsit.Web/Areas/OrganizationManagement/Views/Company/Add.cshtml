@@ -39,7 +39,7 @@
                             <label>What's the name of your organisation?</label>
                         </div>
                         <div class="col-md-7">
-                            @Html.TextBoxFor(model => model.TradingName, new {@class = "cstm-input", @placeholder = "Organisation Name*"})
+                            @Html.TextBoxFor(model => model.TradingName, new {@class = "cstm-input", @placeholder = "Organisation Name*",required="required"})
                             @Html.ValidationMessageFor(model => model.TradingName)
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <div>
                                 <input type="submit" value="Start Trial" name="startTrial" class="btn btn-success"/>
                                 OR
-                                <input type="submit" value="Buy Now" name="buyNow" class="btn btn-info"/>
+                                <input type="button" id="buy-btn" value="Buy Now" name="buyNow" class="btn btn-info"/>
                             </div>
                         </div>
                     </div>
@@ -69,3 +69,8 @@
         }
     </div>
 </div>
+<script>
+    $("#buy-btn").click(function () {
+        alert("Work in Progress");
+    });
+</script>
