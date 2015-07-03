@@ -168,7 +168,7 @@
     </div>
     <input type="hidden" id="UrlHide" value="@Url.Action("CreateItemAjax", "Items", new { area = "Inventories" })">
 </div>
-
+@if (ViewBag.ActionFlag == "EditBill") { 
 <script>
     $(".itemSelected").click(function () {
 
@@ -201,7 +201,7 @@
             data: {item:data},
 
             success: function (data) {
-                $(".dropdown-menu").append(' <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="' + data.id + '" href="javascript:void(0)">' + data.code + '-' + data.name + '</a></li>');
+                $(".items").append(' <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="' + data.id + '" href="javascript:void(0)">' + data.code + '-' + data.name + '</a></li>');
                 $(".close").trigger("click");
                 var itemId = data.id;
                 $('.itemCliked').unbind("click").bind("click", function () {
@@ -279,4 +279,4 @@
 
     })
 </script>
-
+}

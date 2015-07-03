@@ -98,18 +98,20 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                 return View();
             }
         }
-        public PartialViewResult CreateItem()
+        public PartialViewResult CreateItem(string ActionFlag)
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-
             var companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-
             var coalist = _coaService.GetAllChartOfAccountByComIdCostCentre(companyId);
-            ViewBag.CoaList = coalist;
             var lookups = _luSer.GetLookupByType("Tax");//.Select(u => new { u.Id, TValue = u.Value + "(" + u.Quantity + "%)" });
+          
+            //ViewBags
             ViewBag.Lookups = lookups;
+            ViewBag.CoaList = coalist;
+            ViewBag.ActionFlag = ActionFlag;
+            
             return PartialView();
         }
         public ActionResult CreateItemAjax()

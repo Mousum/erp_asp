@@ -3,7 +3,7 @@
     <td>
         <div class="dropdown form-border">
             <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="ul-@ViewBag.rowId">
+            <ul class="dropdown-menu items" role="menu" aria-labelledby="dropdownMenu1" id="ul-@ViewBag.rowId">
                 <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary create-new-item" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="noneDel">None</a></li>
                 @foreach (var item in ViewBag.Items)
@@ -24,7 +24,7 @@
                 <li role="presentation"><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
                 @foreach (var item in ViewBag.CoaList)
                 {
-                    <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                    <li role="presentation"><a role="menuitem" class="itemSelected" data-value="@item.ACode - @item.AName" data-id="@item.Id" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
                 }
             </ul>
            
@@ -205,4 +205,8 @@
         
 
     });
+
+    $(".itemSelected").unbind("click").bind("click", function () {
+        $('.coAccount').val($(this).attr("data-value"))
+    })
 </script>

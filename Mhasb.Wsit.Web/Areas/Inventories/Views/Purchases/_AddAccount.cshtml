@@ -164,7 +164,7 @@
         });
     })
     $("#save-account").click(function () {
-      
+
         var accountObj = new Object();
 
         accountObj.name = $("#name").val();
@@ -175,7 +175,7 @@
         accountObj.Eclaim = $("#Eclaim").is(":checked");
         accountObj.CostCenter = $("#CostCenter").is(":checked");
         accountObj.level = $("#level").val();
-      
+
         var arr = new Array();
         arr.push(accountObj);
 
@@ -187,7 +187,11 @@
             success: function (result) {
                 if (result.msg == "passed")
                 {
-                    $(".account").append('<li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">' + result.code+'-'+ result.name + '</a></li>')
+                    $(".account").append(' <li role="presentation"><a role="menuitem" class="itemSelected" data-value="' + result.code + '-' + result.name + '" data-id="'+result.id+'" tabindex="-1" href="javascript:void(0)">' + result.code + '"-" ' + result.name + '</a></li>');
+                    $(".itemSelected").unbind("click").bind("click", function () {
+                        $('.coAccount').val($(this).attr("data-value"))
+                    })
+                    $(".close").trigger("click");
                 }
             }
         });

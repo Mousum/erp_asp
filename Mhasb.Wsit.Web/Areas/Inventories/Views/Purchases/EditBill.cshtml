@@ -299,7 +299,7 @@
 <!-- Pop Up Add Tax -->
 <!-- Pop Up Add New Item -->
 <div id="itemsModal" class="modal fade">
-    @{ Html.RenderAction("CreateItem", "Items", new { area = "Inventories" });}
+    @{ Html.RenderAction("CreateItem", "Items", new { area = "Inventories", ActionFlag ="EditBill"});}
 </div>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="sellmodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="purchesemodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
@@ -417,6 +417,7 @@
     //                   $("#m-tooltip").removeClass("showTooltips");
     //               }
     //            });
+   
 </script>
 
 <script type="text/javascript">
