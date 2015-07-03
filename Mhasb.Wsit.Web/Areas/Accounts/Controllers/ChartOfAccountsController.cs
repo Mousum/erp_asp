@@ -11,6 +11,7 @@ using Mhasb.Wsit.Web.Utilities;
 using Mhasb.Wsit.Web.Controllers;
 using Mhasb.Services.Loggers;
 using Mhasb.Services.Organizations;
+using Newtonsoft.Json.Linq;
 
 
 namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
@@ -218,6 +219,44 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             var level = UtilityManager.GetLedgerLevel(code);
             var nodes = _cSer.TreeViewList(code, level);
             return Json(nodes);
+        }
+
+        public ActionResult CreateAccountAjax() {
+            var item = Request["item"].ToString(); // Get the JSON string
+            JArray itemData = JArray.Parse(item); // It is an array so parse into a JArray
+            
+             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            //var AccSet = setService.GetAllByUserId(user.Id);
+
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            int companyId = 0;
+            if (logObj != null)
+            {
+                companyId = (int)logObj.CompanyId;
+            }
+            ChartOfAccount obj = new ChartOfAccount();
+
+            //defination
+            obj.AName = itemData[0]["name"].ToString();
+            obj.ACode = itemData[0]["code"].ToString();
+            obj.CompanyId = companyId;
+            obj.Description = itemData[0]["description"].ToString();
+            obj.IsCostCenter = bool.Parse(itemData[0]["CostCenter"].ToString());
+            obj.TaxId = int.Parse(itemData[0]["taxid"].ToString());
+            obj.ShowInDashboard = bool.Parse(itemData[0]["dashboard"].ToString());
+            obj.ShowInExpenseClaims = bool.Parse(itemData[0]["Eclaim"].ToString());
+            obj.Level = int.Parse(itemData[0]["level"].ToString());
+
+            //function call 
+            if (_cSer.AddChartOfAccount(obj))
+            {
+                return Json(new { id = obj.Id, code = obj.ACode, name = obj.AName, msg = "passed" });
+            }
+            else 
+            {
+                return Json(new { msg="failed" });
+            }
+            
         }
 
     }

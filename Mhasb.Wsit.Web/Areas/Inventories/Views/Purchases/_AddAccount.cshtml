@@ -14,10 +14,10 @@
                 <h4 class="modal-title sign-up-title" id="myModalLabel">Add New Account</h4>
             </div>
 
-            @using (Html.BeginForm())
+            @*@using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
+                @Html.ValidationSummary(true)*@
 
                 <div class="col-md-6">
 
@@ -48,7 +48,7 @@
                             <label>Account Name</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.TextBoxFor(m => m.AName, new { @class = "cstm-input" })
+                            @Html.TextBoxFor(m => m.AName, new { @class = "cstm-input",id="name" })
                         </div>
                     </div>
                     <div class="row cstm-frm-row">
@@ -64,7 +64,7 @@
                             <label>Account Description</label>
                         </div>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(m => m.Description, new { @class = "cstm-tarea", placeholder = "Type a text here" })
+                            @Html.TextAreaFor(m => m.Description, new { @class = "cstm-tarea", placeholder = "Type a text here", id = "description" })
                         </div>
                     </div>
                     <div class="row cstm-frm-row">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-md-8">
 
-                            @Html.DropDownList("TaxId", (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { @class = "cstm-input", id = "Aid", required = "required" })
+                            @Html.DropDownList("TaxId", (SelectList)ViewBag.Lookups, "--Select Tax --", htmlAttributes: new { @class = "cstm-input", id = "taxid", required = "required" })
                         </div>
                     </div>
                     @*<div class="row cstm-frm-row">
@@ -95,7 +95,7 @@
 
                         <div class="col-md-12">
                             <label>
-                                @Html.CheckBoxFor(m => m.ShowInDashboard)
+                                @Html.CheckBoxFor(m => m.ShowInDashboard,new {id="dashboard"})
                                 Show on Dashboard Watchlist
                             </label>
                         </div>
@@ -104,7 +104,7 @@
 
                         <div class="col-md-12">
                             <label>
-                                @Html.CheckBoxFor(m => m.ShowInExpenseClaims) Show in Expense Claims
+                                @Html.CheckBoxFor(m => m.ShowInExpenseClaims, new { id = "Eclaim" }) Show in Expense Claims
                             </label>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
 
                         <div class="col-md-12">
                             <label>
-                                @Html.CheckBoxFor(m => m.IsCostCenter)This Account Is a Cost Center
+                                @Html.CheckBoxFor(m => m.IsCostCenter, new { id = "CostCenter" })This Account Is a Cost Center
                             </label>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="col-md-12">
                             <div class="btn-group" role="group" aria-label="...">
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success" id="save-account">Save</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                 <div class="col-md-6">
                     <img src="~/img/chartofaccount.png" />
                 </div>
-            }
+            @*}*@
 
 
 
@@ -141,7 +141,7 @@
     </div>
 </div>
 
-
+<input type="hidden" id="AccountUrlHide" value="@Url.Action("CreateAccountAjax", "ChartOfAccounts", new { area = "Accounts" })">
 
 
 <script>
@@ -163,4 +163,35 @@
             }
         });
     })
+    $("#save-account").click(function () {
+      
+        var accountObj = new Object();
+
+        accountObj.name = $("#name").val();
+        accountObj.code = $("#code").val();
+        accountObj.description = $("#description").val();
+        accountObj.taxid = $("#taxid").val();
+        accountObj.dashboard = $("#dashboard").is(":checked");
+        accountObj.Eclaim = $("#Eclaim").is(":checked");
+        accountObj.CostCenter = $("#CostCenter").is(":checked");
+        accountObj.level = $("#level").val();
+      
+        var arr = new Array();
+        arr.push(accountObj);
+
+        var data = JSON.stringify(arr);
+         $.ajax({
+            type: "POST",
+            url: $("#AccountUrlHide").val(),
+            data: { item: data },
+            success: function (result) {
+                if (result.msg == "passed")
+                {
+                    $(".account").append('<li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">' + result.code+'-'+ result.name + '</a></li>')
+                }
+            }
+        });
+
+
+    });
 </script>
