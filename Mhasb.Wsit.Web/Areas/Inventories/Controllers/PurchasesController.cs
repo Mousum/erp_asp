@@ -9,6 +9,8 @@ using Mhasb.Services.OrgSettings;
 using Mhasb.Services.Users;
 using Mhasb.Domain.Inventories;
 using System;
+using Mhasb.Wsit.CustomModel.Inventories;
+using Mhasb.Services.Organizations;
 
 namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 {
@@ -22,6 +24,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         private readonly ISettingsService _sService = new SettingsService();
         private readonly IChartOfAccountService _coaService = new ChartOfAccountService();
         private readonly ILookupService _luSer = new LookupService();
+        private readonly IEmployeeService empSer = new EmployeeService();
 
         //
         // GET: /Inventories/Purchases/
@@ -40,10 +43,10 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             //    TempData.Add("errMsg", "Please Go To Your Account Seetings to set Default Company");
             //    return RedirectToAction("Index", "Purchases", new { area = "Inventories" });
             //}
-            
+
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
-            var  companyId = 0;
+            var companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
 
             var coalist = _coaService.GetAllChartOfAccountByComIdCostCentre(companyId);
@@ -61,7 +64,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             var lookups = _luSer.GetLookupByType("Tax");//.Select(u => new { u.Id, TValue = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = lookups;
 
-            
+
 
 
 
@@ -82,7 +85,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                 if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
             }
             var atypes = _coaService.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
-           
+
 
             if (atypes.Count == 0)
             {
@@ -98,21 +101,22 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         }
 
         public ActionResult RepeatTransection()
-         {
+        {
 
-             return View();
-         }
-        public JsonResult GetServiceNames(string term) {
+            return View();
+        }
+        public JsonResult GetServiceNames(string term)
+        {
             var results = _contactService.GetAllContactInformation().Where(s => term == null || s.ContactName.ToLower().Contains(term.ToLower())).Select(x => new { id = x.Id, value = x.ContactName }).Take(5).ToList();
-            
+
             return Json(results, JsonRequestBehavior.AllowGet);
-          
+
         }
         public PartialViewResult ItemRow()
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
 
-            
+
 
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
@@ -141,27 +145,61 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             var companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
             var itemList = _itemService.GetAllItemsByConmanyId(companyId, Id)
-                .Select(u => new {
-                    Id=u.Id,
-                    ItemCode=u.ItemCode,
-                    ItemName=u.ItemName,
-                    Description=u.PurchaseDescription,
-                    Quantity=u.Quantity,
-                    UnitPrice=u.PurchaseUnitPrice,
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    ItemCode = u.ItemCode,
+                    ItemName = u.ItemName,
+                    Description = u.PurchaseDescription,
+                    Quantity = u.Quantity,
+                    UnitPrice = u.PurchaseUnitPrice,
                     AccountId = u.PurchasesAccount.Id,
-                    AccountCode=u.PurchasesAccount.ACode,
+                    AccountCode = u.PurchasesAccount.ACode,
                     AccountName = u.PurchasesAccount.AName,
-                    PtxtValue=u.PTaxRate.Key,
-                    PtxtQuantity =  u.PTaxRate.Quantity,
+                    PtxtValue = u.PTaxRate.Key,
+                    PtxtQuantity = u.PTaxRate.Quantity,
+                    PtxtId = u.PTaxRate.Id,
                 });
             if (itemList != null)
             {
                 return Json(new { itemList });
             }
-            else {
+            else
+            {
                 return Json(new { success = "False" });
             }
-            
+
         }
-	}
+        public ActionResult PostPurchase(InventoriesEditBill purchase)
+        {
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+
+            var items = Request["ItemId"];
+            var descriptions = Request["description"];
+            var quantities = Request["quantity"];
+            var unitPrices = Request["unitPrice"];
+            var CoaIds = Request["CoaId"];
+            var TaxIds = Request["TaxId"];
+
+            for (var i = 0; i < items.Count(); i++)
+            {
+                PurchaseTransactionDetail ptd = new PurchaseTransactionDetail();
+
+                ptd.ItemId =(int)items[i];
+                ptd.Quantity = quantities[i];
+                ptd.TaxId = (int)TaxIds[i];
+                ptd.UnitPrice =unitPrices[i];
+               // ptd.Description = (string)descriptions[i];
+                ptd.CoaId = (int)CoaIds[i];
+
+            }
+
+            purchase.PurchaseTransactions.EmployeeId = empSer.GetEmployeeByUserId(user.Id).Id;
+            purchase.PurchaseTransactions.CompanyId = companyId;
+            return Content("Hello");
+        }
+    }
 }

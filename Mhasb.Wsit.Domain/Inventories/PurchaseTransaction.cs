@@ -7,6 +7,7 @@ using Mhasb.Domain.Contacts;
 using Mhasb.Domain.Organizations;
 using Mhasb.Domain.OrgSettings;
 using Mhasb.Wsit.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mhasb.Domain.Inventories
 {
@@ -27,15 +28,20 @@ namespace Mhasb.Domain.Inventories
         public string PoAddress { get; set; }
         public EnumTransactionType TransactionType { get; set; }
 
+        public int CompanyId { get; set; }
+
        
         public virtual ContactInformation ContactInformations { get; set; }
 
         // Navigation Property for Employee
         public virtual Employee Employees { get; set; }
         public virtual Currency Currencies { get; set; }
+
+        public virtual Company Companies { get; set; }
         public virtual ICollection<PurchaseTransactionDetail> PurchaseTransactionDetails { get; set; }
         public virtual ICollection<PurchaseTransactionDocument> PurchaseTransactionDocuments { get; set; }
         public ObjectState State { get; set; }
+       [Key]
         public long Id { get; set; }
     }
 

@@ -1,224 +1,234 @@
 ﻿@model Mhasb.Wsit.CustomModel.Inventories.InventoriesEditBill
 
+@using (Html.BeginForm("PostPurchase", "Purchases",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-<div class="container my-dashboard modal-open">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="welcome">
-                <h3 class="all-head">New Bill</h3>
-            </div>
-            <div class="alert alert-info cstm-box" role="alert">
-                <i class="fa fa-info-circle"></i>&nbsp; It is recommended that you add <span class="cstm-txt3">your organization contact details</span> before spending purchase orders.
-            </div>
-            <div class="row clearfix no-margin card">
-                <div class="col-md-12">
-                    <div class="row clearfix">
-                        <div class="col-md-12">
-                            <div class="col-md-2 x-new">
-                                <h6>From</h6>
-                                <span id="ext-comp-1022" class="x-new-indicator" style="display:none;">NEW</span>
-                                <input class="cstm-input" id="cutomer" type="text" placeholder="">
-                                <input class="cstm-input" value="" id="cutomer-value" type="hidden">
+    @Html.ValidationSummary(true)
+    <div class="container my-dashboard modal-open">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="welcome">
+                    <h3 class="all-head">New Bill</h3>
+                </div>
+                <div class="alert alert-info cstm-box" role="alert">
+                    <i class="fa fa-info-circle"></i>&nbsp; It is recommended that you add <span class="cstm-txt3">your organization contact details</span> before spending purchase orders.
+                </div>
 
-                            </div>
-                            <div class="col-md-2">
-                                <h6>Date</h6>
-                                <input class="cstm-input datepicker" type="text" placeholder="mm/dd/yy">
-                            </div>
-                            <div class="col-md-2">
-                                <h6>Due Date</h6>
-                                <input class="cstm-input datepicker" type="text" placeholder="mm/dd/yy">
-                            </div>
-                            <div class="col-md-2">
-                                <h6>Reference</h6>
-                                <input class="cstm-input" type="text" placeholder="">
-                            </div>
-                            <div class="col-md-2 cstm-ii">
-                                <a class="tooltips newtooltips" href="javascript:void(0);">
-                                    <i class="fa fa-file"></i>
-                                    <span id="m-tooltip">
-                                        <p class="toolhead">
-                                            Header
-                                        </p>
-                                        <div class="toolbody">
-                                            <p>Body text is here</p>
+                <div class="row clearfix no-margin card">
+                    <div class="col-md-12">
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="col-md-2 x-new">
+                                    <h6>From</h6>
+                                    <span id="ext-comp-1022" class="x-new-indicator" style="display:none;">NEW</span>
+                                    <input class="cstm-input" id="cutomer" type="text" placeholder="">
+                                    @*<input class="cstm-input" value="" id="cutomer-value" type="hidden">*@
+                                    @Html.HiddenFor(m => m.PurchaseTransactions.ContactId, new { id = "cutomer-value" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6>Date</h6>
+                                    @*<input class="cstm-input datepicker" type="text" placeholder="mm/dd/yy">*@
+                                    @Html.TextBoxFor(m => m.PurchaseTransactions.TransactionDate, new { @class = "cstm-input datepicker", type = "text", placeholder = "mm/dd/yy" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6>Due Date</h6>
+                                    @*<input class="cstm-input datepicker" type="text" placeholder="mm/dd/yy">*@
+                                    @Html.TextBoxFor(m => m.PurchaseTransactions.DeliveryDate, new { @class = "cstm-input datepicker", type = "text", placeholder = "mm/dd/yy" })
+                                </div>
+                                <div class="col-md-2">
+                                    <h6>Reference</h6>
+                                    @*<input class="cstm-input" type="text" placeholder="">*@
+                                    @Html.TextBoxFor(m => m.PurchaseTransactions.ReferenceNo, new { @class = "cstm-input" })
+                                </div>
+                                <div class="col-md-2 cstm-ii">
+                                    <a class="tooltips newtooltips" href="javascript:void(0);">
+                                        <i class="fa fa-file"></i>
+                                        <span id="m-tooltip">
+                                            <p class="toolhead">
+                                                Header
+                                            </p>
+                                            <div class="toolbody">
+                                                <p>Body text is here</p>
+                                            </div>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2 cch">
+                                    <h6>Total</h6>
+                                    <input class="cstm-input cstm-place" type="text" placeholder="0.00">
+                                </div>
+                                <div class="col-md-12 cstm-border-con"></div>
+
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-1 cstm-head">
+                                        <h6>Currency</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="cstm-select">
+                                            @Html.DropDownListFor(m => m.PurchaseTransactions.Currencyid, ViewBag.CurrencyList as SelectList, "-- select---", new { reqiured = "reqiured" })
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                    </div>
+                                    <div class="col-md-2 cstm-head1">
+                                        <h6>Amounts Are</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="cstm-select">
+                                            @Html.DropDownListFor(m => m.PurchaseTransactions.TransactionType, ViewBag.AmountsareList as SelectList, "-- select---", new { reqiured = "reqiured" })
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                    </div>
+                                </div>
+                                <div class="row cstm-frm-row">
+                                    <table class="table table-bordered table-responsive table-hover table-journal cstm-tbl-brd">
+                                        <tbody id="itemLoader">
+                                            <tr class="cstm-table-clr">
+                                                <td>Item</td>
+                                                <td>Description</td>
+                                                <td>Qty</td>
+                                                <td>Unit Price</td>
+                                                <td>Account</td>
+                                                <td>Tax Rate</td>
+                                                <td>Amount BD</td>
+                                                <td>Action</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row cstm-frm-row">
+                                    <div class="col-md-2">
+                                        <a href="javascript:void(0);" class="btn btn-success" id="new_line" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
+                                    </div>
+                                    <div class="col-md-4 pull-right">
+                                        <div class="col-md-6 cstm-div-border6">
+                                            Sub-Total:
                                         </div>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="col-md-1">
-                            </div>
-                            <div class="col-md-2 cch">
-                                <h6>Total</h6>
-                                <input class="cstm-input cstm-place" type="text" placeholder="0.00">
-                            </div>
-                            <div class="col-md-12 cstm-border-con"></div>
+                                        <div class="col-md-6 cstm-div-border7 sub-total" id="sub-total">
+                                            0.00
+                                        </div>
+                                        <div class="col-md-6 cstm-div-border-3">
+                                            Tax:
+                                        </div>
+                                        <div class="col-md-6 cstm-div-border-4 calTax" id="calTax">
+                                            0.00
+                                        </div>
+                                        <div class="col-md-6 cstm-div-border8">
+                                            Total:
+                                        </div>
+                                        <div class="col-md-6 cstm-div-border8 total" id="total">
+                                            0.00
+                                        </div>
 
-                            <div class="row cstm-frm-row">
-                                <div class="col-md-1 cstm-head">
-                                    <h6>Currency</h6>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="cstm-select">
-                                        @Html.DropDownList("CurrencyId", ViewBag.CurrencyList as SelectList, "-- select---", new { reqiured = "reqiured" })
-                                    </label>
-                                </div>
-                                <div class="col-md-5">
-                                </div>
-                                <div class="col-md-2 cstm-head1">
-                                    <h6>Amounts Are</h6>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="cstm-select">
-                                        @Html.DropDownList("AmountsareId", ViewBag.AmountsareList as SelectList, "-- select---", new { reqiured = "reqiured" })
-                                    </label>
-                                </div>
-                                <div class="col-md-3 pull-right">
-                                </div>
-                            </div>
-                            <div class="row cstm-frm-row">
-                                <table class="table table-bordered table-responsive table-hover table-journal cstm-tbl-brd">
-                                    <tbody id="itemLoader">
-                                        <tr class="cstm-table-clr">
-                                            <td>Item</td>
-                                            <td>Description</td>
-                                            <td>Qty</td>
-                                            <td>Unit Price</td>
-                                            <td>Account</td>
-                                            <td>Tax Rate</td>
-                                            <td>Amount BD</td>
-                                            <td>Action</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row cstm-frm-row">
-                                <div class="col-md-2">
-                                    <a href="javascript:void(0);" class="btn btn-success" id="new_line" data-role="button"><i class="fa fa-arrow-circle-up"></i>&nbsp; Add a new line</a>
-                                </div>
-                                <div class="col-md-4 pull-right">
-                                    <div class="col-md-6 cstm-div-border6">
-                                        Sub-Total:
-                                    </div>
-                                    <div class="col-md-6 cstm-div-border7 sub-total" id="sub-total">
-                                        0.00
-                                    </div>
-                                    <div class="col-md-6 cstm-div-border-3">
-                                        Tax:
-                                    </div>
-                                    <div class="col-md-6 cstm-div-border-4 calTax" id="calTax">
-                                        0.00
-                                    </div>
-                                    <div class="col-md-6 cstm-div-border8">
-                                        Total:
-                                    </div>
-                                    <div class="col-md-6 cstm-div-border8 total" id="total">
-                                        0.00
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-12 cstm-bc">
-                                <div class="col-md-2 cstm-dro-btn">
-                                    <div class="btn-group cstm-wd">
-                                        <button type="button" class="btn btn-info cs-bn">Save</button>
-                                        <button type="button" class="btn btn-info dropdown-toggle cs-bn1" data-toggle="dropdown" aria-expanded="false">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu cstm-drop" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-3 pull-right">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-success">Approve</button>
-                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
+                                <div class="col-md-12 cstm-bc">
+                                    <div class="col-md-2 cstm-dro-btn">
+                                        <div class="btn-group cstm-wd">
+                                            <button type="submit" class="btn btn-info cs-bn">Save</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle cs-bn1" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu cstm-drop" role="menu">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <a href="#" class="btn btn-default" data-role="button">Cancel</a>
+                                    <div class="col-md-3 pull-right">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                            </ul>
+                                        </div>
+                                        <a href="#" class="btn btn-default" data-role="button">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
 
-            </div>
-            <div class="col-md-12 cstm-brd">
-                <div class="row cstm-his">
-                    <span class="cstm-opt1234">
-                        History & Notes
-                        <!-- Button trigger modal -->
+                <div class="col-md-12 cstm-brd">
+                    <div class="row cstm-his">
+                        <span class="cstm-opt1234">
+                            History & Notes
+                            <!-- Button trigger modal -->
 
-                        <a class="tooltips newtooltips" href="javascript:void(0);">
-                            <i class="fa fa-question-circle"></i>
-                            <span id="m-tooltip">
-                                <p class="toolhead">
-                                    Header
-                                </p>
-                                <div class="toolbody">
-                                    <p>Body text is here</p>
-                                </div>
-                            </span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-12 cstm-aa">
-                <a href="javascript:void(0)" class="btn btn-default add-note" data-role="button">Add note</a>
-            </div>
-            <br>
-            <div class="hidden-note" style="display:none;">
-                <div class="row cstm-frm-row">
-                    <div class="col-md-6 no-padding">
-                        <textarea class="cstm-tarea" id="note-des"></textarea>
+                            <a class="tooltips newtooltips" href="javascript:void(0);">
+                                <i class="fa fa-question-circle"></i>
+                                <span id="m-tooltip">
+                                    <p class="toolhead">
+                                        Header
+                                    </p>
+                                    <div class="toolbody">
+                                        <p>Body text is here</p>
+                                    </div>
+                                </span>
+                            </a>
+                        </span>
                     </div>
                 </div>
-                <div class="row cstm-frm-row">
-                    <a href="javascript:void(0)" class="btn btn-success note-save" data-role="button">Save</a>
-                    <a href="javascript:void(0)" class="btn btn-danger note-cancel" data-role="button">Cancel</a>
+                <div class="col-md-12 cstm-aa">
+                    <a href="javascript:void(0)" class="btn btn-default add-note" data-role="button">Add note</a>
                 </div>
-            </div>
-            <input type="hidden" value="@ViewBag.User" id="usename" />
-            <div class="col-md-9 no-padding">
-                <table class="table table-bordered table-responsive table-hover table-journal">
-                    <thead>
-                        <tr>
-                            <th>Change</th>
-                            <th>Date</th>
-                            <th>User</th>
-                            <th width="30%">Details</th>
+                <br>
+                <div class="hidden-note" style="display:none;">
+                    <div class="row cstm-frm-row">
+                        <div class="col-md-6 no-padding">
+                            <textarea class="cstm-tarea" id="note-des"></textarea>
+                        </div>
+                    </div>
+                    <div class="row cstm-frm-row">
+                        <a href="javascript:void(0)" class="btn btn-success note-save" data-role="button">Save</a>
+                        <a href="javascript:void(0)" class="btn btn-danger note-cancel" data-role="button">Cancel</a>
+                    </div>
+                </div>
+                <input type="hidden" value="@ViewBag.User" id="usename" />
+                <div class="col-md-9 no-padding">
+                    <table class="table table-bordered table-responsive table-hover table-journal">
+                        <thead>
+                            <tr>
+                                <th>Change</th>
+                                <th>Date</th>
+                                <th>User</th>
+                                <th width="30%">Details</th>
 
-                        </tr>
-                    </thead>
-                    <tbody id="tbd"></tbody>
-                </table>
-                @Html.Hidden("changes[]", "", new { id = "change" })
-                @Html.Hidden("notedate[]", "", new { id = "date" })
-                @Html.Hidden("Notedes[]", "", new { })
-                <input type="hidden" name="note_data" id="notes" value="" />
+                            </tr>
+                        </thead>
+                        <tbody id="tbd"></tbody>
+                    </table>
+                    @Html.Hidden("changes[]", "", new { id = "change" })
+                    @Html.Hidden("notedate[]", "", new { id = "date" })
+                    @Html.Hidden("Notedes[]", "", new { })
+                    <input type="hidden" name="note_data" id="notes" value="" />
+                </div>
+                <br>
             </div>
-            <br>
+
         </div>
     </div>
-</div>
-
+}
 <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content newAutocomplete" id="ui-id-1" tabindex="0" style="display: none; top: 373.5px; left: 145px; z-index: 1000; width: 152px;">
     <span>+ New Contact</span>
     <li class="ui-menu-item" id="ui-id-1-100" tabindex="-1">R</li>
@@ -299,14 +309,14 @@
 <!-- Pop Up Add Tax -->
 <!-- Pop Up Add New Item -->
 <div id="itemsModal" class="modal fade">
-    @{ Html.RenderAction("CreateItem", "Items", new { area = "Inventories", ActionFlag ="EditBill"});}
+    @{ Html.RenderAction("CreateItem", "Items", new { area = "Inventories", ActionFlag = "EditBill" });}
 </div>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="sellmodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="purchesemodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
 @{ Html.RenderAction("PartialAddAccount", "Purchases", new { area = "Inventories", ActionFlag = "EditBill" });}
 <input id="hiddentr" type="hidden" value="">
 <script type="text/javascript">
-    
+
     $(document).ready(function () {
         $.get("ItemRow", function (data) {
             $("#itemLoader").append(data);
@@ -419,7 +429,7 @@
     //            });
 
 
-   
+
 </script>
 
 <script type="text/javascript">

@@ -29,7 +29,7 @@ namespace Mhasb.DAL.Mapping.Inventories
 
             this.Property(t => t.PoTelephone).HasColumnName("po_telephone").HasMaxLength(100);
             this.Property(t => t.PoAddress).HasColumnName("po_address").HasMaxLength(300);
-
+            this.Property(t => t.CompanyId).HasColumnName("company_id");
 
             this.ToTable("inv.purchase_transaction");
 
@@ -45,6 +45,11 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.HasRequired(t => t.Employees)
                 .WithMany(t => t.PurchaseTransactions)
                 .HasForeignKey(t => t.EmployeeId);
+
+            this.HasRequired(t => t.Companies).
+               WithMany(t=>t.PurchaseTransections).
+               HasForeignKey(t => t.CompanyId)
+               .WillCascadeOnDelete(false);
         }
     }
 }

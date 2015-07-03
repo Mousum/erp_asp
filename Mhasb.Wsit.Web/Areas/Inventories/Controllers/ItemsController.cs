@@ -116,8 +116,14 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         }
         public ActionResult CreateItemAjax()
         {
+            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var companyId = 0;
+            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+           
             var item = Request["item"].ToString(); // Get the JSON string
             JArray itemData = JArray.Parse(item); // It is an array so parse into a JArray
+           
             Item obj = new Item();
             obj.ItemName = itemData[0]["name"].ToString();
             obj.ItemCode = itemData[0]["code"].ToString();
@@ -130,10 +136,18 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             obj.SalesAccountId = int.Parse(itemData[0]["salesAccount"].ToString());
             obj.STaxRateId = int.Parse(itemData[0]["salesTax"].ToString());
             obj.SalesDescription = itemData[0]["salesDescription"].ToString();
-            
-            ItemSer.AddItem(obj);
+            obj.CompanyId = companyId;
 
-            return Json(new { id = obj.Id , name =obj.ItemName,code=obj.ItemCode});
+            if (ItemSer.AddItem(obj))
+            {
+                return Json(new { id = obj.Id, name = obj.ItemName, code = obj.ItemCode });
+            }
+            else 
+            {
+                return Json(new { msg="failed" });
+            }
+
+           
 
 
         }

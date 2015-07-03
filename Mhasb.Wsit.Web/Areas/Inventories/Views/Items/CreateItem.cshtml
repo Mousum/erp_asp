@@ -40,7 +40,7 @@
                             <li><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
                             @foreach (var item in ViewBag.CoaList)
                             {
-                                <li role="presentation"><a role="menuitem" class="itemSelected" data-id="@item.Id" data-value="@item.ACode - @item.AName" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                                <li role="presentation"><a role="menuitem" class="coaSelected" data-id="@item.Id" data-value="@item.ACode - @item.AName" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
                             }
                         </ul>
                     </div>
@@ -171,7 +171,7 @@
 @if (ViewBag.ActionFlag == "EditBill")
 {
     <script>
-    $(".itemSelected").click(function () {
+        $(".coaSelected").click(function () {
 
         // alert($(this).attr("data-value"));
         $("#AccountId").val($(this).attr("data-id"));
@@ -230,11 +230,13 @@
                             var TotalTax = 0.00;
                             var allTotal = 0.00;
                             par.find('.itemtXt').val(data.ItemName);
+                            par.find(".itemid").val(Id);
                             par.find('.description').val(data.Description);
                             par.find('.quantity').val(data.Quantity);
                             par.find('.unitPrice').val(data.UnitPrice);
                             par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
                             par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + "%)");
+                            par.find('.taxid').val(data.PtxtId);
                             par.find('.ammount').text(ammount );
                             par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
                             presubtotal = parseFloat(presubtotal) + ammount;
@@ -284,7 +286,7 @@
 else if (ViewBag.ActionFlag == "InventoryIndex")
 {
     <script>
-        $(".itemSelected").click(function () {
+        $(".coaSelected").click(function () {
 
             // alert($(this).attr("data-value"));
             $("#AccountId").val($(this).attr("data-id"));
