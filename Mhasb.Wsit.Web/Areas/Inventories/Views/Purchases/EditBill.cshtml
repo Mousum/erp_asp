@@ -303,7 +303,7 @@
 </div>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="sellmodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
 <a style="display:none;" class="btn btn-primary" data-target=".bs-example-modal-lg" id="purchesemodalclick" data-toggle="modal" href="#accountModal">+ Add new account...</a>
-@{ Html.RenderAction("PartialAddAccount");}
+@{ Html.RenderAction("PartialAddAccount", "Purchases", new { area = "Inventories", ActionFlag = "EditBill" });}
 <input id="hiddentr" type="hidden" value="">
 <script type="text/javascript">
     
@@ -417,6 +417,8 @@
     //                   $("#m-tooltip").removeClass("showTooltips");
     //               }
     //            });
+
+
    
 </script>
 

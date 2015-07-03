@@ -55,7 +55,7 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
             }
             var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
-
+           
             ViewBag.ATypes = atypes;
             return View("_AddAccount");
         }

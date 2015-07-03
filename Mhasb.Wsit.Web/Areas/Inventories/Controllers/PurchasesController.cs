@@ -67,7 +67,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 
             return View();
         }
-        public ActionResult PartialAddAccount()
+        public ActionResult PartialAddAccount(string ActionFlag)
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
@@ -90,6 +90,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                 atypes = _coaService.GetAllChartOfAccountByCompanyId(companyId);
             }
             var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            ViewBag.ActionFlag = ActionFlag;
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
 
             ViewBag.ATypes = atypes;

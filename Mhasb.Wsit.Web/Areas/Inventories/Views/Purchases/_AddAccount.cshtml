@@ -143,7 +143,8 @@
 
 <input type="hidden" id="AccountUrlHide" value="@Url.Action("CreateAccountAjax", "ChartOfAccounts", new { area = "Accounts" })">
 
-
+@if (ViewBag.ActionFlag == "EditBill")
+{ 
 <script>
     $("#Aid").change(function () {
         var baseUrl = '@Url.Content("~/")';
@@ -199,3 +200,4 @@
 
     });
 </script>
+}
