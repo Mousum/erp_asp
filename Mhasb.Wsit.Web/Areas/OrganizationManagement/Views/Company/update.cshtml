@@ -126,7 +126,7 @@
                 <div class="row cstm-frm-row">
                     <div class="col-md-8">
 
-                        @Html.TextBoxFor(model => model.Tel, new { @class = "cstm-input", @placeholder = "Telephone" })
+                        @Html.TextBoxFor(model => model.Tel, new { @class = "cstm-input", @placeholder = "Telephone", maxlength = "12" })
                         @Html.ValidationMessageFor(model => model.Tel)
 
                     </div>
@@ -146,7 +146,7 @@
                     <div class="col-md-8">
                         @*@Html.LabelFor(model => model.P_O_Box, new { @class = "control-label col-md-2" })*@
 
-                        @Html.TextBoxFor(model => model.P_O_Box, new { @class = "cstm-input", @placeholder = "P. O. Box No*" })
+                        @Html.TextBoxFor(model => model.P_O_Box, new { @class = "cstm-input", @placeholder = "P. O. Box No" })
                         @Html.ValidationMessageFor(model => model.P_O_Box)
 
                     </div>

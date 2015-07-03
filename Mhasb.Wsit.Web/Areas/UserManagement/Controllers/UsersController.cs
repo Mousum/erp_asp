@@ -324,7 +324,7 @@ namespace Mhasb.Wsit.Web.Areas.UserManagement.Controllers
             if (uService.UpdateUser(User))
             {
                 CustomPrincipal.Login(email, User.Password, false);
-                return Json(new { success = "True", msg = email, msgpass = User.Password });
+                return Json(new { success = "True", msg = email, msgpass = "Password is hidden." });// User.Password
             }
             else
             {

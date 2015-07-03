@@ -1,4 +1,4 @@
-﻿@model Mhasb.Domain.Inventories.Item;
+﻿@model Mhasb.Domain.Inventories.Item
 @{
     Layout = null;
 }
@@ -12,12 +12,14 @@
         <div class="modal-body clearfix">
             <div class="col-md-12">
                 <div class="col-md-4">
-                    <h6>Item Name</h6>
-                    <input class="cstm-input" id="txtitemcode" type="text" placeholder="Item Name">
+                    <h6>Item Code</h6>
+                    @Html.TextBoxFor(i=>i.ItemCode,new{@class="cstm-input" ,id="txtitemcode" ,type="text" ,placeholder="Item Code"})
+                    
                 </div>
                 <div class="col-md-6">
-                    <h6>Item Code</h6>
-                    <input class="cstm-input" id="txtitemname" type="text" placeholder="Item Code">
+                    <h6>Item Name</h6>
+                    @Html.TextBoxFor(i=>i.ItemCode,new{@class="cstm-input" ,id="txtitemname" ,type="text" ,placeholder="Item Name"})
+                 @*   <input class="cstm-input" id="txtitemname" type="text" placeholder="Item Code">*@
                 </div>
             </div>
             <div class="col-md-12 cstm-border-con">
@@ -25,18 +27,20 @@
             <div class="col-md-12">
                 <div class="col-md-4 modal-cs">
                     <label>
+                       
                         <input type="checkbox" id="check-item"> I track this item
                     </label>
                 </div>
                 <div class="col-md-6" id="div-check-item" style="display:none">
                     <h6>Inventory Asset Account</h6>
                     <div class="dropdown form-border1 cstm-drop-mod">
-                        <input class="dropdown-toggle" type="text" id="itemtXt" data-toggle="dropdown" aria-expanded="true">
+                        <input class="dropdown-toggle" type="text" id="AccountName" data-toggle="dropdown" aria-expanded="true">
+                        <input type="hidden" id="AccountId">
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
                             @foreach (var item in ViewBag.CoaList)
                             {
-                                <li role="presentation"><a role="menuitem" class="itemSelected" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
+                                <li role="presentation"><a role="menuitem" class="itemSelected" data-id="@item.Id" data-value="@item.ACode - @item.AName" tabindex="-1" href="javascript:void(0)">@item.ACode - @item.AName</a></li>
                             }
                         </ul>
                     </div>
@@ -69,16 +73,17 @@
                 <div id="div-purchase-item">
                     <div class="col-md-2" id="inventory-asset-account">
                         <h6>Unit Price</h6>
-                        <input class="cstm-input" type="text" placeholder="">
+                        @Html.TextBoxFor(m=>m.PurchaseUnitPrice,new{@class="cstm-input" ,id="purchase-unit-price", placeholder=""})
+                      @*  <input class="cstm-input" type="text" placeholder="">*@
                     </div>
                     <div class="col-md-3">
                         <h6>Cost of Goods Sold Account</h6>
-                        <label class="cstm-select">
-                            <select>
+                        <label class="cstm-select" >
+                            <select id="purchase-account">
                                 <option selected="" class="btn btn-primary" id="purcheseaddAccount"> + Add new account... </option>
                                 @foreach (var item in ViewBag.CoaList)
                                 {
-                                    <option selected=""> @item.ACode - @item.AName </option>
+                                    <option value="@item.Id"> @item.ACode - @item.AName </option>
                                 }
                             </select>
                         </label>
@@ -86,11 +91,11 @@
                     <div class="col-md-3">
                         <h6>Tax Rate</h6>
                         <label class="cstm-select">
-                            <select>
+                            <select id="purchase-tax" >
                                 <option selected="" class="btn btn-primary"> + Add new tax... </option>
                                 @foreach (var item in ViewBag.Lookups)
                                 {
-                                    <option> @item.Value (@item.Quantity%) </option>
+                                    <option value="@item.Id"> @item.Value (@item.Quantity%) </option>
                                 }
                             </select>
                         </label>
@@ -103,7 +108,7 @@
                 </div>
                 <div class="col-md-8">
                     <h6>Purchases Description (for my suppliers)</h6>
-                    <textarea class="cstm-tarea" placeholder=""></textarea>
+                    @Html.TextAreaFor(m=>m.PurchaseDescription,new{@class="cstm-tarea",id="purchase-description"})
                 </div>
             </div>
         </div>
@@ -118,16 +123,17 @@
             <div id="div-sell-item" style="display:none;">
                 <div class="col-md-2">
                     <h6>Unit Price</h6>
-                    <input class="cstm-input" type="text" placeholder="">
+                    @Html.TextBoxFor(m => m.SellUnitPrice, new { @class = "cstm-input", placeholder = "",id="sales-unit-price" })
+                    @*<input class="cstm-input" type="text" placeholder="">*@
                 </div>
                 <div class="col-md-3">
                     <h6>Sales Account</h6>
                     <label class="cstm-select">
-                        <select>
+                        <select id="sales-account">
                             <option selected="" class="btn btn-primary" id="selladdAccount"> + Add new account... </option>
                             @foreach (var item in ViewBag.CoaList)
                             {
-                                <option selected=""> @item.ACode - @item.AName </option>
+                                <option value="@item.Id"> @item.ACode - @item.AName </option>
                             }
                         </select>
                     </label>
@@ -135,11 +141,11 @@
                 <div class="col-md-3">
                     <h6>Tax Rate</h6>
                     <label class="cstm-select">
-                        <select>
+                        <select id="sales-tax">
                             <option selected="" class="btn btn-primary"> + Add new tax... </option>
                             @foreach (var item in ViewBag.Lookups)
                             {
-                                <option> @item.Value (@item.Quantity%) </option>
+                                <option value="@item.Id"> @item.Value (@item.Quantity%) </option>
                             }
 
                         </select>
@@ -149,7 +155,7 @@
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
-                        <textarea class="cstm-tarea" placeholder=""></textarea>
+                       @Html.TextAreaFor(m => m.SalesDescription, new { @class = "cstm-tarea", id = "sales-description" })
                     </div>
                 </div>
             </div>
@@ -157,11 +163,120 @@
         <div class="row"></div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" id="SaveItem" class="btn btn-primary">Save changes</button>
         </div>
     </div>
-
+    <input type="hidden" id="UrlHide" value="@Url.Action("CreateItemAjax", "Items", new { area = "Inventories" })">
 </div>
 
+<script>
+    $(".itemSelected").click(function () {
 
+        // alert($(this).attr("data-value"));
+        $("#AccountId").val($(this).attr("data-id"));
+        $("#AccountName").val($(this).attr("data-value"));
+    })
+    $("#SaveItem").click(function () {
+        var item = new Object();
+        item.code = $("#txtitemcode").val();
+        item.name = $("#txtitemname").val();
+        item.assetAccount = $("#AccountId").val();
+        item.purunitprice = $("#purchase-unit-price").val();
+        item.purAccount = $("#purchase-account").val();
+        item.purTax = $("#purchase-tax").val();
+        item.purDes = $("#purchase-description").val();
+        item.salesUnitPrice = $("#sales-unit-price").val();
+        item.salesAccount = $("#sales-account").val();
+        item.salesTax = $("#sales-tax").val();
+        item.salesDescription = $("#sales-description").val();
+        var arr = new Array();
+        arr.push(item)
+        var data = JSON.stringify(arr);
+        console.log(data);
+
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: $("#UrlHide").val(),
+            data: {item:data},
+
+            success: function (data) {
+                $(".dropdown-menu").append(' <li role="presentation"><a role="menuitem" class="itemCliked" tabindex="-1" id="' + data.id + '" href="javascript:void(0)">' + data.code + '-' + data.name + '</a></li>');
+                $(".close").trigger("click");
+                var itemId = data.id;
+                $('.itemCliked').unbind("click").bind("click", function () {
+                    var Id = $(this).attr("id");
+                    var par = $(this).parent('li').parent('ul').parent().parent().parent();
+            
+                  
+                    var presubtotal = $('#sub-total').text();
+                    var prevcalTax = $('#calTax').text();
+                    var prevtotal = $('#total').text();
+            
+                    $.ajax({
+                        url: "@Url.Action("GetjsonItem", "Purchases", new { area = "Inventories" })",
+                        type: "POST",
+                    data: { Id: Id },
+                    success: function (data) {
+                        var json = $.parseJSON(JSON.stringify(data));
+                        var data = json.itemList[0];
+                        console.log(data);
+                        if (json.success == "False") {
+                            console.log("Error");
+                        } else {
+                            var ammount = data.Quantity * data.UnitPrice;
+                            var subTotal = 0.00;
+                            var TotalTax = 0.00;
+                            var allTotal = 0.00;
+                            par.find('.itemtXt').val(data.ItemName);
+                            par.find('.description').val(data.Description);
+                            par.find('.quantity').val(data.Quantity);
+                            par.find('.unitPrice').val(data.UnitPrice);
+                            par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
+                            par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + "%)");
+                            par.find('.ammount').text(ammount );
+                            par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
+                            presubtotal = parseFloat(presubtotal) + ammount;
+                            $('.tr-parent').each(function () {
+                                var eachAmmount = parseFloat($(this).find('.ammount').text()).toFixed(2);
+                                subTotal = parseFloat(subTotal) + parseFloat(eachAmmount);
+                                $('#sub-total').text(subTotal.toFixed(2));
+
+                                var eachAmmounttax = parseFloat($(this).find('.ammounttax').text()).toFixed(2);
+                                TotalTax = parseFloat(TotalTax) + parseFloat(eachAmmounttax);
+                                $('#calTax').text(TotalTax.toFixed(2));
+                                eachAmmount = parseFloat(eachAmmount) + parseFloat(eachAmmount * (eachAmmounttax / 100));
+                                console.log(eachAmmount);
+                                allTotal = parseFloat(allTotal) + parseFloat(eachAmmount);
+                                $('#total').text(allTotal.toFixed(2));
+                                
+
+                            });
+                            // //$('#sub-total').text(parseFloat(presubtotal).toFixed(2));
+                            // //prevcalTax = parseFloat(prevcalTax) + data.PtxtQuantity;
+                            //// $('#calTax').text(parseFloat(prevcalTax).toFixed(2));
+                            // var total;
+                            // if (data.PtxtQuantity >=0) {
+                            //     total = ammount + (ammount * (data.PtxtQuantity / 100)) + parseFloat(prevtotal);
+                            //     }else{
+                            //     total = ammount + parseFloat(prevtotal);
+                            //     }
+                        
+                            // $('#total').text(parseFloat(total).toFixed(2));
+                        }
+                    },
+                    error: function () {
+                        console.log("Error");
+                    }
+                });
+                });
+                var valId = $("#hiddentr").val();
+                $("#" + valId).children().find("#" + itemId).trigger("click");
+
+                
+            }
+        });
+
+    })
+</script>
 

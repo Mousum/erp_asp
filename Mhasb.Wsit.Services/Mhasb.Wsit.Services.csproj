@@ -49,10 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\BankService.cs" />
+    <Compile Include="Accounts\IBankService.cs" />
+    <Compile Include="Accounts\ITransferMoneyService.cs" />
     <Compile Include="Accounts\IVoucherDetailService.cs" />
     <Compile Include="Accounts\IVoucherDocument.cs" />
     <Compile Include="Accounts\IVoucherService.cs" />
     <Compile Include="Accounts\IVoucherType.cs" />
+    <Compile Include="Accounts\TransferMoneyService.cs" />
     <Compile Include="Accounts\VoucherDetailService.cs" />
     <Compile Include="Accounts\VoucherDocumentService.cs" />
     <Compile Include="Accounts\VoucherService.cs" />
