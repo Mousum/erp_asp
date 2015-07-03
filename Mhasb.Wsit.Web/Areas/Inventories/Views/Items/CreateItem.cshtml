@@ -13,13 +13,13 @@
             <div class="col-md-12">
                 <div class="col-md-4">
                     <h6>Item Code</h6>
-                    @Html.TextBoxFor(i=>i.ItemCode,new{@class="cstm-input" ,id="txtitemcode" ,type="text" ,placeholder="Item Code"})
-                    
+                    @Html.TextBoxFor(i => i.ItemCode, new { @class = "cstm-input", id = "txtitemcode", type = "text", placeholder = "Item Code" })
+
                 </div>
                 <div class="col-md-6">
                     <h6>Item Name</h6>
-                    @Html.TextBoxFor(i=>i.ItemCode,new{@class="cstm-input" ,id="txtitemname" ,type="text" ,placeholder="Item Name"})
-                 @*   <input class="cstm-input" id="txtitemname" type="text" placeholder="Item Code">*@
+                    @Html.TextBoxFor(i => i.ItemCode, new { @class = "cstm-input", id = "txtitemname", type = "text", placeholder = "Item Name" })
+                    @*   <input class="cstm-input" id="txtitemname" type="text" placeholder="Item Code">*@
                 </div>
             </div>
             <div class="col-md-12 cstm-border-con">
@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="col-md-4 modal-cs">
                     <label>
-                       
+
                         <input type="checkbox" id="check-item"> I track this item
                     </label>
                 </div>
@@ -73,12 +73,12 @@
                 <div id="div-purchase-item">
                     <div class="col-md-2" id="inventory-asset-account">
                         <h6>Unit Price</h6>
-                        @Html.TextBoxFor(m=>m.PurchaseUnitPrice,new{@class="cstm-input" ,id="purchase-unit-price", placeholder=""})
-                      @*  <input class="cstm-input" type="text" placeholder="">*@
+                        @Html.TextBoxFor(m => m.PurchaseUnitPrice, new { @class = "cstm-input", id = "purchase-unit-price", placeholder = "" })
+                        @*  <input class="cstm-input" type="text" placeholder="">*@
                     </div>
                     <div class="col-md-3">
                         <h6>Cost of Goods Sold Account</h6>
-                        <label class="cstm-select" >
+                        <label class="cstm-select">
                             <select id="purchase-account">
                                 <option selected="" class="btn btn-primary" id="purcheseaddAccount"> + Add new account... </option>
                                 @foreach (var item in ViewBag.CoaList)
@@ -91,7 +91,7 @@
                     <div class="col-md-3">
                         <h6>Tax Rate</h6>
                         <label class="cstm-select">
-                            <select id="purchase-tax" >
+                            <select id="purchase-tax">
                                 <option selected="" class="btn btn-primary"> + Add new tax... </option>
                                 @foreach (var item in ViewBag.Lookups)
                                 {
@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-md-8">
                     <h6>Purchases Description (for my suppliers)</h6>
-                    @Html.TextAreaFor(m=>m.PurchaseDescription,new{@class="cstm-tarea",id="purchase-description"})
+                    @Html.TextAreaFor(m => m.PurchaseDescription, new { @class = "cstm-tarea", id = "purchase-description" })
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
             <div id="div-sell-item" style="display:none;">
                 <div class="col-md-2">
                     <h6>Unit Price</h6>
-                    @Html.TextBoxFor(m => m.SellUnitPrice, new { @class = "cstm-input", placeholder = "",id="sales-unit-price" })
+                    @Html.TextBoxFor(m => m.SellUnitPrice, new { @class = "cstm-input", placeholder = "", id = "sales-unit-price" })
                     @*<input class="cstm-input" type="text" placeholder="">*@
                 </div>
                 <div class="col-md-3">
@@ -155,7 +155,7 @@
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
-                       @Html.TextAreaFor(m => m.SalesDescription, new { @class = "cstm-tarea", id = "sales-description" })
+                        @Html.TextAreaFor(m => m.SalesDescription, new { @class = "cstm-tarea", id = "sales-description" })
                     </div>
                 </div>
             </div>
@@ -168,8 +168,9 @@
     </div>
     <input type="hidden" id="UrlHide" value="@Url.Action("CreateItemAjax", "Items", new { area = "Inventories" })">
 </div>
-@if (ViewBag.ActionFlag == "EditBill") { 
-<script>
+@if (ViewBag.ActionFlag == "EditBill")
+{
+    <script>
     $(".itemSelected").click(function () {
 
         // alert($(this).attr("data-value"));
@@ -207,12 +208,12 @@
                 $('.itemCliked').unbind("click").bind("click", function () {
                     var Id = $(this).attr("id");
                     var par = $(this).parent('li').parent('ul').parent().parent().parent();
-            
-                  
+
+
                     var presubtotal = $('#sub-total').text();
                     var prevcalTax = $('#calTax').text();
                     var prevtotal = $('#total').text();
-            
+
                     $.ajax({
                         url: "@Url.Action("GetjsonItem", "Purchases", new { area = "Inventories" })",
                         type: "POST",
@@ -249,7 +250,7 @@
                                 console.log(eachAmmount);
                                 allTotal = parseFloat(allTotal) + parseFloat(eachAmmount);
                                 $('#total').text(allTotal.toFixed(2));
-                                
+
 
                             });
                             // //$('#sub-total').text(parseFloat(presubtotal).toFixed(2));
@@ -261,7 +262,7 @@
                             //     }else{
                             //     total = ammount + parseFloat(prevtotal);
                             //     }
-                        
+
                             // $('#total').text(parseFloat(total).toFixed(2));
                         }
                     },
@@ -273,10 +274,51 @@
                 var valId = $("#hiddentr").val();
                 $("#" + valId).children().find("#" + itemId).trigger("click");
 
-                
+
             }
         });
 
     })
-</script>
+    </script>
+}
+else if (ViewBag.ActionFlag == "InventoryIndex")
+{
+    <script>
+        $(".itemSelected").click(function () {
+
+            // alert($(this).attr("data-value"));
+            $("#AccountId").val($(this).attr("data-id"));
+            $("#AccountName").val($(this).attr("data-value"));
+        })
+        $("#SaveItem").click(function () {
+            var item = new Object();
+            item.code = $("#txtitemcode").val();
+            item.name = $("#txtitemname").val();
+            item.assetAccount = $("#AccountId").val();
+            item.purunitprice = $("#purchase-unit-price").val();
+            item.purAccount = $("#purchase-account").val();
+            item.purTax = $("#purchase-tax").val();
+            item.purDes = $("#purchase-description").val();
+            item.salesUnitPrice = $("#sales-unit-price").val();
+            item.salesAccount = $("#sales-account").val();
+            item.salesTax = $("#sales-tax").val();
+            item.salesDescription = $("#sales-description").val();
+            var arr = new Array();
+            arr.push(item)
+            var data = JSON.stringify(arr);
+            console.log(data);
+
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: $("#UrlHide").val(),
+                data: { item: data },
+
+                success: function (data) {
+                    location.reload();
+                }
+            });
+
+        })
+    </script>
 }
