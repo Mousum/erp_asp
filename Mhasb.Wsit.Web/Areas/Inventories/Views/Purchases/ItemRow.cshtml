@@ -222,4 +222,16 @@
         $(this).parent().parent().siblings(".taxid").val($(this).attr("data-id"))
         $(this).parent().parent().siblings('.taxPer').val($(this).attr("data-value"))
     })
+    function checkEmpty(DomClass) {
+        var flag = true;
+        $(DomClass).each(function () {
+            
+            if ($(this).val() == "" || $(this).val() == 0) {
+
+                flag = false;
+            }
+
+        })
+        return flag;
+    }
 </script>
