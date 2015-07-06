@@ -34,5 +34,15 @@ namespace Mhasb.Wsit.Web.Utilities
             return level;
         }
 
+        public bool CheckingNull(object obj, out string msg)
+        {
+            msg = "Success";
+            if(obj==null){
+                msg = "Object Not Found";
+                return false;
+            }
+                
+            return true;
+        }
     }
 }
