@@ -11,6 +11,7 @@ using Mhasb.Domain.Users;
 using Mhasb.Domain.Commons;
 using Mhasb.Domain.OrgSettings;
 using Mhasb.Domain.Contacts;
+using Mhasb.Domain.Inventories;
 
 namespace Mhasb.Domain.Organizations
 {
@@ -88,6 +89,10 @@ namespace Mhasb.Domain.Organizations
         public virtual ICollection<FinancialSetting> FinalcialSettings { get; set; }
         public virtual ICollection<TaxSetting> TaxSettings { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+
+        public virtual ICollection<PurchaseTransaction> PurchaseTransections { get; set; }
+
+        public virtual ICollection<Item> items { get; set; }
         
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]

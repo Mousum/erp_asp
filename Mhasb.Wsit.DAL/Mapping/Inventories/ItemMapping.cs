@@ -25,6 +25,7 @@ namespace Mhasb.DAL.Mapping.Inventories
             this.Property(i => i.SalesAccountId).HasColumnName("sales_accountid");
             this.Property(i => i.STaxRateId).HasColumnName("sales_tax_rateid");
             this.Property(i => i.SalesDescription).HasColumnName("Sales_description").HasMaxLength(500);
+            this.Property(i => i.CompanyId).HasColumnName("company_id");
 
 
             this.ToTable("inv.items");
@@ -44,8 +45,14 @@ namespace Mhasb.DAL.Mapping.Inventories
                .HasForeignKey(i => i.SalesAccountId);
             this.HasOptional(s => s.STaxRate)
                 .WithMany()
-                .HasForeignKey(s => s.STaxRateId); 
+                .HasForeignKey(s => s.STaxRateId);
 
+            this.HasRequired(i => i.Companies).
+               WithMany(c => c.items).
+               HasForeignKey(t => t.CompanyId)
+               .WillCascadeOnDelete(false);
         }
+
     }
 }
+

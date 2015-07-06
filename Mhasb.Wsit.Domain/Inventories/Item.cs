@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Mhasb.Domain.Accounts;
 using Mhasb.Domain.Commons;
 using Mhasb.Wsit.Domain;
+using Mhasb.Domain.Organizations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mhasb.Domain.Inventories
 {
@@ -27,6 +29,8 @@ namespace Mhasb.Domain.Inventories
        public int? STaxRateId { get; set; }
        public string SalesDescription { get; set; }
 
+       public int CompanyId { get; set; }
+
 
        public virtual ChartOfAccount AssetAccount { get; set; }
        public virtual ChartOfAccount PurchasesAccount { get; set; }
@@ -34,8 +38,11 @@ namespace Mhasb.Domain.Inventories
        public virtual Lookup PTaxRate { get; set; }
        public virtual Lookup STaxRate { get; set; }
 
+       public virtual Company Companies { get; set; }
+
        public virtual ICollection<PurchaseTransactionDetail> PurchaseTransactionDetails { get; set; }
        public ObjectState State { get; set; }
+       [Key]
        public long Id { get; set; }
     }
 }

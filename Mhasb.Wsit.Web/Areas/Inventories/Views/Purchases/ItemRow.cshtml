@@ -1,8 +1,10 @@
-﻿<tr class="cstm-table-clr tr-parent" >
+﻿@model Mhasb.Domain.Inventories.PurchaseTransactionDetail
+<tr class="cstm-table-clr tr-parent" >
     
     <td>
         <div class="dropdown form-border">
             <input class="dropdown-toggle itemtXt" type="text"  data-toggle="dropdown" aria-expanded="true">
+            @Html.HiddenFor(m => m.ItemId, new { @class="itemid"})
             <ul class="dropdown-menu items" role="menu" aria-labelledby="dropdownMenu1" id="ul-@ViewBag.rowId">
                 <li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" class="btn btn-primary create-new-item" data-toggle="modal" data-target="#itemsModal">+ New Item</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="noneDel">None</a></li>
@@ -13,12 +15,13 @@
             </ul>
         </div>
     </td>
-    <td><textarea class="cstm-tarea-click description" placeholder="" ></textarea></td>
-    <td><textarea class="cstm-tarea-click1 quantity" placeholder="" ></textarea></td>
-    <td><textarea class="cstm-tarea-click1 unitPrice" placeholder=""></textarea></td>
+    <td><textarea class="cstm-tarea-click description" name="description" placeholder=""></textarea></td>
+    <td><textarea class="cstm-tarea-click1 quantity" name="quantity" placeholder=""></textarea></td>
+    <td><textarea class="cstm-tarea-click1 unitPrice" name="unitPrice" placeholder=""></textarea></td>
     <td>
         <div class="dropdown form-border">
             <input class="dropdown-toggle coAccount" type="text"  data-toggle="dropdown" aria-expanded="true">
+            @Html.HiddenFor(m => m.CoaId, new { @class = "coaid" })
             <ul class="dropdown-menu account" id="ul-account-@ViewBag.rowId" role="menu" aria-labelledby="dropdownMenu1">
 
                 <li role="presentation"><a href="#accountModal" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">+ Add new account...</a></li>
@@ -33,11 +36,12 @@
     <td>
         <div class="dropdown form-border">
             <input class="dropdown-toggle taxPer" type="text"  data-toggle="dropdown" aria-expanded="true">
+            @Html.HiddenFor(m => m.TaxId, new { @class = "taxid" })
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" class="btn btn-primary" data-target="#taxModal">+ Add new tax rate...</a></li>
                 @foreach (var item in ViewBag.Lookups)
                 {
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
+                    <li role="presentation"><a role="menuitem" class="taxSelected" data-value="@item.Value (@item.Quantity%)" data-id="@item.Id" tabindex="-1" href="#">@item.Value (@item.Quantity%) </a></li>
                 }
             </ul>
         </div>
@@ -122,13 +126,16 @@
                         var TotalTax = 0.00;
                         var allTotal = 0.00;
                         par.find('.itemtXt').val(data.ItemName);
+                        par.find(".itemid").val(Id);
                         par.find('.description').val(data.Description);
                         par.find('.quantity').val(data.Quantity);
                         par.find('.unitPrice').val(data.UnitPrice);
                         par.find('.coAccount').val(data.AccountCode + " - " + data.AccountName);
                         par.find('.taxPer').val(data.PtxtValue + "(" + data.PtxtQuantity + "%)");
-                        par.find('.ammount').text(ammount );
+                        par.find('.taxid').val(data.PtxtId);
+                        par.find('.ammount').text(ammount);
                         par.find('.ammounttax').text(parseFloat(data.PtxtQuantity).toFixed(2));
+                        par.find('.coaid').val(data.AccountId)
                         presubtotal = parseFloat(presubtotal) + ammount;
                         $('.tr-parent').each(function () {
                             var eachAmmount = parseFloat($(this).find('.ammount').text()).toFixed(2);
@@ -155,7 +162,8 @@
                        //     total = ammount + parseFloat(prevtotal);
                        //     }
                         
-                       // $('#total').text(parseFloat(total).toFixed(2));
+                        // $('#total').text(parseFloat(total).toFixed(2));
+                      
                     }
                 },
                 error: function () {
@@ -207,6 +215,11 @@
     });
 
     $(".itemSelected").unbind("click").bind("click", function () {
-        $('.coAccount').val($(this).attr("data-value"))
+        $(this).parent().parent().siblings(".coaid").val($(this).attr("data-id"))
+        $(this).parent().parent().siblings('.coAccount').val($(this).attr("data-value"))
+    })
+    $(".taxSelected").unbind("click").bind("click", function () {
+        $(this).parent().parent().siblings(".taxid").val($(this).attr("data-id"))
+        $(this).parent().parent().siblings('.taxPer').val($(this).attr("data-value"))
     })
 </script>
