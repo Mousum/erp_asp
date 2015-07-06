@@ -25,6 +25,8 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         private readonly IChartOfAccountService _coaService = new ChartOfAccountService();
         private readonly ILookupService _luSer = new LookupService();
         private readonly IEmployeeService empSer = new EmployeeService();
+        private readonly IPurchaseTransactionDetailService ptdSer = new PurchaseTransactionDetailService();
+        private readonly IPurchaseTransactionService ptSer = new PurchaseTransactionService();
 
         //
         // GET: /Inventories/Purchases/

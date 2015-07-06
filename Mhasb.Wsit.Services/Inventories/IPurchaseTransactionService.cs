@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mhasb.Services.Inventories
 {
-    interface IPurchaseTransactionService
+   public interface IPurchaseTransactionService
     {
         bool AddPurchaseTransaction(PurchaseTransaction purchasetransaction);
         bool UpdatePurchaseTransaction(PurchaseTransaction purchasetransaction);
