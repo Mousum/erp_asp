@@ -11,6 +11,9 @@ using Mhasb.Domain.Inventories;
 using System;
 using Mhasb.Wsit.CustomModel.Inventories;
 using Mhasb.Services.Organizations;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Web;
 
 namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 {
@@ -27,7 +30,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         private readonly IEmployeeService empSer = new EmployeeService();
         private readonly IPurchaseTransactionDetailService ptdSer = new PurchaseTransactionDetailService();
         private readonly IPurchaseTransactionService ptSer = new PurchaseTransactionService();
-
+        private readonly IPurchaseTransactionDocumentService ptDocSer = new PurchaseTransactionDocumentService();
         //
         // GET: /Inventories/Purchases/
         public ActionResult Index()
@@ -53,7 +56,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 
             var coalist = _coaService.GetAllChartOfAccountByComIdCostCentre(companyId);
             ViewBag.CoaList = coalist;
-
+            ViewBag.User = user.FirstName + " " + user.LastName;
             var currencyList = _currencycService.GetAllCurrency();
             ViewBag.CurrencyList = new SelectList(currencyList, "Id", "Name");
 
@@ -172,6 +175,7 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             }
 
         }
+        [HttpPost]
         public ActionResult PostPurchase(InventoriesEditBill purchase)
         {
             int postcount = Request.Form.GetValues("ItemId").Count();
@@ -181,7 +185,8 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                 var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
                 var companyId = 0;
                 if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-                purchase.PurchaseTransactions.EmployeeId = empSer.GetEmployeeByUserId(user.Id).Id;
+                var empObj = empSer.GetEmployeeByUserId(user.Id);
+                purchase.PurchaseTransactions.EmployeeId = empObj.Id;
                 purchase.PurchaseTransactions.CompanyId = companyId;
 
 
@@ -212,6 +217,46 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
                     }
                     if (postcount == counter)
                     {
+                        string data = Request.Form["note_data"];
+
+                        if (Request.Form["note_data"] != "")
+                        {
+                            JArray noteData = JArray.Parse(data);
+
+                            
+                            for (int i = 0; i < noteData.Count(); i++)
+                            {
+                                var PtDoc = new PurchaseTransactionDocument();
+
+                                PtDoc.CreatedDate = Convert.ToDateTime(noteData[i]["date"].ToString());
+                                PtDoc.Description = noteData[i]["des"].ToString();
+                                PtDoc.DocumentType = noteData[i]["type"].ToString();
+                                PtDoc.EmployeeId = empObj.Id;
+                                PtDoc.PurchaseTransactionId = purchase.PurchaseTransactions.Id;
+                                ptDocSer.AddPurchaseTransDocument(PtDoc);
+                            }
+                        }
+                        string documentName;
+                        string documentLocation;
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            if ("documentLocation[]" == Request.Files.GetKey(i))
+                            {
+                                documentName = "Document_" + purchase.PurchaseTransactions.Id + "_" + i + Path.GetRandomFileName() + Path.GetExtension(Request.Files[i].FileName);
+                                documentLocation = Server.MapPath("~/Uploads/" + empObj.Companies.TradingName.Replace(" ", "_") + "/PurcahsesTransactionDocuments/");
+                                if (fileUpload(Request.Files[i], documentName, documentLocation))
+                                {
+                                    var PtDoc = new PurchaseTransactionDocument();
+                                    PtDoc.CreatedDate = DateTime.Now;
+                                    PtDoc.DocumentType = "File";
+                                    PtDoc.EmployeeId = empObj.Id;
+                                    PtDoc.PurchaseTransactionId = purchase.PurchaseTransactions.Id;
+                                    PtDoc.FileLocation = "Uploads/" + empObj.Companies.TradingName.Replace(" ", "_") + "/PurcahsesTransactionDocuments/" + documentName;
+                                    ptDocSer.AddPurchaseTransDocument(PtDoc);
+                                }
+                            }
+
+                        }
                         TempData["success"] = "Bill Created Successfully";
 
                     }
@@ -235,5 +280,48 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
 
             return RedirectToAction("EditBill", "Purchases");
         }
+        public bool fileUpload(HttpPostedFileBase file, string fileName, string filePath)
+        {
+            try
+            {
+
+                string uploadPath = filePath;
+                bool isValid = false;
+                string[] fileExtensions = { ".bmp", ".jpg", ".png", ".jpeg", ".pdf", ".doc", ".txt", ".docx", ".xlsx" };
+                for (int i = 0; i < fileExtensions.Length; i++)
+                {
+
+                    if (file.FileName.Contains(fileExtensions[i]))
+                    {
+
+                        isValid = true;
+                        break;
+                    }
+                }
+
+                if (isValid)
+                {
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+                    file.SaveAs(uploadPath + fileName);
+
+
+                    return true;
+                    //System.IO.File.Move(uploadPath + file.FileName, uploadPath + fileName + ".png");
+                    //return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 }
