@@ -174,53 +174,64 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         }
         public ActionResult PostPurchase(InventoriesEditBill purchase)
         {
-            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            var companyId = 0;
-            if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-            purchase.PurchaseTransactions.EmployeeId = empSer.GetEmployeeByUserId(user.Id).Id;
-            purchase.PurchaseTransactions.CompanyId = companyId;
-
-            if (ptSer.AddPurchaseTransaction(purchase.PurchaseTransactions))
+            int postcount = Request.Form.GetValues("ItemId").Count();
+            if (postcount > 0)
             {
-                int postcount = Request.Form.GetValues("ItemId").Count();
-                int counter = 0;
-                var items = Request.Form.GetValues("ItemId");
-                var descriptions = Request.Form.GetValues("description");
-                var quantities = Request.Form.GetValues("quantity");
-                var unitPrices = Request.Form.GetValues("unitPrice");
-                var CoaIds = Request.Form.GetValues("CoaId");
-                var TaxIds = Request.Form.GetValues("TaxId");
+                var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+                var companyId = 0;
+                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+                purchase.PurchaseTransactions.EmployeeId = empSer.GetEmployeeByUserId(user.Id).Id;
+                purchase.PurchaseTransactions.CompanyId = companyId;
 
-                for (var i = 0; i < postcount; i++)
-                {
-                    PurchaseTransactionDetail ptd = new PurchaseTransactionDetail();
 
-                    ptd.ItemId = int.Parse(items[i]);
-                    ptd.Quantity = double.Parse(quantities[i]);
-                    ptd.TaxId = int.Parse(TaxIds[i]);
-                    ptd.UnitPrice = double.Parse(unitPrices[i]);
-                    ptd.Description = descriptions[i];
-                    ptd.CoaId = int.Parse(CoaIds[i]);
-                    ptd.PurchaseTransactionId = purchase.PurchaseTransactions.Id;
-                    ptdSer.AddPurchaseTransDetailService(ptd);
-                    counter++;
-                }
-                if (postcount == counter)
+                if (ptSer.AddPurchaseTransaction(purchase.PurchaseTransactions))
                 {
-                    TempData["success"] = "Bill Created Successfully";
+
+                    int counter = 0;
+                    var items = Request.Form.GetValues("ItemId");
+                    var descriptions = Request.Form.GetValues("description");
+                    var quantities = Request.Form.GetValues("quantity");
+                    var unitPrices = Request.Form.GetValues("unitPrice");
+                    var CoaIds = Request.Form.GetValues("CoaId");
+                    var TaxIds = Request.Form.GetValues("TaxId");
+
+                    for (var i = 0; i < postcount; i++)
+                    {
+                        PurchaseTransactionDetail ptd = new PurchaseTransactionDetail();
+
+                        ptd.ItemId = int.Parse(items[i]);
+                        ptd.Quantity = double.Parse(quantities[i]);
+                        ptd.TaxId = int.Parse(TaxIds[i]);
+                        ptd.UnitPrice = double.Parse(unitPrices[i]);
+                        ptd.Description = descriptions[i];
+                        ptd.CoaId = int.Parse(CoaIds[i]);
+                        ptd.PurchaseTransactionId = purchase.PurchaseTransactions.Id;
+                        ptdSer.AddPurchaseTransDetailService(ptd);
+                        counter++;
+                    }
+                    if (postcount == counter)
+                    {
+                        TempData["success"] = "Bill Created Successfully";
+
+                    }
+                    else
+                    {
+                        TempData["success"] = "One or more items could not be added";
+                    }
 
                 }
                 else
                 {
-                    TempData["success"] = "One or more items could not be added";
+                    TempData["success"] = "Error in bill genaration";
                 }
 
             }
-            else
+            else 
             {
-                TempData["success"] = "Error in bill genaration";
+                TempData["success"] = "No Item was selected";
             }
+         
 
             return RedirectToAction("EditBill", "Purchases");
         }
