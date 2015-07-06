@@ -21,49 +21,70 @@ namespace Mhasb.Wsit.Web.Controllers
         /// Declare Global User Variable
         /// </summary>
         /// <param name="filterContext"></param>
+        /// 
 
+        IUserInRoleService userInRoleService = new UserInRoleService();
+        IUserService userService = new UserService();
+        ISettingsService setService = new SettingsService();
+        IRoleVsActionService rvaService = new RoleVsActionService();
+        ICompanyService cService = new CompanyService();
+        ICompanyViewLog companyViewLog = new CompanyViewLogService();
+
+
+        public long UserId;
+        public int CompanyId;
+       
+        public CommonBaseController()
+        {
+            UserId = 0;
+            CompanyId = 0;
+            init();
+        }
+        public void init()
+        {
+            if (HttpContext != null)
+            {
+                var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+                if (user != null)
+                    UserId = user.Id;
+                var logObj = companyViewLog.GetLastViewCompanyByUserId(UserId);
+
+                if (logObj != null)
+                {
+                    CompanyId = (int)logObj.CompanyId;
+                }
+            }
+        }
 
         [NonAction]
         public bool checkCompanyFlow(out string absUrl)
         {
-            IUserInRoleService userInRoleService = new UserInRoleService();
-            IUserService userService = new UserService();
-            ISettingsService setService = new SettingsService();
-            IRoleVsActionService rvaService = new RoleVsActionService();
-            ICompanyService cService = new CompanyService();
-            ICompanyViewLog companyViewLog = new CompanyViewLogService();
-
+            init();
             absUrl = "";
-            var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+            
             // if user null, then redirect to login page and  clear session/cookie data.
-            if (user == null)
+            if (UserId == 0)
             {
                 absUrl = Url.Action("Logout", "Users", new { area = "UserManagement" });
                 return false;
             }
-
-            var logObj = companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
-                companyId = (int)logObj.CompanyId;
-            else
-            {
-                absUrl = Url.Action("MyMhasb", "Users", new { area = "UserManagement" });
-                return false;
-            }
-            if (companyId == 0)
+            if (CompanyId == 0)
             {
                 absUrl =Url.Action("MyMhasb", "Users", new { area = "UserManagement" });
                 return false;
             }
 
-            var myCompany = cService.GetSingleCompany(companyId);
+            var myCompany = cService.GetSingleCompany(CompanyId);
             //if(myCompany==null)
             //{
             //    filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
             //    return;
             //}
-            if (myCompany.CompleteFlag != 5 && myCompany.Users.Id == user.Id)
+
+
+
+
+            if (myCompany.CompleteFlag != 5 && myCompany.Users.Id == UserId)
             {
                 if (myCompany.CompleteFlag == 0)
                     absUrl =Url.Action("Update", "Company", new { area = "OrganizationManagement" });
@@ -77,7 +98,7 @@ namespace Mhasb.Wsit.Web.Controllers
                     absUrl =Url.Action("Finish", "Users", new { area = "UserManagement" });
                 return false;
             }
-            else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != user.Id)
+            else if (myCompany.CompleteFlag != 5 && myCompany.Users.Id != UserId)
             {
                 //should be change 
                 absUrl ="~/Home/AccessDenied";

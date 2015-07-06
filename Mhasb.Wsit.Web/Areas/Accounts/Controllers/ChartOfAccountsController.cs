@@ -34,22 +34,14 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult PartialAddAccount(string ActionFlag)
         {
-            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(UserId);
 
-            // var AccSet = setService.GetAllByUserId(user.Id);
-            int companyId = 0;
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            if (logObj != null)
-            {
-                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-            }
-            var atypes = _cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(companyId);
+            var atypes = _cSer.GetAllChartOfAccountByCompanyIdForSecondLevel(CompanyId);
 
             if (atypes.Count == 0)
             {
                 _cSer.AddBaseAccountTypes();
-                atypes = _cSer.GetAllChartOfAccountByCompanyId(companyId);
+                atypes = _cSer.GetAllChartOfAccountByCompanyId(CompanyId);
             }
             var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
             
@@ -105,16 +97,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
 
         public ActionResult Create(int account=0)
         {
-            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(UserId);
             if (logObj.Companies.CompleteFlag <= 5 && logObj.Companies.CompleteFlag >= 3)
             {
                 ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
-                // var AccSet = setService.GetAllByUserId(user.Id);
-                
-                int companyId = 0;
-                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-                var atypes = _cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(companyId, account);
+                var atypes = _cSer.CodeWiseGetAllChartOfAccountByCompanyIdForLastLevel(CompanyId, account);
 
                 return View("Create_new", atypes);
             }
@@ -129,26 +116,16 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         [HttpPost]
         public ActionResult Create(ChartOfAccount chartOfAccount)
         {
-            var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            var accSet = _setService.GetAllByUserId(user.Id);
-
-
-            var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-
-            if (logObj != null)
-            {
-                if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-            }
+            var logObj = _companyViewLog.GetLastViewCompanyByUserId(UserId);
 
             int flag = 4;
-            chartOfAccount.CompanyId = companyId;
+            chartOfAccount.CompanyId = CompanyId;
             if (_cSer.AddChartOfAccount(chartOfAccount))
             {
                 // ReSharper disable once PossibleNullReferenceException
                 if (logObj.Companies.CompleteFlag == 3)
                 {
-                    if (_iCompany.UpdateCompleteFlag(companyId, flag))
+                    if (_iCompany.UpdateCompleteFlag(CompanyId, flag))
                     {
                         return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
                     }
