@@ -32,7 +32,7 @@ namespace Mhasb.Wsit.Web.Controllers
             base.OnActionExecuting(filterContext);
 
             IActionListService actionService = new ActionListService();
-
+            init();
 
             // To get area,controller and action name from http request
             var routeData = filterContext.RequestContext.RouteData;
@@ -59,37 +59,22 @@ namespace Mhasb.Wsit.Web.Controllers
             actionList = actionService.GetActionListByActionList(actionList);
 
             IUserInRoleService userInRoleService = new UserInRoleService();
-            IUserService userService = new UserService();
-            ISettingsService setService = new SettingsService();
             IRoleVsActionService rvaService = new RoleVsActionService();
             ICompanyService cService = new CompanyService();
-            ICompanyViewLog companyViewLog = new CompanyViewLogService();
 
 
-            var user = userService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
-            // if user null, then redirect to login page and  clear session/cookie data.
-            if (user == null)
+            if (UserId ==0)
             {
                 filterContext.Result = new RedirectResult(Url.Action("Logout", "Users", new { area = "UserManagement" }));
                 return;
             }
-
-            var logObj = companyViewLog.GetLastViewCompanyByUserId(user.Id);
-            int companyId = 0;
-            if (logObj != null)
-                companyId = (int)logObj.CompanyId;
-            else
-            {
-                filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
-                return;
-            }
-            if (companyId == 0)
+            if (CompanyId == 0)
             {
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
                 return;
             }
             
-            var myCompany = cService.GetSingleCompany(companyId);
+            var myCompany = cService.GetSingleCompany(CompanyId);
             if (myCompany == null)
             {
                 filterContext.Result = new RedirectResult(Url.Action("MyMhasb", "Users", new { area = "UserManagement" }));
@@ -107,11 +92,11 @@ namespace Mhasb.Wsit.Web.Controllers
                 return;
             }
 
-            var activatedCompany = cService.GetSingleCompany(companyId);
-            if (activatedCompany.Users.Id == user.Id)
+            var activatedCompany = cService.GetSingleCompany(CompanyId);
+            if (activatedCompany.Users.Id == UserId)
                 return;
 
-            var roleList = userInRoleService.GetRoleListByUserAndCompany(user.Id, companyId);
+            var roleList = userInRoleService.GetRoleListByUserAndCompany(UserId, CompanyId);
             foreach (var role in roleList)
             {
                 var accessableActionList = rvaService.GetActionByRoleId(role.RoleId);
