@@ -2,7 +2,7 @@
 
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pop-up-2">Add New Task</button>
+        <button type="button" class="btn btn-primary" id="addTask" data-toggle="modal" data-target="#pop-up-2">Add New Task</button>
         @Html.ActionLink("See All Project", "Index", "Tasks", new { area = "TaskManagement" }, new { @style= "float:right;text-decoration:none"})
         @if (!Model.Any())
         {
@@ -125,6 +125,15 @@
         }
 
     });
+
+    $("#addTask").click(function () {
+        $("#empId").val("");
+        $("#tTitle").val("");
+        $("#tstart").val("");
+        $("#tfinish").val("");
+
+    });
+
 </script>
 <!-- Pop Up Update Task-->
 <div class="modal fade" id="pop-up-4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
