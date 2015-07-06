@@ -1,6 +1,6 @@
 ﻿@model Mhasb.Wsit.CustomModel.Inventories.InventoriesEditBill
 
-@using (Html.BeginForm("PostPurchase", "Purchases", FormMethod.Post))
+@using (Html.BeginForm("PostPurchase", "Purchases", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -200,6 +200,15 @@
                 <div class="col-md-12 cstm-aa">
                     <a href="javascript:void(0)" class="btn btn-default add-note" data-role="button">Add note</a>
                 </div>
+                <div class="col-md-6 form-inline" id="more">
+                    <input name="documentLocation[]" type="file" class="docFile" multiple id="doc_div" />
+                </div>
+                <div class="col-md-6">
+                    <a class="btn btn-primary  cstm-ad-mr" data-role="button" href="javascript:void(0)" id="addDoc" data-role="button">Add More File</a>
+
+                    <div id="fileError" style="display:none;color:#E74C3C;"></div>
+                </div>
+
                 <br>
                 <div class="hidden-note" style="display:none;">
                     <div class="row cstm-frm-row">
@@ -376,7 +385,7 @@
         });
 
         $(".submit").click(function () {
-         
+
             if ($("#cutomer-value").val() == "") {
                 $(".msg").text("Contact Name is required");
                 $(".error-msg").show("slow");
@@ -429,7 +438,23 @@
             }
             return true;
         })
+        $("#addDoc").click(function () {
+            if ($(".docFile").last().val() !== "") {
+                $("#more").append('<input name="documentLocation[]" type="file" class="docFile" multiple id="doc_div" />')
+                $(".docFile").change(function () {
+                    var user = $("#usename").val();
+                    var currentdate = new Date();
+                    var htmlStr = "<tr><td>File</td><td>" + currentdate.toLocaleString() + "</td><td>" + user + "</td><td>File Added</td></tr>";
+                    $("#tbd").append(htmlStr);
+                    $(".hidden-note").hide("slow");
+                })
+            }
+            else {
+                $("#fileError").text("Select File For Previous field First").show("slow");
+                setTimeout(function () { $("#fileError").hide("slow") }, 5000);
+            }
 
+        })
         $("#cutomer").autocomplete({
             source: baseUrl + "Inventories/Purchases/GetServiceNames",
             minLength: 1,

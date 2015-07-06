@@ -17,6 +17,7 @@ namespace Mhasb.Services.Inventories
             try { 
              purtransdoc.State=ObjectState.Added;
              _rep.AddOperation(purtransdoc);
+             purtransdoc.State = ObjectState.Unchanged;
              return true;
             }catch(Exception ex){
                 var msg = ex.Message;
