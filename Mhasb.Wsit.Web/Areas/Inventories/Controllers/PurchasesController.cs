@@ -25,6 +25,8 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
         private readonly IChartOfAccountService _coaService = new ChartOfAccountService();
         private readonly ILookupService _luSer = new LookupService();
         private readonly IEmployeeService empSer = new EmployeeService();
+        private readonly IPurchaseTransactionDetailService ptdSer = new PurchaseTransactionDetailService();
+        private readonly IPurchaseTransactionService ptSer = new PurchaseTransactionService();
 
         //
         // GET: /Inventories/Purchases/
@@ -176,30 +178,51 @@ namespace Mhasb.Wsit.Web.Areas.Inventories.Controllers
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
             var companyId = 0;
             if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
-
-            var items = Request["ItemId"];
-            var descriptions = Request["description"];
-            var quantities = Request["quantity"];
-            var unitPrices = Request["unitPrice"];
-            var CoaIds = Request["CoaId"];
-            var TaxIds = Request["TaxId"];
-
-            for (var i = 0; i < items.Count(); i++)
-            {
-                PurchaseTransactionDetail ptd = new PurchaseTransactionDetail();
-
-                ptd.ItemId =(int)items[i];
-                ptd.Quantity = quantities[i];
-                ptd.TaxId = (int)TaxIds[i];
-                ptd.UnitPrice =unitPrices[i];
-               // ptd.Description = (string)descriptions[i];
-                ptd.CoaId = (int)CoaIds[i];
-
-            }
-
             purchase.PurchaseTransactions.EmployeeId = empSer.GetEmployeeByUserId(user.Id).Id;
             purchase.PurchaseTransactions.CompanyId = companyId;
-            return Content("Hello");
+
+            if (ptSer.AddPurchaseTransaction(purchase.PurchaseTransactions))
+            {
+                int postcount = Request.Form.GetValues("ItemId").Count();
+                int counter = 0;
+                var items = Request.Form.GetValues("ItemId");
+                var descriptions = Request.Form.GetValues("description");
+                var quantities = Request.Form.GetValues("quantity");
+                var unitPrices = Request.Form.GetValues("unitPrice");
+                var CoaIds = Request.Form.GetValues("CoaId");
+                var TaxIds = Request.Form.GetValues("TaxId");
+
+                for (var i = 0; i < postcount; i++)
+                {
+                    PurchaseTransactionDetail ptd = new PurchaseTransactionDetail();
+
+                    ptd.ItemId = int.Parse(items[i]);
+                    ptd.Quantity = double.Parse(quantities[i]);
+                    ptd.TaxId = int.Parse(TaxIds[i]);
+                    ptd.UnitPrice = double.Parse(unitPrices[i]);
+                    ptd.Description = descriptions[i];
+                    ptd.CoaId = int.Parse(CoaIds[i]);
+                    ptd.PurchaseTransactionId = purchase.PurchaseTransactions.Id;
+                    ptdSer.AddPurchaseTransDetailService(ptd);
+                    counter++;
+                }
+                if (postcount == counter)
+                {
+                    TempData["success"] = "Bill Created Successfully";
+
+                }
+                else
+                {
+                    TempData["success"] = "One or more items could not be added";
+                }
+
+            }
+            else
+            {
+                TempData["success"] = "Error in bill genaration";
+            }
+
+            return RedirectToAction("EditBill", "Purchases");
         }
     }
 }

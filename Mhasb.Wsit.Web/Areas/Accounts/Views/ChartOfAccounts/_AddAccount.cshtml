@@ -3,7 +3,7 @@
 
 
 <!-- Large modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add New Account</button>
+
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -14,6 +14,7 @@
                 <h4 class="modal-title sign-up-title" id="myModalLabel">Add New Account</h4>
             </div>
 
+            @*@using (Html.BeginForm("","",new {area="", id="coaForm"}))*@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -121,7 +122,7 @@
                         <div class="col-md-12">
                             <div class="btn-group" role="group" aria-label="...">
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="button" id="SaveItem" class="btn btn-success">Save</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
@@ -134,16 +135,9 @@
                     <img src="~/img/chartofaccount.png" />
                 </div>
             }
-
-
-
         </div>
     </div>
 </div>
-
-
-
-
 <script>
     $("#Aid").change(function () {
         var baseUrl = '@Url.Content("~/")';
@@ -164,3 +158,30 @@
         });
     })
 </script>
+
+@if (ViewBag.ActionFlag == "ChartOfAccountCreate")
+{
+    <script>
+        $("#SaveItem").click(function () {
+            console.log("save button click event catch");
+            var item = new Object();
+
+            var arr = new Array();
+            arr.push(item)
+            var data = JSON.stringify($("#coaForm").serialize());
+            console.log(data);
+
+            //console.log(data);
+            //$.ajax({
+            //    type: "POST",
+            //    url: $("#UrlHide").val(),
+            //    data: { item: data },
+
+            //    success: function (data) {
+            //        location.reload();
+            //    }
+            //});
+
+        })
+    </script>
+}

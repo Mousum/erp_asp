@@ -32,13 +32,11 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
         //    return View();
         //}
 
-        public ActionResult PartialAddAccount()
+        public ActionResult PartialAddAccount(string ActionFlag)
         {
             var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
             var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
 
-            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
-            
             // var AccSet = setService.GetAllByUserId(user.Id);
             int companyId = 0;
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -54,11 +52,56 @@ namespace Mhasb.Wsit.Web.Areas.Accounts.Controllers
                 atypes = _cSer.GetAllChartOfAccountByCompanyId(companyId);
             }
             var lookups = _luSer.GetLookupByType("Tax").Select(u => new { Id = u.Id, Value = u.Value + "(" + u.Quantity + "%)" });
+            
+            //ViewBags
             ViewBag.Lookups = new SelectList(lookups, "Id", "Value");
-           
+            ViewBag.CompanyCompleteFlag = logObj.Companies.CompleteFlag;
+            ViewBag.ActionFlag = ActionFlag;
             ViewBag.ATypes = atypes;
+            
             return View("_AddAccount");
         }
+
+        //[HttpPost]
+        //public JsonResult PartialAddAccount(ChartOfAccount chartOfAccount) 
+        //{
+        //    var user = _uService.GetSingleUserByEmail(HttpContext.User.Identity.Name);
+        //    var accSet = _setService.GetAllByUserId(user.Id);
+
+
+        //    var logObj = _companyViewLog.GetLastViewCompanyByUserId(user.Id);
+        //    int companyId = 0;
+
+        //    if (logObj != null)
+        //    {
+        //        if (logObj.CompanyId != null) companyId = (int)logObj.CompanyId;
+        //    }
+
+        //    chartOfAccount.CompanyId = companyId;
+        //    if (_cSer.AddChartOfAccount(chartOfAccount))
+        //    {
+        //        // ReSharper disable once PossibleNullReferenceException
+        //        if (logObj.Companies.CompleteFlag == 3)
+        //        {
+        //            if (_iCompany.UpdateCompleteFlag(companyId, flag))
+        //            {
+        //                return RedirectToAction("Finish", "Users", new { Area = "UserManagement" });
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("Create", "ChartOfAccounts", new { area = "Accounts" });
+        //            }
+        //        }
+        //        return RedirectToAction("Create", "ChartOfAccounts", new { Area = "Accounts" });
+
+        //    }
+        //    else
+        //    {
+        //        TempData.Add("errMsg", "Chart Of Account Addtion Failed");
+        //    }
+
+        //    return Json(new { id = obj.Id, name = obj.ItemName, code = obj.ItemCode });
+        //}
 
         public ActionResult Create(int account=0)
         {
