@@ -34,7 +34,7 @@ namespace Mhasb.Wsit.Web.Utilities
             return level;
         }
 
-        public bool CheckingNull(object obj, out string msg)
+        public static bool CheckingNull(object obj, out string msg)
         {
             msg = "Success";
             if(obj==null){
