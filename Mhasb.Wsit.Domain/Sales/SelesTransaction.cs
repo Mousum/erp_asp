@@ -45,11 +45,5 @@ namespace Mhasb.Domain.Inventories
         public long Id { get; set; }
     }
 
-    public enum EnumTransactionType
-    {
-        Bill=1,
-        RepeatingBill=2,
-        CreditNote=3,
-        PurchaseOrder=4
-    }
+    
 }

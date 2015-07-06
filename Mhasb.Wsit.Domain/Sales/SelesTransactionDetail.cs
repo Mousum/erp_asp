@@ -33,10 +33,5 @@ namespace Mhasb.Domain.Inventories
         public long Id { get; set; }
     }
 
-    public enum EnumTaxOnTransaction
-    {
-        TaxExclusive=1,
-        TaxInclusive=2,
-        NoTax=3
-    }
+   
 }
