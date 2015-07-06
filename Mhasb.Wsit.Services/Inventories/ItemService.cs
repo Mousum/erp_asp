@@ -120,7 +120,7 @@ namespace Mhasb.Services.Inventories
             catch (Exception ex)
             {
                 var msg = ex.Message;
-                return null;
+                return new List<Item>();
             }
         }
     }

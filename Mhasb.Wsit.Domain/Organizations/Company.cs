@@ -92,7 +92,7 @@ namespace Mhasb.Domain.Organizations
 
         public virtual ICollection<PurchaseTransaction> PurchaseTransections { get; set; }
 
-        public virtual ICollection<Item> items { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
         
         //[Required(ErrorMessage = "Password is required")]
         //[StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
