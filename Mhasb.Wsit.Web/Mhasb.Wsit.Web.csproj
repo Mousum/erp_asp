@@ -742,6 +742,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Mhasb.Wsit.CustomModel\Mhasb.Wsit.CustomModel.csproj">
       <Project>{06bc9fb9-6608-4262-812e-c705d9f6c076}</Project>
       <Name>Mhasb.Wsit.CustomModel</Name>
@@ -758,12 +764,6 @@
       <Project>{cb47ae35-93bb-4696-9338-b700bfc0a5e6}</Project>
       <Name>Mhasb.Wsit.Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
