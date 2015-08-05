@@ -32,6 +32,8 @@ namespace Mhasb.Domain.Contacts
         public virtual ICollection<Company> Companies { get; set; }
 
         public virtual ICollection<PurchaseTransaction> PurchaseTransactions { get; set; }
+        public virtual ICollection<SelesTransaction> SelesTransactions { get; set; }
+
 
         public ObjectState State
         {

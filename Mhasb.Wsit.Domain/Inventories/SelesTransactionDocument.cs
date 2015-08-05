@@ -18,7 +18,7 @@ namespace Mhasb.Domain.Inventories
         public DateTime CreatedDate { get; set; }
 
         public virtual Employee Employees { get; set; }
-        public virtual PurchaseTransaction PurchaseTransactions { get; set; }
+        public virtual SelesTransaction SelesTransactions { get; set; }
         public ObjectState State { get; set; }
         public long Id { get; set; }
     }

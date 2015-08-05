@@ -38,8 +38,8 @@ namespace Mhasb.Domain.Inventories
         public virtual Currency Currencies { get; set; }
 
         public virtual Company Companies { get; set; }
-        public virtual ICollection<PurchaseTransactionDetail> PurchaseTransactionDetails { get; set; }
-        public virtual ICollection<PurchaseTransactionDocument> PurchaseTransactionDocuments { get; set; }
+        public virtual ICollection<SelesTransactionDetail> SelesTransactionDetails { get; set; }
+        public virtual ICollection<SelesTransactionDocument> SelesTransactionDocuments { get; set; }
         public ObjectState State { get; set; }
        [Key]
         public long Id { get; set; }

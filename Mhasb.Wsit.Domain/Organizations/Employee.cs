@@ -27,6 +27,7 @@ namespace Mhasb.Domain.Organizations
         public virtual Designation Designations { get; set; }
         public virtual ICollection<Voucher> Vouchers { get; set; }
         public virtual ICollection<PurchaseTransaction> PurchaseTransactions { get; set; }
+        public virtual ICollection<SelesTransaction> SelesTransactions { get; set; }
         public long Id { get; set; }
 
         public ObjectState State { get; set; }

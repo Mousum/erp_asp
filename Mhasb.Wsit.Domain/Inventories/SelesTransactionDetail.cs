@@ -23,7 +23,7 @@ namespace Mhasb.Domain.Inventories
         public string Description { get; set; }
         
         //
-        public virtual PurchaseTransaction PurchaseTransactions { get; set; }
+        public virtual SelesTransaction SelesTransactions { get; set; }
         public virtual Item Items { get; set; }
 
         public virtual Lookup Lookups { get; set; }
