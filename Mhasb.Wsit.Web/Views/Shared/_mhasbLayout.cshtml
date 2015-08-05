@@ -83,10 +83,19 @@
                         <a href='@Url.Action("Dashboard", "Users", new { area = "UserManagement" })'>Dashboard</a>
 
                     </li>
-                    @*<li class="">
-                            <a href='@Url.Action("AccountSettings", "Users", new { area = "UserManagement" }) '>Account Settings</a>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Accounts <span class="caret"></span>
+                        </a>
 
-                        </li>*@
+                        <ul class="dropdown-menu cstm-submenu" role="menu">
+                            <li class="">
+                                <a href='@Url.Action("EditBill", "Purchases", new {area="Inventories"})'> Purchase </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
 
                     <li class="">
 
